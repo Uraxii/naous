@@ -69,4 +69,3 @@ func _on_selected_character(character_data: Dictionary) -> void:
     current_character = character_data
     log.info("Selected character: " + str(current_character))
     signals.character_selected.emit(character_data)
-

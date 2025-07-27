@@ -11,7 +11,7 @@ extends Control
 
 var selected_track_index:int = 0:
 	set(value):
-		if not tracks.size() > 0:
+		if tracks.size() > 0:
 			selected_track_index = wrapi(value, 0, tracks.size()-1)
 			selected_track_label.text = tracks[selected_track_index].title
 		else:
@@ -21,24 +21,22 @@ var selected_track_index:int = 0:
 @onready var selected_track_label: Label = %SelectedTrack
 
 func start_track(track:DynamicMusicTrack) -> void:
-	if track.treat_positional:
+	var player = get_player(track)
+	player.play()
 		
-		var player:AudioStreamPlayer3D = get_player(track)
-		
-	else:
-		
-		var player:AudioStreamPlayer = get_player(track)
+	if track.trans_start_fade_in:
+			player.volume_linear = track.trans_start_fade_in.sample_baked(track.trans_start_fade_in.min_domain)
+			var trans_tween:Tween = player.create_tween()
+			trans_tween.tween_method(DynamicMusicTrack.set_volume_from_curve.bind(player, track.trans_start_fade_in), player.volume_linear, track.trans_start_fade_in.max_domain, track.trans_start_fade_in.max_domain)
 	
 func stop_track(track:DynamicMusicTrack) -> void:
-	if track.treat_positional:
+	var player = get_player(track)
+	player.stop()
 		
-		var player:AudioStreamPlayer3D = get_player(track)
-		player.stop()
-		
-	else:
-		
-		var player:AudioStreamPlayer = get_player(track)
-		player.stop()
+	if track.trans_end_fade_out:
+			player.volume_linear = track.trans_start_fade_in.sample_baked(track.trans_end_fade_out.min_domain)
+			var trans_tween:Tween = player.create_tween()
+			trans_tween.tween_method(DynamicMusicTrack.set_volume_from_curve.bind(player, track.trans_end_fade_out), player.volume_linear, track.trans_end_fade_out.max_domain, track.trans_end_fade_out.max_domain)
 	
 func get_player(track:DynamicMusicTrack) -> Variant:
 	if track.treat_positional:
@@ -70,8 +68,9 @@ func get_player(track:DynamicMusicTrack) -> Variant:
 		
 		non_positional_root.add_child(new_player)
 		return new_player
+	
 
-func _on_start_stop_playback_pressed() -> void:
+func _on_start_playback_pressed() -> void:
 	start_track(tracks[selected_track_index])
 		
 func _on_stop_playback_pressed() -> void:
