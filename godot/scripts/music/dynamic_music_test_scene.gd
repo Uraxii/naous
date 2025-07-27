@@ -50,6 +50,7 @@ func get_player(track:DynamicMusicTrack) -> Variant:
 		new_player = proto_positional_player.duplicate()
 		
 		new_player.stream = track.file
+		new_player.bus = track.MUSIC_BUS
 		
 		positional_root.add_child(new_player)
 		return new_player
@@ -65,6 +66,7 @@ func get_player(track:DynamicMusicTrack) -> Variant:
 		new_player = proto_non_positional_player.duplicate()
 		
 		new_player.stream = track.file
+		new_player.bus = track.MUSIC_BUS
 		
 		non_positional_root.add_child(new_player)
 		return new_player
