@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btdy0tb2d8jgj"
-path="res://.godot/imported/player_base_clothes_mixmap.tga-5711c2fb467f5115df927043c24325c7.ctex"
+uid="uid://cu8cgayv4033k"
+path="res://.godot/imported/ink-bush.png-60ed79bcbc225066fe92a206bb709320.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player_base_clothes_mixmap.tga"
-dest_files=["res://.godot/imported/player_base_clothes_mixmap.tga-5711c2fb467f5115df927043c24325c7.ctex"]
+source_file="res://assets/textures/ink-bush.png"
+dest_files=["res://.godot/imported/ink-bush.png-60ed79bcbc225066fe92a206bb709320.ctex"]
 
 [params]
 

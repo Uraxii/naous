@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btdy0tb2d8jgj"
-path="res://.godot/imported/player_base_clothes_mixmap.tga-5711c2fb467f5115df927043c24325c7.ctex"
+uid="uid://b86qcvj1ksyjy"
+path="res://.godot/imported/ink-dots-square.png-3090adcb2dca92f6715b640422172f59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player_base_clothes_mixmap.tga"
-dest_files=["res://.godot/imported/player_base_clothes_mixmap.tga-5711c2fb467f5115df927043c24325c7.ctex"]
+source_file="res://assets/textures/ink-dots-square.png"
+dest_files=["res://.godot/imported/ink-dots-square.png-3090adcb2dca92f6715b640422172f59.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btdy0tb2d8jgj"
-path="res://.godot/imported/player_base_clothes_mixmap.tga-5711c2fb467f5115df927043c24325c7.ctex"
+uid="uid://bcl8impki1t8p"
+path="res://.godot/imported/ink-grass-scrub.png-631841f3139daedc9c027cf33a047010.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player_base_clothes_mixmap.tga"
-dest_files=["res://.godot/imported/player_base_clothes_mixmap.tga-5711c2fb467f5115df927043c24325c7.ctex"]
+source_file="res://assets/textures/ink-grass-scrub.png"
+dest_files=["res://.godot/imported/ink-grass-scrub.png-631841f3139daedc9c027cf33a047010.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btdy0tb2d8jgj"
-path="res://.godot/imported/player_base_clothes_mixmap.tga-5711c2fb467f5115df927043c24325c7.ctex"
+uid="uid://6uiysfnglfrj"
+path="res://.godot/imported/ink-pebble.png-e2808c600dee08d07d1ca8f3c5f23948.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/player_base_clothes_mixmap.tga"
-dest_files=["res://.godot/imported/player_base_clothes_mixmap.tga-5711c2fb467f5115df927043c24325c7.ctex"]
+source_file="res://assets/textures/ink-pebble.png"
+dest_files=["res://.godot/imported/ink-pebble.png-e2808c600dee08d07d1ca8f3c5f23948.ctex"]
 
 [params]
 
