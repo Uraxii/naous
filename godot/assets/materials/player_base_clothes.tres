@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bri3l0gc3au6s"]
+
+[ext_resource type="Texture2D" uid="uid://c12lrp32ylgus" path="res://assets/textures/player_base_clothes_albedo.tga" id="1_cx8fu"]
+[ext_resource type="Texture2D" uid="uid://cragrabh6ln70" path="res://assets/textures/player_base_clothes_normal.tga" id="2_io687"]
+
+[resource]
+albedo_texture = ExtResource("1_cx8fu")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2_io687")

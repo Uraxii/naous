@@ -1,0 +1,133 @@
+[gd_scene load_steps=2 format=3 uid="uid://bauh1d4mg5mnx"]
+
+[ext_resource type="Script" uid="uid://blbauabuyukck" path="res://scenes/ui/local_main.gd" id="1_ygbw5"]
+
+[node name="LocalMain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_ygbw5")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="EntryPoint" type="VBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -41.0
+offset_right = 114.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/EntryPoint"]
+layout_mode = 2
+text = "Local Testing"
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="CanvasLayer/EntryPoint"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/EntryPoint"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Host" type="Button" parent="CanvasLayer/EntryPoint/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Host"
+
+[node name="Spacer" type="Control" parent="CanvasLayer/EntryPoint/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Join" type="Button" parent="CanvasLayer/EntryPoint/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+text = "Join"
+
+[node name="HostLevelSelect" type="VBoxContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -274.5
+offset_top = -62.5
+offset_right = 274.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MaxPlayers" type="HBoxContainer" parent="CanvasLayer/HostLevelSelect"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/HostLevelSelect/MaxPlayers"]
+layout_mode = 2
+text = "Max Players:"
+
+[node name="MaxPlayers" type="LineEdit" parent="CanvasLayer/HostLevelSelect/MaxPlayers"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2"
+placeholder_text = "2"
+
+[node name="Scene" type="HBoxContainer" parent="CanvasLayer/HostLevelSelect"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HostLevelSelect/Scene"]
+layout_mode = 2
+text = "Level:"
+
+[node name="ScenePath" type="LineEdit" parent="CanvasLayer/HostLevelSelect/Scene"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "res://scenes/world/zones/devmap.tscn"
+placeholder_text = "2"
+
+[node name="Spacer2" type="Control" parent="CanvasLayer/HostLevelSelect"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="StartGame" type="Button" parent="CanvasLayer/HostLevelSelect"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start"
+
+[connection signal="pressed" from="CanvasLayer/EntryPoint/HBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/EntryPoint/HBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="CanvasLayer/HostLevelSelect/StartGame" to="." method="_on_start_game_pressed"]

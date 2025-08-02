@@ -6,3 +6,5 @@ builds/
 # Container data volumes
 api_data/
 
+# Visual Studio Code specific ignores
+.vscode/
