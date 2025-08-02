@@ -1,20 +1,11 @@
-class_name ApiClient extends Node
+class_name HttpApiClientImpl extends ApiClientImpl
 
 @onready var log := Globals.log
 @onready var signals := Globals.signal_bus
 @onready var http_queue: HttpRequestQueue = HttpRequestQueue.new()
 
-var server: String = "http://localhost:8080"
-var access_token: String = ""
-
-
 func _ready() -> void:
     add_child(http_queue)
-
-
-func set_server(protocol: String, address: String, port: int) -> void:
-    server = "%s://%s:%d" % [protocol, address, port]
-
 
 #region Authentication
 func login(username: String, password: String) -> void:
