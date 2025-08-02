@@ -14,6 +14,7 @@ const port:int = 7000
 const shard_id:String = "1"
 
 func _ready() -> void:
+	API.delegate = MockApiClientImpl.new()
 	# Remove default views that get added by singleton for regular main.tscn flow
 	Globals.views.despawn_all()
 
