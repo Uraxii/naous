@@ -47,6 +47,7 @@ mono_crash.*.json
 
 
 #region Obsidian
+# Vault sync related stuff:
 *conflicted copy*
 *sync-conflict*
 
@@ -62,13 +63,7 @@ mono_crash.*.json
 .obsidian/plugins/*/data.json
 .obsidian/themes/*/manifest.json.bak
 .obsidian/snippets/*.css.bak
-.obsidian/plugins/*/versions.json
-.obsidian/plugins/obsidian-git/data.json
-.obsidian/plugins/templater-obsidian/data.json
-.obsidian/plugins/*/build/
-.obsidian/plugins/*/dist/
-.obsidian/plugins/*/node_modules/
-.obsidian/plugins/file-recovery/
+.obsidian/plugins/
 #endregion
 
 #region Python
