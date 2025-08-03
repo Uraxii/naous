@@ -6,37 +6,61 @@
 
 [node name="swords" instance=ExtResource("1_ipx2b")]
 
-[node name="Hilt" parent="." index="0"]
+[node name="Short2" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+
+[node name="Medium1" parent="." index="1"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+
+[node name="Medium2" parent="." index="2"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+
+[node name="Short1" parent="." index="3"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+
+[node name="Long1" parent="." index="4"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+
+[node name="Long2" parent="." index="5"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+
+[node name="Short3" parent="." index="6"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+surface_material_override/1 = ExtResource("3_l5rvo")
+
+[node name="Medium3" parent="." index="7"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+surface_material_override/1 = ExtResource("3_l5rvo")
+
+[node name="Short4" parent="." index="8"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+
+[node name="Short5" parent="." index="9"]
+surface_material_override/0 = ExtResource("2_l5rvo")
+
+[node name="Hilt" parent="." index="10"]
 surface_material_override/0 = ExtResource("3_l5rvo")
 
-[node name="Short2" parent="." index="1"]
-surface_material_override/0 = ExtResource("2_l5rvo")
+[node name="Hilt_001" parent="." index="11"]
+surface_material_override/0 = ExtResource("3_l5rvo")
 
-[node name="Medium1" parent="." index="2"]
-surface_material_override/0 = ExtResource("2_l5rvo")
+[node name="Hilt_002" parent="." index="12"]
+surface_material_override/0 = ExtResource("3_l5rvo")
 
-[node name="Medium2" parent="." index="3"]
-surface_material_override/0 = ExtResource("2_l5rvo")
+[node name="Hilt_003" parent="." index="13"]
+surface_material_override/0 = ExtResource("3_l5rvo")
 
-[node name="Short1" parent="." index="4"]
-surface_material_override/0 = ExtResource("2_l5rvo")
+[node name="Hilt_004" parent="." index="14"]
+surface_material_override/0 = ExtResource("3_l5rvo")
 
-[node name="Long1" parent="." index="5"]
-surface_material_override/0 = ExtResource("2_l5rvo")
+[node name="Hilt_005" parent="." index="15"]
+surface_material_override/0 = ExtResource("3_l5rvo")
 
-[node name="Long2" parent="." index="6"]
-surface_material_override/0 = ExtResource("2_l5rvo")
+[node name="Hilt_006" parent="." index="16"]
+surface_material_override/0 = ExtResource("3_l5rvo")
 
-[node name="Short3" parent="." index="7"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-surface_material_override/1 = ExtResource("3_l5rvo")
+[node name="Hilt_007" parent="." index="17"]
+surface_material_override/0 = ExtResource("3_l5rvo")
 
-[node name="Medium3" parent="." index="8"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-surface_material_override/1 = ExtResource("3_l5rvo")
-
-[node name="Short4" parent="." index="9"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Short5" parent="." index="10"]
-surface_material_override/0 = ExtResource("2_l5rvo")
+[node name="Hilt_008" parent="." index="18"]
+surface_material_override/0 = ExtResource("3_l5rvo")
