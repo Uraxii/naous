@@ -131,6 +131,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Start"
 
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
+spawn_path = NodePath("../SubViewportContainer/SubViewport")
+
 [connection signal="pressed" from="CanvasLayer/EntryPoint/HBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/EntryPoint/HBoxContainer/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="CanvasLayer/HostLevelSelect/StartGame" to="." method="_on_start_game_pressed"]

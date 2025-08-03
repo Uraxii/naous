@@ -8,6 +8,9 @@ extends Control
 @onready var txt_max_players:LineEdit = %MaxPlayers
 @onready var txt_scene_path:LineEdit = %ScenePath
 
+@onready
+var spawner:MultiplayerSpawner = %LevelSpawner
+
 @export
 var level_container:Node
 
@@ -18,6 +21,13 @@ func _ready() -> void:
 	API.delegate = MockApiClientImpl.new()
 	# Remove default views that get added by singleton for regular main.tscn flow
 	Globals.views.despawn_all()
+	
+	#FIXME: For some reason we have to add the allow list to server AND client which makes no sense to me
+	# But if I just add the scene to the server then the client doesn't get the replicated scene
+	# Alternatively can use the "Auto Spawn List" if know at design time all the available maps
+	# Will probably need to replicate or get the levels when client connects and then add it at that time 
+	# which maybe will come from the shard api
+	spawner.add_spawnable_scene("res://scenes/world/zones/devmap.tscn")
 
 func _on_host_pressed() -> void:
 	entry_point.hide()
@@ -35,6 +45,11 @@ func _on_start_game_pressed() -> void:
 		push_error("Invalid level scene: %s" % txt_scene_path.text)
 		return
 	
+	# "Allow List" for which scenes added to the spawn path root are allowed to replicate
+	# Doesn't work when only called on server
+	#spawner.add_spawnable_scene(level.resource_path)
+	#await get_tree().process_frame
+	
 	var shard_config:Dictionary = {
 		"shard_id": shard_id,
 		"shard_type": "hub", 
@@ -49,7 +64,8 @@ func _on_start_game_pressed() -> void:
 	get_tree().root.add_child(server_manager)
 	server_manager.initialize_shard(shard_config)
 	
-	# FIXME: Temporary test logic - need to determine where game scenes should go
-	level_container.add_child(level.instantiate())
-	ui_root.hide()
-		
+	# TODO: Temporary test logic - need to determine where game scenes should go
+	level_container.call_deferred("add_child",level.instantiate())
+	#spawner.spawn(level.instantiate())
+	
+	ui_root.hide()	
