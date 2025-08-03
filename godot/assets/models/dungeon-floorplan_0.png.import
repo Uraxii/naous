@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5qshmpwgr6fx"
-path.s3tc="res://.godot/imported/trim-simple.png-83118fd0dff731dc12a4a26eb93d43f1.s3tc.ctex"
+uid="uid://b6plvbyuvaf1"
+path.s3tc="res://.godot/imported/dungeon-floorplan_0.png-d503c1b185977870b763a43dd09a6584.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "5ebdff662fb69c6bb281a7b59cb4323e"
+}
 
 [deps]
 
-source_file="res://assets/materials/trim-simple.png"
-dest_files=["res://.godot/imported/trim-simple.png-83118fd0dff731dc12a4a26eb93d43f1.s3tc.ctex"]
+source_file="res://assets/models/dungeon-floorplan_0.png"
+dest_files=["res://.godot/imported/dungeon-floorplan_0.png-d503c1b185977870b763a43dd09a6584.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +23,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://assets/models/dungeon-floorplan_0.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
