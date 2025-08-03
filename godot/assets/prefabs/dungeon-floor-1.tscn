@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://biml44n672tje"]
+[gd_scene load_steps=13 format=3 uid="uid://biml44n672tje"]
 
 [ext_resource type="Material" uid="uid://caunb0mst5ean" path="res://assets/materials/grid-material.tres" id="1_jxk0v"]
 [ext_resource type="ArrayMesh" uid="uid://ksvy3l5to3eu" path="res://assets/models/dungeon-floorplan-inside.obj" id="2_7h7hh"]
@@ -8,7 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://4no0kcoh1kij" path="res://assets/prefabs/boulder_sandstone.tscn" id="8_fed6n"]
 [ext_resource type="PackedScene" uid="uid://dnevvascacxh8" path="res://assets/prefabs/boulder_silver.tscn" id="9_0ppp8"]
 [ext_resource type="PackedScene" uid="uid://bnivwxa6lr1pp" path="res://assets/prefabs/boulder-purple.tscn" id="9_p251t"]
+[ext_resource type="Shader" uid="uid://dbhvm7apanrsc" path="res://assets/shaders/normal_buffer.gdshader" id="10_4in3t"]
 [ext_resource type="PackedScene" uid="uid://c0tcxk54tuq6c" path="res://assets/prefabs/boulder_dark.tscn" id="10_p251t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fed6n"]
+render_priority = 0
+shader = ExtResource("10_4in3t")
+
+[sub_resource type="QuadMesh" id="QuadMesh_0cxaa"]
+material = SubResource("ShaderMaterial_fed6n")
+flip_faces = true
+size = Vector2(2, 2)
 
 [node name="Node3D" type="Node3D"]
 
@@ -46,3 +56,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.753275, 0.3550262, 20.855
 
 [node name="boulder-dark" parent="." instance=ExtResource("10_p251t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.584775, 0.5944625, 21.295319)
+
+[node name="PostProcessing" type="Node3D" parent="."]
+visible = false
+
+[node name="Shader" type="MeshInstance3D" parent="PostProcessing"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_0cxaa")
