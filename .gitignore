@@ -1,10 +1,49 @@
-# Godot 4+ specific ignores
+# === Naous ===
+# Container data
+api_data/
+dev/
+
+
+# === Godot specific ignores ===
 .godot/
 /android/
-
+.import/
+export.cfg
+export_presets.cfg
 builds/
-# Container data volumes
-api_data/
+.mono/
+data_*/
+mono_crash.*.json
 
-# Visual Studio Code specific ignores
+
+# === Obsidian ===
+.trash/
+.obsidian/cache
+.obsidian/graph.json
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspace
+.obsidian/plugins/*/data.json
+.obsidian/themes/*/manifest.json.bak
+.obsidian/snippets/*.css.bak
+.obsidian/plugins/*/versions.json
+.obsidian/plugins/obsidian-git/data.json
+.obsidian/plugins/templater-obsidian/data.json
+.obsidian/plugins/*/build/
+.obsidian/plugins/*/dist/
+.obsidian/plugins/*/node_modules/
+.obsidian/plugins/file-recovery/
+*conflicted copy*
+*sync-conflict*
+
+
+# === System Files ===
+# System/tool-specific
+.tmp/
+.DS_Store
+Thumbs.db
+
+
+# === Visual Studio Code ===
 .vscode/
+.obsidian/workspace.json
