@@ -9,7 +9,6 @@ api_data/
 
 #region Godot
 .godot/
-.import/
 
 /android/
 
