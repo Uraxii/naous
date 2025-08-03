@@ -1,46 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0vesjg38pxru"]
+[gd_scene load_steps=3 format=3 uid="uid://b0vesjg38pxru"]
 
 [ext_resource type="PackedScene" uid="uid://cba3fgakmxrx3" path="res://assets/models/weapons/swords.blend" id="1_ipx2b"]
-[ext_resource type="Material" uid="uid://m2x6kdobp42r" path="res://assets/materials/sword_metal.tres" id="2_l5rvo"]
 [ext_resource type="Material" uid="uid://c7ovqo5ld8s8l" path="res://assets/materials/sword_structure.tres" id="3_l5rvo"]
 
 [node name="swords" instance=ExtResource("1_ipx2b")]
-
-[node name="Short2" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Medium1" parent="." index="1"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Medium2" parent="." index="2"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Short1" parent="." index="3"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Long1" parent="." index="4"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Long2" parent="." index="5"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Short3" parent="." index="6"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-surface_material_override/1 = ExtResource("3_l5rvo")
-
-[node name="Medium3" parent="." index="7"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-surface_material_override/1 = ExtResource("3_l5rvo")
-
-[node name="Short4" parent="." index="8"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Short5" parent="." index="9"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-
-[node name="Long3" parent="." index="10"]
-surface_material_override/0 = ExtResource("2_l5rvo")
-surface_material_override/1 = ExtResource("3_l5rvo")
 
 [node name="Hilt" parent="." index="11"]
 surface_material_override/0 = ExtResource("3_l5rvo")

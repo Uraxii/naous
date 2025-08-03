@@ -37,7 +37,20 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"materials": {
+"BladeMetal": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials/sword_metal.tres",
+"use_external/path": "uid://m2x6kdobp42r"
+},
+"Other": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/materials/sword_structure.tres",
+"use_external/path": "uid://c7ovqo5ld8s8l"
+}
+}
+}
 blender/nodes/visible=1
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=false
