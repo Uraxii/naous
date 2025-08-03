@@ -8,7 +8,8 @@ extends Control
 @onready var txt_max_players:LineEdit = %MaxPlayers
 @onready var txt_scene_path:LineEdit = %ScenePath
 
-@onready var level_container:Node = %SubViewport
+@export
+var level_container:Node
 
 const port:int = 7000
 const shard_id:String = "1"

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blbauabuyukck" path="res://scenes/ui/local_main.gd" id="1_ygbw5"]
 
-[node name="LocalMain" type="Control"]
+[node name="LocalMain" type="Control" node_paths=PackedStringArray("level_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_ygbw5")
+level_container = NodePath("SubViewportContainer/SubViewport")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 0
@@ -20,6 +21,8 @@ offset_bottom = 512.0
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 unique_name_in_owner = true
 handle_input_locally = false
+size = Vector2i(1152, 648)
+size_2d_override_stretch = true
 render_target_update_mode = 4
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
