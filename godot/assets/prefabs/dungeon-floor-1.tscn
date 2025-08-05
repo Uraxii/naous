@@ -8,12 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://4no0kcoh1kij" path="res://assets/prefabs/boulder_sandstone.tscn" id="8_fed6n"]
 [ext_resource type="PackedScene" uid="uid://dnevvascacxh8" path="res://assets/prefabs/boulder_silver.tscn" id="9_0ppp8"]
 [ext_resource type="PackedScene" uid="uid://bnivwxa6lr1pp" path="res://assets/prefabs/boulder-purple.tscn" id="9_p251t"]
-[ext_resource type="Shader" uid="uid://dbhvm7apanrsc" path="res://assets/shaders/normal_buffer.gdshader" id="10_4in3t"]
+[ext_resource type="Shader" uid="uid://cyjys2qnxr0oc" path="res://assets/shaders/edge_detection_normal.gdshader" id="10_4in3t"]
 [ext_resource type="PackedScene" uid="uid://c0tcxk54tuq6c" path="res://assets/prefabs/boulder_dark.tscn" id="10_p251t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fed6n"]
 render_priority = 0
 shader = ExtResource("10_4in3t")
+shader_parameter/edge_only = false
+shader_parameter/edge_threshold = 0.25
+shader_parameter/line_color = Color(0.13, 0.13, 0.13, 1)
+shader_parameter/background_color = Color(0.138, 0.93, 0.44, 0.225)
 
 [sub_resource type="QuadMesh" id="QuadMesh_0cxaa"]
 material = SubResource("ShaderMaterial_fed6n")
@@ -58,7 +62,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.753275, 0.3550262, 20.855
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.584775, 0.5944625, 21.295319)
 
 [node name="PostProcessing" type="Node3D" parent="."]
-visible = false
 
 [node name="Shader" type="MeshInstance3D" parent="PostProcessing"]
 extra_cull_margin = 16384.0
