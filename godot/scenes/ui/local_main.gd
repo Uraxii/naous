@@ -16,19 +16,33 @@ var level_container:Node
 
 const port:int = 7000
 const shard_id:String = "1"
+const world_scene_dir:String = "res://scenes/world/zones/"
 
 func _ready() -> void:
 	API.delegate = MockApiClientImpl.new()
 	# Remove default views that get added by singleton for regular main.tscn flow
 	Globals.views.despawn_all()
 	
-	#FIXME: For some reason we have to add the allow list to server AND client which makes no sense to me
-	# But if I just add the scene to the server then the client doesn't get the replicated scene
-	# Alternatively can use the "Auto Spawn List" if know at design time all the available maps
-	# Will probably need to replicate or get the levels when client connects and then add it at that time 
-	# which maybe will come from the shard api
-	spawner.add_spawnable_scene("res://scenes/world/zones/devmap.tscn")
+	_populate_spawnable_scenes()
 
+# The "Auto Spawn List" is equivalent to "add_spawnable_scene" for each scene at runtime
+# This needs to be called on both client and server to specify the allow list of scenes that can be replicated from server to client
+func _populate_spawnable_scenes() -> void:
+	var world_scenes:Array[String] = [world_scene_dir]
+	
+	while not world_scenes.is_empty():
+		var path:String = world_scenes.pop_back()
+		if path.ends_with(".tscn"):
+			# Scene file
+			if OS.is_debug_build():
+				print_debug("%s: Found scene: %s" % [name, path])
+			spawner.add_spawnable_scene(path)
+		# Directory
+		elif path.ends_with("/"):
+			for resource in ResourceLoader.list_directory(path):
+				var sub_path:String = path + resource
+				world_scenes.push_back(sub_path)
+		
 func _on_host_pressed() -> void:
 	entry_point.hide()
 	host_level_select.show()
@@ -66,6 +80,5 @@ func _on_start_game_pressed() -> void:
 	
 	# TODO: Temporary test logic - need to determine where game scenes should go
 	level_container.call_deferred("add_child",level.instantiate())
-	#spawner.spawn(level.instantiate())
 	
 	ui_root.hide()	

@@ -128,3 +128,5 @@ func delete_character(character_id: int) -> void:
 func status() -> void:
 	signals.api_status_passed.emit()
 #endregion
+
+# TODO Need to execute client or server rpc to sync mutable data
