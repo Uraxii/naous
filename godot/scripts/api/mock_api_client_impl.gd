@@ -67,27 +67,6 @@ func get_me() -> void:
 
 
 #region Character Management
-func create_character(name: String) -> void:
-	var id:int = _character_data.size() + 1
-
-	var character_data:Dictionary = {
-		"name": name,
-		"id": id,
-		"user_id": _player_id,
-		"stats": {
-			"vigor": 1
-		},
-		"equipment": {},
-		"inventory": {},
-		"created_at": "2025-07-16T03:58:12.792101",
-		"last_played": "2025-07-16T03:58:12.792106"
-	}
-
-	_character_data[id] = character_data
-
-	log.success("Character created: %s (ID: %d)" % [character_data.name, character_data.id])
-	signals.character_created.emit(character_data)
-
 
 func get_all_characters(skip: int = 0, limit: int = 10) -> void:
 	log.info("Fetched %d characters" % _character_data.size())
@@ -103,7 +82,63 @@ func get_character(character_id: int) -> void:
 		signals.character_not_found.emit()
 		log.error("Character not found!")
 
+func create_character(name: String) -> void:
+	var id:int = _character_data.size() * 100 + 1
+
+	var character_data:Dictionary = {
+		"name": name,
+		"id": id,
+		"user_id": _player_id,
+		"stats": {
+			"vigor": 1
+		},
+		"equipment": {},
+		"inventory": {},
+		"created_at": "2025-07-16T03:58:12.792101",
+		"last_played": "2025-07-16T03:58:12.792106"
+	}
+	_invoke_replicated("_create_character", id, character_data)
+
 func update_character(character_id: int, updates: Dictionary) -> void:
+	_invoke_replicated("_update_character", character_id, updates)
+
+func delete_character(character_id: int) -> void:
+	_invoke_replicated("_delete_character", character_id)
+#endregion
+
+#region Utility
+func status() -> void:
+	signals.api_status_passed.emit()
+
+func _invoke_replicated(method:String, ...args: Array) -> void:
+	# First invoke locally - doing this simplifies logic since then no ambiguity about local vs remote execution
+	Callable(self, method).callv(args)
+
+	if not multiplayer.has_multiplayer_peer():
+		push_warning("No multiplayer peer - Invoked method=%s with args=%s" % [method, ",".join(args)])
+		return
+	if multiplayer.is_server():
+		# Invoke as broadcast
+		_rpcv(method, args)
+	else:
+		# Call on server - will rebroadcast to other clients
+		_rpcv_id(1, method, args)
+
+func _check_invoke_broadcast(method:String, ...args: Array) -> void:
+	if not multiplayer.has_multiplayer_peer() or not multiplayer.is_server():
+		return
+	# Invoke on all but the originally sending peer
+	var invoker:Callable = func()->void:
+		for peer in multiplayer.get_peers():
+			if peer != multiplayer.get_remote_sender_id():
+				_rpcv_id(peer, method, args)
+
+	invoker.call_deferred()
+#endregion
+
+#region RPCs
+@rpc("any_peer", "call_remote", "reliable")
+func _update_character(character_id: int, updates: Dictionary) -> void:
 	if character_id in _character_data:
 		_character_data[character_id] = updates
 		log.success("Character updated: %s" % updates.name)
@@ -112,7 +147,10 @@ func update_character(character_id: int, updates: Dictionary) -> void:
 		signals.character_not_found.emit()
 		log.error("Character not found!")
 
-func delete_character(character_id: int) -> void:
+	_check_invoke_broadcast("_update_character", character_id, updates)
+
+@rpc("any_peer", "call_remote", "reliable")
+func _delete_character(character_id: int) -> void:
 	var deleted:bool = _character_data.erase(character_id)
 
 	if deleted:
@@ -121,12 +159,37 @@ func delete_character(character_id: int) -> void:
 	else:
 		signals.character_not_found.emit()
 		log.error("Character not found!")
+
+	_check_invoke_broadcast("_delete_character", character_id)
+
+@rpc("any_peer", "call_remote", "reliable")
+func _create_character(id: int, character_data: Dictionary) -> void:
+	_character_data[id] = character_data
+
+	log.success("Character created: %s (ID: %d)" % [character_data.name, character_data.id])
+	signals.character_created.emit(character_data)
+
+	_check_invoke_broadcast("_create_character", id, character_data)
+
+func _rpcv(method:String, args: Array) -> void:
+	# Godot doesn't have a built in var args rpcv function
+	match args.size():
+		0: rpc(method)
+		1: rpc(method, args[0])
+		2: rpc(method, args[0], args[1])
+		3: rpc(method, args[0], args[1], args[2])
+		4: rpc(method, args[0], args[1], args[2], args[3])
+		5: rpc(method, args[0], args[1], args[2], args[3], args[4])
+		_: assert("Argument expansion not implemented for size=%d" % args.size())
+		
+func _rpcv_id(peer_id: int, method:String, args: Array) -> void:
+	# Godot doesn't have a built in var args rpcv function
+	match args.size():
+		0: rpc_id(peer_id, method)
+		1: rpc_id(peer_id, method, args[0])
+		2: rpc_id(peer_id, method, args[0], args[1])
+		3: rpc_id(peer_id, method, args[0], args[1], args[2])
+		4: rpc_id(peer_id, method, args[0], args[1], args[2], args[3])
+		5: rpc_id(peer_id, method, args[0], args[1], args[2], args[3], args[4])
+		_: assert("Argument expansion not implemented for size=%d" % args.size())
 #endregion
-
-
-#region Utility
-func status() -> void:
-	signals.api_status_passed.emit()
-#endregion
-
-# TODO Need to execute client or server rpc to sync mutable data
