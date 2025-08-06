@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://y3oc2qnqpoen"]
+
+[ext_resource type="Material" uid="uid://be6mxeq285rpi" path="res://assets/materials/ink-corner-decoration.tres" id="1_fydsq"]
+[ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="2_d0no0"]
+
+[node name="ink-corner-decoration" type="Node3D"]
+
+[node name="decal-plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0.01, 0)
+material_override = ExtResource("1_fydsq")
+mesh = ExtResource("2_d0no0")

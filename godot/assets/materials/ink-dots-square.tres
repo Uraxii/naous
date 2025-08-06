@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://sy4f548v7vrx"]
+
+[ext_resource type="Texture2D" uid="uid://b86qcvj1ksyjy" path="res://assets/textures/ink-dots-square.png" id="1_pkofo"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+depth_draw_mode = 2
+shading_mode = 0
+specular_mode = 2
+albedo_texture = ExtResource("1_pkofo")

@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cjcr38eorx7xb"]
+
+[ext_resource type="Texture2D" uid="uid://cu8cgayv4033k" path="res://assets/textures/ink-bush.png" id="1_sg5ge"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+depth_draw_mode = 2
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.29163772, 0.48275688, 0.20128866, 1)
+albedo_texture = ExtResource("1_sg5ge")

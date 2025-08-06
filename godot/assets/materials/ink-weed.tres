@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://pyg70bf45s2v"]
+
+[ext_resource type="Texture2D" uid="uid://cqcemqovqim63" path="res://assets/textures/ink-weed.png" id="1_5x20t"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+depth_draw_mode = 2
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.654902, 0.7372549, 0, 1)
+albedo_texture = ExtResource("1_5x20t")

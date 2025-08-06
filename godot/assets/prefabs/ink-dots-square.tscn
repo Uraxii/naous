@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceamwv1um75bu"]
+
+[ext_resource type="Material" uid="uid://sy4f548v7vrx" path="res://assets/materials/ink-dots-square.tres" id="1_bh4xg"]
+[ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="2_bc5gb"]
+
+[node name="ink-dots-square" type="Node3D"]
+
+[node name="decal-plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0.01, 0)
+material_override = ExtResource("1_bh4xg")
+mesh = ExtResource("2_bc5gb")

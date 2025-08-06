@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bftc3tm7ds73x"]
+
+[ext_resource type="Texture2D" uid="uid://bcl8impki1t8p" path="res://assets/textures/ink-grass-scrub.png" id="1_lfehs"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+depth_draw_mode = 2
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.5971039, 0.7026699, 0.45200652, 1)
+albedo_texture = ExtResource("1_lfehs")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://3tr4sm7g8f2k"]
+
+[ext_resource type="Material" uid="uid://dclgt13gmahb5" path="res://assets/materials/ink-dots-long.tres" id="1_lihbe"]
+[ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="2_wwoxj"]
+
+[node name="ink-dots-long" type="Node3D"]
+
+[node name="decal-plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -2, -4.371139e-08, 0, -8.742278e-08, 1, -1, 8.742278e-08, 1.9106855e-15, 0, 0.01, 0)
+material_override = ExtResource("1_lihbe")
+mesh = ExtResource("2_wwoxj")

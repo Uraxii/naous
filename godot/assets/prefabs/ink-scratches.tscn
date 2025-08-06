@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cagcutw3s5wtw"]
+
+[ext_resource type="Material" uid="uid://b4qw084feic0t" path="res://assets/materials/ink-scratches.tres" id="1_kx253"]
+[ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="2_6003s"]
+
+[node name="ink-scratches" type="Node3D"]
+
+[node name="decal-plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0.01, 0)
+material_override = ExtResource("1_kx253")
+mesh = ExtResource("2_6003s")

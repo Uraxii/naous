@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cscuc36uh76wh"]
 
 [ext_resource type="PackedScene" uid="uid://cddnf8s5hqe87" path="res://assets/models/grass_x.glb" id="1_e3s44"]
-[ext_resource type="Material" uid="uid://dmf2we5m32a82" path="res://assets/materials/ink-grass-clump.tres" id="2_2j4be"]
+[ext_resource type="Material" uid="uid://bq5vtldo0uprj" path="res://assets/materials/ink-grass-tuft.tres" id="2_e3s44"]
 
-[node name="grass_x" instance=ExtResource("1_e3s44")]
+[node name="grass_tuft" instance=ExtResource("1_e3s44")]
 
 [node name="Mesh" parent="grass_x_1" index="0"]
-material_override = ExtResource("2_2j4be")
+material_override = ExtResource("2_e3s44")

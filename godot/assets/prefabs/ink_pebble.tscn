@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdnxgde35ujpv"]
+
+[ext_resource type="Material" uid="uid://cadkxfcg14v61" path="res://assets/materials/ink-pebble.tres" id="1_ibxol"]
+[ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="2_1pu15"]
+
+[node name="ink-pebble" type="Node3D"]
+
+[node name="decal-plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0.01, 0)
+material_override = ExtResource("1_ibxol")
+mesh = ExtResource("2_1pu15")

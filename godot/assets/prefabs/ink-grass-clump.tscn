@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cddnf8s5hqe87" path="res://assets/models/grass_x.glb" id="1_5ofi8"]
 [ext_resource type="Material" uid="uid://dmf2we5m32a82" path="res://assets/materials/ink-grass-clump.tres" id="2_65wtg"]
 
-[node name="grass_x" instance=ExtResource("1_5ofi8")]
+[node name="grass_clump" instance=ExtResource("1_5ofi8")]
 
 [node name="Mesh" parent="grass_x_1" index="0"]
 material_override = ExtResource("2_65wtg")
