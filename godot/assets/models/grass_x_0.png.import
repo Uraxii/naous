@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqcemqovqim63"
-path.s3tc="res://.godot/imported/ink-weed.png-bdfb1d407c2af1f837573855bc067835.s3tc.ctex"
+uid="uid://b5p3ex0xtdv5j"
+path.s3tc="res://.godot/imported/grass_x_0.png-a1e5a4ff4b6d91266a9aaa077abbe6ae.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "cb2c71c464cabad1d5145d2178523aef"
+}
 
 [deps]
 
-source_file="res://assets/textures/ink-weed.png"
-dest_files=["res://.godot/imported/ink-weed.png-bdfb1d407c2af1f837573855bc067835.s3tc.ctex"]
+source_file="res://assets/models/grass_x_0.png"
+dest_files=["res://.godot/imported/grass_x_0.png-a1e5a4ff4b6d91266a9aaa077abbe6ae.s3tc.ctex"]
 
 [params]
 
