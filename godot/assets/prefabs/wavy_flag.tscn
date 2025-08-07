@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cayqs5l0qo416"]
+
+[ext_resource type="Material" uid="uid://dfiol0oyogebx" path="res://assets/materials/windy-cloth-material.tres" id="1_ij5ky"]
+[ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="2_xfdpv"]
+
+[node name="wavy-flag" type="Node3D"]
+
+[node name="flag" type="MeshInstance3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+material_override = ExtResource("1_ij5ky")
+mesh = ExtResource("2_xfdpv")
