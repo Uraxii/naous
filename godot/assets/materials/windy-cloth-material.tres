@@ -9,5 +9,5 @@ render_priority = 0
 shader = ExtResource("1_craae")
 shader_parameter/clothTexture = ExtResource("2_hdukr")
 shader_parameter/windTexture = ExtResource("2_glang")
-shader_parameter/windSpeed = 0.10000000000582077
-shader_parameter/windStrength = 4.0
+shader_parameter/windSpeed = 1.0
+shader_parameter/windStrength = 0.5
