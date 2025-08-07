@@ -14,6 +14,8 @@ void vertex() {
   VERTEX.y += (noise_value)
 	* windStrength
 	* uv.x; // less effect to the left so there is no movement neat flagpole
+  // and a larger sin base movement
+  VERTEX.y += (cos(TIME * 6.0 * windSpeed + uv.y*4.0)/2.0)*uv.x;	
 }
 
 void fragment() {
