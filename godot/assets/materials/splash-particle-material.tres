@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://crjxaors8r61l"]
+
+[ext_resource type="Texture2D" uid="uid://dq8alcrvf33ba" path="res://assets/materials/splash.png" id="1_iib0n"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+depth_draw_mode = 2
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(0.1705496, 0.67596436, 0.9033818, 1)
+albedo_texture = ExtResource("1_iib0n")

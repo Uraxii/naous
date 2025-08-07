@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://ch0bqgk8cfdeq"]
+
+[ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
+[ext_resource type="Material" uid="uid://cpccsiuabq0sr" path="res://assets/materials/waterfall-material.tres" id="1_ppcyp"]
+[ext_resource type="Material" uid="uid://xfswcd1ua7te" path="res://assets/materials/uv_scroller_material.tres" id="2_ppcyp"]
+[ext_resource type="Material" uid="uid://crjxaors8r61l" path="res://assets/materials/splash-particle-material.tres" id="4_pyk41"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_eochn"]
+
+[sub_resource type="Curve" id="Curve_pyk41"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5068871, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_eam4u"]
+offsets = PackedFloat32Array(0, 0.9940653)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[node name="lake-natalie" type="Node3D"]
+
+[node name="river" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 1, -8, 8, 0)
+material_override = ExtResource("1_ppcyp")
+mesh = ExtResource("1_8jx1q")
+surface_material_override/0 = ExtResource("2_ppcyp")
+
+[node name="river2" type="MeshInstance3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = ExtResource("1_ppcyp")
+mesh = ExtResource("1_8jx1q")
+surface_material_override/0 = ExtResource("2_ppcyp")
+
+[node name="waterfall" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.496911e-07, 1, 0, -8, -4.371139e-08, 0, 0, 0, 1, 0, 8, 0)
+material_override = ExtResource("1_ppcyp")
+mesh = ExtResource("1_8jx1q")
+surface_material_override/0 = ExtResource("2_ppcyp")
+
+[node name="splashes" type="CPUParticles3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0, -0.5)
+material_override = ExtResource("4_pyk41")
+amount = 16
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 0.01, 0.01)
+spread = 90.0
+gravity = Vector3(0, 4, 0)
+damping_min = 1.0
+damping_max = 4.0
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")

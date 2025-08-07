@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq8alcrvf33ba"
-path.s3tc="res://.godot/imported/splash.png-c1c4e571205b4adb94790c3b4b248dcc.s3tc.ctex"
+uid="uid://bmoxhq2sydvkp"
+path.s3tc="res://.godot/imported/flowing-water.png-894fb2fdf1e3088934a9ac666246cc40.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/materials/splash.png"
-dest_files=["res://.godot/imported/splash.png-c1c4e571205b4adb94790c3b4b248dcc.s3tc.ctex"]
+source_file="res://assets/textures/flowing-water.png"
+dest_files=["res://.godot/imported/flowing-water.png-894fb2fdf1e3088934a9ac666246cc40.s3tc.ctex"]
 
 [params]
 
