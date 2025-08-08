@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 Globals="*res://scripts/global_manager.gd"
 API="*res://scripts/api/api_client.tscn"
 
+[godots]
+
+version_hint=""
+
 [input]
 
 move_forward={
