@@ -1,5 +1,5 @@
 #region Naous <- The Main Project
-Local files:
+# Local file stuff:
 */dev/
 builds/
 
@@ -19,6 +19,13 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Addon Stuff:
+godot/addons/godot_vim/
+godot/addons/gdterm/
+
+# Theme Stuff:
+godot/addons/gdterm/themes/
 #endregion
 
 
