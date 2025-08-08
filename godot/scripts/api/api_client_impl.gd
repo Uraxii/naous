@@ -3,52 +3,52 @@ class_name ApiClientImpl extends Node
 var parent:ApiClient
 
 var server:String:
-	get: return parent.server
-	set(value):
-		parent.server = value
-		
+    get: return parent.server
+    set(value):
+        parent.server = value
+        
 var access_token:String:
-	get: return parent.access_token
-	set(value):
-		parent.access_token = value
+    get: return parent.access_token
+    set(value):
+        parent.access_token = value
 
 #region Authentication
 func login(username: String, password: String) -> void:
-	pass
+    pass
 
 func register(username: String, password: String) -> void:
-	pass
+    pass
 
 func logout() -> void:
-	pass
+    pass
 
 func refresh_token() -> void:
-	pass
+    pass
 
 func get_me() -> void:
-	pass
+    pass
 #endregion
 
 
 #region Character Management
 func create_character(name: String) -> void:
-	pass
-	
+    pass
+    
 func get_all_characters(skip: int = 0, limit: int = 10) -> void:
-	pass
+    pass
 
 func get_character(character_id: int) -> void:
-	pass
+    pass
 
 func update_character(character_id: int, updates: Dictionary) -> void:
-	pass
+    pass
 
 func delete_character(character_id: int) -> void:
-	pass
+    pass
 #endregion
 
 
 #region Utility
 func status() -> void:
-	pass
+    pass
 #endregion
