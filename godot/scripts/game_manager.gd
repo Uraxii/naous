@@ -16,7 +16,6 @@ var main: MainView
 
 func _ready() -> void:
     _connect_signals()
-    main = views.spawn(MainView)
     
 
 func _connect_signals() -> void:
@@ -34,7 +33,6 @@ func _on_api_status_passed() -> void:
 
 func _on_connection_closed() -> void:
     views.despawn_all()
-    main = views.spawn(MainView)
     if shard_connection:
         shard_connection.disconnect_from_shard()
 
