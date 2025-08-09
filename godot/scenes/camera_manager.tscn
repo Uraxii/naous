@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dm68wb50iampm" path="res://scripts/camera_manager.gd" id="1_utxs1"]
 
-[node name="CameraManager" type="SpringArm3D" node_paths=PackedStringArray("camera")]
+[node name="CameraManager" type="SpringArm3D"]
 script = ExtResource("1_utxs1")
-camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="."]
