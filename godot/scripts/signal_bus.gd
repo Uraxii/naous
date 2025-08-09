@@ -71,6 +71,15 @@ signal got_client_id(msg)
 signal login(msg)
 #endregion
 
+#region Entity
+@warning_ignore("unused_signal")
+signal spawn_entity(entity: Entity)
+@warning_ignore("unused_signal")
+signal despawn_entity(entity: Entity)
+@warning_ignore("unused_signal")
+signal control_entity(entity: Entity)
+#endregion
+
 #region UI
 @warning_ignore("unused_signal")
 signal spawn_view(view: View)
