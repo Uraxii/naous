@@ -1,26 +1,28 @@
-class_name PlayerInput extends Node
+class_name InputManager extends Node
 
-var target_self:                bool = false
-var target_next:                bool = false
-var target_cancel:              bool = false
+@onready var signals := Globals.signal_bus
 
-var jump:                       bool    = false
-var move:                       Vector2 = Vector2.ZERO
-var mouse_move:                 bool    = false
+var target_self     := false
+var target_next     := false
+var target_cancel   := false
 
-var select_location:            bool    = false
+var jump := false
 
-var camera_look_enabled:        bool    = false
-var camera_rotation_enabled:    bool    = false
-var camera_rotation:            Vector2 = Vector2.ZERO
-var camera_zoom_out:            bool    = false
-var camera_zoom_in:             bool    = false
+var move := Vector2.ZERO
+var mouse_move := false
 
-var mouse_motion_delta       := Vector2.ZERO
-var current_mouse_position   := Vector2.ZERO
-var previous_mouse_position  := Vector2.ZERO
+var select_location := false
 
-var signals: SignalBus
+var camera_look_enabled     := false
+var camera_rotation_enabled := false
+var camera_zoom_out         := false
+var camera_zoom_in          := false
+var camera_rotation         := Vector2.ZERO
+var mouse_motion_delta      := Vector2.ZERO
+var current_mouse_position  := Vector2.ZERO
+var previous_mouse_position := Vector2.ZERO
+
+var toggle_ui := false
 
 var actions: Dictionary = {
     "bar_1_skill_1": func() -> bool:
@@ -41,7 +43,6 @@ func is_move_event(event: InputEvent) -> bool:
 
 func _ready() -> void:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-    signals = Globals.signal_bus
 
 
 func _input(event: InputEvent) -> void:
@@ -49,13 +50,11 @@ func _input(event: InputEvent) -> void:
         signals.in_accept.emit()
     if Input.is_action_just_pressed("ui_cancel"):
         signals.in_cancel.emit()
+    if Input.is_action_just_pressed("ui_toggle"):
+        signals.toggle_ui.emit()
     if is_move_event(event):
         _move_input()
-
-
-func _playing_input_handler(event: InputEvent):
-    # TODO: Crete these inputs in the project.
-    
+        
     if event is InputEventMouseMotion:
         mouse_motion_delta = Vector2(event.relative.x, event.relative.y)    
 
@@ -70,13 +69,13 @@ func _playing_input_handler(event: InputEvent):
     camera_zoom_out = Input.is_action_just_pressed("camera_zoom_out")
     camera_zoom_in = Input.is_action_just_pressed("camera_zoom_in")
     camera_look_enabled = Input.is_action_pressed("camera_look_enabled")
-    camera_rotation_enabled = Input.is_action_pressed("camera_rotation_enabled")
+    camera_rotation_enabled = Input.is_action_pressed("camera_rotate_enabled")
 
     if camera_rotation_enabled || camera_look_enabled:
             camera_rotation = mouse_motion_delta
     else:
             camera_rotation = Vector2.ZERO
-    
+
 
 func _move_input():
     var dir: Vector2  = Input.get_vector(

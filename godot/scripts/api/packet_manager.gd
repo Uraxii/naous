@@ -1,6 +1,6 @@
 class_name PacketManager extends Node
 
-const PACKETS := preload("res://scripts/packets.gd")
+const PACKETS := preload("res://scripts/api/packets.gd")
 
 var signals: SignalBus
 

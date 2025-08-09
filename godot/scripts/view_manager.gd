@@ -1,7 +1,7 @@
 class_name ViewManager extends CanvasLayer
 
-var system_view: SystemView
-var console_view: ConsoleView
+@onready var signals := Globals.signal_bus
+
 var active_views: Array[View] = []
 
 var _scene_map: Dictionary[GDScript, PackedScene] = {
@@ -13,13 +13,7 @@ var _scene_map: Dictionary[GDScript, PackedScene] = {
     SystemView: preload("res://scenes/ui/system_view.tscn"),
 }
 
-@onready var signals := Globals.signal_bus
-
-
-func despawn_all() -> void:
-    for view in active_views:
-        if view:
-            view.despawn()
+var ui_is_visible := true
 
 
 func spawn(type: GDScript, do_not_register=false) -> View:
@@ -41,26 +35,27 @@ func spawn(type: GDScript, do_not_register=false) -> View:
     add_child(view_node)
     view_node.initalize()
     signals.spawn_view.emit(view_node)
+    view_node.visible = ui_is_visible
+    
     return view_node
 
 
+func despawn_all() -> void:
+    for view in active_views:
+        if view:
+            view.despawn()
+
+
 func _ready():
-    #_set_full_rect(self)
-    console_view = spawn(ConsoleView, true)
-    system_view = spawn(SystemView, true)
+    signals.toggle_ui.connect(_on_toggle_ui)
+
+
+func _on_toggle_ui():
+    ui_is_visible = not ui_is_visible
+    
+    for view in active_views:
+        view.visible = ui_is_visible
 
 
 func _on_despawn_view(view: View) -> void:
     active_views.erase(view)
-
-
-func _set_full_rect(control: Control) -> void:
-    control.anchor_left = 0.0
-    control.anchor_top = 0.0
-    control.anchor_right = 1.0
-    control.anchor_bottom = 1.0
-
-    control.offset_left = 0.0
-    control.offset_top = 0.0
-    control.offset_right = 0.0
-    control.offset_bottom = 0.0
