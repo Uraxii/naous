@@ -1,5 +1,7 @@
 class_name ViewManager extends CanvasLayer
 
+@onready var signals := Globals.signal_bus
+
 var system_view: SystemView
 var console_view: ConsoleView
 var active_views: Array[View] = []
@@ -13,7 +15,7 @@ var _scene_map: Dictionary[GDScript, PackedScene] = {
     SystemView: preload("res://scenes/ui/system_view.tscn"),
 }
 
-@onready var signals := Globals.signal_bus
+var ui_is_visible := true
 
 
 func despawn_all() -> void:
@@ -41,13 +43,23 @@ func spawn(type: GDScript, do_not_register=false) -> View:
     add_child(view_node)
     view_node.initalize()
     signals.spawn_view.emit(view_node)
+    view_node.visible = ui_is_visible
+    
     return view_node
 
 
 func _ready():
     #_set_full_rect(self)
+    signals.toggle_ui.connect(_on_toggle_ui)
     console_view = spawn(ConsoleView, true)
     system_view = spawn(SystemView, true)
+
+
+func _on_toggle_ui():
+    ui_is_visible = not ui_is_visible
+    
+    for view in active_views:
+        view.visible = ui_is_visible
 
 
 func _on_despawn_view(view: View) -> void:

@@ -76,6 +76,8 @@ signal login(msg)
 signal spawn_view(view: View)
 @warning_ignore("unused_signal")
 signal despawn_view(view: View)
+@warning_ignore("unused_signal")
+signal toggle_ui
 #endregion
 
 #region Logging
