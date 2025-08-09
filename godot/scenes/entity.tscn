@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmkcvlx154cnh"]
+
+[ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
+[ext_resource type="PackedScene" uid="uid://dw4fatkylbqbn" path="res://scenes/stat_base.tscn" id="3_bepk3"]
+[ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="3_f4o61"]
+[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/move.gd" id="3_qe04c"]
+
+[sub_resource type="Resource" id="Resource_qe04c"]
+metadata/_custom_type_script = "uid://dkovo1tujjxpg"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
+radius = 0.42333984
+
+[node name="Entity" type="Node3D" node_paths=PackedStringArray("body")]
+script = ExtResource("1_vh5go")
+data = SubResource("Resource_qe04c")
+body = NodePath("Body")
+
+[node name="Inventory" type="Node" parent="."]
+
+[node name="Stats" type="Node" parent="."]
+
+[node name="Health" parent="Stats" instance=ExtResource("3_bepk3")]
+
+[node name="Energy" parent="Stats" instance=ExtResource("3_bepk3")]
+
+[node name="Speed" parent="Stats" instance=ExtResource("3_bepk3")]
+
+[node name="Gravity" parent="Stats" instance=ExtResource("3_bepk3")]
+
+[node name="StatusesEffects" type="Node" parent="."]
+
+[node name="Spells" type="Node" parent="."]
+
+[node name="Components" type="Node" parent="."]
+
+[node name="Move" type="Node" parent="Components" node_paths=PackedStringArray("entity", "body")]
+script = ExtResource("3_qe04c")
+entity = NodePath("../..")
+body = NodePath("../../Body")
+
+[node name="Body" type="CharacterBody3D" parent="."]
+
+[node name="Shape" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_vh5go")
+
+[node name="player_base" parent="Body" instance=ExtResource("3_f4o61")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
