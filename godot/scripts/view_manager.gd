@@ -49,7 +49,6 @@ func spawn(type: GDScript, do_not_register=false) -> View:
 
 
 func _ready():
-    #_set_full_rect(self)
     signals.toggle_ui.connect(_on_toggle_ui)
     console_view = spawn(ConsoleView, true)
     system_view = spawn(SystemView, true)
@@ -64,15 +63,3 @@ func _on_toggle_ui():
 
 func _on_despawn_view(view: View) -> void:
     active_views.erase(view)
-
-
-func _set_full_rect(control: Control) -> void:
-    control.anchor_left = 0.0
-    control.anchor_top = 0.0
-    control.anchor_right = 1.0
-    control.anchor_bottom = 1.0
-
-    control.offset_left = 0.0
-    control.offset_top = 0.0
-    control.offset_right = 0.0
-    control.offset_bottom = 0.0
