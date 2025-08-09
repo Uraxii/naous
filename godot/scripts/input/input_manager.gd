@@ -1,4 +1,4 @@
-class_name PlayerInput extends Node
+class_name InputManager extends Node
 
 @onready var signals := Globals.signal_bus
 
@@ -50,15 +50,11 @@ func _input(event: InputEvent) -> void:
         signals.in_accept.emit()
     if Input.is_action_just_pressed("ui_cancel"):
         signals.in_cancel.emit()
-    if Input.is_action_just_pressed("toggle_ui"):
+    if Input.is_action_just_pressed("ui_toggle"):
         signals.toggle_ui.emit()
     if is_move_event(event):
         _move_input()
-
-
-func _playing_input_handler(event: InputEvent):
-    # TODO: Crete these inputs in the project.
-    
+        
     if event is InputEventMouseMotion:
         mouse_motion_delta = Vector2(event.relative.x, event.relative.y)    
 
@@ -73,13 +69,13 @@ func _playing_input_handler(event: InputEvent):
     camera_zoom_out = Input.is_action_just_pressed("camera_zoom_out")
     camera_zoom_in = Input.is_action_just_pressed("camera_zoom_in")
     camera_look_enabled = Input.is_action_pressed("camera_look_enabled")
-    camera_rotation_enabled = Input.is_action_pressed("camera_rotation_enabled")
+    camera_rotation_enabled = Input.is_action_pressed("camera_rotate_enabled")
 
     if camera_rotation_enabled || camera_look_enabled:
             camera_rotation = mouse_motion_delta
     else:
             camera_rotation = Vector2.ZERO
-    
+
 
 func _move_input():
     var dir: Vector2  = Input.get_vector(
