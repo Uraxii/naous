@@ -7,7 +7,9 @@ class_name GlobalManager extends Node
 @onready var packets    := PacketManager.new(signal_bus)
 @onready var input      := PlayerInput.new()
 @onready var views      := ViewManager.new()
-@onready var game   := GameManager.new()
+@onready var game       := GameManager.new()
+@onready var camera: CameraManager = preload(
+    "res://scenes/camera_manager.tscn").instantiate()
 
 
 func _ready() -> void:
@@ -15,6 +17,11 @@ func _ready() -> void:
         return
 
     # Load order matters here!
+    input.name = "Input"
     add_child(input)
+    views.name = "View"
     add_child(views)
+    game.name = "Game"
     add_child(game)
+    camera.name = "Camera"
+    add_child(camera)
