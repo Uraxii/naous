@@ -3,7 +3,7 @@ class_name Entity extends Node3D
 #region Variables
 const INVALID_ID: int = -1
 
-@export var data := EntityData.new()
+# @export var data := EntityData.new()
 @export var body: CharacterBody3D
 @export_category("Runtime Values")
 @export var id: int = INVALID_ID
