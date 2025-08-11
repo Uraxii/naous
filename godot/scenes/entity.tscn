@@ -25,6 +25,11 @@ current = 5.0
 
 [node name="Gravity" parent="Stats" instance=ExtResource("3_bepk3")]
 
+[node name="JumpForce" parent="Stats" instance=ExtResource("3_bepk3")]
+start_value = 15.0
+max_value = 40.0
+current = 15.0
+
 [node name="StatusesEffects" type="Node" parent="."]
 
 [node name="Spells" type="Node" parent="."]

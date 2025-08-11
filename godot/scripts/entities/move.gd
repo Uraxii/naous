@@ -7,8 +7,9 @@ const FORCE_JUMP_GRAVIY: float = 0.4
 @export var body: CharacterBody3D
 
 @onready var input := Globals.input
-@onready var gravity_scale := entity.get_stat("Gravity")
 @onready var speed := entity.get_stat("Speed")
+@onready var gravity_scale := entity.get_stat("Gravity")
+@onready var jump_force := entity.get_stat("JumpForce")
 
 var current_gravity: float = 0.0
 var move_velocity := Vector3.ZERO
@@ -20,18 +21,18 @@ func set_force_movement(velocity: Vector3) -> void:
     move_velocity = velocity
 
 
-func move_towards(position: Vector3, speed: float) -> void:
+func move_towards(position: Vector3) -> void:
     var direction = position - body.global_transform.origin
     direction = direction.normalized()
-    move_velocity = direction * speed
+    move_velocity = direction * speed.current
 
 
-func jump(jump_force: float, input: Vector2, speed: float) -> void:
+func jump() -> void:
     jump_influence = body.transform.basis * Vector3(
-        input.x, 0, input.y).normalized()
+        input.move.x, 0, input.move.y).normalized()
 
-    jump_influence = jump_influence * speed
-    jump_influence.y = jump_force
+    jump_influence = jump_influence * speed.current
+    jump_influence.y = jump_force.current
 
 
 func move_with_input():
@@ -88,6 +89,8 @@ func apply_movement(current_velocity: Vector3) -> Vector3:
 func _process(_delta: float) -> void:
     if entity.local_has_control:
         move_with_input()
+        if input.jump:
+            jump()
 
     body.velocity = apply_gravity(body.velocity)
     body.velocity = apply_jump_influence(body.velocity)
