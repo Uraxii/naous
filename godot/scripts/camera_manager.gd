@@ -1,7 +1,7 @@
 class_name CameraManager extends SpringArm3D
 
 @export var x_offset: float = 0.0
-@export var y_offset: float = 7.0
+@export var y_offset: float = 2.0
 @export var z_offset: float = 0.0
 @export var zoom_increment: float = 2.0
 @export var sensativity: float = 0.005
