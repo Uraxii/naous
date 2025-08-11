@@ -1,15 +1,14 @@
 class_name CameraManager extends SpringArm3D
 
 @export var x_offset: float = 0.0
-@export var y_offset: float = 2.5
+@export var y_offset: float = 7.0
 @export var z_offset: float = 0.0
 @export var zoom_increment: float = 2.0
 @export var sensativity: float = 0.005
+@export var target: Entity
 
 @onready var signals = Globals.signal_bus
 @onready var input = Globals.input
-
-var target: Entity
 
 
 func _process(_delta: float) -> void:
@@ -36,14 +35,14 @@ func _process(_delta: float) -> void:
 
         if input.camera_look_enabled:
             target.body.rotation.y = rotation.y
-    
+
     elif !input.camera_rotation_enabled && !input.camera_look_enabled && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _ready() -> void:
     signals.control_entity.connect(_on_control_entity)
-    
+
 
 func _on_control_entity(entity: Entity) -> void:
     print_debug("Set camera target to %s." % entity.id)
