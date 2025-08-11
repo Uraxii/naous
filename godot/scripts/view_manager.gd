@@ -4,6 +4,7 @@ class_name ViewManager extends CanvasLayer
 
 var active_views: Array[View] = []
 
+# TODO: Find some way to not have to maintain this data.
 var _scene_map: Dictionary[GDScript, PackedScene] = {
     CharacterSelectView: preload("res://scenes/ui/character_select_view.tscn"),
     CreateCharacterView: preload("res://scenes/ui/create_character_view.tscn"),
@@ -13,7 +14,7 @@ var _scene_map: Dictionary[GDScript, PackedScene] = {
     SystemView: preload("res://scenes/ui/system_view.tscn"),
 }
 
-var ui_is_visible := true
+var is_ui_visible := true
 
 
 func spawn(type: GDScript, do_not_register=false) -> View:
@@ -35,7 +36,7 @@ func spawn(type: GDScript, do_not_register=false) -> View:
     add_child(view_node)
     view_node.initalize()
     signals.spawn_view.emit(view_node)
-    view_node.visible = ui_is_visible
+    view_node.visible = is_ui_visible
     
     return view_node
 
@@ -47,14 +48,14 @@ func despawn_all() -> void:
 
 
 func _ready():
-    signals.toggle_ui.connect(_on_toggle_ui)
+    signals.toggle_ui.connect(_on_ui_toggle)
 
 
-func _on_toggle_ui():
-    ui_is_visible = not ui_is_visible
+func _on_ui_toggle():
+    is_ui_visible = not is_ui_visible
     
     for view in active_views:
-        view.visible = ui_is_visible
+        view.visible = is_ui_visible
 
 
 func _on_despawn_view(view: View) -> void:

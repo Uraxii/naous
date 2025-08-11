@@ -85,8 +85,6 @@ signal control_entity(entity: Entity)
 signal spawn_view(view: View)
 @warning_ignore("unused_signal")
 signal despawn_view(view: View)
-@warning_ignore("unused_signal")
-signal toggle_ui
 #endregion
 
 #region Logging
@@ -118,9 +116,11 @@ signal chat(sender_name: String, message: String)
 
 #region Input
 @warning_ignore("unused_signal")
-signal in_accept
+signal ui_accept 
 @warning_ignore("unused_signal")
-signal in_cancel
+signal ui_cancel
 @warning_ignore("unused_signal")
-signal in_move(dir: Vector2)
+signal move(dir: Vector2)
+@warning_ignore("unused_signal")
+signal toggle_ui(state:bool)
 #endregion

@@ -15,5 +15,5 @@ func despawn():
 
 
 func _on_visibility_change() -> void:
-    var is_visible: bool = is_visible_in_tree()
-    print(self, " visible:", is_visible)
+    var is_ui_visible: bool = is_visible_in_tree()
+    print_debug(self, " visible:", is_visible)

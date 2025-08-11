@@ -22,14 +22,14 @@ var mouse_motion_delta      := Vector2.ZERO
 var current_mouse_position  := Vector2.ZERO
 var previous_mouse_position := Vector2.ZERO
 
-var toggle_ui := false
+var is_ui_visible := false
 
 var actions: Dictionary = {
     "bar_1_skill_1": func() -> bool:
-            return Input.is_action_just_pressed("bar_1_skill_1"),
+        return Input.is_action_just_pressed("bar_1_skill_1"),
 
     "bar_1_skill_2": func() -> bool:
-            return Input.is_action_just_pressed("bar_1_skill_2"),
+        return Input.is_action_just_pressed("bar_1_skill_2"),
 }
 
 
@@ -47,13 +47,14 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
     if Input.is_action_just_pressed("ui_accept"):
-        signals.in_accept.emit()
+        signals.ui_accept.emit()
 
     if Input.is_action_just_pressed("ui_cancel"):
-        signals.in_cancel.emit()
+        signals.ui_cancel.emit()
 
     if Input.is_action_just_pressed("ui_toggle"):
-        signals.toggle_ui.emit()
+        is_ui_visible = not is_ui_visible
+        signals.toggle_ui.emit(is_ui_visible)
 
     _move_input()
 
@@ -90,4 +91,4 @@ func _move_input():
 
     dir = dir.normalized()
     move = dir
-    signals.in_move.emit(dir)
+    signals.move.emit(dir)
