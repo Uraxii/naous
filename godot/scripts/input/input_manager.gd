@@ -48,20 +48,22 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
     if Input.is_action_just_pressed("ui_accept"):
         signals.in_accept.emit()
+
     if Input.is_action_just_pressed("ui_cancel"):
         signals.in_cancel.emit()
+
     if Input.is_action_just_pressed("ui_toggle"):
         signals.toggle_ui.emit()
-    if is_move_event(event):
-        _move_input()
-        
+
+    _move_input()
+
     if event is InputEventMouseMotion:
         mouse_motion_delta = Vector2(event.relative.x, event.relative.y)    
 
     target_self = Input.is_action_just_pressed("target_self")
     target_next = Input.is_action_just_pressed("target_next")
     target_cancel = Input.is_action_just_pressed("ui_cancel")
-    
+
     jump = Input.is_action_just_pressed("jump")
 
     select_location = Input.is_action_just_pressed("select_location")
@@ -72,9 +74,9 @@ func _input(event: InputEvent) -> void:
     camera_rotation_enabled = Input.is_action_pressed("camera_rotate_enabled")
 
     if camera_rotation_enabled || camera_look_enabled:
-            camera_rotation = mouse_motion_delta
+        camera_rotation = mouse_motion_delta
     else:
-            camera_rotation = Vector2.ZERO
+        camera_rotation = Vector2.ZERO
 
 
 func _move_input():
@@ -87,4 +89,5 @@ func _move_input():
             dir.y = -1
 
     dir = dir.normalized()
+    move = dir
     signals.in_move.emit(dir)
