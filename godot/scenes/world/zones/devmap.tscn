@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd0ydf3xgbfoh"]
+[gd_scene load_steps=8 format=3 uid="uid://bd0ydf3xgbfoh"]
 
 [ext_resource type="PackedScene" uid="uid://pmvaqr0spcry" path="res://assets/models/DO_NOT_SHIP_kenny_platformer-kit/block-grass-hexagon.glb" id="1_n6dg4"]
 [ext_resource type="PackedScene" uid="uid://bklcgtmkg4ee5" path="res://assets/models/DO_NOT_SHIP_kenny_platformer-kit/block-grass-low.glb" id="2_7nvo8"]
@@ -16,6 +16,13 @@ sky = SubResource("Sky_7nvo8")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7nvo8"]
+height = 1.2260742
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n6dg4"]
+height = 0.33337402
+radius = 0.13720703
+
 [node name="Devmap" type="Node3D"]
 metadata/do_not_ship = true
 
@@ -26,15 +33,28 @@ transform = Transform3D(-0.9843897, 0.1667832, -0.056216266, 0.109602645, 0.8308
 environment = SubResource("Environment_5t2d2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.5760161, 0.08535735, 0.8129696, 0.64668804, 0.6559071, 0.38933346, -0.50000006, 0.75, -0.43301266, 7.568749, 4.982049, 0)
 shadow_enabled = true
 directional_shadow_max_distance = 1.0
 
-[node name="block-grass-hexagon2" parent="." instance=ExtResource("1_n6dg4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6198, 28.4511, 33.7975)
-
 [node name="block-grass-low2" parent="." instance=ExtResource("2_7nvo8")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 21.6516, 25.9765, 34.9605)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -10.046597, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="block-grass-low2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="block-grass-low2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10534668, 0)
+shape = SubResource("CylinderShape3D_7nvo8")
+
+[node name="block-grass-hexagon2" parent="block-grass-low2" instance=ExtResource("1_n6dg4")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.006359577, 0.49491978, -0.23259974)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="block-grass-low2/block-grass-hexagon2"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.031797886, -0.96143043, 0.025179148)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="block-grass-low2/block-grass-hexagon2/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22772217, 0)
+shape = SubResource("CylinderShape3D_n6dg4")
 
 [node name="spawn-node" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98549, 26.7609)
