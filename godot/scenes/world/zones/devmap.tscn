@@ -56,5 +56,15 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.031797886, -0.96143043, 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22772217, 0)
 shape = SubResource("CylinderShape3D_n6dg4")
 
+[node name="block-grass-hexagon3" parent="block-grass-low2" instance=ExtResource("1_n6dg4")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.17404841, 0.48480085, -0.19356109)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="block-grass-low2/block-grass-hexagon3"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.031797886, -0.96143043, 0.025179148)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="block-grass-low2/block-grass-hexagon3/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22772217, 0)
+shape = SubResource("CylinderShape3D_n6dg4")
+
 [node name="spawn-node" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98549, 26.7609)
