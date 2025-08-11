@@ -33,10 +33,10 @@ func _process(_delta: float) -> void:
         if rotation.x < -1:
             rotation.x = -1
 
-        if input.camera_look_enabled:
+        if input.camera_look:
             target.body.rotation.y = rotation.y
 
-    elif !input.camera_rotation_enabled && !input.camera_look_enabled && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+    elif !input.camera_rotate && !input.camera_look && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 

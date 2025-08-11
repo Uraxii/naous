@@ -1,5 +1,8 @@
 class_name InputManager extends Node
 
+#region Variables
+const BACKPEDDLE_PENALTY := 0.75
+
 @onready var signals := Globals.signal_bus
 
 var target_self     := false
@@ -13,14 +16,14 @@ var mouse_move := false
 
 var select_location := false
 
-var camera_look_enabled     := false
-var camera_rotation_enabled := false
-var camera_zoom_out         := false
-var camera_zoom_in          := false
-var camera_rotation         := Vector2.ZERO
-var mouse_motion_delta      := Vector2.ZERO
-var current_mouse_position  := Vector2.ZERO
-var previous_mouse_position := Vector2.ZERO
+var camera_look     := false
+var camera_rotate   := false
+var camera_zoom_out := false
+var camera_zoom_in  := false
+var camera_rotation := Vector2.ZERO
+var mouse_pos_delta := Vector2.ZERO
+var curr_mouse_pos  := Vector2.ZERO
+var last_mouse_pos  := Vector2.ZERO
 
 var is_ui_visible := false
 
@@ -31,16 +34,27 @@ var actions: Dictionary = {
     "bar_1_skill_2": func() -> bool:
         return Input.is_action_just_pressed("bar_1_skill_2"),
 }
+#endregion
 
 
-func is_move_event(event: InputEvent) -> bool:
-    var forward := event.is_action("move_forward")
-    var left := event.is_action("move_left")
-    var back := event.is_action("move_back")
-    var right := event.is_action("move_right")
-    return forward or left or back or right
+func get_move_input() -> Vector2:
+    var dir: Vector2  = Input.get_vector(
+        "move_left", "move_right", "move_forward", "move_back")
+
+    var is_moving_with_mouse = camera_rotate && camera_look
+    if is_moving_with_mouse:
+        dir.y = -1
+
+    dir = dir.normalized()
+
+    var is_moving_backwards = dir.y > 0
+    if is_moving_backwards:
+        dir = dir * BACKPEDDLE_PENALTY
+
+    return dir
 
 
+#region Godot Callback Functions
 func _ready() -> void:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -54,12 +68,12 @@ func _input(event: InputEvent) -> void:
 
     if Input.is_action_just_pressed("ui_toggle"):
         is_ui_visible = not is_ui_visible
-        signals.toggle_ui.emit(is_ui_visible)
+        signals.ui_toggle.emit(is_ui_visible)
 
-    _move_input()
+    move = get_move_input()
 
     if event is InputEventMouseMotion:
-        mouse_motion_delta = Vector2(event.relative.x, event.relative.y)    
+        mouse_pos_delta = Vector2(event.relative.x, event.relative.y)
 
     target_self = Input.is_action_just_pressed("target_self")
     target_next = Input.is_action_just_pressed("target_next")
@@ -71,24 +85,12 @@ func _input(event: InputEvent) -> void:
 
     camera_zoom_out = Input.is_action_just_pressed("camera_zoom_out")
     camera_zoom_in = Input.is_action_just_pressed("camera_zoom_in")
-    camera_look_enabled = Input.is_action_pressed("camera_look_enabled")
-    camera_rotation_enabled = Input.is_action_pressed("camera_rotate_enabled")
+    camera_look = Input.is_action_pressed("camera_look")
+    camera_rotate = Input.is_action_pressed("camera_rotate")
 
-    if camera_rotation_enabled || camera_look_enabled:
-        camera_rotation = mouse_motion_delta
+    mouse_move = camera_look && camera_rotate
+    if camera_rotate || camera_look:
+        camera_rotation = mouse_pos_delta
     else:
         camera_rotation = Vector2.ZERO
-
-
-func _move_input():
-    var dir: Vector2  = Input.get_vector(
-        "move_left", "move_right", "move_forward", "move_back")
-
-    mouse_move = camera_rotation_enabled && camera_look_enabled
-
-    if mouse_move && dir.y == 0:
-            dir.y = -1
-
-    dir = dir.normalized()
-    move = dir
-    signals.move.emit(dir)
+#endregion
