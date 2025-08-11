@@ -35,7 +35,7 @@ func jump(jump_force: float, input: Vector2, speed: float) -> void:
 
 
 func move_with_input():
-    print_debug(input.move)
+    #print_debug(input.move)
 
     var direction = body.transform.basis * Vector3(
         input.move.x, 0, input.move.y).normalized()
@@ -69,7 +69,7 @@ func apply_jump_influence(current_velocity: Vector3) -> Vector3:
         return current_velocity
 
     is_jumping = true
-    # print('Current jump influence y %3f' % jump_influence.y)
+    # print_debug('Current jump influence y %3f' % jump_influence.y)
     current_velocity += jump_influence
 
     if jump_influence.y > 0:
@@ -92,7 +92,7 @@ func _process(_delta: float) -> void:
     body.velocity = apply_gravity(body.velocity)
     body.velocity = apply_jump_influence(body.velocity)
     body.velocity = apply_movement(body.velocity)
-    
+
     body.move_and_slide()
 
     body.velocity = Vector3.ZERO
