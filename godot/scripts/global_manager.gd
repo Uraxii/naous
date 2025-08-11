@@ -14,10 +14,10 @@ class_name GlobalManager extends Node
 
 
 func new_global(node_name: String, type: GDScript) -> Node:
-    var new_global = type.new()
-    new_global.name = node_name
-    add_child(new_global)
-    return new_global
+    var global = type.new()
+    global.name = node_name
+    add_child(global)
+    return global
 
 
 func new_global_scene(node_name: String, scene: PackedScene) -> Node:
