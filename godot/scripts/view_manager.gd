@@ -48,7 +48,7 @@ func despawn_all() -> void:
 
 
 func _ready():
-    signals.toggle_ui.connect(_on_ui_toggle)
+    signals.ui_toggle.connect(_on_ui_toggle)
 
 
 func _on_ui_toggle():

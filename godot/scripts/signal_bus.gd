@@ -122,5 +122,5 @@ signal ui_cancel
 @warning_ignore("unused_signal")
 signal move(dir: Vector2)
 @warning_ignore("unused_signal")
-signal toggle_ui(state:bool)
+signal ui_toggle(state:bool)
 #endregion

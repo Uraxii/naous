@@ -11,8 +11,8 @@ var curr_state := STATE_HIDDEN
 
 
 func _ready() -> void:
-    signals.in_accept.connect(_on_accept)
-    signals.in_cancel.connect(_on_cancel)
+    signals.ui_accept.connect(_on_accept)
+    signals.ui_cancel.connect(_on_cancel)
     line.text_submitted.connect(_on_submit)
     hide()
 

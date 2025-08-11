@@ -10,7 +10,7 @@ var curr_state := STATE_HIDDEN
 
 
 func _ready() -> void:
-    signals.in_cancel.connect(_on_cancel)
+    signals.ui_cancel.connect(_on_cancel)
     
     var logout: Button = %Logout
     logout.pressed.connect(_on_logout_pressed)
