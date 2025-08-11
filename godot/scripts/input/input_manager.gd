@@ -27,12 +27,8 @@ var last_mouse_pos  := Vector2.ZERO
 
 var is_ui_visible := false
 
-var actions: Dictionary = {
-    "bar_1_skill_1": func() -> bool:
-        return Input.is_action_just_pressed("bar_1_skill_1"),
-
-    "bar_1_skill_2": func() -> bool:
-        return Input.is_action_just_pressed("bar_1_skill_2"),
+var actions: Dictionary[String, bool] = {
+    "action_0": false
 }
 #endregion
 
@@ -93,4 +89,7 @@ func _input(event: InputEvent) -> void:
         camera_rotation = mouse_pos_delta
     else:
         camera_rotation = Vector2.ZERO
+
+    actions['action_0'] = Input.is_action_just_pressed('action_0')
 #endregion
+

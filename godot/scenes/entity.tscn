@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=9 format=3 uid="uid://bmkcvlx154cnh"]
 
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
 [ext_resource type="PackedScene" uid="uid://dw4fatkylbqbn" path="res://scenes/stat_base.tscn" id="3_bepk3"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="3_f4o61"]
+[ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="3_lmnk1"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/move.gd" id="3_qe04c"]
+[ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="4_afumw"]
+[ext_resource type="Script" uid="uid://d4ai60cekwpy" path="res://scripts/entities/cast.gd" id="5_ygnst"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -32,9 +35,18 @@ current = 15.0
 
 [node name="StatusesEffects" type="Node" parent="."]
 
-[node name="Spells" type="Node" parent="."]
-
 [node name="Components" type="Node" parent="."]
+
+[node name="Spells" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
+script = ExtResource("5_ygnst")
+entity = NodePath("../..")
+
+[node name="TestSpell" type="Node" parent="Components/Spells"]
+script = ExtResource("3_lmnk1")
+id = "Test Spell"
+
+[node name="DamageSelf" type="Node" parent="Components/Spells/TestSpell"]
+script = ExtResource("4_afumw")
 
 [node name="Move" type="Node" parent="Components" node_paths=PackedStringArray("entity", "body")]
 script = ExtResource("3_qe04c")
