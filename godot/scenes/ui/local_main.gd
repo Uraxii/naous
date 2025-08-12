@@ -49,7 +49,7 @@ func _on_host_pressed() -> void:
 
 func _on_join_pressed() -> void:
     # TODO: Calling private function to skip hub connection calls
-    Globals.game_man._create_shard_connection("localhost", port, shard_id)
+    Globals.game._create_shard_connection("localhost", port, shard_id)
     # TODO: Respond to an rpc to switch to the server's level
     entry_point.hide()
     
