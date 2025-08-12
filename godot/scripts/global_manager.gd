@@ -2,9 +2,9 @@ class_name GlobalManager extends Node
 
 # Load order matters!!!
 @onready var launch_args := ArgParser.parse()
-@onready var log := Log.new(signal_bus)
 @onready var packets := PacketManager.new(signal_bus)
 @onready var signal_bus: SignalBus = new_global("Signals", SignalBus)
+@onready var log := Log.new(signal_bus)
 @onready var input: InputManager = new_global("Input", InputManager)
 @onready var views: ViewManager = new_global("Views", ViewManager)
 @onready var game: GameManager = new_global("Game", GameManager)
