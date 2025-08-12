@@ -27,7 +27,7 @@ radius = 0.13720703
 metadata/do_not_ship = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.9843897, 0.1667832, -0.056216266, 0.109602645, 0.8308156, 0.545649, 0.13771042, 0.5309698, -0.83612615, 21.586346, 29.69993, 31.435276)
+transform = Transform3D(1, 0, 0, 0, 0.6805291, 0.7327211, 0, -0.7327211, 0.6805291, 0, 7.509359, 11.511243)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5t2d2")
