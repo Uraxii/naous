@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cnjuxndadfe34"]
+
+[ext_resource type="Shader" uid="uid://bhyq8hqi5hiwd" path="res://assets/materials/uv_scroller.gdshader" id="1_mm28x"]
+[ext_resource type="Texture2D" uid="uid://bmoxhq2sydvkp" path="res://assets/textures/flowing-water.png" id="2_s4kny"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mm28x")
+shader_parameter/scroll_speed = 0.0050000002375
+shader_parameter/angle_degrees = 0.0
+shader_parameter/repeat_x = 32.0000014725
+shader_parameter/repeat_y = 32.0000014725
+shader_parameter/row_offset = 0.0
+shader_parameter/color = Vector4(0, 0.5, 1, 1)
+shader_parameter/texture_to_scroll = ExtResource("2_s4kny")

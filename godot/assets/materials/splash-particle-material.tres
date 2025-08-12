@@ -10,5 +10,5 @@ cull_mode = 2
 depth_draw_mode = 2
 shading_mode = 0
 specular_mode = 2
-albedo_color = Color(0.1705496, 0.67596436, 0.9033818, 1)
+albedo_color = Color(0.37779266, 0.7743842, 0.97996193, 1)
 albedo_texture = ExtResource("1_iib0n")

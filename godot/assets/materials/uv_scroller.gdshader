@@ -1,9 +1,9 @@
 shader_type spatial;
 
-uniform float scroll_speed : hint_range(0, 2) = 0.08;
+uniform float scroll_speed : hint_range(0, 16) = 0.08;
 uniform float angle_degrees : hint_range(0, 360) = 45.0;
-uniform float repeat_x : hint_range(1, 20) = 20;
-uniform float repeat_y : hint_range(1, 20) = 12;
+uniform float repeat_x : hint_range(1, 256) = 1;
+uniform float repeat_y : hint_range(1, 256) = 1;
 uniform float row_offset : hint_range(0, 1) = 1;
 uniform vec4 color = vec4(1,1,1,1);
 uniform sampler2D texture_to_scroll;

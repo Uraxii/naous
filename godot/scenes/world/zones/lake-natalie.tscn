@@ -1,9 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=14 format=3 uid="uid://ch0bqgk8cfdeq"]
 
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
 [ext_resource type="Material" uid="uid://cpccsiuabq0sr" path="res://assets/materials/waterfall-material.tres" id="1_ppcyp"]
 [ext_resource type="Material" uid="uid://xfswcd1ua7te" path="res://assets/materials/uv_scroller_material.tres" id="2_ppcyp"]
 [ext_resource type="Material" uid="uid://crjxaors8r61l" path="res://assets/materials/splash-particle-material.tres" id="4_pyk41"]
+[ext_resource type="Material" uid="uid://inv5fl1j6wgv" path="res://assets/materials/heightmap-terrain-material.tres" id="5_8y67n"]
+[ext_resource type="ArrayMesh" uid="uid://0m02442vtb2s" path="res://assets/models/heightmap-lake-natalie.obj" id="5_fydbq"]
+[ext_resource type="Material" uid="uid://cnjuxndadfe34" path="res://assets/materials/lake-material.tres" id="6_8y67n"]
+[ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="7_47l1t"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_eochn"]
 
@@ -15,36 +19,259 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.9940653)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
+[sub_resource type="Curve" id="Curve_47l1t"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 360.0, 0, 1, Vector2(1, 360), 360.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_38dkk"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -360), 0.0, 719.99994, 0, 1, Vector2(1, 360), 719.99994, 0.0, 1, 0]
+point_count = 2
+
 [node name="lake-natalie" type="Node3D"]
 
-[node name="river" type="MeshInstance3D" parent="."]
-transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 1, -8, 8, 0)
-material_override = ExtResource("1_ppcyp")
-mesh = ExtResource("1_8jx1q")
-surface_material_override/0 = ExtResource("2_ppcyp")
-
-[node name="river2" type="MeshInstance3D" parent="."]
-transform = Transform3D(8, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-material_override = ExtResource("1_ppcyp")
-mesh = ExtResource("1_8jx1q")
-surface_material_override/0 = ExtResource("2_ppcyp")
-
 [node name="waterfall" type="MeshInstance3D" parent="."]
-transform = Transform3D(-3.496911e-07, 1, 0, -8, -4.371139e-08, 0, 0, 0, 1, 0, 8, 0)
+transform = Transform3D(3.9999998, 6.9282036, 0, -6.9282036, 3.9999998, 0, 0, 0, 16, -25, 7, 8)
 material_override = ExtResource("1_ppcyp")
 mesh = ExtResource("1_8jx1q")
 surface_material_override/0 = ExtResource("2_ppcyp")
 
-[node name="splashes" type="CPUParticles3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 0, -0.5)
+[node name="top-splashes" type="CPUParticles3D" parent="waterfall"]
+transform = Transform3D(2.3883568e-16, -0.125, -5.4639235e-09, -5.4639235e-09, -5.4639235e-09, 0.125, -0.0625, 0, -2.7319618e-09, 0, 0, -0.5)
 material_override = ExtResource("4_pyk41")
-amount = 16
+amount = 64
 mesh = SubResource("QuadMesh_eochn")
 emission_shape = 3
-emission_box_extents = Vector3(0.5, 0.01, 0.01)
+emission_box_extents = Vector3(5, 0.01, 0.01)
 spread = 90.0
-gravity = Vector3(0, 4, 0)
+gravity = Vector3(0, -4, 0)
+angular_velocity_max = 360.0
 damping_min = 1.0
 damping_max = 4.0
+angle_max = 360.0
+scale_amount_min = 0.25
+scale_amount_max = 0.25
 scale_amount_curve = SubResource("Curve_pyk41")
 color_ramp = SubResource("Gradient_eam4u")
+
+[node name="bottom-splashes" type="CPUParticles3D" parent="waterfall"]
+transform = Transform3D(2.3883568e-16, -0.125, -5.4639235e-09, -5.4639235e-09, -5.4639235e-09, 0.125, -0.0625, 0, -2.7319618e-09, 0.32123625, 0, -0.5)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.1, 0.5)
+spread = 90.0
+gravity = Vector3(0, 4, 0)
+angular_velocity_max = 360.0
+angular_velocity_curve = SubResource("Curve_47l1t")
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+angle_curve = SubResource("Curve_38dkk")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="waterfall3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.0057458e-07, -2.8645016e-07, -16, -6.553216, 4.588611, 0, 4.588611, 6.553216, -6.993822e-07, -3.927, 7, -39)
+material_override = ExtResource("1_ppcyp")
+mesh = ExtResource("1_8jx1q")
+surface_material_override/0 = ExtResource("2_ppcyp")
+
+[node name="top-splashes" type="CPUParticles3D" parent="waterfall3"]
+transform = Transform3D(2.3883568e-16, -0.125, -5.4639235e-09, -5.4639235e-09, -5.4639235e-09, 0.125, -0.0625, 0, -2.7319618e-09, 0, 0, -0.5)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.01, 0.01)
+spread = 90.0
+gravity = Vector3(0, -4, 0)
+angular_velocity_max = 360.0
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+scale_amount_min = 0.25
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="bottom-splashes" type="CPUParticles3D" parent="waterfall3"]
+transform = Transform3D(2.220446e-16, -0.125, -1.8626451e-08, -5.4639226e-09, -1.8626451e-08, 0.125, -0.0625, 1.110223e-16, -2.7319609e-09, 1.0176003, 0.12278724, -0.0625)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.1, 0.5)
+spread = 90.0
+gravity = Vector3(0, 4, 0)
+angular_velocity_max = 360.0
+angular_velocity_curve = SubResource("Curve_47l1t")
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+angle_curve = SubResource("Curve_38dkk")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="waterfall4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.588611, -6.553216, -1.3987644e-06, -6.553216, 4.588611, 0, 4.0114915e-07, 5.729003e-07, -16, 25, 7, -16)
+material_override = ExtResource("1_ppcyp")
+mesh = ExtResource("1_8jx1q")
+surface_material_override/0 = ExtResource("2_ppcyp")
+
+[node name="top-splashes" type="CPUParticles3D" parent="waterfall4"]
+transform = Transform3D(2.3883568e-16, -0.125, -5.4639235e-09, -5.4639235e-09, -5.4639235e-09, 0.125, -0.0625, 0, -2.7319618e-09, 0, 0, -0.5)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.01, 0.01)
+spread = 90.0
+gravity = Vector3(0, -4, 0)
+angular_velocity_max = 360.0
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+scale_amount_min = 0.25
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="bottom-splashes" type="CPUParticles3D" parent="waterfall4"]
+transform = Transform3D(1.7763568e-15, -0.125, -1.8626451e-08, -5.4639244e-09, -1.8626451e-08, 0.125, -0.0625, 0, -2.7319618e-09, 0.94590294, 0.020393848, -0.56250006)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.1, 0.5)
+spread = 90.0
+gravity = Vector3(0, 4, 0)
+angular_velocity_max = 360.0
+angular_velocity_curve = SubResource("Curve_47l1t")
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+angle_curve = SubResource("Curve_38dkk")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="waterfall5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.0057458e-07, -2.8645016e-07, 16, -6.553216, 4.588611, 0, -4.588611, -6.553216, -6.993822e-07, 10, 7, 16)
+material_override = ExtResource("1_ppcyp")
+mesh = ExtResource("1_8jx1q")
+surface_material_override/0 = ExtResource("2_ppcyp")
+
+[node name="top-splashes" type="CPUParticles3D" parent="waterfall5"]
+transform = Transform3D(2.3883568e-16, -0.125, -5.4639235e-09, -5.4639235e-09, -5.4639235e-09, 0.125, -0.0625, 0, -2.7319618e-09, 0, 0, -0.5)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.01, 0.01)
+spread = 90.0
+gravity = Vector3(0, -4, 0)
+angular_velocity_max = 360.0
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+scale_amount_min = 0.25
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="bottom-splashes" type="CPUParticles3D" parent="waterfall5"]
+transform = Transform3D(1.7763568e-15, -0.125, -1.8626451e-08, -5.4639244e-09, -1.8626451e-08, 0.125, -0.0625, 0, -2.7319618e-09, 0.94590294, 0.020393848, -0.56250006)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.1, 0.5)
+spread = 90.0
+gravity = Vector3(0, 4, 0)
+angular_velocity_max = 360.0
+angular_velocity_curve = SubResource("Curve_47l1t")
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+angle_curve = SubResource("Curve_38dkk")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="waterfall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.928202, 3.9999995, 0, -3.9999995, 6.928202, 0, 0, 0, 16, -23.816975, 4.854, 8)
+material_override = ExtResource("1_ppcyp")
+mesh = ExtResource("1_8jx1q")
+surface_material_override/0 = ExtResource("2_ppcyp")
+
+[node name="top-splashes" type="CPUParticles3D" parent="waterfall2"]
+transform = Transform3D(2.3883568e-16, -0.125, -5.4639235e-09, -5.4639235e-09, -5.4639235e-09, 0.125, -0.0625, 0, -2.7319618e-09, 0, 0, -0.5)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.01, 0.01)
+spread = 90.0
+gravity = Vector3(0, -4, 0)
+angular_velocity_max = 360.0
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+scale_amount_min = 0.25
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="bottom-splashes" type="CPUParticles3D" parent="waterfall2"]
+transform = Transform3D(2.220446e-16, -0.125, -3.7252903e-09, -5.4639244e-09, -3.7252903e-09, 0.125, -0.0625, 0, -2.7319618e-09, 1.050002, -0.012259841, -0.25)
+material_override = ExtResource("4_pyk41")
+amount = 64
+mesh = SubResource("QuadMesh_eochn")
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.1, 0.5)
+spread = 90.0
+gravity = Vector3(0, 4, 0)
+angular_velocity_max = 360.0
+angular_velocity_curve = SubResource("Curve_47l1t")
+damping_min = 1.0
+damping_max = 4.0
+angle_max = 360.0
+angle_curve = SubResource("Curve_38dkk")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_pyk41")
+color_ramp = SubResource("Gradient_eam4u")
+
+[node name="HeightmapLakeNatalie" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, 128)
+material_override = ExtResource("5_8y67n")
+mesh = ExtResource("5_fydbq")
+
+[node name="lake water" type="MeshInstance3D" parent="."]
+transform = Transform3D(128, 0, 0, 0, -5.5950577e-06, 128, 0, -128, -5.5950577e-06, 0, 1, 0)
+material_override = ExtResource("6_8y67n")
+mesh = ExtResource("7_47l1t")
+
+[node name="wide river" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-06, 100, 4.371139e-06, 0, -4.371139e-06, 100, 100, 4.371139e-06, 1.9106854e-13, -75, 7, -11)
+material_override = ExtResource("6_8y67n")
+mesh = ExtResource("7_47l1t")
+
+[node name="wide river2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-06, -100, -4.371139e-06, 0, -4.371139e-06, 100, -100, 4.371139e-06, 1.9106854e-13, 75, 7, -25)
+material_override = ExtResource("6_8y67n")
+mesh = ExtResource("7_47l1t")
+
+[node name="wide river3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-100, 8.742278e-06, 3.8213708e-13, 0, -4.371139e-06, 100, 8.742278e-06, 100, 4.371139e-06, 0, 7, -89)
+material_override = ExtResource("6_8y67n")
+mesh = ExtResource("7_47l1t")
+
+[node name="wide river4" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, -4.371139e-06, 100, 0, -100, -4.371139e-06, 11, 7, 66)
+material_override = ExtResource("6_8y67n")
+mesh = ExtResource("7_47l1t")
