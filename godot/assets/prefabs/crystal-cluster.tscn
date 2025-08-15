@@ -6,7 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dti2n5a21yqgn" path="res://assets/models/crystal-c.obj" id="4_pmr1v"]
 [ext_resource type="ArrayMesh" uid="uid://d0a2wn6lu6elq" path="res://assets/models/crystal-d.obj" id="5_qriks"]
 
-[node name="Node3D" type="Node3D"]
+[node name="crystal-cluster" type="Node3D"]
 
 [node name="Crystal-a" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1074, 1.19209e-07, 0.510344)
