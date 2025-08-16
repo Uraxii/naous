@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=10 format=3 uid="uid://bmkcvlx154cnh"]
 
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
 [ext_resource type="PackedScene" uid="uid://dw4fatkylbqbn" path="res://scenes/stat_base.tscn" id="3_bepk3"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="3_lmnk1"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/move.gd" id="3_qe04c"]
 [ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="4_afumw"]
-[ext_resource type="Script" uid="uid://d4ai60cekwpy" path="res://scripts/entities/cast.gd" id="5_ygnst"]
+[ext_resource type="Script" uid="uid://d4ai60cekwpy" path="res://scripts/entities/component_spell.gd" id="5_ygnst"]
+[ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="8_wd4e3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -20,6 +21,8 @@ body = NodePath("Body")
 [node name="Stats" type="Node" parent="."]
 
 [node name="Health" parent="Stats" instance=ExtResource("3_bepk3")]
+start_value = 50.0
+max_value = 100.0
 
 [node name="Energy" parent="Stats" instance=ExtResource("3_bepk3")]
 
@@ -61,3 +64,10 @@ shape = SubResource("CapsuleShape3D_vh5go")
 
 [node name="player_base" parent="Body" instance=ExtResource("3_f4o61")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="HotkeyBar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_wd4e3")

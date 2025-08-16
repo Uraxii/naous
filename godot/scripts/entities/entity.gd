@@ -1,13 +1,15 @@
 class_name Entity extends Node3D
 
 #region Variables
+signal change_control(is_local: bool)
+
 const INVALID_ID: int = -1
 
 # @export var data := EntityData.new()
 @export var body: CharacterBody3D
 @export_category("Runtime Values")
 @export var id: int = INVALID_ID
-@export var local_has_control := false
+@export var local_control := false : set = _set_local_control
 
 @onready var entities := Globals.entities
 @onready var stats: Dictionary[String, Stat] = get_all_stats()
@@ -33,6 +35,11 @@ func get_all_stats() -> Dictionary[String, Stat]:
 
     return map
 #endregion
+
+func _set_local_control(value: bool) -> void:
+    local_control = value
+    change_control.emit(local_control)
+        
 
 #region Godot Callback Functions
 func _ready() -> void:
