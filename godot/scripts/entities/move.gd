@@ -2,11 +2,14 @@ class_name Move extends Node
 
 const FORCE_GRAVITY: float = 0.8
 const FORCE_JUMP_GRAVIY: float = 0.4
+const BACKPEDDLE_PENALTY := 0.75
+
 
 @export var entity: Entity
 @export var body: CharacterBody3D
 
-@onready var input := Globals.input
+@onready var signals = Globals.signal_bus
+@onready var input = Globals.input
 @onready var speed := entity.get_stat("Speed")
 @onready var gravity_scale := entity.get_stat("Gravity")
 @onready var jump_force := entity.get_stat("JumpForce")
@@ -27,21 +30,18 @@ func move_towards(position: Vector3) -> void:
     move_velocity = direction * speed.current
 
 
+func input_move(direction: Vector2):
+    #print_debug(input.move)
+    move_velocity = body.transform.basis * Vector3(
+        direction.x, 0, direction.y).normalized() * speed.current
+
+
 func jump() -> void:
     jump_influence = body.transform.basis * Vector3(
-        input.move.x, 0, input.move.y).normalized()
+        move_velocity.x, 0, move_velocity.y).normalized()
 
     jump_influence = jump_influence * speed.current
     jump_influence.y = jump_force.current
-
-
-func move_with_input():
-    #print_debug(input.move)
-
-    var direction = body.transform.basis * Vector3(
-        input.move.x, 0, input.move.y).normalized()
-
-    move_velocity = direction * speed.current
 
 
 func apply_gravity(current_velocity: Vector3) -> Vector3:
@@ -81,22 +81,42 @@ func apply_jump_influence(current_velocity: Vector3) -> Vector3:
 
 func apply_movement(current_velocity: Vector3) -> Vector3:
     current_velocity += move_velocity
-    move_velocity = Vector3.ZERO
     return current_velocity
 
 
 #region Godot Callback Functions
+func _ready() -> void:
+    entity.change_control.connect(_on_change_control)
+
+
 func _process(_delta: float) -> void:
-    if entity.local_has_control:
-        move_with_input()
-        if input.jump:
-            jump()
+    if entity.local_control:
+        input_move(input.move)
 
     body.velocity = apply_gravity(body.velocity)
     body.velocity = apply_jump_influence(body.velocity)
     body.velocity = apply_movement(body.velocity)
 
+    if body.velocity.z < 0:
+        body.velocity.z = body.velocity.z * BACKPEDDLE_PENALTY
+
     body.move_and_slide()
 
     body.velocity = Vector3.ZERO
+#endregion
+
+#region Signal Handlers
+func _on_change_control(local_has_control: bool):
+    # TODO: Refactor this.
+    if local_has_control:
+        if not signals.jump.is_connected(_on_input_jump):
+            signals.jump.connect(_on_input_jump)
+    else:
+        if signals.jump.is_connected(_on_input_jump):
+            signals.jump.disconnect(_on_input_jump)
+
+
+func _on_input_jump():
+    jump()
+
 #endregion

@@ -18,7 +18,7 @@ func spawn(entity: Entity) -> void:
 
     if active.size() == 1:
         print_debug("Setting entity control to entity %d" % entity.id)
-        entity.local_has_control = true
+        entity.local_control = true
         signals.control_entity.emit(entity)
 
 
