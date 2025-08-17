@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=11 format=3 uid="uid://bmkcvlx154cnh"]
 
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
 [ext_resource type="PackedScene" uid="uid://dw4fatkylbqbn" path="res://scenes/stat_base.tscn" id="3_bepk3"]
@@ -8,13 +8,15 @@
 [ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="4_afumw"]
 [ext_resource type="Script" uid="uid://d4ai60cekwpy" path="res://scripts/entities/component_spell.gd" id="5_ygnst"]
 [ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="8_wd4e3"]
+[ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="9_0oii0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
 
-[node name="Entity" type="Node3D" node_paths=PackedStringArray("body")]
+[node name="Entity" type="Node3D" node_paths=PackedStringArray("body", "spells")]
 script = ExtResource("1_vh5go")
 body = NodePath("Body")
+spells = NodePath("Components/Spells")
 
 [node name="Inventory" type="Node" parent="."]
 
@@ -23,6 +25,7 @@ body = NodePath("Body")
 [node name="Health" parent="Stats" instance=ExtResource("3_bepk3")]
 start_value = 50.0
 max_value = 100.0
+current = 50.0
 
 [node name="Energy" parent="Stats" instance=ExtResource("3_bepk3")]
 
@@ -71,3 +74,18 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_wd4e3")
+
+[node name="StatView" type="Control" parent="." node_paths=PackedStringArray("stat", "label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_0oii0")
+stat = NodePath("../Stats/Health")
+label = NodePath("Health")
+
+[node name="Health" type="Label" parent="StatView"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "HEALTH"

@@ -7,6 +7,7 @@ const INVALID_ID: int = -1
 
 # @export var data := EntityData.new()
 @export var body: CharacterBody3D
+@export var spells: ComponentSpell
 @export_category("Runtime Values")
 @export var id: int = INVALID_ID
 @export var local_control := false : set = _set_local_control
