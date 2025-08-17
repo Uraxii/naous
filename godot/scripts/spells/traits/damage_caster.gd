@@ -4,6 +4,7 @@ class_name DamageCaster extends Node
 
 @onready var spell: Spell
 
+
 func setup() -> void:
     spell = get_parent()
 
