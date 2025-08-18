@@ -1,5 +1,7 @@
 class_name Stat extends Node
 
+signal change(new: float, old: float)
+
 #region Variables
 @export_category("Data Values")
 @export var start_value := 1.0  
@@ -16,8 +18,9 @@ func _init() -> void:
     current = start_value
 
 
-func _set_current(x: float) -> void:
+func _set_current(value: float) -> void:
     if is_infinite:
         return
-        
-    current = clamp(x, min_value, max_value)
+    var old = current
+    current = clamp(value, min_value, max_value)
+    change.emit(current, old)

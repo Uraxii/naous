@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dudlwhegf6r0e"]
+
+[ext_resource type="Shader" uid="uid://cyjys2qnxr0oc" path="res://assets/shaders/edge_detection_normal.gdshader" id="1_p2pww"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_p2pww")
+shader_parameter/edge_only = false
+shader_parameter/edge_threshold = 0.35000000000582077
+shader_parameter/line_color = Color(0.09803922, 0.101960786, 0.16470589, 1)
+shader_parameter/background_color = Color(0, 0, 0, 0)

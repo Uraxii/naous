@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://4no0kcoh1kij"]
 
 [ext_resource type="PackedScene" uid="uid://ccffo2av7qr2c" path="res://assets/models/blob-b.fbx" id="1_yjqyj"]
-[ext_resource type="Material" uid="uid://o5isuscmlgx" path="res://assets/materials/rocky-beige-outlined.tres" id="2_yjqyj"]
+[ext_resource type="Material" uid="uid://vaw6fuxlhupk" path="res://assets/materials/rocky-beige.tres" id="2_yjqyj"]
 
 [node name="boulder-sandstone" instance=ExtResource("1_yjqyj")]
 

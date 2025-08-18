@@ -3,6 +3,11 @@ class_name Spell extends Node
 @export var id := ""
 @export_category("Runtime Values")
 @export var traits: Array[Node] = []
+@export var caster: Entity
+
+
+func setup(entity: Entity) -> void:
+    caster = entity
 
 
 func cast() -> void:
@@ -17,7 +22,10 @@ func get_all_traits() -> Array[Node]:
     var spell_traits: Array[Node] = []
     for t in trait_nodes:
         if t.has_method("cast"):
+            if t.has_method("setup"):
+                t.setup()
             spell_traits.append(t)
+
 
     return spell_traits
 

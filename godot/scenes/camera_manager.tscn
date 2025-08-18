@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dm68wb50iampm" path="res://scripts/camera_manager.gd" id="1_utxs1"]
 
 [node name="CameraManager" type="SpringArm3D"]
-spring_length = 4.0
 script = ExtResource("1_utxs1")
+x_offset = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 current = true
