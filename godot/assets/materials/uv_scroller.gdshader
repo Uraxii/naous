@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode depth_draw_always; // force opaque to avoid z-fighting
 
 uniform float scroll_speed : hint_range(0, 16) = 0.08;
 uniform float angle_degrees : hint_range(0, 360) = 45.0;
@@ -19,5 +20,6 @@ void fragment() {
 	vec2 snappedUV = round(scaled_uv / texelSize) * texelSize;
 	vec4 tex_color = texture(texture_to_scroll, snappedUV);
 	ALBEDO = tex_color.rgb * color.rgb;
-	ALPHA = tex_color.a * color.a;
+	ALPHA = tex_color.a * color.a; // works nciely for transparent fx
+	ALPHA = 1.0; 
 }
