@@ -9,7 +9,13 @@ Converted from Go WebSocket server to Python REST API for MMO game backend.
 - **Instance Management**: Game instance creation and lifecycle management
 - **REST API**: HTTP endpoints instead of WebSocket messages
 
-## Quick Start
+## Environment Setup
+
+Ensure you can run `python` and `pip` from your terminal of choice.
+- **Python Download**: https://wiki.python.org/moin/BeginnersGuide/Download
+- **PIP Install**: https://pip.pypa.io/en/stable/installation/
+
+### Quick Start
 
 1. **Install Dependencies**
    ```bash
