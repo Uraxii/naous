@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=26 format=3 uid="uid://ch0bqgk8cfdeq"]
 
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
 [ext_resource type="Material" uid="uid://cpccsiuabq0sr" path="res://assets/materials/waterfall-material.tres" id="1_ppcyp"]
@@ -16,6 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://bvehfqn2oohcv" path="res://assets/prefabs/ink-grass-scrub.tscn" id="10_6y1nk"]
 [ext_resource type="PackedScene" uid="uid://bfwvrap8c8jsq" path="res://assets/models/box.fbx" id="11_4xysy"]
 [ext_resource type="PackedScene" uid="uid://cayqs5l0qo416" path="res://assets/prefabs/wavy_flag.tscn" id="12_ujt7w"]
+[ext_resource type="PackedScene" uid="uid://dnsf3ognhnwpb" path="res://assets/models/observation-platform.glb" id="13_hq68q"]
+[ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="18_bef4i"]
+[ext_resource type="PackedScene" uid="uid://cl022kfux37fa" path="res://assets/models/simpletown.glb" id="19_vboxf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_vboxf"]
+material = ExtResource("18_bef4i")
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_eochn"]
 
@@ -38,6 +46,12 @@ _data = [Vector2(0, -360), 0.0, 719.99994, 0, 1, Vector2(1, 360), 719.99994, 0.0
 point_count = 2
 
 [node name="lake-natalie" type="Node3D"]
+
+[node name="[outline shader]" type="Node3D" parent="."]
+
+[node name="Shader" type="MeshInstance3D" parent="[outline shader]"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_vboxf")
 
 [node name="terrain" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, 128)
@@ -445,6 +459,21 @@ transform = Transform3D(9.4264145, 166.90344, 0, -3.3380687, 471.32074, 0, 0, 0,
 [node name="wavy-flag" parent="plants/flag3" instance=ExtResource("12_ujt7w")]
 transform = Transform3D(0.099999994, 0, 0, 0, 0.0019999999, 0, 0, 0, 0.099999994, 0, 0.0078, 0)
 
+[node name="observation-platform" parent="plants" instance=ExtResource("13_hq68q")]
+transform = Transform3D(1.8932536, 0, 0.6446635, 0, 2, 0, -0.6446635, 0, 1.8932536, -11.231066, 7.6230564, -38.824314)
+
+[node name="observation-platform3" parent="plants" instance=ExtResource("13_hq68q")]
+transform = Transform3D(-0.96225274, 0, -1.7533026, 0, 2, 0, 1.7533026, 0, -0.96225274, 14.766723, 7.9198, 12.254876)
+
+[node name="observation-platform4" parent="plants" instance=ExtResource("13_hq68q")]
+transform = Transform3D(-1.8568028, 0, -0.74315715, 0, 2, 0, 0.74315715, 0, -1.8568028, 1.8788886, 8.118816, 22.427006)
+
+[node name="observation-platform5" parent="plants" instance=ExtResource("13_hq68q")]
+transform = Transform3D(-1.5979433, 0, 1.2027376, 0, 2, 0, -1.2027376, 0, -1.5979433, -21.699482, 7.3241034, 12.428986)
+
+[node name="observation-platform6" parent="plants" instance=ExtResource("13_hq68q")]
+transform = Transform3D(1.2113099, 0, 1.5914549, 0, 2, 0, -1.5914549, 0, 1.2113099, -24.293472, 7.896246, -11.37801)
+
 [node name="rivers" type="Node3D" parent="."]
 transform = Transform3D(3.9999998, 6.9282036, 0, -6.9282036, 3.9999998, 0, 0, 0, 16, -25, 7, 8)
 
@@ -693,3 +722,20 @@ angle_curve = SubResource("Curve_38dkk")
 scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_pyk41")
 color_ramp = SubResource("Gradient_eam4u")
+
+[node name="towns" type="Node3D" parent="."]
+
+[node name="simpletown" parent="towns" instance=ExtResource("19_vboxf")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -32.03148, 7.840333, -21.93841)
+
+[node name="simpletown2" parent="towns" instance=ExtResource("19_vboxf")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -28.94734, 7.840337, 22.685865)
+
+[node name="simpletown3" parent="towns" instance=ExtResource("19_vboxf")]
+transform = Transform3D(7.543227, 0, 2.6645317, 0, 8, 0, -2.6645317, 0, 7.543227, -5.9091606, 7.840335, 31.769562)
+
+[node name="simpletown4" parent="towns" instance=ExtResource("19_vboxf")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 45.240128, 7.840337, 16.200127)
+
+[node name="simpletown5" parent="towns" instance=ExtResource("19_vboxf")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 30.84903, 7.840337, -45.94719)
