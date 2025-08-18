@@ -191,7 +191,7 @@ Throughout the area, 3 relics are calling out. They tell inspirations of stories
 
 ### Scene 2.2 - Miniboss
 
-The plaza seems combed through for only a brief moment. A shuddering vibration nearby acts as a siren's call. A new type of enemy seems to have kindly demolished the debris blocking one of the paths, but doesn't seem keen on letting us by without greeting us first.
+The plaza seems combed clean for only a brief moment. A shuddering vibration nearby acts as a siren's call. A new type of enemy seems to have kindly demolished the debris blocking one of the paths, but doesn't seem keen on letting us by without greeting us first.
 
 > A new Stilled enemy appears, slightly larger than the previous type. It has thicker, muscle-like appendages with sharp edges and points. It moves notably faster and hits harder, though it takes a bit more time between attacks than the previous enemy.
 > 
@@ -210,20 +210,67 @@ The plaza seems combed through for only a brief moment. A shuddering vibration n
 >   - (Optional) **Projectile attack**: At medium-long distance, will violently shift in place to fire a projectile. Can be dodged with basic movement or a utility Echo.
 >     - Maybe something simple like a large sphere that floats at chest height for a limited distance? Or a ground-level wave in an arc shape?
 
+Naous flows strong like adrenaline as mask and Echoes resonate. Entranced by definition, a new Echo rises from the dust to join our arsenal.
 
+> Inventory/Gear screen opens. A new Echo is gained, but can't be equipped due to our current Draw limit.
+> 
+> Message appears: "Echoes cost 'Draw' in order to equip. You can't equip this Echo right now, so you'll need to unequip one if you want to use it as well. Choose carefully!"
+>
+> - Any Echoes not equipped will remain in the player inventory.
 
-- Fight a medium-sized miniboss with more aggressive attacks
-  - Absorb another combat ability that can't be slotted in with their current abilities due to a Draw limit
-  - Can be swapped with a current ability, but any ability not equipped goes to inventory
-- A small horde of weak enemies attack, player defeats several
-- The horde begins to overwhelm them as some (scripted/fake) "players" save them
-  - Can be entirely faked. Just randomly incur attacks on the enemies and occasionally heal the player
-- A massive boss enemy arrives defeats some allies
-  - Opportunity to show what it looks like when a fellow player is defeated
-- Player leaves, causing the ruins to become a new dungeon that must be tackled fresh with a group of players
+### Scene 2.3 - Horde
 
+The defeat of the Stilled seems to have reminded its allies that they can also break through the rubble blocking the plaza pathways. They begin to trickle in as a stampede-like sound seems to overtake the ruins.
 
+The first ones are weak. The next wave is tougher. Soon survival seems unlikely. The apparent need of a new plan becomes urgent as the horde comfortably outnumbers us.
 
+> Waves of enemies start to trickle in, each breaking down the rubble blockades in the plaza. The paths open, but we are instead blocked by enemies.
+> 
+> - Waves (very loose):
+>   - Basic Stilled are very weak, down in 1-3 hits. Versions of the miniboss appear, but only take 3-4 hits.
+>   - Wave 1: Single basic Stilled
+>   - Wave 2: One basic Stilled, followed by another about 1-2 seconds later
+>   - Wave 3: 3 basic Stilled simultaneously
+>   - Wave 4: Miniboss Stilled, shortly followed by a Basic one
+>   - Wave 5: 2 Miniboss Stilled with a steady stream of Basic and Miniboss enemies every few seconds until next scenario starts
+
+### Scene 2.4 - Escape
+
+Suddenly the world that created us seems to be against us. The number of enemies become unmanageable quickly. Time feels limited just before feeling discrete and brief.
+
+Why were you alone given this impossible task? Why do the fates toy with nature itself? Why can we feel the entirety of the Naous while lost in its expanse?
+
+Then you feel rejuvenated as unfamiliar Echoes bolster your form. Another force enters the battlefield, seemingly the first to provide momentum over resistance. A sensation not unlike hope begins to swell as more Stilled fall around you. These Ossified Ruins are almost clearing themselves.
+
+Another vibration, much heavier this time. A building-sized Stilled reveals itself and swats away the supporting masked allies. It bears down on your position with an overbearing shadow to inform you that you are, in fact, not welcome here.
+
+The entrance to these ruins immediately becomes an exit worth more than life. You rush away as the odds tip and then entirely flip over as swarms of Stilled rush in.
+
+> Some "allies" appear to help with the horde for a brief time. They heal the player and attack enemies.
+> - No need for complex friendly AI - this could be "faked". Could be some visual effects or just some dummy models that stand around and do random attack animations.
+> - Trigger a heal effect on the player from time to time and some damaging attack on the enemies as well.
+> - (Optional) Opportunity to display a "faked" party list here to expose the player to that UI.
+> 
+> After a brief 20-30 seconds (maybe less?), a large Stilled enters the area and chases the player away.
+> - This could be strictly a cutscene, or a finely-scripted set of events where the player runs away.
+
+> The player leaves and/or is ejected from the instance to some neutral space.
+> - Not sure what this looks like, but whatever "outside a dungeon" is. (An instanced overworld? Just some menus?)
+> 
+> The ruins behind turn into the "Coalescence" dungeon. The player is expected to find a party before re-entering.
+> 
+> Quest update: "Gather a party and clear the Coalescence dungeon"
+
+## Scene 3 - Coalescence
+
+- Enter from the same place as the start of the game, now as a party
+- Fight through the opening pathway towards the plaza
+- The plaza splits in 3 directions (eg. left, forward, right)
+- Dungeon has 3 encounters to clear first, then return to the plaza for a big boss fight
+- Encounter 1: Step on a center zone for a time period (charge up), then move to outer rings and stand on those for a bit (deposit charge), rinse-repeat a couple times while defeating enemies
+- Encounter 2: The big boss that scared the player away. Can focus target its legs to knock it down (each leg is targeted separately or can be AoE'd). When dropped, attack the weakpoint on the back for extra damage before it gets back up.
+- Encounter 3: (Mechanical encounter)
+- Encounter 4: Final boss
 
 
 
