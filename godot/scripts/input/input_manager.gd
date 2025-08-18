@@ -3,10 +3,13 @@ class_name InputManager extends Node
 #region Variables
 @onready var signals := Globals.signal_bus
 @onready var action_map: Dictionary[String, Signal] = {
-    "action_1": signals.action_1,
-    "action_2": signals.action_2,
-    "action_0": signals.action_0,
+    InputBindings.ACTION_0: signals.action_0,
+    InputBindings.ACTION_1: signals.action_1,
+    InputBindings.ACTION_2: signals.action_2,
 }
+
+var default_binds: InputBindings = load(
+    "res://resources/default_input_bindings.tres")
 
 var move: Vector2:
     get: return Input.get_vector(
@@ -16,17 +19,30 @@ var move: Vector2:
         "move_back")
 
 var jump := false
-
 var select_location := false
-
 var mouse_pos_delta := Vector2.ZERO
 
-var is_ui_visible := false
+
 #endregion
+
+
+func update_binds(new_binds: InputBindings) -> void:
+    var binds = new_binds.get_binds()
+    
+    for action in binds.keys():
+        InputMap.erase_action(action)
+        InputMap.add_action(action)
+        
+        for event in binds[action]:
+            InputMap.action_add_event(action, event)
+        
+        print_debug(InputMap.action_get_events(action))
+    
 
 #region Godot Callback Functions
 func _ready() -> void:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+    update_binds(default_binds)
 
 
 func _input(event: InputEvent) -> void:
@@ -50,8 +66,7 @@ func _input(event: InputEvent) -> void:
         signals.ui_cancel.emit()
 
     if Input.is_action_just_pressed("ui_toggle"):
-        is_ui_visible = not is_ui_visible
-        signals.ui_toggle.emit(is_ui_visible)
+        signals.ui_toggle.emit()
 
     if Input.is_action_just_pressed("ui_cancel"):
         signals.ui_cancel.emit()

@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="InputBindings" load_steps=15 format=3 uid="uid://dklvwj7n37rma"]
+
+[ext_resource type="Script" uid="uid://7uvyk2xwlmgd" path="res://scripts/input/input_bindings.gd" id="1_qgmqv"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_8fdc3"]
+device = -1
+keycode = 48
+unicode = 48
+
+[sub_resource type="InputEventKey" id="InputEventKey_hwlvn"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="InputEventKey" id="InputEventKey_igu6e"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="InputEventKey" id="InputEventKey_tgrry"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="InputEventKey" id="InputEventKey_3jakj"]
+device = -1
+keycode = 52
+unicode = 52
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_ie32x"]
+button_index = 4
+
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_k0m2b"]
+button_index = 5
+
+[sub_resource type="InputEventKey" id="InputEventKey_ijumv"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_qdwp2"]
+device = -1
+keycode = 83
+unicode = 115
+
+[sub_resource type="InputEventKey" id="InputEventKey_iq71c"]
+device = -1
+keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventKey" id="InputEventKey_6i0xk"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_kmbki"]
+device = -1
+keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventKey" id="InputEventKey_tll83"]
+device = -1
+ctrl_pressed = true
+keycode = 72
+unicode = 104
+
+[resource]
+script = ExtResource("1_qgmqv")
+action_0 = Array[InputEvent]([SubResource("InputEventKey_8fdc3")])
+action_1 = Array[InputEvent]([SubResource("InputEventKey_hwlvn")])
+action_2 = Array[InputEvent]([SubResource("InputEventKey_igu6e")])
+action_3 = Array[InputEvent]([SubResource("InputEventKey_tgrry")])
+action_4 = Array[InputEvent]([SubResource("InputEventKey_3jakj")])
+move_left = Array[InputEvent]([SubResource("InputEventKey_6i0xk")])
+move_right = Array[InputEvent]([SubResource("InputEventKey_kmbki")])
+move_forward = Array[InputEvent]([SubResource("InputEventKey_iq71c")])
+move_back = Array[InputEvent]([SubResource("InputEventKey_qdwp2")])
+jump = Array[InputEvent]([SubResource("InputEventKey_ijumv")])
+camera_zoom_out = Array[InputEvent]([SubResource("InputEventMouseButton_k0m2b")])
+camera_zoom_in = Array[InputEvent]([SubResource("InputEventMouseButton_ie32x")])
+ui_toggle = Array[InputEvent]([SubResource("InputEventKey_tll83")])
+metadata/_custom_type_script = "uid://7uvyk2xwlmgd"
