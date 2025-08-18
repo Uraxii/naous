@@ -14,6 +14,8 @@ const INVALID_ID: int = -1
 
 @onready var entities := Globals.entities
 @onready var stats: Dictionary[String, Stat] = get_all_stats()
+@onready var projectile_spawner: Node3D = %ProjectileSpawner
+
 #endregion
 
 #region Stats
