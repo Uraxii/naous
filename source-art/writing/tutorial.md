@@ -4,42 +4,62 @@
 2. Introduce the player to both the world and the game systems.
 3. Keep things flexible and replaceable.
 
+I don't expect all of this to stick around or remain unmodified. Please feel free to change, scrap, or add to any of this. I had some ideas, got them out of my head, and now they belong to the game/team! I wrote a lot of this with the intent of helping me solidify a tone and internalizing the info in the lore doc. If you see anything off or see opportunity to better connect it with the lore, please call it out! I figure this can act as a background to any actual content we put in the game. If some of it gets refined and makes it to the final version, neat! If not, that means something better takes its place!
 
-# Story Summary
+PS. Very open to feedback. Would greatly appreciate any insights or thoughts on literally any/all of this.
 
-- The player is formed from Naous to assist in quelling the Stilled
+# Summaries
+
+## Story Outline
+- The player is formed from Naous and given a Mask to assist in quelling the Stilled
 - They explore an abandoned Ossified Ruins to wipe out any threats
-- In doing so, they acquire their first set of powers and gear
-- The explore and defeat some basic enemies until their presence alerts a horde
+- In doing so, they acquire their first set of Echo abilities and Masks (gear, items, etc.)
+- They explore and defeat some basic enemies until their presence alerts a horde
 - They use their new powers to fend them off for a time, but soon realize they are outnumbered
 - Some NPC "players" arrive to help take out a few more, but they too are ill-equipped for the long haul
-  - These don't have to be full AI-driven actors. Just have some masks fly around while the enemies get hit a few extra times and maybe the player gets healed occasionally
 - A massive boss enemy arrives that smashes a "player" or two, forcing those remaining to retreat
 - The player (and "group") decide to regroup and go back into this new dungeon with a full party and refreshed resources
+- A nearby Fluid town offers support and (hopefully) a host of players that can join and assist
+  - TODO: Town needs a name, thinking some synonym for flowing water or a river
+- Entering the dungeon from the original entrance, the party fights towards the plaza again
+- Now the pathways are opened and offer a choice of which route to take
+- There are 3 battles for the party to overcome: 2 rituals and a powerful Stilled to be Unmasked
+- After clearing the 3 battles, the plaza becomes the final zone with a large fight
+- Remnants of the previous battles combine and re-summon the horde, along with a host of new powers
+- Defeating this boss leaves the Ossified Ruins cleansed and the party can return to town
 
-# Tutorial Summary
 
-- Player spawns with a default mask providing little-to-no benefits
+## Mechanical Outline
+- Player starts with a default mask providing little-to-no benefits
 - Explores some ruins to find 2 combat abilities (Echoes)
   - Attack + Utility
+  - Any not equipped go to inventory
 - Learn how to attack a static, non-threatening object
 - Fight a simple, combative enemy
   - Absorb a healing ability as reward
-- Explore further to defeat a few more Stilled
-- Acquire 2 masks from the area and/or enemies defeated
+- Explore further to defeat more enemies
+- Acquire 2 masks from objectives: explore area, and defeat enemies
   - Stats-based example: Melee/Tank focused + Ranged/Magic focused
-  - Learn how mask benefits work
 - Learn how to equip different masks to gain their appropriate benefits
-    - Any not equipped go into inventory
+  - Any not equipped go into inventory
 - Fight a medium-sized miniboss with more aggressive attacks
-  - Absorb another combat ability that can't be slotted in with their current abilities due to a Draw limit
+  - Absorb another combat ability that can't be slotted in alongside their current abilities due to a Draw limit
   - Can be swapped with a current ability, but any ability not equipped goes to inventory 
 - A small horde of weak enemies attack, player defeats several
-- The horde begins to overwhelm them as some (scripted/fake) "players" save them
+- The horde begins to overwhelm them as some "players" save them
+  - Opportunity to show the party UI
   - Can be entirely faked. Just randomly incur attacks on the enemies and occasionally heal the player
-- A massive boss enemy arrives defeats some allies
+    - Could also plant some player models in there and give them animations for the illusion of attacking and such
+- A massive boss enemy arrives defeats the allies
   - Opportunity to show what it looks like when a fellow player is defeated
-- Player leaves, causing the ruins to become a new dungeon that must be tackled fresh with a group of players
+- Player leaves. The area becomes a new dungeon that must be tackled fresh with a group of players
+- Learn how to form a party and enter a dungeon instance
+  - Possibly enter a friendly town
+- Return to the dungeon with a full party
+- Dungeon has an open layout with 4 total encounters (full details below)
+  - 3 encounters must be completed first, then the final encounter can be challenged
+- Clearing the dungeon provides Mask/Echo rewards and completes the tutorial quest
+  - Player is prompted to return to town or go wherever makes the most sense
 
 # Full Story & Tutorial
 
@@ -125,7 +145,7 @@ Memory becomes knowledge. The reason you are given form becomes crystal clear.
 > - **Frontal AoE attack**: circular flat shape on the ground directly in front of the Stilled. Indicated with a red or otherwise "scary" zone that suggests the player should get away. Has a long wind-up and animation where the Stilled rears it's head and shoulders back to scream, then slams down. Should have a cooldown, maybe 5-10 seconds.
 >   - Possibly trigger this after taking X hits? Eg. every 2 hits will always use the AoE attack next?
 
-Persistence and purpose win the day as the Stilled's form dissolves into the surroundings. From its core another Echo involuntarily combines its shape with our own, providing yet another ability.
+Persistence and purpose win the day as the Stilled's form dissolves into the surroundings. From its mask another Echo involuntarily combines its shape with our own, providing yet another ability.
 
 > A new support Echo is automatically equipped to the player in the next available slot. The slot on the hotbar illuminates to grab attention as its icon appears.
 > 
@@ -140,12 +160,12 @@ Persistence and purpose win the day as the Stilled's form dissolves into the sur
 
 Two obstacles removed leaves a wide plaza open for us to explore.
 
-> Quest update: "Investigate the Ossified Ruins [0/3]" & "Eliminate the Stilled [0/3]"
-> - Separate simultaneous objectives
-
-The plaza is largely flat with a statue/fountain in the center. More ruined buildings with tighter spacing outline the area, separated by paths leading in a handful of directions. These paths appear to be blocked by rubble sturdier and taller than what we dealt with earlier. We have no clear way to get past them, so we'll need to explore the area first.
+The plaza is largely flat with a statue/fountain in the center. More ruined buildings with tighter spacing outline the area, separated by paths leading in a handful of directions. These paths appear to be blocked by calcified rubble sturdier and taller than what we dealt with earlier. We have no clear way to get past them, so we'll need to explore the area first.
 
 Several Stilled seem to be patrolling the plaza in a manner both mindless and predictable. Eliminating them proves to be expectedly easy.
+
+> Quest update: "Investigate the Ossified Ruins [0/3]" & "Eliminate the Stilled [0/3]"
+> - Separate simultaneous objectives
 
 ### 2.1 - Masks
 
@@ -160,7 +180,7 @@ The 3 Stilled in the area are near oblivious as we ambush each of them right in 
 
 > 3 Stilled enemies patrol the area, all largely identical to the first one fought. Can opt to give them more aggressive AI or extra abilities if desired. Player now has a healing ability to help them jump from fight to fight or mitigate damage from getting outnumbered.
 > 
-> Each of the 3 enemies can be aggro'd separately, but will initiate combat if the player gets close enough.
+> Each of the 3 enemies can be aggro'd separately, but will initiate combat if the player gets close enough even if others are also engaged in fighting the player.
 > 
 > - (Optional) If the player retreats through the opening path, they may disengage and return to their patrol location.
 
@@ -183,6 +203,7 @@ The building layout begins to suggest they were built rather than born. Hints of
 Throughout the area, 3 relics are calling out. They tell inspirations of stories, like a bard with no tongue. Naous cycles through all, repeating every story's ending as though it were a new beginning.
 
 > (Initiate Tutorial if necessary, otherwise simply show a toast for "item acquired" or something)
+> 
 > Inventory/Gear screen open. Similar to the Echoes, a slot indicates where the mask will be equipped to.
 >
 > - Message appears: "Masks provide various benefits. Find and equip a mask that fits your playstyle!"
@@ -193,7 +214,7 @@ Throughout the area, 3 relics are calling out. They tell inspirations of stories
 
 The plaza seems combed clean for only a brief moment. A shuddering vibration nearby acts as a siren's call. A new type of enemy seems to have kindly demolished the debris blocking one of the paths, but doesn't seem keen on letting us by without greeting us first.
 
-> A new Stilled enemy appears, slightly larger than the previous type. It has thicker, muscle-like appendages with sharp edges and points. It moves notably faster and hits harder, though it takes a bit more time between attacks than the previous enemy.
+> A new Stilled enemy appears, slightly larger than the previous type. It is a quadraped with thicker, muscle-like appendages with sharp edges and points. It moves notably faster and hits harder, though it takes a bit more time between attacks than the previous enemy.
 > 
 > - _Miniboss Stilled_:
 >   - Tankier enemy, aggressive, feels fast but not hard to dodge. 10-15 attacks to defeat but has a vulnerability to deal more damage
@@ -210,17 +231,17 @@ The plaza seems combed clean for only a brief moment. A shuddering vibration nea
 >   - (Optional) **Projectile attack**: At medium-long distance, will violently shift in place to fire a projectile. Can be dodged with basic movement or a utility Echo.
 >     - Maybe something simple like a large sphere that floats at chest height for a limited distance? Or a ground-level wave in an arc shape?
 
-Naous flows strong like adrenaline as mask and Echoes resonate. Entranced by definition, a new Echo rises from the dust to join our arsenal.
+Naous flows like heavy adrenaline as mask and Echoes resonate. Entranced by definition, a new Echo rises from the dust to join our arsenal.
 
 > Inventory/Gear screen opens. A new Echo is gained, but can't be equipped due to our current Draw limit.
 > 
-> Message appears: "Echoes cost 'Draw' in order to equip. You can't equip this Echo right now, so you'll need to unequip one if you want to use it as well. Choose carefully!"
+> Message appears: "Echoes cost 'Draw' in order to equip. You can't equip this Echo right now, so you'll need to unequip one if you want to use it. Choose carefully!"
 >
 > - Any Echoes not equipped will remain in the player inventory.
 
 ### Scene 2.3 - Horde
 
-The defeat of the Stilled seems to have reminded its allies that they can also break through the rubble blocking the plaza pathways. They begin to trickle in as a stampede-like sound seems to overtake the ruins.
+The defeat of the Stilled seems to have reminded its allies that they can also break through the rubble blocking the plaza pathways. They begin to trickle in as a stampede-like sound overtakes the ruins.
 
 The first ones are weak. The next wave is tougher. Soon survival seems unlikely. The apparent need of a new plan becomes urgent as the horde comfortably outnumbers us.
 
@@ -236,7 +257,7 @@ The first ones are weak. The next wave is tougher. Soon survival seems unlikely.
 
 ### Scene 2.4 - Escape
 
-Suddenly the world that created us seems to be against us. The number of enemies become unmanageable quickly. Time feels limited just before feeling discrete and brief.
+Suddenly the world that created us acts against us. The number of enemies become unmanageable quickly. Time feels limited just before feeling discrete and brief.
 
 Why were you alone given this impossible task? Why do the fates toy with nature itself? Why can we feel the entirety of the Naous while lost in its expanse?
 
@@ -256,23 +277,185 @@ The entrance to these ruins immediately becomes an exit worth more than life. Yo
 
 > The player leaves and/or is ejected from the instance to some neutral space.
 > - Not sure what this looks like, but whatever "outside a dungeon" is. (An instanced overworld? Just some menus?)
-> 
+>
 > The ruins behind turn into the "Coalescence" dungeon. The player is expected to find a party before re-entering.
-> 
+> - Player could be ushered towards a Fluid town where they can rest and find/create a party of other players
+>
 > Quest update: "Gather a party and clear the Coalescence dungeon"
 
 ## Scene 3 - Coalescence
+
+You've been tasked with cleansing these ruins. Now with extra firepower, a true Unmasking can take place. The Stilled must be cleansed and the natural flow of Naous returned.
 
 - Enter from the same place as the start of the game, now as a party
 - Fight through the opening pathway towards the plaza
 - The plaza splits in 3 directions (eg. left, forward, right)
 - Dungeon has 3 encounters to clear first, then return to the plaza for a big boss fight
-- Encounter 1: Step on a center zone for a time period (charge up), then move to outer rings and stand on those for a bit (deposit charge), rinse-repeat a couple times while defeating enemies
-- Encounter 2: The big boss that scared the player away. Can focus target its legs to knock it down (each leg is targeted separately or can be AoE'd). When dropped, attack the weakpoint on the back for extra damage before it gets back up.
-- Encounter 3: (Mechanical encounter)
-- Encounter 4: Final boss
+
+### Scene 3.1 - Purification Ritual
+
+This Ossified civilization didn't stop when given form. They worked to create more through rituals of their own.
+
+A long-practiced art of creating masks to form Stilled, who would then create more powerful masks for summoning even more powerful Stilled. This loop of cyclic life concentrated immense power that leaves little to be imagined when pondering what could have happened to this city.
+
+> TODO: Define enemy types & spawn patterns
+
+- Ossified Masks attempt to rise as powerful Stilled to defeat the Bearers
+- During the ritual, Stilled will regularly spawn in and converge on the players
+  - Common stats, can be a small variety of Stilled
+  - Spawn in waves? On a timer? Pull randomly from a pool of enemy types?
+  - Instant aggro, prioritize players near the masks
+- If the masks complete a ritual, an extra Stilled with increased stats will be created that must be defeated to progress the ritual
+  - Idea: Health Lockdown
+    - The mask zones will always summon a Stilled based on a timer
+    - as the timer goes up the amount of health the Stilled will have goes up
+    - standing in the zone prevents the health from going up, but the enemy will still be summoned
+    - if the health is prevented from going up enough, the enemy may spawn with very little health and can be one-shot
+- The center of the area has 4 masks (match max num players in party) that begin to form a single, powerful Stilled
+- Standing in a zone near the 4 masks (circle indicator) slowly pushes back the Ossification, preventing the Stilled from being fully formed
+- When this large, center zone is cleared:
+  - the zone will pause and "save" its progress
+  - the masks split up in pairs to 2 new zones, attempting to summon slightly weaker Stilled
+- Party must split up as 2 groups of 2 to clear both zones
+- When those mask zones are cleared, they return together in the center and pick up where they left off
+- Clearing the center zone again:
+  - the zone "pauses" again
+  - all 4 masks split up to each summon a basic Stilled
+- The full party must split up to clear each of the zones
+- When those are cleared, the masks return one final time to the center and must be stopped again
+  - Once the ritual is finished, the powerful Stilled will spawn (some kind of miniboss) with stats relative to how much it was able to grow
+- Once the powerful Stilled is defeated, the Encounter is complete
+  - The masks appear to become lifeless and are absorbed into the ground (to be seen later)
+
+### Scene 3.2 - Stilled Golem, Embedded Edifice
+
+This sign of stubborn age can delay its fate no longer. Any sense of revenge is lost as the role of the Bearer holds a suffocating grip: Unmask the Stilled.
+
+There are no other concepts. Size, strength, and emotion are irrelevant in the face of purpose. Complete the Unmasking, move on to the next.
+
+> TODO: Boss AI and attacks
+
+- Boss fight, the large Stilled that forced the player to retreat in the tutorial
+- Stands at 4-6 times the player's height, large humanoid golem, thick and stony appendages
+- Upon initiating the fight, the mask of the Stilled can be seen being absorbed into it's torso
+- The body can be targeted and damaged, but damage dealt is extremely low (like 1 damage, enough to indicate the player should be doing something different)
+- Each leg can be targeted and damaged, normal damage output. Each leg has it's own health bar.
+- When both legs are destroyed, the golem will fall and the mask will flow to the exterior
+- The mask can be targeted and damaged for massive damage (the "real" way to damage the boss)
+- After a time, the boss will stand back up, re-absorb the mask inside, and its legs will recover
+- Rinse and repeat until defeated
+  - Idea: Arms
+    - The arms can also be targeted and destroyed. When any appendage is destroyed, the boss is stunned.
+    - If all 4 appendages are destroyed and the boss isn't defeated before standing back up, it will regrow its limbs and unleash a powerful attack
+- When defeated, the mask is lively and flies straight up into the air (to be seen later)
+  - (Note: Mask should go straight up, not laterally. Don't want to accidentally hint to the player that they should go anywhere in particular since the encounters can be completed in any order.)
 
 
+### Scene 3.3 - Inverse Heretics
+
+Bearers granted special powers are as bound to Naous as they are to their fated ire from the Ossified. Strong identities lead to limitations, followed by open invitations of something resembling jealousy.
+
+Where the Ossified sought to create more of their kind, they equally sought to fend off their opposition. Killing Bearers was a tricky business, but not an impossible one. Designing careful rituals that would link Naous to a Bearer, they learned how to manually sever the flow by using material anchors.
+
+- A building with multiple floors (2 or 3?)
+- Interior looks like a library with a ritual altar at the center. Several masks are affixed to the altar.
+- This area is for conducting rituals that obliterate Bearers (the players)
+- Throughout the building are interactable objects to 'pick up' and bring to the altar
+  - Objects are visually represented via their models and VFX, but targeting them will provide a name/description for further clarity
+- The ritual will auto-initiate and give steps for how to destroy the Bearers
+- The players must do the OPPOSITE of the step provided to break the ritual
+  - Example: If the ritual requests something "hot", the players should offer it something "cold"
+  - Bringing the "correct" object (the one requested by the altar) will damage the players down to 50% health (they can heal back up normally).
+    - Doing so again will instantly defeat them all and wipe the party.
+- The steps themselves will be a defined set of actions, but could be in a random order
+  - Can also mix-and-match as desired, double up on some, whatever works
+  - When a ritual step starts, the two objects "in play" will light up and a small group of Stilled will spawn to guard them
+- Successfully disturbing the ritual 3(?) times will destroy the altar and clear the encounter
+  - The masks on the altar will lifelessly absorb into the ground (to be seen later)
+
+#### Ritual Messages
+- Approaching the altar conveys a message to the players:
+
+> Bearer Destruction Ritual Initiated
+
+If a ritual step is successfully stopped (given the "wrong" item), the following message displays:
+> Ritual Disturbed.
+
+If the ritual step is failed (given the "correct" item), the following message displays:
+> Severing Bearer.
 
 
+#### Ritual Steps
+
+> Command: Sacrifice Self
+- A group of Stilled will spawn, attempting to "sacrifice" the user
+- Players should defeat the Stilled to proceed
+
+> Command: Offer Warmth/Frost
+- If "warmth" is requested, bring the object described as "Frozen Lake Ice"
+- If "frost" is requested, bring the object described as "Everburning Candle Flame"
+
+> Command: Offer Large/Small
+- If "large": bring the object described as "Miniscule Speck"
+- If "small": bring the object described as "Oversized Carving"
+
+
+### Scene 3.4 - Rite of Unmasking: Stilled Horde
+
+Time would not be so kind to afford the Bearers a thorough sweep of the ruins. Rather, it would efficiently bring the Stilled to one place to create a final showdown of elimination.
+
+Strategically cleansing key points in the ruins leaves the Stilled with little power left that could pose a threat. They would need to create a new power to rival that of the Bearers. Yet as they summon the horde and draw upon their past lives, desperation leaves open an opportunity for the Bearers to wipe out every Stilled remaining.
+
+- After clearing the other 3 encounters, the group can return to the plaza for the final fight
+- The large mask from the golem flies down from the sky into the ground, and the masks from the other encounters raise from the ground
+- All the masks congeal into a single mass that begins to attract other Stilled to the area
+  - The large mask will absorb into the large mass, similar to the golem fight (3.2)
+- Stilled will enter the plaza in waves. They will attempt to reach the mass to "power it up" by being absorbed
+  - Each time the mass summons Stilled, it will use a large AoE attack (circuler, centered on self) with a 3 second wind-up
+  - Enemies will aggro normally and focus the players once they do
+  - If Stilled are absorbed into the mass, it triggers an attack that damages all players. This attacks starts weak and gets progressively more powerful as it absorbs more.
+
+#### Stun Mechanic
+- Clearing one of the mechanics detailed below will "stun" the mass and reveal the large mask to be damaged
+  - Same as golem fight (3.2)
+
+#### Ossified Summoning
+- Occasionally the small masks will break off and separate to raise powerful Stilled from the ground
+- Players need to stand in the indicated zones to prevent/weaken the summoned enemies
+  - Same mechanic as zone-based Purification Ritual (3.1)
+
+#### Bearer Cleansing
+- Occasionally the mass will summon two slightly difficult Stilled, each with opposing names
+  - A message will display indicating which one is "empowered", the other should instead be defeated
+  - Similar to the "opposites" Inverse Heretics encounter (3.3)
+
+> Ritual: Explosion Infused
+- One enemy is "Explosion Infused" and will cause an explosion that heavily damages all players when defeated
+- The other enemy is "Defused Calm". Has no special effects and can be defeated normally
+  - When this one is defeated, the other is stunned, loses its negative effect, and can be defeated normally.
+
+> Ritual: Pain Mirror
+- One enemy is the "Pain Mirror", reflecting and magnifying any damage incurred to the one who attacked it.
+- The other enemy is "Empty Reflection". Has no special effects and can be defeated normally.
+  - When this one is defeated, the other is stunned, loses its negative effect, and can be defeated normally.
+
+## Scene 4.0 - Dispersion (dungeon cleared)
+
+A Bearer knows their purpose from the moment they receive the Naous' gift. They internalize that purpose when Unmasking powerful Stilled in battles that raise question to the very concept of life.
+
+- The mass of masks melts and quickly flows into the ground, with the masks themselves crumbling and dissolving.
+- A message displays as the players strike a respectful, ritualistic pose (a bow? a "salute" of sorts?):
+
+> All return to Naous
+
+> Quest update: Coalescence cleared
+
+- With the dungeon cleared, the players receive rewards
+  - New Echo: Passive ability (INSERT_DETAILS_HERE)
+    - Example: Every 3rd Echo usage used has its effect doubled (eg. double damage, double healing)
+  - Probably other rewards too. Currency? More Echoes? Mask(s)?
+
+As the mass falls and the horde runs dry, you can't help but feel that you should already be elsewhere. If you are here, your job is not done. Naous demands more of you and _you will answer the call_.
+
+- Players are prompted to return to (?? nearby Fluid town? whatever is outside of this place, same place they went to when they escaped the dungeon in the tutorial)
 
