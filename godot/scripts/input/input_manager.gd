@@ -13,10 +13,17 @@ var default_binds: InputBindings = load(
 
 var move: Vector2:
     get: return Input.get_vector(
-        "move_left",
-        "move_right",
-        "move_forward",
-        "move_back")
+        InputBindings.MOVE_LEFT,
+        InputBindings.MOVE_RIGHT,
+        InputBindings.MOVE_FORWARD,
+        InputBindings.MOVE_BACK)
+
+var joystick_camera: Vector2:
+    get: return Input.get_vector(
+        InputBindings.CAMERA_LEFT,
+        InputBindings.CAMERA_RIGHT,
+        InputBindings.CAMERA_UP,
+        InputBindings.CAMERA_DOWN)
 
 var jump := false
 var select_location := false
@@ -71,6 +78,10 @@ func _input(event: InputEvent) -> void:
     if Input.is_action_just_pressed("ui_cancel"):
         signals.ui_cancel.emit()
 
+    # TODO: Currently controller has these binds set 1:1 with regular button inputs.
+    #       Depending on how many hotkey actions are expected to be available, we may need to
+    #       change that to a modifier system to give the player easy access to more actions.
+    #       - eg. LT + Face buttons for a set of actions, RT + face buttons for another set
     for action in action_map.keys():
         if Input.is_action_just_pressed(action):
             action_map[action].emit()

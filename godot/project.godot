@@ -76,6 +76,22 @@ select_location={
 "deadzone": 0.2,
 "events": []
 }
+camera_left={
+"deadzone": 0.2,
+"events": []
+}
+camera_right={
+"deadzone": 0.2,
+"events": []
+}
+camera_up={
+"deadzone": 0.2,
+"events": []
+}
+camera_down={
+"deadzone": 0.2,
+"events": []
+}
 camera_zoom_out={
 "deadzone": 0.2,
 "events": []
