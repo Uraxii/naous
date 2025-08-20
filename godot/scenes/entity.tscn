@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=20 format=3 uid="uid://bmkcvlx154cnh"]
 
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
+[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_uysrf"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="3_f4o61"]
 [ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="3_lmnk1"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/move.gd" id="3_qe04c"]
@@ -17,6 +18,23 @@
 [ext_resource type="Script" uid="uid://b2wnn6hu6a4ab" path="res://scripts/entities/gravity_component.gd" id="14_1wt7u"]
 [ext_resource type="Script" uid="uid://2bgieokot4fm" path="res://scripts/entities/jump_force_component.gd" id="15_mxvno"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
+properties/0/path = NodePath("Components/HealthComponent:current")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Components/EnergyComponent:current")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Components/SpeedComponent:current")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("Components/GravityComponent:current")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("Components/JumpForceComponent:current")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
 
@@ -26,6 +44,14 @@ id = null
 local_control = null
 body = NodePath("Body")
 components = NodePath("Components")
+
+[node name="EntitySynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8nksq")
+script = ExtResource("2_uysrf")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../Body")
 
 [node name="Components" type="Node" parent="."]
 script = ExtResource("3_wjc7b")
