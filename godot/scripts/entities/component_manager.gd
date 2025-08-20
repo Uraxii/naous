@@ -6,7 +6,7 @@ class_name ComponentManager extends Node
 func get_component(type: GDScript) -> Node:
     if not components.has(type):
         components = get_components()
-        
+
     return components.get(type)
 
 

@@ -1,6 +1,6 @@
 class_name StatView extends View
 
-@export var stat_id := ""
+@export var stat_type: String
 @export var label: Label
 
 
@@ -9,14 +9,8 @@ func _ready() -> void:
     if not entity:
         return
         
-    var stats: StatComponent = entity.get_component(StatComponent)
-    if not stats:
-        return
-        
-    var stat: Stat = stats.get_stat(stat_id)
-    if not stat:
-        return
-        
+    var stat: StatComponent = entity.get_component(HealthComponent)
+    
     stat.change.connect(_on_change)
     _on_change(stat.current, stat.current)
     

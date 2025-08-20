@@ -1,0 +1,1 @@
+class_name HealthComponent extends StatComponent

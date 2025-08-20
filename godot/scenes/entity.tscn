@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=18 format=3 uid="uid://bmkcvlx154cnh"]
 
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
-[ext_resource type="PackedScene" uid="uid://dw4fatkylbqbn" path="res://scenes/stat_base.tscn" id="3_bepk3"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="3_f4o61"]
 [ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="3_lmnk1"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/move.gd" id="3_qe04c"]
@@ -12,7 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/spells/projectile.tscn" id="7_bdlbk"]
 [ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="8_wd4e3"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="9_0oii0"]
-[ext_resource type="Script" uid="uid://bq12dhoxj5lfu" path="res://scripts/entities/stats_component.gd" id="10_5a52v"]
+[ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/health_component.gd" id="9_5a52v"]
+[ext_resource type="Script" uid="uid://kkwigfbk2fm2" path="res://scripts/entities/energy_component.gd" id="12_fcheu"]
+[ext_resource type="Script" uid="uid://deyjuv6rhngx1" path="res://scripts/entities/speed_component.gd" id="13_2y5vj"]
+[ext_resource type="Script" uid="uid://b2wnn6hu6a4ab" path="res://scripts/entities/gravity_component.gd" id="14_1wt7u"]
+[ext_resource type="Script" uid="uid://2bgieokot4fm" path="res://scripts/entities/jump_force_component.gd" id="15_mxvno"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -26,26 +29,6 @@ components = NodePath("Components")
 
 [node name="Components" type="Node" parent="."]
 script = ExtResource("3_wjc7b")
-
-[node name="Stats" type="Node" parent="Components"]
-script = ExtResource("10_5a52v")
-
-[node name="Health" parent="Components/Stats" instance=ExtResource("3_bepk3")]
-start_value = 50.0
-max_value = 100.0
-current = 50.0
-
-[node name="Energy" parent="Components/Stats" instance=ExtResource("3_bepk3")]
-
-[node name="Speed" parent="Components/Stats" instance=ExtResource("3_bepk3")]
-current = 5.0
-
-[node name="Gravity" parent="Components/Stats" instance=ExtResource("3_bepk3")]
-
-[node name="JumpForce" parent="Components/Stats" instance=ExtResource("3_bepk3")]
-start_value = 15.0
-max_value = 40.0
-current = 15.0
 
 [node name="Spells" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
 script = ExtResource("5_ygnst")
@@ -76,6 +59,33 @@ body = NodePath("../../Body")
 
 [node name="Inventory" type="Node" parent="Components"]
 
+[node name="HealthComponent" type="Node" parent="Components"]
+script = ExtResource("9_5a52v")
+start_value = 50.0
+max_value = 100.0
+metadata/_custom_type_script = "uid://dcvgu5whndbp8"
+
+[node name="EnergyComponent" type="Node" parent="Components"]
+script = ExtResource("12_fcheu")
+start_value = 5.0
+metadata/_custom_type_script = "uid://kkwigfbk2fm2"
+
+[node name="SpeedComponent" type="Node" parent="Components"]
+script = ExtResource("13_2y5vj")
+start_value = 10.0
+max_value = 30.0
+metadata/_custom_type_script = "uid://deyjuv6rhngx1"
+
+[node name="GravityComponent" type="Node" parent="Components"]
+script = ExtResource("14_1wt7u")
+metadata/_custom_type_script = "uid://b2wnn6hu6a4ab"
+
+[node name="JumpForceComponent" type="Node" parent="Components"]
+script = ExtResource("15_mxvno")
+start_value = 15.0
+max_value = 40.0
+metadata/_custom_type_script = "uid://2bgieokot4fm"
+
 [node name="Body" type="CharacterBody3D" parent="."]
 
 [node name="Shape" type="CollisionShape3D" parent="Body"]
@@ -102,7 +112,6 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0oii0")
-stat_id = "Health"
 label = NodePath("Health")
 
 [node name="Health" type="Label" parent="StatView"]

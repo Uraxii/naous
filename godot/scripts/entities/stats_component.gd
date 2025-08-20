@@ -1,4 +1,4 @@
-class_name StatComponent extends Node
+class_name StatsComponent extends Node
 
 @onready var stats: Dictionary[String, Stat] = get_all_stats()
 
