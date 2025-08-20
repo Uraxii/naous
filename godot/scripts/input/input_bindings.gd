@@ -11,6 +11,10 @@ const MOVE_RIGHT := "move_right"
 const MOVE_FORWARD := "move_forward"
 const MOVE_BACK := "move_back"
 const JUMP := "jump"
+const CAMERA_LEFT := "camera_left"
+const CAMERA_RIGHT := "camera_right"
+const CAMERA_UP := "camera_up"
+const CAMERA_DOWN := "camera_down"
 const CAMERA_ZOOM_OUT := "camera_zoom_out"
 const CAMERA_ZOOM_IN := "camera_zoom_in"
 const UI_TOGGLE := "ui_toggle"
@@ -28,6 +32,10 @@ const UI_TOGGLE := "ui_toggle"
 @export var move_back: Array[InputEvent]
 @export var jump: Array[InputEvent]
 
+@export var camera_left: Array[InputEvent]
+@export var camera_right: Array[InputEvent]
+@export var camera_up: Array[InputEvent]
+@export var camera_down: Array[InputEvent]
 @export var camera_zoom_out: Array[InputEvent]
 @export var camera_zoom_in: Array[InputEvent]
 
@@ -46,6 +54,10 @@ func get_binds() -> Dictionary:
         MOVE_FORWARD: move_forward,
         MOVE_BACK: move_back,
         JUMP: jump,
+        CAMERA_LEFT: camera_left,
+        CAMERA_RIGHT: camera_right,
+        CAMERA_UP: camera_up,
+        CAMERA_DOWN: camera_down,
         CAMERA_ZOOM_OUT: camera_zoom_out,
         CAMERA_ZOOM_IN: camera_zoom_in,
         UI_TOGGLE: ui_toggle,

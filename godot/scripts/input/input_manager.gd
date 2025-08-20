@@ -13,10 +13,17 @@ var default_binds: InputBindings = load(
 
 var move: Vector2:
     get: return Input.get_vector(
-        "move_left",
-        "move_right",
-        "move_forward",
-        "move_back")
+        InputBindings.MOVE_LEFT,
+        InputBindings.MOVE_RIGHT,
+        InputBindings.MOVE_FORWARD,
+        InputBindings.MOVE_BACK)
+
+var joystick_camera: Vector2:
+    get: return Input.get_vector(
+        InputBindings.CAMERA_LEFT,
+        InputBindings.CAMERA_RIGHT,
+        InputBindings.CAMERA_UP,
+        InputBindings.CAMERA_DOWN)
 
 var jump := false
 var select_location := false

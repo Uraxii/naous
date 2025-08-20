@@ -4,6 +4,7 @@
 
 [node name="CameraManager" type="SpringArm3D"]
 script = ExtResource("1_utxs1")
+invert_look_y_axis = true
 x_offset = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
