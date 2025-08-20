@@ -78,6 +78,10 @@ func _input(event: InputEvent) -> void:
     if Input.is_action_just_pressed("ui_cancel"):
         signals.ui_cancel.emit()
 
+    # TODO: Currently controller has these binds set 1:1 with regular button inputs.
+    #       Depending on how many hotkey actions are expected to be available, we may need to
+    #       change that to a modifier system to give the player easy access to more actions.
+    #       - eg. LT + Face buttons for a set of actions, RT + face buttons for another set
     for action in action_map.keys():
         if Input.is_action_just_pressed(action):
             action_map[action].emit()
