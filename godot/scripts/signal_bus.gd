@@ -91,3 +91,8 @@ signal action_2
 signal action_3
 signal action_4
 #endregion
+
+#region Interaction
+signal entity_can_interact(entity: Entity)
+signal entity_interacted(entity: Entity)
+#endregion
