@@ -10,9 +10,13 @@ const BACKPEDDLE_PENALTY := 0.75
 
 @onready var signals = Globals.signal_bus
 @onready var input = Globals.input
-@onready var speed := entity.get_stat("Speed")
-@onready var gravity_scale := entity.get_stat("Gravity")
-@onready var jump_force := entity.get_stat("JumpForce")
+
+@onready var stats: StatComponent = entity.components.get_component(
+    StatComponent)
+    
+@onready var speed := stats.get_stat("Speed")
+@onready var gravity_scale := stats.get_stat("Gravity")
+@onready var jump_force := stats.get_stat("JumpForce")
 
 var current_gravity: float = 0.0
 var move_velocity := Vector3.ZERO

@@ -1,51 +1,51 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=15 format=3 uid="uid://bmkcvlx154cnh"]
 
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
 [ext_resource type="PackedScene" uid="uid://dw4fatkylbqbn" path="res://scenes/stat_base.tscn" id="3_bepk3"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="3_f4o61"]
 [ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="3_lmnk1"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/move.gd" id="3_qe04c"]
+[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="3_wjc7b"]
 [ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="4_afumw"]
 [ext_resource type="Script" uid="uid://d4ai60cekwpy" path="res://scripts/entities/component_spell.gd" id="5_ygnst"]
-[ext_resource type="Script" uid="uid://bc6253msclsnu" path="res://scripts/spells/traits/spawn_projectile.gd" id="6_by054"]
+[ext_resource type="Script" path="res://scripts/spells/traits/spawn_projectile.gd" id="6_by054"]
 [ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/spells/projectile.tscn" id="7_bdlbk"]
 [ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="8_wd4e3"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="9_0oii0"]
+[ext_resource type="Script" uid="uid://bq12dhoxj5lfu" path="res://scripts/entities/stats_component.gd" id="10_5a52v"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
 
-[node name="Entity" type="Node3D" node_paths=PackedStringArray("body", "spells")]
+[node name="Entity" type="Node3D" node_paths=PackedStringArray("body", "components")]
 script = ExtResource("1_vh5go")
-body = NodePath("Body")
-spells = NodePath("Components/Spells")
 id = null
 local_control = null
+body = NodePath("Body")
+components = NodePath("Components")
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Components" type="Node" parent="."]
+script = ExtResource("3_wjc7b")
 
-[node name="Stats" type="Node" parent="."]
+[node name="Stats" type="Node" parent="Components"]
+script = ExtResource("10_5a52v")
 
-[node name="Health" parent="Stats" instance=ExtResource("3_bepk3")]
+[node name="Health" parent="Components/Stats" instance=ExtResource("3_bepk3")]
 start_value = 50.0
 max_value = 100.0
 current = 50.0
 
-[node name="Energy" parent="Stats" instance=ExtResource("3_bepk3")]
+[node name="Energy" parent="Components/Stats" instance=ExtResource("3_bepk3")]
 
-[node name="Speed" parent="Stats" instance=ExtResource("3_bepk3")]
+[node name="Speed" parent="Components/Stats" instance=ExtResource("3_bepk3")]
 current = 5.0
 
-[node name="Gravity" parent="Stats" instance=ExtResource("3_bepk3")]
+[node name="Gravity" parent="Components/Stats" instance=ExtResource("3_bepk3")]
 
-[node name="JumpForce" parent="Stats" instance=ExtResource("3_bepk3")]
+[node name="JumpForce" parent="Components/Stats" instance=ExtResource("3_bepk3")]
 start_value = 15.0
 max_value = 40.0
 current = 15.0
-
-[node name="StatusesEffects" type="Node" parent="."]
-
-[node name="Components" type="Node" parent="."]
 
 [node name="Spells" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
 script = ExtResource("5_ygnst")
@@ -72,6 +72,10 @@ script = ExtResource("3_qe04c")
 entity = NodePath("../..")
 body = NodePath("../../Body")
 
+[node name="StatusesEffects" type="Node" parent="Components"]
+
+[node name="Inventory" type="Node" parent="Components"]
+
 [node name="Body" type="CharacterBody3D" parent="."]
 
 [node name="Shape" type="CollisionShape3D" parent="Body"]
@@ -92,17 +96,17 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("8_wd4e3")
 
-[node name="StatView" type="Control" parent="." node_paths=PackedStringArray("stat", "label")]
+[node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_0oii0")
-stat = NodePath("../Stats/Health")
+stat_id = "Health"
 label = NodePath("Health")
 
 [node name="Health" type="Label" parent="StatView"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-text = "HEALTH"
+text = "STAT"
