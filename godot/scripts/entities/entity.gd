@@ -7,37 +7,19 @@ const INVALID_ID: int = -1
 
 # @export var data := EntityData.new()
 @export var body: CharacterBody3D
-@export var spells: ComponentSpell
+@export var components: ComponentManager
 @export_category("Runtime Values")
 @export var id: int = INVALID_ID
 @export var local_control := false : set = _set_local_control
 
 @onready var entities := Globals.entities
-@onready var stats: Dictionary[String, Stat] = get_all_stats()
 @onready var projectile_spawner: Node3D = %ProjectileSpawner
-
 #endregion
 
-#region Stats
-func get_stat(stat_id: String) -> Stat:
-    if not stats.has(stat_id):
-        stats = get_all_stats()
 
-    return stats.get(stat_id)
+func get_component(type: GDScript) -> Node:
+    return components.get_component(type)
 
-
-func get_all_stats() -> Dictionary[String, Stat]:
-    var container := find_child("Stats")
-    # Get any child that is of type Stat
-    var stat_nodes := container.get_children().filter(
-        func(child): return child is Stat)
-
-    var map: Dictionary[String, Stat] = {}
-    for s: Stat in stat_nodes:
-        map[s.name] = s
-
-    return map
-#endregion
 
 func _set_local_control(value: bool) -> void:
     local_control = value

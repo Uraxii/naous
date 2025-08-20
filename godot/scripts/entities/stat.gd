@@ -1,4 +1,4 @@
-class_name Stat extends Node
+class_name StatComponent extends Node
 
 signal change(new: float, old: float)
 
@@ -14,7 +14,7 @@ signal change(new: float, old: float)
 #endregion
 
 
-func _init() -> void:
+func _ready() -> void:
     current = start_value
 
 

@@ -16,10 +16,11 @@ func _ready() -> void:
 
 
 func _on_control(new_enity: Entity) -> void:
-    if not new_enity.spells:
+    var spell_component = new_enity.get_component(ComponentSpell)
+    if not spell_component:
         return
     
-    var spells: Array[Spell] = new_enity.spells.spells.values()
+    var spells: Array[Spell] = spell_component.spells.values()
     
     for i in range(spells.size()):
         buttons[i].set_spell(spells[i])

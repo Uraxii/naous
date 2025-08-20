@@ -10,9 +10,10 @@ const BACKPEDDLE_PENALTY := 0.75
 
 @onready var signals = Globals.signal_bus
 @onready var input = Globals.input
-@onready var speed := entity.get_stat("Speed")
-@onready var gravity_scale := entity.get_stat("Gravity")
-@onready var jump_force := entity.get_stat("JumpForce")
+@onready var speed: SpeedComponent = entity.get_component(SpeedComponent)
+@onready var gravity: GravityComponent = entity.get_component(GravityComponent)
+@onready var jump_force: JumpForceComponent = entity.get_component(
+    JumpForceComponent)
 
 var current_gravity: float = 0.0
 var move_velocity := Vector3.ZERO
@@ -57,7 +58,7 @@ func apply_gravity(current_velocity: Vector3) -> Vector3:
     else:
         gravity_to_apply = FORCE_GRAVITY
 
-    current_gravity -= gravity_to_apply * gravity_scale.current
+    current_gravity -= gravity_to_apply * gravity.current
     current_velocity.y += current_gravity
 
     return current_velocity
