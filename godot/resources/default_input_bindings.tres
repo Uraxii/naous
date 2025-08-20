@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InputBindings" load_steps=15 format=3 uid="uid://dklvwj7n37rma"]
+[gd_resource type="Resource" script_class="InputBindings" load_steps=19 format=3 uid="uid://dklvwj7n37rma"]
 
 [ext_resource type="Script" uid="uid://7uvyk2xwlmgd" path="res://scripts/input/input_bindings.gd" id="1_qgmqv"]
 
@@ -43,20 +43,34 @@ device = -1
 keycode = 83
 unicode = 115
 
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_qgmqv"]
+axis = 1
+axis_value = 1.0
+
 [sub_resource type="InputEventKey" id="InputEventKey_iq71c"]
 device = -1
 keycode = 87
 unicode = 119
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_ie32x"]
+axis = 1
+axis_value = -1.0
 
 [sub_resource type="InputEventKey" id="InputEventKey_6i0xk"]
 device = -1
 keycode = 65
 unicode = 97
 
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_k0m2b"]
+axis_value = -1.0
+
 [sub_resource type="InputEventKey" id="InputEventKey_kmbki"]
 device = -1
 keycode = 68
 unicode = 100
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_tll83"]
+axis_value = 1.0
 
 [sub_resource type="InputEventKey" id="InputEventKey_tll83"]
 device = -1
@@ -71,10 +85,10 @@ action_1 = Array[InputEvent]([SubResource("InputEventKey_hwlvn")])
 action_2 = Array[InputEvent]([SubResource("InputEventKey_igu6e")])
 action_3 = Array[InputEvent]([SubResource("InputEventKey_tgrry")])
 action_4 = Array[InputEvent]([SubResource("InputEventKey_3jakj")])
-move_left = Array[InputEvent]([SubResource("InputEventKey_6i0xk")])
-move_right = Array[InputEvent]([SubResource("InputEventKey_kmbki")])
-move_forward = Array[InputEvent]([SubResource("InputEventKey_iq71c")])
-move_back = Array[InputEvent]([SubResource("InputEventKey_qdwp2")])
+move_left = Array[InputEvent]([SubResource("InputEventKey_6i0xk"), SubResource("InputEventJoypadMotion_k0m2b")])
+move_right = Array[InputEvent]([SubResource("InputEventKey_kmbki"), SubResource("InputEventJoypadMotion_tll83")])
+move_forward = Array[InputEvent]([SubResource("InputEventKey_iq71c"), SubResource("InputEventJoypadMotion_ie32x")])
+move_back = Array[InputEvent]([SubResource("InputEventKey_qdwp2"), SubResource("InputEventJoypadMotion_qgmqv")])
 jump = Array[InputEvent]([SubResource("InputEventKey_ijumv")])
 camera_zoom_out = Array[InputEvent]([SubResource("InputEventMouseButton_k0m2b")])
 camera_zoom_in = Array[InputEvent]([SubResource("InputEventMouseButton_ie32x")])
