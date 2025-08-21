@@ -21,7 +21,9 @@ RUN apt-get update \
         unzip \
         xvfb \
         libasound2 \
-        libgl1-mesa-glx \
+        libgl1  # replaced libgl1-mesa-glx (removed in trixie) \
+		libglx-mesa0 \
+		libgl1-mesa-dri \
         libglu1-mesa \
         libxrandr2 \
         libxi6 \
