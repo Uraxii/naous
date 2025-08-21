@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dluy6c7orh677"]
+
+[ext_resource type="Script" uid="uid://bsc5blllejlso" path="res://scripts/entities/objects/pick_up.gd" id="1_alksn"]
+[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="2_cq6oy"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/interaction/interactable_component.gd" id="3_ey4g2"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_cq6oy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cq6oy"]
+radius = 0.6404774
+
+[node name="PickUp" type="Node3D"]
+script = ExtResource("1_alksn")
+
+[node name="ComponentManager" type="Node" parent="."]
+script = ExtResource("2_cq6oy")
+metadata/_custom_type_script = "uid://4tgebhhxaok0"
+
+[node name="InteractableComponent" type="Node" parent="ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("3_ey4g2")
+entity = NodePath("")
+prompt_text = "Pizza!"
+interaction_time = 2.0
+priority = 3
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.395, 0, 0, 0, 0.395, 0, 0, 0, 0.23091125, 0, 0.23274142, 0)
+mesh = SubResource("PrismMesh_cq6oy")
+
+[node name="InteractableTriggerZone" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableTriggerZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22348017, 0)
+shape = SubResource("SphereShape3D_cq6oy")
