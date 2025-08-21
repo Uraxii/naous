@@ -99,10 +99,11 @@ func _create_level(level_scene:PackedScene) -> Node:
 
 func _spawn_player() -> Entity:
     # Create player
+    # - Note that we can't call 'Global.entities.spawn()' here, or the child scenes of Entity won't be set up yet.
+    # - Let the Entity handle that when it enters the scene, then the nodes will be ready in the SceneTree for the EntityManager.
     if not player_controller or not player_controller.can_instantiate():
         push_error("%s: player_controller scene not set" % name)
         return null
     var player:Entity = player_controller.instantiate() as Entity
-    if player:
-        Globals.entities.spawn(player)
+    
     return player
