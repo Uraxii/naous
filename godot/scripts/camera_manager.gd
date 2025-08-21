@@ -15,6 +15,8 @@ class_name CameraManager extends SpringArm3D
 @onready var signals = Globals.signal_bus
 @onready var input := Globals.input
 
+@onready var camera: Camera3D = $Camera3D
+
 var direction := Vector2.ZERO
 var menu_is_open := false
 
@@ -26,14 +28,14 @@ func _process(_delta: float) -> void:
     position.x = target.body.position.x + x_offset
     position.y = target.body.position.y + y_offset
     position.z = target.body.position.z + z_offset
-    
+
     # Handle mouse motion
     if not direction.is_zero_approx():
         Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
         _handle_rotation(direction * mouse_sensitivity)
         direction = Vector2.ZERO
-    
+
     # Handle controller joystick
     # - Can't drive this via signals since the joystick doesn't constantly emit events while
     #   actuated outside of neutral. So we just check the input directly. Not elegant, but works.
@@ -42,7 +44,7 @@ func _process(_delta: float) -> void:
         if invert_look_y_axis:
             joystick_look *= Vector2(1, -1)
         _handle_rotation(joystick_look * joystick_sensitivity)
-    
+
     # Handle menu
     elif menu_is_open:
         if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -54,6 +56,9 @@ func _ready() -> void:
     signals.camera_zoom_out.connect(_on_camera_zoom_out)
     signals.camera_zoom_in.connect(_on_camera_zoom_in)
     signals.rotate_camera.connect(_on_rotate_camera)
+	
+    # Ensure we have an active camera immediately
+    camera.make_current()
 
 
 func _handle_rotation(rotation_vector: Vector2) -> void:
@@ -74,6 +79,10 @@ func _set_camera_distance(value: float) -> void:
 func _on_control_entity(entity: Entity) -> void:
     print_debug("Set camera target to %s." % entity.id)
     target = entity
+	
+    # Reassert camera after new target (in case another camera became current earlier)
+    if not camera.is_current():
+        camera.make_current()
 
 
 func _on_camera_zoom_out() -> void:
