@@ -26,9 +26,6 @@ radius = 0.13720703
 [node name="Devmap" type="Node3D"]
 metadata/do_not_ship = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.6805291, 0.7327211, 0, -0.7327211, 0.6805291, 0, 7.509359, 11.511243)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_5t2d2")
 
