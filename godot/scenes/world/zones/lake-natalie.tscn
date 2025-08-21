@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=32 format=3 uid="uid://ch0bqgk8cfdeq"]
 
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
 [ext_resource type="Material" uid="uid://cpccsiuabq0sr" path="res://assets/materials/waterfall-material.tres" id="1_ppcyp"]
@@ -51,6 +51,18 @@ point_count = 2
 _limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, -360), 0.0, 719.99994, 0, 1, Vector2(1, 360), 719.99994, 0.0, 1, 0]
 point_count = 2
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q55i7"]
+
+[sub_resource type="Sky" id="Sky_6y1nk"]
+sky_material = SubResource("ProceduralSkyMaterial_q55i7")
+
+[sub_resource type="Environment" id="Environment_4xysy"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_6y1nk")
+ssao_enabled = true
+ssao_intensity = 2.5
 
 [node name="lake-natalie" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
@@ -216,6 +228,63 @@ transform = Transform3D(3.3131413, 0, 2.2412262, 0, 4, 0, -2.2412262, 0, 3.31314
 
 [node name="boulder-sandstone18" parent="boulders" instance=ExtResource("6_hq68q")]
 transform = Transform3D(3.2114365, 0, 2.3846753, 0, 4, 0, -2.3846753, 0, 3.2114365, 25.20575, 7.002002, 2.255398)
+
+[node name="boulder-sandstone62" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(2.68954, 1.2174091, 2.6989422, 2.1641257, 1.6800895, -2.9144228, -2.0206275, 3.4198265, 0.47101033, 21.789606, 2.678141, 0.3250544)
+
+[node name="boulder-sandstone63" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-0.34611437, 3.183502, 2.3969808, 3.5780816, -0.8109138, 1.59366, 1.7542915, 2.2820456, -2.7775397, 20.81059, 0.80218697, -3.121559)
+
+[node name="boulder-sandstone64" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(1.2611829, 3.6717124, -0.9632988, 3.5780816, -0.8109138, 1.5936599, 1.2675772, -1.364164, -3.540099, 20.81059, 0.3070917, -12.525436)
+
+[node name="boulder-sandstone65" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(1.261183, 3.6717129, -0.9632989, 2.3486228, -1.5522263, -2.8415775, -2.9821799, 0.33033082, -2.6452775, 19.276608, 1.5775013, -14.838231)
+
+[node name="big flat boulder" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(7.003851, 0, 7.7320294, 0, 4, 0, -3.8660147, 0, 14.007702, 15.882387, 1.1292992, -21.912998)
+
+[node name="big flat boulder2" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-7.867991, 0, -2.8946233, 0, 4, 0, 1.4473116, 0, -15.735982, 10.942752, 0.27108574, -26.727198)
+
+[node name="big flat boulder3" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-7.867991, 0, -2.8946233, 0, 4, 0, 1.4473116, 0, -15.735982, -5.0062494, 0.27108574, -33.05949)
+
+[node name="big flat boulder4" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-7.867991, 0, -2.8946233, 0, 4, 0, 1.4473116, 0, -15.735982, -16.99458, 0.7388458, -21.188381)
+
+[node name="big flat boulder5" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-1.5416832, 0, -15.700092, 0, 4, 0, 7.850046, 0, -3.0833664, -12.94441, 0.7388458, -14.00248)
+
+[node name="big flat boulder9" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(7.097891, 0, -7.3810415, 0, 4, 0, 3.6905208, 0, 14.195782, -13.201929, 0.0020656586, -32.547974)
+
+[node name="big flat boulder6" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-3.5553303, 0, -14.333126, 0, 4, 0, 7.166563, 0, -7.1106606, -13.2689085, 0.8402662, 9.967758)
+
+[node name="big flat boulder7" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-6.2212954, 0, -10.058923, 0, 4, 0, 5.0294614, 0, -12.442591, 11.381972, 0.8402662, 15.387495)
+
+[node name="big flat boulder10" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-5.984331, 0, 10.618433, 0, 4, 0, -5.3092165, 0, -11.968662, -15.995324, 0.8402662, -4.1833506)
+
+[node name="big flat boulder8" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(-6.322267, 0, 9.8038645, 0, 4, 0, -4.9019322, 0, -12.644534, 14.061479, 0.13819122, 5.1745725)
+
+[node name="wide canyon boulder" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(2.874743, 11.005542, -1.6284022, -2.3708277, 10.920753, 6.8413434, 1.4543133, -3.9516098, 14.371649, 14.977079, 1.6711559, 3.2230139)
+
+[node name="wide canyon boulder2" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(2.874743, 11.005542, -1.6284022, -2.3708277, 10.920753, 6.8413434, 1.4543133, -3.9516098, 14.371649, 23.281116, 0.57503414, -19.889828)
+
+[node name="wide canyon boulder3" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(2.4197161, 0.42808533, 12.7332735, -2.3708277, 10.920753, 6.841343, -2.1270044, -11.685629, 6.860009, 12.627045, 0.57503414, -23.40027)
+
+[node name="wide canyon boulder4" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(3.1789532, -6.2629614, -7.421817, 2.1512058, 1.5980339, 13.39415, -1.1254175, -14.636311, 4.638247, -15.618599, 0.57503414, -18.151318)
+
+[node name="wide canyon boulder5" parent="boulders" instance=ExtResource("6_hq68q")]
+transform = Transform3D(1.1806784, 4.908803, -14.477554, 2.1216278, -13.445202, -1.7903879, -3.1787858, -7.15053, -6.5722857, -12.296999, -0.09620094, 9.083693)
 
 [node name="boulder-sandstone19" parent="boulders" instance=ExtResource("6_hq68q")]
 transform = Transform3D(-0.6254618, 0, -3.950797, 0, 4, 0, 3.950797, 0, -0.6254618, 27.281345, 7.759988, 5.887995)
@@ -757,3 +826,12 @@ transform = Transform3D(0.028532386, 0, 0.9995929, 0, 1, 0, -0.9995929, 0, 0.028
 
 [node name="stairs" parent="." instance=ExtResource("20_q55i7")]
 transform = Transform3D(-0.9202455, 0, 0.39134154, 0, 1, 0, -0.39134154, 0, -0.9202455, 8.300304, -2.427867, -35.034378)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.5877852, -0.32905686, 0.7390738, 0, 0.9135454, 0.40673664, -0.809017, 0.23907377, -0.53696847, 0, 100, 0)
+shadow_enabled = true
+shadow_opacity = 0.5
+shadow_blur = 8.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="DirectionalLight3D"]
+environment = SubResource("Environment_4xysy")
