@@ -14,6 +14,12 @@ var spawner:MultiplayerSpawner = %LevelSpawner
 @export
 var level_container:Node
 
+# HACK: as we have the camera manager in a different viewport root so we need a copy to track the player
+# This will cause problems if we have two copies - one in Globals and one in a subviewport
+# Possibly the subviewport abstraction is not needed but the UI overlapped weird without it
+@onready
+var camera_manager:CameraManager = %CameraManager
+
 @export
 var player_controller:PackedScene
 
@@ -83,18 +89,20 @@ func _on_start_game_pressed() -> void:
 
     # TODO: Temporary test logic - need to determine where game scenes should go
     level_container.call_deferred("add_child",_create_level(level))
+    level_container.call_deferred("add_child",_spawn_player())
 
     ui_root.hide()
 
 func _create_level(level_scene:PackedScene) -> Node:
     var level:Node = level_scene.instantiate()
+    return level
+
+func _spawn_player() -> Entity:
     # Create player
-    var player:Entity = null
     if not player_controller or not player_controller.can_instantiate():
         push_error("%s: player_controller scene not set" % name)
-    player = player_controller.instantiate() as Entity
+        return null
+    var player:Entity = player_controller.instantiate() as Entity
     if player:
         Globals.entities.spawn(player)
-        level.add_child(player)
-
-    return level
+    return player
