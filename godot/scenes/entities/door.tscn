@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bubw2npxhqmbl"]
+
+[ext_resource type="Script" uid="uid://cfn7j3g4lutwr" path="res://scripts/entities/objects/door.gd" id="1_htbgl"]
+[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="2_de05j"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/interaction/interactable_component.gd" id="3_y1est"]
+[ext_resource type="Script" uid="uid://biugcdkh4yjur" path="res://scripts/entities/interaction/interactable_trigger.gd" id="4_de05j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_htbgl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_de05j"]
+size = Vector3(1, 1.8066711, 0.15777588)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_htbgl"]
+size = Vector3(1.4953613, 1.9421387, 1)
+
+[node name="Door" type="Node3D" node_paths=PackedStringArray("components")]
+script = ExtResource("1_htbgl")
+close_rotation = Vector3(0, 90, 0)
+components = NodePath("ComponentManager")
+metadata/_custom_type_script = "uid://gs35pl2e40ha"
+
+[node name="ComponentManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_de05j")
+metadata/_custom_type_script = "uid://4tgebhhxaok0"
+
+[node name="InteractableComponent" type="Node" parent="ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("3_y1est")
+entity = NodePath("../..")
+prompt_text = "Definitely a Door"
+time_to_complete = 0.0
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5074188, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1.8060284, 0, 0, 0, 0.14275372, 0, 0.9254364, 0)
+mesh = SubResource("BoxMesh_htbgl")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92359006, 0.0022888184)
+shape = SubResource("BoxShape3D_de05j")
+
+[node name="InteractableTrigger" type="Area3D" parent="StaticBody3D" node_paths=PackedStringArray("interactable")]
+script = ExtResource("4_de05j")
+interactable = NodePath("../../ComponentManager/InteractableComponent")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/InteractableTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03112793, 0.9690343, 0)
+shape = SubResource("BoxShape3D_htbgl")
