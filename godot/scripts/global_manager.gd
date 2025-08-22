@@ -9,6 +9,7 @@ class_name GlobalManager extends Node
 @onready var views: ViewManager = new_global("Views", ViewManager)
 @onready var game: GameManager = new_global("Game", GameManager)
 @onready var entities: EntityManager = new_global("Entities", EntityManager)
+@onready var interaction: InteractionManager = new_global("Interaction", InteractionManager)
 @onready var camera: CameraManager = new_global_scene(
     "Camera", preload("res://scenes/camera_manager.tscn"))
 

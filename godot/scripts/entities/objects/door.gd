@@ -1,12 +1,11 @@
-class_name Door extends Node3D
+class_name Door extends Entity
 
 @export_category("Door Details")
 @export var open_rotation: Vector3
 @export var close_rotation: Vector3
 
-@onready var component_manager: ComponentManager = %ComponentManager
-
 var is_open: bool = false
+
 
 #region Door Logic
 func toggle_position() -> void:
@@ -17,16 +16,18 @@ func toggle_position() -> void:
 
 
 func open() -> void:
-    _animate_rotation_to(open_rotation)
+    print("Door opening!")
+    _rotate_to(open_rotation)
     is_open = true
 
 
 func close() -> void:
-    _animate_rotation_to(close_rotation)
+    print("Door closing!")
+    _rotate_to(close_rotation)
     is_open = false
 
 
-func _animate_rotation_to(rotation_vector: Vector3) -> void:
+func _rotate_to(rotation_vector: Vector3) -> void:
     # TODO: Tween/AnimationPlayer this
     rotation = rotation_vector
 #endregion
@@ -34,7 +35,6 @@ func _animate_rotation_to(rotation_vector: Vector3) -> void:
 
 #region Godot Callback Functions
 func _ready() -> void:
-    var interactable_component: InteractableComponent = component_manager.get_component(InteractableComponent) as InteractableComponent
-    
-
+    var interactable_component: InteractableComponent = get_component(InteractableComponent) as InteractableComponent
+    interactable_component.interaction_complete.connect(toggle_position)
 #endregion

@@ -65,6 +65,9 @@ func _input(event: InputEvent) -> void:
 
     if Input.is_action_just_pressed("jump"):
         signals.jump.emit()
+    
+    if Input.is_action_just_pressed("interact"):
+        signals.interact.emit()
 
     if Input.is_action_just_pressed("ui_accept"):
         signals.ui_accept.emit()

@@ -120,3 +120,14 @@ action_4={
 "deadzone": 0.2,
 "events": []
 }
+interact={
+"deadzone": 0.2,
+"events": []
+}
+
+[layer_names]
+
+3d_physics/layer_1="Player"
+3d_physics/layer_2="World"
+3d_physics/layer_3="Entity"
+3d_physics/layer_4="InteractableTrigger"

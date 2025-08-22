@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bd0ydf3xgbfoh"]
+[gd_scene load_steps=11 format=3 uid="uid://bd0ydf3xgbfoh"]
 
 [ext_resource type="PackedScene" uid="uid://pmvaqr0spcry" path="res://assets/models/DO_NOT_SHIP_kenny_platformer-kit/block-grass-hexagon.glb" id="1_n6dg4"]
 [ext_resource type="PackedScene" uid="uid://bklcgtmkg4ee5" path="res://assets/models/DO_NOT_SHIP_kenny_platformer-kit/block-grass-low.glb" id="2_7nvo8"]
+[ext_resource type="PackedScene" uid="uid://bubw2npxhqmbl" path="res://scenes/entities/door.tscn" id="3_7nvo8"]
+[ext_resource type="PackedScene" uid="uid://dluy6c7orh677" path="res://scenes/entities/pick_up.tscn" id="4_egbtg"]
+[ext_resource type="PackedScene" uid="uid://dwvukle78pxbp" path="res://scenes/entities/control_zone.tscn" id="5_a1h00"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n6dg4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -65,3 +68,12 @@ shape = SubResource("CylinderShape3D_n6dg4")
 
 [node name="spawn-node" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98549, 26.7609)
+
+[node name="Door" parent="." instance=ExtResource("3_7nvo8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6022243, 0, 4.167201)
+
+[node name="PickUp" parent="." instance=ExtResource("4_egbtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3359025, 0, 4.0903134)
+
+[node name="ControlZone" parent="." instance=ExtResource("5_a1h00")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9739275, -4.7683716e-07, 5.0849333)

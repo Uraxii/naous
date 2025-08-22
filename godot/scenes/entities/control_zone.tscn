@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwvukle78pxbp"]
+
+[ext_resource type="Script" uid="uid://c0o28dohsooma" path="res://scripts/entities/objects/control_zone.gd" id="1_spf4a"]
+[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="2_rupwl"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/interaction/interactable_component.gd" id="3_oh56c"]
+[ext_resource type="Script" uid="uid://bcj72dre6qge7" path="res://scripts/entities/interaction/entity_detector.gd" id="4_kcvsx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7ojcd"]
+height = 0.2109375
+radius = 0.7607422
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7ojcd"]
+top_radius = 0.73
+bottom_radius = 0.73
+height = 0.182
+
+[node name="ControlZone" type="Node3D" node_paths=PackedStringArray("components")]
+script = ExtResource("1_spf4a")
+components = NodePath("ComponentManager")
+metadata/_custom_type_script = "uid://gs35pl2e40ha"
+
+[node name="ComponentManager" type="Node" parent="."]
+script = ExtResource("2_rupwl")
+metadata/_custom_type_script = "uid://4tgebhhxaok0"
+
+[node name="InteractableComponent" type="Node" parent="ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("3_oh56c")
+entity = NodePath("../..")
+prompt_text = "Standin' Around"
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="EntityDetector" type="Area3D" parent="." node_paths=PackedStringArray("interactable")]
+script = ExtResource("4_kcvsx")
+interactable = NodePath("../ComponentManager/InteractableComponent")
+metadata/_custom_type_script = "uid://bcj72dre6qge7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntityDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.061523438, 0)
+shape = SubResource("CylinderShape3D_7ojcd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05107689, 0)
+mesh = SubResource("CylinderMesh_7ojcd")

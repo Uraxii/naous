@@ -83,6 +83,7 @@ signal camera_rotate(is_pressed: bool)
 signal rotate_camera(delta: Vector2)
 
 signal jump
+signal interact
 signal move(dir: Vector2)
 
 signal action_0
@@ -94,7 +95,9 @@ signal action_4
 
 #region Interaction
 signal entity_can_interact(entity: Entity, interactable: InteractableComponent)
+signal entity_attempting_interaction(entity: Entity, interactable: InteractableComponent)
+signal entity_started_interaction(entity: Entity, interactable: InteractableComponent)
+signal entity_completed_interaction(entity: Entity, interactable: InteractableComponent)
 signal entity_interaction_interrupted(entity: Entity, interactable: InteractableComponent)
 signal entity_lost_interactable(entity: Entity, interactable: InteractableComponent)
-signal entity_completed_interaction(entity: Entity, interactable: InteractableComponent)
 #endregion
