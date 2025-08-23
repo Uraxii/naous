@@ -2,6 +2,7 @@
 // using a lookup texture - nice for waves and flags
 
 shader_type spatial;
+render_mode cull_disabled; // enables 2 sided faces
 
 uniform sampler2D clothTexture;
 uniform sampler2D windTexture;
