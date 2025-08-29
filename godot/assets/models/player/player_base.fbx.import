@@ -41,8 +41,8 @@ _subresources={
 "materials": {
 "outline": {
 "use_external/enabled": true,
-"use_external/fallback_path": "",
-"use_external/path": "res://assets/models/player/outline.tres"
+"use_external/fallback_path": "res://assets/models/player/outline.tres",
+"use_external/path": "uid://djsnp1xlxrhxt"
 },
 "skin": {
 "use_external/enabled": true,
