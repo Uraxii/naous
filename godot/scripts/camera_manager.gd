@@ -65,8 +65,7 @@ func _handle_rotation(rotation_vector: Vector2) -> void:
     rotation.y -= rotation_vector.x
     rotation.x -= rotation_vector.y
 
-    if rotation.x < -1:
-        rotation.x = -1
+    rotation.x = clampf(rotation.x, -1, 1)
 
     target.body.rotation.y = rotation.y
 
