@@ -43,7 +43,7 @@ func update_binds(new_binds: InputBindings) -> void:
         for event in binds[action]:
             InputMap.action_add_event(action, event)
         
-        print_debug(InputMap.action_get_events(action))
+        # print_debug(InputMap.action_get_events(action))
     
 
 #region Godot Callback Functions

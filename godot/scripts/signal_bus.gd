@@ -35,6 +35,12 @@ signal disconnected_from_shard
 signal shard_connection_failed
 #endregion
 
+#region Shard API
+signal player_connected(peer_id: int)
+signal player_disconnected(peer_id: int)
+signal server_disconnected
+#endregion
+
 #region Network (Legacy - keeping for compatibility)
 signal connection_closed
 signal got_packet(packet)
