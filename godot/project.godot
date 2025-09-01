@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Globals="*res://scripts/global_manager.gd"
 API="*res://scripts/api/api_client.tscn"
+InstanceAPI="*res://scripts/instance_api.gd"
+EntitySpawner="*res://scenes/EntitySpawner.tscn"
 
 [debug]
 
@@ -27,6 +29,38 @@ gdscript/warnings/unused_signal=0
 [godots]
 
 version_hint=""
+
+[importer_defaults]
+
+animation_library={
+"_subresources": {},
+"animation/fps": 30,
+"animation/import": true,
+"animation/import_rest_as_RESET": false,
+"animation/remove_immutable_tracks": true,
+"animation/trimming": false,
+"gltf/embedded_image_handling": 1,
+"gltf/naming_version": 2,
+"import_script/path": "",
+"materials/extract": 0,
+"materials/extract_format": 0,
+"materials/extract_path": "",
+"meshes/create_shadow_meshes": true,
+"meshes/ensure_tangents": true,
+"meshes/force_disable_compression": false,
+"meshes/generate_lods": true,
+"meshes/light_baking": 1,
+"meshes/lightmap_texel_size": 0.2,
+"nodes/apply_root_scale": true,
+"nodes/import_as_skeleton_bones": false,
+"nodes/root_name": "",
+"nodes/root_scale": 1.0,
+"nodes/root_script": null,
+"nodes/root_type": "",
+"nodes/use_name_suffixes": true,
+"nodes/use_node_type_suffixes": true,
+"skins/use_named_skins": true
+}
 
 [input]
 

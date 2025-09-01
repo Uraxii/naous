@@ -1,8 +1,17 @@
 class_name View extends Control
 
-@onready var signals := Globals.signal_bus
-@onready var input := Globals.input
-@onready var log := Globals.log
+var signals: SignalBus:
+    get: return Globals.signal_bus
+
+var input: InputManager:
+    get: return Globals.input
+ 
+var views: ViewManager:
+    get: return Globals.views
+
+@warning_ignore("shadowed_global_identifier")
+var log: Log:
+    get: return Globals.log
 
 
 func initalize() -> void:
@@ -15,5 +24,4 @@ func despawn():
 
 
 func _on_visibility_change() -> void:
-    var is_ui_visible: bool = is_visible_in_tree()
-    print_debug(self, " visible:", is_visible)
+    print_debug(self, " visible:", is_visible_in_tree())

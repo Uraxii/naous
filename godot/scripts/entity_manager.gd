@@ -16,13 +16,12 @@ func spawn(entity: Entity) -> void:
     print_debug("Spawned entity with id %d" % entity.id)
     signals.spawn_entity.emit(entity)
 
-    if active.size() == 1:
-        print_debug("Setting entity control to entity %d" % entity.id)
-        entity.local_control = true
-        signals.control_entity.emit(entity)
-
 
 func despawn(entity: Entity) -> void:
     active.erase(entity.id)
     print_debug("despawned entity with id %d" % entity.id)
+    
+    if entity.is_inside_tree():
+        entity.queue_free.call_deferred()
+        
     signals.despawn_entity.emit(entity)
