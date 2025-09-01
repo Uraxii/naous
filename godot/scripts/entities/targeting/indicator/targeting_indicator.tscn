@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://b74mdgvt321do"]
+
+[ext_resource type="Script" uid="uid://bv5vupo6livwr" path="res://scripts/entities/targeting/indicator/targeting_indicator.gd" id="1_c18ck"]
+[ext_resource type="Material" uid="uid://dl23dcekblki8" path="res://scripts/entities/targeting/indicator/default_indicator.tres" id="2_svoyi"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_fibsw"]
+material = ExtResource("2_svoyi")
+inner_radius = 0.3
+outer_radius = 0.33
+rings = 32
+ring_segments = 8
+
+[sub_resource type="PrismMesh" id="PrismMesh_drx44"]
+material = ExtResource("2_svoyi")
+
+[node name="TargetingIndicator" type="Node3D"]
+script = ExtResource("1_c18ck")
+
+[node name="Circle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.303, 0, 0, 0, 1, 0, 0.04059869, 0)
+mesh = SubResource("TorusMesh_fibsw")
+
+[node name="Pointer" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.181, 1.5823522e-08, 0, -1.5823522e-08, -0.181, 0, 0, 0, 0.181, 0, 0.6436773, 0)
+mesh = SubResource("PrismMesh_drx44")
+
+[node name="RayCast3D" type="RayCast3D" parent="Pointer"]
+transform = Transform3D(-5.5248613, -4.829988e-07, 0, 4.829988e-07, -5.5248613, 0, 0, 0, 5.5248613, 2.8541535e-08, 0.32647705, 0)
+visible = false
+collision_mask = 4
+hit_from_inside = true
+debug_shape_custom_color = Color(0, 0.9098039, 0.88235295, 0.09411765)
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InputBindings" load_steps=34 format=3 uid="uid://dklvwj7n37rma"]
+[gd_resource type="Resource" script_class="InputBindings" load_steps=36 format=3 uid="uid://dklvwj7n37rma"]
 
 [ext_resource type="Script" uid="uid://7uvyk2xwlmgd" path="res://scripts/input/input_bindings.gd" id="1_qgmqv"]
 
@@ -77,6 +77,13 @@ button_index = 5
 button_index = 8
 pressed = true
 
+[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_qgmqv"]
+button_mask = 1
+position = Vector2(355, 25)
+global_position = Vector2(365, 76)
+button_index = 1
+pressed = true
+
 [sub_resource type="InputEventKey" id="InputEventKey_qgmqv"]
 device = -1
 keycode = 70
@@ -128,6 +135,8 @@ unicode = 100
 [sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_tll83"]
 axis_value = 1.0
 
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_l78yg"]
+
 [sub_resource type="InputEventKey" id="InputEventKey_tll83"]
 device = -1
 ctrl_pressed = true
@@ -151,6 +160,9 @@ move_forward = Array[InputEvent]([SubResource("InputEventKey_iq71c"), SubResourc
 move_back = Array[InputEvent]([SubResource("InputEventKey_qdwp2"), SubResource("InputEventJoypadMotion_qgmqv")])
 jump = Array[InputEvent]([SubResource("InputEventKey_ijumv"), SubResource("InputEventJoypadButton_qgmqv")])
 interact = Array[InputEvent]([SubResource("InputEventKey_qgmqv"), SubResource("InputEventJoypadButton_tll83")])
+cursor_target = Array[InputEvent]([SubResource("InputEventMouseButton_qgmqv")])
+next_target = Array[InputEvent]([SubResource("InputEventJoypadButton_l78yg")])
+previous_target = Array[InputEvent]([null])
 camera_left = Array[InputEvent]([SubResource("InputEventJoypadMotion_myrx5")])
 camera_right = Array[InputEvent]([SubResource("InputEventJoypadMotion_t1s46")])
 camera_up = Array[InputEvent]([SubResource("InputEventJoypadMotion_nf0w0")])

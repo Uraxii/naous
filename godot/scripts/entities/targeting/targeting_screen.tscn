@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bgv7ppuo7gtad"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 5
+
+[node name="TargetingScreen" type="AspectRatioContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="TargetingScreen"]
+position = Vector2(581, 364)
+color = Color(0.7137255, 0.34509805, 0.5843137, 0.3372549)
+polygon = PackedVector2Array(-185, -146, -149, -176, -100.993, -210.98601, -42, -232, 15, -233, 64.303, -214.66899, 116.634, -182.345, 170, -136, 0, 0)
+uv = PackedVector2Array(-185, -146, -149, -176, -100.993, -210.98601, -42, -232, 15, -233, 64.303, -214.66899, 116.634, -182.345, 170, -136, 0, 0)

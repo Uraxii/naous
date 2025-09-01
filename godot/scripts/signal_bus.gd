@@ -92,6 +92,13 @@ signal jump
 signal interact
 signal move(dir: Vector2)
 
+## Targeting
+signal cursor_target(point: Vector2)
+signal next_target
+signal previous_target
+signal scan_target_right
+signal scan_target_left
+
 signal action_0
 signal action_1
 signal action_2

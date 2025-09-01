@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://8gqdpvmtu8g4"]
+
+[ext_resource type="Script" uid="uid://cbidjfhlnvb46" path="res://scripts/entities/targeting/detection_types/targeting_detection.gd" id="1_c5h1c"]
+
+[node name="CursorTargeting" type="Node"]
+script = ExtResource("1_c5h1c")
+inputs = null
+metadata/_custom_type_script = "uid://cbidjfhlnvb46"

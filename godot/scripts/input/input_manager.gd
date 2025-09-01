@@ -68,6 +68,23 @@ func _input(event: InputEvent) -> void:
     
     if Input.is_action_just_pressed("interact"):
         signals.interact.emit()
+    
+    if Input.is_action_just_pressed("cursor_target"):
+        var mouse_event: InputEventMouseButton = event as InputEventMouseButton
+        var mouse_pos_in_viewport := mouse_event.position
+        signals.cursor_target.emit(mouse_pos_in_viewport)
+    
+    if Input.is_action_just_pressed("target_next"):
+        signals.next_target.emit()
+    
+    if Input.is_action_just_pressed("target_previous"):
+        signals.previous_target.emit()
+    
+    if Input.is_action_just_pressed("scan_target_right"):
+        signals.scan_target_right.emit()
+    
+    if Input.is_action_just_pressed("scan_target_left"):
+        signals.scan_target_left.emit()
 
     if Input.is_action_just_pressed("ui_accept"):
         signals.ui_accept.emit()

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://gltlimjauiog"]
+
+[ext_resource type="Script" uid="uid://cbidjfhlnvb46" path="res://scripts/entities/targeting/detection_types/targeting_detection.gd" id="1_xbhis"]
+
+[node name="AutoTargeting" type="Node"]
+script = ExtResource("1_xbhis")
+metadata/_custom_type_script = "uid://cbidjfhlnvb46"
