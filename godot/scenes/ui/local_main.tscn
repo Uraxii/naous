@@ -38,7 +38,7 @@ layer = 100
 
 [node name="EntryPoint" type="VBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -85,7 +85,7 @@ text = "Join"
 [node name="HostLevelSelect" type="VBoxContainer" parent="CanvasLayer"]
 unique_name_in_owner = true
 visible = false
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

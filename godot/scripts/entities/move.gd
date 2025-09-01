@@ -91,7 +91,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-    if entity.local_control:
+    if entity.is_multiplayer_authority():
         input_move(input.move)
 
     body.velocity = apply_gravity(body.velocity)

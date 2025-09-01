@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6yyh7")
 
-[node name="Start" type="Button" parent="."]
+[node name="Host" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -27,7 +27,8 @@ offset_right = 48.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Start Game"
+text = "Host Game
+"
 
 [node name="Join" type="Button" parent="."]
 unique_name_in_owner = true
@@ -38,9 +39,37 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -48.0
-offset_top = 36.0
+offset_top = 75.0
 offset_right = 48.0
-offset_bottom = 67.0
+offset_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Join Game"
+
+[node name="HostAddress" type="LineEdit" parent="Join"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -75.0
+offset_top = -35.0
+offset_right = -51.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Host Address"
+
+[node name="Port" type="LineEdit" parent="Join"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -35.0
+offset_right = 74.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "Port Number"
