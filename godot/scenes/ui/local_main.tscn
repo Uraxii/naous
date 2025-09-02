@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blbauabuyukck" path="res://scenes/ui/local_main.gd" id="1_ygbw5"]
 [ext_resource type="PackedScene" uid="uid://bmkcvlx154cnh" path="res://scenes/entity.tscn" id="2_8dxb3"]
-[ext_resource type="PackedScene" uid="uid://dajlyyo0adshc" path="res://scenes/camera_manager.tscn" id="3_4fmkm"]
+[ext_resource type="PackedScene" uid="uid://dajlyyo0adshc" path="res://scenes/camera/camera_manager.tscn" id="3_4fmkm"]
 
 [node name="LocalMain" type="Control" node_paths=PackedStringArray("level_container")]
 layout_mode = 3

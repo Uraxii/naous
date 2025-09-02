@@ -16,6 +16,9 @@ var server_is_full: bool:
 
 var signals: SignalBus:
     get: return Globals.signal_bus
+    
+var entities: EntityManager:
+    get: return Globals.entities
 
 var config: InstanceConfig = preload(
     "res://resources/default_instance_config.tres")
@@ -72,10 +75,6 @@ func _spawn_player(authority: int, user_name: String, character_name: String) ->
     if not is_server:
         return
 
-    if not config.player_scene or not config.player_scene.can_instantiate():
-        push_error("%s: player_controller scene not set" % name)
-        return
-
     print_debug("Sender %d" % authority)
 
     var player_data = PlayerData.new(user_name, authority)
@@ -88,7 +87,7 @@ func _spawn_player(authority: int, user_name: String, character_name: String) ->
         "authority": authority,
         "id": player_data.id
     }
-    var entity: Entity = EntitySpawner.spawn(spawn_data)
+    var entity: Entity = entities.spawn(spawn_data)
     player_data.entity = entity
     connections[authority] = player_data
 
