@@ -47,4 +47,4 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
     entities.despawn(id)
-#endr_egion
+#end_region

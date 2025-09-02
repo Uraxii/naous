@@ -19,7 +19,7 @@ func despawn(id: int) -> void:
     signals.despawn_entity.emit(entity)
     
 
-#region Godot Callback 
+#region Godot Callback Functions
 func _ready():
     spawn_function = Callable(self, "_spawn_custom")
 

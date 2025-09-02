@@ -20,6 +20,7 @@ var signals: SignalBus:
 var entities: EntityManager:
     get: return Globals.entities
 
+
 var config: InstanceConfig = preload(
     "res://resources/default_instance_config.tres")
 
@@ -87,6 +88,7 @@ func _spawn_player(authority: int, user_name: String, character_name: String) ->
         "authority": authority,
         "id": player_data.id
     }
+    
     var entity: Entity = entities.spawn(spawn_data)
     player_data.entity = entity
     connections[authority] = player_data
