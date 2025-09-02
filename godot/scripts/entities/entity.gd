@@ -8,11 +8,13 @@ const INVALID_ID: int = -1
 # @export var data := EntityData.new()
 @export var body: CharacterBody3D
 @export var components: ComponentManager
+@export var projectile_spawner: Node3D
 @export_category("Runtime Values")
 @export var id := INVALID_ID
 @export var stored_authority := 1
-@onready var entities := Globals.entities
-@onready var projectile_spawner: Node3D = %ProjectileSpawner
+
+var entities: EntityManager:
+    get: return Globals.entities
 
 var signals: SignalBus:
     get: return Globals.signal_bus

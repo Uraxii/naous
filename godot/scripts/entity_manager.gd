@@ -1,6 +1,7 @@
 class_name EntityManager extends MultiplayerSpawner
 
-@export var player_scene: PackedScene = preload("res://scenes/entity.tscn")
+@export var player_scene: PackedScene = preload(
+    "res://scenes/entities/player.tscn")
 
 var signals: SignalBus:
     get: return Globals.signal_bus

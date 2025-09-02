@@ -13,7 +13,7 @@ class_name GlobalManager extends Node
     "Interaction", InteractionManager)
 
 @onready var entities: EntityManager = new_global_scene(
-    "Entities", preload("res://scenes/entity_manager.tscn"))
+    "Entities", preload("res://scenes/entities/entity_manager.tscn"))
 
 @onready var camera: CameraManager = new_global_scene(
     "Camera", preload("res://scenes/camera/camera_manager.tscn"))

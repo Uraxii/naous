@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0kc2r2wbe47x"]
+
+[ext_resource type="Script" uid="uid://cygqbb44xmtda" path="res://scripts/entity_manager.gd" id="1_jcf0l"]
+[ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="2_v40jf"]
+
+[node name="EntityManager" type="MultiplayerSpawner"]
+_spawnable_scenes = PackedStringArray("uid://bmkcvlx154cnh")
+spawn_path = NodePath("Entities")
+script = ExtResource("1_jcf0l")
+player_scene = ExtResource("2_v40jf")
+
+[node name="Entities" type="Node" parent="."]

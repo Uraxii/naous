@@ -1,24 +1,24 @@
-[gd_scene load_steps=23 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=23 format=3 uid="uid://c5ospakgw0cwt"]
 
-[ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
-[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_uysrf"]
-[ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="3_f4o61"]
-[ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="3_lmnk1"]
-[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/move.gd" id="3_qe04c"]
-[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="3_wjc7b"]
-[ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="4_afumw"]
-[ext_resource type="Script" uid="uid://d4ai60cekwpy" path="res://scripts/entities/component_spell.gd" id="5_ygnst"]
-[ext_resource type="Script" uid="uid://bc6253msclsnu" path="res://scripts/spells/traits/spawn_projectile.gd" id="6_by054"]
-[ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/spells/projectile.tscn" id="7_bdlbk"]
-[ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="8_wd4e3"]
-[ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="9_0oii0"]
-[ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/health_component.gd" id="9_5a52v"]
-[ext_resource type="Script" uid="uid://kkwigfbk2fm2" path="res://scripts/entities/energy_component.gd" id="12_fcheu"]
-[ext_resource type="Script" uid="uid://deyjuv6rhngx1" path="res://scripts/entities/speed_component.gd" id="13_2y5vj"]
-[ext_resource type="Script" uid="uid://b2wnn6hu6a4ab" path="res://scripts/entities/gravity_component.gd" id="14_1wt7u"]
-[ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="15_2y5vj"]
-[ext_resource type="Script" uid="uid://2bgieokot4fm" path="res://scripts/entities/jump_force_component.gd" id="15_mxvno"]
-[ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_1wt7u"]
+[ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
+[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
+[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="3_r5ib0"]
+[ext_resource type="Script" uid="uid://d4ai60cekwpy" path="res://scripts/entities/component_spell.gd" id="4_qa3vu"]
+[ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="5_xigm7"]
+[ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="6_0njix"]
+[ext_resource type="Script" uid="uid://bc6253msclsnu" path="res://scripts/spells/traits/spawn_projectile.gd" id="7_o0n85"]
+[ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/spells/projectile.tscn" id="8_m53cu"]
+[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/move.gd" id="9_dqg57"]
+[ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/health_component.gd" id="10_w0xwc"]
+[ext_resource type="Script" uid="uid://kkwigfbk2fm2" path="res://scripts/entities/energy_component.gd" id="11_nsvym"]
+[ext_resource type="Script" uid="uid://deyjuv6rhngx1" path="res://scripts/entities/speed_component.gd" id="12_qbi11"]
+[ext_resource type="Script" uid="uid://b2wnn6hu6a4ab" path="res://scripts/entities/gravity_component.gd" id="13_8hg17"]
+[ext_resource type="Script" uid="uid://2bgieokot4fm" path="res://scripts/entities/jump_force_component.gd" id="14_ngkne"]
+[ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="15_xx8w6"]
+[ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
+[ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
+[ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="18_kg25l"]
+[ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
 properties/0/path = NodePath("Components/HealthComponent:current")
@@ -52,41 +52,42 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Entity" type="Node3D" node_paths=PackedStringArray("body", "components")]
-script = ExtResource("1_vh5go")
+[node name="Player" type="Node3D" node_paths=PackedStringArray("body", "components", "projectile_spawner")]
+script = ExtResource("1_yr3on")
 body = NodePath("Body")
 components = NodePath("Components")
+projectile_spawner = NodePath("Body/ProjectileSpawner")
 
 [node name="EntitySynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
-script = ExtResource("2_uysrf")
+script = ExtResource("2_mjgby")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
 [node name="Components" type="Node" parent="."]
-script = ExtResource("3_wjc7b")
+script = ExtResource("3_r5ib0")
 
 [node name="Spells" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
-script = ExtResource("5_ygnst")
+script = ExtResource("4_qa3vu")
 entity = NodePath("../..")
 
 [node name="TestSpell" type="Node" parent="Components/Spells"]
-script = ExtResource("3_lmnk1")
+script = ExtResource("5_xigm7")
 id = "Test Spell"
 
 [node name="DamageSelf" type="Node" parent="Components/Spells/TestSpell"]
-script = ExtResource("4_afumw")
+script = ExtResource("6_0njix")
 
 [node name="ThrowBall" type="Node" parent="Components/Spells"]
-script = ExtResource("3_lmnk1")
+script = ExtResource("5_xigm7")
 id = "Throw Ball"
 metadata/_custom_type_script = "uid://dm0o2a64iis1u"
 
 [node name="SpawnProjectile" type="Node" parent="Components/Spells/ThrowBall"]
-script = ExtResource("6_by054")
-projectile_scene = ExtResource("7_bdlbk")
+script = ExtResource("7_o0n85")
+projectile_scene = ExtResource("8_m53cu")
 
 [node name="Move" type="Node" parent="Components" node_paths=PackedStringArray("entity", "body")]
-script = ExtResource("3_qe04c")
+script = ExtResource("9_dqg57")
 entity = NodePath("../..")
 body = NodePath("../../Body")
 
@@ -95,35 +96,35 @@ body = NodePath("../../Body")
 [node name="Inventory" type="Node" parent="Components"]
 
 [node name="HealthComponent" type="Node" parent="Components"]
-script = ExtResource("9_5a52v")
+script = ExtResource("10_w0xwc")
 start_value = 50.0
 max_value = 100.0
 metadata/_custom_type_script = "uid://dcvgu5whndbp8"
 
 [node name="EnergyComponent" type="Node" parent="Components"]
-script = ExtResource("12_fcheu")
+script = ExtResource("11_nsvym")
 start_value = 5.0
 metadata/_custom_type_script = "uid://kkwigfbk2fm2"
 
 [node name="SpeedComponent" type="Node" parent="Components"]
-script = ExtResource("13_2y5vj")
+script = ExtResource("12_qbi11")
 start_value = 10.0
 max_value = 30.0
 metadata/_custom_type_script = "uid://deyjuv6rhngx1"
 
 [node name="GravityComponent" type="Node" parent="Components"]
-script = ExtResource("14_1wt7u")
+script = ExtResource("13_8hg17")
 metadata/_custom_type_script = "uid://b2wnn6hu6a4ab"
 
 [node name="JumpForceComponent" type="Node" parent="Components"]
-script = ExtResource("15_mxvno")
+script = ExtResource("14_ngkne")
 start_value = 15.0
 max_value = 40.0
 metadata/_custom_type_script = "uid://2bgieokot4fm"
 
 [node name="InteractionComponent" type="Node" parent="Components" node_paths=PackedStringArray("entity", "detection_zone")]
-script = ExtResource("15_2y5vj")
-entity = NodePath("../..")
+script = ExtResource("15_xx8w6")
+entity = NodePath("")
 detection_zone = NodePath("../../Body/InteractableDetector")
 metadata/_custom_type_script = "uid://ctil5vnixrdc0"
 
@@ -136,7 +137,7 @@ collision_mask = 5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_vh5go")
 
-[node name="player_base" parent="Body" instance=ExtResource("3_f4o61")]
+[node name="player_base" parent="Body" instance=ExtResource("16_v11i1")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="ProjectileSpawner" type="Node3D" parent="Body"]
@@ -144,7 +145,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1923853, -0.7264159)
 
 [node name="InteractableDetector" type="Area3D" parent="Body"]
-script = ExtResource("17_1wt7u")
+script = ExtResource("17_oouqh")
 metadata/_custom_type_script = "uid://bkq1fycsacayy"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/InteractableDetector"]
@@ -156,14 +157,14 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("8_wd4e3")
+script = ExtResource("18_kg25l")
 
 [node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("9_0oii0")
+script = ExtResource("19_ow2nv")
 label = NodePath("Health")
 
 [node name="Health" type="Label" parent="StatView"]
