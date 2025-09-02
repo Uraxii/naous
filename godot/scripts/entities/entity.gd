@@ -42,10 +42,9 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-    entities.spawn(self)
     _check_local_authority()
 
 
 func _exit_tree() -> void:
-    entities.despawn(self)
-#endr_egion
+    entities.despawn(id)
+#end_region

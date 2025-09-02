@@ -1,6 +1,6 @@
 class_name HttpApiClientImpl extends ApiClientImpl
 
-@onready var log := Globals.log
+@onready var logger := Globals.logger
 @onready var signals := Globals.signal_bus
 @onready var http_queue: HttpRequestQueue = HttpRequestQueue.new()
 
@@ -77,14 +77,14 @@ func status() -> void:
 func _on_login(response_code: int, response_text: String) -> void:
     if response_code != HTTPClient.RESPONSE_OK:
         signals.login_failed.emit(response_code)
-        log.error("Login failed! Error: %d" % response_code)
+        logger.error("Login failed! Error: %d" % response_code)
         return
         
     var json: JSON = JSON.new()
     var err: Error = json.parse(response_text)
     
     if err:
-        log.error("Failed to parse login success response from server!")
+        logger.error("Failed to parse login success response from server!")
         signals.login_failed.emit(-1)
         return
         
@@ -93,71 +93,71 @@ func _on_login(response_code: int, response_text: String) -> void:
     var player_id: int = data.player_id
     var username: String = data.username
     
-    log.success("Login successful! Player ID: %d" % player_id)
+    logger.success("Login successful! Player ID: %d" % player_id)
     signals.login_success.emit()
 
 
 func _on_register(response_code: int, response_text: String) -> void:
     if response_code != HTTPClient.RESPONSE_OK:
         signals.register_failed.emit(response_code, response_text)
-        log.error("Registration failed! Error: %d" % response_code)
+        logger.error("Registration failed! Error: %d" % response_code)
         return
         
     var json: JSON = JSON.new()
     var err: Error = json.parse(response_text)
     
     if err:
-        log.error("Failed to parse register response from server!")
+        logger.error("Failed to parse register response from server!")
         signals.register_failed.emit(-1, "Parse error")
         return
         
     var data: Dictionary = json.data
     access_token = data.access_token
     
-    log.success("Registration successful!")
+    logger.success("Registration successful!")
     signals.register_success.emit(data)
 
 
 func _on_logout(response_code: int, response_text: String) -> void:
     if response_code != HTTPClient.RESPONSE_OK:
-        log.error("Logout failed! Error: %d" % response_code)
+        logger.error("Logout failed! Error: %d" % response_code)
         return
     
     access_token = ""
-    log.info("Logged out successfully")
+    logger.info("Logged out successfully")
     signals.logout_success.emit()
 
 
 func _on_refresh_token(response_code: int, response_text: String) -> void:
     if response_code != HTTPClient.RESPONSE_OK:
         signals.token_refresh_failed.emit(response_code)
-        log.error("Token refresh failed! Error: %d" % response_code)
+        logger.error("Token refresh failed! Error: %d" % response_code)
         return
         
     var json: JSON = JSON.new()
     var err: Error = json.parse(response_text)
     
     if err:
-        log.error("Failed to parse token refresh response!")
+        logger.error("Failed to parse token refresh response!")
         return
         
     var data: Dictionary = json.data
     access_token = data.access_token
     
-    log.info("Token refreshed successfully")
+    logger.info("Token refreshed successfully")
     signals.token_refresh_success.emit()
 
 
 func _on_get_me(response_code: int, response_text: String) -> void:
     if response_code != HTTPClient.RESPONSE_OK:
-        log.error("Get user info failed! Error: %d" % response_code)
+        logger.error("Get user info failed! Error: %d" % response_code)
         return
         
     var json: JSON = JSON.new()
     var err: Error = json.parse(response_text)
     
     if err:
-        log.error("Failed to parse user info response!")
+        logger.error("Failed to parse user info response!")
         return
         
     var data: Dictionary = json.data
@@ -169,19 +169,19 @@ func _on_get_me(response_code: int, response_text: String) -> void:
 func _on_create_character(response_code: int, response_text: String) -> void:
     if response_code != HTTPClient.RESPONSE_OK:
         signals.character_create_failed.emit(response_code, response_text)
-        log.error("Character creation failed! Error: %d" % response_code)
+        logger.error("Character creation failed! Error: %d" % response_code)
         return
         
     var json: JSON = JSON.new()
     var err: Error = json.parse(response_text)
     
     if err:
-        log.error("Failed to parse character creation response!")
+        logger.error("Failed to parse character creation response!")
         signals.character_create_failed.emit(-1, "Parse error")
         return
         
     var character_data: Dictionary = json.data
-    log.success("Character created: %s (ID: %d)" % 
+    logger.success("Character created: %s (ID: %d)" % 
                 [character_data.name, character_data.id])
     signals.character_created.emit(character_data)
 
@@ -189,79 +189,79 @@ func _on_create_character(response_code: int, response_text: String) -> void:
 func _on_get_all_characters(response_code: int, response_text: String) -> void:
     if response_code != HTTPClient.RESPONSE_OK:
         signals.characters_fetch_failed.emit(response_code)
-        log.error("Failed to fetch characters! Error: %d" % response_code)
+        logger.error("Failed to fetch characters! Error: %d" % response_code)
         return
         
     var json: JSON = JSON.new()
     var err: Error = json.parse(response_text)
     
     if err:
-        log.error("Failed to parse characters list response!")
+        logger.error("Failed to parse characters list response!")
         signals.characters_fetch_failed.emit(-1)
         return
         
     var data: Dictionary = json.data
-    log.info("Fetched %d characters" % data.characters.size())
+    logger.info("Fetched %d characters" % data.characters.size())
     signals.characters_received.emit(data.characters, data.total)
 
 
 func _on_get_character(response_code: int, response_text: String) -> void:
     if response_code == HTTPClient.RESPONSE_NOT_FOUND:
         signals.character_not_found.emit()
-        log.error("Character not found!")
+        logger.error("Character not found!")
         return
     elif response_code != HTTPClient.RESPONSE_OK:
         signals.character_fetch_failed.emit(response_code)
-        log.error("Failed to fetch character! Error: %d" % response_code)
+        logger.error("Failed to fetch character! Error: %d" % response_code)
         return
         
     var json: JSON = JSON.new()
     var err: Error = json.parse(response_text)
     
     if err:
-        log.error("Failed to parse character response!")
+        logger.error("Failed to parse character response!")
         signals.character_fetch_failed.emit(-1)
         return
         
     var character_data: Dictionary = json.data
-    log.info("Fetched character: %s" % character_data.name)
+    logger.info("Fetched character: %s" % character_data.name)
     signals.character_received.emit(character_data)
 
 
 func _on_update_character(response_code: int, response_text: String) -> void:
     if response_code == HTTPClient.RESPONSE_NOT_FOUND:
         signals.character_not_found.emit()
-        log.error("Character not found!")
+        logger.error("Character not found!")
         return
     elif response_code != HTTPClient.RESPONSE_OK:
         signals.character_update_failed.emit(response_code)
-        log.error("Failed to update character! Error: %d" % response_code)
+        logger.error("Failed to update character! Error: %d" % response_code)
         return
         
     var json: JSON = JSON.new()
     var err: Error = json.parse(response_text)
     
     if err:
-        log.error("Failed to parse character update response!")
+        logger.error("Failed to parse character update response!")
         signals.character_update_failed.emit(-1)
         return
         
     var character_data: Dictionary = json.data
-    log.success("Character updated: %s" % character_data.name)
+    logger.success("Character updated: %s" % character_data.name)
     signals.character_updated.emit(character_data)
 
 
 func _on_delete_character(response_code: int, response_text: String) -> void:
     if response_code == HTTPClient.RESPONSE_NOT_FOUND:
         signals.character_not_found.emit()
-        log.error("Character not found!")
+        logger.error("Character not found!")
         return
     elif response_code != HTTPClient.RESPONSE_OK:
         signals.character_delete_failed.emit(response_code)
-        log.error("Failed to delete character! Error: %d" % response_code)
+        logger.error("Failed to delete character! Error: %d" % response_code)
         return
         
-    log.success("Character deleted successfully")
+    logger.success("Character deleted successfully")
     signals.character_deleted.emit()
 #endregion
 
@@ -269,7 +269,7 @@ func _on_delete_character(response_code: int, response_text: String) -> void:
 #region Response Handlers - Utility
 func _on_status(response_code: int, response_text: String) -> void:
     if response_code != HTTPClient.RESPONSE_OK:
-        log.error("API status check failed!")
+        logger.error("API status check failed!")
         signals.api_status_failed.emit(response_code)
         return
         

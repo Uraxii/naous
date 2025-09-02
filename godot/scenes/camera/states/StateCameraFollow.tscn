@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvlhsuuvbo88p"]
+
+[ext_resource type="Script" uid="uid://hup4oh2rxxcd" path="res://scripts/camera/states/state_camera_follow.gd" id="1_w1rrd"]
+
+[node name="StateCameraFollow" type="Node"]
+script = ExtResource("1_w1rrd")
+metadata/_custom_type_script = "uid://hup4oh2rxxcd"

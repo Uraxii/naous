@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc6x5tp0g03ka"]
+
+[ext_resource type="Script" uid="uid://clp4u36rlwb2h" path="res://scripts/camera/states/state_camera_free.gd" id="1_kxbba"]
+
+[node name="StateCameraFree" type="Node"]
+script = ExtResource("1_kxbba")
+metadata/_custom_type_script = "uid://clp4u36rlwb2h"
