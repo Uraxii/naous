@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 Globals="*res://scripts/global_manager.gd"
 API="*res://scripts/api/api_client.tscn"
 InstanceAPI="*res://scripts/instance_api.gd"
-EntitySpawner="*res://scenes/EntitySpawner.tscn"
 
 [debug]
 
