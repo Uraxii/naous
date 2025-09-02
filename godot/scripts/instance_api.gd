@@ -116,8 +116,10 @@ func _on_player_connected(peer_id: int) -> void:
 
 func _on_player_disconnected(peer_id: int) -> void:
     if connections.has(peer_id):
-        var player_id = connections[peer_id].id
-        signals.log_new_debug.emit("%s disconnected." % player_id)
+        var data = connections[peer_id]
+        if data.entity:
+            entities.despawn(data.entity.id)
+        signals.log_new_debug.emit("%s disconnected." % data.id)
 
     player_disconnected.emit(peer_id)
 
