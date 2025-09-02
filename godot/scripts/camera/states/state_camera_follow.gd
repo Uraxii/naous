@@ -47,11 +47,11 @@ func exit() -> void:
     pass
 
 
-func get_next_position(target: Entity) -> Vector3:
+func get_next_position(entity: Entity) -> Vector3:
     var new_position = Vector3(
-        target.body.global_position.x + camera.x_offset,
-        target.body.global_position.y + camera.y_offset,
-        target.body.global_position.z + camera.z_offset)
+        entity.body.global_position.x + camera.x_offset,
+        entity.body.global_position.y + camera.y_offset,
+        entity.body.global_position.z + camera.z_offset)
 
     return new_position
 
