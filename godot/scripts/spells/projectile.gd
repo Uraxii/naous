@@ -29,6 +29,9 @@ func _hit_target(collision) -> void:
     
     var hit_object = collision.collider
     
-    # TODO: Damage
+    if hit_object is Entity:
+        var health: HealthComponent = hit_object.get_component(HealthComponent)
+        if health:
+            health.current -= damage
     
     queue_free()
