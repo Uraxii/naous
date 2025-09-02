@@ -129,8 +129,8 @@ metadata/_custom_type_script = "uid://ctil5vnixrdc0"
 
 [node name="Body" type="CharacterBody3D" parent="."]
 top_level = true
-collision_layer = 5
-collision_mask = 5
+collision_layer = 7
+collision_mask = 7
 
 [node name="Shape" type="CollisionShape3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
