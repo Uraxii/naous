@@ -1,15 +1,11 @@
-class_name State
+class_name State extends Node
 
-var id: int
-var next_state: int
-
-
-func _init(state_id: int) -> void:
-    id = state_id
+var next_state: GDScript
 
 
 func enter() -> void:
-        push_error("enter func must be implemented in State!")
+    push_error("enter func must be implemented in State!")
+
 
 func process() -> void:
     push_error("process func must be implemented in State!")
@@ -22,4 +18,4 @@ func exit() -> void:
 # Run by the state machine to ensure this state can run correctly if we ever
 # return to this state.
 func cleanup() -> void:
-    next_state = id
+    next_state = self.get_script()
