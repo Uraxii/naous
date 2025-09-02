@@ -1,5 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=34 format=3 uid="uid://ch0bqgk8cfdeq"]
 
+[ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="1_6y1nk"]
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
 [ext_resource type="Material" uid="uid://cpccsiuabq0sr" path="res://assets/materials/waterfall-material.tres" id="1_ppcyp"]
 [ext_resource type="Material" uid="uid://xfswcd1ua7te" path="res://assets/materials/uv_scroller_material.tres" id="2_ppcyp"]
@@ -20,6 +21,23 @@
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="18_bef4i"]
 [ext_resource type="PackedScene" uid="uid://d1vsrqg2pt0xc" path="res://assets/prefabs/simpletown.tscn" id="19_vboxf"]
 [ext_resource type="PackedScene" uid="uid://k8t2ynb36rvi" path="res://assets/prefabs/stairs.tscn" id="20_q55i7"]
+[ext_resource type="Material" uid="uid://rknsm0d0mgvc" path="res://assets/materials/ink-cloud1.tres" id="22_4xysy"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_4xysy"]
+panorama = ExtResource("1_6y1nk")
+
+[sub_resource type="Sky" id="Sky_6y1nk"]
+sky_material = SubResource("PanoramaSkyMaterial_4xysy")
+
+[sub_resource type="Environment" id="Environment_4xysy"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_6y1nk")
+ambient_light_source = 2
+ambient_light_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
+reflected_light_source = 1
+ssao_enabled = true
+ssao_intensity = 2.5
 
 [sub_resource type="QuadMesh" id="QuadMesh_vboxf"]
 material = ExtResource("18_bef4i")
@@ -52,20 +70,16 @@ _limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, -360), 0.0, 719.99994, 0, 1, Vector2(1, 360), 719.99994, 0.0, 1, 0]
 point_count = 2
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q55i7"]
-
-[sub_resource type="Sky" id="Sky_6y1nk"]
-sky_material = SubResource("ProceduralSkyMaterial_q55i7")
-
-[sub_resource type="Environment" id="Environment_4xysy"]
-background_mode = 2
-background_energy_multiplier = 2.0
-sky = SubResource("Sky_6y1nk")
-ssao_enabled = true
-ssao_intensity = 2.5
-
 [node name="lake-natalie" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[node name="sunlight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.58778524, -0.3290569, 0.7390739, 0, 0.9135455, 0.40673667, -0.80901706, 0.23907378, -0.5369685, 0, 100, 0)
+shadow_enabled = true
+shadow_opacity = 0.5
+shadow_blur = 8.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="sunlight"]
+environment = SubResource("Environment_4xysy")
 
 [node name="[outline shader]" type="Node3D" parent="."]
 
@@ -827,11 +841,7 @@ transform = Transform3D(0.028532386, 0, 0.9995929, 0, 1, 0, -0.9995929, 0, 0.028
 [node name="stairs" parent="." instance=ExtResource("20_q55i7")]
 transform = Transform3D(-0.9202455, 0, 0.39134154, 0, 1, 0, -0.39134154, 0, -0.9202455, 8.300304, -2.427867, -35.034378)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.5877852, -0.32905686, 0.7390738, 0, 0.9135454, 0.40673664, -0.809017, 0.23907377, -0.53696847, 0, 100, 0)
-shadow_enabled = true
-shadow_opacity = 0.5
-shadow_blur = 8.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="DirectionalLight3D"]
-environment = SubResource("Environment_4xysy")
+[node name="cloud1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.742278e-07, 40, 0, -20, -1.7484556e-06, 0, 0, 0, 20, -50, 42.483147, -150)
+mesh = ExtResource("7_47l1t")
+surface_material_override/0 = ExtResource("22_4xysy")
