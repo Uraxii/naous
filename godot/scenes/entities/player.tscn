@@ -95,8 +95,9 @@ body = NodePath("../../Body")
 
 [node name="Inventory" type="Node" parent="Components"]
 
-[node name="HealthComponent" type="Node" parent="Components"]
+[node name="HealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
 script = ExtResource("10_w0xwc")
+entity = NodePath("../..")
 start_value = 50.0
 max_value = 100.0
 metadata/_custom_type_script = "uid://dcvgu5whndbp8"

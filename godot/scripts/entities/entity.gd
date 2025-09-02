@@ -21,6 +21,11 @@ var signals: SignalBus:
 #endregion
 
 
+func die() -> void:
+    signals.log_new_debug.emit("Entity %d died." % id)
+    entities.despawn(id)
+
+
 func get_component(type: GDScript) -> Node:
     return components.get_component(type)
 
@@ -46,7 +51,4 @@ func _enter_tree() -> void:
 func _ready() -> void:
     _check_local_authority()
 
-
-func _exit_tree() -> void:
-    entities.despawn(id)
 #end_region
