@@ -14,9 +14,10 @@ func despawn(id: int) -> void:
     var entity: Entity = pool.get(id)
     pool.erase(id)
     
-    if entity.is_inside_tree():
-        entity.queue_free.call_deferred()
+    if not entity or not entity.is_inside_tree():
+        return
     
+    entity.queue_free.call_deferred()
     signals.despawn_entity.emit(entity)
     
 
