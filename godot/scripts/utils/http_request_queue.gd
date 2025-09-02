@@ -1,6 +1,6 @@
 class_name HttpRequestQueue extends Node
 
-@onready var log := Globals.log
+@onready var logger := Globals.logger
 @onready var http: HTTPRequest = HTTPRequest.new()
 
 var pending_requests: Array[Dictionary] = []
