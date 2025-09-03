@@ -51,7 +51,6 @@ func apply_gravity(current_velocity: Vector3) -> Vector3:
         return current_velocity
 
     var gravity_to_apply: float
-
     if is_jumping and jump_influence.y > 0:
         gravity_to_apply = FORCE_JUMP_GRAVIY
     else:
@@ -59,7 +58,6 @@ func apply_gravity(current_velocity: Vector3) -> Vector3:
 
     current_gravity -= gravity_to_apply * gravity.current
     current_velocity.y += current_gravity
-
     return current_velocity
 
 
@@ -70,12 +68,9 @@ func apply_jump_influence(current_velocity: Vector3) -> Vector3:
         return current_velocity
 
     is_jumping = true
-    # print_debug('Current jump influence y %3f' % jump_influence.y)
     current_velocity += jump_influence
-
     if jump_influence.y > 0:
         jump_influence.y -= FORCE_JUMP_GRAVIY
-
     return current_velocity
 
 
@@ -106,7 +101,6 @@ func _process(_delta: float) -> void:
         body.velocity.z = body.velocity.z * BACKPEDDLE_PENALTY
 
     body.move_and_slide()
-
     body.velocity = Vector3.ZERO
 #endregion
 

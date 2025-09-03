@@ -105,6 +105,9 @@ script = ExtResource("13_8hg17")
 
 [node name="JumpForce" type="Node" parent="Components"]
 script = ExtResource("14_ngkne")
+start_value = 15.0
+max_value = 50.0
+current = 1.0
 
 [node name="Interaction" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
 script = ExtResource("15_yr3on")
