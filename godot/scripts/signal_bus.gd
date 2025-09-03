@@ -114,3 +114,8 @@ signal entity_completed_interaction(entity: Entity, interactable: InteractableCo
 signal entity_interaction_interrupted(entity: Entity, interactable: InteractableComponent)
 signal entity_lost_interactable(entity: Entity, interactable: InteractableComponent)
 #endregion
+
+#region Targeting
+signal target_entered_screen(target: Targetable)
+signal target_exited_screen(target: Targetable)
+#endregion
