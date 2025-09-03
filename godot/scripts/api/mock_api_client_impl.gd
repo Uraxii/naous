@@ -1,6 +1,6 @@
 class_name MockApiClientImpl extends ApiClientImpl
 
-@onready var log := Globals.log
+@onready var logger := Globals.logger
 @onready var signals := Globals.signal_bus
 
 var _character_data:Dictionary[int, Dictionary]
@@ -26,25 +26,25 @@ func _ready() -> void:
         }
     }
 #region Authentication
-func login(username: String, password: String) -> void:
+func loggerin(username: String, password: String) -> void:
     _username = username
     parent.access_token = _create_access_token()
 
-    log.success("Login successful! Player ID: %d" % _player_id)
-    signals.login_success.emit()
+    logger.success("Login successful! Player ID: %d" % _player_id)
+    signals.loggerin_success.emit()
 
 func register(username: String, password: String) -> void:
     _username = username
     var data: Dictionary = { username = _username}
     parent.access_token = _create_access_token()
 
-    log.success("Registration successful!")
+    logger.success("Registration successful!")
     signals.register_success.emit(data)
 
-func logout() -> void:
+func loggerout() -> void:
     parent.access_token = ""
-    log.info("Logged out successfully")
-    signals.logout_success.emit()
+    logger.info("Logged out successfully")
+    signals.loggerout_success.emit()
 
 func _create_access_token() -> String:
     var random_string:PackedStringArray = []
@@ -56,7 +56,7 @@ func _create_access_token() -> String:
     return "".join(random_string)
 
 func refresh_token() -> void:
-    log.info("Token refreshed successfully")
+    logger.info("Token refreshed successfully")
     parent.access_token = _create_access_token()
     signals.token_refresh_success.emit()
 
@@ -69,18 +69,18 @@ func get_me() -> void:
 #region Character Management
 
 func get_all_characters(skip: int = 0, limit: int = 10) -> void:
-    log.info("Fetched %d characters" % _character_data.size())
+    logger.info("Fetched %d characters" % _character_data.size())
     var characters_array = _character_data.values()
     signals.characters_received.emit(characters_array, _character_data.size())
 
 func get_character(character_id: int) -> void:
     if character_id in _character_data:
         var character_data = _character_data[character_id]
-        log.info("Fetched character: %s" % character_data.name)
+        logger.info("Fetched character: %s" % character_data.name)
         signals.character_received.emit(character_data)
     else:
         signals.character_not_found.emit()
-        log.error("Character not found!")
+        logger.error("Character not found!")
 
 func create_character(name: String) -> void:
     var id:int = _character_data.size() * 100 + 1
@@ -111,7 +111,7 @@ func status() -> void:
     signals.api_status_passed.emit()
 
 func _invoke_replicated(method:String, ...args: Array) -> void:
-    # First invoke locally - doing this simplifies logic since then no ambiguity about local vs remote execution
+    # First invoke locally - doing this simplifies loggeric since then no ambiguity about local vs remote execution
     Callable(self, method).callv(args)
 
     if not multiplayer.has_multiplayer_peer():
@@ -141,11 +141,11 @@ func _check_invoke_broadcast(method:String, ...args: Array) -> void:
 func _update_character(character_id: int, updates: Dictionary) -> void:
     if character_id in _character_data:
         _character_data[character_id] = updates
-        log.success("Character updated: %s" % updates.name)
+        logger.success("Character updated: %s" % updates.name)
         signals.character_updated.emit(updates)
     else:
         signals.character_not_found.emit()
-        log.error("Character not found!")
+        logger.error("Character not found!")
 
     _check_invoke_broadcast("_update_character", character_id, updates)
 
@@ -154,11 +154,11 @@ func _delete_character(character_id: int) -> void:
     var deleted:bool = _character_data.erase(character_id)
 
     if deleted:
-        log.success("Character deleted successfully")
+        logger.success("Character deleted successfully")
         signals.character_deleted.emit()
     else:
         signals.character_not_found.emit()
-        log.error("Character not found!")
+        logger.error("Character not found!")
 
     _check_invoke_broadcast("_delete_character", character_id)
 
@@ -166,7 +166,7 @@ func _delete_character(character_id: int) -> void:
 func _create_character(id: int, character_data: Dictionary) -> void:
     _character_data[id] = character_data
 
-    log.success("Character created: %s (ID: %d)" % [character_data.name, character_data.id])
+    logger.success("Character created: %s (ID: %d)" % [character_data.name, character_data.id])
     signals.character_created.emit(character_data)
 
     _check_invoke_broadcast("_create_character", id, character_data)
