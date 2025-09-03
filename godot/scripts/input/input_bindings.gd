@@ -20,6 +20,8 @@ const CAMERA_ZOOM_OUT := "camera_zoom_out"
 const CAMERA_ZOOM_IN := "camera_zoom_in"
 const CAMERA_ROTATE := "camera_rotate"
 const CHARACTER_ROTATE := "character_rotate"
+const UI_ACCEPT := "ui_accept"
+const UI_CANCEL := "ui_cancel"
 const UI_TOGGLE := "ui_toggle"
 #endregion
 
@@ -45,6 +47,8 @@ const UI_TOGGLE := "ui_toggle"
 @export var camera_rotate: Array[InputEvent]
 @export var character_rotate: Array[InputEvent]
 
+@export var ui_accept: Array[InputEvent]
+@export var ui_cancel: Array[InputEvent]
 @export var ui_toggle: Array[InputEvent]
 
 
@@ -69,5 +73,7 @@ func get_binds() -> Dictionary:
         CAMERA_ZOOM_IN: camera_zoom_in,
         CAMERA_ROTATE: camera_rotate,
         CHARACTER_ROTATE: character_rotate,
+        UI_ACCEPT: ui_accept,
+        UI_CANCEL: ui_cancel,
         UI_TOGGLE: ui_toggle,
     }

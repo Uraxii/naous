@@ -3,6 +3,13 @@ class_name InputManager extends Node
 #region Variables
 @onready var signals := Globals.signal_bus
 @onready var action_map: Dictionary[String, Signal] = {
+    InputBindings.CAMERA_ZOOM_IN: signals.camera_zoom_in,
+    InputBindings.CAMERA_ZOOM_OUT: signals.camera_zoom_out,
+    InputBindings.JUMP: signals.jump,
+    InputBindings.INTERACT: signals.interact,
+    InputBindings.UI_ACCEPT: signals.ui_accept,
+    InputBindings.UI_CANCEL: signals.ui_cancel,
+    InputBindings.UI_TOGGLE: signals.ui_toggle,
     InputBindings.ACTION_0: signals.action_0,
     InputBindings.ACTION_1: signals.action_1,
     InputBindings.ACTION_2: signals.action_2,
@@ -77,24 +84,7 @@ func _input(event: InputEvent) -> void:
         if is_camera_rotating:
             signals.camera_rotate.emit(move_delta)
 
-    if Input.is_action_just_pressed("camera_zoom_out"):
-        signals.camera_zoom_out.emit()
-    if Input.is_action_just_pressed("camera_zoom_in"):
-        signals.camera_zoom_in.emit()
-    if Input.is_action_just_pressed("jump"):
-        signals.jump.emit()
-    if Input.is_action_just_pressed("interact"):
-        signals.interact.emit()
-    if Input.is_action_just_pressed("ui_accept"):
-        signals.ui_accept.emit()
-    if Input.is_action_just_pressed("ui_cancel"):
-        signals.ui_cancel.emit()
-    if Input.is_action_just_pressed("ui_toggle"):
-        signals.ui_toggle.emit()
-    if Input.is_action_just_pressed("ui_cancel"):
-        signals.ui_cancel.emit()
-
-    # TODO: Currently controller has these binds set 1:1 with regular button inputs.
+    # TODO: Controller has hotbutton binds set 1:1 with regular button inputs.
     #       Depending on how many hotkey actions are expected to be available, we may need to
     #       change that to a modifier system to give the player easy access to more actions.
     #       - eg. LT + Face buttons for a set of actions, RT + face buttons for another set

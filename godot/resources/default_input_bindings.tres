@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InputBindings" load_steps=36 format=3 uid="uid://dklvwj7n37rma"]
+[gd_resource type="Resource" script_class="InputBindings" load_steps=39 format=3 uid="uid://dklvwj7n37rma"]
 
 [ext_resource type="Script" uid="uid://7uvyk2xwlmgd" path="res://scripts/input/input_bindings.gd" id="1_qgmqv"]
 
@@ -134,6 +134,17 @@ unicode = 100
 [sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_tll83"]
 axis_value = 1.0
 
+[sub_resource type="InputEventKey" id="InputEventKey_ie32x"]
+device = -1
+keycode = 4194309
+
+[sub_resource type="InputEventKey" id="InputEventKey_k0m2b"]
+keycode = 4194310
+
+[sub_resource type="InputEventKey" id="InputEventKey_l78yg"]
+device = -1
+keycode = 4194305
+
 [sub_resource type="InputEventKey" id="InputEventKey_tll83"]
 device = -1
 ctrl_pressed = true
@@ -165,5 +176,7 @@ camera_zoom_out = Array[InputEvent]([SubResource("InputEventMouseButton_k0m2b"),
 camera_zoom_in = Array[InputEvent]([SubResource("InputEventMouseButton_ie32x"), SubResource("InputEventJoypadButton_20erl")])
 camera_rotate = Array[InputEvent]([SubResource("InputEventMouseButton_qgmqv")])
 character_rotate = Array[InputEvent]([SubResource("InputEventMouseButton_tll83")])
+ui_accept = Array[InputEvent]([SubResource("InputEventKey_ie32x"), SubResource("InputEventKey_k0m2b")])
+ui_cancel = Array[InputEvent]([SubResource("InputEventKey_l78yg")])
 ui_toggle = Array[InputEvent]([SubResource("InputEventKey_tll83"), SubResource("InputEventJoypadButton_ws6gv")])
 metadata/_custom_type_script = "uid://7uvyk2xwlmgd"
