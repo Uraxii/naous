@@ -11,4 +11,4 @@ func setup() -> void:
 func cast() -> void:
     var health = spell.caster.get_component(HealthComponent)
     if health:
-        health.current -= damage
+        health.current -= damage 

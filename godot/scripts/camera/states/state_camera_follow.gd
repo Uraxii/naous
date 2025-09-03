@@ -14,7 +14,7 @@ func enter() -> void:
 
 
 func process() -> void:
-    if not target:
+    if not target or not target.is_inside_tree():
         next_state = StateCameraFree
         return
 

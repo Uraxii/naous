@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=24 format=3 uid="uid://bmkcvlx154cnh"]
 
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_so8uy"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_218qm"]
@@ -21,30 +21,20 @@
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_yl0st"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
-properties/0/path = NodePath("Components/HealthComponent:current")
+properties/0/path = NodePath("Body:position")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath("Components/EnergyComponent:current")
+properties/1/path = NodePath("Body:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
-properties/2/path = NodePath("Components/SpeedComponent:current")
+properties/2/path = NodePath("Body:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 2
-properties/3/path = NodePath("Components/GravityComponent:current")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath("Components/JumpForceComponent:current")
-properties/4/spawn = true
-properties/4/replication_mode = 2
-properties/5/path = NodePath("Body:position")
-properties/5/spawn = true
-properties/5/replication_mode = 2
-properties/6/path = NodePath("Body:rotation")
-properties/6/spawn = true
-properties/6/replication_mode = 2
-properties/7/path = NodePath("Body:scale")
-properties/7/spawn = true
-properties/7/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_so8uy"]
+properties/0/path = NodePath(".:id")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -57,10 +47,13 @@ script = ExtResource("1_so8uy")
 body = NodePath("Body")
 components = NodePath("Components")
 
-[node name="EntitySynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
 script = ExtResource("2_218qm")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_so8uy")
 
 [node name="Components" type="Node" parent="."]
 script = ExtResource("3_a7jbu")

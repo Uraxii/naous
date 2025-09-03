@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfn7j3g4lutwr" path="res://scripts/entities/objects/door.gd" id="1_htbgl"]
 [ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="2_de05j"]
-[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/interaction/interactable_component.gd" id="3_y1est"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/interaction/component_interactable.gd" id="3_y1est"]
 [ext_resource type="Script" uid="uid://biugcdkh4yjur" path="res://scripts/entities/interaction/interactable_trigger.gd" id="4_de05j"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_htbgl"]

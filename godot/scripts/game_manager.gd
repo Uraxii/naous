@@ -117,7 +117,7 @@ func _on_hub_connection_response(result: int, response_code: int,
     _create_shard_connection(host, port, shard_id)
 
 
-func _create_shard_connection(host: String, port: int, shard_id: String) -> void:
+func _create_shard_connection(host: String, port: int, _shard_id: String) -> void:
     """Create and establish shard connection."""
     if shard_connection:
         shard_connection.disconnect_from_shard()

@@ -5,9 +5,6 @@ signal player_disconnected(peer_id)
 signal server_disconnected
 
 #region Instance Variables
-var is_server: bool:
-    get: return multiplayer.is_server()
-
 var my_peer_id: int:
     get: return multiplayer.get_unique_id()
 
@@ -19,7 +16,6 @@ var signals: SignalBus:
     
 var entities: EntityManager:
     get: return Globals.entities
-
 
 var config: InstanceConfig = preload(
     "res://resources/default_instance_config.tres")
@@ -60,7 +56,29 @@ func start_server(cfg: InstanceConfig) -> void:
 #endregion
 
 
-@rpc("authority", "call_remote", "reliable", 1)
+#region Entity Control Functions
+@rpc("any_peer", "reliable")
+func request_cast(entity_id: int, spell_id: String) -> void:
+    # TODO: Check if sender has authority over the entity!
+    
+    var entity: Entity = entities.pool.get(entity_id)
+    if not entity:
+        return
+        
+    var component: ComponentSpell = entity.get_component(ComponentSpell)
+    if not component:
+        return
+        
+    var spell: Spell = component.spells.get(spell_id)
+    if not spell:
+        return
+    
+    if spell.can_cast():
+        spell.cast.rpc()
+#endregion
+
+
+@rpc("authority", "call_remote", "reliable")
 func load_level(level_name: String) -> void:
     var level_path: String = "res://scenes/world/zones/%s.tscn" % level_name
     signals.log_new_debug.emit("Loading %s" % level_path)
@@ -73,7 +91,7 @@ func load_level(level_name: String) -> void:
 
 
 func _spawn_player(authority: int, user_name: String, character_name: String) -> void:
-    if not is_server:
+    if not multiplayer.is_server():
         return
 
     print_debug("Sender %d" % authority)
@@ -110,7 +128,7 @@ func _set_authority(entity: Entity, peer_id: int) -> void:
 func _on_player_connected(peer_id: int) -> void:
     signals.log_new_debug.emit("Peer %d connected." % peer_id)
 
-    if is_server:
+    if multiplayer.is_server():
         load_level.rpc_id(peer_id, config.level.instantiate().name)
 
 

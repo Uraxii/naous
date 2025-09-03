@@ -9,12 +9,14 @@ signal change(new: float, old: float)
 @export var max_value := 10.0
 @export_category("Runtime Values")
 @export var is_infinite := false
-
-@onready var current: float = start_value: set = _set_current
+@export var current: float = 10: set = _set_current
 
 var signals: SignalBus:
     get: return Globals.signal_bus
 #endregion
+
+func _ready() -> void:
+    current = start_value
 
 
 func _set_current(value: float) -> void:

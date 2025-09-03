@@ -5,12 +5,21 @@ class_name Spell extends Node
 @export var traits: Array[Node] = []
 @export var caster: Entity
 
+var signals: SignalBus:
+    get: return Globals.signal_bus
+
 
 func setup(entity: Entity) -> void:
     caster = entity
 
 
+func can_cast() -> bool:
+    return true
+
+
+@rpc("call_local", "reliable")
 func cast() -> void:
+    signals.log_new_debug.emit("%d casted %s" %[caster.id, id])
     for t in traits:
         if t:
             t.cast()

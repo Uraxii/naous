@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=24 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
@@ -14,37 +14,24 @@
 [ext_resource type="Script" uid="uid://deyjuv6rhngx1" path="res://scripts/entities/component_speed.gd" id="12_qbi11"]
 [ext_resource type="Script" uid="uid://b2wnn6hu6a4ab" path="res://scripts/entities/component_gravity.gd" id="13_8hg17"]
 [ext_resource type="Script" uid="uid://2bgieokot4fm" path="res://scripts/entities/component_jump_force.gd" id="14_ngkne"]
-[ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="15_xx8w6"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/interaction/component_interactable.gd" id="15_yr3on"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
 [ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="18_kg25l"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
-properties/0/path = NodePath("Components/HealthComponent:current")
+properties/0/path = NodePath("Body:position")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath("Components/EnergyComponent:current")
+properties/1/path = NodePath("Body:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 2
-properties/2/path = NodePath("Components/SpeedComponent:current")
+properties/2/path = NodePath("Body:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 2
-properties/3/path = NodePath("Components/GravityComponent:current")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath("Components/JumpForceComponent:current")
-properties/4/spawn = true
-properties/4/replication_mode = 2
-properties/5/path = NodePath("Body:position")
-properties/5/spawn = true
-properties/5/replication_mode = 2
-properties/6/path = NodePath("Body:rotation")
-properties/6/spawn = true
-properties/6/replication_mode = 2
-properties/7/path = NodePath("Body:scale")
-properties/7/spawn = true
-properties/7/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2ngu4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -58,8 +45,13 @@ body = NodePath("Body")
 components = NodePath("Components")
 projectile_spawner = NodePath("Body/ProjectileSpawner")
 
-[node name="EntitySynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
+script = ExtResource("2_mjgby")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="StatSyncronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2ngu4")
 script = ExtResource("2_mjgby")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
@@ -95,39 +87,25 @@ body = NodePath("../../Body")
 
 [node name="Inventory" type="Node" parent="Components"]
 
-[node name="HealthComponent" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
+[node name="Health" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
 script = ExtResource("10_w0xwc")
 entity = NodePath("../..")
-start_value = 50.0
-max_value = 100.0
-metadata/_custom_type_script = "uid://dcvgu5whndbp8"
 
-[node name="EnergyComponent" type="Node" parent="Components"]
+[node name="Energy" type="Node" parent="Components"]
 script = ExtResource("11_nsvym")
-start_value = 5.0
-metadata/_custom_type_script = "uid://kkwigfbk2fm2"
 
-[node name="SpeedComponent" type="Node" parent="Components"]
+[node name="Speed" type="Node" parent="Components"]
 script = ExtResource("12_qbi11")
-start_value = 10.0
-max_value = 30.0
-metadata/_custom_type_script = "uid://deyjuv6rhngx1"
 
-[node name="GravityComponent" type="Node" parent="Components"]
+[node name="Gravity" type="Node" parent="Components"]
 script = ExtResource("13_8hg17")
-metadata/_custom_type_script = "uid://b2wnn6hu6a4ab"
 
-[node name="JumpForceComponent" type="Node" parent="Components"]
+[node name="JumpForce" type="Node" parent="Components"]
 script = ExtResource("14_ngkne")
-start_value = 15.0
-max_value = 40.0
-metadata/_custom_type_script = "uid://2bgieokot4fm"
 
-[node name="InteractionComponent" type="Node" parent="Components" node_paths=PackedStringArray("entity", "detection_zone")]
-script = ExtResource("15_xx8w6")
-entity = NodePath("")
-detection_zone = NodePath("../../Body/InteractableDetector")
-metadata/_custom_type_script = "uid://ctil5vnixrdc0"
+[node name="Interaction" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_yr3on")
+entity = NodePath("../..")
 
 [node name="Body" type="CharacterBody3D" parent="."]
 top_level = true
@@ -155,7 +133,7 @@ metadata/_custom_type_script = "uid://bkq1fycsacayy"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009765625, 1.4589534, -0.9480772)
 shape = SubResource("BoxShape3D_mxvno")
 
-[node name="HotkeyBar" type="Control" parent="."]
+[node name="Hotbar" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

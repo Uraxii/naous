@@ -1,16 +1,19 @@
-class_name HotkeyBar extends View
+class_name HotBar extends View
 
-@export var binds := ["action_1", "action_2", "action_3", "action_0"]
+var binds := [
+    InputBindings.ACTION_1,
+    InputBindings.ACTION_2,
+    InputBindings.ACTION_3,
+    InputBindings.ACTION_0]
 
-var buttons: Array[HotkeyButton] = []
+var buttons: Array[HotButton] = []
 
 
 func _ready() -> void:
     signals.control_entity.connect(_on_control)
     
     for i in range(0, binds.size()):
-        var button = HotkeyButton.new()
-        button.set_bind(signals.get(binds[i]))
+        var button = HotButton.new()
         buttons.append(button)
         add_child(button)
 
@@ -23,4 +26,5 @@ func _on_control(new_enity: Entity) -> void:
     var spells: Array[Spell] = spell_component.spells.values()
     
     for i in range(spells.size()):
-        buttons[i].set_spell(spells[i])
+        var action_str = binds[i] if i < binds.size() else ""
+        buttons[i].setup(action_str, spells[i], new_enity)

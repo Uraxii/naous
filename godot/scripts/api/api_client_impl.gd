@@ -13,10 +13,10 @@ var access_token:String:
         parent.access_token = value
 
 #region Authentication
-func login(username: String, password: String) -> void:
+func login(_username: String, _password: String) -> void:
     pass
 
-func register(username: String, password: String) -> void:
+func register(_username: String, _password: String) -> void:
     pass
 
 func logout() -> void:
@@ -26,24 +26,6 @@ func refresh_token() -> void:
     pass
 
 func get_me() -> void:
-    pass
-#endregion
-
-
-#region Character Management
-func create_character(name: String) -> void:
-    pass
-    
-func get_all_characters(skip: int = 0, limit: int = 10) -> void:
-    pass
-
-func get_character(character_id: int) -> void:
-    pass
-
-func update_character(character_id: int, updates: Dictionary) -> void:
-    pass
-
-func delete_character(character_id: int) -> void:
     pass
 #endregion
 
