@@ -1,6 +1,6 @@
 class_name TargetingManager extends Node
 
-signal player_targeted(player: Entity, target: Targetable)
+signal player_targeted(player: Entity, target: )
 
 const INDICATOR: PackedScene = preload("uid://b74mdgvt321do") # targeting_indicator.tscn
 

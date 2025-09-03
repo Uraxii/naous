@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bmkcvlx154cnh" path="res://scenes/entity.tscn" id="1_hxfej"]
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="2_f2noy"]
 [ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="3_6rn7e"]
-[ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable.gd" id="4_jf6rp"]
+[ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="4_jf6rp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6rn7e"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -63,9 +63,6 @@ skeleton = NodePath("../../root/@EditorNode@20442/@Panel@14/@VBoxContainer@15/Do
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023010254, 0, 0.13989258)
 shape = SubResource("BoxShape3D_6rn7e")
-
-[node name="Player" parent="." instance=ExtResource("1_hxfej")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.0852785)
 
 [node name="Targets" type="Node3D" parent="."]
 
@@ -152,3 +149,6 @@ mesh = SubResource("CapsuleMesh_6rn7e")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Right/CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2559342, 0)
 shape = SubResource("ConvexPolygonShape3D_6rn7e")
+
+[node name="Player" parent="." instance=ExtResource("1_hxfej")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.0852785)
