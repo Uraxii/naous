@@ -6,8 +6,12 @@ const INDICATOR: PackedScene = preload("uid://b74mdgvt321do") # targeting_indica
 
 @onready var signals := Globals.signal_bus
 
-var valid_targets: Array[Targetable]
+var valid_targets: Array[Targetable]:
+    get = get_valid_targets
 
+
+func get_valid_targets() -> Array[Targetable]:
+    return valid_targets
 
 func add_valid_target(new_target: Targetable) -> void:
     if not valid_targets.has(new_target):

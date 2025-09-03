@@ -1,35 +1,52 @@
 class_name TargetingSystem extends Node
 
-@export var detections: Array[TargetingDetection]
+@export var cursor_targeting: CursorTargeting
+@export var auto_targeting: AutoTargeting
+@export var scan_targeting: ScanTargeting
 
 @onready var signals := Globals.signal_bus
 
-var current_target: Node3D # TODO: Change to anything? Entity?
+var current_target: Targetable
 
 
-func cursor_target(screen_point: Vector2) -> void:
-    print("Attempting to find target at cursor location: ", screen_point)
+func cursor_target() -> void:
+    #print("Attempting to find target at cursor location: ", screen_point)
+    var cursor_detection_target := cursor_targeting.get_next_detected_target(current_target)
+    if is_instance_valid(cursor_detection_target) and cursor_detection_target != current_target:
+        #print("CURSOR TARGET: updating current target!")
+        current_target = cursor_detection_target
 
 
 func next_target() -> void:
-    
-    pass
+    #print("attempting NEXT auto target!")
+    var next_auto_target := auto_targeting.get_next_detected_target(current_target)
+    if is_instance_valid(next_auto_target) and next_auto_target != current_target:
+        #print("AUTO NEXT TARGET: updating current target!")
+        current_target = next_auto_target
 
 
 func previous_target() -> void:
-    if not has_valid_target():
-        next_target()
-    else:
-        # Find the previous target via reverse priority
-        pass
+    #print("attempting PREV auto target!")
+    var prev_auto_target := auto_targeting.get_previous_detected_target(current_target)
+    if is_instance_valid(prev_auto_target) and prev_auto_target != current_target:
+        #print("AUTO PREV TARGET: updating current target!")
+        current_target = prev_auto_target
 
 
 func scan_target_right() -> void:
-    pass
+    #print("attempting RIGHT scan target!")
+    var next_scan_target := scan_targeting.get_next_detected_target(current_target)
+    if is_instance_valid(next_scan_target) and next_scan_target != current_target:
+        #print("SCAN NEXT TARGET: updating current target!")
+        current_target = next_scan_target
 
 
 func scan_target_left() -> void:
-    pass
+    #print("attempting LEFT scan target!")
+    var prev_scan_target := scan_targeting.get_previous_detected_target(current_target)
+    if is_instance_valid(prev_scan_target) and prev_scan_target != current_target:
+        #print("SCAN PREV TARGET: updating current target!")
+        current_target = prev_scan_target
 
 
 func has_valid_target() -> bool:

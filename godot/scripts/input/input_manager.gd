@@ -70,9 +70,7 @@ func _input(event: InputEvent) -> void:
         signals.interact.emit()
     
     if Input.is_action_just_pressed("cursor_target"):
-        var mouse_event: InputEventMouseButton = event as InputEventMouseButton
-        var mouse_pos_in_viewport := mouse_event.position
-        signals.cursor_target.emit(mouse_pos_in_viewport)
+        signals.cursor_target.emit()
     
     if Input.is_action_just_pressed("target_next"):
         signals.next_target.emit()

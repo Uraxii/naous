@@ -93,7 +93,7 @@ signal interact
 signal move(dir: Vector2)
 
 ## Targeting
-signal cursor_target(point: Vector2)
+signal cursor_target
 signal next_target
 signal previous_target
 signal scan_target_right

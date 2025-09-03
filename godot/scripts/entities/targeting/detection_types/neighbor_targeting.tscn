@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bf51jnfb20p2r"]
-
-[ext_resource type="Script" uid="uid://dqjib480x5ih3" path="res://scripts/entities/targeting/detection_types/neighbor_targeting.gd" id="1_ys87q"]
-
-[node name="NeighborTargeting" type="Node"]
-script = ExtResource("1_ys87q")
-metadata/_custom_type_script = "uid://cbidjfhlnvb46"

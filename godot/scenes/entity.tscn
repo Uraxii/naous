@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bmkcvlx154cnh"]
+[gd_scene load_steps=27 format=3 uid="uid://bmkcvlx154cnh"]
 
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_vh5go"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_uysrf"]
@@ -18,7 +18,11 @@
 [ext_resource type="Script" uid="uid://b2wnn6hu6a4ab" path="res://scripts/entities/gravity_component.gd" id="14_1wt7u"]
 [ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="15_2y5vj"]
 [ext_resource type="Script" uid="uid://2bgieokot4fm" path="res://scripts/entities/jump_force_component.gd" id="15_mxvno"]
+[ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="16_1wt7u"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_1wt7u"]
+[ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="17_nd8wj"]
+[ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="18_d4l62"]
+[ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="19_fwya0"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
 properties/0/path = NodePath("Components/HealthComponent:current")
@@ -126,6 +130,19 @@ script = ExtResource("15_2y5vj")
 entity = NodePath("../..")
 detection_zone = NodePath("../../Body/InteractableDetector")
 metadata/_custom_type_script = "uid://ctil5vnixrdc0"
+
+[node name="TargetingSystem" type="Node" parent="Components" node_paths=PackedStringArray("cursor_targeting", "auto_targeting", "scan_targeting")]
+script = ExtResource("16_1wt7u")
+cursor_targeting = NodePath("CursorTargeting")
+auto_targeting = NodePath("AutoTargeting")
+scan_targeting = NodePath("ScanTargeting")
+metadata/_custom_type_script = "uid://bfu0l0d4jw4rd"
+
+[node name="CursorTargeting" parent="Components/TargetingSystem" instance=ExtResource("17_nd8wj")]
+
+[node name="AutoTargeting" parent="Components/TargetingSystem" instance=ExtResource("18_d4l62")]
+
+[node name="ScanTargeting" parent="Components/TargetingSystem" instance=ExtResource("19_fwya0")]
 
 [node name="Body" type="CharacterBody3D" parent="."]
 top_level = true
