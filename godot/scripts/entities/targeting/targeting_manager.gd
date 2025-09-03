@@ -4,20 +4,31 @@ signal player_targeted(player: Entity, target: Targetable)
 
 const INDICATOR: PackedScene = preload("uid://b74mdgvt321do") # targeting_indicator.tscn
 
-@onready var globals := Globals
+@onready var signals := Globals.signal_bus
+
+var valid_targets: Array[Targetable]
 
 
-func find_targetable() -> Targetable:
-    return null
+func add_valid_target(new_target: Targetable) -> void:
+    if not valid_targets.has(new_target):
+        valid_targets.push_back(new_target)
 
 
-func body_is_in_projected_polygon(body: Node3D, polygon: Polygon2D) -> bool:
-    return false 
-    
-
-func _find_targetable_at_screen_position(screen_pos: Vector2) -> Targetable:
-    return null
+func remove_valid_target(lost_target: Targetable) -> void:
+    if valid_targets.has(lost_target):
+        valid_targets.erase(lost_target)
 
 
-func _find_targetable_nearest_position(screen_pos: Vector2) -> Targetable:
-    return null
+func _target_entered_screen(target: Targetable) -> void:
+    add_valid_target(target)
+
+
+func _target_exited_screen(target: Targetable) -> void:
+    remove_valid_target(target)
+
+
+#region Godot Callbacks
+func _ready() -> void:
+    signals.target_entered_screen.connect(_target_entered_screen)
+    signals.target_exited_screen.connect(_target_exited_screen)
+#endregion
