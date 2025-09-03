@@ -96,6 +96,9 @@ script = ExtResource("11_nsvym")
 
 [node name="Speed" type="Node" parent="Components"]
 script = ExtResource("12_qbi11")
+start_value = 10.0
+max_value = 30.0
+current = 1.0
 
 [node name="Gravity" type="Node" parent="Components"]
 script = ExtResource("13_8hg17")

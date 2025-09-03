@@ -18,6 +18,7 @@ class_name CameraManager extends SpringArm3D
 @onready var camera: Camera3D = $Camera3D
 
 var direction := Vector2.ZERO
+var rotate_entity := false
 var menu_is_open := false
 
 
@@ -25,7 +26,9 @@ func _ready() -> void:
     signals.control_entity.connect(_on_control_entity)
     signals.camera_zoom_out.connect(_on_camera_zoom_out)
     signals.camera_zoom_in.connect(_on_camera_zoom_in)
-    signals.rotate_camera.connect(_on_rotate_camera)
+    signals.camera_rotate.connect(_on_camera_rotate)
+    signals.character_rotate_start.connect(_on_character_rotate_start)
+    signals.character_rotate_stop.connect(_on_character_rotate_stop)
 
     # Ensure we have an active camera immediately
     camera.make_current()
@@ -63,5 +66,13 @@ func _on_camera_zoom_in() -> void:
     camera_distance -= zoom_increment
 
 
-func _on_rotate_camera(input_direction: Vector2) -> void:
+func _on_camera_rotate(input_direction: Vector2) -> void:
     direction = input_direction
+    
+
+func _on_character_rotate_start() -> void:
+    rotate_entity = true
+    
+
+func _on_character_rotate_stop() -> void:
+    rotate_entity = false

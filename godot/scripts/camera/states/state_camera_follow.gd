@@ -22,8 +22,6 @@ func process() -> void:
 
     # Handle mouse motion
     if not camera.direction.is_zero_approx():
-        Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
         _handle_rotation(camera.direction * camera.mouse_sensitivity)
         camera.direction = Vector2.ZERO
 
@@ -62,5 +60,6 @@ func _handle_rotation(rotation_vector: Vector2) -> void:
 
     if camera.rotation.x < -1:
         camera.rotation.x = -1
-
-    target.body.rotation.y = camera.rotation.y
+    
+    if camera.rotate_entity:
+        target.body.rotation.y = camera.rotation.y

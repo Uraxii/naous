@@ -91,8 +91,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-    if entity.is_multiplayer_authority():
-        input_move(input.move)
+    if entity.transform_sync.is_multiplayer_authority():
+        var dir = input.move
+        if input.was_camera_move_enabled and dir.y == 0:
+            dir.y = -1
+        input_move(dir)
+    else:
+        signals.log_new_debug.emit("I do not have the power!")
 
     body.velocity = apply_gravity(body.velocity)
     body.velocity = apply_jump_influence(body.velocity)

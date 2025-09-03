@@ -25,11 +25,12 @@ var joystick_camera: Vector2:
         InputBindings.CAMERA_UP,
         InputBindings.CAMERA_DOWN)
 
+var was_camera_rotating := false
+var was_character_rotating := false
+var was_camera_move_enabled := false
 var jump := false
 var select_location := false
 var mouse_pos_delta := Vector2.ZERO
-
-
 #endregion
 
 
@@ -53,31 +54,43 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+    var rotate_cam = Input.is_action_pressed(InputBindings.CAMERA_ROTATE)
+    var rotate_char =  Input.is_action_pressed(InputBindings.CHARACTER_ROTATE)
+    var is_camera_rotating = rotate_cam or rotate_char
+    
+    if was_camera_rotating and not is_camera_rotating:
+        Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+    elif not was_camera_rotating and is_camera_rotating:
+        Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+        
+    if rotate_char and not was_character_rotating:
+        signals.character_rotate_start.emit()
+    elif not rotate_char and was_character_rotating:
+        signals.character_rotate_stop.emit()
+    
+    was_camera_rotating = is_camera_rotating
+    was_character_rotating = rotate_char
+    was_camera_move_enabled = rotate_cam and rotate_char
+    
     if event is InputEventMouseMotion:
-        signals.rotate_camera.emit(Vector2(event.relative.x, event.relative.y))
-        return
+        var move_delta = Vector2(event.relative.x, event.relative.y)
+        if is_camera_rotating:
+            signals.camera_rotate.emit(move_delta)
 
     if Input.is_action_just_pressed("camera_zoom_out"):
         signals.camera_zoom_out.emit()
-
     if Input.is_action_just_pressed("camera_zoom_in"):
         signals.camera_zoom_in.emit()
-
     if Input.is_action_just_pressed("jump"):
         signals.jump.emit()
-    
     if Input.is_action_just_pressed("interact"):
         signals.interact.emit()
-
     if Input.is_action_just_pressed("ui_accept"):
         signals.ui_accept.emit()
-
     if Input.is_action_just_pressed("ui_cancel"):
         signals.ui_cancel.emit()
-
     if Input.is_action_just_pressed("ui_toggle"):
         signals.ui_toggle.emit()
-
     if Input.is_action_just_pressed("ui_cancel"):
         signals.ui_cancel.emit()
 

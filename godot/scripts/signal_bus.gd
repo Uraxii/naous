@@ -84,9 +84,11 @@ signal ui_toggle(state:bool)
 
 signal camera_zoom_in
 signal camera_zoom_out
-signal camera_look(is_pressed: bool)
-signal camera_rotate(is_pressed: bool)
-signal rotate_camera(delta: Vector2)
+signal camera_move_start
+signal camera_move_stop
+signal camera_rotate(delta: Vector2)
+signal character_rotate_start
+signal character_rotate_stop
 
 signal jump
 signal interact

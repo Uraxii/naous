@@ -40,6 +40,7 @@ func _ready():
 
 func _spawn_custom(data) -> Node:
     var entity: Entity = player_scene.instantiate()
+    entity.body.position.z -= 30
     entity.transform_sync.set_multiplayer_authority(data.authority)
     entity.name = data.id
     
