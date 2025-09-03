@@ -4,7 +4,6 @@ const FORCE_GRAVITY: float = 0.8
 const FORCE_JUMP_GRAVIY: float = 0.4
 const BACKPEDDLE_PENALTY := 0.75
 
-
 @export var entity: Entity
 @export var body: CharacterBody3D
 
@@ -124,5 +123,4 @@ func _on_change_control(local_has_control: bool):
 
 func _on_input_jump():
     jump()
-
 #endregion
