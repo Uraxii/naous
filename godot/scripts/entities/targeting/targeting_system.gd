@@ -6,9 +6,11 @@ class_name TargetingSystem extends Node
 
 @onready var signals := Globals.signal_bus
 
-var current_target: Targetable
+var current_target: Targetable:
+    set = _set_current_target
 
 
+#region Targeting
 func cursor_target() -> void:
     #print("Attempting to find target at cursor location: ", screen_point)
     var cursor_detection_target := cursor_targeting.get_next_detected_target(current_target)
@@ -51,6 +53,17 @@ func scan_target_left() -> void:
 
 func has_valid_target() -> bool:
     return is_instance_valid(current_target)
+
+
+func _set_current_target(new_target) -> void:
+    print("")
+    if is_instance_valid(current_target):
+        current_target.hide_indicator()
+    
+    current_target = new_target
+    current_target.show_indicator()
+
+#endregion
 
 
 #region Godot Callbacks
