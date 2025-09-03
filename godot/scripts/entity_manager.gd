@@ -14,13 +14,13 @@ var _ids := IdPool.new()
 func despawn(id: int) -> void:
     if not multiplayer.is_server():
         return
-        
+
     var entity: Entity = pool.get(id)
     pool.erase(id)
-    
+
     if not entity or not entity.is_inside_tree():
         return
-    
+
     entity.queue_free.call_deferred()
     signals.despawn_entity.emit(entity)
 
@@ -43,11 +43,11 @@ func _spawn_custom(data) -> Node:
     entity.body.position.z -= 30
     entity.transform_sync.set_multiplayer_authority(data.authority)
     entity.name = data.id
-    
+
     var id = _ids.lease()
     entity.id = id
     pool[id] = entity
-    
+
     signals.spawn_entity.emit(entity)
     return entity
 #endregion
