@@ -41,6 +41,7 @@ func _setup_target_indicator() -> void:
     var new_indicator := INDICATOR_SCENE.instantiate()
     indicator = new_indicator
     entity.add_child(indicator)
+    indicator.set_owning_entity(entity)
 
 
 #region Godot Callbacks

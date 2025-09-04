@@ -26,7 +26,7 @@ albedo_color = Color(0.21882677, 0.19938435, 0.16469835, 1)
 material = SubResource("StandardMaterial3D_bkaei")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6rn7e"]
-size = Vector3(17.124146, 1, 19.619629)
+size = Vector3(78.39969, 1, 57.492676)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6rn7e"]
 
@@ -62,7 +62,7 @@ mesh = SubResource("BoxMesh_hxfej")
 skeleton = NodePath("../../root/@EditorNode@20442/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@62/@VBoxContainer@63/@EditorMainScreen@103/MainScreen/@CanvasItemEditor@10871/@VSplitContainer@10516/@HSplitContainer@10518/@HSplitContainer@10520/@Control@10521/@SubViewportContainer@10522/@SubViewport@10523/TestTargeting")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.023010254, 0, 0.13989258)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40507507, 0, -0.24072266)
 shape = SubResource("BoxShape3D_6rn7e")
 
 [node name="Targets" type="Node3D" parent="."]

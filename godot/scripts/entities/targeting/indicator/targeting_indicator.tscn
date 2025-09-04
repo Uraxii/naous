@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b74mdgvt321do"]
 
 [ext_resource type="Script" uid="uid://bv5vupo6livwr" path="res://scripts/entities/targeting/indicator/targeting_indicator.gd" id="1_c18ck"]
-[ext_resource type="Material" uid="uid://dl23dcekblki8" path="res://scripts/entities/targeting/indicator/default_indicator.tres" id="2_svoyi"]
+[ext_resource type="Material" uid="uid://dl23dcekblki8" path="res://scripts/entities/targeting/indicator/default_indicator_material.tres" id="2_svoyi"]
 
 [sub_resource type="TorusMesh" id="TorusMesh_fibsw"]
 material = ExtResource("2_svoyi")
@@ -17,10 +17,12 @@ material = ExtResource("2_svoyi")
 script = ExtResource("1_c18ck")
 
 [node name="Circle" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.303, 0, 0, 0, 1, 0, 0.10210228, 0)
 mesh = SubResource("TorusMesh_fibsw")
 
 [node name="Pointer" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(-0.181, 1.5823522e-08, 0, -1.5823522e-08, -0.181, 0, 0, 0, 0.181, 0, 0.6436773, 0)
 mesh = SubResource("PrismMesh_drx44")
 
