@@ -33,16 +33,17 @@ func move_towards(position: Vector3) -> void:
 
 
 func input_move(direction: Vector2):
-    #print_debug(input.move)
     move_velocity = body.transform.basis * Vector3(
         direction.x, 0, direction.y).normalized() * speed.current
 
 
 func jump() -> void:
-    jump_influence = body.transform.basis * Vector3(
-        move_velocity.x, 0, move_velocity.y).normalized()
-
-    jump_influence = jump_influence * speed.current
+    if move_velocity.length() > 0.1:
+        var horizontal_velocity = Vector3(move_velocity.x, 0, move_velocity.z)
+        jump_influence = horizontal_velocity.normalized() * speed.current
+    else:
+        jump_influence = Vector3.ZERO
+    
     jump_influence.y = jump_force.current
 
 
@@ -98,10 +99,20 @@ func _setup() -> void:
     push_warning("Reminder: Move is pushing the player up in _startup.")
     body.position.y += 100
     speed = entity.speed
-    gravity = component_manager.find("Gravity")
-    jump_force = component_manager.find("JumpForce")
+    gravity = entity.gravity
+    jump_force = entity.jump_force
     
     entity.change_control.connect(_on_change_control)
+    
+    if entity.transform_sync.is_multiplayer_authority() and not signals.jump.is_connected(jump):
+        signals.jump.connect(jump)
+
+
+func _on_change_control(local_has_control: bool):
+    if local_has_control and not signals.jump.is_connected(jump):
+        signals.jump.connect(jump)
+    elif signals.jump.is_connected(jump):
+        signals.jump.disconnect(jump)
 
 
 #region Godot Callback Functions
@@ -125,19 +136,4 @@ func _process(_delta: float) -> void:
 
     body.move_and_slide()
     body.velocity = Vector3.ZERO
-#endregion
-
-#region Signal Handlers
-func _on_change_control(local_has_control: bool):
-    # TODO: Refactor this.
-    if local_has_control:
-        if not signals.jump.is_connected(_on_input_jump):
-            signals.jump.connect(_on_input_jump)
-    else:
-        if signals.jump.is_connected(_on_input_jump):
-            signals.jump.disconnect(_on_input_jump)
-
-
-func _on_input_jump():
-    jump()
 #endregion
