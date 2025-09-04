@@ -27,7 +27,7 @@ func process() -> void:
         if camera.invert_look_y_axis:
             joystick_look *= Vector2(1, -1)
 
-        _handle_rotation(camera.joystick_look * camera.joystick_sensitivity)
+        _handle_rotation(joystick_look * camera.joystick_sensitivity)
 
     # Handle menu
     elif camera.menu_is_open:
