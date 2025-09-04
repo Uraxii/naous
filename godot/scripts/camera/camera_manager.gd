@@ -29,7 +29,13 @@ func _ready() -> void:
     signals.camera_rotate.connect(_on_camera_rotate)
     signals.character_rotate_start.connect(_on_character_rotate_start)
     signals.character_rotate_stop.connect(_on_character_rotate_stop)
-
+    
+    # Adjust position to make the server view better.
+    # This can get deleted once free cam movement works.
+    if multiplayer.is_server():
+        position.x += 5
+        position.y += 5
+        
     # Ensure we have an active camera immediately
     camera.make_current()
 
@@ -43,7 +49,7 @@ func _handle_rotation(rotation_vector: Vector2) -> void:
 
     target.body.rotation.y = rotation.y
 
-
+#region Singal Handlers
 func _set_camera_distance(value: float) -> void:
     camera_distance = clampf(value, min_distance, max_distance)
     spring_length = camera_distance
@@ -57,7 +63,6 @@ func _on_control_entity(entity: Entity) -> void:
     # Reassert camera after new target (in case another camera became current earlier)
     if not camera.is_current():
         camera.make_current()
-
 
 func _on_camera_zoom_out() -> void:
     camera_distance += zoom_increment
@@ -77,3 +82,4 @@ func _on_character_rotate_start() -> void:
 
 func _on_character_rotate_stop() -> void:
     rotate_entity = false
+#endregion
