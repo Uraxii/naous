@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=21 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/entities/projectiles/projectile.tscn" id="8_ogpgs"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
+[ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
 [ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="12_spk56"]
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="15_yr3on"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
@@ -34,22 +35,6 @@ properties/3/replication_mode = 1
 properties/0/path = NodePath(".:id")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-
-[sub_resource type="GDScript" id="GDScript_ogpgs"]
-script/source = "class_name EnergyComponent extends StatComponent
-"
-
-[sub_resource type="GDScript" id="GDScript_spk56"]
-script/source = "class_name SpeedComponent extends StatComponent
-"
-
-[sub_resource type="GDScript" id="GDScript_1yk18"]
-script/source = "class_name GravityComponent extends StatComponent
-"
-
-[sub_resource type="GDScript" id="GDScript_b4o2o"]
-script/source = "class_name JumpForceComponent extends StatComponent
-"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -105,19 +90,22 @@ script = ExtResource("9_dqg57")
 script = ExtResource("10_w0xwc")
 
 [node name="Energy" type="Node" parent="Components"]
-script = SubResource("GDScript_ogpgs")
+script = ExtResource("11_spk56")
 
 [node name="Speed" type="Node" parent="Components"]
-script = SubResource("GDScript_spk56")
+script = ExtResource("11_spk56")
 max_value = 30.0
 current = 1.0
 
 [node name="Gravity" type="Node" parent="Components"]
-script = SubResource("GDScript_1yk18")
+script = ExtResource("11_spk56")
+max_value = 100.0
+start_percent = 0.014000000000000012
 
 [node name="JumpForce" type="Node" parent="Components"]
-script = SubResource("GDScript_b4o2o")
-max_value = 50.0
+script = ExtResource("11_spk56")
+max_value = 200.0
+start_percent = 0.17500000000000004
 
 [node name="Interaction" type="Node" parent="Components"]
 script = ExtResource("15_yr3on")

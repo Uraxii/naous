@@ -6,7 +6,7 @@ signal change(new: float, old: float)
 @export_category("Data Values")
 @export var min_value := 0.0 
 @export var max_value := 10.0
-@export_range(0.00, 1.0) var start_percent := 1.0  
+@export_range(-1.0, 1.0) var start_percent := 1.0  
 @export_category("Runtime Values")
 @export var is_infinite := false
 @export var current: float = 10: set = _set_current
