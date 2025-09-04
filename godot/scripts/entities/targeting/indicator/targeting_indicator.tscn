@@ -18,16 +18,10 @@ script = ExtResource("1_c18ck")
 
 [node name="Circle" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.303, 0, 0, 0, 1, 0, 0.10210228, 0)
+transform = Transform3D(1, 0, 0, 0, 0.303, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("TorusMesh_fibsw")
 
 [node name="Pointer" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(-0.181, 1.5823522e-08, 0, -1.5823522e-08, -0.181, 0, 0, 0, 0.181, 0, 0.6436773, 0)
 mesh = SubResource("PrismMesh_drx44")
-
-[node name="RayCast3D" type="RayCast3D" parent="Pointer"]
-transform = Transform3D(-5.5248613, -4.829988e-07, 0, 4.829988e-07, -5.5248613, 0, 0, 0, 5.5248613, 2.8541535e-08, 0.32647705, 0)
-collision_mask = 4
-hit_from_inside = true
-debug_shape_custom_color = Color(0, 0.9098039, 0.88235295, 0.09411765)
