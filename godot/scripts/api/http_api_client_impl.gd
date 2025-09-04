@@ -37,9 +37,9 @@ func get_me() -> void:
 
 
 #region Character Management
-func create_character(name: String) -> void:
+func create_character(display_name: String) -> void:
     var url: String = server + "/api/v0/characters/"
-    var body_data: Dictionary = { "name": name }
+    var body_data: Dictionary = { "name": display_name }
     var body: String = JSON.stringify(body_data)
     http_queue.queue_post(url, _get_auth_headers(), body, _on_create_character)
 
@@ -91,6 +91,7 @@ func _on_login(response_code: int, response_text: String) -> void:
     var data: Dictionary = json.data
     access_token = data.access_token
     var player_id: int = data.player_id
+    @warning_ignore("unused_variable")
     var username: String = data.username
     
     logger.success("Login successful! Player ID: %d" % player_id)

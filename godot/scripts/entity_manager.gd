@@ -25,6 +25,10 @@ func despawn(id: int) -> void:
     signals.despawn_entity.emit(entity)
 
 
+func find(id: int) -> Entity:
+    return pool.get(id)
+
+
 func _on_client_spawn(node: Node) -> void:
     if node is Entity:
         # Register the entity in the pool.
@@ -38,11 +42,19 @@ func _ready():
     spawned.connect(_on_client_spawn)
 
 
-func _spawn_custom(data) -> Node:
-    var entity: Entity = player_scene.instantiate()
-    entity.body.position.z -= 30
-    entity.transform_sync.set_multiplayer_authority(data.authority)
-    entity.name = data.id
+func _spawn_custom(data: Dictionary) -> Node:
+    # TODO: CHANGE THIS!!! PLAYERS SHOULD NOT BE ABLE TO PASS IN AN ABITRARY PATH!!!
+    var scene = load(data.scene)
+    var entity: Entity = scene.instantiate()
+    
+    if data.get("type") == "player":
+        entity.transform_sync.set_multiplayer_authority(data.authority)
+        entity.name = data.id
+        
+    if data.has("position"):
+        print_debug("Set entity pos to %s" % data.position)
+        entity.position = data.position
+        
 
     var id = _ids.lease()
     entity.id = id

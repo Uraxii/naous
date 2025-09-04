@@ -2,7 +2,7 @@ class_name StateCameraFollow extends State
 
 @onready var camera: CameraManager = get_owner()
 
-var target: Entity:
+var target: Node3D:
     get: return camera.target
 
 var input: InputManager:
@@ -18,7 +18,7 @@ func process() -> void:
         next_state = StateCameraFree
         return
 
-    camera.position = get_next_position(target)
+    camera.position = get_next_position(target.global_position)
 
     # Handle mouse motion
     if not camera.direction.is_zero_approx():
@@ -45,11 +45,12 @@ func exit() -> void:
     pass
 
 
-func get_next_position(entity: Entity) -> Vector3:
+func get_next_position(position: Vector3) -> Vector3:
     var new_position = Vector3(
-        entity.body.global_position.x + camera.x_offset,
-        entity.body.global_position.y + camera.y_offset,
-        entity.body.global_position.z + camera.z_offset)
+        position.x + camera.x_offset,
+        position.y + camera.y_offset,
+        position.z + camera.z_offset
+        )
 
     return new_position
 
@@ -62,4 +63,4 @@ func _handle_rotation(rotation_vector: Vector2) -> void:
         camera.rotation.x = -1
     
     if camera.rotate_entity:
-        target.body.rotation.y = camera.rotation.y
+        target.rotation.y = camera.rotation.y

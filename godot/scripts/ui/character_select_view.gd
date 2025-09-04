@@ -33,11 +33,11 @@ func _on_characters_received(characters: Array, total: int) -> void:
         
     var character_container: VBoxContainer = %CharacterContainer
     
-    for char: Dictionary in characters:
+    for c: Dictionary in characters:
         var info_template: CharacterInfoTemplate = character_info_template.instantiate()
         character_buttons.append(info_template)
         info_template.selected_character.connect(_on_selected_character)
-        info_template.set_character_data(char)
+        info_template.set_character_data(c)
         character_container.add_child(info_template)
 
 

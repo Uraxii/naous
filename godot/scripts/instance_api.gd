@@ -61,20 +61,13 @@ func start_server(cfg: InstanceConfig) -> void:
 func request_cast(entity_id: int, spell_id: String) -> void:
     # TODO: Check if sender has authority over the entity!
     
-    var entity: Entity = entities.pool.get(entity_id)
+    var entity: Entity = entities.find(entity_id)
     if not entity:
         return
         
-    var component: ComponentSpell = entity.get_component(ComponentSpell)
-    if not component:
-        return
-        
-    var spell: Spell = component.spells.get(spell_id)
-    if not spell:
-        return
-    
-    if spell.can_cast():
-        spell.cast.rpc()
+    var spellbook: ComponentSpellbook = entity.components.find("Spellbook")
+    if spellbook:
+        spellbook.cast(spell_id)
 #endregion
 
 
@@ -94,7 +87,7 @@ func _spawn_player(authority: int, user_name: String, character_name: String) ->
     if not multiplayer.is_server():
         return
 
-    print_debug("Sender %d" % authority)
+      #print_debug("Sender %d" % authority)
 
     var player_data = PlayerData.new(user_name, authority)
     player_data.set_character_data(character_name)
@@ -103,11 +96,14 @@ func _spawn_player(authority: int, user_name: String, character_name: String) ->
         return
 
     var spawn_data = {
+        "type": "player",
+        "scene": "res://scenes/entities/player.tscn",
         "authority": authority,
         "id": player_data.id
     }
     
     var entity: Entity = entities.spawn(spawn_data)
+    
     player_data.entity = entity
     connections[authority] = player_data
 

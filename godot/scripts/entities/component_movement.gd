@@ -1,18 +1,20 @@
-class_name Move extends Node
+class_name ComponentMove extends Node
 
 const FORCE_GRAVITY: float = 0.8
 const FORCE_JUMP_GRAVIY: float = 0.4
 const BACKPEDDLE_PENALTY := 0.75
 
-@export var entity: Entity
-@export var body: CharacterBody3D
+var entity: Entity
+var body: CharacterBody3D
+var speed: StatComponent
+var gravity: StatComponent
+var jump_force: StatComponent
 
-@onready var signals = Globals.signal_bus
-@onready var input = Globals.input
-@onready var speed: SpeedComponent = entity.get_component(SpeedComponent)
-@onready var gravity: GravityComponent = entity.get_component(GravityComponent)
-@onready var jump_force: JumpForceComponent = entity.get_component(
-    JumpForceComponent)
+var signals: SignalBus:
+    get: return Globals.signal_bus
+    
+var input: InputManager:
+    get: return Globals.input
 
 var current_gravity: float = 0.0
 var move_velocity := Vector3.ZERO
@@ -79,9 +81,23 @@ func apply_movement(current_velocity: Vector3) -> Vector3:
     return current_velocity
 
 
+func _setup() -> void:
+    var component_manager: ComponentManager = get_parent()
+    body = component_manager.find("Body")
+    push_warning("Reminder: Move is pushing the player up in _startup.")
+    body.position.y += 100
+    
+    speed = component_manager.find("Speed")
+    gravity = component_manager.find("Gravity")
+    jump_force = component_manager.find("JumpForce")
+    
+    entity = component_manager.entity
+    entity.change_control.connect(_on_change_control)
+    
+
 #region Godot Callback Functions
 func _ready() -> void:
-    entity.change_control.connect(_on_change_control)
+    _setup.call_deferred()
 
 
 func _process(_delta: float) -> void:
@@ -90,8 +106,6 @@ func _process(_delta: float) -> void:
         if input.was_camera_move_enabled and dir.y == 0:
             dir.y = -1
         input_move(dir)
-    else:
-        signals.log_new_debug.emit("I do not have the power!")
 
     body.velocity = apply_gravity(body.velocity)
     body.velocity = apply_jump_influence(body.velocity)

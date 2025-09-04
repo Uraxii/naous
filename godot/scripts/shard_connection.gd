@@ -8,7 +8,7 @@ signal connection_failed
 
 var multiplayer_peer: ENetMultiplayerPeer
 var character_data: Dictionary = {}
-var is_connected: bool = false
+var connected: bool = false
 
 @onready var signals := Globals.signal_bus
 @onready var logger := Globals.logger
@@ -46,7 +46,7 @@ func disconnect_from_shard() -> void:
         multiplayer_peer.close()
         multiplayer_peer = null
     
-    is_connected = false
+    connected = false
     
     # Disconnect signals to avoid issues
     if multiplayer.connected_to_server.is_connected(_on_connected_to_server):
@@ -59,7 +59,7 @@ func disconnect_from_shard() -> void:
 
 func is_connected_to_shard() -> bool:
     """Check if currently connected to a shard."""
-    return is_connected and multiplayer_peer != null and multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED
+    return connected and multiplayer_peer != null and multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED
 
 
 func send_chat_message(message: String) -> void:
@@ -88,7 +88,7 @@ func send_player_position(position: Vector3, rotation: Vector3) -> void:
 
 func _on_connected_to_server() -> void:
     """Called when successfully connected to shard server."""
-    is_connected = true
+    connected = true
     logger.success("Connected to shard server!")
     
     # Send authentication to server
@@ -102,14 +102,14 @@ func _on_connected_to_server() -> void:
 
 func _on_connection_failed() -> void:
     """Called when connection to shard fails."""
-    is_connected = false
+    connected = false
     logger.error("Failed to connect to shard server")
     connection_failed.emit()
 
 
 func _on_server_disconnected() -> void:
     """Called when disconnected from shard server."""
-    is_connected = false
+    connected = false
     logger.warn("Disconnected from shard server")
     disconnected_from_shard.emit()
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dwvukle78pxbp"]
 
 [ext_resource type="Script" uid="uid://c0o28dohsooma" path="res://scripts/entities/objects/control_zone.gd" id="1_spf4a"]
-[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="2_rupwl"]
-[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/interaction/component_interactable.gd" id="3_oh56c"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_manager.gd" id="2_rupwl"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="3_oh56c"]
 [ext_resource type="Script" uid="uid://bcj72dre6qge7" path="res://scripts/entities/interaction/entity_detector.gd" id="4_kcvsx"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7ojcd"]

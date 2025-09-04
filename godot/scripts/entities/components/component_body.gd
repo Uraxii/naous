@@ -1,0 +1,1 @@
+class_name ComponentBody extends CharacterBody3D

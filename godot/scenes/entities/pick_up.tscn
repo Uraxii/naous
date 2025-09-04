@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dluy6c7orh677"]
 
 [ext_resource type="Script" uid="uid://bsc5blllejlso" path="res://scripts/entities/objects/pick_up.gd" id="1_alksn"]
-[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="2_cq6oy"]
-[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/interaction/component_interactable.gd" id="3_ey4g2"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_manager.gd" id="2_cq6oy"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="3_ey4g2"]
 [ext_resource type="Script" uid="uid://biugcdkh4yjur" path="res://scripts/entities/interaction/interactable_trigger.gd" id="4_ey4g2"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_cq6oy"]

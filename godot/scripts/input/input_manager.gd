@@ -90,5 +90,6 @@ func _input(event: InputEvent) -> void:
     #       - eg. LT + Face buttons for a set of actions, RT + face buttons for another set
     for action in action_map.keys():
         if Input.is_action_just_pressed(action):
+            signals.log_new_debug.emit("%s pressed" % action)
             action_map[action].emit()
 #endregion
