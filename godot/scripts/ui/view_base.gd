@@ -11,7 +11,7 @@ var views: ViewManager:
 
 @warning_ignore("shadowed_global_identifier")
 var log: Log:
-    get: return Globals.log
+    get: return Globals.logger
 
 
 func initalize() -> void:

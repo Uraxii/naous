@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=24 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="15_yr3on"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
-[ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="18_kg25l"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
@@ -145,13 +144,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="ProjectileSpawner" type="Node3D" parent="Components/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5009488, -0.53692293)
-
-[node name="Hotbar" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("18_kg25l")
 
 [node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
 layout_mode = 3

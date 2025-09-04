@@ -7,6 +7,7 @@ class_name GlobalManager extends Node
 @onready var logger := Log.new(signal_bus)
 @onready var input: InputManager = new_global("Input", InputManager)
 @onready var views: ViewManager = new_global("Views", ViewManager)
+@onready var hotbar: HotbarView = views.spawn(HotbarView)
 @onready var game: GameManager = new_global("Game", GameManager)
 
 @onready var interaction: InteractionManager = new_global(

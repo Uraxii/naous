@@ -1,5 +1,7 @@
 class_name Spell extends Node
 
+signal cast_started
+
 @export var id := ""
 @export var cooldown_time := 1.0
 @export_category("Runtime Values")
@@ -25,6 +27,7 @@ func cast() -> void:
     signals.log_new_debug.emit("%d casted %s." % [caster.id, id])
     timer.wait_time = cooldown_time
     timer.start()
+    cast_started.emit()
     for t in traits:
         if t:
             t.cast()

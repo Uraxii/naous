@@ -1,4 +1,6 @@
-class_name HotBar extends View
+class_name HotbarView extends View
+
+@onready var hbox: HBoxContainer = %HBox
 
 var id := 1
 
@@ -9,20 +11,21 @@ var binds := [
     InputBindings.ACTION_4,
     ]
 
-var buttons: Array[HotButton] = []
+var buttons: Array[Hotbutton] = []
 
 
 func _ready() -> void:
+    print_debug("Hotbar")
     signals.control_entity.connect(_on_control.call_deferred)
     
     for i in range(0, binds.size()):
-        var button = HotButton.new()
+        var button: Hotbutton = views.spawn(Hotbutton)
         buttons.append(button)
-        add_child(button)
+        button.reparent(hbox)
 
 
 func _on_control(new_enity: Entity) -> void:
-    var spell_component = new_enity.components.find("Spellbook")
+    var spell_component = new_enity.spellbook
     if not spell_component:
         return
     

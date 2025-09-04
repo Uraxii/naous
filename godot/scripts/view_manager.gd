@@ -12,6 +12,8 @@ var _scene_map: Dictionary[GDScript, PackedScene] = {
     MainView: preload("res://scenes/ui/main_view.tscn"),
     ConsoleView: preload("res://scenes/ui/console_view.tscn"),
     SystemView: preload("res://scenes/ui/system_view.tscn"),
+    HotbarView: preload("res://scenes/ui/hotbar_view.tscn"),
+    Hotbutton: preload("res://scenes/ui/hotbutton.tscn"),
 }
 
 var is_ui_visible := true
