@@ -28,7 +28,5 @@ func _on_component_removed(node: Node) -> void:
 func _ready() -> void:
     child_entered_tree.connect(_on_component_added)
     child_exiting_tree.connect(_on_component_removed)
-    
-    if not entity:
-        entity = get_parent()
+    if not entity: entity = get_parent()
 #endregion

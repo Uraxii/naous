@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsnahgut5wqd6"]
+[gd_scene load_steps=7 format=3 uid="uid://bsnahgut5wqd6"]
 
 [ext_resource type="Script" uid="uid://0c4vp0yvei3e" path="res://scripts/spells/projectile.gd" id="1_6ndfs"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="2_kbb6n"]
+[ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="3_ewt5w"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ewt5w"]
 properties/0/path = NodePath("ComponentManager/Body:position")
@@ -18,10 +19,11 @@ properties/2/replication_mode = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_fn7fi"]
 
-[node name="Projectile" type="Node3D" node_paths=PackedStringArray("rb", "components")]
+[node name="Projectile" type="Node3D" node_paths=PackedStringArray("rb", "components", "body")]
 script = ExtResource("1_6ndfs")
 rb = NodePath("ComponentManager/Body")
 components = NodePath("ComponentManager")
+body = NodePath("ComponentManager/Body")
 
 [node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ewt5w")
@@ -41,3 +43,7 @@ shape = SubResource("SphereShape3D_fn7fi")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("SphereMesh_fn7fi")
 skeleton = NodePath("../../..")
+
+[node name="Speed" type="Node" parent="ComponentManager"]
+script = ExtResource("3_ewt5w")
+metadata/_custom_type_script = "uid://bjeqm0rajdi7x"

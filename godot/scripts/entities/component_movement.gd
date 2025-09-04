@@ -81,19 +81,28 @@ func apply_movement(current_velocity: Vector3) -> Vector3:
     return current_velocity
 
 
+func set_entity(new_entity: Entity) -> void:
+    entity = new_entity
+
+
 func _setup() -> void:
     var component_manager: ComponentManager = get_parent()
-    body = component_manager.find("Body")
+    if component_manager is not ComponentManager:
+        push_error("Movement component MUST be child of a ComponentManager!")
+        
+    if not entity:
+        entity = component_manager.entity
+        if not entity: push_error("Movement found no entity!")
+        
+    body = entity.body
     push_warning("Reminder: Move is pushing the player up in _startup.")
     body.position.y += 100
-    
-    speed = component_manager.find("Speed")
+    speed = entity.speed
     gravity = component_manager.find("Gravity")
     jump_force = component_manager.find("JumpForce")
     
-    entity = component_manager.entity
     entity.change_control.connect(_on_change_control)
-    
+
 
 #region Godot Callback Functions
 func _ready() -> void:

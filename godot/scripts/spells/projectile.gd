@@ -1,16 +1,17 @@
 class_name Projectile extends Entity
 
 @export var damage := 10.0
-@export var speed := 20.0
 @export var rb: RigidBody3D
 
 var velocity = Vector3.ZERO
 
 func calculate_direction():
-    velocity = -transform.basis.z * speed
+    velocity = -transform.basis.z * speed.current
 
 
 func _ready() -> void:
+    super._ready()
+    
     if not rb:
         rb = find_child("Body")
 
@@ -31,8 +32,8 @@ func _hit_target(collision: KinematicCollision3D) -> void:
     if hit_object.name == "Body":
         var component_manager: ComponentManager = hit_object.get_parent()
         var entity: Entity = component_manager.entity
-        var health: StatComponent = entity.components.find("Health")
-        if health:
-            health.current -= damage
+        var hp: StatComponent = entity.components.find("Health")
+        if hp:
+            hp.current -= damage
     
     queue_free()

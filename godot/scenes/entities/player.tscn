@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=25 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
@@ -8,8 +8,9 @@
 [ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="6_0njix"]
 [ext_resource type="Script" path="res://scripts/spells/traits/spawn_entity.gd" id="7_o0n85"]
 [ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/entities/projectiles/projectile.tscn" id="8_ogpgs"]
-[ext_resource type="Script" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
+[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
+[ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="12_spk56"]
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="15_yr3on"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
@@ -109,7 +110,6 @@ script = SubResource("GDScript_ogpgs")
 
 [node name="Speed" type="Node" parent="Components"]
 script = SubResource("GDScript_spk56")
-start_value = 10.0
 max_value = 30.0
 current = 1.0
 
@@ -118,13 +118,13 @@ script = SubResource("GDScript_1yk18")
 
 [node name="JumpForce" type="Node" parent="Components"]
 script = SubResource("GDScript_b4o2o")
-start_value = 15.0
 max_value = 50.0
 
 [node name="Interaction" type="Node" parent="Components"]
 script = ExtResource("15_yr3on")
 
 [node name="Body" type="CharacterBody3D" parent="Components"]
+script = ExtResource("12_spk56")
 
 [node name="Shape" type="CollisionShape3D" parent="Components/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
