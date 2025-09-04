@@ -5,6 +5,7 @@ class_name Projectile extends Entity
 
 var velocity = Vector3.ZERO
 
+
 func calculate_direction():
     velocity = -transform.basis.z * speed.current
 
@@ -27,13 +28,12 @@ func _physics_process(delta) -> void:
 
 func _hit_target(collision: KinematicCollision3D) -> void:    
     var hit_object = collision.get_collider()
-    print_debug("%s" % hit_object)
     
-    if hit_object.name == "Body":
-        var component_manager: ComponentManager = hit_object.get_parent()
-        var entity: Entity = component_manager.entity
-        var hp: StatComponent = entity.components.find("Health")
-        if hp:
-            hp.current -= damage
+    var hit_entity: Entity = hit_object.get("entity")
+    if not hit_entity:
+        return
+        
+    if hit_entity.health:
+        hit_entity.health.current -= damage
     
     queue_free()
