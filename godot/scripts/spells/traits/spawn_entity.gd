@@ -4,8 +4,7 @@ class_name TraitSpawnEntity extends Node
 @export_category("Runtime Values")
 @export var spell: Spell
 
-var entities: EntityManager:
-    get: return Globals.entities
+@onready var entities: EntityManager = Globals.entities
 
 
 func setup() -> void:
