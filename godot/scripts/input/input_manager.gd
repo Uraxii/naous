@@ -72,17 +72,20 @@ func _input(event: InputEvent) -> void:
     if Input.is_action_just_pressed("cursor_target"):
         signals.cursor_target.emit()
     
-    if Input.is_action_just_pressed("target_next"):
-        signals.next_target.emit()
-    
+    # TODO: I bound these to 'Tab' and 'Shift+Tab', but they can both trigger from 'Shift+Tab' since that key was technically pressed. May need to re-evaluate this signal handling to better resolve modifier key combo inputs.
     if Input.is_action_just_pressed("target_previous"):
         signals.previous_target.emit()
+    elif Input.is_action_just_pressed("target_next"):
+        signals.next_target.emit()
     
     if Input.is_action_just_pressed("scan_target_right"):
         signals.scan_target_right.emit()
     
     if Input.is_action_just_pressed("scan_target_left"):
         signals.scan_target_left.emit()
+
+    if Input.is_action_just_pressed("cancel_target"):
+        signals.cancel_target.emit()
 
     if Input.is_action_just_pressed("ui_accept"):
         signals.ui_accept.emit()

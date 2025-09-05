@@ -5,40 +5,44 @@
 
 [node name="AutoTargeting" type="Node" node_paths=PackedStringArray("detectors")]
 script = ExtResource("1_xbhis")
-detectors = [NodePath("Zone1"), NodePath("Zone2"), NodePath("Zone3"), NodePath("Zone4"), NodePath("Zone5")]
+detectors = [NodePath("AspectRatioContainer/Zone1"), NodePath("AspectRatioContainer/Zone2"), NodePath("AspectRatioContainer/Zone3"), NodePath("AspectRatioContainer/Zone4"), NodePath("AspectRatioContainer/Zone5")]
 metadata/_custom_type_script = "uid://cbidjfhlnvb46"
 
-[node name="Zone1" type="Polygon2D" parent="."]
-position = Vector2(0, 114)
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 110.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Zone1" type="Polygon2D" parent="AspectRatioContainer"]
 color = Color(0.970578, 0.28835246, 0.30506596, 0.5294118)
-polygon = PackedVector2Array(572, 316, 436, 274, 484, 213, 572, 176, 654, 199, 727, 268)
+polygon = PackedVector2Array(572, 316, 141, 278, 250, 193, 567, 121, 841, 177, 998, 269)
 script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Zone2" type="Polygon2D" parent="."]
-position = Vector2(0, 114)
+[node name="Zone2" type="Polygon2D" parent="AspectRatioContainer"]
 color = Color(0.78977114, 0.4484908, 0.55916715, 0.5294118)
-polygon = PackedVector2Array(573, 235, 373, 274, 376, 474, 573, 512, 807, 477, 809, 282)
+polygon = PackedVector2Array(573, 235, 194, 269, 197, 488, 573, 512, 948, 487, 946, 263)
 script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Zone3" type="Polygon2D" parent="."]
-position = Vector2(0, 114)
+[node name="Zone3" type="Polygon2D" parent="AspectRatioContainer"]
 color = Color(0.787522, 0.4858221, 0.27731854, 0.5294118)
-polygon = PackedVector2Array(573, 315, 358, 233, 462, 133, 568, 109, 690, 153, 774, 232)
+polygon = PackedVector2Array(573, 315, 77, 209, 190, 100, 566, 48, 859, 93, 1074, 206)
 script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Zone4" type="Polygon2D" parent="."]
-position = Vector2(0, 114)
+[node name="Zone4" type="Polygon2D" parent="AspectRatioContainer"]
 color = Color(0.6217734, 0.5811835, 0.19050422, 0.5294118)
-polygon = PackedVector2Array(574, 315, 194, 83, 410, 0, 705, 2, 888, 87)
+polygon = PackedVector2Array(574, 315, 24, 106, 164, -4, 566, -45, 998, 7, 1126, 105)
 script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Zone5" type="Polygon2D" parent="."]
-position = Vector2(0, 114)
+[node name="Zone5" type="Polygon2D" parent="AspectRatioContainer"]
 color = Color(0.3847674, 0.60381866, 0.70750016, 0.5294118)
-polygon = PackedVector2Array(571, 311, 2, -92, 2, -116, 1150, -109, 1108, -85)
+polygon = PackedVector2Array(571, 311, 0, -11, 2, -116, 1150, -109, 1147, -23)
 script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"

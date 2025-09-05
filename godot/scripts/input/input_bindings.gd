@@ -17,6 +17,7 @@ const NEXT_TARGET := "target_next"
 const PREVIOUS_TARGET := "target_previous"
 const SCAN_TARGET_RIGHT := "scan_target_right"
 const SCAN_TARGET_LEFT := "scan_target_left"
+const CANCEL_TARGET := "cancel_target"
 const CAMERA_LEFT := "camera_left"
 const CAMERA_RIGHT := "camera_right"
 const CAMERA_UP := "camera_up"
@@ -43,6 +44,7 @@ const UI_TOGGLE := "ui_toggle"
 @export var previous_target: Array[InputEvent]
 @export var scan_target_right: Array[InputEvent]
 @export var scan_target_left: Array[InputEvent]
+@export var cancel_target: Array[InputEvent]
 
 @export var camera_left: Array[InputEvent]
 @export var camera_right: Array[InputEvent]
@@ -72,6 +74,7 @@ func get_binds() -> Dictionary:
         PREVIOUS_TARGET: previous_target,
         SCAN_TARGET_RIGHT: scan_target_right,
         SCAN_TARGET_LEFT: scan_target_left,
+        CANCEL_TARGET: cancel_target,
         CAMERA_LEFT: camera_left,
         CAMERA_RIGHT: camera_right,
         CAMERA_UP: camera_up,

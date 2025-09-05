@@ -98,6 +98,7 @@ signal next_target
 signal previous_target
 signal scan_target_right
 signal scan_target_left
+signal cancel_target
 
 signal action_0
 signal action_1

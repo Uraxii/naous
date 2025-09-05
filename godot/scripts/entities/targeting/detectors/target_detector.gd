@@ -33,15 +33,12 @@ func detect_targets() -> void:
 
 func _target_is_in_shape(possible_target: Targetable, screen_shape: Polygon2D) -> bool:
     var target_entity: Entity = possible_target.entity
-    var target_visual_instances := target_entity.find_children("*", "VisualInstance3D")
-    var first_visual_instance: VisualInstance3D = target_visual_instances[0] as VisualInstance3D
-    var target_aabb := first_visual_instance.get_aabb()
-    var transformed_aabb := target_aabb * first_visual_instance.global_transform
-    var target_aabb_points := _generate_screen_points_of_aabb(transformed_aabb)
-    
+    var entity_world_aabb := target_entity.get_world_aabb()
+    var target_aabb_points := _generate_screen_points_of_aabb(entity_world_aabb)
+    var screen_polygon := screen_shape.polygon * screen_shape.global_transform
     var target_in_shape := false
     for aabb_point: Vector2 in target_aabb_points:
-        if Geometry2D.is_point_in_polygon(aabb_point, screen_shape.polygon):
+        if Geometry2D.is_point_in_polygon(aabb_point, screen_polygon):
             target_in_shape = true
             break
     
@@ -72,11 +69,13 @@ func _generate_screen_points_of_aabb(aabb: AABB) -> Array[Vector2]:
 
 func _add_current_target(new_target: Targetable) -> void:
     if not _current_targets.has(new_target):
+        #print("adding a target to: - ", self.name)
         _current_targets.push_back(new_target)
 
 
 func _remove_current_target(lost_target: Targetable) -> void:
     if _current_targets.has(lost_target):
+        #print("removing a target from: - ", self.name)
         _current_targets.erase(lost_target)
 #endregion
 
@@ -88,4 +87,5 @@ func _physics_process(_delta: float) -> void:
 
 func _ready() -> void:
     visible = false # Hide the shape from the screen
+    pass
 #endregion

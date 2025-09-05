@@ -12,7 +12,7 @@ var current_target: Targetable:
 
 #region Targeting
 func cursor_target() -> void:
-    #print("Attempting to find target at cursor location: ", screen_point)
+    #print("Attempting CURSOR target!")
     var cursor_detection_target := cursor_targeting.get_next_detected_target(current_target)
     if is_instance_valid(cursor_detection_target) and cursor_detection_target != current_target:
         #print("CURSOR TARGET: updating current target!")
@@ -51,18 +51,23 @@ func scan_target_left() -> void:
         current_target = prev_scan_target
 
 
+func cancel_target() -> void:
+    current_target = null
+
+
 func has_valid_target() -> bool:
     return is_instance_valid(current_target)
 
 
 func _set_current_target(new_target) -> void:
-    print("")
+    #print("setting new current target to: ", new_target.get_parent().get_parent().name)
     if is_instance_valid(current_target):
         current_target.hide_indicator()
     
     current_target = new_target
-    current_target.show_indicator()
-
+    
+    if is_instance_valid(current_target):
+        current_target.show_indicator()
 #endregion
 
 
@@ -73,4 +78,5 @@ func _ready() -> void:
     signals.previous_target.connect(previous_target)
     signals.scan_target_right.connect(scan_target_right)
     signals.scan_target_left.connect(scan_target_left)
+    signals.cancel_target.connect(cancel_target)
 #endregion

@@ -23,14 +23,14 @@ func adjust_ground_indicator_for_entity(target_entity: Entity) -> void:
     # TODO: This does not snap to the ground, but to the bottom of the mesh. If we ever have something that has a model stretching into the ground (eg. a burrowing worm), we may need to adjust this logic to do actual floor snapping.
     var new_circle_height := transformed_aabb.position.y
     circle.global_position.y = new_circle_height
-    print("updated ground ind height for mesh %s = %s" % [entity.name, circle.global_position.y])
+    #print("updated ground ind height for mesh %s = %s" % [entity.name, circle.global_position.y])
     
     var circle_radius := sqrt(pow(transformed_aabb.size.x, 2) + pow(transformed_aabb.size.z, 2)) / 2
     var torus_mesh: TorusMesh = circle.mesh as TorusMesh
     var concentric_radius_diff := torus_mesh.outer_radius - torus_mesh.inner_radius
     torus_mesh.inner_radius = circle_radius + RADIUS_BUFFER
     torus_mesh.outer_radius = torus_mesh.inner_radius + concentric_radius_diff
-    print("updated inner radius for mesh %s = %s" % [entity.name, circle_radius])
+    #print("updated inner radius for mesh %s = %s" % [entity.name, circle_radius])
 
 
 func adjust_pointer_indicator_for_entity(target_entity: Entity) -> void:
@@ -38,7 +38,7 @@ func adjust_pointer_indicator_for_entity(target_entity: Entity) -> void:
     var pointer_world_aabb := pointer.global_transform * pointer.mesh.get_aabb()
     var new_pointer_height := transformed_aabb.end.y + (pointer_world_aabb.size.y / 2) + POINTER_BUFFER
     pointer.global_position.y = new_pointer_height
-    print("updated pointer height for mesh %s = %s" % [entity.name, pointer.global_position.y])
+    #print("updated pointer height for mesh %s = %s" % [entity.name, pointer.global_position.y])
     
 
 func set_material_color(new_color: Color) -> void:

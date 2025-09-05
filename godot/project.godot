@@ -118,6 +118,10 @@ scan_target_left={
 "deadzone": 0.2,
 "events": []
 }
+cancel_target={
+"deadzone": 0.2,
+"events": []
+}
 jump={
 "deadzone": 0.2,
 "events": []
