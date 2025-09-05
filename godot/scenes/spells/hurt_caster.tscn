@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqgvbdfsa0nll"]
+
+[ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="1_0gs2d"]
+[ext_resource type="PackedScene" uid="uid://bv35w8et1ttcd" path="res://scenes/spells/traits/damage_caster.tscn" id="2_odf6n"]
+
+[node name="HurtCaster" type="Node"]
+script = ExtResource("1_0gs2d")
+id = "Test Spell"
+hotbar = 1
+hotbutton = 1
+
+[node name="DamageCaster" parent="." instance=ExtResource("2_odf6n")]

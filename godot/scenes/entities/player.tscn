@@ -1,13 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=19 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
-[ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="5_xigm7"]
-[ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="6_0njix"]
-[ext_resource type="Script" path="res://scripts/spells/traits/spawn_entity.gd" id="7_o0n85"]
-[ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/entities/projectiles/projectile.tscn" id="8_ogpgs"]
+[ext_resource type="PackedScene" uid="uid://dqgvbdfsa0nll" path="res://scenes/spells/hurt_caster.tscn" id="5_5ki56"]
+[ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
@@ -63,25 +61,12 @@ entity = NodePath("..")
 [node name="Spellbook" type="Node" parent="Components"]
 script = ExtResource("4_qa3vu")
 
-[node name="TestSpell" type="Node" parent="Components/Spellbook"]
-script = ExtResource("5_xigm7")
-id = "Test Spell"
-hotbar = 1
+[node name="ThrowBall" parent="Components/Spellbook" instance=ExtResource("5_saib0")]
 hotbutton = 1
 
-[node name="DamageSelf" type="Node" parent="Components/Spellbook/TestSpell"]
-script = ExtResource("6_0njix")
-
-[node name="ThrowBall" type="Node" parent="Components/Spellbook"]
-script = ExtResource("5_xigm7")
-id = "Throw Ball"
-hotbar = 1
+[node name="HurtCaster" parent="Components/Spellbook" instance=ExtResource("5_5ki56")]
+id = "Hurt Caster"
 hotbutton = 3
-metadata/_custom_type_script = "uid://dm0o2a64iis1u"
-
-[node name="SpawnEntity" type="Node" parent="Components/Spellbook/ThrowBall"]
-script = ExtResource("7_o0n85")
-entity_scene = ExtResource("8_ogpgs")
 
 [node name="Move" type="Node" parent="Components"]
 script = ExtResource("9_dqg57")
@@ -138,6 +123,8 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5009488, -0.53692293)
 
 [node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
