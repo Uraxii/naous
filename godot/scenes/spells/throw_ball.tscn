@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://yraotv0gbwqi"]
+[gd_scene load_steps=3 format=3 uid="uid://yraotv0gbwqi"]
 
 [ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="1_3qo5t"]
-[ext_resource type="Script" uid="uid://bc6253msclsnu" path="res://scripts/spells/traits/spawn_entity.gd" id="2_qdrrm"]
-[ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/entities/projectiles/projectile.tscn" id="3_u3t4w"]
+[ext_resource type="PackedScene" uid="uid://c1omqy0vt0q46" path="res://scenes/spells/traits/spawn_entity.tscn" id="2_8vjq7"]
 
 [node name="ThrowBall" type="Node"]
 script = ExtResource("1_3qo5t")
@@ -11,6 +10,4 @@ hotbar = 1
 hotbutton = 3
 metadata/_custom_type_script = "uid://dm0o2a64iis1u"
 
-[node name="SpawnEntity" type="Node" parent="."]
-script = ExtResource("2_qdrrm")
-entity_scene = ExtResource("3_u3t4w")
+[node name="SpawnEntity" parent="." instance=ExtResource("2_8vjq7")]
