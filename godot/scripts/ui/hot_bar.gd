@@ -14,25 +14,29 @@ var binds := [
 var buttons: Array[Hotbutton] = []
 
 
-func _ready() -> void:
-    print_debug("Hotbar")
-    signals.control_entity.connect(_on_control.call_deferred)
-    
-    for i in range(0, binds.size()):
-        var button: Hotbutton = views.spawn(Hotbutton)
-        buttons.append(button)
-        button.reparent(hbox)
-
-
-func _on_control(new_enity: Entity) -> void:
+func _on_control_entity(new_enity: Entity) -> void:
     var spell_component = new_enity.spellbook
+    log.debug("sb", new_enity.spellbook)
     if not spell_component:
         return
     
-    var spells: Array[Spell] = spell_component.spells.values()
-    var next_button_id = 0
-    # TODO: HotbarPrefs
-    for i in range(spells.size()):
-        var action_str = binds[i] if i < binds.size() else "OUT_OF_ACTIONS"
-        buttons[i].setup(next_button_id, action_str, spells[i], new_enity)
-        next_button_id += 1
+    var spells: Array[Spell] = spell_component.spells.values().filter(
+        func(spell:Spell): return spell.hotbar == id)
+    
+    log.debug("Spells:", spells)
+    
+    for button in buttons:
+        for spell in spells:
+            if spell.hotbutton == button.id:
+                button.set_spell(spell)
+
+
+func _ready() -> void:
+    signals.control_entity.connect(_on_control_entity)
+    for i in range(0, binds.size()):
+        var button: Hotbutton = views.spawn(Hotbutton)
+        var button_id = i + 1
+        var action = binds[i]
+        button.setup(button_id, action)
+        buttons.append(button)
+        button.reparent(hbox)

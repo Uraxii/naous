@@ -24,4 +24,5 @@ func despawn():
 
 
 func _on_visibility_change() -> void:
-    print_debug(self, " visible:", is_visible_in_tree())
+    #print_debug(self, " visible:", is_visible_in_tree())
+    pass

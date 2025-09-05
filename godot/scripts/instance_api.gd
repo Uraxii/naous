@@ -1,10 +1,8 @@
 class_name InstanceApi extends Node
 
-signal player_connected(peer_id, player_info)
-signal player_disconnected(peer_id)
-signal server_disconnected
-
 #region Instance Variables
+@onready var lg: Log = Globals.logger
+
 var my_peer_id: int:
     get: return multiplayer.get_unique_id()
 
@@ -107,8 +105,8 @@ func _spawn_player(authority: int, user_name: String, character_name: String) ->
     player_data.entity = entity
     connections[authority] = player_data
 
-    signals.log_new_debug.emit("%s spawned." % player_data.id)
-    player_connected.emit(authority, player_data)
+    lg.debug("%s spawned." % player_data.id)
+    signals.player_connected.emit(authority, player_data)
 
 
 @rpc("any_peer", "call_remote", "reliable")
@@ -135,7 +133,7 @@ func _on_player_disconnected(peer_id: int) -> void:
             entities.despawn(data.entity.id)
         signals.log_new_debug.emit("%s disconnected." % data.id)
 
-    player_disconnected.emit(peer_id)
+    signals.player_disconnected.emit(peer_id)
 
 
 func _on_connected_ok() -> void:
@@ -143,6 +141,7 @@ func _on_connected_ok() -> void:
         "res://resources/dummy_character_data.tres")
     # Request server to spawn this player
     _request_spawn.rpc_id(1, "Nicole", char_data.name)
+    signals.connected_to_server.emit()
 
 
 func _on_connected_fail() -> void:
@@ -154,7 +153,7 @@ func _on_server_disconnected() -> void:
     signals.log_new_warning.emit("Disconnected from server.")
     multiplayer.multiplayer_peer = null
     connections.clear()
-    server_disconnected.emit()
+    signals.server_disconnected.emit()
 #endregion
 
 #region Godot Callback functions

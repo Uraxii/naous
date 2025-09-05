@@ -1,6 +1,7 @@
 class_name ViewManager extends CanvasLayer
 
 @onready var signals := Globals.signal_bus
+@onready var lg: Log = Globals.logger
 
 var active_views: Array[View] = []
 
@@ -16,8 +17,19 @@ var _scene_map: Dictionary[GDScript, PackedScene] = {
     Hotbutton: preload("res://scenes/ui/hotbutton.tscn"),
 }
 
-var is_ui_visible := true
+var active: Dictionary[String, Control]
+var is_hidden := false
 
+
+func spawn_menu(scene: PackedScene) -> Control:
+    if not scene:
+        lg.error("Tried to spawn menu, but the provided scene was null!")
+        return
+        
+    var menu: Control = scene.instantiate()
+    add_child(menu)
+    return menu
+    
 
 func spawn(type: GDScript, do_not_register=false) -> View:
     var view_scene = _scene_map.get(type)
@@ -38,7 +50,7 @@ func spawn(type: GDScript, do_not_register=false) -> View:
     add_child(view_node)
     view_node.initalize()
     signals.spawn_view.emit(view_node)
-    view_node.visible = is_ui_visible
+    view_node.visible = not is_hidden
     
     return view_node
 
@@ -54,10 +66,10 @@ func _ready():
 
 
 func _on_ui_toggle():
-    is_ui_visible = not is_ui_visible
+    is_hidden = not is_hidden
     
     for view in active_views:
-        view.visible = is_ui_visible
+        view.visible = is_hidden
 
 
 func _on_despawn_view(view: View) -> void:

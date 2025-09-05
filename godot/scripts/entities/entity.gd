@@ -16,6 +16,8 @@ signal change_control(is_local: bool)
 @export_category("Runtime Values")
 @export var id := -1
 
+@onready var lg: Log = Globals.logger
+
 
 var entities: EntityManager:
     get: return Globals.entities
@@ -46,14 +48,14 @@ func die() -> void:
 
 func _check_local_authority() -> void:
     var is_local = transform_sync.is_multiplayer_authority()
-    signals.log_new_debug.emit(
-        "Entity %s - Authority: %d, Local: %s" %
-            [name, get_multiplayer_authority(), is_local])
+    #lg.debug("Entity %s - Authority: %d, Local: %s" %
+        #[name, get_multiplayer_authority(), is_local])
+
+    change_control.emit(is_local)
 
     if is_local:
         signals.control_entity.emit(self)
 
-    change_control.emit(is_local)
 
 
 #region Godot Callback Functions
@@ -63,8 +65,6 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-    _check_local_authority()
-    
     if not components: components = find_child("Components")
     if components:
         if not health:      health      = components.find("Health")
@@ -79,4 +79,7 @@ func _ready() -> void:
     for comp: Node in components.map.values():
         if comp.has_method("set_entity"):
             comp.set_entity(self)
+    
+    # This MUST be last!
+    _check_local_authority()
 #endregion

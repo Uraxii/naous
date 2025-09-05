@@ -3,9 +3,8 @@ class_name StateMachine extends Node
 @export var initial_state: State
 
 @onready var curr := initial_state
-
-var signals: SignalBus:
-    get: return Globals.signal_bus
+@onready var signals: SignalBus = Globals.signal_bus
+@onready var lg: Log = Globals.logger
 
 var states: Dictionary[GDScript, State] = {}
 
@@ -21,8 +20,7 @@ func transition(current_state: State, target_state: GDScript) -> void:
         push_error("Next state null!")
         return
 
-    signals.log_new_debug.emit(
-        "Transitioning from %s to %s" % [current_state, next_state])
+    #lg.debug("Transitioning from %s to %s" % [current_state, next_state])
     
     next_state.enter()    
     curr = next_state

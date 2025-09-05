@@ -66,6 +66,8 @@ script = ExtResource("4_qa3vu")
 [node name="TestSpell" type="Node" parent="Components/Spellbook"]
 script = ExtResource("5_xigm7")
 id = "Test Spell"
+hotbar = 1
+hotbutton = 1
 
 [node name="DamageSelf" type="Node" parent="Components/Spellbook/TestSpell"]
 script = ExtResource("6_0njix")
@@ -73,6 +75,8 @@ script = ExtResource("6_0njix")
 [node name="ThrowBall" type="Node" parent="Components/Spellbook"]
 script = ExtResource("5_xigm7")
 id = "Throw Ball"
+hotbar = 1
+hotbutton = 3
 metadata/_custom_type_script = "uid://dm0o2a64iis1u"
 
 [node name="SpawnEntity" type="Node" parent="Components/Spellbook/ThrowBall"]

@@ -2,6 +2,8 @@ class_name ComponentSpellbook extends Node
 
 @export_category("Runtime Values")
 @export var spells: Dictionary[String, Spell] = {}
+# Spell ID : Input Action String
+@export var hotbutton_binds: Dictionary[String, String]
 
 var caster: Entity
 
@@ -10,7 +12,7 @@ func cast(spell_id: String):
     var spell: Spell = spells.get(spell_id)
     if not spell or not spell.is_castable:
         return false
-        
+
     spell.cast.rpc()
     return true
     
@@ -33,4 +35,4 @@ func _setup() -> void:
     
     
 func _ready() -> void:
-    _setup.call_deferred()
+    _setup()

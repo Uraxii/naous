@@ -4,6 +4,8 @@ signal cast_started
 
 @export var id := ""
 @export var cooldown_time := 1.0
+@export var hotbar := 0
+@export var hotbutton := 0
 @export_category("Runtime Values")
 @export var traits: Array[Node] = []
 @export var caster: Entity

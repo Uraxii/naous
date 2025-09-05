@@ -3,8 +3,8 @@ class_name EntityManager extends MultiplayerSpawner
 @export var player_scene: PackedScene = preload(
     "res://scenes/entities/player.tscn")
 
-var signals: SignalBus:
-    get: return Globals.signal_bus
+@onready var signals: SignalBus = Globals.signal_bus
+@onready var lg: Log = Globals.logger
 
 var pool: Dictionary[int, Entity] = {}
 var _ids := IdPool.new()
@@ -22,7 +22,7 @@ func despawn(id: int) -> void:
         return
 
     entity.queue_free.call_deferred()
-    signals.despawn_entity.emit(entity)
+    #lg.debug(entity)
 
 
 func find(id: int) -> Entity:
@@ -33,7 +33,7 @@ func _on_client_spawn(node: Node) -> void:
     if node is Entity:
         # Register the entity in the pool.
         pool[node.id] = node as Entity
-        signals.log_new_debug.emit("Registered %s as %d" % [node.name, node.id])
+        #lg.debug("Registered %s as %d" % [node.name, node.id])
 
 
 #region Godot Callback Functions
