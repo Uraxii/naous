@@ -14,6 +14,8 @@ class_name InputManager extends Node
     InputBindings.ACTION_0: signals.action_0,
     InputBindings.ACTION_1: signals.action_1,
     InputBindings.ACTION_2: signals.action_2,
+    InputBindings.ACTION_3: signals.action_3,
+    InputBindings.ACTION_4: signals.action_4,
 }
 
 var default_binds: InputBindings = load(
