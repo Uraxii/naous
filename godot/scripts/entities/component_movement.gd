@@ -6,17 +6,17 @@ const BACKPEDDLE_PENALTY := 0.7
 var body: CharacterBody3D:
     get: return entity.body
     
-var speed: StatComponent:
-    get: return entity.speed
+var speed: float:
+    get: return entity.speed.current
     
-var gravity: StatComponent:
-    get: return entity.gravity
+var gravity: float:
+    get: return entity.gravity.current
 
 var jumping_gravity: float:
     get: return entity.gravity.current / 2
     
-var jump_force: StatComponent:
-    get: return entity.jump_force
+var jump_force: float:
+    get: return entity.jump_force.current
 
 var signals: SignalBus:
     get: return Globals.signal_bus
@@ -39,22 +39,22 @@ func set_force_movement(velocity: Vector3) -> void:
 func move_towards(position: Vector3) -> void:
     var direction = position - body.global_transform.origin
     direction = direction.normalized()
-    move_velocity = direction * speed.current
+    move_velocity = direction * speed
 
 
 func input_move(direction: Vector2):
     move_velocity = body.transform.basis * Vector3(
-        direction.x, 0, direction.y).normalized() * speed.current
+        direction.x, 0, direction.y).normalized() * speed
 
 
 func jump() -> void:
     if move_velocity.length() > 0.1:
         var horizontal_velocity = Vector3(move_velocity.x, 0, move_velocity.z)
-        jump_influence = horizontal_velocity.normalized() * speed.current
+        jump_influence = horizontal_velocity.normalized() * speed
     else:
         jump_influence = Vector3.ZERO
     
-    jump_influence.y = jump_force.current
+    jump_influence.y = jump_force
 
 
 func apply_gravity(current_velocity: Vector3) -> Vector3:
@@ -67,9 +67,9 @@ func apply_gravity(current_velocity: Vector3) -> Vector3:
     if is_jumping and jump_influence.y > 0:
         gravity_to_apply = jumping_gravity
     else:
-        gravity_to_apply = gravity.current
+        gravity_to_apply = gravity
 
-    current_gravity -= gravity_to_apply * gravity.current
+    current_gravity -= gravity_to_apply * gravity
     current_velocity.y += current_gravity
     return current_velocity
 
@@ -103,12 +103,12 @@ func _setup() -> void:
         
     if not entity:
         entity = component_manager.entity
-        if not entity: push_error("Movement found no entity!")
+        if not entity:
+            push_error("Movement found no entity!")
+            return
         
     push_warning("Reminder: Move is pushing the player up in _startup.")
     body.position.y += 100
-
-    jump_force = entity.jump_force
     
     entity.change_control.connect(_on_change_control)
     
