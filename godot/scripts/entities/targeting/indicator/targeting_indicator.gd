@@ -19,6 +19,8 @@ func set_owning_entity(owning_entity: Entity) -> void:
 
 func adjust_ground_indicator_for_entity(target_entity: Entity) -> void:
     var transformed_aabb := _get_transformed_target_aabb(target_entity)
+    
+    # TODO: This does not snap to the ground, but to the bottom of the mesh. If we ever have something that has a model stretching into the ground (eg. a burrowing worm), we may need to adjust this logic to do actual floor snapping.
     var new_circle_height := transformed_aabb.position.y
     circle.global_position.y = new_circle_height
     print("updated ground ind height for mesh %s = %s" % [entity.name, circle.global_position.y])
@@ -33,7 +35,8 @@ func adjust_ground_indicator_for_entity(target_entity: Entity) -> void:
 
 func adjust_pointer_indicator_for_entity(target_entity: Entity) -> void:
     var transformed_aabb := _get_transformed_target_aabb(target_entity)
-    var new_pointer_height := transformed_aabb.end.y + POINTER_BUFFER
+    var pointer_world_aabb := pointer.global_transform * pointer.mesh.get_aabb()
+    var new_pointer_height := transformed_aabb.end.y + (pointer_world_aabb.size.y / 2) + POINTER_BUFFER
     pointer.global_position.y = new_pointer_height
     print("updated pointer height for mesh %s = %s" % [entity.name, pointer.global_position.y])
     
@@ -46,11 +49,7 @@ func set_material_color(new_color: Color) -> void:
 
 
 func _get_transformed_target_aabb(target_entity: Entity) -> AABB:
-    # FIXME: Account for scaling of nodes (need to pass this to Entity)
-    var target_visual_instances := target_entity.find_children("*", "VisualInstance3D")
-    var first_visual_instance: VisualInstance3D = target_visual_instances[0] as VisualInstance3D
-    var target_aabb := first_visual_instance.get_aabb()
-    var transformed_aabb := target_aabb * first_visual_instance.global_transform.affine_inverse()
+    var transformed_aabb := target_entity.get_world_aabb()
     return transformed_aabb
 
 
