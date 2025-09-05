@@ -1,26 +1,36 @@
 class_name ComponentMove extends Node
 
-const FORCE_GRAVITY: float = 0.8
-const FORCE_JUMP_GRAVIY: float = 0.4
-const BACKPEDDLE_PENALTY := 0.75
+#region Variables
+const BACKPEDDLE_PENALTY := 0.7
 
-var entity: Entity
-var body: CharacterBody3D
-var speed: StatComponent
-var gravity: StatComponent
-var jump_force: StatComponent
+var body: CharacterBody3D:
+    get: return entity.body
+    
+var speed: StatComponent:
+    get: return entity.speed
+    
+var gravity: StatComponent:
+    get: return entity.gravity
+
+var jumping_gravity: float:
+    get: return entity.gravity.current / 2
+    
+var jump_force: StatComponent:
+    get: return entity.jump_force
 
 var signals: SignalBus:
     get: return Globals.signal_bus
     
 var input: InputManager:
     get: return Globals.input
+    
+var entity: Entity
 
 var current_gravity: float = 0.0
 var move_velocity := Vector3.ZERO
 var is_jumping: bool = false
 var jump_influence := Vector3.ZERO
-
+#endregion
 
 func set_force_movement(velocity: Vector3) -> void:
     move_velocity = velocity
@@ -55,9 +65,9 @@ func apply_gravity(current_velocity: Vector3) -> Vector3:
 
     var gravity_to_apply: float
     if is_jumping and jump_influence.y > 0:
-        gravity_to_apply = FORCE_JUMP_GRAVIY
+        gravity_to_apply = jumping_gravity
     else:
-        gravity_to_apply = FORCE_GRAVITY
+        gravity_to_apply = gravity.current
 
     current_gravity -= gravity_to_apply * gravity.current
     current_velocity.y += current_gravity
@@ -73,7 +83,7 @@ func apply_jump_influence(current_velocity: Vector3) -> Vector3:
     is_jumping = true
     current_velocity += jump_influence
     if jump_influence.y > 0:
-        jump_influence.y -= FORCE_JUMP_GRAVIY
+        jump_influence.y -= jumping_gravity
     return current_velocity
 
 
@@ -95,11 +105,9 @@ func _setup() -> void:
         entity = component_manager.entity
         if not entity: push_error("Movement found no entity!")
         
-    body = entity.body
     push_warning("Reminder: Move is pushing the player up in _startup.")
     body.position.y += 100
-    speed = entity.speed
-    gravity = entity.gravity
+
     jump_force = entity.jump_force
     
     entity.change_control.connect(_on_change_control)
