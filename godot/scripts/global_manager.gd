@@ -12,10 +12,10 @@ class_name GlobalManager extends Node
     "Interaction", InteractionManager)
 
 @onready var entities: EntityManager = new_global_scene(
-    "Entities", preload("res://scenes/entities/entity_manager.tscn"))
-
+    "Entities", preload("uid://c0kc2r2wbe47x"))
+@onready var targeting: TargetingManager = new_global("Targeting", TargetingManager)
 @onready var camera: CameraManager = new_global_scene(
-    "Camera", preload("res://scenes/camera/camera_manager.tscn"))
+    "Camera", preload("uid://dajlyyo0adshc"))
 
 
 func new_global(node_name: String, type: GDScript) -> Node:

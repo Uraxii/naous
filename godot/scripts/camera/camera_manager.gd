@@ -29,13 +29,13 @@ func _ready() -> void:
     signals.camera_rotate.connect(_on_camera_rotate)
     signals.character_rotate_start.connect(_on_character_rotate_start)
     signals.character_rotate_stop.connect(_on_character_rotate_stop)
-    
+
     # Adjust position to make the server view better.
     # This can get deleted once free cam movement works.
     if multiplayer.is_server():
         position.x += 5
         position.y += 5
-        
+
     # Ensure we have an active camera immediately
     camera.make_current()
 
@@ -44,8 +44,7 @@ func _handle_rotation(rotation_vector: Vector2) -> void:
     rotation.y -= rotation_vector.x
     rotation.x -= rotation_vector.y
 
-    if rotation.x < -1: 
-        rotation.x = -1
+    rotation.x = clampf(rotation.x, -1, 1)
 
     target.body.rotation.y = rotation.y
 
@@ -74,11 +73,11 @@ func _on_camera_zoom_in() -> void:
 
 func _on_camera_rotate(input_direction: Vector2) -> void:
     direction = input_direction
-    
+
 
 func _on_character_rotate_start() -> void:
     rotate_entity = true
-    
+
 
 func _on_character_rotate_stop() -> void:
     rotate_entity = false

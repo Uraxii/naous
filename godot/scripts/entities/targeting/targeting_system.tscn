@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ngjvwwwfe2sy"]
+
+[ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="1_41ke8"]
+
+[node name="TargetingSystem" type="Node"]
+script = ExtResource("1_41ke8")

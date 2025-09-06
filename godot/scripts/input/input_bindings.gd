@@ -12,6 +12,12 @@ const MOVE_FORWARD := "move_forward"
 const MOVE_BACK := "move_back"
 const JUMP := "jump"
 const INTERACT := "interact"
+const CURSOR_TARGET := "cursor_target"
+const NEXT_TARGET := "target_next"
+const PREVIOUS_TARGET := "target_previous"
+const SCAN_TARGET_RIGHT := "scan_target_right"
+const SCAN_TARGET_LEFT := "scan_target_left"
+const CANCEL_TARGET := "cancel_target"
 const CAMERA_LEFT := "camera_left"
 const CAMERA_RIGHT := "camera_right"
 const CAMERA_UP := "camera_up"
@@ -37,6 +43,12 @@ const UI_TOGGLE := "ui_toggle"
 @export var move_back: Array[InputEvent]
 @export var jump: Array[InputEvent]
 @export var interact: Array[InputEvent]
+@export var cursor_target: Array[InputEvent]
+@export var next_target: Array[InputEvent]
+@export var previous_target: Array[InputEvent]
+@export var scan_target_right: Array[InputEvent]
+@export var scan_target_left: Array[InputEvent]
+@export var cancel_target: Array[InputEvent]
 
 @export var camera_left: Array[InputEvent]
 @export var camera_right: Array[InputEvent]
@@ -65,6 +77,12 @@ func get_binds() -> Dictionary:
         MOVE_BACK: move_back,
         JUMP: jump,
         INTERACT: interact,
+        CURSOR_TARGET: cursor_target,
+        NEXT_TARGET: next_target,
+        PREVIOUS_TARGET: previous_target,
+        SCAN_TARGET_RIGHT: scan_target_right,
+        SCAN_TARGET_LEFT: scan_target_left,
+        CANCEL_TARGET: cancel_target,
         CAMERA_LEFT: camera_left,
         CAMERA_RIGHT: camera_right,
         CAMERA_UP: camera_up,

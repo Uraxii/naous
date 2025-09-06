@@ -104,7 +104,27 @@ target_self={
 "deadzone": 0.2,
 "events": []
 }
+cursor_target={
+"deadzone": 0.2,
+"events": []
+}
 target_next={
+"deadzone": 0.2,
+"events": []
+}
+target_previous={
+"deadzone": 0.2,
+"events": []
+}
+scan_target_right={
+"deadzone": 0.2,
+"events": []
+}
+scan_target_left={
+"deadzone": 0.2,
+"events": []
+}
+cancel_target={
 "deadzone": 0.2,
 "events": []
 }

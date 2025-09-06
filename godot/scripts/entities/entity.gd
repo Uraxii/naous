@@ -4,15 +4,17 @@ class_name Entity extends Node3D
 signal change_control(is_local: bool)
 
 @export_category("Components")
-@export var components: ComponentManager
-@export var health:     HealthComponent
-@export var speed:      StatComponent
-@export var gravity:    StatComponent
-@export var jump_force: StatComponent
-@export var move:       ComponentMove
-@export var body:       Node3D
-@export var spellbook:  ComponentSpellbook
-@export var inventory:  Node
+@export var components:   ComponentManager
+@export var health:       HealthComponent
+@export var speed:        StatComponent
+@export var gravity:      StatComponent
+@export var jump_force:   StatComponent
+@export var move:         ComponentMove
+@export var body:         Node3D
+@export var spellbook:    ComponentSpellbook
+@export var inventory:    Node
+@export var interaction:  InteractionComponent
+@export var targeting:    TargetingSystem
 @export_category("Runtime Values")
 @export var id := -1
 
@@ -57,6 +59,54 @@ func _check_local_authority() -> void:
         signals.control_entity.emit(self)
 
 
+#region AABB Helpers
+func get_local_aabb() -> AABB:
+    var visual_instances := _get_visual_instances()
+    var local_transformed_aabb := _get_local_aabb_from_instances(visual_instances)
+    return local_transformed_aabb
+
+
+func get_world_aabb() -> AABB:
+    # FIXME: Account for scaling of nodes (need to pass this to Entity)
+    var visual_instances := _get_visual_instances()
+    var world_transformed_aabb := _get_world_transformed_aabb_from_instances(visual_instances)
+    return world_transformed_aabb
+
+
+func _get_visual_instances() -> Array[VisualInstance3D]:
+    var instance_children := find_children("*", "VisualInstance3D")
+    var visual_instances: Array[VisualInstance3D] = []
+    visual_instances.assign(instance_children)
+    return visual_instances
+
+
+func _get_local_aabb_from_instances(visual_instances: Array[VisualInstance3D]) -> AABB:
+    var final_aabb := AABB()
+    
+    for visual_instance: VisualInstance3D in visual_instances:
+        var instance_aabb := visual_instance.get_aabb()
+        final_aabb.merge(instance_aabb)
+    
+    return final_aabb
+
+
+func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualInstance3D]) -> AABB:
+    var final_transformed_aabb := AABB()
+    
+    for visual_instance: VisualInstance3D in visual_instances:
+        var instance_aabb := visual_instance.get_aabb()
+        # MATRIX MATH ORDER MATTERS!
+        # For global-space transforms, multiply the global transform BY the local transform (seen here)
+        # This converts the local-space AABB transform (which doesn't contain things like scale or rotation) to its transform in global space.
+        var world_instance_aabb := visual_instance.global_transform * instance_aabb
+        if final_transformed_aabb.position == Vector3.ZERO and final_transformed_aabb.size == Vector3.ZERO:
+            final_transformed_aabb = world_instance_aabb
+        else:
+            final_transformed_aabb.merge(world_instance_aabb)
+    
+    return final_transformed_aabb
+#endregion
+
 
 #region Godot Callback Functions
 func _enter_tree() -> void:
@@ -67,14 +117,16 @@ func _enter_tree() -> void:
 func _ready() -> void:
     if not components: components = find_child("Components")
     if components:
-        if not health:      health      = components.find("Health")
-        if not speed:       speed       = components.find("Speed")
-        if not gravity:     gravity     = components.find("Gravity")
-        if not jump_force:  jump_force  = components.find("JumpForce")
-        if not spellbook:   spellbook   = components.find("Spellbook")
-        if not body:        body        = components.find("Body")
-        if not move:        move        = components.find("Move")
-        if not inventory:   inventory   = components.find("Inventory")
+        if not health:        health       = components.find("Health")
+        if not speed:         speed        = components.find("Speed")
+        if not gravity:       gravity      = components.find("Gravity")
+        if not jump_force:    jump_force   = components.find("JumpForce")
+        if not spellbook:     spellbook    = components.find("Spellbook")
+        if not body:          body         = components.find("Body")
+        if not move:          move         = components.find("Move")
+        if not inventory:     inventory    = components.find("Inventory")
+        if not interaction:   interaction  = components.find("Interaction")
+        if not targeting:     targeting    = components.find("TargetingSystem")
         
     for comp: Node in components.map.values():
         if comp.has_method("set_entity"):

@@ -35,6 +35,7 @@ func _rotate_to(rotation_vector: Vector3) -> void:
 
 #region Godot Callback Functions
 func _ready() -> void:
-    var interactable_component: InteractableComponent = get_component(InteractableComponent) as InteractableComponent
+    super._ready()
+    var interactable_component: InteractableComponent = components.find("Interactable")
     interactable_component.interaction_complete.connect(toggle_position)
 #endregion

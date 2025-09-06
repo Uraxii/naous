@@ -9,6 +9,7 @@ func control_complete() -> void:
 
 
 func _ready() -> void:
-    var interactable_component: InteractableComponent = get_component(InteractableComponent) as InteractableComponent
+    super._ready()
+    var interactable_component: InteractableComponent = components.find("Interactable")
     interactable_component.interaction_started.connect(start_control)
     interactable_component.interaction_complete.connect(control_complete)

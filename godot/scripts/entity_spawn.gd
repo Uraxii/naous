@@ -1,6 +1,6 @@
 class_name EntitySpawn extends MultiplayerSpawner
 
-@export var player_scene: PackedScene = preload("res://scenes/entity.tscn")
+@export var player_scene: PackedScene = preload("uid://bmpfv2bwc6v1r")
 
 
 func _ready():
