@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dqgvbdfsa0nll" path="res://scenes/spells/hurt_caster.tscn" id="5_5ki56"]
 [ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
 [ext_resource type="Script" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
+[ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="10_b4o2o"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="11_b4o2o"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
@@ -14,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="12_yr3on"]
 [ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="13_2ngu4"]
 [ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="14_jv5ih"]
-[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="15_yr3on"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
@@ -100,8 +100,11 @@ script = ExtResource("11_spk56")
 max_value = 200.0
 start_percent = 0.17500000000000004
 
-[node name="Interaction" type="Node" parent="Components"]
-script = ExtResource("15_yr3on")
+[node name="Interaction" type="Node" parent="Components" node_paths=PackedStringArray("entity", "detection_zone")]
+script = ExtResource("10_b4o2o")
+entity = NodePath("../..")
+detection_zone = NodePath("../Body/InteractableDetector")
+metadata/_custom_type_script = "uid://ctil5vnixrdc0"
 
 [node name="TargetingSystem" type="Node" parent="Components" node_paths=PackedStringArray("cursor_targeting", "auto_targeting", "scan_targeting")]
 script = ExtResource("11_b4o2o")
