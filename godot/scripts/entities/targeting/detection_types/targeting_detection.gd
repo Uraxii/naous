@@ -2,6 +2,8 @@ class_name TargetingDetection extends Node
 
 ## List of TargetDetector nodes to use for the detection logic. Order matters! First has highest priority, last has lowest priority.
 @export var detectors: Array[TargetDetector]
+@export var enable_debug_view: bool = false:
+    set = set_debug_mode_for_detectors
 
 var prioritized_target_list: Array[Targetable]
 
@@ -78,8 +80,7 @@ func update_prioritized_targets_for_detectors() -> void:
             detector_targets = _prioritize_detector_targets(detector_targets)
         for target: Targetable in detector_targets:
             if not prioritized_target_list.has(target):
-                if self.name == "CursorTargeting":
-                    print("Frame %s: '%s' found target '%s' via detector '%s'" % [Engine.get_frames_drawn(), self.name, target.get_parent().get_parent().name, detector.name])
+                print("Frame %s: '%s' found target '%s' via detector '%s'" % [Engine.get_frames_drawn(), self.name, target.get_parent().get_parent().name, detector.name])
                 prioritized_target_list.push_back(target)
     _queued_for_target_updated = false
 
@@ -96,7 +97,15 @@ func _on_detector_targets_changed(_targets: Array[Targetable]) -> void:
         # We only want to execute this once per frame if multiple detectors signal on the same frame
         # This felt cleaner than testing every frame via '_process'
         _queued_for_target_updated = true
-        update_prioritized_targets_for_detectors()
+        update_prioritized_targets_for_detectors.call_deferred()
+
+
+func set_debug_mode_for_detectors(enable_debug: bool) -> void:
+    enable_debug_view = enable_debug
+    if is_inside_tree():
+        #print("%s setting debug view: %s" % [self.name, enable_debug])
+        for detector: TargetDetector in detectors:
+            detector.set_debug_mode(enable_debug)
 
 
 ## Implementation should override this
@@ -108,6 +117,7 @@ func _target_sort(target_A: Targetable, target_B: Targetable) -> bool:
 
 #region Godot Callbacks
 func _ready() -> void:
+    set_debug_mode_for_detectors(enable_debug_view)
     for detector: TargetDetector in detectors:
         detector.current_targets_updated.connect(_on_detector_targets_changed)
 #endregion

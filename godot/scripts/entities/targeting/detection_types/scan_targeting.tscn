@@ -5,22 +5,22 @@
 
 [node name="ScanTargeting" type="Node" node_paths=PackedStringArray("detectors")]
 script = ExtResource("1_ys87q")
-detectors = [NodePath("Left3"), NodePath("Left2"), NodePath("Left1"), NodePath("Center"), NodePath("Right1"), NodePath("Right2"), NodePath("Right3")]
+detectors = [NodePath("LeftFar"), NodePath("LeftMid"), NodePath("LeftCenter"), NodePath("Center"), NodePath("RightCenter"), NodePath("RightMid"), NodePath("RightFar")]
 metadata/_custom_type_script = "uid://cbidjfhlnvb46"
 
-[node name="Left3" type="Polygon2D" parent="."]
+[node name="LeftFar" type="Polygon2D" parent="."]
 color = Color(0.12941177, 0.34117648, 0.8666667, 0.49019608)
 polygon = PackedVector2Array(223, 647, -5, 646, -2, -2, 228, 0)
 script = ExtResource("2_hftbh")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Left2" type="Polygon2D" parent="."]
+[node name="LeftMid" type="Polygon2D" parent="."]
 color = Color(0.13436241, 0.53923637, 0.8354336, 0.47843137)
 polygon = PackedVector2Array(387, 643, 224, 644, 226, -6, 387, 1)
 script = ExtResource("2_hftbh")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Left1" type="Polygon2D" parent="."]
+[node name="LeftCenter" type="Polygon2D" parent="."]
 color = Color(0.32333508, 0.48838207, 0.91170913, 0.47843137)
 polygon = PackedVector2Array(495, 646, 390, 645, 388, -3, 497, -4)
 script = ExtResource("2_hftbh")
@@ -32,19 +32,19 @@ polygon = PackedVector2Array(497, -1, 496, 646, 620, 646, 619, -4)
 script = ExtResource("2_hftbh")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Right1" type="Polygon2D" parent="."]
+[node name="RightCenter" type="Polygon2D" parent="."]
 color = Color(0.7343689, 0.22179644, 0.9161494, 0.47843137)
 polygon = PackedVector2Array(621, 647, 621, -3, 726, -2, 730, 649)
 script = ExtResource("2_hftbh")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Right2" type="Polygon2D" parent="."]
+[node name="RightMid" type="Polygon2D" parent="."]
 color = Color(0.8678419, 0.099748306, 0.696536, 0.47843137)
 polygon = PackedVector2Array(733, 645, 894, 648, 898, 0, 724, 0)
 script = ExtResource("2_hftbh")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
-[node name="Right3" type="Polygon2D" parent="."]
+[node name="RightFar" type="Polygon2D" parent="."]
 color = Color(0.91764706, 0.047058813, 0.34901962, 0.47843137)
 polygon = PackedVector2Array(894, 646, 1151, 647, 1151, -6, 898, 0)
 script = ExtResource("2_hftbh")

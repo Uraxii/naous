@@ -49,8 +49,8 @@ func get_world_aabb() -> AABB:
 
 
 func _get_visual_instances() -> Array[VisualInstance3D]:
-    var visual_instances: Array[VisualInstance3D] = []
     var instance_children := find_children("*", "VisualInstance3D")
+    var visual_instances: Array[VisualInstance3D] = []
     visual_instances.assign(instance_children)
     return visual_instances
 

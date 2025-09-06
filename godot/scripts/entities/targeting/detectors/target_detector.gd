@@ -3,6 +3,9 @@ class_name TargetDetector extends Polygon2D
 
 signal current_targets_updated(target_list: Array[Targetable])
 
+@export var debug_mode: bool = false:
+    set = set_debug_mode
+
 @onready var targeting := Globals.targeting
 @onready var camera := Globals.camera.camera
 
@@ -11,6 +14,10 @@ var _current_targets: Array[Targetable]:
 
 
 #region Detecting Targets
+func get_polygon_shape() -> Polygon2D:
+    return self
+
+
 func get_current_targets() -> Array[Targetable]:
     return _current_targets
 
@@ -20,7 +27,7 @@ func detect_targets() -> void:
     previous_targets.assign(_current_targets)
     var valid_targets := targeting.get_valid_targets()
     for possible_target: Targetable in valid_targets:
-        var target_is_detected := _target_is_in_shape(possible_target, self)
+        var target_is_detected := _target_is_in_shape(possible_target, get_polygon_shape())
         if target_is_detected:
             _add_current_target(possible_target)
         else:
@@ -77,6 +84,21 @@ func _remove_current_target(lost_target: Targetable) -> void:
     if _current_targets.has(lost_target):
         #print("removing a target from: - ", self.name)
         _current_targets.erase(lost_target)
+
+
+func _adjust_shape_to_screen() -> void:
+    var project_window_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
+    var project_window_height: int = ProjectSettings.get_setting("display/window/size/viewport_height")
+    var current_viewport_rect := get_viewport_rect()
+    var new_polygon_scale := Vector2(current_viewport_rect.size.x / project_window_width, current_viewport_rect.size.y / project_window_height)
+    self.scale = new_polygon_scale
+#endregion
+
+
+#region Debugging
+func set_debug_mode(enable_debug: bool) -> void:
+    debug_mode = enable_debug
+    visible = enable_debug
 #endregion
 
 
@@ -86,6 +108,5 @@ func _physics_process(_delta: float) -> void:
 
 
 func _ready() -> void:
-    visible = false # Hide the shape from the screen
-    pass
+    get_viewport().size_changed.connect(_adjust_shape_to_screen)
 #endregion
