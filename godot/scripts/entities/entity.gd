@@ -70,6 +70,9 @@ func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualIn
     
     for visual_instance: VisualInstance3D in visual_instances:
         var instance_aabb := visual_instance.get_aabb()
+        # MATRIX MATH ORDER MATTERS!
+        # For global-space transforms, multiply the global transform BY the local transform (seen here)
+        # This converts the local-space AABB transform (which doesn't contain things like scale or rotation) to its transform in global space.
         var world_instance_aabb := visual_instance.global_transform * instance_aabb
         if final_transformed_aabb.position == Vector3.ZERO and final_transformed_aabb.size == Vector3.ZERO:
             final_transformed_aabb = world_instance_aabb

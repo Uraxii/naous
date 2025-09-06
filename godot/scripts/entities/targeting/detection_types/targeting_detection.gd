@@ -80,7 +80,7 @@ func update_prioritized_targets_for_detectors() -> void:
             detector_targets = _prioritize_detector_targets(detector_targets)
         for target: Targetable in detector_targets:
             if not prioritized_target_list.has(target):
-                print("Frame %s: '%s' found target '%s' via detector '%s'" % [Engine.get_frames_drawn(), self.name, target.get_parent().get_parent().name, detector.name])
+                #print("Frame %s: '%s' found target '%s' via detector '%s'" % [Engine.get_frames_drawn(), self.name, target.get_parent().get_parent().name, detector.name])
                 prioritized_target_list.push_back(target)
     _queued_for_target_updated = false
 
