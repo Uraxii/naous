@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InputBindings" load_steps=45 format=3 uid="uid://dklvwj7n37rma"]
+[gd_resource type="Resource" script_class="InputBindings" load_steps=46 format=3 uid="uid://dklvwj7n37rma"]
 
 [ext_resource type="Script" uid="uid://7uvyk2xwlmgd" path="res://scripts/input/input_bindings.gd" id="1_qgmqv"]
 
@@ -87,13 +87,6 @@ pressed = true
 [sub_resource type="InputEventKey" id="InputEventKey_iynii"]
 device = -1
 keycode = 4194305
-
-[sub_resource type="InputEventMouseButton" id="InputEventMouseButton_qgmqv"]
-button_mask = 1
-position = Vector2(355, 25)
-global_position = Vector2(365, 76)
-button_index = 1
-pressed = true
 
 [sub_resource type="InputEventMouseButton" id="InputEventMouseButton_tll83"]
 button_index = 2

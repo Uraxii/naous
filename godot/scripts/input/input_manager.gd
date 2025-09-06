@@ -8,6 +8,12 @@ class_name InputManager extends Node
     InputBindings.CAMERA_ZOOM_OUT: signals.camera_zoom_out,
     InputBindings.JUMP: signals.jump,
     InputBindings.INTERACT: signals.interact,
+    InputBindings.CURSOR_TARGET: signals.cursor_target,
+    InputBindings.NEXT_TARGET: signals.next_target,
+    InputBindings.PREVIOUS_TARGET: signals.previous_target,
+    InputBindings.SCAN_TARGET_LEFT: signals.scan_target_left,
+    InputBindings.SCAN_TARGET_RIGHT: signals.scan_target_right,
+    InputBindings.CANCEL_TARGET: signals.cancel_target,
     InputBindings.UI_ACCEPT: signals.ui_accept,
     InputBindings.UI_CANCEL: signals.ui_cancel,
     InputBindings.UI_TOGGLE: signals.ui_toggle,
@@ -86,18 +92,13 @@ func _input(event: InputEvent) -> void:
         var move_delta = Vector2(event.relative.x, event.relative.y)
         if is_camera_rotating:
             signals.camera_rotate.emit(move_delta)
-    # TODO: I bound these to 'Tab' and 'Shift+Tab', but they can both trigger from 'Shift+Tab' since that key was technically pressed. May need to re-evaluate this signal handling to better resolve modifier key combo inputs.
-    if Input.is_action_just_pressed("target_previous"):
-        signals.previous_target.emit()
-    elif Input.is_action_just_pressed("target_next"):
-        signals.next_target.emit()
 
     # TODO: Controller has hotbutton binds set 1:1 with regular button inputs.
     #       Depending on how many hotkey actions are expected to be available, we may need to
     #       change that to a modifier system to give the player easy access to more actions.
     #       - eg. LT + Face buttons for a set of actions, RT + face buttons for another set
     for action in action_map.keys():
-        if Input.is_action_just_pressed(action):
+        if Input.is_action_just_pressed(action) and event.is_action(action, true):
             lg.debug("Pressed:", action)
             action_map[action].emit()
 #endregion

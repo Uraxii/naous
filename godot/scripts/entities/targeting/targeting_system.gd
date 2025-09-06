@@ -36,7 +36,7 @@ func previous_target() -> void:
 
 
 func scan_target_right() -> void:
-    print("attempting RIGHT scan target!")
+    #print("attempting RIGHT scan target!")
     var next_scan_target := scan_targeting.get_next_detected_target(current_target)
     if is_instance_valid(next_scan_target) and next_scan_target != current_target:
         #print("SCAN NEXT TARGET: updating current target!")
@@ -44,7 +44,7 @@ func scan_target_right() -> void:
 
 
 func scan_target_left() -> void:
-    print("attempting LEFT scan target!")
+    #print("attempting LEFT scan target!")
     var prev_scan_target := scan_targeting.get_previous_detected_target(current_target)
     if is_instance_valid(prev_scan_target) and prev_scan_target != current_target:
         #print("SCAN PREV TARGET: updating current target!")
@@ -66,7 +66,7 @@ func _set_current_target(new_target) -> void:
     current_target = new_target
     
     if is_instance_valid(current_target):
-        print("setting new current target to: ", new_target.get_parent().get_parent().name)
+        #print("setting new current target to: ", new_target.get_parent().get_parent().name)
         current_target.show_indicator()
 #endregion
 

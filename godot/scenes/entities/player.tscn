@@ -1,15 +1,19 @@
-[gd_scene load_steps=19 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=23 format=3 uid="uid://c5ospakgw0cwt"]
 
-[ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
+[ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
 [ext_resource type="PackedScene" uid="uid://dqgvbdfsa0nll" path="res://scenes/spells/hurt_caster.tscn" id="5_5ki56"]
 [ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
-[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
+[ext_resource type="Script" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
+[ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="11_b4o2o"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
 [ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="12_spk56"]
+[ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="12_yr3on"]
+[ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="13_2ngu4"]
+[ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="14_jv5ih"]
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="15_yr3on"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
@@ -98,6 +102,19 @@ start_percent = 0.17500000000000004
 
 [node name="Interaction" type="Node" parent="Components"]
 script = ExtResource("15_yr3on")
+
+[node name="TargetingSystem" type="Node" parent="Components" node_paths=PackedStringArray("cursor_targeting", "auto_targeting", "scan_targeting")]
+script = ExtResource("11_b4o2o")
+cursor_targeting = NodePath("CursorTargeting")
+auto_targeting = NodePath("AutoTargeting")
+scan_targeting = NodePath("ScanTargeting")
+metadata/_custom_type_script = "uid://bfu0l0d4jw4rd"
+
+[node name="AutoTargeting" parent="Components/TargetingSystem" instance=ExtResource("12_yr3on")]
+
+[node name="ScanTargeting" parent="Components/TargetingSystem" instance=ExtResource("13_2ngu4")]
+
+[node name="CursorTargeting" parent="Components/TargetingSystem" instance=ExtResource("14_jv5ih")]
 
 [node name="Body" type="CharacterBody3D" parent="Components"]
 script = ExtResource("12_spk56")

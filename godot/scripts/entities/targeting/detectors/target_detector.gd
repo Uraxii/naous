@@ -42,7 +42,8 @@ func _target_is_in_shape(possible_target: Targetable, screen_shape: Polygon2D) -
     var target_entity: Entity = possible_target.entity
     var entity_world_aabb := target_entity.get_world_aabb()
     var target_aabb_points := _generate_screen_points_of_aabb(entity_world_aabb)
-    var screen_polygon := screen_shape.polygon * screen_shape.global_transform
+    # MATRIX MATH ORDER MATTERS! Converting the shape polygon vertices to global screen space
+    var screen_polygon := screen_shape.global_transform * screen_shape.polygon
     var target_in_shape := false
     for aabb_point: Vector2 in target_aabb_points:
         if Geometry2D.is_point_in_polygon(aabb_point, screen_polygon):

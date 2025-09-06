@@ -8,7 +8,7 @@ var uptime: float = 0.0
 var connected_players: Dictionary = {}  
 
 var log: Log:
-    get: return Globals.log
+    get: return Globals.logger
 
 
 func initialize_shard(config: Dictionary) -> void:

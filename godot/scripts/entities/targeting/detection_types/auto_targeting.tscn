@@ -6,7 +6,6 @@
 [node name="AutoTargeting" type="Node" node_paths=PackedStringArray("detectors")]
 script = ExtResource("1_xbhis")
 detectors = [NodePath("Zone1"), NodePath("Zone2"), NodePath("Zone3"), NodePath("Zone4"), NodePath("Zone5")]
-enable_debug_view = true
 metadata/_custom_type_script = "uid://cbidjfhlnvb46"
 
 [node name="Zone1" type="Polygon2D" parent="."]

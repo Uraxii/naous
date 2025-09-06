@@ -19,7 +19,7 @@ func entity_can_interact(entity: Entity, interactable: InteractableComponent) ->
 
 
 func entity_attempting_interaction(entity: Entity, interactable: InteractableComponent) -> void:
-    var entity_interaction: InteractionComponent = entity.get_component(InteractionComponent)
+    var entity_interaction: InteractionComponent = entity.interaction
     if entity_interaction != null:
         # TODO: Can add logic here for the scenario where the player CAN interact (ie. see the prompt), but fails to due to a condition of sorts
         entity_interaction.start_interaction_with(interactable)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://xmeimvl21anw"]
+[gd_scene load_steps=20 format=3 uid="uid://xmeimvl21anw"]
 
-[ext_resource type="PackedScene" uid="uid://bmkcvlx154cnh" path="res://scenes/entity.tscn" id="1_hxfej"]
 [ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="2_f2noy"]
-[ext_resource type="Script" uid="uid://4tgebhhxaok0" path="res://scripts/entities/component_manager.gd" id="3_6rn7e"]
+[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_jf6rp"]
+[ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_6rn7e"]
 [ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="4_jf6rp"]
+[ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="5_yb11o"]
 
 [sub_resource type="GDScript" id="GDScript_6rn7e"]
 script/source = "extends Node3D
@@ -41,6 +42,17 @@ material = SubResource("StandardMaterial3D_bkaei")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6rn7e"]
 size = Vector3(78.39969, 1, 57.492676)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6led1"]
+properties/0/path = NodePath("Body:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Body:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Body:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_6rn7e"]
 
@@ -83,16 +95,20 @@ shape = SubResource("BoxShape3D_6rn7e")
 
 [node name="Targets" type="Node3D" parent="."]
 
-[node name="Left" type="Node3D" parent="Targets" node_paths=PackedStringArray("body", "components")]
+[node name="Left" type="Node3D" parent="Targets" node_paths=PackedStringArray("components", "body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.745409, 0, -18.07885)
 script = ExtResource("2_f2noy")
-body = NodePath("CharacterBody3D")
 components = NodePath("ComponentManager")
+body = NodePath("CharacterBody3D")
 metadata/_custom_type_script = "uid://gs35pl2e40ha"
+
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Left"]
+replication_config = SubResource("SceneReplicationConfig_6led1")
+script = ExtResource("2_jf6rp")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
 [node name="ComponentManager" type="Node" parent="Targets/Left"]
 script = ExtResource("3_6rn7e")
-metadata/_custom_type_script = "uid://4tgebhhxaok0"
 
 [node name="Targetable" type="Node" parent="Targets/Left/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("4_jf6rp")
@@ -110,16 +126,20 @@ mesh = SubResource("BoxMesh_6rn7e")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Left/CharacterBody3D"]
 shape = SubResource("ConvexPolygonShape3D_jf6rp")
 
-[node name="Center" type="Node3D" parent="Targets" node_paths=PackedStringArray("body", "components")]
+[node name="Center" type="Node3D" parent="Targets" node_paths=PackedStringArray("components", "body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.916088, 0, -16.392939)
 script = ExtResource("2_f2noy")
-body = NodePath("CharacterBody3D")
 components = NodePath("ComponentManager")
+body = NodePath("CharacterBody3D")
 metadata/_custom_type_script = "uid://gs35pl2e40ha"
+
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Center"]
+replication_config = SubResource("SceneReplicationConfig_6led1")
+script = ExtResource("2_jf6rp")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
 [node name="ComponentManager" type="Node" parent="Targets/Center"]
 script = ExtResource("3_6rn7e")
-metadata/_custom_type_script = "uid://4tgebhhxaok0"
 
 [node name="Targetable" type="Node" parent="Targets/Center/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("4_jf6rp")
@@ -137,16 +157,20 @@ mesh = SubResource("SphereMesh_yb11o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Center/CharacterBody3D"]
 shape = SubResource("ConvexPolygonShape3D_6led1")
 
-[node name="Right" type="Node3D" parent="Targets" node_paths=PackedStringArray("body", "components")]
+[node name="Right" type="Node3D" parent="Targets" node_paths=PackedStringArray("components", "body")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.085228, 0, -13.529427)
 script = ExtResource("2_f2noy")
-body = NodePath("CharacterBody3D")
 components = NodePath("ComponentManager")
+body = NodePath("CharacterBody3D")
 metadata/_custom_type_script = "uid://gs35pl2e40ha"
+
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Right"]
+replication_config = SubResource("SceneReplicationConfig_6led1")
+script = ExtResource("2_jf6rp")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
 [node name="ComponentManager" type="Node" parent="Targets/Right"]
 script = ExtResource("3_6rn7e")
-metadata/_custom_type_script = "uid://4tgebhhxaok0"
 
 [node name="Targetable" type="Node" parent="Targets/Right/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("4_jf6rp")
@@ -164,17 +188,21 @@ mesh = SubResource("CapsuleMesh_6rn7e")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Right/CharacterBody3D"]
 shape = SubResource("ConvexPolygonShape3D_6rn7e")
 
-[node name="Left2" type="Node3D" parent="Targets" node_paths=PackedStringArray("body", "components")]
+[node name="Left2" type="Node3D" parent="Targets" node_paths=PackedStringArray("components", "body")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.333043, 1.9073486e-06, -9.991966)
 script = ExtResource("2_f2noy")
-body = NodePath("CharacterBody3D")
 components = NodePath("ComponentManager")
+body = NodePath("CharacterBody3D")
 metadata/_custom_type_script = "uid://gs35pl2e40ha"
+
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Left2"]
+replication_config = SubResource("SceneReplicationConfig_6led1")
+script = ExtResource("2_jf6rp")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
 [node name="ComponentManager" type="Node" parent="Targets/Left2"]
 script = ExtResource("3_6rn7e")
-metadata/_custom_type_script = "uid://4tgebhhxaok0"
 
 [node name="Targetable" type="Node" parent="Targets/Left2/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("4_jf6rp")
@@ -192,17 +220,21 @@ mesh = SubResource("BoxMesh_6rn7e")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Left2/CharacterBody3D"]
 shape = SubResource("ConvexPolygonShape3D_jf6rp")
 
-[node name="Center2" type="Node3D" parent="Targets" node_paths=PackedStringArray("body", "components")]
+[node name="Center2" type="Node3D" parent="Targets" node_paths=PackedStringArray("components", "body")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.837636, 1.9073486e-06, -8.306055)
 script = ExtResource("2_f2noy")
-body = NodePath("CharacterBody3D")
 components = NodePath("ComponentManager")
+body = NodePath("CharacterBody3D")
 metadata/_custom_type_script = "uid://gs35pl2e40ha"
+
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Center2"]
+replication_config = SubResource("SceneReplicationConfig_6led1")
+script = ExtResource("2_jf6rp")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
 [node name="ComponentManager" type="Node" parent="Targets/Center2"]
 script = ExtResource("3_6rn7e")
-metadata/_custom_type_script = "uid://4tgebhhxaok0"
 
 [node name="Targetable" type="Node" parent="Targets/Center2/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("4_jf6rp")
@@ -220,17 +252,21 @@ mesh = SubResource("SphereMesh_yb11o")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Center2/CharacterBody3D"]
 shape = SubResource("ConvexPolygonShape3D_6led1")
 
-[node name="Right2" type="Node3D" parent="Targets" node_paths=PackedStringArray("body", "components")]
+[node name="Right2" type="Node3D" parent="Targets" node_paths=PackedStringArray("components", "body")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.006775, 1.9073486e-06, -5.442543)
 script = ExtResource("2_f2noy")
-body = NodePath("CharacterBody3D")
 components = NodePath("ComponentManager")
+body = NodePath("CharacterBody3D")
 metadata/_custom_type_script = "uid://gs35pl2e40ha"
+
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Right2"]
+replication_config = SubResource("SceneReplicationConfig_6led1")
+script = ExtResource("2_jf6rp")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
 [node name="ComponentManager" type="Node" parent="Targets/Right2"]
 script = ExtResource("3_6rn7e")
-metadata/_custom_type_script = "uid://4tgebhhxaok0"
 
 [node name="Targetable" type="Node" parent="Targets/Right2/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("4_jf6rp")
@@ -248,8 +284,7 @@ mesh = SubResource("CapsuleMesh_6rn7e")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Right2/CharacterBody3D"]
 shape = SubResource("ConvexPolygonShape3D_6rn7e")
 
-[node name="Player" parent="." instance=ExtResource("1_hxfej")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.0852785)
+[node name="Player" parent="." instance=ExtResource("5_yb11o")]
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5255527, 0.24810362, -5.0428452)

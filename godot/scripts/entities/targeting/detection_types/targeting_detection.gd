@@ -100,12 +100,14 @@ func _on_detector_targets_changed(_targets: Array[Targetable]) -> void:
         update_prioritized_targets_for_detectors.call_deferred()
 
 
+#region Debugging
 func set_debug_mode_for_detectors(enable_debug: bool) -> void:
     enable_debug_view = enable_debug
     if is_inside_tree():
         #print("%s setting debug view: %s" % [self.name, enable_debug])
         for detector: TargetDetector in detectors:
             detector.set_debug_mode(enable_debug)
+#endregion
 
 
 ## Implementation should override this

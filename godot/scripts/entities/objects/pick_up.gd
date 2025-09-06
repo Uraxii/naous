@@ -10,5 +10,6 @@ func complete_pick_up() -> void:
 
 
 func _ready() -> void:
-    var interactable_component: InteractableComponent = get_component(InteractableComponent) as InteractableComponent
+    super._ready()
+    var interactable_component: InteractableComponent = components.find("Interactable")
     interactable_component.interaction_complete.connect(complete_pick_up)

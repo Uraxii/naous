@@ -4,15 +4,17 @@ class_name Entity extends Node3D
 signal change_control(is_local: bool)
 
 @export_category("Components")
-@export var components: ComponentManager
-@export var health:     HealthComponent
-@export var speed:      StatComponent
-@export var gravity:    StatComponent
-@export var jump_force: StatComponent
-@export var move:       ComponentMove
-@export var body:       Node3D
-@export var spellbook:  ComponentSpellbook
-@export var inventory:  Node
+@export var components:   ComponentManager
+@export var health:       HealthComponent
+@export var speed:        StatComponent
+@export var gravity:      StatComponent
+@export var jump_force:   StatComponent
+@export var move:         ComponentMove
+@export var body:         Node3D
+@export var spellbook:    ComponentSpellbook
+@export var inventory:    Node
+@export var interaction:  InteractionComponent
+@export var targeting:    TargetingSystem
 @export_category("Runtime Values")
 @export var id := -1
 
@@ -103,8 +105,6 @@ func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualIn
             final_transformed_aabb.merge(world_instance_aabb)
     
     return final_transformed_aabb
-
-
 #endregion
 
 
@@ -117,14 +117,16 @@ func _enter_tree() -> void:
 func _ready() -> void:
     if not components: components = find_child("Components")
     if components:
-        if not health:      health      = components.find("Health")
-        if not speed:       speed       = components.find("Speed")
-        if not gravity:     gravity     = components.find("Gravity")
-        if not jump_force:  jump_force  = components.find("JumpForce")
-        if not spellbook:   spellbook   = components.find("Spellbook")
-        if not body:        body        = components.find("Body")
-        if not move:        move        = components.find("Move")
-        if not inventory:   inventory   = components.find("Inventory")
+        if not health:        health       = components.find("Health")
+        if not speed:         speed        = components.find("Speed")
+        if not gravity:       gravity      = components.find("Gravity")
+        if not jump_force:    jump_force   = components.find("JumpForce")
+        if not spellbook:     spellbook    = components.find("Spellbook")
+        if not body:          body         = components.find("Body")
+        if not move:          move         = components.find("Move")
+        if not inventory:     inventory    = components.find("Inventory")
+        if not interaction:   interaction  = components.find("Interaction")
+        if not targeting:     targeting    = components.find("TargetingSystem")
         
     for comp: Node in components.map.values():
         if comp.has_method("set_entity"):
