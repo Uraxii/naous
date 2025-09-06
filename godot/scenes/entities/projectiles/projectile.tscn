@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsnahgut5wqd6"]
+
+[ext_resource type="Script" uid="uid://0c4vp0yvei3e" path="res://scripts/spells/projectile.gd" id="1_6ndfs"]
+[ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="2_kbb6n"]
+[ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="3_ewt5w"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ewt5w"]
+properties/0/path = NodePath("ComponentManager/Body:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("ComponentManager/Body:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("ComponentManager/Body:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fn7fi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_fn7fi"]
+
+[node name="Projectile" type="Node3D" node_paths=PackedStringArray("rb", "components", "body")]
+script = ExtResource("1_6ndfs")
+rb = NodePath("ComponentManager/Body")
+components = NodePath("ComponentManager")
+body = NodePath("ComponentManager/Body")
+
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ewt5w")
+
+[node name="ComponentManager" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("2_kbb6n")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Body" type="RigidBody3D" parent="ComponentManager"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ComponentManager/Body"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("SphereShape3D_fn7fi")
+
+[node name="Visual" type="MeshInstance3D" parent="ComponentManager/Body"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_fn7fi")
+skeleton = NodePath("../../..")
+
+[node name="Speed" type="Node" parent="ComponentManager"]
+script = ExtResource("3_ewt5w")
+metadata/_custom_type_script = "uid://bjeqm0rajdi7x"

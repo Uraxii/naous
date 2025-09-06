@@ -42,8 +42,8 @@ func get_me() -> void:
 
 
 #region Character Management
-func create_character(name: String) -> void:
-    delegate.create_character(name)
+func create_character(display_name: String) -> void:
+    delegate.create_character(display_name)
     
 func get_all_characters(skip: int = 0, limit: int = 10) -> void:
     delegate.get_all_characters(skip, limit)

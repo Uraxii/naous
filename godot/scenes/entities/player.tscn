@@ -1,0 +1,139 @@
+[gd_scene load_steps=19 format=3 uid="uid://c5ospakgw0cwt"]
+
+[ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
+[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
+[ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
+[ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
+[ext_resource type="PackedScene" uid="uid://dqgvbdfsa0nll" path="res://scenes/spells/hurt_caster.tscn" id="5_5ki56"]
+[ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
+[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
+[ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
+[ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
+[ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="12_spk56"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="15_yr3on"]
+[ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
+[ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
+[ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
+properties/0/path = NodePath("Components/Body:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Components/Body:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Components/Body:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Components/Body:up_direction")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2ngu4"]
+properties/0/path = NodePath(".:id")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
+radius = 0.42333984
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
+size = Vector3(1.3007813, 3.4932861, 1.2172852)
+
+[node name="Player" type="Node3D" node_paths=PackedStringArray("components")]
+script = ExtResource("1_yr3on")
+components = NodePath("Components")
+
+[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_8nksq")
+script = ExtResource("2_mjgby")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="StatSyncronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2ngu4")
+script = ExtResource("2_mjgby")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="Components" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("3_r5ib0")
+entity = NodePath("..")
+
+[node name="Spellbook" type="Node" parent="Components"]
+script = ExtResource("4_qa3vu")
+
+[node name="ThrowBall" parent="Components/Spellbook" instance=ExtResource("5_saib0")]
+hotbutton = 1
+
+[node name="HurtCaster" parent="Components/Spellbook" instance=ExtResource("5_5ki56")]
+id = "Hurt Caster"
+hotbutton = 3
+
+[node name="Move" type="Node" parent="Components"]
+script = ExtResource("9_dqg57")
+
+[node name="StatusesEffects" type="Node" parent="Components"]
+
+[node name="Inventory" type="Node" parent="Components"]
+
+[node name="Health" type="Node" parent="Components"]
+script = ExtResource("10_w0xwc")
+
+[node name="Energy" type="Node" parent="Components"]
+script = ExtResource("11_spk56")
+
+[node name="Speed" type="Node" parent="Components"]
+script = ExtResource("11_spk56")
+max_value = 30.0
+current = 1.0
+
+[node name="Gravity" type="Node" parent="Components"]
+script = ExtResource("11_spk56")
+max_value = 100.0
+start_percent = 0.01400000000000001
+
+[node name="JumpForce" type="Node" parent="Components"]
+script = ExtResource("11_spk56")
+max_value = 200.0
+start_percent = 0.17500000000000004
+
+[node name="Interaction" type="Node" parent="Components"]
+script = ExtResource("15_yr3on")
+
+[node name="Body" type="CharacterBody3D" parent="Components"]
+script = ExtResource("12_spk56")
+
+[node name="Shape" type="CollisionShape3D" parent="Components/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_vh5go")
+
+[node name="InteractableDetector" type="Area3D" parent="Components/Body"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("17_oouqh")
+metadata/_custom_type_script = "uid://bkq1fycsacayy"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/Body/InteractableDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009765625, 1.4589534, -0.9480772)
+shape = SubResource("BoxShape3D_mxvno")
+
+[node name="Visual" parent="Components/Body" instance=ExtResource("16_v11i1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="ProjectileSpawner" type="Node3D" parent="Components/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5009488, -0.53692293)
+
+[node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("19_ow2nv")
+label = NodePath("Health")
+
+[node name="Health" type="Label" parent="StatView"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "STAT"

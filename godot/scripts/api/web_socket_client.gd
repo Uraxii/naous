@@ -19,12 +19,12 @@ var polling_rate := 30:
 var client_id: int = -1
 
 @onready var signals := Globals.signal_bus
-@onready var log := Globals.log
+@onready var logger := Globals.logger
 @onready var packets := Globals.packets
 
 
 func connect_to_url(url: String, port: int) -> int:
-    log.info("Connecting: %s:%d" % [url, port])
+    logger.info("Connecting: %s:%d" % [url, port])
     socket.supported_protocols = supported_protcols
     socket.handshake_headers = handshake_headers
 
@@ -32,7 +32,7 @@ func connect_to_url(url: String, port: int) -> int:
         "ws://%s:%d/ws" % [url, port], tls_options)
 
     if err:
-        log.error("Failed to connect!")
+        logger.error("Failed to connect!")
         return err
         
     signals.connected_to_server.connect(_on_connected_to_server)
@@ -51,7 +51,7 @@ func disconn() -> void:
 
 
 func send(packet: PacketManager.PACKETS.Packet) -> int:
-    log.info("Sending:" + str(packet))
+    logger.info("Sending:" + str(packet))
     packet.set_sender_id(0)
     var bytes := packet.to_bytes()
     return socket.send(bytes)
@@ -66,7 +66,7 @@ func get_packet() -> PacketManager.PACKETS.Packet:
     var err := packet.from_bytes(bytes)
 
     if err:
-        log.error("Error formatting packet from data %s" % [
+        logger.error("Error formatting packet from data %s" % [
             bytes.get_string_from_utf8()])
 
     return packet
@@ -103,7 +103,7 @@ func _ready() -> void:
 func _on_connected_to_server() -> void:
     var host := socket.get_connected_host()
     var port := socket.get_connected_port()
-    log.success("Connection started: %s:%d" % [host, port])
+    logger.success("Connection started: %s:%d" % [host, port])
     
     var packet := PacketManager.new_packet()
     var hello_chat := packet.new_chat()
@@ -113,7 +113,7 @@ func _on_connected_to_server() -> void:
     
 
 func _on_connection_closed() -> void:
-    log.warn("Connection closed")
+    logger.warn("Connection closed")
     poll_timer.timeout.disconnect(poll)
     poll_timer.stop()
     

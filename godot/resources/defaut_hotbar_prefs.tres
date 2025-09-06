@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="HotbarPrefs" load_steps=2 format=3 uid="uid://0p7mb11yap3h"]
+
+[ext_resource type="Script" uid="uid://c68v5ucx8ab7n" path="res://scripts/ui/hotbar_prefs.gd" id="1_iiy3q"]
+
+[resource]
+script = ExtResource("1_iiy3q")
+metadata/_custom_type_script = "uid://c68v5ucx8ab7n"

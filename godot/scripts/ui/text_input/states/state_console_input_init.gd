@@ -3,8 +3,7 @@ class_name StateConsoleInputInit extends State
 var input_view: ChatInput
 
 
-func _init(_id: int, _input_view: ChatInput, edit_signal: InputEvent) -> void:
-    id = id
+func _init(_input_view: ChatInput, edit_signal: InputEvent) -> void:
     input_view = _input_view
 
 

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm1hp0iecfkyo"]
+
+[ext_resource type="Script" uid="uid://dgpjya5w3dpcy" path="res://scripts/ui/hotbar_manager.gd" id="1_80i08"]
+[ext_resource type="PackedScene" uid="uid://dsts11lyb1wm7" path="res://scenes/ui/hotbar_view.tscn" id="2_meqgt"]
+[ext_resource type="Resource" uid="uid://0p7mb11yap3h" path="res://resources/defaut_hotbar_prefs.tres" id="2_pug7i"]
+
+[node name="HotbarManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_80i08")
+default_hotbar_prefs = ExtResource("2_pug7i")
+hotbar_scene = ExtResource("2_meqgt")

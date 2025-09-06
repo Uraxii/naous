@@ -1,26 +1,42 @@
-class_name HotkeyBar extends View
+class_name HotbarView extends View
 
-@export var binds := ["action_1", "action_2", "action_3", "action_0"]
+@onready var hbox: HBoxContainer = %HBox
 
-var buttons: Array[HotkeyButton] = []
+var id := 1
+
+var binds := [
+    InputBindings.ACTION_1,
+    InputBindings.ACTION_2,
+    InputBindings.ACTION_3,
+    InputBindings.ACTION_4,
+    ]
+
+var buttons: Array[Hotbutton] = []
 
 
-func _ready() -> void:
-    signals.control_entity.connect(_on_control)
-    
-    for i in range(0, binds.size()):
-        var button = HotkeyButton.new()
-        button.set_bind(signals.get(binds[i]))
-        buttons.append(button)
-        add_child(button)
-
-
-func _on_control(new_enity: Entity) -> void:
-    var spell_component = new_enity.get_component(ComponentSpell)
+func _on_control_entity(new_enity: Entity) -> void:
+    var spell_component = new_enity.spellbook
+    log.debug("sb", new_enity.spellbook)
     if not spell_component:
         return
     
-    var spells: Array[Spell] = spell_component.spells.values()
+    var spells: Array[Spell] = spell_component.spells.values().filter(
+        func(spell:Spell): return spell.hotbar == id)
     
-    for i in range(spells.size()):
-        buttons[i].set_spell(spells[i])
+    log.debug("Spells:", spells)
+    
+    for button in buttons:
+        for spell in spells:
+            if spell.hotbutton == button.id:
+                button.set_spell(spell)
+
+
+func _ready() -> void:
+    signals.control_entity.connect(_on_control_entity)
+    for i in range(0, binds.size()):
+        var button: Hotbutton = views.spawn(Hotbutton)
+        var button_id = i + 1
+        var action = binds[i]
+        button.setup(button_id, action)
+        buttons.append(button)
+        button.reparent(hbox)

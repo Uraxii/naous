@@ -1,34 +1,39 @@
-class_name Projectile extends RigidBody3D
+class_name Projectile extends Entity
 
-var damage := 10.0
-var speed := 20.0
+@export var damage := 10.0
+@export var rb: RigidBody3D
+
 var velocity = Vector3.ZERO
-var spawner: Node3D
 
 
-func setup(spawner_node:Node3D) -> void:
-    spawner = spawner_node
+func calculate_direction():
+    velocity = -transform.basis.z * speed.current
 
 
 func _ready() -> void:
-    global_position = spawner.global_position
-    global_rotation = spawner.global_rotation
-    velocity = -transform.basis.z * speed
+    super._ready()
+    
+    if not rb:
+        rb = find_child("Body")
 
 
 func _physics_process(delta) -> void:
-    var collision = move_and_collide(velocity * delta)
+    if not multiplayer.is_server():
+        return
+        
+    var collision = rb.move_and_collide(velocity * delta)
     if collision:
         _hit_target(collision)
         
 
-func _hit_target(collision) -> void:
-    if collision is KinematicCollision3D:
-        queue_free()
+func _hit_target(collision: KinematicCollision3D) -> void:    
+    var hit_object = collision.get_collider()
+    
+    var hit_entity: Entity = hit_object.get("entity")
+    if not hit_entity:
         return
-    
-    var hit_object = collision.collider
-    
-    # TODO: Damage
+        
+    if hit_entity.health:
+        hit_entity.health.current -= damage
     
     queue_free()

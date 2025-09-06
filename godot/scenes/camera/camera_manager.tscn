@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dajlyyo0adshc"]
+
+[ext_resource type="Script" uid="uid://dm68wb50iampm" path="res://scripts/camera/camera_manager.gd" id="1_utxs1"]
+[ext_resource type="PackedScene" uid="uid://bflp8f0qeu23k" path="res://scenes/state_machine.tscn" id="2_durvc"]
+[ext_resource type="PackedScene" uid="uid://bc6x5tp0g03ka" path="res://scenes/camera/states/StateCameraFree.tscn" id="3_x2cpi"]
+[ext_resource type="PackedScene" uid="uid://bvlhsuuvbo88p" path="res://scenes/camera/states/StateCameraFollow.tscn" id="4_ku0ge"]
+
+[node name="CameraManager" type="SpringArm3D"]
+script = ExtResource("1_utxs1")
+x_offset = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("2_durvc")]
+initial_state = NodePath("StateCameraFree")
+
+[node name="StateCameraFree" parent="StateMachine" instance=ExtResource("3_x2cpi")]
+
+[node name="StateCameraFollow" parent="StateMachine" instance=ExtResource("4_ku0ge")]

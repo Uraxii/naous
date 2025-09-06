@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv35w8et1ttcd"]
+
+[ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="1_yrsip"]
+
+[node name="DamageSelf" type="Node"]
+script = ExtResource("1_yrsip")
+damage = 1.0

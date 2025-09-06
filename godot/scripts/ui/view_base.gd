@@ -11,7 +11,7 @@ var views: ViewManager:
 
 @warning_ignore("shadowed_global_identifier")
 var log: Log:
-    get: return Globals.log
+    get: return Globals.logger
 
 
 func initalize() -> void:
@@ -24,4 +24,5 @@ func despawn():
 
 
 func _on_visibility_change() -> void:
-    print_debug(self, " visible:", is_visible_in_tree())
+    #print_debug(self, " visible:", is_visible_in_tree())
+    pass

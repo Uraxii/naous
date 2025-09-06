@@ -4,15 +4,18 @@ class_name GlobalManager extends Node
 @onready var launch_args := ArgParser.parse()
 @onready var signal_bus: SignalBus = new_global("Signals", SignalBus)
 @onready var packets := PacketManager.new(signal_bus)
-@onready var log := Log.new(signal_bus)
+@onready var logger := Log.new(signal_bus)
 @onready var input: InputManager = new_global("Input", InputManager)
 @onready var views: ViewManager = new_global("Views", ViewManager)
 @onready var game: GameManager = new_global("Game", GameManager)
-@onready var entities: EntityManager = new_global("Entities", EntityManager)
-@onready var interaction: InteractionManager = new_global("Interaction", InteractionManager)
+@onready var interaction: InteractionManager = new_global(
+    "Interaction", InteractionManager)
+
+@onready var entities: EntityManager = new_global_scene(
+    "Entities", preload("res://scenes/entities/entity_manager.tscn"))
 @onready var targeting: TargetingManager = new_global("Targeting", TargetingManager)
 @onready var camera: CameraManager = new_global_scene(
-    "Camera", preload("res://scenes/camera_manager.tscn"))
+    "Camera", preload("res://scenes/camera/camera_manager.tscn"))
 
 
 func new_global(node_name: String, type: GDScript) -> Node:

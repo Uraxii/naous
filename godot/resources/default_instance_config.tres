@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="InstanceConfig" load_steps=3 format=3 uid="uid://cdbbqb5cmbtl3"]
+[gd_resource type="Resource" script_class="InstanceConfig" load_steps=4 format=3 uid="uid://cdbbqb5cmbtl3"]
 
 [ext_resource type="Script" uid="uid://bkckqpe71ier5" path="res://scripts/instance_config.gd" id="1_cs1ou"]
-[ext_resource type="PackedScene" uid="uid://ch0bqgk8cfdeq" path="res://scenes/world/zones/lake-natalie.tscn" id="1_up5xg"]
+[ext_resource type="PackedScene" uid="uid://ch0bqgk8cfdeq" path="res://scenes/world/zones/lake-natalie.tscn" id="1_x05t1"]
+
+[sub_resource type="PackedScene" id="PackedScene_up5xg"]
 
 [resource]
 script = ExtResource("1_cs1ou")

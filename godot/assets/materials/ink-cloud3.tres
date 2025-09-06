@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d38i2dxauqkl0"]
+
+[ext_resource type="Texture2D" uid="uid://cp1rwn23twpv2" path="res://assets/textures/cloud3.png" id="1_v6rlq"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+depth_draw_mode = 2
+shading_mode = 0
+specular_mode = 2
+albedo_color = Color(1, 1, 1, 0.627451)
+albedo_texture = ExtResource("1_v6rlq")

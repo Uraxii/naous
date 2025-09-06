@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsts11lyb1wm7"]
+
+[ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="1_yjdhc"]
+
+[node name="HotBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("1_yjdhc")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -98.0
+offset_right = 74.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0

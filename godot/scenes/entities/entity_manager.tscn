@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0kc2r2wbe47x"]
+
+[ext_resource type="Script" uid="uid://cygqbb44xmtda" path="res://scripts/entity_manager.gd" id="1_jcf0l"]
+
+[node name="EntityManager" type="MultiplayerSpawner"]
+_spawnable_scenes = PackedStringArray("uid://bmkcvlx154cnh")
+spawn_path = NodePath(".")
+script = ExtResource("1_jcf0l")

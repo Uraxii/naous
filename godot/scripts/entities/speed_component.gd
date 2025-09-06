@@ -1,1 +1,0 @@
-class_name SpeedComponent extends StatComponent
