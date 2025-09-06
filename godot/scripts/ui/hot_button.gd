@@ -2,6 +2,7 @@ class_name Hotbutton extends View
 
 @onready var button: Button = %Button
 @onready var label: Label = %Label
+@onready var icon: TextureRect = %Icon
 
 var id := -1
 var spell: Spell
@@ -29,6 +30,8 @@ func set_spell(new_spell: Spell) -> void:
     spell.cast_started.connect(_on_cast_started)
     spell.timer.timeout.connect(_on_timer_timout)
     label.text = spell.id
+    if spell.icon:
+        icon.texture = spell.icon
 
 
 func remove_spell() -> void:

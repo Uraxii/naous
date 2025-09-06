@@ -2,6 +2,7 @@ class_name Spell extends Node
 
 signal cast_started
 
+@export var icon: Texture2D
 @export var id := ""
 @export var cooldown_time := 1.0
 @export var hotbar := 0

@@ -15,15 +15,16 @@ script = ExtResource("1_yjdhc")
 
 [node name="HBox" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -308.0
-offset_top = -100.0
-offset_right = 308.0
+offset_left = -76.0
+offset_top = -98.0
+offset_right = 74.0
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 0

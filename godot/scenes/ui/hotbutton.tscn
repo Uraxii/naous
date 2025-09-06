@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://c0m8tmsilt5f" path="res://scripts/ui/hot_button.gd" id="1_mktm8"]
 
 [node name="Hotbutton" type="Control"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1052.0
-offset_bottom = -548.0
+offset_right = -1077.0
+offset_bottom = -573.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(100, 100)
@@ -18,34 +18,41 @@ metadata/_custom_type_script = "uid://c0m8tmsilt5f"
 
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 37.5
+offset_bottom = 37.5
 grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
 button_mask = 5
 
+[node name="Icon" type="TextureRect" parent="Button"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
 [node name="Label" type="Label" parent="Button"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.5
-offset_top = -11.5
-offset_right = 40.5
-offset_bottom = 11.5
+offset_left = -37.5
+offset_right = 37.5
+offset_bottom = 75.0
 grow_horizontal = 2
-grow_vertical = 2
 horizontal_alignment = 1
-vertical_alignment = 1
