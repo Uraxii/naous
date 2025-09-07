@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://c4y8pw0trfn08" path="res://scripts/entities/targeting/detection_types/auto_targeting.gd" id="1_xbhis"]
 [ext_resource type="Script" uid="uid://ig85vsh183qg" path="res://scripts/entities/targeting/detectors/target_detector.gd" id="2_omt2j"]
 
-[node name="AutoTargeting" type="Node" node_paths=PackedStringArray("detectors")]
+[node name="AutoTargeting" type="Node"]
 script = ExtResource("1_xbhis")
-detectors = [NodePath("Zone1"), NodePath("Zone2"), NodePath("Zone3"), NodePath("Zone4"), NodePath("Zone5")]
 metadata/_custom_type_script = "uid://cbidjfhlnvb46"
 
 [node name="Zone1" type="Polygon2D" parent="."]

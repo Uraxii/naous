@@ -5,6 +5,7 @@
 
 [node name="CursorTargeting" type="Node" node_paths=PackedStringArray("detectors")]
 script = ExtResource("1_c5h1c")
+raycast_collision_mask = 4
 detectors = [NodePath("CursorDetector")]
 metadata/_custom_type_script = "uid://cbidjfhlnvb46"
 
