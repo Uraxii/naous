@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dluy6c7orh677"]
+[gd_scene load_steps=13 format=3 uid="uid://dluy6c7orh677"]
 
 [ext_resource type="Script" uid="uid://bsc5blllejlso" path="res://scripts/entities/objects/pick_up.gd" id="1_alksn"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="2_cq6oy"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="3_ey4g2"]
 [ext_resource type="Script" uid="uid://biugcdkh4yjur" path="res://scripts/entities/interaction/interactable_trigger.gd" id="4_ey4g2"]
 [ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="5_ftkej"]
+[ext_resource type="Script" uid="uid://cidlribiuexkb" path="res://scripts/entities/interaction/requirements/interactable_requirement.gd" id="5_ika42"]
+[ext_resource type="Script" uid="uid://jqx82cd4qphm" path="res://scripts/entities/interaction/requirements/min_distance_requirement.gd" id="6_8p8gj"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ftkej"]
 properties/0/path = NodePath("Body:position")
@@ -17,6 +19,11 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath("Body:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+
+[sub_resource type="Resource" id="Resource_me15v"]
+script = ExtResource("6_8p8gj")
+min_distance = 1.0
+metadata/_custom_type_script = "uid://jqx82cd4qphm"
 
 [sub_resource type="PrismMesh" id="PrismMesh_cq6oy"]
 
@@ -41,6 +48,7 @@ script = ExtResource("2_cq6oy")
 [node name="Interactable" type="Node" parent="ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("3_ey4g2")
 entity = NodePath("../..")
+requirements = Array[ExtResource("5_ika42")]([SubResource("Resource_me15v")])
 prompt_text = "Pizza!"
 time_to_complete = 2.0
 priority = 3

@@ -76,7 +76,7 @@ signal action_4
 #endregion
 
 #region Interaction
-signal entity_can_interact(entity: Entity, interactable: InteractableComponent)
+signal entity_detected_interactable(entity: Entity, interactable: InteractableComponent)
 signal entity_attempting_interaction(entity: Entity, interactable: InteractableComponent)
 signal entity_started_interaction(entity: Entity, interactable: InteractableComponent)
 signal entity_completed_interaction(entity: Entity, interactable: InteractableComponent)

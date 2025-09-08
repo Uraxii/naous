@@ -5,6 +5,7 @@ signal interaction_complete
 
 @export_category("Interaction Dependencies")
 @export var entity: Entity ## The owning entity that represents this interactable
+@export var requirements: Array[InteractableRequirement]
 
 @export_category("Interaction Details")
 @export var prompt_text: String = "INTERACT WITH ME" ## Text indicating what action occurs when interacting with this object (intended for UI)
@@ -19,6 +20,19 @@ var _interaction_modifier: int = 1
 
 
 #region Interaction Logic
+func can_interact(interacting_entity: Entity) -> bool:
+    var interaction_allowed := true # Assume interaction is allowed by default
+    
+    if not requirements.is_empty():
+        for requirement: InteractableRequirement in requirements:
+            # If the condition passes AND we've passed all previous conditions...
+            # If one requirement fails, all subsequent checks will also fail
+            interaction_allowed = requirement.condition_passed(interacting_entity) and interaction_allowed
+    
+    print("Entity interaction check: Name=%s , Passing=%s" % [entity.name, interaction_allowed])
+    return interaction_allowed
+
+
 func interact() -> void:
     #print("Using interactable: ", prompt_text)
     _start_timer()
@@ -42,6 +56,12 @@ func get_current_interaction_progress() -> float:
 
 func is_higher_priority_than(interactable: InteractableComponent) -> bool:
     return priority > interactable.priority
+
+
+func _initialize_requirements() -> void:
+    if not requirements.is_empty():
+        for requirement: InteractableRequirement in requirements:
+            requirement.parent_interactable = self
 #endregion
 
 
@@ -76,7 +96,7 @@ func decrease_interaction_modifier() -> void:
 
 #region Godot Callback Functions
 func _ready() -> void:
-    pass
+    _initialize_requirements()
 
 
 func _process(delta: float) -> void:

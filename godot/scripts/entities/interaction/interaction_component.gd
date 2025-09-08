@@ -103,7 +103,7 @@ func remove_current_interactable(interactable_to_remove: InteractableComponent) 
 func _on_detecting_interactable(interactable: InteractableComponent) -> void:
     #print("Can interact with: ", interactable.prompt_text)
     can_interact_with.emit(interactable)
-    signals.entity_can_interact.emit(entity, interactable)
+    signals.entity_detected_interactable.emit(entity, interactable)
 
 
 func _on_lost_interactable(interactable: InteractableComponent) -> void:

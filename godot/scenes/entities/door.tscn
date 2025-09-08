@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bubw2npxhqmbl"]
+[gd_scene load_steps=14 format=3 uid="uid://bubw2npxhqmbl"]
 
 [ext_resource type="Script" uid="uid://cfn7j3g4lutwr" path="res://scripts/entities/objects/door.gd" id="1_htbgl"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="2_de05j"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_y1est"]
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="3_y1est"]
 [ext_resource type="Script" uid="uid://biugcdkh4yjur" path="res://scripts/entities/interaction/interactable_trigger.gd" id="4_de05j"]
+[ext_resource type="Script" uid="uid://cidlribiuexkb" path="res://scripts/entities/interaction/requirements/interactable_requirement.gd" id="5_f8c16"]
 [ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="5_qu8ah"]
+[ext_resource type="Script" uid="uid://jqx82cd4qphm" path="res://scripts/entities/interaction/requirements/min_distance_requirement.gd" id="6_ritpd"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qu8ah"]
 properties/0/path = NodePath("Body:position")
@@ -17,6 +19,11 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath("Body:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+
+[sub_resource type="Resource" id="Resource_5d2xg"]
+script = ExtResource("6_ritpd")
+min_distance = 5.0
+metadata/_custom_type_script = "uid://jqx82cd4qphm"
 
 [sub_resource type="BoxMesh" id="BoxMesh_htbgl"]
 
@@ -45,6 +52,7 @@ script = ExtResource("2_de05j")
 [node name="Interactable" type="Node" parent="ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("3_y1est")
 entity = NodePath("../..")
+requirements = Array[ExtResource("5_f8c16")]([SubResource("Resource_5d2xg")])
 prompt_text = "Definitely a Door"
 time_to_complete = 0.0
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"

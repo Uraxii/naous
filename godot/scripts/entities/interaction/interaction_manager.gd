@@ -14,13 +14,17 @@ var interaction_map: Dictionary[InteractableComponent, Array]
 
 
 #region Interaction Management
-func entity_can_interact(entity: Entity, interactable: InteractableComponent) -> void:
+func entity_detected_interactable(entity: Entity, interactable: InteractableComponent) -> void:
     pass
+
+
+func entity_can_interact(entity: Entity, interactable: InteractableComponent) -> bool:
+    return interactable.can_interact(entity)
 
 
 func entity_attempting_interaction(entity: Entity, interactable: InteractableComponent) -> void:
     var entity_interaction: InteractionComponent = entity.interaction
-    if entity_interaction != null:
+    if entity_interaction != null and entity_can_interact(entity, interactable):
         # TODO: Can add logic here for the scenario where the player CAN interact (ie. see the prompt), but fails to due to a condition of sorts
         entity_interaction.start_interaction_with(interactable)
 
@@ -47,7 +51,7 @@ func _ready() -> void:
     _connect_signals()
 
 func _connect_signals() -> void:
-    signals.entity_can_interact.connect(entity_can_interact)
+    signals.entity_detected_interactable.connect(entity_detected_interactable)
     signals.entity_attempting_interaction.connect(entity_attempting_interaction)
     signals.entity_started_interaction.connect(entity_started_interaction)
     signals.entity_interaction_interrupted.connect(entity_interaction_interrupted)
