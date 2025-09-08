@@ -16,20 +16,20 @@ func toggle_position() -> void:
 
 
 func open() -> void:
-    print("Door opening!")
+    #print("Door opening!")
     _rotate_to(open_rotation)
     is_open = true
 
 
 func close() -> void:
-    print("Door closing!")
+    #print("Door closing!")
     _rotate_to(close_rotation)
     is_open = false
 
 
 func _rotate_to(rotation_vector: Vector3) -> void:
     # TODO: Tween/AnimationPlayer this
-    rotation = rotation_vector
+    rotation_degrees = rotation_vector
 #endregion
 
 

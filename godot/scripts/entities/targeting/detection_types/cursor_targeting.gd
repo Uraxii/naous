@@ -52,15 +52,19 @@ func find_targetable_at_cursor_position(cursor_pos: Vector2) -> Targetable:
     var ray_from := camera.project_ray_origin(cursor_pos)
     var ray_to := camera.project_ray_normal(cursor_pos) * RAYCAST_LENGTH
     var ray_collision_mask := raycast_collision_mask
-    # TODO: Unused unless we start looking for multiple objects in the future. We'd loop around some condition and keep casting while adding each found object to this list to prevent it from beign detected again.
+    # TODO: Refactor if we wnat to start looking for multiple objects in the future. We'd loop around some condition and keep casting while adding each found object to this 'exluded' list to prevent it from beign detected on the next cast.
     var excluded_objects: Array[RID]
     excluded_objects.push_back(player_body.get_rid())
+    
+    # Assemble our raycast query
     var ray_query_params := PhysicsRayQueryParameters3D.create(ray_from, ray_to, ray_collision_mask, excluded_objects)
+    ray_query_params.collide_with_areas = true
+    ray_query_params.hit_from_inside = true
     
     # Cast the ray and check for collisions
     var intersection_result := world_space_3d.intersect_ray(ray_query_params)
     if not intersection_result.is_empty():
-        var entity_body_found: CharacterBody3D = intersection_result.get("collider")
+        var entity_body_found: CollisionObject3D = intersection_result.get("collider")
         # If the cast failed, we'll get a null object
         if entity_body_found != null:
             var targetable_entity: Targetable

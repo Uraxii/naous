@@ -20,7 +20,7 @@ var _interaction_modifier: int = 1
 
 #region Interaction Logic
 func interact() -> void:
-    print("Using interactable: ", prompt_text)
+    #print("Using interactable: ", prompt_text)
     _start_timer()
     interaction_started.emit()
 
@@ -30,9 +30,10 @@ func stop_interaction() -> void:
 
 
 func complete_interaction() -> void:
-    print("Completing usage of interactable: ", prompt_text)
+    #print("Completing usage of interactable: ", prompt_text)
     interaction_complete.emit()
     _stop_timer()
+
 
 ## Get the current interaction progress as a ratio of the total time needed to complete the interaction. Ranges from 0.0 (not started) to 1.0 (fully completed).
 func get_current_interaction_progress() -> float:

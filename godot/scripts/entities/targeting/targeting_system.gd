@@ -7,7 +7,7 @@ class_name TargetingSystem extends Node
 @onready var signals := Globals.signal_bus
 
 var current_target: Targetable:
-    set = _set_current_target
+    set = set_current_target
 
 
 #region Targeting
@@ -59,7 +59,7 @@ func has_valid_target() -> bool:
     return is_instance_valid(current_target)
 
 
-func _set_current_target(new_target) -> void:
+func set_current_target(new_target: Targetable) -> void:
     if is_instance_valid(current_target):
         current_target.hide_indicator()
     
