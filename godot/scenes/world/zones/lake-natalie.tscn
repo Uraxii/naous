@@ -966,16 +966,16 @@ color_ramp = SubResource("Gradient_eam4u")
 [node name="towns" type="Node3D" parent="."]
 
 [node name="simpletown" parent="towns" instance=ExtResource("19_vboxf")]
-transform = Transform3D(-0.25762188, 0, -0.96624583, 0, 1, 0, 0.96624583, 0, -0.25762188, -24.227448, 6.975315, 49.92171)
+transform = Transform3D(-5.1524377, 0, -19.324917, 0, 20, 0, 19.324917, 0, -5.1524377, -24.227448, 6.975315, 49.92171)
 
 [node name="simpletown2" parent="towns" instance=ExtResource("19_vboxf")]
-transform = Transform3D(-0.8776402, 0, 0.47932002, 0, 1, 0, -0.47932002, 0, -0.8776402, -46.382446, 6.975315, -50.22692)
+transform = Transform3D(-17.552803, 0, 9.5864, 0, 20, 0, -9.5864, 0, -17.552803, -46.382446, 6.975315, -50.22692)
 
 [node name="simpletown3" parent="towns" instance=ExtResource("19_vboxf")]
-transform = Transform3D(-0.843551, 0, -0.53704935, 0, 1, 0, 0.53704935, 0, -0.843551, 41.105877, 6.975315, -39.326927)
+transform = Transform3D(-16.871017, 0, -10.740986, 0, 20, 0, 10.740986, 0, -16.871017, 41.105877, 6.975315, -39.326927)
 
 [node name="simpletown4" parent="towns" instance=ExtResource("19_vboxf")]
-transform = Transform3D(0.028532403, 0, 0.99959284, 0, 1, 0, -0.99959284, 0, 0.028532403, 51.315178, 6.975315, 25.078259)
+transform = Transform3D(0.5706481, 0, 19.991858, 0, 20, 0, -19.991858, 0, 0.5706481, 51.315178, 6.975315, 25.078259)
 
 [node name="stairs" parent="." instance=ExtResource("20_q55i7")]
 transform = Transform3D(-0.9202455, 0, 0.39134154, 0, 1, 0, -0.39134154, 0, -0.9202455, 8.300304, -2.427867, -35.034378)
