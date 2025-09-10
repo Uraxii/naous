@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=39 format=3 uid="uid://ch0bqgk8cfdeq"]
 
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="1_6y1nk"]
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
@@ -26,6 +26,7 @@
 [ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="22_xswqy"]
 [ext_resource type="Material" uid="uid://d38i2dxauqkl0" path="res://assets/materials/ink-cloud3.tres" id="23_1l721"]
 [ext_resource type="ArrayMesh" uid="uid://cscyy7keqvkkp" path="res://assets/models/sierpinski_triangles.obj" id="26_1ukf6"]
+[ext_resource type="PackedScene" uid="uid://1ylgy66wcqit" path="res://assets/prefabs/sand_dunes.tscn" id="27_s72rl"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_vboxf"]
 material = ExtResource("18_bef4i")
@@ -983,3 +984,6 @@ transform = Transform3D(-0.9202455, 0, 0.39134154, 0, 1, 0, -0.39134154, 0, -0.9
 [node name="SierpinskiTriangles" type="MeshInstance3D" parent="."]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -55.828964, 7.914072, 81.88608)
 mesh = ExtResource("26_1ukf6")
+
+[node name="sand-dunes" parent="." instance=ExtResource("27_s72rl")]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, 20.917067, 7.68637, -127.57047)

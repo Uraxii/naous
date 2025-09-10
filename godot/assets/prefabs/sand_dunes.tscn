@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://1ylgy66wcqit"]
+
+[ext_resource type="PackedScene" uid="uid://boesdu06ngeg1" path="res://assets/models/blob-d.fbx" id="1_q0piq"]
+[ext_resource type="Material" uid="uid://dd17pmtjchh3c" path="res://assets/materials/sand-dunes.tres" id="2_f1sn1"]
+
+[node name="sand-dunes" instance=ExtResource("1_q0piq")]
+
+[node name="cube_sphere_32" parent="." index="0"]
+transform = Transform3D(1024, 0, 0, 0, -4.476046e-05, 256, 0, -1024, -1.1190115e-05, 0, -0.5, 0)
+surface_material_override/0 = ExtResource("2_f1sn1")
