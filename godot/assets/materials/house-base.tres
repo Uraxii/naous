@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dfwy04xhxplyc"]
+
+[ext_resource type="Texture2D" uid="uid://or7de3y3ckxi" path="res://assets/textures/ink-trim-wavy.png" id="1_j7u1w"]
+
+[resource]
+cull_mode = 2
+depth_draw_mode = 1
+specular_mode = 2
+albedo_color = Color(1, 0.7490196, 0.47058824, 1)
+albedo_texture = ExtResource("1_j7u1w")
+uv1_scale = Vector3(10, 10, 10)
