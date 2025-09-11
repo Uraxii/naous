@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=41 format=3 uid="uid://ch0bqgk8cfdeq"]
 
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="1_6y1nk"]
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
@@ -25,7 +25,9 @@
 [ext_resource type="Material" uid="uid://rknsm0d0mgvc" path="res://assets/materials/ink-cloud1.tres" id="22_4xysy"]
 [ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="22_xswqy"]
 [ext_resource type="Material" uid="uid://d38i2dxauqkl0" path="res://assets/materials/ink-cloud3.tres" id="23_1l721"]
+[ext_resource type="ArrayMesh" uid="uid://owe4sfo5l6w2" path="res://assets/models/tree_big.obj" id="25_tbnxh"]
 [ext_resource type="ArrayMesh" uid="uid://cscyy7keqvkkp" path="res://assets/models/sierpinski_triangles.obj" id="26_1ukf6"]
+[ext_resource type="Material" uid="uid://xnfrp5vnr1au" path="res://assets/materials/tree-material.tres" id="26_abejf"]
 [ext_resource type="PackedScene" uid="uid://1ylgy66wcqit" path="res://assets/prefabs/sand_dunes.tscn" id="27_s72rl"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_vboxf"]
@@ -977,6 +979,11 @@ transform = Transform3D(-16.871017, 0, -10.740986, 0, 20, 0, 10.740986, 0, -16.8
 
 [node name="simpletown4" parent="towns" instance=ExtResource("19_vboxf")]
 transform = Transform3D(0.5706481, 0, 19.991858, 0, 20, 0, -19.991858, 0, 0.5706481, 51.315178, 6.975315, 25.078259)
+
+[node name="TreeBig" type="MeshInstance3D" parent="towns"]
+transform = Transform3D(0.0011755705, 0, -0.0016180341, 0, 0.002, 0, 0.0016180341, 0, 0.0011755705, 8.722359, 1.3244708, -26.480965)
+mesh = ExtResource("25_tbnxh")
+surface_material_override/0 = ExtResource("26_abejf")
 
 [node name="stairs" parent="." instance=ExtResource("20_q55i7")]
 transform = Transform3D(-0.9202455, 0, 0.39134154, 0, 1, 0, -0.39134154, 0, -0.9202455, 8.300304, -2.427867, -35.034378)
