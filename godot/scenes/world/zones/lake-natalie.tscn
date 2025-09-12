@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=42 format=3 uid="uid://ch0bqgk8cfdeq"]
 
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="1_6y1nk"]
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cayqs5l0qo416" path="res://assets/prefabs/wavy_flag.tscn" id="12_ujt7w"]
 [ext_resource type="PackedScene" uid="uid://dnsf3ognhnwpb" path="res://assets/models/observation-platform.glb" id="13_hq68q"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="18_bef4i"]
+[ext_resource type="PackedScene" uid="uid://cy6gtgeup1h6e" path="res://assets/prefabs/bunting.tscn" id="19_abejf"]
 [ext_resource type="PackedScene" uid="uid://d1vsrqg2pt0xc" path="res://assets/prefabs/simpletown.tscn" id="19_vboxf"]
 [ext_resource type="PackedScene" uid="uid://k8t2ynb36rvi" path="res://assets/prefabs/stairs.tscn" id="20_q55i7"]
 [ext_resource type="Material" uid="uid://rknsm0d0mgvc" path="res://assets/materials/ink-cloud1.tres" id="22_4xysy"]
@@ -701,6 +702,9 @@ transform = Transform3D(9.4264145, 166.90344, 0, -3.3380687, 471.32074, 0, 0, 0,
 
 [node name="wavy-flag" parent="plants/flag3" instance=ExtResource("12_ujt7w")]
 transform = Transform3D(0.099999994, 0, 0, 0, 0.0019999999, 0, 0, 0, 0.099999994, 0, 0.0078, 0)
+
+[node name="bunting" parent="plants" instance=ExtResource("19_abejf")]
+transform = Transform3D(1.5366058, 0.11640884, -1.2748697, -3.053531e-07, 1.9917142, 0.18186392, 1.2801732, -0.13972637, 1.5302397, 25.551321, 13.292893, -33.404793)
 
 [node name="observation-platform" parent="plants" instance=ExtResource("13_hq68q")]
 transform = Transform3D(1.8932536, 0, 0.6446635, 0, 2, 0, -0.6446635, 0, 1.8932536, -11.231066, 7.6230564, -38.824314)

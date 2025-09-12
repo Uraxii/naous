@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b7nfgx1ufmkej"]
+
+[ext_resource type="Shader" uid="uid://ccvc3ew5q38lo" path="res://assets/materials/windy-cloth-shader.gdshader" id="1_1ercs"]
+[ext_resource type="Texture2D" uid="uid://cg0oj1lsm2e4w" path="res://assets/textures/bunting.png" id="2_1ercs"]
+[ext_resource type="Texture2D" uid="uid://celfcmiqm1tqh" path="res://assets/textures/wind-noise-lookup-table.png" id="3_l182q"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_1ercs")
+shader_parameter/clothTexture = ExtResource("2_1ercs")
+shader_parameter/windTexture = ExtResource("3_l182q")
+shader_parameter/windSpeed = 1.0
+shader_parameter/windStrength = 0.5
