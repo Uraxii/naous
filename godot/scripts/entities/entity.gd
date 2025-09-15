@@ -31,7 +31,7 @@ var _transform_sync: MultiplayerSynchronizer
 var transform_sync: MultiplayerSynchronizer:
     get:
         if not _transform_sync:
-            _transform_sync = find_child("LocalControlSnychronizer", true, false)
+            _transform_sync = find_child("LocalControlSynchronizer", true, false)
         return _transform_sync
 
 var stored_authority := Globals.SERVER_ID
