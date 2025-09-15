@@ -1,7 +1,7 @@
 class_name IdPool
 
 #region Variables
-const INVALID_ID := -1
+const INVALID_ID := 0
 
 var active:     Array[int] = []
 var inactive:   Array[int] = []
