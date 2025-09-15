@@ -1,10 +1,6 @@
-class_name Log
+class_name Log extends Node
 
-var signals: SignalBus
-    
-
-func _init(signal_bus: SignalBus) -> void:
-    signals = signal_bus
+@onready var signals := Globals.signal_bus
 
 
 func info(...args: Array) -> void:
