@@ -129,7 +129,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-    if entity.transform_sync.is_multiplayer_authority():
+    if entity.is_local_owner:
         var dir = input.move
         if input.was_camera_move_enabled and dir.y == 0:
             dir.y = -1

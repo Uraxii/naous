@@ -27,7 +27,7 @@ func setup(entity: Entity) -> void:
 
 @rpc("call_local", "reliable")
 func cast() -> void:
-    signals.log_new_debug.emit("%d casted %s." % [caster.id, id])
+    lg.debug("%d casted %s." % [caster.id, id])
     timer.wait_time = cooldown_time
     timer.start()
     cast_started.emit()

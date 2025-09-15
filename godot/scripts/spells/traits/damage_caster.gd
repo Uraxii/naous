@@ -2,7 +2,7 @@ class_name DamageCaster extends Node
 
 @export var damage := 10.0
 
-@onready var spell: Spell
+var spell: Spell
 
 
 func setup() -> void:

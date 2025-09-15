@@ -19,31 +19,30 @@ properties/2/replication_mode = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_fn7fi"]
 
-[node name="Projectile" type="Node3D" node_paths=PackedStringArray("rb", "components", "body")]
+[node name="Projectile" type="Node3D" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("1_6ndfs")
-rb = NodePath("ComponentManager/Body")
-components = NodePath("ComponentManager")
-body = NodePath("ComponentManager/Body")
+components = NodePath("Components")
+body = NodePath("")
 
 [node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ewt5w")
 
-[node name="ComponentManager" type="Node" parent="." node_paths=PackedStringArray("entity")]
+[node name="Components" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("2_kbb6n")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Body" type="RigidBody3D" parent="ComponentManager"]
+[node name="Speed" type="Node" parent="Components"]
+script = ExtResource("3_ewt5w")
+metadata/_custom_type_script = "uid://bjeqm0rajdi7x"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ComponentManager/Body"]
+[node name="Body" type="CharacterBody3D" parent="Components"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/Body"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 shape = SubResource("SphereShape3D_fn7fi")
 
-[node name="Visual" type="MeshInstance3D" parent="ComponentManager/Body"]
+[node name="Visual" type="MeshInstance3D" parent="Components/Body"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("SphereMesh_fn7fi")
 skeleton = NodePath("../../..")
-
-[node name="Speed" type="Node" parent="ComponentManager"]
-script = ExtResource("3_ewt5w")
-metadata/_custom_type_script = "uid://bjeqm0rajdi7x"

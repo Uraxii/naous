@@ -1,12 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=25 format=3 uid="uid://c5ospakgw0cwt"]
 
-[ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
+[ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
 [ext_resource type="PackedScene" uid="uid://dqgvbdfsa0nll" path="res://scenes/spells/hurt_caster.tscn" id="5_5ki56"]
 [ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
-[ext_resource type="Script" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
+[ext_resource type="PackedScene" uid="uid://wv8s83v0gmat" path="res://scenes/spells/hurt_target.tscn" id="7_yr3on"]
+[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
 [ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="10_b4o2o"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="11_b4o2o"]
@@ -17,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="14_jv5ih"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
+[ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="19_2ngu4"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
@@ -32,6 +34,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("Components/Body:up_direction")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:target_id")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2ngu4"]
 properties/0/path = NodePath(".:id")
@@ -48,7 +53,7 @@ size = Vector3(1.3007813, 3.4932861, 1.2172852)
 script = ExtResource("1_yr3on")
 components = NodePath("Components")
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
 script = ExtResource("2_mjgby")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -71,6 +76,10 @@ hotbutton = 1
 [node name="HurtCaster" parent="Components/Spellbook" instance=ExtResource("5_5ki56")]
 id = "Hurt Caster"
 hotbutton = 3
+
+[node name="HurtTarget" parent="Components/Spellbook" instance=ExtResource("7_yr3on")]
+hotbar = 1
+hotbutton = 2
 
 [node name="Move" type="Node" parent="Components"]
 script = ExtResource("9_dqg57")
@@ -141,6 +150,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="ProjectileSpawner" type="Node3D" parent="Components/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5009488, -0.53692293)
+
+[node name="Targetable" parent="Components" node_paths=PackedStringArray("entity") instance=ExtResource("19_2ngu4")]
+entity = NodePath("../..")
 
 [node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
 unique_name_in_owner = true

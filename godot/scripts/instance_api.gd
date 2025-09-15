@@ -11,7 +11,7 @@ var server_is_full: bool:
 
 var signals: SignalBus:
     get: return Globals.signal_bus
-    
+
 var entities: EntityManager:
     get: return Globals.entities
 
@@ -27,7 +27,7 @@ var _sender_id: int:
 
 #region Start Multiplayer Functions
 func start_client(address=config.host, port=config.port) -> void:
-    signals.log_new_debug.emit("Connecting to %s:%d" %[address, port])
+    lg.debug("Connecting to %s:%d" %[address, port])
     var multiplayer_peer = ENetMultiplayerPeer.new()
     var error = multiplayer_peer.create_client(address, port)
 
@@ -39,7 +39,8 @@ func start_client(address=config.host, port=config.port) -> void:
 
 
 func start_server(cfg: InstanceConfig) -> void:
-    signals.log_new_debug.emit("Starting server.")
+    lg.debug("Starting server.")
+
     config = cfg
     var multiplayer_peer = ENetMultiplayerPeer.new()
     var error = multiplayer_peer.create_server(cfg.port, cfg.size)
@@ -58,12 +59,14 @@ func start_server(cfg: InstanceConfig) -> void:
 @rpc("any_peer", "reliable")
 func request_cast(entity_id: int, spell_id: String) -> void:
     # TODO: Check if sender has authority over the entity!
-    
     var entity: Entity = entities.find(entity_id)
     if not entity:
+        lg.debug("Did not find entity %d" % entity_id)
         return
-        
-    var spellbook: ComponentSpellbook = entity.components.find("Spellbook")
+
+    lg.debug("Entity %d found." % entity.id)
+
+    var spellbook: ComponentSpellbook = entity.spellbook
     if spellbook:
         spellbook.cast(spell_id)
 #endregion
@@ -72,7 +75,7 @@ func request_cast(entity_id: int, spell_id: String) -> void:
 @rpc("authority", "call_remote", "reliable")
 func load_level(level_name: String) -> void:
     var level_path: String = "res://scenes/world/zones/%s.tscn" % level_name
-    signals.log_new_debug.emit("Loading %s" % level_path)
+    lg.debug("Loading %s" % level_path)
     print_debug(level_path)
     var level_scene: PackedScene = load(level_path)
 
@@ -120,7 +123,7 @@ func _set_authority(entity: Entity, peer_id: int) -> void:
 
 #region Signal Handlers
 func _on_player_connected(peer_id: int) -> void:
-    signals.log_new_debug.emit("Peer %d connected." % peer_id)
+    lg.debug("Peer %d connected." % peer_id)
 
     if multiplayer.is_server():
         load_level.rpc_id(peer_id, config.level.instantiate().name)
@@ -131,7 +134,7 @@ func _on_player_disconnected(peer_id: int) -> void:
         var data = connections[peer_id]
         if data.entity:
             entities.despawn(data.entity.id)
-        signals.log_new_debug.emit("%s disconnected." % data.id)
+        lg.debug("%s disconnected." % data.id)
 
     signals.player_disconnected.emit(peer_id)
 

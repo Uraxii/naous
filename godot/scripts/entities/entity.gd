@@ -16,26 +16,25 @@ signal change_control(is_local: bool)
 @export var interaction:  InteractionComponent
 @export var targeting:    TargetingSystem
 @export_category("Runtime Values")
-@export var id := -1
+@export var id := 0
+@export var target_id := 0
 
-@onready var lg: Log = Globals.logger
+@onready var entities:  EntityManager   = Globals.entities
+@onready var signals:   SignalBus       = Globals.signal_bus
 
-
-var entities: EntityManager:
-    get: return Globals.entities
-
-var signals: SignalBus:
-    get: return Globals.signal_bus
+var is_local_owner: bool:
+    get: return transform_sync.is_multiplayer_authority()
 
 var _transform_sync: MultiplayerSynchronizer
 # The synchronizer is a lazy-backed property to fix timing issues with spawning.
+# If somone has a better solution, feel free to implement it.
 var transform_sync: MultiplayerSynchronizer:
     get:
         if not _transform_sync:
-            _transform_sync = find_child("TransformSynchronizer", true, false)
+            _transform_sync = find_child("LocalControlSnychronizer", true, false)
         return _transform_sync
 
-var stored_authority := 1    
+var stored_authority := Globals.SERVER_ID
 #endregion
 
 
@@ -43,7 +42,7 @@ var stored_authority := 1
 func die() -> void:
     if not multiplayer.is_server():
         return
-        
+
     signals.log_new_debug.emit("Entity %d died." % id)
     entities.despawn(id)
 
@@ -82,17 +81,17 @@ func _get_visual_instances() -> Array[VisualInstance3D]:
 
 func _get_local_aabb_from_instances(visual_instances: Array[VisualInstance3D]) -> AABB:
     var final_aabb := AABB()
-    
+
     for visual_instance: VisualInstance3D in visual_instances:
         var instance_aabb := visual_instance.get_aabb()
         final_aabb.merge(instance_aabb)
-    
+
     return final_aabb
 
 
 func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualInstance3D]) -> AABB:
     var final_transformed_aabb := AABB()
-    
+
     for visual_instance: VisualInstance3D in visual_instances:
         var instance_aabb := visual_instance.get_aabb()
         # MATRIX MATH ORDER MATTERS!
@@ -103,19 +102,14 @@ func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualIn
             final_transformed_aabb = world_instance_aabb
         else:
             final_transformed_aabb.merge(world_instance_aabb)
-    
+
     return final_transformed_aabb
 #endregion
 
 
-#region Godot Callback Functions
-func _enter_tree() -> void:
-    if stored_authority != 1:
-        transform_sync.set_multiplayer_authority(stored_authority)
-
-
-func _ready() -> void:
+func hookup_components() -> void:
     if not components: components = find_child("Components")
+
     if components:
         if not health:        health       = components.find("Health")
         if not speed:         speed        = components.find("Speed")
@@ -127,11 +121,21 @@ func _ready() -> void:
         if not inventory:     inventory    = components.find("Inventory")
         if not interaction:   interaction  = components.find("Interaction")
         if not targeting:     targeting    = components.find("TargetingSystem")
-        
+
+
+#region Godot Callback Functions
+func _enter_tree() -> void:
+    if stored_authority != 1:
+        transform_sync.set_multiplayer_authority(stored_authority)
+
+
+func _ready() -> void:
+    hookup_components()
+
     for comp: Node in components.map.values():
         if comp.has_method("set_entity"):
             comp.set_entity(self)
-    
+
     # This MUST be last!
     _check_local_authority()
 #endregion

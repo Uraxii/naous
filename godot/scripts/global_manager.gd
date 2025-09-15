@@ -1,24 +1,22 @@
 class_name GlobalManager extends Node
 
-# Load order matters!!!
-@onready var launch_args := ArgParser.parse()
-@onready var signal_bus: SignalBus = new_global("Signals", SignalBus)
-@onready var packets := PacketManager.new(signal_bus)
-@onready var logger := Log.new(signal_bus)
-@onready var input: InputManager = new_global("Input", InputManager)
-@onready var views: ViewManager = new_global("Views", ViewManager)
-@onready var game: GameManager = new_global("Game", GameManager)
-@onready var interaction: InteractionManager = new_global(
-    "Interaction", InteractionManager)
+const SERVER_ID := 1
 
-@onready var entities: EntityManager = new_global_scene(
-    "Entities", preload("uid://c0kc2r2wbe47x"))
-@onready var targeting: TargetingManager = new_global("Targeting", TargetingManager)
-@onready var camera: CameraManager = new_global_scene(
-    "Camera", preload("uid://dajlyyo0adshc"))
+var launch_args:    Dictionary
+var signal_bus:     SignalBus
+var packets:        PacketManager
+var logger:         Log
+var input:          InputManager
+var views:          ViewManager
+var game:           GameManager
+var interaction:    InteractionManager
+var entities:       EntityManager
+var targeting:      TargetingManager
+var camera:         CameraManager
+var casting:        CastManager
 
 
-func new_global(node_name: String, type: GDScript) -> Node:
+func new_global_script(node_name: String, type: GDScript) -> Node:
     var global = type.new()
     global.name = node_name
     add_child(global)
@@ -30,3 +28,23 @@ func new_global_scene(node_name: String, scene: PackedScene) -> Node:
     new_node.name = node_name
     add_child(new_node)
     return new_node
+
+
+func create_globals() -> void:
+    # Load order matters!!!
+    signal_bus = new_global_script("Signals", SignalBus)
+    packets = PacketManager.new(signal_bus)
+    logger = new_global_script("Log", Log)
+    input = new_global_script("Input", InputManager)
+    views = new_global_script("Views", ViewManager)
+    game = new_global_script("Game", GameManager)
+    interaction = new_global_script("Interaction", InteractionManager)
+    entities = new_global_scene("Entities", preload("uid://c0kc2r2wbe47x"))
+    targeting = new_global_script("Targeting", TargetingManager)
+    camera = new_global_scene("Camera", preload("uid://dajlyyo0adshc"))
+    casting = new_global_script("Casting", CastManager)
+
+
+func _ready():
+    launch_args = ArgParser.parse()
+    create_globals()

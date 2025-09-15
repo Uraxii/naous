@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvsnchb8ax10s"]
+
+[ext_resource type="Script" uid="uid://ccxpwloe1f4c0" path="res://scripts/spells/traits/damage_target.gd" id="1_a4smn"]
+
+[node name="DamageTarget" type="Node"]
+script = ExtResource("1_a4smn")

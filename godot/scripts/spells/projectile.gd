@@ -1,7 +1,6 @@
 class_name Projectile extends Entity
 
 @export var damage := 10.0
-@export var rb: RigidBody3D
 
 var velocity = Vector3.ZERO
 
@@ -10,18 +9,11 @@ func calculate_direction():
     velocity = -transform.basis.z * speed.current
 
 
-func _ready() -> void:
-    super._ready()
-    
-    if not rb:
-        rb = find_child("Body")
-
-
 func _physics_process(delta) -> void:
     if not multiplayer.is_server():
         return
         
-    var collision = rb.move_and_collide(velocity * delta)
+    var collision = body.move_and_collide(velocity * delta)
     if collision:
         _hit_target(collision)
         

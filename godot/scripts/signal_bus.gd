@@ -14,6 +14,10 @@ signal got_client_id(msg)
 signal login(msg)
 #endregion
 
+#region Spell Casting
+signal damage_entity(id: int, amount: float)
+#endregion
+
 #region Entity
 signal spawn_entity(entity: Entity)
 signal despawn_entity(entity: Entity)

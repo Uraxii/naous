@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://wv8s83v0gmat"]
+
+[ext_resource type="PackedScene" uid="uid://cvsnchb8ax10s" path="res://scenes/spells/traits/damage_target.tscn" id="1_jjfdb"]
+[ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="1_u2jiv"]
+
+[node name="HurtTarget" type="Node"]
+script = ExtResource("1_u2jiv")
+id = "Hurt Target"
+
+[node name="DamageTarget" parent="." instance=ExtResource("1_jjfdb")]
