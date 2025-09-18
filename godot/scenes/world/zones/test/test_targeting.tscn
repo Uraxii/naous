@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://xmeimvl21anw"]
 
-[ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="2_f2noy"]
+[ext_resource type="Script" uid="uid://cfyjnr8bvcyt8" path="res://scripts/entities/entity.gd" id="2_f2noy"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_jf6rp"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_6rn7e"]
 [ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="4_jf6rp"]
@@ -103,9 +103,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.745409, 0, -18.07885)
 script = ExtResource("2_f2noy")
 components = NodePath("ComponentManager")
 body = NodePath("CharacterBody3D")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Left"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Left"]
 replication_config = SubResource("SceneReplicationConfig_6led1")
 script = ExtResource("2_jf6rp")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -134,9 +133,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.916088, 0, -16.392939)
 script = ExtResource("2_f2noy")
 components = NodePath("ComponentManager")
 body = NodePath("CharacterBody3D")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Center"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Center"]
 replication_config = SubResource("SceneReplicationConfig_6led1")
 script = ExtResource("2_jf6rp")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -165,9 +163,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.085228, 0, -13.529427)
 script = ExtResource("2_f2noy")
 components = NodePath("ComponentManager")
 body = NodePath("CharacterBody3D")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Right"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Right"]
 replication_config = SubResource("SceneReplicationConfig_6led1")
 script = ExtResource("2_jf6rp")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -197,9 +194,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.333043, 1.9073486e-06, -9.
 script = ExtResource("2_f2noy")
 components = NodePath("ComponentManager")
 body = NodePath("CharacterBody3D")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Left2"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Left2"]
 replication_config = SubResource("SceneReplicationConfig_6led1")
 script = ExtResource("2_jf6rp")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -229,9 +225,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.837636, 1.9073486e-06, -8.3
 script = ExtResource("2_f2noy")
 components = NodePath("ComponentManager")
 body = NodePath("CharacterBody3D")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Center2"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Center2"]
 replication_config = SubResource("SceneReplicationConfig_6led1")
 script = ExtResource("2_jf6rp")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -261,9 +256,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.006775, 1.9073486e-06, -5.4
 script = ExtResource("2_f2noy")
 components = NodePath("ComponentManager")
 body = NodePath("CharacterBody3D")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Right2"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Targets/Right2"]
 replication_config = SubResource("SceneReplicationConfig_6led1")
 script = ExtResource("2_jf6rp")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"

@@ -4,9 +4,6 @@ class_name CursorTargeting extends TargetingDetection
 
 const RAYCAST_LENGTH := 500.0
 
-@onready var camera_manager := Globals.camera
-@onready var camera := Globals.camera.camera
-
 var cursor_detector: TargetDetector
 
 var _raycast_targets: Array[Targetable]
@@ -21,8 +18,9 @@ func sync_detectors_to_cursor(cursor_pos: Vector2) -> void:
 func _target_sort(target_A: Targetable, target_B: Targetable) -> bool:
     var cursor_position: Vector2 = get_viewport().get_mouse_position()
     
-    var target_A_screen_pos := camera.unproject_position(target_A.entity.global_position)
-    var target_B_screen_pos := camera.unproject_position(target_B.entity.global_position)
+    var current_camera := get_camera()
+    var target_A_screen_pos := current_camera.unproject_position(target_A.entity.global_position)
+    var target_B_screen_pos := current_camera.unproject_position(target_B.entity.global_position)
     var target_A_distance_to_cursor := target_A_screen_pos.distance_to(cursor_position)
     var target_B_distance_to_cursor := target_B_screen_pos.distance_to(cursor_position)
     return target_A_distance_to_cursor < target_B_distance_to_cursor
@@ -41,7 +39,7 @@ func update_raycast_targets() -> void:
 
 
 func find_targetable_at_cursor_position(cursor_pos: Vector2) -> Targetable:
-    var player_body: CharacterBody3D = camera_manager.target
+    var player_body: CharacterBody3D = get_camera_body()
     if not is_instance_valid(player_body):
         return null
     
@@ -75,7 +73,7 @@ func find_targetable_at_cursor_position(cursor_pos: Vector2) -> Targetable:
                 if target_entity.body == entity_body_found:
                     targetable_entity = target_entity.components.find("Targetable")
                     if targetable_entity != null:
-                        #print("Cursor raycast found Target: ", targetable_entity.get_parent().get_parent().name)
+                        #Globals.logger.debug("Cursor raycast found Target: ", targetable_entity.get_parent().get_parent().name)
                         found_targetable = targetable_entity
     
     return found_targetable

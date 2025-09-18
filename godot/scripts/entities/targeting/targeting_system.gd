@@ -1,5 +1,7 @@
 class_name TargetingSystem extends Node
 
+signal new_target_selected(target: Targetable)
+
 @export var cursor_targeting: CursorTargeting
 @export var auto_targeting: AutoTargeting
 @export var scan_targeting: ScanTargeting
@@ -7,15 +9,16 @@ class_name TargetingSystem extends Node
 @onready var signals := Globals.signal_bus
 
 var current_target: Targetable:
+    get = get_current_target,
     set = set_current_target
 
 
-#region Targeting
+#region Target Selection
 func cursor_target() -> void:
-    #print("Attempting CURSOR target!")
+    #Globals.logger.debug("Attempting CURSOR target!")
     var cursor_detection_target := cursor_targeting.get_next_detected_target(current_target)
     if is_instance_valid(cursor_detection_target) and cursor_detection_target != current_target:
-        #print("CURSOR TARGET: updating current target!")
+        #Globals.logger.debug("CURSOR TARGET: updating current target!")
         current_target = cursor_detection_target
 
 
@@ -23,40 +26,42 @@ func next_target() -> void:
     #print("attempting NEXT auto target!")
     var next_auto_target := auto_targeting.get_next_detected_target(current_target)
     if is_instance_valid(next_auto_target) and next_auto_target != current_target:
-        #print("AUTO NEXT TARGET: updating current target!")
+        #Globals.logger.debug("AUTO NEXT TARGET: updating current target!")
         current_target = next_auto_target
 
 
 func previous_target() -> void:
-    #print("attempting PREV auto target!")
+    #Globals.logger.debug("attempting PREV auto target!")
     var prev_auto_target := auto_targeting.get_previous_detected_target(current_target)
     if is_instance_valid(prev_auto_target) and prev_auto_target != current_target:
-        #print("AUTO PREV TARGET: updating current target!")
+        #Globals.logger.debug("AUTO PREV TARGET: updating current target!")
         current_target = prev_auto_target
 
 
 func scan_target_right() -> void:
-    #print("attempting RIGHT scan target!")
+    #Globals.logger.debug("attempting RIGHT scan target!")
     var next_scan_target := scan_targeting.get_next_detected_target(current_target)
     if is_instance_valid(next_scan_target) and next_scan_target != current_target:
-        #print("SCAN NEXT TARGET: updating current target!")
+        #Globals.logger.debug("SCAN NEXT TARGET: updating current target!")
         current_target = next_scan_target
 
 
 func scan_target_left() -> void:
-    #print("attempting LEFT scan target!")
+    #Globals.logger.debug("attempting LEFT scan target!")
     var prev_scan_target := scan_targeting.get_previous_detected_target(current_target)
     if is_instance_valid(prev_scan_target) and prev_scan_target != current_target:
-        #print("SCAN PREV TARGET: updating current target!")
+        #Globals.logger.debug("SCAN PREV TARGET: updating current target!")
         current_target = prev_scan_target
+#endregion
 
 
-func cancel_target() -> void:
-    current_target = null
-
-
+#region Target Retrieval
 func has_valid_target() -> bool:
     return is_instance_valid(current_target)
+
+
+func get_current_target() -> Targetable:
+    return current_target
 
 
 func set_current_target(new_target: Targetable) -> void:
@@ -66,8 +71,15 @@ func set_current_target(new_target: Targetable) -> void:
     current_target = new_target
     
     if is_instance_valid(current_target):
-        #print("setting new current target to: ", new_target.get_parent().get_parent().name)
+        #Globals.logger.debug("setting new current target to: ", new_target.get_parent().get_parent().name)
         current_target.show_indicator()
+    
+    # Always emit this for new targets AND for unselecting target (null)
+    new_target_selected.emit(current_target)
+
+
+func clear_current_target() -> void:
+    current_target = null
 #endregion
 
 
@@ -78,5 +90,5 @@ func _ready() -> void:
     signals.previous_target.connect(previous_target)
     signals.scan_target_right.connect(scan_target_right)
     signals.scan_target_left.connect(scan_target_left)
-    signals.cancel_target.connect(cancel_target)
+    signals.cancel_target.connect(clear_current_target)
 #endregion

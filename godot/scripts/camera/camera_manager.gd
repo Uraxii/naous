@@ -15,7 +15,8 @@ class_name CameraManager extends SpringArm3D
 @onready var signals = Globals.signal_bus
 @onready var input := Globals.input
 
-@onready var camera: Camera3D = $Camera3D
+@onready var camera: Camera3D = %Camera3D:
+    get = get_current_camera
 
 var direction := Vector2.ZERO
 var rotate_entity := false
@@ -47,6 +48,15 @@ func _handle_rotation(rotation_vector: Vector2) -> void:
     rotation.x = clampf(rotation.x, -1, 1)
 
     target.body.rotation.y = rotation.y
+
+
+func get_current_camera() -> Camera3D:
+    var current_camera := camera
+    # Fallback to the viewport camera if the Manager doesn't have one set for whatever reason
+    if not is_instance_valid(current_camera):
+        current_camera = get_viewport().get_camera_3d()
+    return current_camera
+
 
 #region Singal Handlers
 func _set_camera_distance(value: float) -> void:

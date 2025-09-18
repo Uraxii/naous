@@ -7,7 +7,9 @@ signal current_targets_updated(target_list: Array[Targetable])
     set = set_debug_mode
 
 @onready var targeting := Globals.targeting
-@onready var camera := Globals.camera.camera
+
+var camera: Camera3D:
+    get = get_camera
 
 var _current_targets: Array[Targetable]:
     get = get_current_targets
@@ -16,10 +18,6 @@ var _current_targets: Array[Targetable]:
 #region Detecting Targets
 func get_polygon_shape() -> Polygon2D:
     return self
-
-
-func get_current_targets() -> Array[Targetable]:
-    return _current_targets
 
 
 func detect_targets() -> void:
@@ -70,9 +68,24 @@ func _generate_screen_points_of_aabb(aabb: AABB) -> Array[Vector2]:
     
     var aabb_points: Array[Vector2]
     for aabb_3d_point: Vector3 in aabb_points_3D:
-        var new_point := camera.unproject_position(aabb_3d_point)
+        var current_camera := get_camera()
+        var new_point := current_camera.unproject_position(aabb_3d_point)
         aabb_points.push_back(new_point)
     return aabb_points
+
+
+func _adjust_shape_to_screen() -> void:
+    var project_window_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
+    var project_window_height: int = ProjectSettings.get_setting("display/window/size/viewport_height")
+    var current_viewport_rect := get_viewport_rect()
+    var new_polygon_scale := Vector2(current_viewport_rect.size.x / project_window_width, current_viewport_rect.size.y / project_window_height)
+    self.scale = new_polygon_scale
+#endregion
+
+
+#region Detected Target Management
+func get_current_targets() -> Array[Targetable]:
+    return _current_targets
 
 
 func _add_current_target(new_target: Targetable) -> void:
@@ -86,13 +99,12 @@ func _remove_current_target(lost_target: Targetable) -> void:
         #print("removing a target from: - ", self.name)
         _current_targets.erase(lost_target)
 
+#endregion
 
-func _adjust_shape_to_screen() -> void:
-    var project_window_width: int = ProjectSettings.get_setting("display/window/size/viewport_width")
-    var project_window_height: int = ProjectSettings.get_setting("display/window/size/viewport_height")
-    var current_viewport_rect := get_viewport_rect()
-    var new_polygon_scale := Vector2(current_viewport_rect.size.x / project_window_width, current_viewport_rect.size.y / project_window_height)
-    self.scale = new_polygon_scale
+
+#region Camera
+func get_camera() -> Camera3D:
+    return Globals.camera.get_current_camera()
 #endregion
 
 

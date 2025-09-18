@@ -10,6 +10,7 @@ var screen_notifier: TargetableScreenNotifier
 var indicator: TargetingIndicator
 
 
+# TODO: If this is ever needed, add some general diagnostic-type details here
 func get_targeting_info() -> void:
     pass
 

@@ -17,7 +17,8 @@ signal change_control(is_local: bool)
 @export var targeting:    TargetingSystem
 @export_category("Runtime Values")
 @export var id := 0
-@export var target_id := 0
+@export var target_id := 0:
+    set = set_target_id
 
 @onready var entities:  EntityManager   = Globals.entities
 @onready var signals:   SignalBus       = Globals.signal_bus
@@ -45,6 +46,14 @@ func die() -> void:
 
     signals.log_new_debug.emit("Entity %d died." % id)
     entities.despawn(id)
+
+
+func set_target_id(new_target_id: int) -> void:
+    #Globals.logger.debug(
+        #"Entity (%s, %s) setting new target id: %s" %
+        #[self.name, self.get_instance_id(), new_target_id]
+    #)
+    target_id = new_target_id
 
 
 func _check_local_authority() -> void:
@@ -107,6 +116,7 @@ func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualIn
 #endregion
 
 
+#region Components
 func hookup_components() -> void:
     if not components: components = find_child("Components")
 
@@ -121,6 +131,18 @@ func hookup_components() -> void:
         if not inventory:     inventory    = components.find("Inventory")
         if not interaction:   interaction  = components.find("Interaction")
         if not targeting:     targeting    = components.find("TargetingSystem")
+        
+        # Component signals
+        if is_instance_valid(targeting):
+            targeting.new_target_selected.connect(_new_target_selected)
+
+
+func _new_target_selected(new_target: Targetable) -> void:
+    if is_instance_valid(new_target):
+        set_target_id(new_target.get_instance_id())
+    else:
+        set_target_id(0) # Some default, adjust if needed
+#endregion
 
 
 #region Godot Callback Functions

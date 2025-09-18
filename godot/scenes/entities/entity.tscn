@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://bmpfv2bwc6v1r"]
 
-[ext_resource type="Script" uid="uid://gs35pl2e40ha" path="res://scripts/entities/entity.gd" id="1_so8uy"]
+[ext_resource type="Script" uid="uid://cfyjnr8bvcyt8" path="res://scripts/entities/entity.gd" id="1_so8uy"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_218qm"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_egv4y"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_owpaf"]
@@ -10,12 +10,12 @@
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_de2c2"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="9_owpaf"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w2piu"]
-[ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="14_nml3o"]
+[ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="12_nml3o"]
+[ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="13_so8uy"]
+[ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="14_218qm"]
+[ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="15_a7jbu"]
 [ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="15_hqyav"]
-[ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="15_so8uy"]
-[ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="16_218qm"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_qjjt6"]
-[ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="17_a7jbu"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_ktyik"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_yl0st"]
 
@@ -107,17 +107,18 @@ detection_zone = NodePath("../Body/InteractableDetector")
 metadata/_custom_type_script = "uid://ctil5vnixrdc0"
 
 [node name="TargetingSystem" type="Node" parent="Components" node_paths=PackedStringArray("cursor_targeting", "auto_targeting", "scan_targeting")]
-script = ExtResource("14_nml3o")
+unique_name_in_owner = true
+script = ExtResource("12_nml3o")
 cursor_targeting = NodePath("CursorTargeting")
 auto_targeting = NodePath("AutoTargeting")
 scan_targeting = NodePath("ScanTargeting")
 metadata/_custom_type_script = "uid://bfu0l0d4jw4rd"
 
-[node name="AutoTargeting" parent="Components/TargetingSystem" instance=ExtResource("15_so8uy")]
+[node name="AutoTargeting" parent="Components/TargetingSystem" instance=ExtResource("13_so8uy")]
 
-[node name="ScanTargeting" parent="Components/TargetingSystem" instance=ExtResource("16_218qm")]
+[node name="ScanTargeting" parent="Components/TargetingSystem" instance=ExtResource("14_218qm")]
 
-[node name="CursorTargeting" parent="Components/TargetingSystem" instance=ExtResource("17_a7jbu")]
+[node name="CursorTargeting" parent="Components/TargetingSystem" instance=ExtResource("15_a7jbu")]
 
 [node name="Body" type="CharacterBody3D" parent="Components"]
 collision_layer = 7

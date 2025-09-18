@@ -8,6 +8,9 @@ class_name TargetingDetection extends Node
 
 @onready var targeting := Globals.targeting
 
+var camera: Camera3D:
+    get = get_camera
+
 var prioritized_target_list: Array[Targetable]
 
 var _queued_for_target_updated := false
@@ -74,8 +77,9 @@ func get_next_target_by_higher_priority(target: Targetable) -> Targetable:
     return next_higher_priority_target
 
 
+#region Detector Target Handling
 func update_prioritized_targets_for_detectors() -> void:
-    #print("updating priority targets! - ", self.name)
+    #Globals.logger.debug("updating priority targets! - ", self.name)
     prioritized_target_list.clear()
     var currently_detected_targets := _get_currently_detected_targets()
     prioritized_target_list.assign(currently_detected_targets)
@@ -91,7 +95,7 @@ func _get_currently_detected_targets() -> Array[Targetable]:
             detector_targets = _prioritize_detector_targets(detector_targets)
         for target: Targetable in detector_targets:
             if not detected_targets.has(target):
-                #print("Frame %s: '%s' found target '%s' via detector '%s'" % [Engine.get_frames_drawn(), self.name, target.get_parent().get_parent().name, detector.name])
+                #Globals.logger.debug(("Frame %s: '%s' found target '%s' via detector '%s'" % [Engine.get_frames_drawn(), self.name, target.get_parent().get_parent().name, detector.name])
                 detected_targets.push_back(target)
     return detected_targets
     
@@ -124,13 +128,24 @@ func _set_detectors_from_children() -> void:
             # I can't find documentation stating that 'find_children' returns a determistic order of child nodes (such as in scene-tree order as see in the editor). Using the node's index to be 100% sure that the order is maintained.
             var detector_child_index := detector.get_index()
             detectors.insert(detector_child_index, detector)
-        
+#endregion
+
+
+#region Camera
+func get_camera() -> Camera3D:
+    return Globals.camera.get_current_camera()
+
+
+func get_camera_body() -> CharacterBody3D:
+    return Globals.camera.target as CharacterBody3D
+#endregion
+
 
 #region Debugging
 func set_debug_mode_for_detectors(enable_debug: bool) -> void:
     enable_debug_view = enable_debug
     if is_inside_tree():
-        #print("%s setting debug view: %s" % [self.name, enable_debug])
+        #Globals.logger.debug("%s setting debug view: %s" % [self.name, enable_debug])
         for detector: TargetDetector in detectors:
             detector.set_debug_mode(enable_debug)
 #endregion

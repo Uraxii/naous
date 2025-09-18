@@ -50,13 +50,12 @@ func complete_interaction_with(interactable: InteractableComponent) -> void:
     remove_current_interactable(interactable)
 
 
-# TODO: This should probably be refactored to a "targeting" system when we get that started
 func get_highest_priority_detected_interactable() -> InteractableComponent:
     var priority_interactable: InteractableComponent # will be null there are none detected
     
     # First see if we're targeting something and prioritize that
-    if is_instance_valid(entity.targeting) and entity.targeting.has_valid_target():
-        var current_targetable := entity.targeting.current_target
+    var current_targetable := Globals.targeting.get_current_target()
+    if is_instance_valid(current_targetable):
         var current_target_entity := current_targetable.entity
         priority_interactable = current_target_entity.components.find("Interactable")
     

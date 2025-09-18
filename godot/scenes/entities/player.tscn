@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://c5ospakgw0cwt"]
 
-[ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
+[ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
@@ -49,9 +49,11 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("components")]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("components", "interaction", "targeting")]
 script = ExtResource("1_yr3on")
 components = NodePath("Components")
+interaction = NodePath("Components/Interaction")
+targeting = NodePath("Components/TargetingSystem")
 
 [node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
@@ -116,6 +118,7 @@ detection_zone = NodePath("../Body/InteractableDetector")
 metadata/_custom_type_script = "uid://ctil5vnixrdc0"
 
 [node name="TargetingSystem" type="Node" parent="Components" node_paths=PackedStringArray("cursor_targeting", "auto_targeting", "scan_targeting")]
+unique_name_in_owner = true
 script = ExtResource("11_b4o2o")
 cursor_targeting = NodePath("CursorTargeting")
 auto_targeting = NodePath("AutoTargeting")
@@ -127,6 +130,9 @@ metadata/_custom_type_script = "uid://bfu0l0d4jw4rd"
 [node name="ScanTargeting" parent="Components/TargetingSystem" instance=ExtResource("13_2ngu4")]
 
 [node name="CursorTargeting" parent="Components/TargetingSystem" instance=ExtResource("14_jv5ih")]
+
+[node name="Targetable" parent="Components" node_paths=PackedStringArray("entity") instance=ExtResource("19_2ngu4")]
+entity = NodePath("../..")
 
 [node name="Body" type="CharacterBody3D" parent="Components"]
 script = ExtResource("12_spk56")
@@ -150,9 +156,6 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="ProjectileSpawner" type="Node3D" parent="Components/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5009488, -0.53692293)
-
-[node name="Targetable" parent="Components" node_paths=PackedStringArray("entity") instance=ExtResource("19_2ngu4")]
-entity = NodePath("../..")
 
 [node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
 unique_name_in_owner = true
