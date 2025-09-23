@@ -39,7 +39,7 @@ script = ExtResource("1_htbgl")
 components = NodePath("ComponentManager")
 body = NodePath("StaticBody3D")
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qu8ah")
 script = ExtResource("2_y1est")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
