@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=3 uid="uid://cx54j3yuqwncx"]
+
+[ext_resource type="PackedScene" uid="uid://cdrx1jc5vlcfw" path="res://scenes/world/dungeons/coalescence/structures/building.tscn" id="1_t8rem"]
+[ext_resource type="PackedScene" uid="uid://lf4ssc56rjul" path="res://scenes/world/dungeons/coalescence/structures/arched_gateway.tscn" id="2_mlaoi"]
+[ext_resource type="PackedScene" uid="uid://deb4oma4divte" path="res://scenes/world/dungeons/coalescence/structures/graybox_hint.tscn" id="3_1dg0r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2u03h"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_t8rem"]
+
+[node name="EntryPath" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+collision_layer = 3
+collision_mask = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_2u03h")
+
+[node name="WorldGround" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98181725, 0.3630867)
+shape = SubResource("WorldBoundaryShape3D_t8rem")
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="Building" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(0.9921693, 0, -0.12490033, 0, 1, 0, 0.12490033, 0, 0.9921693, -20.670383, 1.9073486e-06, 36.71489)
+
+[node name="Building2" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(0.9779658, 0, 0.20876521, 0, 1, 0, -0.20876521, 0, 0.9779658, -21.36966, 1.9073486e-06, 27.952919)
+
+[node name="Building3" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(0.9946633, 0, -0.10317446, 0, 1, 0, 0.10317446, 0, 0.9946633, -20.604815, 3.8146973e-06, 12.443031)
+
+[node name="Building5" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(0.97178835, 0, -0.23585454, 0, 1, 0, 0.23585454, 0, 0.97178835, -19.552008, 7.6293945e-06, 4.515707)
+
+[node name="Building6" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(0.9801814, 0, 0.19810215, 0, 1, 0, -0.19810215, 0, 0.9801814, -19.63882, -3.8146973e-06, -9.053257)
+
+[node name="Building4" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, 20.748718, 3.8146973e-06, 33.430103)
+
+[node name="Building7" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(-0.99761254, 0, -0.06906009, 0, 1, 0, 0.06906009, 0, -0.99761254, 22.785545, 3.8146973e-06, 18.412035)
+
+[node name="Building8" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(-0.9020964, 0, 0.43153474, 0, 1, 0, -0.43153474, 0, -0.9020964, 21.04311, 3.8146973e-06, 11.61541)
+
+[node name="Building9" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(-0.92485833, 0, -0.38031188, 0, 1, 0, 0.38031188, 0, -0.92485833, 28.408232, 1.5258789e-05, -4.675583)
+
+[node name="Building10" parent="Buildings" instance=ExtResource("1_t8rem")]
+transform = Transform3D(-0.9147552, 0, -0.4040084, 0, 1, 0, 0.4040084, 0, -0.9147552, 25.225227, 7.6293945e-06, -23.47966)
+
+[node name="ArchedGateway" parent="." instance=ExtResource("2_mlaoi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41.37599)
+
+[node name="EchoHint" parent="." instance=ExtResource("3_1dg0r")]
+transform = Transform3D(0.44719723, 0, -0.89443535, 0, 1, 0, 0.89443535, 0, 0.44719723, 22.87396, 2.4215503, -18.862278)
+text = "First Echoes Here"
+
+[node name="PlazaH" parent="." instance=ExtResource("3_1dg0r")]
+transform = Transform3D(0.9999885, 0, -0.0047996044, 0, 1, 0, 0.0047996044, 0, 0.9999885, 3.5091438, 2.4215503, -32.1987)
+text = "To Plaza"
+
+[node name="BoulderHint" type="Label3D" parent="."]
+transform = Transform3D(0.99598336, 0, 0.08953759, 0, 1, 0, -0.08953759, 0, 0.99598336, -6.657563, 2.4215503, -34.59155)
+text = "Boulder blocks path on first visit (tutorial)"
+font_size = 140
+outline_size = 92
+uppercase = true
+autowrap_mode = 2
+width = 1500.0
+
+[node name="LoreHint" type="Label3D" parent="."]
+transform = Transform3D(0.15457234, 0, 0.9879814, 0, 1, 0, -0.9879814, 0, 0.15457234, -15.792407, 2.4215503, 9.248089)
+text = "Lore pickups over here?"
+font_size = 140
+outline_size = 92
+uppercase = true
+autowrap_mode = 2
+width = 1500.0
+
+[node name="EmptyHint" type="Label3D" parent="."]
+transform = Transform3D(0.6293476, 0, -0.7771238, 0, 1, 0, 0.7771238, 0, 0.6293476, 17.603836, 2.6570363, 36.110867)
+text = "Empty building or two"
+font_size = 140
+outline_size = 92
+uppercase = true
+autowrap_mode = 2
+width = 1500.0
+
+[node name="EmptyHint2" type="Label3D" parent="."]
+transform = Transform3D(0.39613873, 0, -0.9181906, 0, 1, 0, 0.9181906, 0, 0.39613873, 17.378885, 2.6570373, 16.606773)
+text = "Some buildings don't open"
+font_size = 140
+outline_size = 92
+uppercase = true
+autowrap_mode = 2
+width = 1500.0

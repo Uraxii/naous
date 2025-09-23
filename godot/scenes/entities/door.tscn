@@ -26,19 +26,18 @@ min_distance = 5.0
 metadata/_custom_type_script = "uid://jqx82cd4qphm"
 
 [sub_resource type="BoxMesh" id="BoxMesh_htbgl"]
+size = Vector3(1.8, 4, 0.3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_de05j"]
-size = Vector3(1, 1.8066711, 0.15777588)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f8c16"]
+points = PackedVector3Array(0.9569571, 2.6412697, 0.22142857, -0.941084, -2.6412697, -0.19126981, -0.941084, -2.6412697, 0.22142857, -0.941084, 2.6412697, -0.19126981, 0.9569571, -2.6412697, -0.19126981, 0.9569571, -2.6412697, 0.22142857, -0.941084, 2.6412697, 0.22142857, 0.9569571, 2.6412697, -0.19126981)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_htbgl"]
-size = Vector3(1.4953613, 1.9421387, 1)
+size = Vector3(2.7026367, 5.6488, 1)
 
 [node name="Door" type="Node3D" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("1_htbgl")
-open_rotation = Vector3(0, 90, 0)
 components = NodePath("ComponentManager")
 body = NodePath("StaticBody3D")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
 [node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qu8ah")
@@ -63,18 +62,18 @@ entity = NodePath("../..")
 metadata/_custom_type_script = "uid://kb2rkvmsll57"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5074188, 0, 0)
-collision_layer = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.897, 2, 0)
+collision_layer = 6
 collision_mask = 7
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1.8060284, 0, 0, 0, 0.14275372, 0, 0.9254364, 0)
+visibility_range_end = 40.0
+visibility_range_end_margin = 5.0
 mesh = SubResource("BoxMesh_htbgl")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92359006, 0.0022888184)
-shape = SubResource("BoxShape3D_de05j")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_f8c16")
 
 [node name="InteractableTrigger" type="Area3D" parent="StaticBody3D" node_paths=PackedStringArray("interactable")]
 collision_layer = 8
@@ -83,5 +82,5 @@ interactable = NodePath("../../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://biugcdkh4yjur"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/InteractableTrigger"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03112793, 0.9690343, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036987305, 0.06343651, 0)
 shape = SubResource("BoxShape3D_htbgl")

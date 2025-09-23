@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dso1aolsqgck"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gw7nq"]
+size = Vector3(0.6, 5, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uva5k"]
+albedo_color = Color(0.3311, 0.5066599, 0.77, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_needq"]
+points = PackedVector3Array(0.41428572, 2.6587303, 5.077377, -0.37936503, -2.579365, -5.077377, 0.41428572, -2.579365, -5.077377, -0.37936503, -2.579365, 5.077377, -0.37936503, 2.6587303, -5.077377, 0.41428572, 2.6587303, -5.077377, 0.41428572, -2.579365, 5.077377, -0.37936503, 2.6587303, 5.077377)
+
+[node name="Bookcase" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visibility_range_end = 50.0
+visibility_range_end_margin = 5.0
+mesh = SubResource("BoxMesh_gw7nq")
+surface_material_override/0 = SubResource("StandardMaterial3D_uva5k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_needq")
