@@ -203,6 +203,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -185.19629)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -273.40607, 0, -177.99998)
 
 [node name="Dwellings" parent="BubbleZones" instance=ExtResource("11_3hgis")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -283.77884, 0, -413.45227)
 
 [node name="MaskingSite" parent="BubbleZones" instance=ExtResource("12_rfsvl")]
 
