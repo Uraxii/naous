@@ -12,8 +12,6 @@ points = PackedVector3Array(0.41428572, 2.6587303, 5.077377, -0.37936503, -2.579
 [node name="Bookcase" type="StaticBody3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visibility_range_end = 50.0
-visibility_range_end_margin = 5.0
 mesh = SubResource("BoxMesh_gw7nq")
 surface_material_override/0 = SubResource("StandardMaterial3D_uva5k")
 

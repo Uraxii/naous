@@ -67,8 +67,6 @@ collision_layer = 6
 collision_mask = 7
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-visibility_range_end = 40.0
-visibility_range_end_margin = 5.0
 mesh = SubResource("BoxMesh_htbgl")
 skeleton = NodePath("../..")
 

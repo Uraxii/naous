@@ -192,3 +192,7 @@ interact={
 3d_physics/layer_2="World"
 3d_physics/layer_3="Entity"
 3d_physics/layer_4="InteractableTrigger"
+
+[rendering]
+
+occlusion_culling/use_occlusion_culling=true
