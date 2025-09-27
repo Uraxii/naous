@@ -1,11 +1,8 @@
-# Filename.ext
-# Tempo
-# Beats until the first downbeat
-# Time Signature
-# Time Markers[]? Could be useful.
-
-Naous_Menu.mp3
+Not So Still
 bpm: 60
-offset: 1
-sig: 4/4
-markers: []
+
+Test 2
+bpm:
+
+Test 3
+bpm: 94
