@@ -1,11 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://fkfyhnng56ic"]
+[gd_scene load_steps=11 format=3 uid="uid://fkfyhnng56ic"]
 
 [ext_resource type="Script" uid="uid://c8vuvxm8pbrf2" path="res://scripts/music/dynamic_music_test_scene.gd" id="1_hb3m7"]
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://assets/music/resource_music_dynamic.gd" id="2_xno0y"]
 [ext_resource type="Resource" uid="uid://e26byi4f045n" path="res://assets/music/01-Not So Still.tres" id="3_wr1r5"]
+[ext_resource type="AudioStream" uid="uid://psvgua4141k" path="res://assets/music/02 Ambivalent Fellow/02 - Ambivalent Fellow - Complete.mp3" id="4_aprk7"]
 [ext_resource type="AudioStream" uid="uid://dqtb8y87fv0tl" path="res://assets/music/02 Ambivalent Fellow/02 - Ambivalent Fellow - Loonsong.ogg" id="4_ltqrd"]
 [ext_resource type="AudioStream" uid="uid://bao8db15eti0j" path="res://assets/music/02 Ambivalent Fellow/02 - Ambivalent Fellow - Pad.ogg" id="5_aprk7"]
 [ext_resource type="AudioStream" uid="uid://cnake8nsss7x7" path="res://assets/music/02 Ambivalent Fellow/02 - Ambivalent Fellow - Piano.ogg" id="6_pqu1w"]
+
+[sub_resource type="Resource" id="Resource_pqu1w"]
+script = ExtResource("2_xno0y")
+file = ExtResource("4_aprk7")
+title = "Ambivalent Fellow"
+bpm = 94
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_fe71g"]
 stream_count = 3
@@ -29,7 +37,7 @@ grow_vertical = 2
 script = ExtResource("1_hb3m7")
 non_positional_root = NodePath("DynamicMusic/NonPositional")
 positional_root = NodePath("DynamicMusic/Positional")
-tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5")])
+tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), SubResource("Resource_pqu1w")])
 proto_non_positional_player = NodePath("DynamicMusic/NonPositionalPrototype")
 proto_positional_player = NodePath("DynamicMusic/PositionalPrototype")
 

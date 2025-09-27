@@ -12,7 +12,7 @@ extends Control
 var selected_track_index:int = 0:
 	set(value):
 		if tracks.size() > 0:
-			selected_track_index = wrapi(value, 0, tracks.size()-1)
+			selected_track_index = wrapi(value, 0, tracks.size())
 			selected_track_label.text = tracks[selected_track_index].title
 		else:
 			selected_track_index = -1
@@ -25,9 +25,7 @@ func start_track(track:DynamicMusicTrack) -> void:
 	player.play()
 		
 	if track.trans_start_fade_in:
-			player.volume_linear = track.trans_start_fade_in.sample_baked(track.trans_start_fade_in.min_domain)
-			var trans_tween:Tween = player.create_tween()
-			trans_tween.tween_method(DynamicMusicTrack.set_volume_from_curve.bind(player, track.trans_start_fade_in), player.volume_linear, track.trans_start_fade_in.max_domain, track.trans_start_fade_in.max_domain)
+			pass
 	
 func stop_track(track:DynamicMusicTrack) -> void:
 	var player = get_player(track)
