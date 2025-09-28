@@ -1,52 +1,45 @@
 class_name Main extends Node
 
-enum ServerMode {
-    CLIENT,
-    HEADLESS_SERVER
-}
+@onready var signals := Globals.signal_bus
+@onready var http := Globals.http
+@onready var ws := Globals.websocket
+@onready var session := Globals.session
 
-var server_mode: ServerMode = ServerMode.CLIENT
-var shard_config: Dictionary = {}
+
+func _auto_connect(args: Dictionary) -> void:
+    print_debug("Autoconnecting...")
+
+    var response = await http.login(args['user'], args['secret'])
+
+    var code: int = response[1]
+    if code != 200:
+        push_error("Login failed!")
+        return
+
+    signals.logged_in.emit()
+
+    var resp_body = response[3]
+    var data = JSON.parse_string(resp_body.get_string_from_utf8())
+    session.token = data['session_token']
+
+    var endpoint = "ws://%s:%d/%s" % [
+    ws.SERVER_ADDRESS, ws.SERVER_PORT, ws.WEBSOCKET_ENDPOINT]
+
+    var error = ws.connect_to_url(endpoint)
+    if error:
+        push_error("Unable to connec to %s" % endpoint)
 
 
 func _ready() -> void:
+    print_debug("Initializing as client...")
+
     Globals.views.spawn(ConsoleView)
     var args := ArgParser.parse()
-    
-    print("Args=", args)
-    
-    # Check if running as headless server
-    if _is_server_mode(args):
-        server_mode = ServerMode.HEADLESS_SERVER
-        _initialize_server(args)
-    else:
-        server_mode = ServerMode.CLIENT
-        _initialize_client(args)
 
+    print_debug("Args=", args)
 
-func _is_server_mode(args: Dictionary) -> bool:
-    """Check if we should run as a headless server."""
-    return args.has("headless") or args.has("server") or args.has("shard_id")
-
-
-func _initialize_server(args: Dictionary) -> void:
-    """Initialize as a headless server shard."""
-    print("Initializing as headless server...")
-
-    var instance_cfg := InstanceConfig.new()
-    if args.has("level"):
-        var level_name = args.get("level")
-        instance_cfg.level = load(
-            "res://scenes/world/zones/%s.tscn" % level_name)
-    InstanceAPI.start_server(instance_cfg)
-
-
-func _initialize_client(args: Dictionary) -> void:
-    """Initialize as a normal client."""
-    print("Initializing as client...")
-    
-    if args.has("auto_connect"):
-        InstanceAPI.start_client()
+    if args.has("autoconnect"):
+        _auto_connect(args)
         return
-    
+
     Globals.views.spawn(MainView)

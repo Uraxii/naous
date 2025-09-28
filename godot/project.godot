@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://scripts/global_manager.gd"
-API="*res://scripts/api/api_client.tscn"
 InstanceAPI="*res://scripts/instance_api.gd"
 lg="*res://scripts/utils/log.gd"
 
