@@ -47,4 +47,5 @@ func create_globals() -> void:
 
 func _ready():
     launch_args = ArgParser.parse()
-    create_globals()
+    if not launch_args.has("no-globals"):
+        create_globals()
