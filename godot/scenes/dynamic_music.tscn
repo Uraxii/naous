@@ -76,83 +76,85 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="Controls/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 10
+size_flags_horizontal = 3
 
-[node name="Controller" type="PanelContainer" parent="Controls/VBoxContainer/GridContainer"]
+[node name="Controller" type="PanelContainer" parent="Controls/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/VBoxContainer/GridContainer/Controller"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 
-[node name="StartPlayback" type="Button" parent="Controls/VBoxContainer/GridContainer/Controller/VBoxContainer"]
+[node name="PrevNext" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
 layout_mode = 2
-text = "Start"
+alignment = 1
 
-[node name="Label" type="Label" parent="Controls/VBoxContainer/GridContainer/Controller/VBoxContainer"]
-layout_mode = 2
-
-[node name="ControllerSyncLayers" type="PanelContainer" parent="Controls/VBoxContainer/GridContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="Layers" type="VBoxContainer" parent="Controls/VBoxContainer/GridContainer/ControllerSyncLayers"]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Controls/VBoxContainer/GridContainer/ControllerSyncLayers/Layers"]
-layout_mode = 2
-text = "Synchronized Stream Layers"
-
-[node name="Controller3" type="PanelContainer" parent="Controls/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/VBoxContainer/GridContainer/Controller3"]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer"]
-layout_mode = 2
-
-[node name="Prev" type="Button" parent="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer/HBoxContainer"]
+[node name="Prev" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Previous"
 
-[node name="Next" type="Button" parent="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer/HBoxContainer"]
+[node name="Next" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Next"
 
-[node name="SelectedTrack" type="Label" parent="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer"]
+[node name="SelectedTrack" type="Label" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Current: "
+text = "- selection -"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Controller2" type="PanelContainer" parent="Controls/VBoxContainer/GridContainer"]
+[node name="StartStop" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StopPlayback" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop"
+
+[node name="StartPlayback" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start"
+
+[node name="PlayingTracks" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/VBoxContainer/GridContainer/Controller2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 
-[node name="StopPlayback" type="Button" parent="Controls/VBoxContainer/GridContainer/Controller2/VBoxContainer"]
+[node name="Label" type="Label" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks/VBoxContainer"]
 layout_mode = 2
-text = "Stop"
+text = "Player Instances:"
+horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="Controls/VBoxContainer/GridContainer/Controller2/VBoxContainer"]
+[node name="TracksPlaying" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Controls/VBoxContainer"]
+[node name="ControllerSyncLayers" type="PanelContainer" parent="Controls/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
+
+[node name="Layers" type="VBoxContainer" parent="Controls/HBoxContainer/ControllerSyncLayers"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Controls/HBoxContainer/ControllerSyncLayers/Layers"]
+layout_mode = 2
+text = "Synchronized Stream Layers"
+horizontal_alignment = 1
 
 [node name="Root" type="Node3D" parent="."]
 
@@ -170,7 +172,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 mesh = SubResource("QuadMesh_hb3m7")
 skeleton = NodePath("../..")
 
-[connection signal="pressed" from="Controls/VBoxContainer/GridContainer/Controller/VBoxContainer/StartPlayback" to="." method="_on_start_playback_pressed"]
-[connection signal="pressed" from="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer/HBoxContainer/Prev" to="." method="_on_track_select_prev_pressed"]
-[connection signal="pressed" from="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer/HBoxContainer/Next" to="." method="_on_track_select_next_pressed"]
-[connection signal="pressed" from="Controls/VBoxContainer/GridContainer/Controller2/VBoxContainer/StopPlayback" to="." method="_on_stop_playback_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext/Prev" to="." method="_on_track_select_prev_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext/Next" to="." method="_on_track_select_next_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop/StopPlayback" to="." method="_on_stop_playback_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop/StartPlayback" to="." method="_on_start_playback_pressed"]
