@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://detfjcbuu0eib"
+path="res://.godot/imported/Combat - EPiano.ogg-3e8f3a521a70a52154e52a097e597aff.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/03 Combat 1/Combat - EPiano.ogg"
+dest_files=["res://.godot/imported/Combat - EPiano.ogg-3e8f3a521a70a52154e52a097e597aff.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=99.0
+beat_count=144
+bar_beats=4
