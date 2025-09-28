@@ -4,5 +4,9 @@ bpm: 60
 Test 2
 bpm:
 
-Test 3
+Ambivalent Fellow
 bpm: 94
+
+Combat 1
+bpm: 99
+loop: 37 measures
