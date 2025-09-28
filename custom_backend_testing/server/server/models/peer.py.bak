@@ -1,0 +1,69 @@
+import random
+import string
+from abc import ABC, abstractmethod
+from datetime import datetime, timedelta
+from fastapi import WebSocket
+from pydantic import BaseModel
+
+from shared.models.game import Character, User
+from websocket.models.packets import Packet
+
+
+class Session():
+    def __init__(self, time_to_live: timedelta):
+        self.token = self.refresh_token()
+        self.expiration = datetime.now() + time_to_live
+
+
+    def refresh_token(self) -> str:
+        # TODO: TRANSITON TO JWT!!!
+        self.token = "NOT-SECURE-MAKE-JWT-" + generate_random_string(512)
+        return self.token
+
+
+    def is_expired(self) -> bool:
+        return self.expiration < datetime.now()
+
+
+class ConnectionState(ABC):
+    @abstractmethod
+    async def handle_packet(self, peer, message):
+        pass
+
+
+class Peer():
+    id: int
+    socket: WebSocket
+    session: Session
+    state: ConnectionState
+    user: User
+    character: Character
+
+
+    @property
+    def debug_name(self) -> str:
+        return f"{self.user.name} ({self.id})"
+
+
+    def is_valid_token(self, session_token: str) -> bool:
+        return session_token == self.session.token
+
+
+    async def send_packet(self, packet: BaseModel):
+        json_str = packet.model_dump_json(exclude={'session_token'})
+        await self.socket.send_text(json_str)
+
+
+    def set_state(self, new_state):
+        self.current_state = new_state
+
+
+    async def process_message(self, message):
+        await self.current_state.handle_packet(self, message)
+
+
+def generate_random_string(length):
+    characters = string.ascii_letters + string.digits
+    random_string = ''.join(random.choices(characters, k=length))
+    return random_string
+
