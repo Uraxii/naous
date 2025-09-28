@@ -123,17 +123,30 @@ func _repopulate_tracks_playing() -> void:
 	list.append_array(positional_root.get_children())
 	list.append_array(non_positional_root.get_children())
 	for item in list:
-		if "stream" in item:
+		if item is AudioStreamPlayer:
 			var label:Label = Label.new()
 			label.text = item.stream.resource_path.get_file()
 			label.text += " - %s" % ["playing" if item.playing else "stopped"]
 			tracks_playing.add_child(label)
+			
+			# Playback position slider
+			var slider := AudioPlaybackPositionHSlider.new()
+			slider.audio_player = item
+			tracks_playing.add_child(slider)
+			
+func _process(delta: float) -> void:
+	for child in tracks_playing.get_children():
+		if child is HSlider:
+			pass
 	
 func _on_sync_check_button_toggled(is_pressed:bool, stream:AudioStreamSynchronized, id:int) -> void:
 	stream.set_sync_stream_volume(id, linear_to_db(1.0 if is_pressed else 0.0))
 	
 func _on_sync_layer_slider_changed(value:float, stream:AudioStreamSynchronized, id:int) -> void:
 	stream.set_sync_stream_volume(id, linear_to_db(value))
+	
+func _on_playback_slider_changed(value:float, player:AudioStreamPlayer) -> void:
+	player.seek(value)
 	
 func _on_start_playback_pressed() -> void:
 	start_track(tracks[selected_track_index])
