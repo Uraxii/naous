@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ce8dplxm176ae" path="res://scripts/ui/main_view.gd" id="1_6yyh7"]
 
-[node name="MainView" type="Control"]
+[node name="MainView" type="Control" node_paths=PackedStringArray("username", "password", "join")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -12,23 +12,9 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6yyh7")
-
-[node name="Host" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -15.5
-offset_right = 48.0
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Host Game
-"
+username = NodePath("Join/Username")
+password = NodePath("Join/Password")
+join = NodePath("Join")
 
 [node name="Join" type="Button" parent="."]
 unique_name_in_owner = true
@@ -46,7 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Join Game"
 
-[node name="HostAddress" type="LineEdit" parent="Join"]
+[node name="Username" type="LineEdit" parent="Join"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -54,13 +40,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -75.0
 offset_top = -35.0
-offset_right = -51.0
+offset_right = -46.4375
 offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
-placeholder_text = "Host Address"
+text = "Natalie"
+placeholder_text = "User Name"
 
-[node name="Port" type="LineEdit" parent="Join"]
+[node name="Password" type="LineEdit" parent="Join"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -68,8 +55,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 50.0
 offset_top = -35.0
-offset_right = 74.0
+offset_right = 78.5625
 offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
-placeholder_text = "Port Number"
+text = "password"
+placeholder_text = "Password"

@@ -1,22 +1,18 @@
 class_name View extends Control
 
-var signals: SignalBus:
-    get: return Globals.signal_bus
-
-var input: InputManager:
-    get: return Globals.input
- 
-var views: ViewManager:
-    get: return Globals.views
-
+@onready var signals := Globals.signal_bus
+@onready var session := Globals.session
+@onready var http := Globals.http
+@onready var ws := Globals.websocket
+@onready var input := Globals.input
+@onready var views := Globals.views
 @warning_ignore("shadowed_global_identifier")
-var log: Log:
-    get: return Globals.logger
+@onready var log := Globals.logger
 
 
 func initalize() -> void:
     visibility_changed.connect(_on_visibility_change)    
-    
+
 
 func despawn():
     signals.despawn_view.emit(self)
