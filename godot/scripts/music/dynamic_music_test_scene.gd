@@ -19,10 +19,18 @@ var selected_track_index:int = 0:
 			selected_track_label.text = "No tracks!"
 
 @onready var selected_track_label: Label = %SelectedTrack
+@onready var controller_sync_layers: PanelContainer = %ControllerSyncLayers # parent of vbox for layers
+
 
 func start_track(track:DynamicMusicTrack) -> void:
 	var player = get_player(track)
 	player.play()
+	
+	if track.file is AudioStreamSynchronized:
+		repopulate_synchronized_layers(player.stream)
+		controller_sync_layers.show()
+	else:
+		controller_sync_layers.hide()
 		
 	if track.trans_start_fade_in:
 			pass
@@ -69,6 +77,23 @@ func get_player(track:DynamicMusicTrack) -> Variant:
 		non_positional_root.add_child(new_player)
 		return new_player
 	
+func repopulate_synchronized_layers(stream:AudioStreamSynchronized) -> void:
+	var vbox:VBoxContainer = controller_sync_layers.get_child(0)
+	for child in vbox.get_children():
+		if child is CheckButton:
+			child.free()
+	for i in stream.stream_count:
+		var layer:AudioStream = stream.get_sync_stream(i)
+		# Make a toggle
+		var check_button := CheckButton.new()
+		check_button.text = layer.resource_path.get_file() # This is just for UI purposes.
+		check_button.button_pressed = true # All streams always start playing at once by default.
+		check_button.toggled.connect(_on_sync_check_button_toggled.bind(stream, i))
+		vbox.add_child(check_button)
+	pass
+	
+func _on_sync_check_button_toggled(is_pressed:bool, stream:AudioStreamSynchronized, id:int) -> void:
+	stream.set_sync_stream_volume(id, linear_to_db(1.0 if is_pressed else 0.0))
 
 func _on_start_playback_pressed() -> void:
 	start_track(tracks[selected_track_index])
