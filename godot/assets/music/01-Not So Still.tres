@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=4 format=3 uid="uid://e26byi4f045n"]
 
 [ext_resource type="AudioStream" uid="uid://014tiklr87rp" path="res://assets/music/01 - Not So Still.mp3" id="1_oshl5"]
-[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://assets/music/resource_music_dynamic.gd" id="2_eqarn"]
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_eqarn"]
 
 [sub_resource type="Curve" id="Curve_oshl5"]
 _limits = [0.0, 1.0, 0.0, 3.0]

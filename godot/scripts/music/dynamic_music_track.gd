@@ -1,12 +1,15 @@
 class_name DynamicMusicTrack extends Resource
 
-const MUSIC_BUS:StringName = &"Music"
-
 ## Audio resource.
 @export var file:AudioStream
 
 ## Title of the song.
-@export_placeholder("Song Title") var title:String
+@export_placeholder("Song Title") var title:String:
+	get:
+		if not title:
+			return "EMPTY TITLE PROPERTY"
+		else:
+			return title
 
 ## Tempo; Beats per minute.
 @export var bpm:int
