@@ -1,31 +1,38 @@
 @tool class_name DynamicMusicManager extends Node
 
-const MUSIC_BUS_NAME:StringName = &"Music"
+const BUS_NAME:StringName = &"Music"
+## This is their position in the mixer effect stack. Ensure the tracks align.
 enum FX {
 	Attenuation = 0,
 	BandPass = 1,
 	HighShelf = 2,
 	LowShelf = 3,
 }
+class FXBaselines:
+	const Attenuation:float = 0.0 ## dB gain
+	const HighShelf:float = 1.0 ## Linear gain
+	const LowShelf:float = 1.0 ## Linear gain
+	const BandPass:float = 0.0 ## Linear resonance
 
+@export_group("Components")
 @export var non_positional_root: Node
 @export var positional_root: Node3D
-
-@export var tracks:Array[DynamicMusicTrack]
-
-@export_group("Prototypes", "proto_")
 @export var proto_non_positional_player:AudioStreamPlayer
 @export var proto_positional_player:AudioStreamPlayer3D
 
+@export var tracks:Array[DynamicMusicTrack]
+
 @export_group("Behavior")
 @export_range(0.1, 10.0, 0.1, "or_greater", "hide_slider") var minimum_transition_time:float = 0.1
+@export_range(0.1, 30.0, 0.1, "or_greater", "hide_slider") var default_transition_time:float = 5.0
+
 
 ## Cached integer for the index of the Music bus in [AudioServer].
-var music_bus:int:
+var music_bus_idx:int:
 	get:
-		if not music_bus:
-			music_bus = get_music_bus_idx()
-		return music_bus
+		if not music_bus_idx:
+			music_bus_idx = get_bus_idx()
+		return music_bus_idx
 		
 
 ## This effect is used for ducking the Volume of the whole music bus, for dynamic gameplay purposes.
@@ -61,6 +68,16 @@ var highs_tween:Tween
 var lows_tween:Tween
 var band_pass_tween:Tween
 
+var attenuation_baseline:float = 0.0 ## db gain.
+var highs_baseline:float = 1.0 ## Linear gain.
+var lows_baseline:float = 1.0 ## Linear gain.
+var band_pass_baseline:float = 0.0 ## Linear resonance.
+
+var attenuation_reset_timer: Tween
+var highs_reset_timer: Tween
+var lows_reset_timer: Tween
+var band_pass_reset_timer: Tween
+
 
 #region Virtuals
 func _process(delta: float) -> void:
@@ -74,43 +91,45 @@ func _process(delta: float) -> void:
 #region Tweens
 ## Provided a reference [param tween], will [method Tween.kill], and always
 ## returns a new [Tween] binded to [param attach] using [method Node.create_tween].
-static func check_kill(tween, attach:Node) -> Tween:
+static func kill_create(tween, attach:Node) -> Tween:
 	if tween:
 		if tween is Tween:
 			tween.kill()
 	return attach.create_tween()
 	
+static func check_kill(tween) -> void:
+	if tween is Tween:
+		tween.kill()
 #endregion
 
 #region Mixer Bus - Utilities
 static func set_music_bus_volume(volume_linear:float) -> void:
-	AudioServer.set_bus_volume_linear(get_music_bus_idx(), volume_linear)
+	AudioServer.set_bus_volume_linear(get_bus_idx(), volume_linear)
 	
 static func get_music_bus_volume_linear() -> float:
-	return AudioServer.get_bus_volume_linear(get_music_bus_idx())
+	return AudioServer.get_bus_volume_linear(get_bus_idx())
 	
 static func get_music_bus_volume_db() -> float:
-	return AudioServer.get_bus_volume_db(get_music_bus_idx())
+	return AudioServer.get_bus_volume_db(get_bus_idx())
 
-static func get_music_bus_idx() -> int:
-	return AudioServer.get_bus_index(MUSIC_BUS_NAME)
+static func get_bus_idx() -> int:
+	return AudioServer.get_bus_index(BUS_NAME)
 	
 ## Use [member FX] for [param index].
-static func get_fx(bus_index:int, fx_index:FX) -> AudioEffect:
-	return AudioServer.get_bus_effect(bus_index, fx_index)
+static func get_fx(fx_index:FX) -> AudioEffect:
+	return AudioServer.get_bus_effect(get_bus_idx(), fx_index)
 	
 static func get_band_pass() -> AudioEffectBandPassFilter:
-	return get_fx(get_music_bus_idx(), FX.BandPass)
+	return get_fx(FX.BandPass)
 	
 static func get_attenuation() -> AudioEffectAmplify:
-	return get_fx(get_music_bus_idx(), FX.Attenuation)
+	return get_fx(FX.Attenuation)
 
 static func get_highs_filter() -> AudioEffectHighShelfFilter:
-	return get_fx(get_music_bus_idx(), FX.HighShelf)
+	return get_fx(FX.HighShelf)
 	
 static func get_lows_filter() -> AudioEffectLowShelfFilter:
-	return get_fx(get_music_bus_idx(), FX.LowShelf)
-
+	return get_fx(FX.LowShelf)
 
 static func set_filter_resonance(value:float, fx: AudioEffectFilter) -> void:
 	#fx comes after value in the args because of how Callable.bind() works.
@@ -122,21 +141,65 @@ static func set_filter_cutoff(hz:float, fx: AudioEffectFilter) -> void:
 	
 static func set_filter_slope(slope:AudioEffectFilter.FilterDB, fx: AudioEffectFilter) -> void:
 	fx.db = slope
-	
+
 static func set_filter_gain_db(volume_db:float, fx: AudioEffectFilter) -> void:
 	#fx comes after value in the args because of how Callable.bind() works.
 	fx.gain = db_to_linear(volume_db)
 
+## The local baseline variable can be adjusted by gameplay. This method can be used
+## to ensure that after a scene change, these values are properly defaulted.
+## Each of these values within [class FXBaselines] represents a neutral state.
+func reset_all_fx_baselines_to_default() -> void:
+	attenuation_baseline = FXBaselines.Attenuation
+	highs_baseline = FXBaselines.HighShelf
+	lows_baseline = FXBaselines.LowShelf
+	band_pass_baseline = FXBaselines.BandPass
+
+## Transitions each of the filters back to their respective current baseline values.
+## Primarily used by [DynamicMusicEvent] to reset their active effect.
+func reset_all_fx_to_baselines(transition:float = default_transition_time) -> void:
+	for type in FX: reset_fx(type, transition)
+
+func reset_fx(fx:FX, transition:float = default_transition_time) ->  void:
+	match fx:
+		FX.Attenuation:
+			attenuate(attenuation_baseline, transition)
+		FX.HighShelf:
+			high_shelf(get_highs_filter().cutoff_hz, highs_baseline, transition)
+		FX.LowShelf:
+			low_shelf(get_lows_filter().cutoff_hz, lows_baseline, transition)
+		FX.BandPass:
+			band_pass(get_band_pass().cutoff_hz, band_pass_baseline, transition)
+			
+func timed_reset(fx:FX, delay:float, transition:float = default_transition_time) -> void:
+	var timer: Tween
+	
+	match fx:
+		FX.Attenuation:
+			timer = attenuation_reset_timer
+		FX.HighShelf:
+			timer = highs_reset_timer
+		FX.LowShelf:
+			timer = lows_reset_timer
+		FX.BandPass:
+			timer = band_pass_reset_timer
+			
+	timer = kill_create(timer, self)
+	timer.tween_interval(delay)
+	timer.tween_callback(
+		reset_fx.bind(fx, transition)
+	)
+
 ## Adjust the [AudioEffectBandPassFilter] on the Music bus (see [AudioServer]).
 ## [param frequency] is in hz,
-## [param resonance] is 0.0 to 0.1, where zero is no effect.
+## [param resonance] is 0.0 to 1.0, where zero is no effect.
 ## [param transition] is in seconds. The minimum is 0.1s for sanity's sake.
 ## There is a configurable global minimum, see [member minimum_transition_time].
 func band_pass(frequency:float, resonance:float, transition:float = 0.0) -> void:
-	band_pass_tween = check_kill(band_pass_tween, self)
-	#var band_pass_filter:AudioEffectBandPassFilter = get_band_pass() # Singleton cached.
+	band_pass_tween = kill_create(band_pass_tween, self)
+	check_kill(band_pass_reset_timer)
 	
-	if transition > 0.1:
+	if transition >= 0.1:
 		transition = maxf(transition, minimum_transition_time)
 		band_pass_tween.set_ease(Tween.EASE_OUT)
 		band_pass_tween.tween_method(
@@ -161,9 +224,10 @@ func band_pass(frequency:float, resonance:float, transition:float = 0.0) -> void
 ## [param transition] is in seconds. The minimum is 0.1s for sanity's sake.
 ## There is a configurable global minimum, see [member minimum_transition_time].
 func attenuate(gain_db:float, transition:float = 0.0) -> void:
-	attenuation_tween = check_kill(attenuation_tween, self)
+	attenuation_tween = kill_create(attenuation_tween, self)
+	check_kill(attenuation_reset_timer)
 	
-	if transition > 0.1:
+	if transition >= 0.1:
 		transition = maxf(transition, minimum_transition_time)
 		#attenuation_tween.set_ease(Tween.EASE_IN_OUT) # Linear is probably best.
 		attenuation_tween.tween_property(
@@ -182,10 +246,10 @@ func attenuate(gain_db:float, transition:float = 0.0) -> void:
 ## [param transition] is in seconds. The minimum is 0.1s for sanity's sake.
 ## There is a configurable global minimum, see [member minimum_transition_time].
 func high_shelf(frequency:float, gain:float, transition:float = 0.0) -> void:
-	highs_tween = check_kill(highs_tween, self)
-	#var band_pass_filter:AudioEffectBandPassFilter = get_band_pass() # Singleton cached.
+	highs_tween = kill_create(highs_tween, self)
+	check_kill(highs_reset_timer)
 	
-	if transition > 0.1:
+	if transition >= 0.1:
 		transition = maxf(transition, minimum_transition_time)
 		highs_tween.set_ease(Tween.EASE_OUT)
 		highs_tween.tween_method(
@@ -211,10 +275,10 @@ func high_shelf(frequency:float, gain:float, transition:float = 0.0) -> void:
 ## [param transition] is in seconds. The minimum is 0.1s for sanity's sake.
 ## There is a configurable global minimum, see [member minimum_transition_time].
 func low_shelf(frequency:float, gain:float, transition:float = 0.0) -> void:
-	lows_tween = check_kill(lows_tween, self)
-	#var band_pass_filter:AudioEffectBandPassFilter = get_band_pass() # Singleton cached.
+	lows_tween = kill_create(lows_tween, self)
+	check_kill(lows_reset_timer)
 	
-	if transition > 0.1:
+	if transition >= 0.1:
 		transition = maxf(transition, minimum_transition_time)
 		lows_tween.set_ease(Tween.EASE_IN)
 		lows_tween.tween_method(
@@ -249,7 +313,7 @@ func get_player(track:DynamicMusicTrack) -> Variant:
 		new_player = proto_positional_player.duplicate()
 		
 		new_player.stream = track.file
-		new_player.bus = MUSIC_BUS_NAME
+		new_player.bus = BUS_NAME
 		
 		positional_root.add_child(new_player)
 		
@@ -266,7 +330,7 @@ func get_player(track:DynamicMusicTrack) -> Variant:
 		new_player = proto_non_positional_player.duplicate()
 		
 		new_player.stream = track.file
-		new_player.bus = MUSIC_BUS_NAME
+		new_player.bus = BUS_NAME
 		
 		non_positional_root.add_child(new_player)
 			
@@ -288,8 +352,8 @@ func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	player.play()
 		
 	if track.trans_start_fade_in:
-			pass
-			
+		pass
+		
 	return player
 	
 func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:

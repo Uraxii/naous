@@ -10,4 +10,4 @@
 
 func editor_demo() -> void:
 	if event:
-		event
+		event.activate()

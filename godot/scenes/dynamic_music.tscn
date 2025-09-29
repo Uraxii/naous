@@ -22,17 +22,19 @@ metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
 script = ExtResource("15_3ovdk")
 non_positional_root = NodePath("NonPositional")
 positional_root = NodePath("Positional")
-tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), SubResource("Resource_ltqrd"), SubResource("Resource_aprk7")])
 proto_non_positional_player = NodePath("NonPositionalPrototype")
 proto_positional_player = NodePath("PositionalPrototype")
+tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), SubResource("Resource_ltqrd"), SubResource("Resource_aprk7")])
 
 [node name="NonPositionalPrototype" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_o8nnl")
 bus = &"Music"
 
 [node name="NonPositional" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="PositionalPrototype" type="AudioStreamPlayer3D" parent="."]
 bus = &"Music"
 
 [node name="Positional" type="Node3D" parent="."]
+unique_name_in_owner = true
