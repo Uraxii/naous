@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwvukle78pxbp"]
+[gd_scene load_steps=10 format=3 uid="uid://dwvukle78pxbp"]
 
 [ext_resource type="Script" uid="uid://c0o28dohsooma" path="res://scripts/entities/objects/control_zone.gd" id="1_spf4a"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_oh56c"]
@@ -26,10 +26,12 @@ top_radius = 0.73
 bottom_radius = 0.73
 height = 0.182
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rupwl"]
+albedo_color = Color(0.41960785, 0.16078432, 0.3882353, 0.48235294)
+
 [node name="ControlZone" type="Node3D" node_paths=PackedStringArray("components")]
 script = ExtResource("1_spf4a")
 components = NodePath("ComponentManager")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
 [node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_kcvsx")
@@ -46,6 +48,7 @@ prompt_text = "Standin' Around"
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
 
 [node name="EntityDetector" type="Area3D" parent="." node_paths=PackedStringArray("interactable")]
+collision_layer = 4
 script = ExtResource("4_kcvsx")
 interactable = NodePath("../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://bcj72dre6qge7"
@@ -57,3 +60,4 @@ shape = SubResource("CylinderShape3D_7ojcd")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05107689, 0)
 mesh = SubResource("CylinderMesh_7ojcd")
+surface_material_override/0 = SubResource("StandardMaterial3D_rupwl")
