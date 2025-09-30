@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://vb4a3rgbc3du"]
+[gd_scene load_steps=46 format=3 uid="uid://vb4a3rgbc3du"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://caewogmm7ngun" path="res://scenes/world/dungeons/coalescence/bubbles/masking_site.occ" id="1_yhf3s"]
 [ext_resource type="PackedScene" uid="uid://deb4oma4divte" path="res://scenes/world/dungeons/coalescence/structures/graybox_hint.tscn" id="3_6xr3y"]
@@ -66,6 +66,12 @@ points = PackedVector3Array(-1, -2, -2.5, 1, -2, -2.5, -1, -2, 2.5, -1, 2, -2.5,
 [sub_resource type="BoxMesh" id="BoxMesh_apwbj"]
 size = Vector3(8, 5, 8)
 
+[sub_resource type="BoxMesh" id="BoxMesh_mbmts"]
+size = Vector3(7, 8, 4)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ic6mq"]
+points = PackedVector3Array(-3.5, -4, -2, -3.5, -4, 2, -3.5, 4, -2, 3.5, -4, -2, 3.5, -4, 2, -3.5, 4, 2, 3.5, 4, -2, 3.5, 4, 2)
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_whd06"]
 points = PackedVector3Array(-4, -2.5, -4, -4, 2.5, -4, 4, -2.5, -4, -4, -2.5, 4, -4, 2.5, 4, 4, 2.5, -4, 4, -2.5, 4, 4, 2.5, 4)
 
@@ -112,7 +118,7 @@ size = Vector3(20, 10, 50)
 points = PackedVector3Array(10, 5, 25, 10, -5, 25, 10, 5, -25, -10, 5, 25, -10, -5, 25, 10, -5, -25, -10, 5, -25, -10, -5, -25)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1568y"]
-size = Vector3(30, 10, 50)
+size = Vector3(30, 10, 34)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5u25u"]
 points = PackedVector3Array(14.999998, 5, 25, 14.999998, -5, 25, 14.999998, 5, -25, -15, 5, 25, -15, -5, 25, 14.999998, -5, -25, -15, 5, -25, -15, -5, -25)
@@ -234,6 +240,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.649815, 2.8947039, -11.56
 mesh = SubResource("BoxMesh_apwbj")
 skeleton = NodePath("../../WallGeo")
 
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Geometry/RaisedArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.11643, 3.8725252, -32.985245)
+mesh = SubResource("BoxMesh_mbmts")
+skeleton = NodePath("../../WallGeo")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="Geometry/RaisedArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.11643, 3.8725252, -32.985245)
+shape = SubResource("ConvexPolygonShape3D_ic6mq")
+
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="Geometry/RaisedArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.649815, 2.8947039, -11.566008)
 shape = SubResource("ConvexPolygonShape3D_whd06")
@@ -300,7 +315,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.464756, 5, -47.04456)
 shape = SubResource("ConvexPolygonShape3D_apwbj")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Geometry/WallGeo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.759838, 5, -60.84612)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.759838, 5, -53.394955)
 mesh = SubResource("BoxMesh_1568y")
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="Geometry/WallGeo"]
@@ -333,8 +348,16 @@ transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, -15.849762, 1.3706846, 27.395
 [node name="Hints" type="Node3D" parent="."]
 
 [node name="GrayboxHint" parent="Hints" instance=ExtResource("3_6xr3y")]
-transform = Transform3D(0.34142968, 0, -0.9399073, 0, 1, 0, 0.9399073, 0, 0.34142968, -50.363834, 2.9918413, -7.1671114)
+transform = Transform3D(0.34142968, 0, -0.9399073, 0, 1, 0, 0.9399073, 0, 0.34142968, -44.37188, 2.9918413, -6.677253)
 text = "Hallway, tall walls, open ceiling. Feels like walking through a canyon"
+
+[node name="GrayboxHint8" parent="Hints" instance=ExtResource("3_6xr3y")]
+transform = Transform3D(-0.44541672, 0, 0.89532334, 0, 1, 0, -0.89532334, 0, -0.44541672, -59.371063, 1.5125384, 0.65007067)
+text = "To Plaza"
+
+[node name="GrayboxHint9" parent="Hints" instance=ExtResource("3_6xr3y")]
+transform = Transform3D(0.8385185, 0, -0.5448732, 0, 1, 0, 0.5448732, 0, 0.8385185, -8.305788, 1.5125384, -61.638157)
+text = "To Markets"
 
 [node name="GrayboxHint2" parent="Hints" instance=ExtResource("3_6xr3y")]
 transform = Transform3D(-0.46255344, 0, -0.88659143, 0, 1, 0, 0.88659143, 0, -0.46255344, -10.091459, 2.9918413, 2.910242)

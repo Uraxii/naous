@@ -35,13 +35,13 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ba1mt")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Occluder"]
-transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, -118.72398, 8.616543, -66.78101)
+transform = Transform3D(0.23961803, 0.9708672, -4.2437954e-08, 0, -4.371139e-08, -1, -0.9708672, 0.23961803, -1.0474038e-08, -100.920944, 8.616539, -63.95207)
 mesh = SubResource("BoxMesh_hq35h")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ba1mt")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Occluder"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -84.69657, 8.616543, -124.66165)
+transform = Transform3D(0.9112093, 0.4119438, -1.8006636e-08, 0, -4.371139e-08, -1, -0.4119438, 0.9112093, -3.9830223e-08, -66.64284, 8.616547, -106.62488)
 mesh = SubResource("BoxMesh_hq35h")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ba1mt")
