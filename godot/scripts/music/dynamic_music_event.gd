@@ -14,30 +14,25 @@ enum MODES {
 @export_group("Duck Volume", "duck_")
 @export var duck_enabled:bool = false
 @export_range(-60, 0, 1.5) var duck_volume:float = 0.0
-@export var duck_transitions: TransitionsConfig
+@export var duck_transitions: DynamicMusicEventTransitionsConfig
 
 @export_group("High Shelf", "hs_")
 @export var hs_enabled:bool = false
 @export_range(100, 12000, 50) var hs_frequency:float = 1000.0
 @export_range(-60, 0, 1.5) var hs_gain:float = 0.0
-@export var hs_transitions: TransitionsConfig
+@export var hs_transitions: DynamicMusicEventTransitionsConfig
 
 @export_group("Low Shelf", "ls_")
 @export var ls_enabled:bool = false
 @export_range(100, 12000, 50) var ls_frequency:float = 1000.0
 @export_range(-60, 0, 1.5) var ls_gain:float = 0.0
-@export var ls_transitions: TransitionsConfig
+@export var ls_transitions: DynamicMusicEventTransitionsConfig
 
 @export_group("Band Pass", "bp_")
 @export var bp_enabled:bool = false
 @export_range(100, 12000, 25) var bp_frequency:float = 1200.0
 @export_range(0.0, 1.0, 0.05) var bp_resonance:float = 0.0
-@export var bp_transitions: TransitionsConfig
-
-class TransitionsConfig extends Resource:
-	@export_range(-1.0, 30.0, 0.1,"or_greater") var transition_in:float = 1.0
-	@export_range(0.1, 10.0, 0.1, "or_greater", "hide_slider") var duration:float = 3.0 ## Only applies to Duration [member mode].
-	@export_range(-1.0, 30.0, 0.1,"or_greater") var transition_out:float = 1.0 ## in seconds. Does not apply to One-shot [member mode].
+@export var bp_transitions: DynamicMusicEventTransitionsConfig
 
 
 func activate() -> void:
@@ -67,7 +62,6 @@ func activate() -> void:
 			bp_transitions.duration,
 			bp_transitions.transition_out
 			)
-		
 	activated.emit()
 
 func deactivate() -> void:
@@ -87,3 +81,5 @@ func deactivate() -> void:
 		DynamicMusicManager.FX.BandPass,
 		bp_transitions.transition_out
 		)
+	
+	deactivated.emit()
