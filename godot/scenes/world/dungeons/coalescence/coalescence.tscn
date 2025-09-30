@@ -212,7 +212,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 187.55295, 0, -177.63788)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 185.4044, -1.5258789e-05, -350.1861)
 
 [node name="ViewingPlatform" parent="BubbleZones" instance=ExtResource("14_k3fpd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -459.61072)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54.809425, 0, -428.46237)
 
 [node name="Player" parent="." instance=ExtResource("15_bco6j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5273829)

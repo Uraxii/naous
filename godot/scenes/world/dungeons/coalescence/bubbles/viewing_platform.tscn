@@ -1,3 +1,75 @@
-[gd_scene format=3 uid="uid://v35xnyjqs16p"]
+[gd_scene load_steps=9 format=3 uid="uid://v35xnyjqs16p"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ofv53"]
+size = Vector2(300, 250)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_8uaek"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_a4sid"]
+size = Vector3(20, 50, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8uaek"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5dq56"]
+size = Vector3(70, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6abn5"]
+size = Vector3(70, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fjpom"]
+size = Vector3(70, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ofv53"]
+size = Vector3(1, 100, 1)
 
 [node name="ViewingPlatform" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_ofv53")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_8uaek")
+
+[node name="UpperArea" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.610832, 50, -26.123426)
+
+[node name="Slab" type="StaticBody3D" parent="UpperArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.06549, 0, -28.978579)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="UpperArea/Slab"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.187767, 7.4826126, -20.756332)
+mesh = SubResource("BoxMesh_a4sid")
+
+[node name="MainPlatform" type="MeshInstance3D" parent="UpperArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.846054, -16.661697, 0)
+mesh = SubResource("BoxMesh_8uaek")
+
+[node name="SouthStairs" type="StaticBody3D" parent="UpperArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.959656, -22.75763, 85.02659)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="UpperArea/SouthStairs"]
+transform = Transform3D(-0.097426504, 2.1382625e-09, -0.99524266, -0.3774259, 0.92530227, 0.03694706, 0.92090046, 0.37923002, -0.090148985, 23.163795, -4.977413, -14.833126)
+mesh = SubResource("BoxMesh_5dq56")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="UpperArea/SouthStairs"]
+transform = Transform3D(0.8338922, 0.51625264, -0.19520985, -0.5135672, 0.85533595, 0.068181984, 0.20216921, 0.04339692, 0.97838867, 60.02262, -10.575916, -120.802826)
+mesh = SubResource("BoxMesh_6abn5")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="UpperArea/SouthStairs"]
+transform = Transform3D(-0.8251522, -0.5141074, 0.23413084, -0.5135672, 0.85533595, 0.06818199, -0.23531349, -0.06398134, -0.96981144, -82.82193, -10.575916, -130.9126)
+mesh = SubResource("BoxMesh_fjpom")
+
+[node name="West" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -140.06969, -1.5258789e-05, -64.619995)
+mesh = SubResource("BoxMesh_ofv53")
+
+[node name="East" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 138.38171, -1.5258789e-05, -62.94189)
+mesh = SubResource("BoxMesh_ofv53")
+
+[node name="Soth" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.46117, 0, 108.32392)
+mesh = SubResource("BoxMesh_ofv53")
