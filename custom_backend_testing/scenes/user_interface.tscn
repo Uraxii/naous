@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://d21pp0ycm7vm6"]
+
+[ext_resource type="Script" uid="uid://cnf7nlvmm3w71" path="res://scripts/user_interface.gd" id="1_syvep"]
+[ext_resource type="Script" uid="uid://b17esmq0ypis8" path="res://scripts/chat.gd" id="2_l2bgj"]
+
+[node name="UserInterface" type="Control" node_paths=PackedStringArray("connect_button", "disconnect_button", "player_name", "chat_window", "input_text", "send_message_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_syvep")
+connect_button = NodePath("ConnectButton")
+disconnect_button = NodePath("DisonnectButton")
+player_name = NodePath("PlayerName")
+chat_window = NodePath("Chat")
+input_text = NodePath("Chat/InputText")
+send_message_button = NodePath("Chat/SendMessageButton")
+
+[node name="ConnectButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 211.0
+offset_bottom = 72.0
+text = "Connect"
+
+[node name="DisonnectButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 211.0
+offset_bottom = 72.0
+text = "Disconnect"
+
+[node name="PlayerName" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 83.0
+offset_right = 183.0
+offset_bottom = 114.0
+text = "Nicole"
+placeholder_text = "Name"
+
+[node name="Chat" type="Control" parent="." node_paths=PackedStringArray("player_name", "chat_log", "text_input", "send_message_button")]
+anchors_preset = 0
+offset_left = 28.0
+offset_top = 403.0
+offset_right = 609.0
+offset_bottom = 527.0
+script = ExtResource("2_l2bgj")
+player_name = NodePath("../PlayerName")
+chat_log = NodePath("ChatLog")
+text_input = NodePath("InputText")
+send_message_button = NodePath("SendMessageButton")
+
+[node name="ChatLog" type="RichTextLabel" parent="Chat"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = -170.0
+offset_right = 513.0
+offset_bottom = -1.0
+
+[node name="InputText" type="TextEdit" parent="Chat"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = 574.0
+offset_bottom = 52.0
+placeholder_text = "Message..."
+
+[node name="SendMessageButton" type="Button" parent="Chat"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 71.0
+offset_right = 255.0
+offset_bottom = 102.0
+text = "Send"

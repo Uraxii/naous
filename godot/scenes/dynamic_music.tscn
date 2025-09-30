@@ -1,8 +1,67 @@
-[gd_scene load_steps=5 format=3 uid="uid://fkfyhnng56ic"]
+[gd_scene load_steps=21 format=3 uid="uid://fkfyhnng56ic"]
 
 [ext_resource type="Script" uid="uid://c8vuvxm8pbrf2" path="res://scripts/music/dynamic_music_test_scene.gd" id="1_hb3m7"]
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://assets/music/resource_music_dynamic.gd" id="2_xno0y"]
 [ext_resource type="Resource" uid="uid://e26byi4f045n" path="res://assets/music/01-Not So Still.tres" id="3_wr1r5"]
+[ext_resource type="AudioStream" uid="uid://htobeesip2qa" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 1.ogg" id="4_o8nnl"]
+[ext_resource type="AudioStream" uid="uid://by4la1ljato1d" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 3.ogg" id="5_y6qkl"]
+[ext_resource type="AudioStream" uid="uid://48u8uru081xt" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 5.ogg" id="6_8wqun"]
+[ext_resource type="AudioStream" uid="uid://detfjcbuu0eib" path="res://assets/music/03 Combat 1/Combat - EPiano.ogg" id="7_jv0va"]
+[ext_resource type="AudioStream" uid="uid://cmb6mne7qi2n6" path="res://assets/music/03 Combat 1/Combat - EPiano B.ogg" id="8_aalfb"]
+[ext_resource type="AudioStream" uid="uid://chnlxgnks6d6c" path="res://assets/music/03 Combat 1/Combat - Piano A.ogg" id="9_3ovdk"]
+[ext_resource type="AudioStream" uid="uid://bjx0a161yik7f" path="res://assets/music/03 Combat 1/Combat - Piano B.ogg" id="10_o8nnl"]
+[ext_resource type="AudioStream" uid="uid://dj4qrk1st87xr" path="res://assets/music/03 Combat 1/Combat - Pad.ogg" id="11_y6qkl"]
+[ext_resource type="AudioStream" uid="uid://dpo2cxa5c0glb" path="res://assets/music/03 Combat 1/Combat - Drums A.ogg" id="12_8wqun"]
+[ext_resource type="AudioStream" uid="uid://b16kutfh4ayjc" path="res://assets/music/03 Combat 1/Combat - Drums B.ogg" id="13_ft0a7"]
+[ext_resource type="AudioStream" uid="uid://cxo01xpccni0i" path="res://assets/music/03 Combat 1/Combat - LPercussion.ogg" id="14_hhqak"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_ft0a7"]
+stream_count = 3
+stream_0/stream = ExtResource("4_o8nnl")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("5_y6qkl")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("6_8wqun")
+stream_2/volume = 0.0
+
+[sub_resource type="Resource" id="Resource_hhqak"]
+script = ExtResource("2_xno0y")
+file = SubResource("AudioStreamSynchronized_ft0a7")
+title = "Ambivalent Fellow"
+bpm = 94
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_yqb01"]
+stream_count = 8
+stream_0/stream = ExtResource("7_jv0va")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("8_aalfb")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("9_3ovdk")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("10_o8nnl")
+stream_3/volume = 0.0
+stream_4/stream = ExtResource("11_y6qkl")
+stream_4/volume = 0.0
+stream_5/stream = ExtResource("12_8wqun")
+stream_5/volume = 0.0
+stream_6/stream = ExtResource("13_ft0a7")
+stream_6/volume = 0.0
+stream_7/stream = ExtResource("14_hhqak")
+stream_7/volume = 0.0
+
+[sub_resource type="Resource" id="Resource_g5p8f"]
+script = ExtResource("2_xno0y")
+file = SubResource("AudioStreamSynchronized_yqb01")
+title = "Combat"
+bpm = 94
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_fe71g"]
+stream_count = 3
+stream_0/volume = 0.0
+stream_1/volume = 0.0
+stream_2/volume = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_hb3m7"]
 size = Vector2(15, 15)
@@ -17,7 +76,7 @@ grow_vertical = 2
 script = ExtResource("1_hb3m7")
 non_positional_root = NodePath("DynamicMusic/NonPositional")
 positional_root = NodePath("DynamicMusic/Positional")
-tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5")])
+tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), SubResource("Resource_hhqak"), SubResource("Resource_g5p8f")])
 proto_non_positional_player = NodePath("DynamicMusic/NonPositionalPrototype")
 proto_positional_player = NodePath("DynamicMusic/PositionalPrototype")
 
@@ -33,6 +92,9 @@ bus = &"Music"
 
 [node name="Positional" type="Node3D" parent="DynamicMusic"]
 
+[node name="SynchronizedPrototype" type="AudioStreamPlayer" parent="DynamicMusic"]
+stream = SubResource("AudioStreamSynchronized_fe71g")
+
 [node name="Controls" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -45,71 +107,85 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="Controls/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 10
+size_flags_horizontal = 3
 
-[node name="Controller" type="PanelContainer" parent="Controls/VBoxContainer/GridContainer"]
+[node name="Controller" type="PanelContainer" parent="Controls/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/VBoxContainer/GridContainer/Controller"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 
-[node name="StartPlayback" type="Button" parent="Controls/VBoxContainer/GridContainer/Controller/VBoxContainer"]
+[node name="PrevNext" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
 layout_mode = 2
-text = "Start"
+alignment = 1
 
-[node name="Label" type="Label" parent="Controls/VBoxContainer/GridContainer/Controller/VBoxContainer"]
-layout_mode = 2
-
-[node name="Controller3" type="PanelContainer" parent="Controls/VBoxContainer/GridContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/VBoxContainer/GridContainer/Controller3"]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer"]
-layout_mode = 2
-
-[node name="Prev" type="Button" parent="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer/HBoxContainer"]
+[node name="Prev" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Previous"
 
-[node name="Next" type="Button" parent="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer/HBoxContainer"]
+[node name="Next" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Next"
 
-[node name="SelectedTrack" type="Label" parent="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer"]
+[node name="SelectedTrack" type="Label" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Current: "
+text = "- selection -"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Controller2" type="PanelContainer" parent="Controls/VBoxContainer/GridContainer"]
+[node name="StartStop" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StopPlayback" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop"
+
+[node name="StartPlayback" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start"
+
+[node name="PlayingTracks" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Controls/VBoxContainer/GridContainer/Controller2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 
-[node name="StopPlayback" type="Button" parent="Controls/VBoxContainer/GridContainer/Controller2/VBoxContainer"]
+[node name="Label" type="Label" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks/VBoxContainer"]
 layout_mode = 2
-text = "Stop"
+text = "Player Instances:"
+horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="Controls/VBoxContainer/GridContainer/Controller2/VBoxContainer"]
+[node name="TracksPlaying" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Controls/VBoxContainer"]
+[node name="ControllerSyncLayers" type="PanelContainer" parent="Controls/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
+
+[node name="Layers" type="VBoxContainer" parent="Controls/HBoxContainer/ControllerSyncLayers"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Controls/HBoxContainer/ControllerSyncLayers/Layers"]
+layout_mode = 2
+text = "Synchronized Stream Layers"
+horizontal_alignment = 1
 
 [node name="Root" type="Node3D" parent="."]
 
@@ -127,7 +203,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 mesh = SubResource("QuadMesh_hb3m7")
 skeleton = NodePath("../..")
 
-[connection signal="pressed" from="Controls/VBoxContainer/GridContainer/Controller/VBoxContainer/StartPlayback" to="." method="_on_start_playback_pressed"]
-[connection signal="pressed" from="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer/HBoxContainer/Prev" to="." method="_on_track_select_prev_pressed"]
-[connection signal="pressed" from="Controls/VBoxContainer/GridContainer/Controller3/VBoxContainer/HBoxContainer/Next" to="." method="_on_track_select_next_pressed"]
-[connection signal="pressed" from="Controls/VBoxContainer/GridContainer/Controller2/VBoxContainer/StopPlayback" to="." method="_on_stop_playback_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext/Prev" to="." method="_on_track_select_prev_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext/Next" to="." method="_on_track_select_next_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop/StopPlayback" to="." method="_on_stop_playback_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop/StartPlayback" to="." method="_on_start_playback_pressed"]
