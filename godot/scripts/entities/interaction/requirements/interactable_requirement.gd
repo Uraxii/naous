@@ -8,5 +8,5 @@ func condition_passed(entity: Entity) -> bool:
     return true
 
 
-#func _init() -> void:
-    #resource_local_to_scene = true
+func _init() -> void:
+    resource_local_to_scene = true
