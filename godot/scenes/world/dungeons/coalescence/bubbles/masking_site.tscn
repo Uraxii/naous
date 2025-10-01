@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://vb4a3rgbc3du"]
+[gd_scene load_steps=48 format=3 uid="uid://vb4a3rgbc3du"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://caewogmm7ngun" path="res://scenes/world/dungeons/coalescence/bubbles/masking_site.occ" id="1_yhf3s"]
 [ext_resource type="PackedScene" uid="uid://deb4oma4divte" path="res://scenes/world/dungeons/coalescence/structures/graybox_hint.tscn" id="3_6xr3y"]
@@ -12,6 +12,12 @@ albedo_color = Color(0.020138215, 0.020138217, 0.020138215, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_la6qr"]
 size = Vector3(41, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gkgth"]
+size = Vector3(35.23, 1, 13)
+
+[sub_resource type="BoxMesh" id="BoxMesh_av3oj"]
+size = Vector3(41.115, 1, 13)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ic6mq"]
 size = Vector3(46, 1, 20)
@@ -143,6 +149,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6xr3y")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="OccluderInstance3D"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 14.089478, 8.61655, -70.30129)
 mesh = SubResource("BoxMesh_la6qr")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_6xr3y")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="OccluderInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -13.198177, 18.628368, -71.41181)
+mesh = SubResource("BoxMesh_gkgth")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_6xr3y")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="OccluderInstance3D"]
+transform = Transform3D(-4.3711385e-08, 0.99999994, -4.371139e-08, 0, -4.3711385e-08, -1, -0.99999994, -4.3711385e-08, 1.9106855e-15, -61.912342, 18.62837, -2.7721686)
+mesh = SubResource("BoxMesh_av3oj")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_6xr3y")
 
