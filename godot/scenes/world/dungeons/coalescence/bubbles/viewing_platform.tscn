@@ -1,6 +1,7 @@
-[gd_scene load_steps=146 format=3 uid="uid://v35xnyjqs16p"]
+[gd_scene load_steps=147 format=3 uid="uid://v35xnyjqs16p"]
 
 [ext_resource type="ArrayOccluder3D" uid="uid://cp453bod6bsjr" path="res://scenes/world/dungeons/coalescence/bubbles/viewing_platform.occ" id="1_8uaek"]
+[ext_resource type="PackedScene" uid="uid://deb4oma4divte" path="res://scenes/world/dungeons/coalescence/structures/graybox_hint.tscn" id="2_5dq56"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_v83ps"]
 size = Vector3(149, 117, 1)
@@ -1258,3 +1259,63 @@ mesh = SubResource("BoxMesh_mvpa0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SouthStructures"]
 transform = Transform3D(-0.35809094, 0, 0.9336868, 0, 1, 0, -0.9336868, 0, -0.35809094, 29.488201, 3.3276472, -4.192894)
 shape = SubResource("ConvexPolygonShape3D_xgivd")
+
+[node name="Hints" type="Node3D" parent="."]
+
+[node name="GrayboxHint" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.913456, 39.675564, -63.84035)
+text = "Some large structure, feels like it dwarfs the player"
+
+[node name="GrayboxHint11" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(0.6443239, 0, -0.76475275, 0, 1, 0, 0.76475275, 0, 0.6443239, 41.421116, 40.57817, -77.1972)
+text = "Intentionally floats out over the edge.
+Maybe a supporting pillar extends to ground?"
+
+[node name="GrayboxHint12" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(0.9964328, 0, 0.08439088, 0, 1, 0, -0.08439088, 0, 0.9964328, 23.014872, 42.313873, -88.48071)
+text = "View of landscape/skybox"
+
+[node name="GrayboxHint7" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(0.8225214, 0, -0.56873417, 0, 1, 0, 0.56873417, 0, 0.8225214, 57.590656, 39.675564, -16.868431)
+text = "Big Golem Boss lives here"
+
+[node name="GrayboxHint14" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(0.84807587, 0, -0.52987486, 0, 1, 0, 0.52987486, 0, 0.84807587, 77.822624, 43.15084, -38.831944)
+text = "Ground is colorful, inviting.
+This area feels like standing on the stained-glass wall of a church... A site of prayer"
+
+[node name="GrayboxHint8" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(-0.9294357, 0, 0.36898434, 0, 1, 0, -0.36898434, 0, -0.9294357, 40.957848, 39.675564, 27.261732)
+text = "Pretend there are short railings everywhere"
+
+[node name="GrayboxHint2" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(-0.412071, 0, -0.9111517, 0, 1, 0, 0.9111517, 0, -0.412071, 142.56104, 4.1119633, 4.8342705)
+text = "To Markets"
+
+[node name="GrayboxHint9" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(-0.42857254, 0, 0.9035073, 0, 1, 0, -0.9035073, 0, -0.42857254, 129.54164, 2.996552, -4.588167)
+text = "Bushes or something I guess?"
+
+[node name="GrayboxHint3" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(-0.99870604, 0, 0.050854385, 0, 1, 0, -0.050854385, 0, -0.99870604, 41.41421, 3.1774845, 114.17988)
+text = "To Plaza"
+
+[node name="GrayboxHint10" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(0.9999035, 0, 0.013892412, 0, 1, 0, -0.013892412, 0, 0.9999035, 40.64044, 3.1774855, 76.76084)
+text = "Remnants of buildings from the plaza"
+
+[node name="GrayboxHint13" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(0.7890734, 0, -0.614299, 0, 1, 0, 0.614299, 0, 0.7890734, 93.99431, 24.75956, 58.44362)
+text = "Stairs and ramps, no particular layout or structure"
+
+[node name="GrayboxHint4" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(0.11840396, 0, 0.9929655, 0, 1, 0, -0.9929655, 0, 0.11840396, -126.74816, 3.1774845, -70.22614)
+text = "To Dwellings"
+
+[node name="GrayboxHint5" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(0.1764147, 0, -0.98431593, 0, 1, 0, 0.98431593, 0, 0.1764147, -74.01053, 6.961099, -74.14068)
+text = "Two paths up - sharp angle stairs, accessibility(?) ramp"
+
+[node name="GrayboxHint6" parent="Hints" instance=ExtResource("2_5dq56")]
+transform = Transform3D(-0.20398355, 0, -0.97897434, 0, 1, 0, 0.97897434, 0, -0.20398355, -73.49924, 6.990572, -67.05411)
+text = "Players can pick a path and feel like they pick an \"optimal\" route (maybe even jump across them)"
