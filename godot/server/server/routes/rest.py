@@ -1,12 +1,11 @@
 from datetime import timedelta
 from fastapi import APIRouter, Depends, status
 from fastapi.exceptions import HTTPException
-from fastapi.responses import HTMLResponse
 
-from models.responses import LoginResponse, LogoutResponse
-from models.post import LoginPost, LogoutPost
-from dependencies import get_peer_manager
-from models.game import User
+from dependencies import get_peer_manager, get_db
+from models.responses import *
+from models.post import *
+from models.game import *
 from models.peer import InactiveSession, Session
 from services.peer_manager import PeerManager
 
@@ -44,43 +43,10 @@ async def logout(
     return LogoutResponse(message="Good-bye!")
 
 
-@router.get("/chat")
-async def chat():
-    """Not functional right now."""
-
-    chat_html = """
-    <!DOCTYPE html>
-    <html>
-        <head>
-            <title>Chat</title>
-        </head>
-        <body>
-            <h1>WebSocket Chat</h1>
-            <form action="" onsubmit="sendMessage(event)">
-                <input type="text" id="messageText" autocomplete="off"/>
-                <button>Send</button>
-            </form>
-            <ul id='messages'>
-            </ul>
-            <script>
-                var ws = new WebSocket("ws://localhost:8000/api/ws");
-                ws.onmessage = function(event) {
-                    var messages = document.getElementById('messages')
-                    var message = document.createElement('li')
-                    var content = document.createTextNode(event.data)
-                    message.appendChild(content)
-                    messages.appendChild(message)
-                };
-                function sendMessage(event) {
-                    var input = document.getElementById("messageText")
-                    ws.send(input.value)
-                    input.value = ''
-                    event.preventDefault()
-                }
-            </script>
-        </body>
-    </html>
-    """
-
-    return HTMLResponse(chat_html)
-
+@router.post("/character/{user_id}")
+async def post_character(
+        user_id: str,
+        data: Character,
+        db=get_db
+) -> Character:
+    return data
