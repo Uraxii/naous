@@ -48,7 +48,9 @@ func register_active_targeting_system(new_targeting_system: TargetingSystem) -> 
 
 
 func get_current_targeting_owner() -> Entity:
-    return (Globals.camera.target as ComponentCharacterBody).entity
+    if is_instance_valid(Globals.camera.target) and Globals.camera.target is ComponentCharacterBody:
+        return (Globals.camera.target as ComponentCharacterBody).entity
+    return null
 #endregion
 
 
