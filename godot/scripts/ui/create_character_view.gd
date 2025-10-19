@@ -22,7 +22,7 @@ func _on_back_pressed() -> void:
     
 func _on_create_pressed() -> void:
     var character_name: LineEdit = %CharacterName
-    API.create_character(character_name.text)
+    ##API.create_character(character_name.text)
 
 
 func _on_character_created(data: Dictionary) -> void:

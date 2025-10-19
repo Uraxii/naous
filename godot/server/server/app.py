@@ -1,10 +1,12 @@
-import uvicorn
+from contextlib import asynccontextmanager
 from datetime import datetime
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from typing import AsyncGenerator
 
 from routes import rest, websocket
 from core.config import settings
+from dependencies import get_peer_manager
 
 
 app = FastAPI(
@@ -12,7 +14,6 @@ app = FastAPI(
     description="Backend API server for Naous.",
     version="0.0.1",
 )
-
 
 # TODO: Harden this!
 app.add_middleware(
@@ -56,6 +57,7 @@ async def health_check():
     Returns the server's current status and uptime.
     This is useful for load balancers and container orchestrators.
     """
+
     return {
         "status": "healthy",
         "timestamp": datetime.now().isoformat(),
@@ -68,14 +70,27 @@ async def version():
     """
     Return version number of the this API.
     """
-    return {
-        "version": "0.0.1"
-    }
+
+    return { "version": "0.0.1" }
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    # Things to do at startup
+
+    peer_manager = get_peer_manager()
+    await peer_manager.start_removing_expired_peers_async(interval_sec=600.0)
+
+    yield
+
+    # Things to do at shutdown
 
 
 def main() -> None:
+    import uvicorn
+
     uvicorn.run(
-        "app.main:app",
+        "app:app",
         host = settings.HOST,
         port = settings.PORT,
         reload = settings.DEBUG,

@@ -9,7 +9,7 @@ var character_buttons: Array[CharacterInfoTemplate] = []
 
 func _ready() -> void:
     _connect_signals()
-    API.get_all_characters()
+    ##API.get_all_characters()
 
 
 func _connect_signals() -> void:
@@ -51,8 +51,8 @@ func _on_delete_pressed() -> void:
         log.error("Selected character, but not id was found.")
         return
     
-    API.delete_character(current_character.get("id"))
-    API.get_all_characters() 
+    ##API.delete_character(current_character.get("id"))
+    ##API.get_all_characters() 
     
     
 func _on_load_pressed() -> void:

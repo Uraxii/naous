@@ -1,5 +1,4 @@
 import asyncio
-from datetime import timedelta
 
 from fastapi import WebSocket
 from models.peer import InactiveSession, Peer
@@ -32,7 +31,6 @@ class PeerManager():
 
     def __init__(self):
         self.should_remove_dead_connections: bool = False
-        self.start_removing_expired_peers(600)
 
 
     def get_peer(self, peer_id: int) -> Peer | None:
@@ -109,7 +107,10 @@ class PeerManager():
         return expired_peers
 
 
-    def start_removing_expired_peers(self, interval_sec: float) -> None:
+    async def start_removing_expired_peers_async(
+            self,
+            interval_sec: float
+    ) -> None:
         self.stop_removing_expired_peers()
 
         self.should_remove_dead_connections = True

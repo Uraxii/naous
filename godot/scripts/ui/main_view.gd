@@ -1,21 +1,32 @@
 class_name MainView extends View
 
+@export var username: LineEdit
+@export var password: LineEdit
+@export var join: Button
+
 
 func _ready() -> void:
-    var host: Button = %Host
-    host.pressed.connect(_on_host_game)
-    
-    var join: Button = %Join
-    join.pressed.connect(_on_join_game)
+    join.pressed.connect(_on_join_pressed)
 
 
-func _on_host_game() -> void:
-    var cfg: InstanceConfig = load(
-        "res://resources/default_instance_config.tres")
-    InstanceAPI.start_server(cfg)
-    despawn()
-    
+func _on_join_pressed() -> void:
+    var response  = await http.login("Nicole", "Password")
 
-func _on_join_game() -> void:
-    InstanceAPI.start_client()
-    despawn()
+    var code: int = response[1]
+    if code != 200:
+        push_error("Login failed!")
+        return
+
+    signals.logged_in.emit()
+
+    var resp_body = response[3]
+    var data = JSON.parse_string(resp_body.get_string_from_utf8())
+    session.token = data['session_token']
+
+    var endpoint = "ws://%s:%d/%s" % [
+    ws.SERVER_ADDRESS, ws.SERVER_PORT, ws.WEBSOCKET_ENDPOINT]
+
+    var error = ws.connect_to_url(endpoint)
+    if error:
+        push_error("Unable to connec to %s" % endpoint)
+

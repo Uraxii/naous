@@ -9,3 +9,7 @@ class LoginPost(BaseModel):
 class LogoutPost(BaseModel):
     peer_id: int
     session_token: str
+
+
+class CharacterDataPost(BaseModel):
+    name: str

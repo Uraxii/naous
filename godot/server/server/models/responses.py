@@ -7,3 +7,7 @@ class LoginResponse(BaseModel):
 
 class LogoutResponse(BaseModel):
     message: str
+
+
+class CharacterDataPostResponse(BaseModel):
+    name: str
