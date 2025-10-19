@@ -16,6 +16,7 @@ starlette==0.48.0
 typing-inspection==0.4.1
 typing_extensions==4.15.0
 uvicorn==0.35.0
-uvloop==0.21.0
+# uvloop does NOT support Windows, though it appears unused in the project at this time anyway
+# uvloop==0.21.0
 watchfiles==1.1.0
 websockets==15.0.1
