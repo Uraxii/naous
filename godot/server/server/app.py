@@ -71,9 +71,7 @@ async def version():
     Return version number of the this API.
     """
 
-    return {
-        "version": "0.0.1"
-    }
+    return { "version": "0.0.1" }
 
 
 @asynccontextmanager
