@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=49 format=4 uid="uid://ch0bqgk8cfdeq"]
 
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="1_6y1nk"]
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://1ylgy66wcqit" path="res://assets/prefabs/sand_dunes.tscn" id="27_s72rl"]
 [ext_resource type="Texture2D" uid="uid://b5p3ex0xtdv5j" path="res://assets/models/grass_x_0.png" id="31_2j48s"]
 [ext_resource type="Script" uid="uid://csbrdjitu0hdl" path="res://scripts/utils/random_rotate_multimesh_instances.gd" id="32_kff60"]
+[ext_resource type="PackedScene" uid="uid://hvjax25ll5p0" path="res://assets/models/enemies/archa-enemy.glb" id="33_y46pn"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_vboxf"]
 material = ExtResource("18_bef4i")
@@ -1061,3 +1062,8 @@ transform = Transform3D(6.3504076, -1.5449573, -3.3766113e-08, 0, -8.742278e-08,
 visible = false
 mesh = ExtResource("7_47l1t")
 skeleton = NodePath("../..")
+
+[node name="enemies" type="Node3D" parent="."]
+
+[node name="archa-enemy" parent="." instance=ExtResource("33_y46pn")]
+transform = Transform3D(0.16168624, 0, -0.4731359, 0, 0.5, 0, 0.4731359, 0, 0.16168624, -11.846475, 1.723911, -4.6581573)
