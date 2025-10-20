@@ -29,4 +29,3 @@ func _on_join_pressed() -> void:
     var error = ws.connect_to_url(endpoint)
     if error:
         push_error("Unable to connec to %s" % endpoint)
-
