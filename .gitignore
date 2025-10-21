@@ -264,3 +264,4 @@ __marimo__/
 .DS_Store
 Thumbs.db
 #endregion
+*.blend1
