@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://bj74y314oia35"]
+
+[ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="2_3dnx3"]
+[ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="2_r1bpr"]
+
+[sub_resource type="GDScript" id="GDScript_r1bpr"]
+script/source = "extends Node3D
+
+@onready var enemies: Node3D = $Enemies
+@onready var player: Player = $Player
+
+
+# This is a hack to eliminate the need for the server authority to spawn the
+# player and trigger the relevant \"spawn\" signals
+func _ready() -> void:
+    for enemy: BaseEnemy in enemies.get_children():
+        if enemy.components != null:
+            var player_detector: PlayerDetector = enemy.components.find(\"PlayerDetector\")
+            if is_instance_valid(player_detector):
+                player_detector.handle_player_entered_scene(player)
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xght7"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_7nvo8"]
+sky_material = SubResource("ProceduralSkyMaterial_xght7")
+
+[sub_resource type="Environment" id="Environment_r1bpr"]
+background_mode = 2
+sky = SubResource("Sky_7nvo8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkaei"]
+albedo_color = Color(0.21882677, 0.19938435, 0.16469835, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3dnx3"]
+material = SubResource("StandardMaterial3D_bkaei")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0d0uc"]
+
+[node name="TestEnemies" type="Node3D"]
+script = SubResource("GDScript_r1bpr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r1bpr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.5760161, 0.08535735, 0.8129696, 0.64668804, 0.6559071, 0.38933343, -0.50000006, 0.75, -0.43301263, 7.568749, 4.982049, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="Ground" type="StaticBody3D" parent="."]
+collision_layer = 2
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(79.024925, 0, 0, 0, 0.13247752, 0, 0, 0, 58.499367, 0, 0, 0)
+mesh = SubResource("BoxMesh_3dnx3")
+skeleton = NodePath("../../root/@EditorNode@20442/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@62/@VBoxContainer@63/@EditorMainScreen@103/MainScreen/@CanvasItemEditor@10871/@VSplitContainer@10516/@HSplitContainer@10518/@HSplitContainer@10520/@Control@10521/@SubViewportContainer@10522/@SubViewport@10523/TestTargeting")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_0d0uc")
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="Archa" parent="Enemies" instance=ExtResource("2_r1bpr")]
+
+[node name="Player" parent="." instance=ExtResource("2_3dnx3")]
