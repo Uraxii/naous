@@ -19,19 +19,20 @@ void fragment() {
     }
 
     // Filters out any parts of the mask that don't meet the minimum strength threshold
-    mask_strength = min(mask_strength - mask_noise_threshold, 0);
+    mask_strength = step(mask_strength, mask_noise_threshold) * mask_strength;
 
     // Setup our range of pixel strengths
-    float range = 1. - mask_noise_threshold;
+    float range = 1.;
+    //float range = 1. - mask_noise_threshold;
     float step_length = range / float(crack_stages);
-
     // How strong is this pixel for this stage
-    float current_mask_step = mod(mask_strength, step_length);
-    float step_strength = current_mask_step / float(crack_stages);
+
+    float current_step = floor(crack_strength * float(crack_stages));
+    float current_crack_strength = mask_strength * current_step;
 
     //float mask_crack_strength = step_strength * crack_strength;
 
-    float blended_crack_strength = step_strength * step(step_strength, crack_strength);
+    float blended_crack_strength = current_crack_strength * 1.;
 
     // ALPHA is used to filter out the noise and increase the relative strength of the cracks at each stage
     ALPHA = blended_crack_strength;
