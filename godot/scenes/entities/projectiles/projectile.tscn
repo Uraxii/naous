@@ -19,12 +19,11 @@ properties/2/replication_mode = 1
 
 [sub_resource type="SphereMesh" id="SphereMesh_fn7fi"]
 
-[node name="Projectile" type="Node3D" node_paths=PackedStringArray("components", "body")]
+[node name="Projectile" type="Node3D" node_paths=PackedStringArray("components")]
 script = ExtResource("1_6ndfs")
 components = NodePath("Components")
-body = NodePath("")
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ewt5w")
 
 [node name="Components" type="Node" parent="." node_paths=PackedStringArray("entity")]

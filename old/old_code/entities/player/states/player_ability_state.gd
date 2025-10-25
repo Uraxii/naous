@@ -1,1 +1,0 @@
-class_name Player_Ability_State extends PlayerState
