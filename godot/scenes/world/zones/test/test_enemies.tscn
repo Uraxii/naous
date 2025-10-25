@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bj74y314oia35"]
+[gd_scene load_steps=10 format=3 uid="uid://bwq7i6qs5ssqa"]
 
 [ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="2_3dnx3"]
 [ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="2_r1bpr"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqljrgdwdfqk2"]
+[gd_scene load_steps=3 format=3 uid="uid://dqljrgdwdfqk2"]
 
 [ext_resource type="PackedScene" uid="uid://hvjax25ll5p0" path="res://assets/models/enemies/archa-enemy.glb" id="1_seodg"]
+[ext_resource type="Material" uid="uid://cdrndbvg0xyu6" path="res://assets/models/enemies/archa_material.tres" id="2_xn3d4"]
 
 [node name="archa-enemy" instance=ExtResource("1_seodg")]
 
@@ -21,6 +22,9 @@ bones/11/position = Vector3(0.9432619, 1.6743239, 0.17252585)
 bones/13/position = Vector3(0.6520272, 1.9165078, 0.91373014)
 bones/15/position = Vector3(-0.9671373, 0.86638856, -0.23386492)
 bones/17/position = Vector3(-1.0943968, 1.9165076, 0.91373014)
+
+[node name="Archa" parent="Archa-Enemy/Skeleton3D" index="0"]
+material_override = ExtResource("2_xn3d4")
 
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "ArmatureAction"
