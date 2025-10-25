@@ -24,20 +24,20 @@ func _ready() -> void:
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_7nvo8"]
+[sub_resource type="Sky" id="Sky_r1bpr"]
 sky_material = SubResource("ProceduralSkyMaterial_xght7")
 
 [sub_resource type="Environment" id="Environment_r1bpr"]
 background_mode = 2
-sky = SubResource("Sky_7nvo8")
+sky = SubResource("Sky_r1bpr")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bkaei"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dnx3"]
 albedo_color = Color(0.21882677, 0.19938435, 0.16469835, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3dnx3"]
-material = SubResource("StandardMaterial3D_bkaei")
+material = SubResource("StandardMaterial3D_3dnx3")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_0d0uc"]
 
