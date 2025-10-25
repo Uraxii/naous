@@ -26,7 +26,7 @@ var _sender_id: int:
 #endregion
 
 #region Start Multiplayer Functions
-func start_client(address=config.host, port=config.port) -> void:
+func start_client(address:=config.host, port:=config.port) -> void:
     lg.debug("Connecting to %s:%d" %[address, port])
     var multiplayer_peer = ENetMultiplayerPeer.new()
     var error = multiplayer_peer.create_client(address, port)
