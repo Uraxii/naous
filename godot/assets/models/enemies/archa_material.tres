@@ -12,10 +12,10 @@ render_priority = 0
 shader = ExtResource("4_samnv")
 shader_parameter/CrackColor = Color(0.88, 0.88, 0.88, 1)
 shader_parameter/CrackMask = ExtResource("3_samnv")
-shader_parameter/crack_strength = 0.15999999642368
-shader_parameter/emission_strength = 0.5
-shader_parameter/crack_stages = 5
-shader_parameter/mask_noise_threshold = 0.05999999865888
+shader_parameter/crack_strength = 0.97999997809504
+shader_parameter/emission_strength = 1.20000001788144
+shader_parameter/crack_stages = 4
+shader_parameter/mask_noise_threshold = 0.0999999977648
 shader_parameter/invert_mask = true
 
 [resource]
