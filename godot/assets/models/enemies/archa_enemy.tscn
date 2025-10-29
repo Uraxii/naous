@@ -9,11 +9,11 @@ render_priority = 0
 shader = ExtResource("2_4bawe")
 shader_parameter/CrackColor = Color(1, 1, 1, 1)
 shader_parameter/CrackMask = ExtResource("3_pai0u")
-shader_parameter/crack_strength = 0.60999998636528
-shader_parameter/emission_strength = 1.20000001788144
+shader_parameter/crack_strength = 0.0
+shader_parameter/emission_strength = 0.1
 shader_parameter/crack_stages = 5
-shader_parameter/mask_noise_threshold = 0.12999999709424
-shader_parameter/invert_mask = true
+shader_parameter/mask_noise_threshold = 0.78999998234192
+shader_parameter/invert_mask = false
 
 [node name="archa-enemy" instance=ExtResource("1_seodg")]
 
