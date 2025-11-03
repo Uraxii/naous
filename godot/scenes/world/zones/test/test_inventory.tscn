@@ -1,0 +1,322 @@
+[gd_scene load_steps=13 format=3 uid="uid://eyaf8u4fxjpr"]
+
+[ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="1_1kjt4"]
+[ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="2_5do3c"]
+[ext_resource type="Texture2D" uid="uid://penv05a5ag0f" path="res://assets/materials/grid.png" id="2_mopb7"]
+[ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="3_3mglh"]
+
+[sub_resource type="GDScript" id="GDScript_y844b"]
+script/source = "extends Node3D
+
+@onready var game_world_ui_layer: CanvasLayer = %GameWorldUILayer
+@onready var testing_ui_layer: CanvasLayer = %TestingUILayer
+@onready var camera_3d: Camera3D = %Camera3D
+
+@onready var test_ui_button: Button = %TestUIButton
+
+@onready var inventory_component: InventoryComponent = %InventoryComponent
+
+@onready var equipped_mask_value: LineEdit = %EquippedMaskValue
+@onready var equipped_echoes_container: HBoxContainer = %EquippedEchoesContainer
+@onready var backpack_items_list: FlowContainer = %BackpackItemsList
+@onready var debug_text: TextEdit = %DebugText
+
+@onready var update_inventory_button: Button = %UpdateInventoryButton
+@onready var close_inventory_button: Button = %CloseInventoryButton
+
+
+func show_test_ui() -> void:
+    game_world_ui_layer.hide()
+    testing_ui_layer.show()
+
+
+func show_game_ui() -> void:
+    testing_ui_layer.hide()
+    game_world_ui_layer.show()
+
+
+func update_inventory_from_test() -> void:
+    var mask := equipped_mask_value.text
+    
+    var echoes: Array
+    var echo_values := equipped_echoes_container.get_children()
+    for echo: LineEdit in echo_values:
+        echoes.push_back(echo.text)
+    
+    var items: Array
+    var item_values := backpack_items_list.get_children()
+    for item: LineEdit in item_values:
+        items.push_back(item.text)
+    
+    inventory_component.inventory.set_equipped_mask(mask)
+    
+    for echo: Variant in echoes:
+        inventory_component.inventory.set_equipped_echo_slot(echoes.find(echo), echo)
+        
+    for item: Variant in items:
+        inventory_component.inventory.set_backpack_slot(items.find(item), item)
+    
+
+
+func set_debug_text() -> void:
+    var equipped_mask: Variant = inventory_component.inventory.equipped.mask
+    var equipped_echoes: Array[Variant] = inventory_component.inventory.equipped.echoes
+    var backpack: Array[Variant] = inventory_component.inventory.backpack
+    
+    var print_object := {
+        \"mask\": equipped_mask,
+        \"echoes\": equipped_echoes,
+        \"backpack\": backpack,
+    }
+    
+    var printable_text := JSON.stringify(print_object, \"    \", false)
+    debug_text.text = printable_text
+
+
+func update_inventory_and_debug_text() -> void:
+    update_inventory_from_test()
+    set_debug_text()
+
+
+func _ready() -> void:
+    # Hacks to disable global camera and input stuff
+    camera_3d.make_current()
+    Globals.camera.queue_free()
+    Globals.input.queue_free()
+    
+    show_game_ui()
+
+    test_ui_button.pressed.connect(show_test_ui)
+    close_inventory_button.pressed.connect(show_game_ui)
+    update_inventory_button.pressed.connect(update_inventory_and_debug_text)
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y844b"]
+sky_top_color = Color(0.6087425, 0.62527335, 0.55818534, 1)
+sky_horizon_color = Color(0.8603753, 0.856758, 0.830986, 1)
+ground_horizon_color = Color(0.8603753, 0.856758, 0.830986, 1)
+
+[sub_resource type="Sky" id="Sky_1kjt4"]
+sky_material = SubResource("ProceduralSkyMaterial_y844b")
+
+[sub_resource type="Environment" id="Environment_mopb7"]
+background_mode = 2
+sky = SubResource("Sky_1kjt4")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_y844b"]
+size = Vector3(5, 0.3, 5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_y844b"]
+
+[sub_resource type="Resource" id="Resource_sygpe"]
+script = ExtResource("2_5do3c")
+metadata/_custom_type_script = "uid://sjk1ggbjspjx"
+
+[sub_resource type="FontVariation" id="FontVariation_1kjt4"]
+variation_embolden = 0.66
+variation_transform = Transform2D(1, 0.184, 0, 1, 0, 0)
+
+[node name="TestInventory" type="Node3D"]
+script = SubResource("GDScript_y844b")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mopb7")
+
+[node name="floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_y844b")
+
+[node name="definitely a tree" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.432703, 0)
+mesh = SubResource("SphereMesh_y844b")
+
+[node name="InventoryComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_1kjt4")
+inventory = SubResource("Resource_sygpe")
+metadata/_custom_type_script = "uid://u8paan0wgvi6"
+
+[node name="GameWorldUILayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameWorldUILayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 329
+alignment = 1
+
+[node name="TestUIButton" type="Button" parent="GameWorldUILayer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Click for Test UI"
+
+[node name="TestingUILayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="TestingUILayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TestingUILayer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TabContainer" type="TabContainer" parent="TestingUILayer/PanelContainer/MarginContainer"]
+layout_mode = 2
+tab_alignment = 1
+current_tab = 0
+
+[node name="TestInventory" type="HBoxContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 64
+
+[node name="GridContainer" type="GridContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 24
+columns = 2
+
+[node name="EquippedMaskLabel" type="Label" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Equipped Mask"
+
+[node name="EquippedMaskValue" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/minimum_character_width = 10
+
+[node name="EquippedEchoesLabel" type="Label" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Equipped Echoes"
+
+[node name="EquippedEchoesContainer" type="HBoxContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EquippedEchoesValue" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/EquippedEchoesContainer"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="EquippedEchoesValue2" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/EquippedEchoesContainer"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="EquippedEchoesValue3" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/EquippedEchoesContainer"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsLabel" type="Label" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Backpack Items"
+
+[node name="BackpackItemsList" type="FlowContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 10
+
+[node name="BackpackItemsValue" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsValue2" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsValue3" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsValue4" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsValue5" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsValue6" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsValue7" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsValue8" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="BackpackItemsValue9" type="LineEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer/GridContainer/BackpackItemsList"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 3
+
+[node name="UpdateInventoryButton" type="Button" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/icon_max_width = 135
+theme_override_fonts/font = SubResource("FontVariation_1kjt4")
+theme_override_font_sizes/font_size = 29
+theme_override_icons/icon = ExtResource("2_mopb7")
+text = "UPDATE INVENTORY"
+
+[node name="CloseInventoryButton" type="Button" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 20
+theme_override_constants/icon_max_width = 50
+theme_override_font_sizes/font_size = 21
+text = "Close Inventory View"
+icon = ExtResource("3_3mglh")
+
+[node name="DebugDisplay" type="PanelContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DebugText" type="TextEdit" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/TestInventory/DebugDisplay"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "{
+  JSON_INVENTORY_GOES_HERE
+}"
+editable = false
+
+[node name="Inventory" type="PanelContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/Inventory"]
+layout_mode = 2
+text = "TODO: Add draggable inventory interface"
+horizontal_alignment = 1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.86074203, -0.17577109, 0.4777318, 0, 0.938493, 0.3452982, -0.50904137, -0.2972127, 0.8078004, 1.5324123, 1.8550003, 2.8622618)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=28 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
@@ -8,7 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
 [ext_resource type="PackedScene" uid="uid://wv8s83v0gmat" path="res://scenes/spells/hurt_target.tscn" id="7_yr3on"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
+[ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="9_jv5ih"]
 [ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="10_b4o2o"]
+[ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="10_n36er"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="11_b4o2o"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
@@ -42,6 +44,10 @@ properties/4/replication_mode = 2
 properties/0/path = NodePath(".:id")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+
+[sub_resource type="Resource" id="Resource_d745t"]
+script = ExtResource("10_n36er")
+metadata/_custom_type_script = "uid://sjk1ggbjspjx"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -89,6 +95,9 @@ script = ExtResource("9_dqg57")
 [node name="StatusesEffects" type="Node" parent="Components"]
 
 [node name="Inventory" type="Node" parent="Components"]
+script = ExtResource("9_jv5ih")
+inventory = SubResource("Resource_d745t")
+metadata/_custom_type_script = "uid://u8paan0wgvi6"
 
 [node name="Health" type="Node" parent="Components"]
 script = ExtResource("10_w0xwc")
