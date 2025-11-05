@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxlcd6thwmxi6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o8bje"]
+font_size = 20
+
+[node name="Dialogue" type="Control"]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.5
+offset_right = 58.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Speaker" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/Speaker"]
+layout_mode = 2
+
+[node name="SpeakerName" type="Label" parent="VBoxContainer/PanelContainer/Speaker/VBoxContainer"]
+layout_mode = 2
+text = "Character Name"
+label_settings = SubResource("LabelSettings_o8bje")
+
+[node name="Narration" type="RichTextLabel" parent="VBoxContainer/PanelContainer/Speaker/VBoxContainer"]
+custom_minimum_size = Vector2(768, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos."
+fit_content = true
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Choices" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Choices"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Choices/PanelContainer"]
+layout_mode = 2
+
+[node name="Instruction" type="Label" parent="VBoxContainer/Choices/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Choices" type="VBoxContainer" parent="VBoxContainer/Choices/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TemplateChoice" type="Button" parent="VBoxContainer/Choices/PanelContainer/VBoxContainer/Choices"]
+layout_mode = 2
+text = "Example of a choosable dialogue."

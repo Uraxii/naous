@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://neyxl4d7706n"]
+
+[ext_resource type="PackedScene" uid="uid://bxlcd6thwmxi6" path="res://scripts/dialogue/dialogue.tscn" id="1_c34ii"]
+
+[node name="DialogueTestbench" type="Node2D"]
+
+[node name="Dialogue" parent="." instance=ExtResource("1_c34ii")]
