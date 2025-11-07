@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cf10alpcpeo8n"]
+
+[node name="ItemIcon" type="TextureRect"]
+custom_minimum_size = Vector2(40, 40)
+expand_mode = 5
+stretch_mode = 5

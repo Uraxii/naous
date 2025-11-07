@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://nbaglwtf3v0k"]
+
+[ext_resource type="Script" uid="uid://dq8g4lg34mymn" path="res://scenes/ui/inventory/item_slot.gd" id="1_dxhvd"]
+[ext_resource type="PackedScene" uid="uid://cf10alpcpeo8n" path="res://scenes/ui/inventory/item_slot_icon.tscn" id="2_1y2um"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a0on1"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.019607844, 0.019607844, 0.019607844, 0.20392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.12285983, 0.12285984, 0.12285974, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Theme" id="Theme_8pb6k"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_a0on1")
+
+[node name="ItemSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(80, 80)
+focus_mode = 2
+mouse_default_cursor_shape = 7
+theme = SubResource("Theme_8pb6k")
+script = ExtResource("1_dxhvd")
+
+[node name="ItemSlotIcon" parent="." instance=ExtResource("2_1y2um")]
+unique_name_in_owner = true
+layout_mode = 2

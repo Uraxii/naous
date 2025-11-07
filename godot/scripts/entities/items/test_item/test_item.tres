@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://clfcaibvn6w48"]
+
+[ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="1_4ftvi"]
+[ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="1_uisim"]
+
+[resource]
+script = ExtResource("1_4ftvi")
+name = &"Test Item"
+descripotion = "This is a test item! You should be able to read this in some UI view or another."
+icon = ExtResource("1_uisim")
+metadata/_custom_type_script = "uid://dbkni0d5ocl7o"

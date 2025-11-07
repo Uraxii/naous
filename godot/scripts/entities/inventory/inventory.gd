@@ -10,6 +10,7 @@ signal backpack_updated(new_backpack: Array[Variant]) # TODO: Update param to it
 #  - Probably needs to be a new class type since Dictionary can't have multiple value types
 @export var equipped := {
     "mask": "MASK",
+    "weapon": "WEAPON",
     "echoes": [
         "ECHO_1",
         "ECHO_2",
@@ -18,12 +19,12 @@ signal backpack_updated(new_backpack: Array[Variant]) # TODO: Update param to it
 }
 
 @export var max_backpack_slots := 20
-@export var backpack: Array[Variant] = [ # TODO: Change type to Array of item object type
-    "slot_1",
-    "slot_2",
-    "slot_3",
-    "slot_4",
-    "slot_5",
+@export var backpack: Array[Item] = [ # TODO: Change type to Array of item object type
+    Item.new(),
+    Item.new(),
+    null,
+    Item.new(),
+    Item.new(),
 ]
 
 

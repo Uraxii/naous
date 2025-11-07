@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7bsvixb5jjsf"]
+
+[ext_resource type="Script" uid="uid://epop25me7jqf" path="res://scenes/ui/inventory/inventory_ui.gd" id="1_a0on1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aks48"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.42660004, 0.48708004, 0.54, 0.94509804)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.44400004, 0.74, 0.65119994, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="Theme" id="Theme_ctn7s"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_aks48")
+
+[node name="InventoryUI" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ctn7s")
+script = ExtResource("1_a0on1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="EquippedGear" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Backpack" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackpackGrid" type="GridContainer" parent="HBoxContainer/Backpack"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+columns = 8

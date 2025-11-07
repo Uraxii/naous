@@ -1,13 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://eyaf8u4fxjpr"]
+[gd_scene load_steps=24 format=3 uid="uid://eyaf8u4fxjpr"]
 
 [ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="1_1kjt4"]
 [ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="2_5do3c"]
 [ext_resource type="Texture2D" uid="uid://penv05a5ag0f" path="res://assets/materials/grid.png" id="2_mopb7"]
 [ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="3_3mglh"]
+[ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="3_7lasq"]
+[ext_resource type="Texture2D" uid="uid://b5p3ex0xtdv5j" path="res://assets/models/grass_x_0.png" id="4_6hf3d"]
+[ext_resource type="Texture2D" uid="uid://du2snp128bqw6" path="res://assets/textures/greebly-normal.png" id="5_naaaj"]
+[ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="5_sygpe"]
+[ext_resource type="Texture2D" uid="uid://cqcemqovqim63" path="res://assets/textures/ink-weed.png" id="6_wecma"]
+[ext_resource type="Texture2D" uid="uid://b1am4dchwn4eh" path="res://assets/textures/ink-crack.png" id="7_ia41r"]
 
 [sub_resource type="GDScript" id="GDScript_y844b"]
 script/source = "extends Node3D
 
+#region Onready vars
 @onready var game_world_ui_layer: CanvasLayer = %GameWorldUILayer
 @onready var testing_ui_layer: CanvasLayer = %TestingUILayer
 @onready var camera_3d: Camera3D = %Camera3D
@@ -21,9 +28,11 @@ script/source = "extends Node3D
 @onready var backpack_items_list: FlowContainer = %BackpackItemsList
 @onready var debug_text: TextEdit = %DebugText
 
+@onready var inventory_ui: InventoryUI = %InventoryUI
+
 @onready var update_inventory_button: Button = %UpdateInventoryButton
 @onready var close_inventory_button: Button = %CloseInventoryButton
-
+#endregion
 
 func show_test_ui() -> void:
     game_world_ui_layer.hide()
@@ -36,6 +45,7 @@ func show_game_ui() -> void:
 
 
 func update_inventory_from_test() -> void:
+    # Collect our test values
     var mask := equipped_mask_value.text
     
     var echoes: Array
@@ -48,6 +58,7 @@ func update_inventory_from_test() -> void:
     for item: LineEdit in item_values:
         items.push_back(item.text)
     
+    # Set our new test values into the inventory
     inventory_component.inventory.set_equipped_mask(mask)
     
     for echo: Variant in echoes:
@@ -55,7 +66,6 @@ func update_inventory_from_test() -> void:
         
     for item: Variant in items:
         inventory_component.inventory.set_backpack_slot(items.find(item), item)
-    
 
 
 func set_debug_text() -> void:
@@ -85,6 +95,8 @@ func _ready() -> void:
     Globals.input.queue_free()
     
     show_game_ui()
+    
+    inventory_ui.set_inventory(inventory_component.inventory)
 
     test_ui_button.pressed.connect(show_test_ui)
     close_inventory_button.pressed.connect(show_game_ui)
@@ -110,8 +122,39 @@ size = Vector3(5, 0.3, 5)
 
 [sub_resource type="SphereMesh" id="SphereMesh_y844b"]
 
+[sub_resource type="Resource" id="Resource_y52ys"]
+script = ExtResource("3_7lasq")
+name = &"First"
+icon = ExtResource("3_3mglh")
+metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
+
+[sub_resource type="Resource" id="Resource_65he2"]
+script = ExtResource("3_7lasq")
+name = &"2nd"
+icon = ExtResource("4_6hf3d")
+metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
+
+[sub_resource type="Resource" id="Resource_1mfyk"]
+script = ExtResource("3_7lasq")
+name = &"another"
+icon = ExtResource("5_naaaj")
+metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
+
+[sub_resource type="Resource" id="Resource_rmjhl"]
+script = ExtResource("3_7lasq")
+name = &"hewwo :3"
+icon = ExtResource("6_wecma")
+metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
+
+[sub_resource type="Resource" id="Resource_577en"]
+script = ExtResource("3_7lasq")
+name = &"last one"
+icon = ExtResource("7_ia41r")
+metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
+
 [sub_resource type="Resource" id="Resource_sygpe"]
 script = ExtResource("2_5do3c")
+backpack = Array[Object]([SubResource("Resource_y52ys"), SubResource("Resource_65he2"), SubResource("Resource_1mfyk"), null, SubResource("Resource_rmjhl"), SubResource("Resource_577en"), null])
 metadata/_custom_type_script = "uid://sjk1ggbjspjx"
 
 [sub_resource type="FontVariation" id="FontVariation_1kjt4"]
@@ -139,6 +182,7 @@ metadata/_custom_type_script = "uid://u8paan0wgvi6"
 
 [node name="GameWorldUILayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameWorldUILayer"]
 anchors_preset = 15
@@ -154,6 +198,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+theme_override_font_sizes/font_size = 61
 text = "Click for Test UI"
 
 [node name="TestingUILayer" type="CanvasLayer" parent="."]
@@ -177,9 +222,10 @@ theme_override_constants/margin_bottom = 8
 [node name="TabContainer" type="TabContainer" parent="TestingUILayer/PanelContainer/MarginContainer"]
 layout_mode = 2
 tab_alignment = 1
-current_tab = 0
+current_tab = 1
 
 [node name="TestInventory" type="HBoxContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -307,15 +353,17 @@ placeholder_text = "{
 }"
 editable = false
 
-[node name="Inventory" type="PanelContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer"]
-visible = false
+[node name="InventoryPreview" type="MarginContainer" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 metadata/_tab_index = 1
 
-[node name="Label" type="Label" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/Inventory"]
+[node name="InventoryUI" parent="TestingUILayer/PanelContainer/MarginContainer/TabContainer/InventoryPreview" instance=ExtResource("5_sygpe")]
+unique_name_in_owner = true
 layout_mode = 2
-text = "TODO: Add draggable inventory interface"
-horizontal_alignment = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
