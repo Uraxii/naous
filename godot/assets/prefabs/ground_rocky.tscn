@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0rkj0dcpnrd5"]
+
+[ext_resource type="PackedScene" uid="uid://dxkdhtdm1yino" path="res://assets/models/blob-a.fbx" id="1_sl62x"]
+[ext_resource type="Material" uid="uid://bx333gj3e4ur6" path="res://assets/materials/ground - rocky.tres" id="2_v4uxn"]
+
+[node name="ground - rocky" instance=ExtResource("1_sl62x")]
+transform = Transform3D(32, 0, 0, 0, 2, 0, 0, 0, 32, 0, 0, 0)
+
+[node name="cube_sphere_32" parent="." index="0"]
+transform = Transform3D(100, 0, 0, 0, -4.3711384e-06, 99.99999, 0, -99.99999, -4.3711384e-06, 0, -0.5, 0)
+material_override = ExtResource("2_v4uxn")
