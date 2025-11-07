@@ -5,7 +5,7 @@ class_name HTTPManager extends Node
 
 var available_requesters: Array[HTTPRequest] = []
 
-var base_url := "http://localhost:8080"
+var base_url := "http://localhost:8000"
 
 
 func login(user: String, secret: String) -> Array:
