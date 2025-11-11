@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci8ii42pte78r"]
+
+[ext_resource type="Material" uid="uid://w2rycdywn4le" path="res://assets/materials/rocky-silver.tres" id="1_xu04l"]
+[ext_resource type="ArrayMesh" uid="uid://bkqdu40226ci3" path="res://assets/models/mesh_rock_cluster.obj" id="2_2sgl5"]
+
+[node name="small-rock-cluster" type="Node3D"]
+
+[node name="MeshRockCluster" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.25, 0, 0, 0, 0.5, -0.5, 0, 0.5)
+material_override = ExtResource("1_xu04l")
+mesh = ExtResource("2_2sgl5")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cx54j3yuqwncx"]
+[gd_scene load_steps=23 format=3 uid="uid://cx54j3yuqwncx"]
 
 [ext_resource type="Material" uid="uid://bdqiuk1jp6gfi" path="res://assets/materials/ground - rocky - huge.tres" id="1_ej2el"]
 [ext_resource type="PackedScene" uid="uid://cdrx1jc5vlcfw" path="res://scenes/world/dungeons/coalescence/structures/building.tscn" id="1_t8rem"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c0tcxk54tuq6c" path="res://assets/prefabs/boulder_dark.tscn" id="5_kjq6w"]
 [ext_resource type="PackedScene" uid="uid://d1vsrqg2pt0xc" path="res://assets/prefabs/simpletown.tscn" id="6_kjq6w"]
 [ext_resource type="PackedScene" uid="uid://c3vvmgu3op006" path="res://assets/prefabs/crystal-cluster.tscn" id="6_uof7h"]
+[ext_resource type="PackedScene" uid="uid://ci8ii42pte78r" path="res://assets/prefabs/small_rock_cluster.tscn" id="8_h3w75"]
 [ext_resource type="PackedScene" uid="uid://crvijhkrifgtp" path="res://assets/prefabs/grass_cluster_a.tscn" id="11_vkb28"]
 [ext_resource type="PackedScene" uid="uid://b10ssru87qgh0" path="res://assets/prefabs/tree_red.tscn" id="12_nbdce"]
 
@@ -214,6 +215,69 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.742075, 0.49999952, -34.68
 
 [node name="grass-cluster-a13" parent="foliage" instance=ExtResource("11_vkb28")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.017691, 0.49999905, -36.880817)
+
+[node name="small-rock-cluster" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.825314, 0.5, 33.900497)
+
+[node name="small-rock-cluster2" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.99764, 0.50000095, 42.15438)
+
+[node name="small-rock-cluster3" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2118044, 0.5, 38.882977)
+
+[node name="small-rock-cluster4" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8830004, 0.5, 39.483154)
+
+[node name="small-rock-cluster5" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.883, 0.5, 20.483154)
+
+[node name="small-rock-cluster6" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.41289, 0.49999952, 26.761316)
+
+[node name="small-rock-cluster7" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(-0.879997, 0, -0.47497922, 0, 1, 0, 0.47497922, 0, -0.879997, -13.007821, 0.49999905, 26.778236)
+
+[node name="small-rock-cluster8" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(-0.879997, 0, -0.47497922, 0, 1, 0, 0.47497922, 0, -0.879997, -15.278291, 0.49999905, 37.14119)
+
+[node name="small-rock-cluster9" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.9982994, 0, 0.058295757, 0, 1, 0, -0.058295757, 0, 0.9982994, -12.39138, 0.49999905, 37.47901)
+
+[node name="small-rock-cluster10" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.9982994, 0, 0.058295757, 0, 1, 0, -0.058295757, 0, 0.9982994, -9.099733, 0.49999905, 37.981586)
+
+[node name="small-rock-cluster11" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.9982994, 0, 0.058295757, 0, 1, 0, -0.058295757, 0, 0.9982994, -0.14551067, 0.49999905, -6.5354614)
+
+[node name="small-rock-cluster12" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.9982994, 0, 0.058295757, 0, 1, 0, -0.058295757, 0, 0.9982994, 3.27695, 0.49999905, -10.37108)
+
+[node name="small-rock-cluster13" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.9982994, 0, 0.058295757, 0, 1, 0, -0.058295757, 0, 0.9982994, 10.313397, 0.49999905, -4.7174625)
+
+[node name="small-rock-cluster14" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.9982994, 0, 0.058295757, 0, 1, 0, -0.058295757, 0, 0.9982994, 12.566556, 0.49999905, -1.103159)
+
+[node name="small-rock-cluster15" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.29855773, 0, -0.9543916, 0, 1, 0, 0.9543916, 0, 0.29855773, 10.298009, 0.49999905, -1.7144814)
+
+[node name="small-rock-cluster16" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.29855773, 0, -0.9543916, 0, 1, 0, 0.9543916, 0, 0.29855773, 23.628708, 0.5, -18.516722)
+
+[node name="small-rock-cluster17" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(-0.83847094, 0, -0.54494643, 0, 1, 0, 0.54494643, 0, -0.83847094, 21.065992, 0.5, -20.2051)
+
+[node name="small-rock-cluster18" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.1953128, 0, -0.9807411, 0, 1, 0, 0.9807411, 0, 0.1953128, 21.092188, 0.5, -17.73249)
+
+[node name="small-rock-cluster19" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(0.9498194, 0, -0.31279922, 0, 1, 0, 0.31279922, 0, 0.9498194, 19.758026, 0.5, -23.45371)
+
+[node name="small-rock-cluster20" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(-0.20676783, 0, -0.9783901, 0, 1, 0, 0.9783901, 0, -0.20676783, 18.206644, 0.5, -20.786402)
+
+[node name="small-rock-cluster21" parent="foliage" instance=ExtResource("8_h3w75")]
+transform = Transform3D(-0.9729698, 0, -0.23093285, 0, 1, 0, 0.23093285, 0, -0.9729698, 18.463211, 0.5000005, -17.390625)
 
 [node name="Buildings" type="Node3D" parent="."]
 
