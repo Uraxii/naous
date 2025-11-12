@@ -2,7 +2,8 @@ class_name ItemSlot extends PanelContainer
 
 signal selected
 signal interacted
-signal received_item
+signal received_item(item: Item)
+signal removed_item(item: Item)
 
 const ITEM_SLOT_ICON: PackedScene = preload("uid://cf10alpcpeo8n")
 
@@ -11,9 +12,12 @@ const ITEM_SLOT_ICON: PackedScene = preload("uid://cf10alpcpeo8n")
 var item: Item:
     set = set_item
 
+var _acceptable_item_callback: Callable:
+    set = set_acceptable_item_callback
 
-func can_accept_item(item_to_check: Item) -> bool:
-    return true
+
+func set_acceptable_item_callback(new_callback: Callable) -> void:
+    _acceptable_item_callback = new_callback
 
 
 func has_item() -> bool:
@@ -29,8 +33,11 @@ func set_item(new_item: Item) -> void:
         item_icon.texture = item.icon
 
 
-func remove_item() -> void:
+func remove_item() -> Item:
+    var old_item := item
     set_item(null)
+    removed_item.emit(old_item)
+    return old_item
 
 
 func emit_selected() -> void:
@@ -55,7 +62,7 @@ func received_interaction() -> void:
 
 #region Draggable
 # Called when the drag operation initially starts
-func _get_drag_data(at_position: Vector2) -> Variant:
+func _get_drag_data(at_position: Vector2) -> Item:
     #print("Getting draggable data from item slot")
     var item_data: Item
     if item != null:
@@ -68,16 +75,23 @@ func _get_drag_data(at_position: Vector2) -> Variant:
     return item_data
 
 
-# Called for every frame the mouse is moving while over this Control while dragging is in effect
+# Called for every frame the mouse is moving while over this Control and dragging is in effect
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
     #print("Item slot is being dragged -> " + name)
-    return can_accept_item(data)
+    if not data is Item:
+        return false
+    
+    if _acceptable_item_callback.is_valid():
+        return _acceptable_item_callback.call(data)
+    
+    return true
 
 
 # Called when a drop is triggered after a drag
 func _drop_data(at_position: Vector2, data: Variant) -> void:
-    #print("Item slot dropping data")
-    received_item.emit(data)
+    if data != null and data != item:
+        #print("Item slot dropping data")
+        received_item.emit(data)
 #endregion
 
 

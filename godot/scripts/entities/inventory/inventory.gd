@@ -2,14 +2,14 @@
 ## This does not have to stay this way! You can change this to extend from Node if you prefer and use it however you wish.
 class_name Inventory extends Resource
 
-signal equipment_updated(new_equipment: Equipment) # TODO: Update param to mask-item type
-signal equipped_echoes_updated(new_echoes: Array[Variant]) # TODO: Update param to echo-item type
-signal backpack_updated(new_backpack: Array[Variant]) # TODO: Update param to item type
+signal equipment_updated(new_equipment: Equipment)
+signal equipped_echoes_updated(new_echoes: Array[EchoItem])
+signal backpack_updated(new_backpack: Array[Item])
 
 @export var equipment: Equipment
 
 @export var max_backpack_slots := 20
-@export var backpack: Array[EchoItem]
+@export var backpack: Array[Item]
 
 
 func _init() -> void:
@@ -20,11 +20,11 @@ func _init() -> void:
 
 
 #region Equipped Mask
-func get_equipped_mask() -> Variant: # TODO: Return mask object type
+func get_equipped_mask() -> MaskItem:
     return equipment.mask
 
 
-func set_equipped_mask(new_equipped_mask: Variant) -> void: # TODO: Update param to be mask-item type
+func set_equipped_mask(new_equipped_mask: MaskItem) -> void:
     Globals.logger.debug("Setting new equipped mask: New Mask: %s | Prev Mask: %s" % [new_equipped_mask, equipment.mask])
     equipment.mask = new_equipped_mask
     equipment_updated.emit(equipment)
@@ -32,11 +32,11 @@ func set_equipped_mask(new_equipped_mask: Variant) -> void: # TODO: Update param
 
 
 #region Equipped Echoes
-func get_equipped_echoes() -> Array[EchoItem]: # TODO: Return Array of echo object type
+func get_equipped_echoes() -> Array[EchoItem]:
     return equipment.echoes
 
 
-func set_equipped_echo_slot(slot_index: int, new_echo: EchoItem) -> void: # TODO: Update param to echo-item type
+func set_equipped_echo_slot(slot_index: int, new_echo: EchoItem) -> void:
     if equipment.echoes.get(slot_index) == null:
         Globals.logger.error("Can not set equipped echo for invalid index! Index: %s | Echos Size: %s" % [slot_index, equipment.echoes.size()])
         return
@@ -49,7 +49,7 @@ func set_equipped_echo_slot(slot_index: int, new_echo: EchoItem) -> void: # TODO
 
 
 #region Backpack
-func get_backpack_item(slot_index: int) -> Variant: # TODO: Return item object type
+func get_backpack_item(slot_index: int) -> Item:
     if !backpack_slot_valid(slot_index):
         Globals.logger.error("Can not retrieve invalid slot index in backpack! Index: %s | Backpack Size: %s" % [slot_index, backpack.size()])
         return
@@ -57,7 +57,7 @@ func get_backpack_item(slot_index: int) -> Variant: # TODO: Return item object t
     return backpack.get(slot_index)
 
 
-func set_backpack_slot(slot_index: int, item: Variant) -> void: # TODO: Set param to item object type
+func set_backpack_slot(slot_index: int, item: Item) -> void:
     if backpack_slot_valid(slot_index):
         Globals.logger.error("Can not access invalid slot index in backpack! Index: %s | Backpack Size: %s" % [slot_index, backpack.size()])
         return

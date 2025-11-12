@@ -1,12 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://eyaf8u4fxjpr"]
+[gd_scene load_steps=13 format=3 uid="uid://eyaf8u4fxjpr"]
 
 [ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="1_1kjt4"]
-[ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="2_5do3c"]
-[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="2_eloa6"]
 [ext_resource type="Texture2D" uid="uid://penv05a5ag0f" path="res://assets/materials/grid.png" id="2_mopb7"]
+[ext_resource type="Resource" uid="uid://b80d5xg0dixw1" path="res://scripts/entities/inventory/test_inventory.tres" id="2_sygpe"]
 [ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="3_3mglh"]
 [ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="5_sygpe"]
-[ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="8_6hf3d"]
 
 [sub_resource type="GDScript" id="GDScript_y844b"]
 script/source = "extends Node3D
@@ -30,6 +28,7 @@ script/source = "extends Node3D
 @onready var update_inventory_button: Button = %UpdateInventoryButton
 @onready var close_inventory_button: Button = %CloseInventoryButton
 #endregion
+
 
 func show_test_ui() -> void:
     game_world_ui_layer.hide()
@@ -56,11 +55,13 @@ func update_inventory_from_test() -> void:
         items.push_back(item.text)
     
     # Set our new test values into the inventory
-    inventory_component.inventory.set_equipped_mask(mask)
+    #inventory_component.inventory.set_equipped_mask(mask)
     
     for echo: Variant in echoes:
-        inventory_component.inventory.set_equipped_echo_slot(echoes.find(echo), echo)
-        
+        inventory_component.inventory.set_equipped_echo_slot(
+            echoes.find(echo), echo
+        )
+    
     for item: Variant in items:
         inventory_component.inventory.set_backpack_slot(items.find(item), item)
 
@@ -119,17 +120,6 @@ size = Vector3(5, 0.3, 5)
 
 [sub_resource type="SphereMesh" id="SphereMesh_y844b"]
 
-[sub_resource type="Resource" id="Resource_6hf3d"]
-script = ExtResource("8_6hf3d")
-echoes = Array[ExtResource("2_eloa6")]([null])
-metadata/_custom_type_script = "uid://hqemwssvkqh4"
-
-[sub_resource type="Resource" id="Resource_sygpe"]
-script = ExtResource("2_5do3c")
-equipment = SubResource("Resource_6hf3d")
-max_backpack_slots = null
-metadata/_custom_type_script = "uid://sjk1ggbjspjx"
-
 [sub_resource type="FontVariation" id="FontVariation_1kjt4"]
 variation_embolden = 0.66
 variation_transform = Transform2D(1, 0.184, 0, 1, 0, 0)
@@ -150,7 +140,7 @@ mesh = SubResource("SphereMesh_y844b")
 [node name="InventoryComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_1kjt4")
-inventory = SubResource("Resource_sygpe")
+inventory = ExtResource("2_sygpe")
 metadata/_custom_type_script = "uid://u8paan0wgvi6"
 
 [node name="GameWorldUILayer" type="CanvasLayer" parent="."]

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EchoItem" load_steps=4 format=3 uid="uid://cdeofyf7gxuno"]
+
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="1_ssmey"]
+[ext_resource type="Texture2D" uid="uid://cg0oj1lsm2e4w" path="res://assets/textures/bunting.png" id="1_yxv13"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mi3el"]
+atlas = ExtResource("1_yxv13")
+region = Rect2(98.637405, 824.8905, 155.81345, 147.88287)
+
+[resource]
+script = ExtResource("1_ssmey")
+name = &"Test Echo 2"
+icon = SubResource("AtlasTexture_mi3el")
+metadata/_custom_type_script = "uid://chxnjdgyds7hd"

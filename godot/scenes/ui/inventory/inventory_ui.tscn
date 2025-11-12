@@ -26,6 +26,8 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_aks48")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -151.11108
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_ctn7s")
@@ -40,82 +42,170 @@ size_flags_horizontal = 3
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer/EquippedGear"]
 layout_mode = 2
-alignment_vertical = 0
+size_flags_horizontal = 3
+ratio = 0.9177
 
 [node name="Panel" type="Panel" parent="HBoxContainer/EquippedGear/AspectRatioContainer"]
 layout_mode = 2
 
-[node name="Mask" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+[node name="MaskSlot" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 245.0
-offset_top = 55.0
-offset_right = -245.0
-offset_bottom = -435.0
+offset_left = 201.30775
+offset_top = 16.0
+offset_right = -219.30772
+offset_bottom = -447.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WeaponLeft" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+[node name="WeaponLeftSlot" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 74.0
-offset_top = 239.0
-offset_right = -416.0
-offset_bottom = -251.0
+offset_left = 26.30774
+offset_top = 166.0
+offset_right = -394.30774
+offset_bottom = -297.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WeaponRight" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+[node name="WeaponRightSlot" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 422.0
-offset_top = 224.0
-offset_right = -68.0
-offset_bottom = -266.0
+offset_left = 388.30774
+offset_top = 163.0
+offset_right = -32.30774
+offset_bottom = -300.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Shoulders" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+[node name="ShouldersSlot" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 245.0
-offset_top = 165.0
-offset_right = -245.0
-offset_bottom = -325.0
+offset_left = 201.30775
+offset_top = 106.0
+offset_right = -219.30772
+offset_bottom = -357.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Torso" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+[node name="TorsoSlot" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 245.0
-offset_top = 295.0
-offset_right = -245.0
-offset_bottom = -195.0
+offset_left = 201.30774
+offset_top = 195.49997
+offset_right = -219.30774
+offset_bottom = -267.50003
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Legs" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+[node name="LegsSlot" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 240.0
-offset_top = 427.0
-offset_right = -250.0
-offset_bottom = -63.0
+offset_left = 200.30774
+offset_top = 293.49997
+offset_right = -220.30774
+offset_bottom = -169.50003
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="EchoesContainer" type="HBoxContainer" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ItemSlot" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel/EchoesContainer" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot2" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel/EchoesContainer" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot3" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel/EchoesContainer" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot4" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel/EchoesContainer" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel"]
+layout_mode = 0
+offset_left = 66.307755
+offset_top = 408.0
+offset_right = 120.307755
+offset_bottom = 431.0
+text = "Echoes"
+
+[node name="Label2" type="Label" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel"]
+layout_mode = 0
+offset_left = 206.30775
+offset_top = 66.0
+offset_right = 260.30774
+offset_bottom = 89.0
+text = "Mask"
+
+[node name="Label3" type="Label" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel"]
+layout_mode = 0
+offset_left = 10.3077545
+offset_top = 221.50003
+offset_right = 97.307755
+offset_bottom = 244.50003
+text = "Weapon (L)"
+
+[node name="Label4" type="Label" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel"]
+layout_mode = 0
+offset_left = 370.30774
+offset_top = 227.50003
+offset_right = 459.30774
+offset_bottom = 250.50003
+text = "Weapon (R)"
+
+[node name="Label5" type="Label" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel"]
+layout_mode = 0
+offset_left = 187.30775
+offset_top = 157.0
+offset_right = 276.30774
+offset_bottom = 180.0
+text = "Shoulders"
+
+[node name="Label6" type="Label" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel"]
+layout_mode = 0
+offset_left = 206.30775
+offset_top = 247.0
+offset_right = 295.30774
+offset_bottom = 270.0
+text = "Torso"
+
+[node name="Label7" type="Label" parent="HBoxContainer/EquippedGear/AspectRatioContainer/Panel"]
+layout_mode = 0
+offset_left = 210.30775
+offset_top = 344.0
+offset_right = 299.30774
+offset_bottom = 367.0
+text = "Legs"
 
 [node name="Backpack" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2

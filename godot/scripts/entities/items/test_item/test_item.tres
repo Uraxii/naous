@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://clfcaibvn6w48"]
 
 [ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="1_4ftvi"]
-[ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="1_uisim"]
+[ext_resource type="Texture2D" uid="uid://dq8alcrvf33ba" path="res://assets/materials/splash.png" id="1_4n3wy"]
 [ext_resource type="PackedScene" uid="uid://dwg0xgfniybxi" path="res://scripts/entities/items/test_item/test_item_mesh.tscn" id="2_4n3wy"]
 
 [resource]
 script = ExtResource("1_4ftvi")
 name = &"Test Item"
-icon = ExtResource("1_uisim")
+icon = ExtResource("1_4n3wy")
 meshScene = ExtResource("2_4n3wy")
 metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
