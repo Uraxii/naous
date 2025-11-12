@@ -1,7 +1,5 @@
 class_name InventoryUI extends PanelContainer
 
-
-
 const ITEM_SLOT: PackedScene = preload("uid://nbaglwtf3v0k")
 @onready var backpack_grid: GridContainer = %BackpackGrid
 

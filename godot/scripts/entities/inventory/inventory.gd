@@ -2,30 +2,14 @@
 ## This does not have to stay this way! You can change this to extend from Node if you prefer and use it however you wish.
 class_name Inventory extends Resource
 
-signal equipped_mask_updated(new_mask: Variant) # TODO: Update param to mask-item type
+signal equipment_updated(new_equipment: Equipment) # TODO: Update param to mask-item type
 signal equipped_echoes_updated(new_echoes: Array[Variant]) # TODO: Update param to echo-item type
 signal backpack_updated(new_backpack: Array[Variant]) # TODO: Update param to item type
 
-# TODO: Update this to use item-extended object types, like "Mask" and "Echo"
-#  - Probably needs to be a new class type since Dictionary can't have multiple value types
-@export var equipped := {
-    "mask": "MASK",
-    "weapon": "WEAPON",
-    "echoes": [
-        "ECHO_1",
-        "ECHO_2",
-        "ECHO_3",
-    ]
-}
+@export var equipment: Equipment
 
 @export var max_backpack_slots := 20
-@export var backpack: Array[Item] = [ # TODO: Change type to Array of item object type
-    Item.new(),
-    Item.new(),
-    null,
-    Item.new(),
-    Item.new(),
-]
+@export var backpack: Array[EchoItem]
 
 
 func _init() -> void:
@@ -37,29 +21,30 @@ func _init() -> void:
 
 #region Equipped Mask
 func get_equipped_mask() -> Variant: # TODO: Return mask object type
-    return equipped.mask
+    return equipment.mask
 
 
 func set_equipped_mask(new_equipped_mask: Variant) -> void: # TODO: Update param to be mask-item type
-    Globals.logger.debug("Setting new equipped mask: New Mask: %s | Prev Mask: %s" % [new_equipped_mask, equipped.mask])
-    equipped.mask = new_equipped_mask
+    Globals.logger.debug("Setting new equipped mask: New Mask: %s | Prev Mask: %s" % [new_equipped_mask, equipment.mask])
+    equipment.mask = new_equipped_mask
+    equipment_updated.emit(equipment)
 #endregion
 
 
 #region Equipped Echoes
-func get_equipped_echoes() -> Array[Variant]: # TODO: Return Array of echo object type
-    return equipped.echoes
+func get_equipped_echoes() -> Array[EchoItem]: # TODO: Return Array of echo object type
+    return equipment.echoes
 
 
-func set_equipped_echo_slot(slot_index: int, new_echo: Variant) -> void: # TODO: Update param to echo-item type
-    if equipped.echoes.get(slot_index) == null:
-        Globals.logger.error("Can not set equipped echo for invalid index! Index: %s | Echos Size: %s" % [slot_index, equipped.echoes.size()])
+func set_equipped_echo_slot(slot_index: int, new_echo: EchoItem) -> void: # TODO: Update param to echo-item type
+    if equipment.echoes.get(slot_index) == null:
+        Globals.logger.error("Can not set equipped echo for invalid index! Index: %s | Echos Size: %s" % [slot_index, equipment.echoes.size()])
         return
     
     # TODO: Update typing to accomodate Array of echo-item objects
-    var prev_echo: Variant = equipped.echoes.get(slot_index)
+    var prev_echo: Variant = equipment.echoes.get(slot_index)
     Globals.logger.debug("Setting equipped echo slot. Index: %s | New Echo: %s | Prev Echo: %s", [slot_index, new_echo, prev_echo])
-    equipped.echoes.set(slot_index, new_echo)
+    equipment.echoes.set(slot_index, new_echo)
 #endregion
 
 

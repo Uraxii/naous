@@ -1,15 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://eyaf8u4fxjpr"]
+[gd_scene load_steps=17 format=3 uid="uid://eyaf8u4fxjpr"]
 
 [ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="1_1kjt4"]
 [ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="2_5do3c"]
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="2_eloa6"]
 [ext_resource type="Texture2D" uid="uid://penv05a5ag0f" path="res://assets/materials/grid.png" id="2_mopb7"]
 [ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="3_3mglh"]
-[ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="3_7lasq"]
-[ext_resource type="Texture2D" uid="uid://b5p3ex0xtdv5j" path="res://assets/models/grass_x_0.png" id="4_6hf3d"]
-[ext_resource type="Texture2D" uid="uid://du2snp128bqw6" path="res://assets/textures/greebly-normal.png" id="5_naaaj"]
 [ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="5_sygpe"]
-[ext_resource type="Texture2D" uid="uid://cqcemqovqim63" path="res://assets/textures/ink-weed.png" id="6_wecma"]
-[ext_resource type="Texture2D" uid="uid://b1am4dchwn4eh" path="res://assets/textures/ink-crack.png" id="7_ia41r"]
+[ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="8_6hf3d"]
 
 [sub_resource type="GDScript" id="GDScript_y844b"]
 script/source = "extends Node3D
@@ -122,39 +119,15 @@ size = Vector3(5, 0.3, 5)
 
 [sub_resource type="SphereMesh" id="SphereMesh_y844b"]
 
-[sub_resource type="Resource" id="Resource_y52ys"]
-script = ExtResource("3_7lasq")
-name = &"First"
-icon = ExtResource("3_3mglh")
-metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
-
-[sub_resource type="Resource" id="Resource_65he2"]
-script = ExtResource("3_7lasq")
-name = &"2nd"
-icon = ExtResource("4_6hf3d")
-metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
-
-[sub_resource type="Resource" id="Resource_1mfyk"]
-script = ExtResource("3_7lasq")
-name = &"another"
-icon = ExtResource("5_naaaj")
-metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
-
-[sub_resource type="Resource" id="Resource_rmjhl"]
-script = ExtResource("3_7lasq")
-name = &"hewwo :3"
-icon = ExtResource("6_wecma")
-metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
-
-[sub_resource type="Resource" id="Resource_577en"]
-script = ExtResource("3_7lasq")
-name = &"last one"
-icon = ExtResource("7_ia41r")
-metadata/_custom_type_script = "uid://dbkni0d5ocl7o"
+[sub_resource type="Resource" id="Resource_6hf3d"]
+script = ExtResource("8_6hf3d")
+echoes = Array[ExtResource("2_eloa6")]([null])
+metadata/_custom_type_script = "uid://hqemwssvkqh4"
 
 [sub_resource type="Resource" id="Resource_sygpe"]
 script = ExtResource("2_5do3c")
-backpack = Array[Object]([SubResource("Resource_y52ys"), SubResource("Resource_65he2"), SubResource("Resource_1mfyk"), null, SubResource("Resource_rmjhl"), SubResource("Resource_577en"), null])
+equipment = SubResource("Resource_6hf3d")
+max_backpack_slots = null
 metadata/_custom_type_script = "uid://sjk1ggbjspjx"
 
 [sub_resource type="FontVariation" id="FontVariation_1kjt4"]

@@ -23,7 +23,7 @@ corner_radius_bottom_left = 2
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_a0on1")
 
 [node name="ItemSlot" type="PanelContainer"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(60, 60)
 focus_mode = 2
 mouse_default_cursor_shape = 7
 theme = SubResource("Theme_8pb6k")
