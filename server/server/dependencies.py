@@ -1,28 +1,25 @@
-import sqlalchemy
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import sessionmaker, Session
+from pymongo import MongoClient
+from pymongo.database import Database
 
+from core.config import settings
 from services.peer_manager import PeerManager
 
-#region Dependency Values
-DATABASE_URL = "sqlite:///./naous.db"
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-peer_manager = PeerManager()
-#endregion
+peer_manager: PeerManager = PeerManager()
+
+client: MongoClient = MongoClient(
+    host=settings.DATABASE_URI,
+    port=settings.DATABASE_PORT,
+    connect=True)
+
+#db: Database = client[settings.DATABASE_NAME]
 
 #region Dependency Getter Methods
 def get_peer_manager() -> PeerManager:
     return peer_manager
 
 
-def get_db():
-    db = SessionLocal()
-
-    try:
-        yield db
-    finally:
-        db.close()
+def get_client() -> MongoClient:
+    return client
 #endregion
 

@@ -3,20 +3,18 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    warnings.filterwarnings("ignore", message="(trapped) error reading bcrypt version")
+    warnings.filterwarnings(
+        "ignore", message="(trapped) error reading bcrypt version")
 
     # Server settings
     HOST: str = "0.0.0.0"
     PORT: int = 8080
     DEBUG: bool = True
 
-    # Security
-    SECRET_KEY: str = "your-secret-key-change-this-in-production"
-    ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-
     # Database
-    DATABASE_URL: str = ""
+    DATABASE_PORT: int = 27017
+    DATABASE_URI: str = f"localhost"
+    DATABASE_NAME: str ="naous"
 
     ADMIN_USERNAME: str = "admin"
     ADMIN_PASSWORD: str = "nimda"
@@ -27,3 +25,4 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+

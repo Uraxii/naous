@@ -14,6 +14,7 @@ class User(BaseModel):
     name: str
     roles: list[str]
 
+
     def has_role(self, role: str) -> bool:
         return role in self.roles
 
@@ -22,8 +23,8 @@ class Character(BaseModel):
     id: str
     name: str
     user: User
-    group: "Group"
-    instance: "Instance"
+    group_id: int
+    instance_id: int
     zone: str
     transform_queue: list[Transform]
 

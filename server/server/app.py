@@ -77,7 +77,6 @@ async def version():
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # Things to do at startup
-
     peer_manager = get_peer_manager()
     await peer_manager.start_removing_expired_peers_async(interval_sec=600.0)
 
