@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bubw2npxhqmbl"]
+[gd_scene load_steps=15 format=3 uid="uid://bubw2npxhqmbl"]
 
 [ext_resource type="Script" uid="uid://cfn7j3g4lutwr" path="res://scripts/entities/objects/door.gd" id="1_htbgl"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="2_de05j"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cidlribiuexkb" path="res://scripts/entities/interaction/requirements/interactable_requirement.gd" id="5_f8c16"]
 [ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="5_qu8ah"]
 [ext_resource type="Script" uid="uid://jqx82cd4qphm" path="res://scripts/entities/interaction/requirements/min_distance_requirement.gd" id="6_ritpd"]
+[ext_resource type="Material" uid="uid://bnyusgd0ncsnl" path="res://assets/materials/house-door.tres" id="8_ritpd"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qu8ah"]
 properties/0/path = NodePath("Body:position")
@@ -67,6 +68,7 @@ collision_layer = 6
 collision_mask = 7
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = ExtResource("8_ritpd")
 mesh = SubResource("BoxMesh_htbgl")
 skeleton = NodePath("../..")
 

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=5 format=3 uid="uid://b80d5xg0dixw1"]
+
+[ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="1_4fgfs"]
+[ext_resource type="Resource" uid="uid://clfcaibvn6w48" path="res://scripts/entities/items/test_item/test_item.tres" id="2_6ol7x"]
+[ext_resource type="Resource" uid="uid://bkio72g04wx2o" path="res://scripts/entities/inventory/test_equipment.tres" id="3_xuq83"]
+[ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="4_vopij"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("4_vopij")
+equipment = ExtResource("3_xuq83")
+backpack = Array[ExtResource("1_4fgfs")]([ExtResource("2_6ol7x"), null, ExtResource("2_6ol7x"), null])
+metadata/_custom_type_script = "uid://sjk1ggbjspjx"

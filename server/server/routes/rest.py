@@ -2,7 +2,7 @@ from datetime import timedelta
 from fastapi import APIRouter, Depends, status
 from fastapi.exceptions import HTTPException
 
-from dependencies import get_peer_manager, get_db
+from dependencies import get_peer_manager, get_client
 from models.responses import *
 from models.post import *
 from models.game import *
@@ -47,6 +47,11 @@ async def logout(
 async def post_character(
         user_id: str,
         data: Character,
-        db=get_db
 ) -> Character:
     return data
+
+
+# TODO: Only enable this route in Dev.
+@router.get("/db/client/info")
+async def db_client_info(client=Depends(get_client)):
+    return client.server_info()

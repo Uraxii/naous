@@ -1,6 +1,7 @@
 annotated-types==0.7.0
 anyio==4.10.0
 click==8.2.1
+dnspython==2.8.0
 fastapi==0.116.2
 greenlet==3.2.4
 h11==0.16.0
@@ -10,15 +11,14 @@ numpy==2.3.3
 pydantic==2.11.9
 pydantic-settings==2.10.1
 pydantic_core==2.33.2
+pymongo==4.15.3
 python-dotenv==1.1.1
 PyYAML==6.0.2
 sniffio==1.3.1
-SQLAlchemy==2.0.43
 starlette==0.48.0
 typing-inspection==0.4.1
 typing_extensions==4.15.0
 uvicorn==0.35.0
-# uvloop does NOT support Windows, though it appears unused in the project at this time anyway
-# uvloop==0.21.0
+uvloop==0.21.0
 watchfiles==1.1.0
 websockets==15.0.1

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MaskItem" load_steps=4 format=3 uid="uid://dcj2qv41xjv7b"]
+
+[ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="1_biknb"]
+[ext_resource type="Script" uid="uid://dg45bv0urh4re" path="res://scripts/entities/items/mask/mask_item.gd" id="1_urcab"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tid0"]
+atlas = ExtResource("1_biknb")
+region = Rect2(32.696, 56.07219, 18.672577, 19.390755)
+
+[resource]
+script = ExtResource("1_urcab")
+draw = 5
+name = &"Test Mask"
+description = "This is a TEST"
+icon = SubResource("AtlasTexture_2tid0")
+metadata/_custom_type_script = "uid://dg45bv0urh4re"

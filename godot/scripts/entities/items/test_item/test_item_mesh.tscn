@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwg0xgfniybxi"]
+
+[ext_resource type="ArrayMesh" uid="uid://doy71gctyntpo" path="res://assets/models/crystal-a.obj" id="1_vq54b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wi2ba"]
+albedo_color = Color(0.7449365, 0.03693222, 0.3664667, 1)
+
+[node name="TestItemMesh" type="MeshInstance3D"]
+mesh = ExtResource("1_vq54b")
+surface_material_override/0 = SubResource("StandardMaterial3D_wi2ba")
