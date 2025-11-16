@@ -1,0 +1,93 @@
+[gd_resource type="Resource" script_class="PackedDialogue" load_steps=21 format=3 uid="uid://drq115jdvmgjx"]
+
+[ext_resource type="Script" uid="uid://ottan7x2caxt" path="res://scripts/dialogue/dialogue_packed.gd" id="1_xtbp6"]
+[ext_resource type="Script" uid="uid://dyo5n8quvu8wt" path="res://scripts/dialogue/components/dialogue_tree.gd" id="2_rxfyr"]
+[ext_resource type="Script" uid="uid://btkpijagycoer" path="res://scripts/dialogue/components/dialogue_tree_item.gd" id="3_6t0if"]
+[ext_resource type="Script" uid="uid://bi8vmqkqokkqw" path="res://scripts/dialogue/components/dialogue_narration.gd" id="4_0rusf"]
+[ext_resource type="Script" uid="uid://bhlt2a5hvogi0" path="res://scripts/dialogue/components/dialogue_option.gd" id="5_mvghi"]
+
+[sub_resource type="Resource" id="Resource_d44t5"]
+script = ExtResource("4_0rusf")
+speaker = "tarnished moth"
+metadata/_custom_type_script = "uid://bi8vmqkqokkqw"
+
+[sub_resource type="Resource" id="Resource_kilfn"]
+script = ExtResource("4_0rusf")
+speaker = "tarnished moth"
+display_text = "Have you seen the new dialogue system in development for [b]Naous[/b]?"
+metadata/_custom_type_script = "uid://bi8vmqkqokkqw"
+
+[sub_resource type="Resource" id="Resource_pwdxj"]
+script = ExtResource("5_mvghi")
+requires_flags = Array[StringName]([&"flags_tutorial_completed"])
+display_text = "Yes, I have already."
+metadata/_custom_type_script = "uid://bhlt2a5hvogi0"
+
+[sub_resource type="Resource" id="Resource_1xpi0"]
+script = ExtResource("5_mvghi")
+display_text = "No, I'm just seeing it now."
+metadata/_custom_type_script = "uid://bhlt2a5hvogi0"
+
+[sub_resource type="Resource" id="Resource_2cxqg"]
+script = ExtResource("3_6t0if")
+narrations = Array[ExtResource("4_0rusf")]([SubResource("Resource_d44t5"), SubResource("Resource_kilfn")])
+options = Array[ExtResource("5_mvghi")]([SubResource("Resource_pwdxj"), SubResource("Resource_1xpi0")])
+metadata/_custom_type_script = "uid://btkpijagycoer"
+
+[sub_resource type="Resource" id="Resource_y8ln3"]
+script = ExtResource("4_0rusf")
+metadata/_custom_type_script = "uid://bi8vmqkqokkqw"
+
+[sub_resource type="Resource" id="Resource_7v6db"]
+script = ExtResource("4_0rusf")
+speaker = "tarnished moth"
+display_text = "Honesty is the best policy!"
+metadata/_custom_type_script = "uid://bi8vmqkqokkqw"
+
+[sub_resource type="Resource" id="Resource_v1iqc"]
+script = ExtResource("4_0rusf")
+speaker = "Lorem guy"
+display_text = "Lorem ipsum dolor sit amet consectetur adipiscing elit. Consectetur adipiscing elit quisque faucibus ex sapien vitae. Ex sapien vitae pellentesque sem placerat in id. Placerat in id cursus mi pretium tellus duis. Pretium tellus duis convallis tempus leo eu aenean."
+metadata/_custom_type_script = "uid://bi8vmqkqokkqw"
+
+[sub_resource type="Resource" id="Resource_hodu3"]
+script = ExtResource("4_0rusf")
+speaker = "Lorem guy"
+display_text = "... you know what I mean???"
+metadata/_custom_type_script = "uid://bi8vmqkqokkqw"
+
+[sub_resource type="Resource" id="Resource_d3uxk"]
+script = ExtResource("5_mvghi")
+display_text = "Yes"
+metadata/_custom_type_script = "uid://bhlt2a5hvogi0"
+
+[sub_resource type="Resource" id="Resource_i4i11"]
+script = ExtResource("5_mvghi")
+display_text = "No"
+metadata/_custom_type_script = "uid://bhlt2a5hvogi0"
+
+[sub_resource type="Resource" id="Resource_1t3wk"]
+script = ExtResource("5_mvghi")
+display_text = "Maybe"
+metadata/_custom_type_script = "uid://bhlt2a5hvogi0"
+
+[sub_resource type="Resource" id="Resource_mlah5"]
+script = ExtResource("5_mvghi")
+display_text = "I don't know"
+metadata/_custom_type_script = "uid://bhlt2a5hvogi0"
+
+[sub_resource type="Resource" id="Resource_yegxq"]
+script = ExtResource("3_6t0if")
+narrations = Array[ExtResource("4_0rusf")]([SubResource("Resource_y8ln3"), SubResource("Resource_7v6db"), SubResource("Resource_v1iqc"), SubResource("Resource_hodu3")])
+options = Array[ExtResource("5_mvghi")]([SubResource("Resource_d3uxk"), SubResource("Resource_i4i11"), SubResource("Resource_1t3wk"), SubResource("Resource_mlah5")])
+metadata/_custom_type_script = "uid://btkpijagycoer"
+
+[sub_resource type="Resource" id="Resource_1foq4"]
+script = ExtResource("2_rxfyr")
+items = Array[ExtResource("3_6t0if")]([SubResource("Resource_2cxqg"), SubResource("Resource_yegxq")])
+metadata/_custom_type_script = "uid://dyo5n8quvu8wt"
+
+[resource]
+script = ExtResource("1_xtbp6")
+trees = Array[ExtResource("2_rxfyr")]([SubResource("Resource_1foq4")])
+metadata/_custom_type_script = "uid://ottan7x2caxt"

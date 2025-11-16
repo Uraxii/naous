@@ -1,7 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://neyxl4d7706n"]
+[gd_scene load_steps=4 format=3 uid="uid://neyxl4d7706n"]
 
+[ext_resource type="Script" uid="uid://b55eblph6juxn" path="res://scripts/dialogue/dialogue_testbench.gd" id="1_c3ac4"]
 [ext_resource type="PackedScene" uid="uid://bxlcd6thwmxi6" path="res://scripts/dialogue/dialogue.tscn" id="1_c34ii"]
+[ext_resource type="Resource" uid="uid://drq115jdvmgjx" path="res://scripts/dialogue/test_dialogue_pack.tres" id="2_5vwcm"]
 
 [node name="DialogueTestbench" type="Node2D"]
+script = ExtResource("1_c3ac4")
+dialogue_pack = ExtResource("2_5vwcm")
 
 [node name="Dialogue" parent="." instance=ExtResource("1_c34ii")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 147.0
+offset_top = 31.0
+offset_right = 193.0
+offset_bottom = 71.0
+
+[node name="StartButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="AdvanceButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Advance"
+
+[connection signal="pressed" from="HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/AdvanceButton" to="." method="_on_advance_button_pressed"]
