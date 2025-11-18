@@ -11,14 +11,14 @@ class_name View extends Control
 
 
 func initalize() -> void:
-    visibility_changed.connect(_on_visibility_change)    
+	visibility_changed.connect(_on_visibility_change)    
 
 
 func despawn():
-    signals.despawn_view.emit(self)
-    queue_free.call_deferred()
+	signals.despawn_view.emit(self)
+	queue_free.call_deferred()
 
 
 func _on_visibility_change() -> void:
-    #print_debug(self, " visible:", is_visible_in_tree())
-    pass
+	#print_debug(self, " visible:", is_visible_in_tree())
+	pass

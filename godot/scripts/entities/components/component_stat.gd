@@ -12,17 +12,17 @@ signal change(new: float, old: float)
 @export var current: float = 10: set = _set_current
 
 var signals: SignalBus:
-    get: return Globals.signal_bus
+	get: return Globals.signal_bus
 #endregion
 
 func _ready() -> void:
-    current = max_value * start_percent
+	current = max_value * start_percent
 
 
 func _set_current(value: float) -> void:
-    if is_infinite:
-        return
-        
-    var old = current
-    current = clamp(value, min_value, max_value)
-    change.emit(current, old)
+	if is_infinite:
+		return
+		
+	var old = current
+	current = clamp(value, min_value, max_value)
+	change.emit(current, old)

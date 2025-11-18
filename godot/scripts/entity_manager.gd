@@ -1,7 +1,7 @@
 class_name EntityManager extends MultiplayerSpawner
 
 @export var player_scene: PackedScene = preload(
-    "uid://c5ospakgw0cwt")
+	"uid://c5ospakgw0cwt")
 
 @onready var signals: SignalBus = Globals.signal_bus
 @onready var lg: Log = Globals.logger
@@ -12,34 +12,34 @@ var _ids := IdPool.new()
 
 @rpc("call_local")
 func despawn(id: int) -> void:
-    if not multiplayer.is_server():
-        return
+	if not multiplayer.is_server():
+		return
 
-    var entity: Entity = pool.get(id)
-    pool.erase(id)
+	var entity: Entity = pool.get(id)
+	pool.erase(id)
 
-    if not entity or not entity.is_inside_tree():
-        return
+	if not entity or not entity.is_inside_tree():
+		return
 
-    entity.queue_free.call_deferred()
-    #lg.debug(entity)
+	entity.queue_free.call_deferred()
+	#lg.debug(entity)
 
 
 func find(id: int) -> Entity:
-    return pool.get(id)
+	return pool.get(id)
 
 
 func _on_client_spawn(node: Node) -> void:
-    if node is Entity:
-        # Register the entity in the pool.
-        pool[node.id] = node as Entity
-        #lg.debug("Registered %s as %d" % [node.name, node.id])
+	if node is Entity:
+		# Register the entity in the pool.
+		pool[node.id] = node as Entity
+		#lg.debug("Registered %s as %d" % [node.name, node.id])
 
 
 #region Godot Callback Functions
 func _ready():
-    spawn_function = Callable(self, "_spawn_custom")
-    spawned.connect(_on_client_spawn)
+	spawn_function = Callable(self, "_spawn_custom")
+	spawned.connect(_on_client_spawn)
 
 
 func _spawn_custom(data: Dictionary) -> Node:

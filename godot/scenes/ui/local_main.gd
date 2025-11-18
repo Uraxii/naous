@@ -28,38 +28,38 @@ const shard_id:String = "1"
 const world_scene_dir:String = "res://scenes/world/zones/"
 
 func _ready() -> void:
-    API.delegate = MockApiClientImpl.new()
-    # Remove default views that get added by singleton for regular main.tscn flow
-    Globals.views.despawn_all()
+	API.delegate = MockApiClientImpl.new()
+	# Remove default views that get added by singleton for regular main.tscn flow
+	Globals.views.despawn_all()
 
-    _populate_spawnable_scenes()
+	_populate_spawnable_scenes()
 
 # The "Auto Spawn List" is equivalent to "add_spawnable_scene" for each scene at runtime
 # This needs to be called on both client and server to specify the allow list of scenes that can be replicated from server to client
 func _populate_spawnable_scenes() -> void:
-    var world_scenes:Array[String] = [world_scene_dir]
+	var world_scenes:Array[String] = [world_scene_dir]
 
-    while not world_scenes.is_empty():
-        var path:String = world_scenes.pop_back()
-        if path.ends_with(".tscn"):
-            # Scene file
-            if OS.is_debug_build():
-                print_debug("%s: Found scene: %s" % [name, path])
-            spawner.add_spawnable_scene(path)
-        # Directory
-        elif path.ends_with("/"):
-            for resource in ResourceLoader.list_directory(path):
-                var sub_path:String = path + resource
-                world_scenes.push_back(sub_path)
+	while not world_scenes.is_empty():
+		var path:String = world_scenes.pop_back()
+		if path.ends_with(".tscn"):
+			# Scene file
+			if OS.is_debug_build():
+				print_debug("%s: Found scene: %s" % [name, path])
+			spawner.add_spawnable_scene(path)
+		# Directory
+		elif path.ends_with("/"):
+			for resource in ResourceLoader.list_directory(path):
+				var sub_path:String = path + resource
+				world_scenes.push_back(sub_path)
 
 func _on_host_pressed() -> void:
-    entry_point.hide()
-    host_level_select.show()
+	entry_point.hide()
+	host_level_select.show()
 
 func _on_join_pressed() -> void:
-    # TODO: Calling private function to skip hub connection calls
-    Globals.game._create_shard_connection("localhost", port, shard_id)
-    # TODO: Respond to an rpc to switch to the server's level
+	# TODO: Calling private function to skip hub connection calls
+	Globals.game._create_shard_connection("localhost", port, shard_id)
+	# TODO: Respond to an rpc to switch to the server's level
     entry_point.hide()
 
 func _on_start_game_pressed() -> void:
@@ -69,41 +69,41 @@ func _on_start_game_pressed() -> void:
         return
 
     # "Allow List" for which scenes added to the spawn path root are allowed to replicate
-    # Doesn't work when only called on server
-    #spawner.add_spawnable_scene(level.resource_path)
-    #await get_tree().process_frame
+	# Doesn't work when only called on server
+	#spawner.add_spawnable_scene(level.resource_path)
+	#await get_tree().process_frame
 
-    var shard_config:Dictionary = {
-        "shard_id": shard_id,
-        "shard_type": "hub",
-        "port": port,
-        "max_players": int(txt_max_players.text)
-        #"manager_host": args.get("manager-host", "localhost"),
-        #"manager_port": int(args.get("manager-port", "8081"))
-    }
+	var shard_config:Dictionary = {
+		"shard_id": shard_id,
+		"shard_type": "hub",
+		"port": port,
+		"max_players": int(txt_max_players.text)
+		#"manager_host": args.get("manager-host", "localhost"),
+		#"manager_port": int(args.get("manager-port", "8081"))
+	}
 
-    # Now start the server manager
-    var server_manager := ServerManager.new()
-    get_tree().root.add_child(server_manager)
-    server_manager.initialize_shard(shard_config)
+	# Now start the server manager
+	var server_manager := ServerManager.new()
+	get_tree().root.add_child(server_manager)
+	server_manager.initialize_shard(shard_config)
 
-    # TODO: Temporary test logic - need to determine where game scenes should go
-    level_container.call_deferred("add_child",_create_level(level))
-    level_container.call_deferred("add_child",_spawn_player())
+	# TODO: Temporary test logic - need to determine where game scenes should go
+	level_container.call_deferred("add_child",_create_level(level))
+	level_container.call_deferred("add_child",_spawn_player())
 
-    ui_root.hide()
+	ui_root.hide()
 
 func _create_level(level_scene:PackedScene) -> Node:
-    var level:Node = level_scene.instantiate()
-    return level
+	var level:Node = level_scene.instantiate()
+	return level
 
 func _spawn_player() -> Entity:
-    # Create player
-    # - Note that we can't call 'Global.entities.spawn()' here, or the child scenes of Entity won't be set up yet.
-    # - Let the Entity handle that when it enters the scene, then the nodes will be ready in the SceneTree for the EntityManager.
-    if not player_controller or not player_controller.can_instantiate():
-        push_error("%s: player_controller scene not set" % name)
-        return null
-    var player:Entity = player_controller.instantiate() as Entity
-    
-    return player
+	# Create player
+	# - Note that we can't call 'Global.entities.spawn()' here, or the child scenes of Entity won't be set up yet.
+	# - Let the Entity handle that when it enters the scene, then the nodes will be ready in the SceneTree for the EntityManager.
+	if not player_controller or not player_controller.can_instantiate():
+		push_error("%s: player_controller scene not set" % name)
+		return null
+	var player:Entity = player_controller.instantiate() as Entity
+	
+	return player
