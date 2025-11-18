@@ -44,14 +44,16 @@ func _initialize_server(args: Dictionary) -> void:
 
 
 func _ready() -> void:
-    print_debug("Initializing as client...")
-    print_debug("Args=", arguments)
+	print_debug("Initializing as client...")
+	print_debug("Args=", arguments)
 
-    if arguments.has("server"):
-        _initialize_server(arguments)
-    elif arguments.has("client"):
-        _auto_connect(arguments)
-    elif arguments.has("connect-to-instance"):
-        _connect_to_instance(arguments)
-    else:
-        Globals.views.spawn(MainView)
+	Globals.username = "Nicole"
+
+	if arguments.has("server"):
+		_initialize_server(arguments)
+	elif arguments.has("client"):
+		_auto_connect(arguments)
+	elif arguments.has("connect-to-instance"):
+		_connect_to_instance(arguments)
+	else:
+		Globals.views.spawn(MainView)

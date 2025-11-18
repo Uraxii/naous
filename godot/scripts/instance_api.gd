@@ -85,32 +85,28 @@ func load_level(level_name: String) -> void:
 
 
 func _spawn_player(authority: int, user_name: String, character_name: String) -> void:
-    if not multiplayer.is_server():
-        return
+	if not multiplayer.is_server():
+		return
 
-      #print_debug("Sender %d" % authority)
+	#print_debug("Sender %d" % authority)
 
-    var player_data = PlayerData.new(user_name, authority)
-    player_data.set_character_data(character_name)
+	if connections.has(authority):
+		return
+	var player_data = PlayerData.new(user_name, authority)
+	var spawn_data = {
+		"type": "player",
+		"scene": "res://scenes/entities/player.tscn",
+		"authority": authority,
+		"id": player_data.id,
+		"active_character": character_name,
+	}
+	
+	var entity: Entity = entities.spawn(spawn_data)
+	player_data.entity = entity
+	connections[authority] = player_data
 
-    if connections.has(authority):
-        return
-
-    var spawn_data = {
-        "type": "player",
-        "scene": "res://scenes/entities/player.tscn",
-        "authority": authority,
-        "id": player_data.id
-    }
-    
-    var entity: Entity = entities.spawn(spawn_data)
-    
-    player_data.entity = entity
-    connections[authority] = player_data
-
-    lg.debug("%s spawned." % player_data.id)
-    signals.player_connected.emit(authority, player_data)
-
+	lg.debug("%s spawned." % player_data.id)
+	signals.player_connected.emit(authority)
 
 @rpc("any_peer", "call_remote", "reliable")
 func _request_spawn(user_name: String, character_name: String) -> void:
@@ -140,12 +136,9 @@ func _on_player_disconnected(peer_id: int) -> void:
 
 
 func _on_connected_ok() -> void:
-    var char_data: CharacterData = load(
-        "res://resources/dummy_character_data.tres")
-    # Request server to spawn this player
-    _request_spawn.rpc_id(1, "Nicole", char_data.name)
-    signals.connected_to_server.emit()
-
+	# Request server to spawn a character of this player
+	_request_spawn.rpc_id(1, Globals.username, "Nimble")
+	signals.connected_to_server.emit()
 
 func _on_connected_fail() -> void:
     signals.log_new_error.emit("Failed to connect.")

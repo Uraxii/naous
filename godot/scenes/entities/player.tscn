@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=30 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
 [ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="9_jv5ih"]
 [ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="10_b4o2o"]
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="10_d745t"]
 [ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="10_n36er"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="11_b4o2o"]
@@ -22,7 +23,7 @@
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
 [ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="19_2ngu4"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
-[ext_resource type="Script" uid="uid://cyi3glr80w6yu" path="res://scenes/entities/ground_material_detector.gd" id="23_d745t"]
+[ext_resource type="Script" path="res://scenes/entities/ground_material_detector.gd" id="23_d745t"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
 properties/0/path = NodePath("Components/Body:position")

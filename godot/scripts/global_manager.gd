@@ -18,7 +18,7 @@ var camera:         CameraManager
 var casting:        CastManager
 var http:           HTTPManager
 var websocket:      WebSocketManager
-
+var username: 		String
 
 func new_global_script(node_name: String, type: GDScript) -> Node:
     var global = type.new()

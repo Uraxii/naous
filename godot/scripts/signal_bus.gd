@@ -16,9 +16,10 @@ signal server_message_received(packet)
 #endregion
 
 #region Instance API
-signal player_connected(peer_id: int, data: PlayerData)
+signal player_connected(peer_id: int)
 signal player_disconnected(peer_id: int)
 signal server_disconnected
+signal save_game
 #endregion
 
 #region Network (Legacy - keeping for compatibility)
@@ -77,7 +78,7 @@ signal jump
 signal interact
 signal move(dir: Vector2)
 
-## Targeting
+#region Targeting
 signal cursor_target
 signal next_target
 signal previous_target
@@ -101,7 +102,7 @@ signal entity_interaction_interrupted(entity: Entity, interactable: Interactable
 signal entity_lost_interactable(entity: Entity, interactable: InteractableComponent)
 #endregion
 
-#region Targeting
+#region Aiming
 signal target_entered_screen(target: Targetable)
 signal target_exited_screen(target: Targetable)
 #endregion
