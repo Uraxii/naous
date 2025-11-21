@@ -1,4 +1,7 @@
+class_name TutorialSequence
 extends Node
+
+signal sequence_changed(sequence: SEQ)
 
 ## States of the sequence
 enum SEQ {
@@ -37,17 +40,58 @@ enum SEQ {
     ESCAPE
 }
 
+@onready var player: Player = %Player
+@onready var hud_layer: HUDLayer = %HUDLayer
+
+var current_sequence: SEQ:
+    set = set_current_sequence
+
+
+func start() -> void:
+    trigger_sequence(SEQ.BEGINNING)
+
+
 #region Sequence Functions
+#region BEGINNING
+@onready var player_spawn_position: Marker3D = %PlayerSpawnPosition
+@onready var starter_gear_pickup: StarterGearPickup = %StarterGearPickup
+var _original_player_velocity: float
 func beginning() -> void:
+    print("STARTING BEGINNING SEQUENCE")
+    current_sequence = SEQ.BEGINNING
     # 1. Set camera to black, prevent player control
+    hud_layer.hide_screen()
+    var player_speed_c: StatComponent = player.components.find("Speed")
+    # HACK: Hack to prevent movement
+    _original_player_velocity = player_speed_c.current
+    player_speed_c.current = 0
     # 2. Spawn player in starting position
+    var player_body_c: Node3D = player.components.find("Body")
+    player_body_c.global_position = player_spawn_position.global_position
     # 3. Fade in screen to show character (with letterbox?)
+    hud_layer.fade_in_complete.connect(_on_beginning_hud_fade_in)
+    hud_layer.fade_in()
+
+
+func _on_beginning_hud_fade_in() -> void:
+    hud_layer.fade_in_complete.disconnect(_on_beginning_hud_fade_in)
     # 4. Give player control (remove letterbox?)
+    var player_speed_c: StatComponent = player.components.find("Speed")
+    player_speed_c.current = _original_player_velocity
+    starter_gear_pickup.collected.connect(_on_beginning_gear_pickup)
+
+
+func _on_beginning_gear_pickup() -> void:
+    starter_gear_pickup.collected.disconnect(_on_beginning_gear_pickup)
     # 5. When player picks up starter gear, trigger next sequence
-    pass
+    await starter_gear_pickup.collected
+    trigger_sequence(SEQ.GEAR_TUTORIAL)
+#endregion BEGINNING
 
 
 func gear_tutorial() -> void:
+    print("STARTING GEAR TUTORIAL SEQUENCE")
+    current_sequence = SEQ.GEAR_TUTORIAL
     # 1. Open inventory/equipment view
     # 2. Display items that have been "picked up" (Echoes)
     # 3. Display tutorial UI teaching how to equip the Echoes
@@ -58,13 +102,16 @@ func gear_tutorial() -> void:
 
 
 func destroy_barricade() -> void:
+    current_sequence = SEQ.DESTROY_BARRICADE
     # 1. Show/Highlight the boulder blocking the path forward
     # 2. Prompt player to destroy the boulder using their new attack ability
     # 3. When the boulder reaches low health, trigger next sequence
     pass
 
 
+@onready var first_enemy_initial: Marker3D = %FirstEnemyInitial
 func first_combat() -> void:
+    current_sequence = SEQ.FIRST_COMBAT
     # 1. Start "cutscene" where enemy bursts through boulder (potentially damaging the player slightly - this ensures they have health to recover with the upcoming heal ability)
     # 2. Prompt player to target and attack the enemy (just like they did with the boulder)
     # 3. When the enemy is defeated, trigger next sequence
@@ -72,6 +119,7 @@ func first_combat() -> void:
 
 
 func heal_tutorial() -> void:
+    current_sequence = SEQ.HEAL_TUTORIAL
     # 1. Enemy will drop a new Echo for self-healing
     # 2. Prompt player to pick up Echo
     # 3. Prompt player to open inventory to equip it (or maybe we auto-equip it?)
@@ -81,6 +129,7 @@ func heal_tutorial() -> void:
 
 
 func explore_plaza() -> void:
+    current_sequence = SEQ.EXPLORE_PLAZA
     # 1. Remove collision preventing player from progressing as necessary (maybe it looks like the healing burst applies an impulse to the boulder rubble that finishes moving it out of the way)
     # 2. Show the open plaza with roaming enemies and shiny pick-up items
     # 3. Prompt the user to explore the area
@@ -92,6 +141,7 @@ func explore_plaza() -> void:
 
 
 func miniboss_fight() -> void:
+    current_sequence = SEQ.MINIBOSS_FIGHT
     # 1. Show "cutscene" of miniboss entering the area
     # 2. Prompt player to defeat the miniboss
     # 3. When the enemy is defeated, trigger next sequence
@@ -99,6 +149,7 @@ func miniboss_fight() -> void:
 
 
 func draw_tutorial() -> void:
+    current_sequence = SEQ.DRAW_TUTORIAL
     # 1. The defeated miniboss drops a new Echo (with a higher Draw cost)
     # 2. Prompt player to open the inventory
     # 3. Once inventory is open, show tutorial explaining Draw cost and how it limits how many/what Echoes you can have equipped.
@@ -108,6 +159,7 @@ func draw_tutorial() -> void:
 
 
 func horde_fight() -> void:
+    current_sequence = SEQ.HORDE_FIGHT
     # 1. Show "cutscene" of roars and rumbles
     # 2. Spawn some enemies and have them jump into the scene
     # 3. Highlight a designated area for the player to move to (should mostly be where they were)
@@ -117,6 +169,7 @@ func horde_fight() -> void:
 
 
 func backup_arrives() -> void:
+    current_sequence = SEQ.BACKUP_ARRIVES
     # 1. Show "cutscene" of allies jumping in to help
     # 2. Startup "allies" as static characters that attack enemies and support the player
     # 3. Prompt player to continue fending off the horde
@@ -125,6 +178,7 @@ func backup_arrives() -> void:
 
 
 func escape() -> void:
+    current_sequence = SEQ.ESCAPE
     # 1. Show "cutscene" of large boss enemy smashing into the scene and defeating some allies
     # 2. Prompt player to retreat and find help
     # 3. Highlight the entrance/exit for the player to move towards, point player camera in that direction
@@ -158,3 +212,13 @@ func trigger_sequence(sequence: SEQ) -> void:
             backup_arrives()
         SEQ.ESCAPE:
             escape()
+
+
+func set_current_sequence(new_sequence: SEQ) -> void:
+    if current_sequence != new_sequence:
+        current_sequence = new_sequence
+        sequence_changed.emit(current_sequence)
+
+
+func _ready() -> void:
+    pass

@@ -91,5 +91,5 @@ func _control_entity_changed(new_controlling_entity: Entity) -> void:
     if new_controlling_entity.targeting != null:
         register_active_targeting_system(new_controlling_entity.targeting)
     else:
-        Globals.logger.error("New controlling entity does not have a TargetingSystem!")
+        Globals.logger.warn("New controlling entity does not have a TargetingSystem!")
 #endregion

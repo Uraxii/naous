@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=33 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="2_8cm00"]
@@ -7,10 +7,32 @@
 [ext_resource type="Material" path="res://assets/materials/ink-cloud2.tres" id="5_ygplp"]
 [ext_resource type="Material" path="res://assets/materials/ink-cloud3.tres" id="6_64ggy"]
 [ext_resource type="Material" path="res://assets/materials/ink-cloud1.tres" id="7_4r05b"]
-[ext_resource type="Script" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_sequence.gd" id="8_8cm00"]
+[ext_resource type="Script" uid="uid://wp3c7iemuwmf" path="res://scenes/world/dungeons/coalescence/tutorial/hud_layer.gd" id="8_0cvc3"]
+[ext_resource type="Script" uid="uid://bn60ptck7jhbi" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_sequence.gd" id="8_8cm00"]
 [ext_resource type="PackedScene" uid="uid://cx54j3yuqwncx" path="res://scenes/world/dungeons/coalescence/bubbles/entry_path.tscn" id="8_fx6br"]
 [ext_resource type="PackedScene" uid="uid://bh4yxqkgk4di4" path="res://scenes/world/dungeons/coalescence/bubbles/plaza.tscn" id="9_otwgf"]
 [ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="10_23v16"]
+[ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="12_g7sat"]
+[ext_resource type="Script" uid="uid://cfyjnr8bvcyt8" path="res://scripts/entities/entity.gd" id="13_xujpj"]
+[ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="14_0tafa"]
+[ext_resource type="Script" uid="uid://dk070b54ufb44" path="res://scenes/world/dungeons/coalescence/tutorial/starter_gear_pickup.gd" id="14_1c438"]
+[ext_resource type="Script" uid="uid://biugcdkh4yjur" path="res://scripts/entities/interaction/interactable_trigger.gd" id="14_omq0d"]
+[ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="15_0cvc3"]
+[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="16_o0ykn"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="17_1c438"]
+
+[sub_resource type="GDScript" id="GDScript_0cvc3"]
+script/source = "# Tutorial
+extends Node3D
+
+@onready var tutorial_sequence: TutorialSequence = %TutorialSequence
+
+
+func _ready() -> void:
+    # This is mostly to ensure we wait until the movement component warps the body up 100 units so we can snap it back after
+    await get_tree().process_frame
+    tutorial_sequence.start()
+"
 
 [sub_resource type="QuadMesh" id="QuadMesh_mc5jl"]
 material = ExtResource("1_e5qsc")
@@ -33,7 +55,62 @@ reflected_light_source = 1
 ssao_enabled = true
 ssao_intensity = 2.5
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w4dxx"]
+properties/0/path = NodePath("Components/Body:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Components/Body:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Components/Body:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Components/Body:up_direction")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:target_id")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g7sat"]
+spread = 180.0
+initial_velocity_min = 0.14
+initial_velocity_max = 0.14
+gravity = Vector3(0, 0, 0)
+damping_max = 0.07
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wek5"]
+transparency = 4
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_xujpj"]
+lightmap_size_hint = Vector2i(2, 2)
+material = SubResource("StandardMaterial3D_2wek5")
+radius = 0.024
+height = 0.048
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7sat"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.45490196)
+emission_enabled = true
+emission = Color(0.96, 0.96, 0.96, 1)
+emission_energy_multiplier = 1.73
+
+[sub_resource type="SphereMesh" id="SphereMesh_2wek5"]
+material = SubResource("StandardMaterial3D_g7sat")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o0ykn"]
+size = Vector3(1.465, 0.779, 0.995)
+
 [node name="Tutorial" type="Node3D"]
+script = SubResource("GDScript_0cvc3")
 
 [node name="Environment" type="Node" parent="."]
 
@@ -187,7 +264,22 @@ mesh = ExtResource("4_julif")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("7_4r05b")
 
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 2
+script = ExtResource("8_0cvc3")
+
+[node name="FadeBox" type="ColorRect" parent="HUDLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="TutorialSequence" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("8_8cm00")
 
 [node name="EntryPath" parent="." instance=ExtResource("8_fx6br")]
@@ -195,6 +287,70 @@ script = ExtResource("8_8cm00")
 [node name="Plaza" parent="." instance=ExtResource("9_otwgf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -172.40681)
 
+[node name="PlayerSpawnPosition" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.99999845, 0.00044343778, -0.0017273357, 0, 0.96859217, 0.24865481, 0.0017833469, -0.24865443, 0.9685906, 0.34585485, 1.3265276, 63.15676)
+
+[node name="FirstEnemyInitial" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 2.9610605, -42.199593)
+
+[node name="Archa" parent="." instance=ExtResource("12_g7sat")]
+
+[node name="StarterGearPickup" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.32749826, 0, -0.94485176, 0, 1, 0, 0.94485176, 0, 0.32749826, 25.594046, 0.62818503, -23.348516)
+script = ExtResource("14_1c438")
+
+[node name="StarterGearEntity" type="Node3D" parent="StarterGearPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="StarterGearPickup/StarterGearEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="StarterGearPickup/StarterGearEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StarterGearPickup/StarterGearEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="StarterGearPickup/StarterGearEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StarterGearPickup/StarterGearEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_o0ykn")
+
+[node name="ComponentManager" type="Node" parent="StarterGearPickup/StarterGearEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="StarterGearPickup/StarterGearEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="StarterGearPickup/StarterGearEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Collect Gear"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
 [node name="Player" parent="." instance=ExtResource("10_23v16")]
-id = null
-target_id = null
+unique_name_in_owner = true
