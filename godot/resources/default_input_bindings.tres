@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InputBindings" load_steps=46 format=3 uid="uid://dklvwj7n37rma"]
+[gd_resource type="Resource" script_class="InputBindings" load_steps=48 format=3 uid="uid://dklvwj7n37rma"]
 
 [ext_resource type="Script" uid="uid://7uvyk2xwlmgd" path="res://scripts/input/input_bindings.gd" id="1_qgmqv"]
 
@@ -150,6 +150,14 @@ pressed = true
 device = -1
 keycode = 4194306
 
+[sub_resource type="InputEventKey" id="InputEventKey_t1s46"]
+device = -1
+keycode = 4194306
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_iynii"]
+button_index = 4
+pressed = true
+
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_myrx5"]
 button_index = 12
 pressed = true
@@ -196,6 +204,7 @@ move_left = Array[InputEvent]([SubResource("InputEventKey_6i0xk"), SubResource("
 move_right = Array[InputEvent]([SubResource("InputEventKey_kmbki"), SubResource("InputEventJoypadMotion_tll83")])
 move_forward = Array[InputEvent]([SubResource("InputEventKey_iq71c"), SubResource("InputEventJoypadMotion_ie32x")])
 move_back = Array[InputEvent]([SubResource("InputEventKey_qdwp2"), SubResource("InputEventJoypadMotion_qgmqv")])
+character_rotate = Array[InputEvent]([SubResource("InputEventMouseButton_tll83")])
 jump = Array[InputEvent]([SubResource("InputEventKey_ijumv"), SubResource("InputEventJoypadButton_qgmqv")])
 interact = Array[InputEvent]([SubResource("InputEventKey_qgmqv"), SubResource("InputEventJoypadButton_tll83")])
 cursor_target = Array[InputEvent]([SubResource("InputEventMouseButton_qgmqv")])
@@ -211,7 +220,7 @@ camera_down = Array[InputEvent]([SubResource("InputEventJoypadMotion_l78yg")])
 camera_zoom_out = Array[InputEvent]([SubResource("InputEventMouseButton_k0m2b"), SubResource("InputEventJoypadButton_dunel")])
 camera_zoom_in = Array[InputEvent]([SubResource("InputEventMouseButton_ie32x"), SubResource("InputEventJoypadButton_20erl")])
 camera_rotate = Array[InputEvent]([SubResource("InputEventMouseButton_qgmqv")])
-character_rotate = Array[InputEvent]([SubResource("InputEventMouseButton_tll83")])
+open_inventory = Array[InputEvent]([SubResource("InputEventKey_t1s46"), SubResource("InputEventJoypadButton_iynii")])
 ui_accept = Array[InputEvent]([SubResource("InputEventKey_ie32x"), SubResource("InputEventKey_k0m2b")])
 ui_cancel = Array[InputEvent]([SubResource("InputEventKey_l78yg")])
 ui_toggle = Array[InputEvent]([SubResource("InputEventKey_tll83"), SubResource("InputEventJoypadButton_ws6gv")])

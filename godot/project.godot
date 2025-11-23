@@ -184,6 +184,10 @@ interact={
 "deadzone": 0.2,
 "events": []
 }
+open_inventory={
+"deadzone": 0.2,
+"events": []
+}
 
 [layer_names]
 

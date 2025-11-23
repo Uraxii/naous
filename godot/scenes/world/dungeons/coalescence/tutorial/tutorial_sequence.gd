@@ -41,7 +41,8 @@ enum SEQ {
 }
 
 @onready var player: Player = %Player
-@onready var hud_layer: HUDLayer = %HUDLayer
+@onready var screen_overlay: ScreenOverlayLayer = %ScreenOverlayLayer
+@onready var first_enemy: Archa = %FirstEnemy
 
 var current_sequence: SEQ:
     set = set_current_sequence
@@ -60,7 +61,7 @@ func beginning() -> void:
     print("STARTING BEGINNING SEQUENCE")
     current_sequence = SEQ.BEGINNING
     # 1. Set camera to black, prevent player control
-    hud_layer.hide_screen()
+    screen_overlay.hide_screen()
     var player_speed_c: StatComponent = player.components.find("Speed")
     # HACK: Hack to prevent movement
     _original_player_velocity = player_speed_c.current
@@ -69,12 +70,12 @@ func beginning() -> void:
     var player_body_c: Node3D = player.components.find("Body")
     player_body_c.global_position = player_spawn_position.global_position
     # 3. Fade in screen to show character (with letterbox?)
-    hud_layer.fade_in_complete.connect(_on_beginning_hud_fade_in)
-    hud_layer.fade_in()
+    screen_overlay.fade_in_complete.connect(_on_beginning_hud_fade_in)
+    screen_overlay.fade_in()
 
 
 func _on_beginning_hud_fade_in() -> void:
-    hud_layer.fade_in_complete.disconnect(_on_beginning_hud_fade_in)
+    screen_overlay.fade_in_complete.disconnect(_on_beginning_hud_fade_in)
     # 4. Give player control (remove letterbox?)
     var player_speed_c: StatComponent = player.components.find("Speed")
     player_speed_c.current = _original_player_velocity

@@ -1,49 +1,27 @@
 class_name HUDLayer
 extends CanvasLayer
 
-signal fade_in_complete
-signal fade_out_complete
-
-@onready var fade_box: ColorRect = %FadeBox
-
-const FADE_DURATION: float = 4
-var current_tween: Tween
+@onready var quest_heading: Label = %QuestHeading
+@onready var quest_details: Label = %QuestDetails
+@onready var interact_prompt: PanelContainer = %InteractPrompt
+@onready var interact_text: Label = %InteractText
 
 
-func hide_screen() -> void:
-    fade_box.color.a = 1
+func detected_interactable(entity: Entity, interactable: InteractableComponent) -> void:
+    if entity.is_local_owner:
+        var interact_prompt_text := interactable.prompt_text
+        interact_text.text = interact_prompt_text
+        interact_prompt.show()
 
 
-func show_screen() -> void:
-    fade_box.color.a = 0
+func lost_interactable(entity: Entity, interactable: InteractableComponent) -> void:
+    if entity.is_local_owner:
+        interact_prompt.hide()
+        interact_text.text = ""
 
 
-func fade_in() -> void:
-    fade_box.show()
-    if is_instance_valid(current_tween) and current_tween.is_running():
-        current_tween.stop()
+func _ready() -> void:
+    Globals.signal_bus.entity_detected_interactable.connect(detected_interactable)
+    Globals.signal_bus.entity_lost_interactable.connect(lost_interactable)
     
-    current_tween = create_tween()
-    var fade_time := FADE_DURATION * (fade_box.color.a) # Ratio for how much to fade
-    current_tween.tween_property(fade_box, "color", Color(0,0,0,0), fade_time)
-    current_tween.tween_callback(_on_fade_in_complete)
-
-
-func _on_fade_in_complete() -> void:
-    fade_box.hide()
-    fade_in_complete.emit()
-
-
-func fade_out() -> void:
-    fade_box.show()
-    if is_instance_valid(current_tween) and current_tween.is_running():
-        current_tween.stop()
-    
-    current_tween = create_tween()
-    var fade_time := FADE_DURATION * (1 - fade_box.color.a) # Ratio for how much to fade
-    current_tween.tween_property(fade_box, "color", Color(0,0,0,1), fade_time)
-    current_tween.tween_callback(_on_fade_out_complete)
-
-
-func _on_fade_out_complete() -> void:
-    fade_out_complete.emit()
+    interact_prompt.hide()

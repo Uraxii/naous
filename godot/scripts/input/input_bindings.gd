@@ -26,23 +26,31 @@ const CAMERA_ZOOM_OUT := "camera_zoom_out"
 const CAMERA_ZOOM_IN := "camera_zoom_in"
 const CAMERA_ROTATE := "camera_rotate"
 const CHARACTER_ROTATE := "character_rotate"
+const OPEN_INVENTORY := "open_inventory"
 const UI_ACCEPT := "ui_accept"
 const UI_CANCEL := "ui_cancel"
 const UI_TOGGLE := "ui_toggle"
 #endregion
 
+@export_group("Hotbar Actions")
 @export var action_0: Array[InputEvent]
 @export var action_1: Array[InputEvent]
 @export var action_2: Array[InputEvent]
 @export var action_3: Array[InputEvent]
 @export var action_4: Array[InputEvent]
 
+@export_group("Movement")
 @export var move_left: Array[InputEvent]
 @export var move_right: Array[InputEvent]
 @export var move_forward: Array[InputEvent]
 @export var move_back: Array[InputEvent]
+@export var character_rotate: Array[InputEvent]
+
+@export_group("Basic Actions")
 @export var jump: Array[InputEvent]
 @export var interact: Array[InputEvent]
+
+@export_group("Targeting")
 @export var cursor_target: Array[InputEvent]
 @export var next_target: Array[InputEvent]
 @export var previous_target: Array[InputEvent]
@@ -50,6 +58,7 @@ const UI_TOGGLE := "ui_toggle"
 @export var scan_target_left: Array[InputEvent]
 @export var cancel_target: Array[InputEvent]
 
+@export_group("Camera")
 @export var camera_left: Array[InputEvent]
 @export var camera_right: Array[InputEvent]
 @export var camera_up: Array[InputEvent]
@@ -57,8 +66,9 @@ const UI_TOGGLE := "ui_toggle"
 @export var camera_zoom_out: Array[InputEvent]
 @export var camera_zoom_in: Array[InputEvent]
 @export var camera_rotate: Array[InputEvent]
-@export var character_rotate: Array[InputEvent]
 
+@export_group("Menus & UI")
+@export var open_inventory: Array[InputEvent]
 @export var ui_accept: Array[InputEvent]
 @export var ui_cancel: Array[InputEvent]
 @export var ui_toggle: Array[InputEvent]
@@ -91,6 +101,7 @@ func get_binds() -> Dictionary:
         CAMERA_ZOOM_IN: camera_zoom_in,
         CAMERA_ROTATE: camera_rotate,
         CHARACTER_ROTATE: character_rotate,
+        OPEN_INVENTORY: open_inventory,
         UI_ACCEPT: ui_accept,
         UI_CANCEL: ui_cancel,
         UI_TOGGLE: ui_toggle,

@@ -65,6 +65,7 @@ signal chat(sender_name: String, message: String)
 signal ui_accept 
 signal ui_cancel
 signal ui_toggle(state:bool)
+signal open_inventory
 
 signal camera_zoom_in
 signal camera_zoom_out
@@ -77,6 +78,7 @@ signal character_rotate_stop
 signal jump
 signal interact
 signal move(dir: Vector2)
+#endregion Input
 
 #region Targeting
 signal cursor_target
