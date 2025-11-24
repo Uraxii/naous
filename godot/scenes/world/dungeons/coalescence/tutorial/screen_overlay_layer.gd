@@ -18,7 +18,9 @@ func show_screen() -> void:
     fade_box.color.a = 0
 
 
+## Fade the game view in
 func fade_in() -> void:
+    show()
     fade_box.show()
     if is_instance_valid(current_tween) and current_tween.is_running():
         current_tween.stop()
@@ -30,11 +32,14 @@ func fade_in() -> void:
 
 
 func _on_fade_in_complete() -> void:
+    hide()
     fade_box.hide()
     fade_in_complete.emit()
 
 
+## Fade the game view out (to black)
 func fade_out() -> void:
+    show()
     fade_box.show()
     if is_instance_valid(current_tween) and current_tween.is_running():
         current_tween.stop()

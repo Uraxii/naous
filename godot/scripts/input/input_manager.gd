@@ -48,6 +48,8 @@ var was_camera_move_enabled := false
 var jump := false
 var select_location := false
 var mouse_pos_delta := Vector2.ZERO
+var capture_mouse_on_click := true:
+    set = set_mouse_capture
 #endregion
 
 
@@ -68,6 +70,7 @@ func update_binds(new_binds: InputBindings) -> void:
 func _ready() -> void:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
     update_binds(default_binds)
+    Globals.signal_bus.allow_character_control.connect(_on_allow_character_control)
 
 
 func _input(event: InputEvent) -> void:
@@ -77,7 +80,7 @@ func _input(event: InputEvent) -> void:
 
     if was_camera_rotating and not is_camera_rotating:
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-    elif not was_camera_rotating and is_camera_rotating:
+    elif not was_camera_rotating and is_camera_rotating and capture_mouse_on_click:
         Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
     if rotate_char and not was_character_rotating:
@@ -102,4 +105,15 @@ func _input(event: InputEvent) -> void:
         if Input.is_action_just_pressed(action) and event.is_action(action, true):
             lg.debug("Pressed:", action)
             action_map[action].emit()
+
+
+func set_mouse_capture(capture: bool) -> void:
+    capture_mouse_on_click = capture
+    # Ensure the mouse is visible and not actively captured
+    if not capture_mouse_on_click:
+        Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _on_allow_character_control(allow: bool) -> void:
+    set_mouse_capture(allow)
 #endregion

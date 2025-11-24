@@ -41,6 +41,7 @@ enum SEQ {
 }
 
 @onready var player: Player = %Player
+@onready var hud_layer: HUDLayer = %HUDLayer
 @onready var screen_overlay: ScreenOverlayLayer = %ScreenOverlayLayer
 @onready var first_enemy: Archa = %FirstEnemy
 
@@ -56,16 +57,14 @@ func start() -> void:
 #region BEGINNING
 @onready var player_spawn_position: Marker3D = %PlayerSpawnPosition
 @onready var starter_gear_pickup: StarterGearPickup = %StarterGearPickup
-var _original_player_velocity: float
 func beginning() -> void:
     print("STARTING BEGINNING SEQUENCE")
     current_sequence = SEQ.BEGINNING
     # 1. Set camera to black, prevent player control
     screen_overlay.hide_screen()
-    var player_speed_c: StatComponent = player.components.find("Speed")
-    # HACK: Hack to prevent movement
-    _original_player_velocity = player_speed_c.current
-    player_speed_c.current = 0
+    # TODO: Disable ability for player top open inventory until next sequence
+    Globals.signal_bus.allow_character_control.emit(false)
+    
     # 2. Spawn player in starting position
     var player_body_c: Node3D = player.components.find("Body")
     player_body_c.global_position = player_spawn_position.global_position
@@ -75,17 +74,19 @@ func beginning() -> void:
 
 
 func _on_beginning_hud_fade_in() -> void:
+    print("BEGINNING: Hud faded in, re-enabling character control")
     screen_overlay.fade_in_complete.disconnect(_on_beginning_hud_fade_in)
     # 4. Give player control (remove letterbox?)
-    var player_speed_c: StatComponent = player.components.find("Speed")
-    player_speed_c.current = _original_player_velocity
+    Globals.signal_bus.allow_character_control.emit(true)
+    hud_layer.display_objective_hud("Explore the ruins")
+    
     starter_gear_pickup.collected.connect(_on_beginning_gear_pickup)
 
 
 func _on_beginning_gear_pickup() -> void:
-    starter_gear_pickup.collected.disconnect(_on_beginning_gear_pickup)
+    print("BEGINNING: Player picked up starter gear")
     # 5. When player picks up starter gear, trigger next sequence
-    await starter_gear_pickup.collected
+    starter_gear_pickup.collected.disconnect(_on_beginning_gear_pickup)
     trigger_sequence(SEQ.GEAR_TUTORIAL)
 #endregion BEGINNING
 
@@ -113,10 +114,10 @@ func destroy_barricade() -> void:
 @onready var first_enemy_initial: Marker3D = %FirstEnemyInitial
 func first_combat() -> void:
     current_sequence = SEQ.FIRST_COMBAT
+    first_enemy.process_mode = Node.PROCESS_MODE_INHERIT
     # 1. Start "cutscene" where enemy bursts through boulder (potentially damaging the player slightly - this ensures they have health to recover with the upcoming heal ability)
     # 2. Prompt player to target and attack the enemy (just like they did with the boulder)
     # 3. When the enemy is defeated, trigger next sequence
-    pass
 
 
 func heal_tutorial() -> void:

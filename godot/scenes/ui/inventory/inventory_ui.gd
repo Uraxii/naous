@@ -20,7 +20,7 @@ var inventory: Inventory:
 var initial_item_slot: ItemSlot
 var target_item_slot: ItemSlot
 
-var backpack_slots :=  8 * 4 # 8 items per row, 4 rows
+var backpack_slots :=  8 * 2 # Items per row x Num rows
 
 
 func put_item_in_slot(item: Item, item_slot: ItemSlot) -> void:
@@ -130,7 +130,15 @@ func _wire_equipment_slots() -> void:
 
 func _ready() -> void:
     _wire_equipment_slots()
+    _clear_preview_slots_on_load()
     
     for i in range(0, backpack_slots):
         var new_backpack_slot := _create_item_slot()
         backpack_grid.add_child(new_backpack_slot)
+
+
+func _clear_preview_slots_on_load() -> void:
+    var preview_backpack_slots := backpack_grid.get_children()
+    for slot: Control in preview_backpack_slots:
+        slot.queue_free()
+    

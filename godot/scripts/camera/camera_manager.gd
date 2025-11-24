@@ -21,6 +21,7 @@ class_name CameraManager extends SpringArm3D
 var direction := Vector2.ZERO
 var rotate_entity := false
 var menu_is_open := false
+var allow_input_control := true
 
 
 func _ready() -> void:
@@ -30,6 +31,7 @@ func _ready() -> void:
     signals.camera_rotate.connect(_on_camera_rotate)
     signals.character_rotate_start.connect(_on_character_rotate_start)
     signals.character_rotate_stop.connect(_on_character_rotate_stop)
+    signals.allow_character_control.connect(_on_allow_character_control)
 
     # Adjust position to make the server view better.
     # This can get deleted once free cam movement works.
@@ -60,8 +62,13 @@ func get_current_camera() -> Camera3D:
 
 #region Singal Handlers
 func _set_camera_distance(value: float) -> void:
-    camera_distance = clampf(value, min_distance, max_distance)
-    spring_length = camera_distance
+    if allow_input_control:
+        camera_distance = clampf(value, min_distance, max_distance)
+        spring_length = camera_distance
+
+
+func _on_allow_character_control(allow: bool) -> void:
+    allow_input_control = allow
 
 
 func _on_control_entity(entity: Entity) -> void:

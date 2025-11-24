@@ -1,6 +1,7 @@
 class_name HUDLayer
 extends CanvasLayer
 
+@onready var quest_info_container: PanelContainer = %QuestInfoContainer
 @onready var quest_heading: Label = %QuestHeading
 @onready var quest_details: Label = %QuestDetails
 @onready var interact_prompt: PanelContainer = %InteractPrompt
@@ -20,8 +21,14 @@ func lost_interactable(entity: Entity, interactable: InteractableComponent) -> v
         interact_text.text = ""
 
 
+func display_objective_hud(objective_text: String) -> void:
+    quest_details.text = objective_text
+    quest_info_container.show()
+
+
 func _ready() -> void:
     Globals.signal_bus.entity_detected_interactable.connect(detected_interactable)
     Globals.signal_bus.entity_lost_interactable.connect(lost_interactable)
     
     interact_prompt.hide()
+    quest_info_container.hide()

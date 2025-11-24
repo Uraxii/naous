@@ -66,6 +66,7 @@ signal ui_accept
 signal ui_cancel
 signal ui_toggle(state:bool)
 signal open_inventory
+signal allow_character_control(allow: bool)
 
 signal camera_zoom_in
 signal camera_zoom_out

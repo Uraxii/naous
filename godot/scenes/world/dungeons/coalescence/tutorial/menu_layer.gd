@@ -4,26 +4,23 @@ extends CanvasLayer
 @onready var inventory_ui: InventoryUI = %InventoryUI
 @onready var player: Player = %Player
 
-var _original_player_velocity: float
 
 func open_inventory() -> void:
     print("Opening player inventory!")
     # Remove player control
-    var player_speed_c: StatComponent = player.components.find("Speed")
-    # HACK: Hack to prevent movement
-    _original_player_velocity = player_speed_c.current
-    player_speed_c.current = 0
+    Globals.signal_bus.allow_character_control.emit(false)
     # Show inventory panel
     inventory_ui.show()
+    show()
 
 
 func close_inventory() -> void:
     print("Closing player inventory!")
     # Hide inventory panel
+    hide()
     inventory_ui.hide()
     # Return player control
-    var player_speed_c: StatComponent = player.components.find("Speed")
-    player_speed_c.current = _original_player_velocity
+    Globals.signal_bus.allow_character_control.emit(true)
 
 
 func _on_inventory_menu_input() -> void:
@@ -41,3 +38,4 @@ func _ready() -> void:
     Globals.signal_bus.open_inventory.connect(_on_inventory_menu_input)
     
     inventory_ui.hide()
+    

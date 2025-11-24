@@ -30,6 +30,7 @@ var current_gravity: float = 0.0
 var move_velocity := Vector3.ZERO
 var is_jumping: bool = false
 var jump_influence := Vector3.ZERO
+var allow_character_control := true
 #endregion
 
 func set_force_movement(velocity: Vector3) -> void:
@@ -48,13 +49,14 @@ func input_move(direction: Vector2):
 
 
 func jump() -> void:
-    if move_velocity.length() > 0.1:
-        var horizontal_velocity = Vector3(move_velocity.x, 0, move_velocity.z)
-        jump_influence = horizontal_velocity.normalized() * speed
-    else:
-        jump_influence = Vector3.ZERO
-    
-    jump_influence.y = jump_force
+     if allow_character_control:
+        if move_velocity.length() > 0.1:
+            var horizontal_velocity = Vector3(move_velocity.x, 0, move_velocity.z)
+            jump_influence = horizontal_velocity.normalized() * speed
+        else:
+            jump_influence = Vector3.ZERO
+        
+        jump_influence.y = jump_force
 
 
 func apply_gravity(current_velocity: Vector3) -> Vector3:
@@ -114,6 +116,8 @@ func _setup() -> void:
     
     if entity.transform_sync.is_multiplayer_authority() and not signals.jump.is_connected(jump):
         signals.jump.connect(jump)
+    
+    signals.allow_character_control.connect(_on_allow_character_control)
 
 
 func _on_change_control(local_has_control: bool):
@@ -123,13 +127,17 @@ func _on_change_control(local_has_control: bool):
         signals.jump.disconnect(jump)
 
 
+func _on_allow_character_control(allow: bool) -> void:
+    allow_character_control = allow
+
+
 #region Godot Callback Functions
 func _ready() -> void:
     _setup.call_deferred()
 
 
 func _process(_delta: float) -> void:
-    if entity.is_local_owner:
+    if entity.is_local_owner and allow_character_control:
         var dir = input.move
         if input.was_camera_move_enabled and dir.y == 0:
             dir.y = -1
