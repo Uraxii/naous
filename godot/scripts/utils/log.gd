@@ -19,8 +19,8 @@ func warn(...args: Array) -> void:
     var message = " ".join(args.map(str))
     signals.log_new_warning.emit(message)
     print(message)
-    
-    
+
+
 func error(...args: Array) -> void:
     var message = " ".join(args.map(str))
     signals.log_new_error.emit(message)
