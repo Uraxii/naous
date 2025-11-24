@@ -1,7 +1,8 @@
 class_name InstanceApi extends Node
 
 #region Instance Variables
-@onready var lg: Log = Globals.logger
+@onready var save   := Globals.save
+@onready var lg     := Globals.logger
 
 var my_peer_id: int:
     get: return multiplayer.get_unique_id()
@@ -87,7 +88,7 @@ func load_level(level_name: String) -> void:
 
 
 func _spawn_player(
-    authority: int, user_name: String, character_name: String
+    authority: int, user_name: String, character_data: Dictionary
 ) -> void:
     if not multiplayer.is_server():
         return
@@ -103,20 +104,25 @@ func _spawn_player(
         "scene": "res://scenes/entities/player.tscn",
         "authority": authority,
         "id": player_data.id,
-        "active_character": character_name,
+        "character_data": character_data,
     }
-    
+
+    lg.debug(spawn_data)
+
     var entity: Entity = entities.spawn(spawn_data)
     player_data.entity = entity
     connections[authority] = player_data
 
-    lg.debug("%s spawned." % player_data.id)
+    #lg.debug(
+    #    "%s spawned as %s." % [
+    #        player_data.id, player_data.character_data.name])
+
     signals.player_connected.emit(authority)
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func _request_spawn(user_name: String, character_name: String) -> void:
-    _spawn_player(_sender_id, user_name, character_name)
+func _request_spawn(user_name: String, character_data: Dictionary) -> void:
+    _spawn_player(_sender_id, user_name, character_data)
 
 
 func _set_authority(entity: Entity, peer_id: int) -> void:
@@ -143,7 +149,13 @@ func _on_player_disconnected(peer_id: int) -> void:
 
 func _on_connected_ok() -> void:
     # Request server to spawn a character of this player
-    _request_spawn.rpc_id(1, local_player.user, local_player.character_name)
+    var character_data = save.load_character(local_player.character_name)
+
+    _request_spawn.rpc_id(
+        1,
+        local_player.user,
+        character_data)
+
     signals.connected_to_server.emit()
 
 

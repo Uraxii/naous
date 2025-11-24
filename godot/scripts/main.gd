@@ -55,3 +55,5 @@ func _ready() -> void:
         _connect_to_instance(arguments)
     else:
         Globals.views.spawn(CharacterSelectView)
+
+    Globals.views.spawn(ConsoleView)

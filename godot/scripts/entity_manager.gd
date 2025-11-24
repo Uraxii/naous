@@ -50,6 +50,7 @@ func _spawn_custom(data: Dictionary) -> Node:
     if data.get("type") == "player":
         entity.transform_sync.set_multiplayer_authority(data.authority)
         entity.name = data.id
+        entity.display_name = data.character_data.name
         
     if data.has("position"):
         print_debug("Set entity pos to %s" % data.position)

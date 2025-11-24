@@ -20,8 +20,11 @@ signal change_control(is_local: bool)
 @export var target_id := 0:
     set = set_target_id
 
-@onready var entities:  EntityManager   = Globals.entities
-@onready var signals:   SignalBus       = Globals.signal_bus
+@onready var logger     := Globals.logger
+@onready var entities   := Globals.entities
+@onready var signals    := Globals.signal_bus
+
+var display_name := "{ NAME }"
 
 var is_local_owner: bool:
     get: return transform_sync.is_multiplayer_authority()
@@ -65,6 +68,7 @@ func _check_local_authority() -> void:
 
     if is_local:
         signals.control_entity.emit(self)
+        logger.debug("I am %s playing as %s" % [name, display_name])
 
 
 #region AABB Helpers
