@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckmilfobl8y5i"]
+
+[sub_resource type="GDScript" id="GDScript_chtx7"]
+script/source = "class_name LobbyPlayerView extends View
+
+
+@onready var player_label: Label = $HBoxContainer/PlayerLabel
+@onready var character_options: OptionButton = $HBoxContainer/CharacterOptions
+@onready var ready_check: CheckButton = $HBoxContainer/ReadyCheck
+
+
+@rpc
+func set_player(player_name: String) -> void:
+    player_label.text = player_name
+
+
+@rpc
+func set_character(character_name: String) -> void:
+    character_options.text = character_name
+
+
+@rpc
+func _on_ready_toggle(is_toggled: bool) -> void:
+    if ready_check.button_pressed != is_toggled:
+        ready_check.button_pressed = is_toggled
+
+
+func populate_character_options() -> void:
+    pass
+
+
+#region Godot Callback Functions
+func _ready() -> void:
+    ready_check.toggled.connect(_on_ready_toggle)
+    populate_character_options()
+#endregion
+"
+
+[node name="LobbyPlayerView" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("GDScript_chtx7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "{ PLAYER }"
+
+[node name="CharacterOptions" type="OptionButton" parent="HBoxContainer"]
+layout_mode = 2
+item_count = 1
+popup/item_0/text = "NO CHARACTERS"
+popup/item_0/id = 0
+
+[node name="ReadyCheck" type="CheckButton" parent="HBoxContainer"]
+layout_mode = 2
+disabled = true

@@ -12,22 +12,6 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_xqtgq")
 
-[node name="LoadWorld" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -70.0
-offset_top = -48.0
-offset_right = 70.0
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Enter"
-
 [node name="DeleteCharacter" type="Button" parent="."]
 unique_name_in_owner = true
 top_level = true
@@ -68,3 +52,51 @@ vertical_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 text = "New Character"
+
+[node name="ConnectionContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -101.0
+offset_right = 111.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConnectionContainer"]
+layout_mode = 2
+
+[node name="ServerAddress" type="LineEdit" parent="ConnectionContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+placeholder_text = "IP Address"
+
+[node name="ServerPort" type="LineEdit" parent="ConnectionContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Port #"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ConnectionContainer"]
+layout_mode = 2
+
+[node name="Username" type="LineEdit" parent="ConnectionContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "User Name"
+
+[node name="Password" type="LineEdit" parent="ConnectionContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Password"
+secret = true
+
+[node name="LoadWorld" type="Button" parent="ConnectionContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enter"

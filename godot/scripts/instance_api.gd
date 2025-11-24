@@ -19,6 +19,8 @@ var config: InstanceConfig = preload(
     "res://resources/default_instance_config.tres")
 
 var connections: Dictionary[int, PlayerData] = {}
+var local_player := PlayerData.new()
+
 
 # Don't use this outside of RPC functions!
 var _sender_id: int:
@@ -84,7 +86,9 @@ func load_level(level_name: String) -> void:
         add_child(level_node)
 
 
-func _spawn_player(authority: int, user_name: String, character_name: String) -> void:
+func _spawn_player(
+    authority: int, user_name: String, character_name: String
+) -> void:
     if not multiplayer.is_server():
         return
 
@@ -92,6 +96,7 @@ func _spawn_player(authority: int, user_name: String, character_name: String) ->
 
     if connections.has(authority):
         return
+
     var player_data = PlayerData.new(user_name, authority)
     var spawn_data = {
         "type": "player",
@@ -107,6 +112,7 @@ func _spawn_player(authority: int, user_name: String, character_name: String) ->
 
     lg.debug("%s spawned." % player_data.id)
     signals.player_connected.emit(authority)
+
 
 @rpc("any_peer", "call_remote", "reliable")
 func _request_spawn(user_name: String, character_name: String) -> void:
@@ -137,8 +143,9 @@ func _on_player_disconnected(peer_id: int) -> void:
 
 func _on_connected_ok() -> void:
     # Request server to spawn a character of this player
-    _request_spawn.rpc_id(1, Globals.username, "Nimble")
+    _request_spawn.rpc_id(1, local_player.user, local_player.character_name)
     signals.connected_to_server.emit()
+
 
 func _on_connected_fail() -> void:
     signals.log_new_error.emit("Failed to connect.")
