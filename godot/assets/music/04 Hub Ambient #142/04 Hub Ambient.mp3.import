@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyakv35t8dfkg"
+path="res://.godot/imported/04 Hub Ambient.mp3-8205ac8ca91ba959dc54b473a094850c.mp3str"
+
+[deps]
+
+source_file="res://assets/music/04 Hub Ambient #142/04 Hub Ambient.mp3"
+dest_files=["res://.godot/imported/04 Hub Ambient.mp3-8205ac8ca91ba959dc54b473a094850c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
