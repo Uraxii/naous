@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=3 uid="uid://cx54j3yuqwncx"]
+[gd_scene load_steps=24 format=3 uid="uid://cx54j3yuqwncx"]
 
+[ext_resource type="Script" uid="uid://nwrhhefs20xd" path="res://scenes/world/dungeons/coalescence/bubbles/entry_path.gd" id="1_1esqk"]
 [ext_resource type="Material" uid="uid://bdqiuk1jp6gfi" path="res://assets/materials/ground - rocky - huge.tres" id="1_ej2el"]
 [ext_resource type="PackedScene" uid="uid://cdrx1jc5vlcfw" path="res://scenes/world/dungeons/coalescence/structures/building.tscn" id="1_t8rem"]
 [ext_resource type="PackedScene" uid="uid://1ylgy66wcqit" path="res://assets/prefabs/sand_dunes.tscn" id="2_6jvcw"]
@@ -42,6 +43,7 @@ size = Vector3(100, 1, 100)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_t8rem"]
 
 [node name="EntryPath" type="Node3D"]
+script = ExtResource("1_1esqk")
 
 [node name="Occluder" type="OccluderInstance3D" parent="."]
 occluder = SubResource("ArrayOccluder3D_0dynh")
@@ -318,6 +320,7 @@ transform = Transform3D(-0.92485833, 0, -0.38031188, 0, 1, 0, 0.38031188, 0, -0.
 transform = Transform3D(-0.9147552, 0, -0.4040084, 0, 1, 0, 0.4040084, 0, -0.9147552, 25.225227, 7.6293945e-06, -23.47966)
 
 [node name="ArchedGateway" parent="." instance=ExtResource("2_mlaoi")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -41.37599)
 
 [node name="EchoHint" parent="." instance=ExtResource("3_1dg0r")]

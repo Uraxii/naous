@@ -8,6 +8,7 @@ signal removed_item(item: Item)
 const ITEM_SLOT_ICON: PackedScene = preload("uid://cf10alpcpeo8n")
 
 @onready var item_icon: TextureRect = %ItemSlotIcon
+var set_inventory_item_callback: Callable = Callable()
 
 var item: Item:
     set = set_item
@@ -28,9 +29,13 @@ func set_item(new_item: Item) -> void:
     if new_item == null:
         item = null
         item_icon.texture = null
+        if set_inventory_item_callback.is_valid():
+            set_inventory_item_callback.call(null)
     else:
         item = new_item
         item_icon.texture = item.icon
+        if set_inventory_item_callback.is_valid():
+            set_inventory_item_callback.call(item)
 
 
 func remove_item() -> Item:

@@ -25,7 +25,6 @@ var backpack_slots :=  8 * 2 # Items per row x Num rows
 
 func put_item_in_slot(item: Item, item_slot: ItemSlot) -> void:
     item_slot.item = item
-    # TODO: Update inventory item
 
 
 func swap_slot_items(initial_slot: ItemSlot, target_slot: ItemSlot) -> void:
@@ -34,7 +33,7 @@ func swap_slot_items(initial_slot: ItemSlot, target_slot: ItemSlot) -> void:
     put_item_in_slot(initial_item, target_slot)
 
 
-func set_inventory(new_inventory) -> void:
+func set_inventory(new_inventory: Inventory) -> void:
     inventory = new_inventory
         
     if inventory != null:
@@ -50,7 +49,7 @@ func set_inventory(new_inventory) -> void:
         var echo_slots := echoes_container.get_children()
         for i in range(0, echo_slots.size()):
             var echo_slot: ItemSlot = echo_slots.get(i)
-            wire_slot_signals(echo_slot)
+            wire_slot_signals(echo_slot, inventory.set_equipped_echo_slot.bind(i))
             echo_slot.set_acceptable_item_callback(
                 slot_can_accept_item.bind(EchoItem)
             )
@@ -58,11 +57,19 @@ func set_inventory(new_inventory) -> void:
             if inventory.equipment.echoes.get(i) != null:
                 echo_slot.set_item(inventory.equipment.echoes.get(i))
         
+        # Connect signals for setting equipment slots
+        _wire_equipment_slots()
+        
         # Set backpack slots
         for i in range(0, inventory.backpack.size()):
-            if inventory.backpack[i] != null:
-                var backpack_item_slot: ItemSlot = backpack_grid.get_child(i)
-                backpack_item_slot.set_item(inventory.backpack[i])
+            var backpack_item_slot: ItemSlot = backpack_grid.get_child(i)
+            backpack_item_slot.set_item(inventory.backpack[i])
+            wire_slot_signals(
+                backpack_item_slot, inventory.set_backpack_slot.bind(i))
+        
+        inventory.equipment_updated.connect(_inventory_equipment_updated)
+        inventory.equipped_echoes_updated.connect(_equipped_echoes_updated)
+        inventory.backpack_updated.connect(_inventory_backpack_updated)
 
 
 func slot_can_accept_item(item: Item, item_type: Variant) -> bool:
@@ -94,42 +101,85 @@ func handle_item_slot_interacted(item_slot: ItemSlot) -> void:
     initial_item_slot = item_slot
 
 
-func wire_slot_signals(item_slot: ItemSlot) -> void:
+func wire_slot_signals(item_slot: ItemSlot, setter_callable: Callable) -> void:
     item_slot.selected.connect(handle_item_slot_selected.bind(item_slot))
     item_slot.received_item.connect(handle_received_item_in_slot.bind(item_slot))
+    if setter_callable.is_valid():
+        item_slot.set_inventory_item_callback = setter_callable
     item_slot.interacted.connect(handle_item_slot_interacted.bind(item_slot))
 
 
 func _create_item_slot() -> ItemSlot:
     var new_item_slot: ItemSlot = ITEM_SLOT.instantiate()
-    #new_item_slot.set_acceptable_item_callback(slot_can_accept_item)
-    wire_slot_signals(new_item_slot)
     return new_item_slot
 
 
+func _initialize_equipment_slots() -> void:
+    mask_slot.set_acceptable_item_callback(
+        slot_can_accept_item.bind(MaskItem))
+    
+    weapon_left_slot.set_acceptable_item_callback(
+        slot_can_accept_item.bind(WeaponItem))
+    
+    weapon_right_slot.set_acceptable_item_callback(
+        slot_can_accept_item.bind(WeaponItem))
+    
+    shoulders_slot.set_acceptable_item_callback(
+        slot_can_accept_item.bind(ShoulderItem))
+    
+    torso_slot.set_acceptable_item_callback(
+        slot_can_accept_item.bind(TorsoItem))
+    
+    legs_slot.set_acceptable_item_callback(
+        slot_can_accept_item.bind(LegsItem))
+
+
 func _wire_equipment_slots() -> void:
-    mask_slot.set_acceptable_item_callback(slot_can_accept_item.bind(MaskItem))
-    wire_slot_signals(mask_slot)
-    
-    weapon_left_slot.set_acceptable_item_callback(slot_can_accept_item.bind(WeaponItem))
-    wire_slot_signals(weapon_left_slot)
-    
-    weapon_right_slot.set_acceptable_item_callback(slot_can_accept_item.bind(WeaponItem))
-    wire_slot_signals(weapon_right_slot)
-    
-    # TODO: Update these when new item types exist. These can effectively take anything
-    shoulders_slot.set_acceptable_item_callback(slot_can_accept_item.bind(ShoulderItem))
-    wire_slot_signals(shoulders_slot)
-    
-    torso_slot.set_acceptable_item_callback(slot_can_accept_item.bind(TorsoItem))
-    wire_slot_signals(torso_slot)
-    
-    legs_slot.set_acceptable_item_callback(slot_can_accept_item.bind(LegsItem))
-    wire_slot_signals(legs_slot)
+    wire_slot_signals(mask_slot, inventory.set_equipped_mask)
+    wire_slot_signals(weapon_left_slot, inventory.set_equipped_weapon_left)
+    wire_slot_signals(weapon_right_slot, inventory.set_equipped_weapon_right)
+    wire_slot_signals(shoulders_slot, inventory.set_equipped_shoulders)
+    wire_slot_signals(torso_slot, inventory.set_equipped_torso)
+    wire_slot_signals(legs_slot, inventory.set_equipped_legs)
+
+
+func sync_equipment_to_view(equipment: Equipment) -> void:
+    mask_slot.set_item(equipment.mask)
+    weapon_left_slot.set_item(equipment.weapon_left)
+    weapon_right_slot.set_item(equipment.weapon_right)
+    torso_slot.set_item(equipment.torso)
+    shoulders_slot.set_item(equipment.shoulders)
+    legs_slot.set_item(equipment.legs)
+
+
+func sync_equipped_echoes_to_view(echoes: Array[EchoItem]) -> void:
+    var echo_item_slots := echoes_container.get_children()
+    for i in range(0, echo_item_slots.size()):
+        var echo_slot: ItemSlot = echo_item_slots[i]
+        echo_slot.set_item(echoes[i])
+
+
+func sync_backpack_to_view(backpack: Array[Item]) -> void:
+    var backpack_item_slots := backpack_grid.get_children()
+    for i in range(0, backpack_item_slots.size()):
+        var backpack_slot: ItemSlot = backpack_item_slots[i]
+        backpack_slot.set_item(backpack[i])
+
+
+func _inventory_equipment_updated(equipment: Equipment) -> void:
+    sync_equipment_to_view(equipment)
+
+
+func _equipped_echoes_updated(echoes: Array[EchoItem]) -> void:
+    sync_equipped_echoes_to_view(echoes)
+
+
+func _inventory_backpack_updated(backpack: Array[Item]) -> void:
+    sync_backpack_to_view(backpack)
 
 
 func _ready() -> void:
-    _wire_equipment_slots()
+    _initialize_equipment_slots()
     _clear_preview_slots_on_load()
     
     for i in range(0, backpack_slots):
@@ -140,5 +190,5 @@ func _ready() -> void:
 func _clear_preview_slots_on_load() -> void:
     var preview_backpack_slots := backpack_grid.get_children()
     for slot: Control in preview_backpack_slots:
+        backpack_grid.remove_child(slot)
         slot.queue_free()
-    

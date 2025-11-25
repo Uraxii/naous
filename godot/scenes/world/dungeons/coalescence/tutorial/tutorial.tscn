@@ -430,6 +430,7 @@ unique_name_in_owner = true
 script = ExtResource("8_8cm00")
 
 [node name="EntryPath" parent="." instance=ExtResource("8_fx6br")]
+unique_name_in_owner = true
 
 [node name="Plaza" parent="." instance=ExtResource("9_otwgf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -172.40681)

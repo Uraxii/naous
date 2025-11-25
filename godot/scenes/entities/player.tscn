@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=34 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
+[ext_resource type="Script" uid="uid://cq7g2ygkwm0yr" path="res://scripts/entities/components/component_attack.gd" id="4_yv3je"]
 [ext_resource type="PackedScene" uid="uid://dqgvbdfsa0nll" path="res://scenes/spells/hurt_caster.tscn" id="5_5ki56"]
 [ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
 [ext_resource type="PackedScene" uid="uid://wv8s83v0gmat" path="res://scenes/spells/hurt_target.tscn" id="7_yr3on"]
@@ -14,9 +15,11 @@
 [ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="10_qc1tv"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="11_b4o2o"]
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="11_cwche"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
 [ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="12_spk56"]
 [ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="12_yr3on"]
+[ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="12_yv3je"]
 [ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="13_2ngu4"]
 [ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="14_jv5ih"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
@@ -47,8 +50,15 @@ properties/0/path = NodePath(".:id")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
+[sub_resource type="Resource" id="Resource_3hm5d"]
+resource_local_to_scene = true
+script = ExtResource("12_yv3je")
+metadata/_custom_type_script = "uid://hqemwssvkqh4"
+
 [sub_resource type="Resource" id="Resource_d745t"]
+resource_local_to_scene = true
 script = ExtResource("10_n36er")
+equipment = SubResource("Resource_3hm5d")
 metadata/_custom_type_script = "uid://sjk1ggbjspjx"
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
@@ -57,9 +67,10 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("components", "interaction", "targeting")]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("components", "inventory", "interaction", "targeting")]
 script = ExtResource("1_yr3on")
 components = NodePath("Components")
+inventory = NodePath("Components/Inventory")
 interaction = NodePath("Components/Interaction")
 targeting = NodePath("Components/TargetingSystem")
 
@@ -76,6 +87,10 @@ metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 [node name="Components" type="Node" parent="." node_paths=PackedStringArray("entity")]
 script = ExtResource("3_r5ib0")
 entity = NodePath("..")
+
+[node name="Attack" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
+script = ExtResource("4_yv3je")
+entity = NodePath("../..")
 
 [node name="Spellbook" type="Node" parent="Components"]
 script = ExtResource("4_qa3vu")

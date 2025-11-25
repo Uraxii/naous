@@ -1,6 +1,9 @@
 class_name MenuLayer
 extends CanvasLayer
 
+signal inventory_opened
+signal inventory_closed
+
 @onready var inventory_ui: InventoryUI = %InventoryUI
 @onready var player: Player = %Player
 
@@ -12,6 +15,7 @@ func open_inventory() -> void:
     # Show inventory panel
     inventory_ui.show()
     show()
+    inventory_opened.emit()
 
 
 func close_inventory() -> void:
@@ -21,6 +25,7 @@ func close_inventory() -> void:
     inventory_ui.hide()
     # Return player control
     Globals.signal_bus.allow_character_control.emit(true)
+    inventory_closed.emit()
 
 
 func _on_inventory_menu_input() -> void:
@@ -37,5 +42,6 @@ func _inventory_is_open() -> bool:
 func _ready() -> void:
     Globals.signal_bus.open_inventory.connect(_on_inventory_menu_input)
     
+    inventory_ui.set_inventory.call_deferred(player.inventory.inventory)
     inventory_ui.hide()
     

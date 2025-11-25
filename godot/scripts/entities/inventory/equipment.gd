@@ -17,5 +17,10 @@ var EQUIP_MAP := {
 @export var legs: LegsItem
 @export var shoulders: ShoulderItem
 
-const MAX_ECHOES := 8
+const MAX_ECHOES := 4
 @export var echoes: Array[EchoItem]
+
+
+func _init() -> void:
+    if echoes.size() < MAX_ECHOES:
+        echoes.resize(MAX_ECHOES)

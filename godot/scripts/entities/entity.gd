@@ -12,7 +12,7 @@ signal change_control(is_local: bool)
 @export var move:         ComponentMove
 @export var body:         Node3D
 @export var spellbook:    ComponentSpellbook
-@export var inventory:    Node
+@export var inventory:    InventoryComponent
 @export var interaction:  InteractionComponent
 @export var targeting:    TargetingSystem
 @export_category("Runtime Values")

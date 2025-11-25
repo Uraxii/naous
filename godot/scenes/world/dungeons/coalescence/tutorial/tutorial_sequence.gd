@@ -43,6 +43,7 @@ enum SEQ {
 @onready var player: Player = %Player
 @onready var hud_layer: HUDLayer = %HUDLayer
 @onready var screen_overlay: ScreenOverlayLayer = %ScreenOverlayLayer
+@onready var menu_layer: MenuLayer = %MenuLayer
 @onready var first_enemy: Archa = %FirstEnemy
 
 var current_sequence: SEQ:
@@ -91,36 +92,110 @@ func _on_beginning_gear_pickup() -> void:
 #endregion BEGINNING
 
 
+#region GEAR TUTORIAL
+const STARTER_MASK: MaskItem = preload("uid://dk0erx4ii1d1l")
+const STARTER_ECHOES: Array[EchoItem] = [
+    preload("uid://iyvy1qavlxb7"),
+    preload("uid://c1nk8bluat4xw"),
+]
+const STARTER_WEAPON: WeaponItem = preload("uid://b7eyqhnr5cqgo")
 func gear_tutorial() -> void:
     print("STARTING GEAR TUTORIAL SEQUENCE")
     current_sequence = SEQ.GEAR_TUTORIAL
     # 1. Open inventory/equipment view
+    hud_layer.display_objective_hud("Open Inventory")
+    menu_layer.inventory_opened.connect(_on_inventory_opened_with_starter_gear)
+    # 1a. Put the items in the player's inventory
+    player.inventory.inventory.set_backpack_slot(STARTER_MASK, 0)
+    player.inventory.inventory.set_backpack_slot(STARTER_WEAPON, 1)
+    player.inventory.inventory.set_backpack_slot(STARTER_ECHOES[0], 2)
+    player.inventory.inventory.set_backpack_slot(STARTER_ECHOES[1], 3)
+
+
+func _on_inventory_opened_with_starter_gear() -> void:
     # 2. Display items that have been "picked up" (Echoes)
+    # TODO: Add some tutorial overlays or toast messages or something
     # 3. Display tutorial UI teaching how to equip the Echoes
-    # 4. Prompt to close inventory
-    # 4a. (optional) Show newly equipped abilities in HUD
+    # TODO: Show how to equip the items
+    player.inventory.inventory.equipment_updated.connect(
+        _on_inventory_updated_with_starter_gear)
+    player.inventory.inventory.equipped_echoes_updated.connect(
+        _on_equipped_echoes_updated_with_starter_gear)
+
+
+func _on_inventory_updated_with_starter_gear(_equipment: Equipment) -> void:
+    _validate_starter_gear_equipped()
+
+func _on_equipped_echoes_updated_with_starter_gear(_echoes: Array[EchoItem]) -> void:
+    _validate_starter_gear_equipped()
+
+
+func _validate_starter_gear_equipped() -> void:
+    # Confirm the gear is equipped
+    var player_equipment: Equipment = player.inventory.inventory.equipment
+    if player_equipment.mask == STARTER_MASK and\
+    (
+        player_equipment.weapon_left == STARTER_WEAPON or player_equipment.weapon_right == STARTER_WEAPON
+    ) and\
+    player_equipment.echoes[0] in STARTER_ECHOES and\
+    player_equipment.echoes[1] in STARTER_ECHOES:
+        # 4. Prompt to close inventory
+        Globals.logger.debug("Player equipped all the gear")
+        # TODO: Use the overlay and such mentioned above
+        menu_layer.inventory_closed.connect(_on_inventory_closed_with_starter_gear)
+
+
+func _on_inventory_closed_with_starter_gear() -> void:
+    Globals.logger.debug("Player closed inventory after equipping starter gear")
+    # 4a. (optional) Show newly equipped abilities in HUD (Hotbar)
+    # TODO: Use some overlay/highlight UI to show the abilities in the hotbar
     # 5. When inventory/UI is resolved, trigger next sequence
-    pass
+    player.inventory.inventory.equipment_updated.disconnect(
+        _on_inventory_updated_with_starter_gear)
+    player.inventory.inventory.equipped_echoes_updated.disconnect(
+        _on_equipped_echoes_updated_with_starter_gear)
+    menu_layer.inventory_closed.disconnect(_on_inventory_closed_with_starter_gear)
+    menu_layer.inventory_opened.disconnect(_on_inventory_opened_with_starter_gear)
+    trigger_sequence(SEQ.DESTROY_BARRICADE)
+#endregion GEAR TUTORIAL
 
 
+#region DESTROY BARRICADE
+@onready var entry_path: EntryPath = %EntryPath
 func destroy_barricade() -> void:
+    Globals.logger.debug("STARTING DESTROY BARRICADE SEQUENCE")
     current_sequence = SEQ.DESTROY_BARRICADE
     # 1. Show/Highlight the boulder blocking the path forward
+    # TODO: Camera cutscene? Remove player control briefly and point towards the boulder (or pan entirely over to show it)
     # 2. Prompt player to destroy the boulder using their new attack ability
+    hud_layer.display_objective_hud("Destroy the boulder")
     # 3. When the boulder reaches low health, trigger next sequence
-    pass
+    entry_path.arched_gateway.rubble_entity.health.change.connect(
+        _on_barricade_health_changed)
 
 
+func _on_barricade_health_changed(new: float, _old: float) -> void:
+    var percentage_health := new / entry_path.arched_gateway.rubble_entity.health.max_value
+    if percentage_health < 0.2: # Less than 20% health
+        trigger_sequence(SEQ.FIRST_COMBAT)
+#endregion DESTROY BARRICADE
+
+
+#region FIRST COMBAT
 @onready var first_enemy_initial: Marker3D = %FirstEnemyInitial
 func first_combat() -> void:
+    Globals.logger.debug("STARTING FIRST COMBAT SEQUENCE")
     current_sequence = SEQ.FIRST_COMBAT
     first_enemy.process_mode = Node.PROCESS_MODE_INHERIT
     # 1. Start "cutscene" where enemy bursts through boulder (potentially damaging the player slightly - this ensures they have health to recover with the upcoming heal ability)
     # 2. Prompt player to target and attack the enemy (just like they did with the boulder)
     # 3. When the enemy is defeated, trigger next sequence
+#endregion FIRST COMBAT
 
 
+#region HEAL TUTORIAL
 func heal_tutorial() -> void:
+    Globals.logger.debug("STARTING HEAL SEQUENCE")
     current_sequence = SEQ.HEAL_TUTORIAL
     # 1. Enemy will drop a new Echo for self-healing
     # 2. Prompt player to pick up Echo
@@ -128,9 +203,12 @@ func heal_tutorial() -> void:
     # 4. Once equipped, prompt player to use self-heal to recover health
     # 5. Once health is restored, trigger next sequence
     pass
+#endregion HEAL TUTORIAL
 
 
+#region EXPLORE PLAZA
 func explore_plaza() -> void:
+    Globals.logger.debug("STARTING EXPLORE PLAZA SEQUENCE")
     current_sequence = SEQ.EXPLORE_PLAZA
     # 1. Remove collision preventing player from progressing as necessary (maybe it looks like the healing burst applies an impulse to the boulder rubble that finishes moving it out of the way)
     # 2. Show the open plaza with roaming enemies and shiny pick-up items
@@ -140,17 +218,23 @@ func explore_plaza() -> void:
     # 5. Once inventory is open, show Mask equip tutorial explaining what they do
     # 6. When all enemies are defeated and Masks are collected, trigger next sequence
     pass
+#endregion EXPLORE PLAZA
 
 
+#region MINIBOSS FIGHT
 func miniboss_fight() -> void:
+    Globals.logger.debug("STARTING MINIBOSS SEQUENCE")
     current_sequence = SEQ.MINIBOSS_FIGHT
     # 1. Show "cutscene" of miniboss entering the area
     # 2. Prompt player to defeat the miniboss
     # 3. When the enemy is defeated, trigger next sequence
     pass
+#endregion MINIBOSS FIGHT
 
 
+#region DRAW TUTORIAL
 func draw_tutorial() -> void:
+    Globals.logger.debug("STARTING DRAW SEQUENCE")
     current_sequence = SEQ.DRAW_TUTORIAL
     # 1. The defeated miniboss drops a new Echo (with a higher Draw cost)
     # 2. Prompt player to open the inventory
@@ -158,9 +242,12 @@ func draw_tutorial() -> void:
     # 4. Prompt user to adjust Echoes as desired and then close inventory
     # 5. When inventory is closed, trigger next sequence
     pass
+#endregion DRAW TUTORIAL
 
 
+#region HORDE FIGHT
 func horde_fight() -> void:
+    Globals.logger.debug("STARTING HORDE SEQUENCE")
     current_sequence = SEQ.HORDE_FIGHT
     # 1. Show "cutscene" of roars and rumbles
     # 2. Spawn some enemies and have them jump into the scene
@@ -168,18 +255,24 @@ func horde_fight() -> void:
     # 4. Prompt player to fend off the horde
     # 5. After 3 enemies are defeated, trigger next sequence
     pass
+#endregion HORDE FIGHT
 
 
+#region BACKUP ARRIVES
 func backup_arrives() -> void:
+    Globals.logger.debug("STARTING BACKUP SEQUENCE")
     current_sequence = SEQ.BACKUP_ARRIVES
     # 1. Show "cutscene" of allies jumping in to help
     # 2. Startup "allies" as static characters that attack enemies and support the player
     # 3. Prompt player to continue fending off the horde
     # When several more enemies are defeated or after X time has passed, trigger next sequence
     pass
+#endregion BACKUP ARRIVES
 
 
+#region ESCAPE
 func escape() -> void:
+    Globals.logger.debug("STARTING ESCAPE SEQUENCE")
     current_sequence = SEQ.ESCAPE
     # 1. Show "cutscene" of large boss enemy smashing into the scene and defeating some allies
     # 2. Prompt player to retreat and find help
@@ -187,6 +280,7 @@ func escape() -> void:
     # 4. Activate level transition collision at the exit of the area
     # 5. When player reaches level transition, let level transition occur and resolve sequence
     pass
+#endregion ESCAPE
 #endregion Sequence Functions
 
 

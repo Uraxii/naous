@@ -6,7 +6,7 @@ signal fade_out_complete
 
 @onready var fade_box: ColorRect = %FadeBox
 
-const FADE_DURATION: float = 4
+const FADE_DURATION: float = 0.1 # FIXME: Set this this to ~4, using 0.1 for testing
 var current_tween: Tween
 
 
