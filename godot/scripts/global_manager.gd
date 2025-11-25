@@ -6,6 +6,7 @@ const SERVER_ID := 1
 
 var launch_args:    Dictionary
 var signal_bus:     SignalBus
+var save:           SaveManager
 var packets:        PacketManager
 var logger:         Log
 var input:          InputManager
@@ -18,7 +19,7 @@ var camera:         CameraManager
 var casting:        CastManager
 var http:           HTTPManager
 var websocket:      WebSocketManager
-var username: 		String
+
 
 func new_global_script(node_name: String, type: GDScript) -> Node:
     var global = type.new()

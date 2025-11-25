@@ -109,3 +109,7 @@ signal entity_lost_interactable(entity: Entity, interactable: InteractableCompon
 signal target_entered_screen(target: Targetable)
 signal target_exited_screen(target: Targetable)
 #endregion
+
+#region Character Select
+signal selected_character(character_data: Dictionary)
+#endregion

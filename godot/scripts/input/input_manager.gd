@@ -78,6 +78,7 @@ func _input(event: InputEvent) -> void:
     var rotate_char =  Input.is_action_pressed(InputBindings.CHARACTER_ROTATE)
     var is_camera_rotating = rotate_cam or rotate_char
 
+    # TODO: Figure out way to only do this when playing.
     if was_camera_rotating and not is_camera_rotating:
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
     elif not was_camera_rotating and is_camera_rotating and capture_mouse_on_click:
@@ -103,7 +104,7 @@ func _input(event: InputEvent) -> void:
     #       - eg. LT + Face buttons for a set of actions, RT + face buttons for another set
     for action in action_map.keys():
         if Input.is_action_just_pressed(action) and event.is_action(action, true):
-            lg.debug("Pressed:", action)
+            #lg.debug("Pressed:", action)
             action_map[action].emit()
 
 

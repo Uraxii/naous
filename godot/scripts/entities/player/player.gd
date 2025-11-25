@@ -1,8 +1,10 @@
 class_name Player extends Entity
 
+@onready var is_client: bool = transform_sync.is_multiplayer_authority()
+
 var character_data: Dictionary
 var active_character: String = ""
-@onready var is_client: bool = transform_sync.is_multiplayer_authority()
+
 
 func _ready() -> void:
     super._ready()
