@@ -59,10 +59,6 @@ func _on_load_pressed() -> void:
         return
 
     log.info("Entering world as " + current_character.get("name"))
-    var local_player = InstanceAPI.local_player
-    local_player.character_name = current_character.get("name")
-    local_player.user = %Username.text
-    InstanceAPI.start_client(%ServerAddress.text, int($%ServerPort.text))
 
 
 func _on_selected_character(character_data: Dictionary) -> void:

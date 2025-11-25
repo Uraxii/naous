@@ -6,14 +6,10 @@ class_name Main extends Node
 
 func _connect_to_instance(args: Dictionary) -> void:
     print("Connecting to instance server...")
-    InstanceAPI.start_client("localhost", 9000)
 
 
 func _initialize_server(args: Dictionary) -> void:
     print("Initializing as headless server...")
-
-    var instance_cfg := InstanceConfig.new()
-    InstanceAPI.start_server(instance_cfg)
 
 
 func _ready() -> void:
