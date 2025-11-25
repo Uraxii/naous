@@ -57,7 +57,7 @@ func start() -> void:
 #region Sequence Functions
 #region BEGINNING
 @onready var player_spawn_position: Marker3D = %PlayerSpawnPosition
-@onready var starter_gear_pickup: StarterGearPickup = %StarterGearPickup
+@onready var starter_gear_pickup: LootPickup = %StarterGearPickup
 func beginning() -> void:
     print("STARTING BEGINNING SEQUENCE")
     current_sequence = SEQ.BEGINNING
@@ -88,6 +88,7 @@ func _on_beginning_gear_pickup() -> void:
     print("BEGINNING: Player picked up starter gear")
     # 5. When player picks up starter gear, trigger next sequence
     starter_gear_pickup.collected.disconnect(_on_beginning_gear_pickup)
+    starter_gear_pickup.queue_free()
     trigger_sequence(SEQ.GEAR_TUTORIAL)
 #endregion BEGINNING
 
@@ -106,10 +107,10 @@ func gear_tutorial() -> void:
     hud_layer.display_objective_hud("Open Inventory")
     menu_layer.inventory_opened.connect(_on_inventory_opened_with_starter_gear)
     # 1a. Put the items in the player's inventory
-    player.inventory.inventory.set_backpack_slot(STARTER_MASK, 0)
-    player.inventory.inventory.set_backpack_slot(STARTER_WEAPON, 1)
-    player.inventory.inventory.set_backpack_slot(STARTER_ECHOES[0], 2)
-    player.inventory.inventory.set_backpack_slot(STARTER_ECHOES[1], 3)
+    player.inventory.inventory.add_to_backpack(STARTER_MASK)
+    player.inventory.inventory.add_to_backpack(STARTER_WEAPON)
+    player.inventory.inventory.add_to_backpack(STARTER_ECHOES[0])
+    player.inventory.inventory.add_to_backpack(STARTER_ECHOES[1])
 
 
 func _on_inventory_opened_with_starter_gear() -> void:
@@ -206,6 +207,7 @@ func _play_first_combat_enemy_reveal() -> void:
 const FIRST_ENEMY_HOLD_TIME: float = 3.0
 func _first_enemy_reached_target_position() -> void:
     # Let the enemy hold in position for a moment for DRAMATIC EFFECT
+    player.health.current = player.health.current * 0.8
     get_tree().create_timer(FIRST_ENEMY_HOLD_TIME).timeout.connect(
         _after_first_enemy_hold)
 
@@ -218,8 +220,11 @@ func _after_first_enemy_hold() -> void:
     first_enemy.defeated.connect(_on_first_enemy_defeated)
 
 
+@onready var heal_echo_pickup: LootPickup = %HealEchoPickup
 func _on_first_enemy_defeated() -> void:
     first_enemy.defeated.disconnect(_on_first_enemy_defeated)
+    # Move the heal pickup to where the enemy was (ie. it "dropped" on defeat)
+    heal_echo_pickup.global_position = first_enemy.body.global_position
     first_enemy.queue_free()
     # 3. When the enemy is defeated, trigger next sequence
     trigger_sequence(SEQ.HEAL_TUTORIAL)
@@ -227,18 +232,28 @@ func _on_first_enemy_defeated() -> void:
 
 
 #region HEAL TUTORIAL
+const HEAL_ECHO = preload("uid://dqwvsj4f1p0hd")
 func heal_tutorial() -> void:
     Globals.logger.debug("STARTING HEAL SEQUENCE")
     current_sequence = SEQ.HEAL_TUTORIAL
-    # 1. Enemy will drop a new Echo for self-healing
+    # 1. Enemy dropped a new Echo for self-healing
     # 2. Prompt player to pick up Echo
+    hud_layer.display_objective_hud("Pickup Item")
+    heal_echo_pickup.collected.connect(_on_heal_pickup)
+
+
+func _on_heal_pickup() -> void:
+    heal_echo_pickup.collected.disconnect(_on_heal_pickup)
+    heal_echo_pickup.queue_free()
     # 3. Prompt player to open inventory to equip it (or maybe we auto-equip it?)
     # 4. Once equipped, prompt player to use self-heal to recover health
+    hud_layer.display_objective_hud("Equip Echo and Heal")
+    player.health.change.connect(_on_player_healed)
+    player.inventory.inventory.add_to_backpack(HEAL_ECHO)
+
+
+func _on_player_healed(_new: float, _old: float) -> void:
     # 5. Once health is restored, trigger next sequence
-    pass
-
-
-func _on_player_healed() -> void:
     trigger_sequence(SEQ.EXPLORE_PLAZA)
 #endregion HEAL TUTORIAL
 

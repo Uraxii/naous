@@ -118,6 +118,8 @@ metadata/_custom_type_script = "uid://u8paan0wgvi6"
 
 [node name="Health" type="Node" parent="Components"]
 script = ExtResource("10_w0xwc")
+max_value = 100.0
+current = 100.0
 
 [node name="Energy" type="Node" parent="Components"]
 script = ExtResource("11_spk56")

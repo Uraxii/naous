@@ -10,3 +10,10 @@ func apply_effect_to_entity(entity: Entity) -> void:
     else:
         Globals.logger.debug("Dealing damage to entity: Damage=%s | Entity=%s" % [damage, entity.name])
         health_c.current = health_c.current - damage
+
+
+func entity_triggered_effect(entity: Entity) -> void:
+    if is_instance_valid(entity.targeting):
+        var curr_target := entity.targeting.get_current_target()
+        if is_instance_valid(curr_target):
+            apply_effect_to_entity(curr_target.entity)

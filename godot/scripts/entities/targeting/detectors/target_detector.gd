@@ -93,11 +93,13 @@ func _add_current_target(new_target: Targetable) -> void:
     if not _current_targets.has(new_target):
         #print("adding a target to: - ", self.name)
         _current_targets.push_back(new_target)
+        new_target.tree_exiting.connect(_remove_current_target.bind(new_target))
 
 
 func _remove_current_target(lost_target: Targetable) -> void:
     if _current_targets.has(lost_target):
         #print("removing a target from: - ", self.name)
+        lost_target.tree_exiting.disconnect(_remove_current_target)
         _current_targets.erase(lost_target)
 
 #endregion

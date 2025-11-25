@@ -20,3 +20,6 @@ class_name EffectBase extends Resource
 ## Override with child classes
 @abstract
 func apply_effect_to_entity(entity: Entity) -> void
+
+@abstract
+func entity_triggered_effect(entity: Entity) -> void
