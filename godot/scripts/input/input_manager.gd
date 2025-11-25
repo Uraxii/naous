@@ -15,6 +15,7 @@ class_name InputManager extends Node
     InputBindings.SCAN_TARGET_RIGHT: signals.scan_target_right,
     InputBindings.CANCEL_TARGET: signals.cancel_target,
     InputBindings.OPEN_INVENTORY: signals.open_inventory,
+    InputBindings.TOGGLE_CHAT_INPUT: signals.toggle_chat_input,
     InputBindings.UI_ACCEPT: signals.ui_accept,
     InputBindings.UI_CANCEL: signals.ui_cancel,
     InputBindings.UI_TOGGLE: signals.ui_toggle,

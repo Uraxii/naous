@@ -11,18 +11,41 @@ static func generate_msg_routes(
 ) -> Dictionary[Msg.Type, Signal]:
     return {
         Msg.Type.TEST: bus.test_msg,
+        Msg.Type.CHAT: bus.chat_msg,
         Msg.Type.SPAWN_ENTITY: bus.spawn_entity_msg,
     }
 
 
 func send(msg: Msg) -> void:
-    _receive.rpc(Msg.serialize(msg))
+    _receive.rpc(msg.serialize())
 
 
-@rpc("any_peer")
-func _receive(serialized_msg: Dictionary) -> void:
-    var msg = Msg.deserialize(serialized_msg)
-    logger.debug("Received message:", msg.data)
+@rpc("any_peer", "call_local")
+func _receive(msg: Dictionary) -> void:
+    if not validate_message(msg):
+        return
+
+    logger.debug("Received message:", msg)
+    var new_msg = Msg.TypeMap.get(msg.type).new()
+    new_msg.deserialize(msg.payload)
+
+    if not routes.has(msg.type):
+        logger.warn("No route for message!\tMSG:", msg)
+        return
+
+    routes[msg.type].emit(new_msg)
+
+
+func validate_message(msg: Dictionary) -> bool:
+    if not msg.has("payload") and msg["payload"] is Dictionary:
+        logger.warn("Invaid msg payload!\tMSG:", msg)
+        return false
+
+    if not msg.has("type") or not Msg.TypeMap.has(msg["type"]):
+        logger.warn("Invalid msg type!\tMSG:", msg)
+        return false
+
+    return true
 
 
 func send_test_message() -> void:
@@ -30,8 +53,13 @@ func send_test_message() -> void:
     send(test_msg)
 
 
+func _on_test_message(msg: MsgTest) -> void:
+    logger.debug("Got test message!")
+
+
 #region Godot Callback Functions
 func _ready() -> void:
     routes = generate_msg_routes(signals)
     signals.connected_to_server.connect(send_test_message)
+    signals.test_msg.connect(_on_test_message)
 #endregion

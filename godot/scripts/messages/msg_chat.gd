@@ -1,14 +1,17 @@
-class_name MsgTest extends MsgChat
+class_name MsgChat extends Msg
+
+var sender: String
+var message: String
 
 
 func serialize() -> Dictionary:
     return {
-        "type": Type.TEST,
+        "type": Type.CHAT,
         "payload": {
-            "sender": "TestMessage",
-            "message": "This is a test message."
-            }
+            "sender": sender,
+            "message": message,
         }
+    }
 
 
 func deserialize(payload: Dictionary):

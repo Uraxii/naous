@@ -4,22 +4,25 @@ enum Type {
     UNKOWN,
     BASE,
     TEST,
+    CHAT,
     SPAWN_ENTITY,
 }
 
-var type := Type.BASE
-var data := {  }
+static var TypeMap: Dictionary[Type, GDScript] = {
+    Type.BASE: Msg,
+    Type.TEST: MsgTest,
+    Type.CHAT: MsgChat,
+    Type.SPAWN_ENTITY: MsgSpawnEntity,
+}
 
 
-static func serialize(msg: Msg) -> Dictionary:
-    return {
-        "type": msg.type,
-        "data": msg.data,
+func serialize() -> Dictionary:
+    push_warning("serialize not implemented for message!")
+    return { 
+        "type": Type.BASE,
+        "payload": {  },
     }
 
 
-static func deserialize(serialized_msg: Dictionary) -> Msg:
-    var msg = Msg.new()
-    msg.type = serialized_msg.get("type", Type.UNKOWN)
-    msg.data = serialized_msg.get("data", {  })
-    return msg
+func deserialize(payload: Dictionary):
+    push_warning("deserialize is not implemented on message!\tDATA:", payload)

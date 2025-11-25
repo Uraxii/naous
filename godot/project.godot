@@ -188,6 +188,10 @@ open_inventory={
 "deadzone": 0.2,
 "events": []
 }
+toggle_chat_input={
+"deadzone": 0.2,
+"events": []
+}
 
 [layer_names]
 

@@ -38,15 +38,12 @@ signal reload
 signal load_world
 #endregion
 
-#region Chat
-signal chat(sender_name: String, message: String)
-#endregion
-
 #region Input
 signal ui_accept 
 signal ui_cancel
 signal ui_toggle(state:bool)
 signal open_inventory
+signal toggle_chat_input
 signal allow_character_control(allow: bool)
 
 signal camera_zoom_in
@@ -100,5 +97,6 @@ signal selected_character(character_data: Dictionary)
 
 #region Network Messages
 signal test_msg(msg: MsgSpawnEntity)
+signal chat_msg(msg: MsgChat)
 signal spawn_entity_msg(msg: MsgSpawnEntity)
 #endregion

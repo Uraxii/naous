@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InputBindings" load_steps=48 format=3 uid="uid://dklvwj7n37rma"]
+[gd_resource type="Resource" script_class="InputBindings" load_steps=49 format=3 uid="uid://dklvwj7n37rma"]
 
 [ext_resource type="Script" uid="uid://7uvyk2xwlmgd" path="res://scripts/input/input_bindings.gd" id="1_qgmqv"]
 
@@ -173,7 +173,7 @@ pressed = true
 
 [sub_resource type="InputEventKey" id="InputEventKey_l78yg"]
 device = -1
-keycode = 4194319
+keycode = 4194305
 
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_nf0w0"]
 button_index = 14
@@ -182,6 +182,10 @@ pressed = true
 [sub_resource type="InputEventKey" id="InputEventKey_myrx5"]
 device = -1
 keycode = 4194321
+
+[sub_resource type="InputEventKey" id="InputEventKey_nf0w0"]
+device = -1
+keycode = 4194309
 
 [sub_resource type="InputEventKey" id="InputEventKey_tll83"]
 device = -1
@@ -221,6 +225,7 @@ camera_zoom_out = Array[InputEvent]([SubResource("InputEventMouseButton_k0m2b"),
 camera_zoom_in = Array[InputEvent]([SubResource("InputEventMouseButton_ie32x"), SubResource("InputEventJoypadButton_20erl")])
 camera_rotate = Array[InputEvent]([SubResource("InputEventMouseButton_qgmqv")])
 open_inventory = Array[InputEvent]([SubResource("InputEventKey_t1s46"), SubResource("InputEventJoypadButton_iynii")])
+toggle_chat_input = Array[InputEvent]([SubResource("InputEventKey_nf0w0")])
 ui_accept = Array[InputEvent]([SubResource("InputEventKey_ie32x"), SubResource("InputEventKey_k0m2b")])
 ui_cancel = Array[InputEvent]([SubResource("InputEventKey_l78yg")])
 ui_toggle = Array[InputEvent]([SubResource("InputEventKey_tll83"), SubResource("InputEventJoypadButton_ws6gv")])

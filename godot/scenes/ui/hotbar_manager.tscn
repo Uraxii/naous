@@ -6,11 +6,13 @@
 
 [node name="HotbarManager" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 script = ExtResource("1_80i08")
 default_hotbar_prefs = ExtResource("2_pug7i")
 hotbar_scene = ExtResource("2_meqgt")

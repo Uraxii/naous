@@ -27,6 +27,7 @@ const CAMERA_ZOOM_IN := "camera_zoom_in"
 const CAMERA_ROTATE := "camera_rotate"
 const CHARACTER_ROTATE := "character_rotate"
 const OPEN_INVENTORY := "open_inventory"
+const TOGGLE_CHAT_INPUT := "toggle_chat_input"
 const UI_ACCEPT := "ui_accept"
 const UI_CANCEL := "ui_cancel"
 const UI_TOGGLE := "ui_toggle"
@@ -69,6 +70,7 @@ const UI_TOGGLE := "ui_toggle"
 
 @export_group("Menus & UI")
 @export var open_inventory: Array[InputEvent]
+@export var toggle_chat_input: Array[InputEvent]
 @export var ui_accept: Array[InputEvent]
 @export var ui_cancel: Array[InputEvent]
 @export var ui_toggle: Array[InputEvent]
@@ -102,6 +104,7 @@ func get_binds() -> Dictionary:
         CAMERA_ROTATE: camera_rotate,
         CHARACTER_ROTATE: character_rotate,
         OPEN_INVENTORY: open_inventory,
+        TOGGLE_CHAT_INPUT: toggle_chat_input,
         UI_ACCEPT: ui_accept,
         UI_CANCEL: ui_cancel,
         UI_TOGGLE: ui_toggle,

@@ -7,14 +7,7 @@ enum {
 
 var curr_state := STATE_HIDDEN
 
-@onready var line: LineEdit = %LineEdit
-
-
-func _ready() -> void:
-    signals.ui_accept.connect(_on_accept)
-    signals.ui_cancel.connect(_on_cancel)
-    line.text_submitted.connect(_on_submit)
-    hide()
+@onready var line: LineEdit = %ChatInput
 
 
 func _on_accept() -> void:
@@ -31,8 +24,20 @@ func _on_cancel() -> void:
             curr_state = STATE_HIDDEN
 
 
-# TODO: Make this an rpc call and update messages for to clients.
 func _on_submit(content: String) -> void:
-    line.text = ""
+    if line.text:
+        var msg := MsgChat.new()
+        msg.sender = InstanceAPI.local_player.character_name
+        msg.message = content
+        router.send(msg)
 
-    signals.chat.emit("You", content)
+    line.text = ""
+    hide()
+    curr_state = STATE_HIDDEN
+
+
+func _ready() -> void:
+    signals.toggle_chat_input.connect(_on_accept)
+    signals.ui_cancel.connect(_on_cancel)
+    line.text_submitted.connect(_on_submit)
+    hide()
