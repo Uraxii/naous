@@ -25,11 +25,12 @@ func detect_targets() -> void:
     previous_targets.assign(_current_targets)
     var valid_targets := targeting.get_valid_targets()
     for possible_target: Targetable in valid_targets:
-        var target_is_detected := _target_is_in_shape(possible_target, get_polygon_shape())
-        if target_is_detected:
-            _add_current_target(possible_target)
-        else:
-            _remove_current_target(possible_target)
+        if not possible_target.is_queued_for_deletion():
+            var target_is_detected := _target_is_in_shape(possible_target, get_polygon_shape())
+            if target_is_detected:
+                _add_current_target(possible_target)
+            else:
+                _remove_current_target(possible_target)
     
     if previous_targets != _current_targets:
         #print("updating detected shapes! - ", self.name)

@@ -64,10 +64,12 @@ func add_valid_target(new_target: Targetable) -> void:
     if not valid_targets.has(new_target) and new_target.entity != current_targeting_owner:
         #Globals.logger.debug("Adding valid target: ", new_target.entity.name)
         valid_targets.push_back(new_target)
+        new_target.tree_exiting.connect(remove_valid_target.bind(new_target))
 
 
 func remove_valid_target(lost_target: Targetable) -> void:
     if valid_targets.has(lost_target):
+        lost_target.tree_exiting.disconnect(remove_valid_target)
         valid_targets.erase(lost_target)
 
 

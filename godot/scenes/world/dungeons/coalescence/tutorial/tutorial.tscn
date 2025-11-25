@@ -1,5 +1,6 @@
 [gd_scene load_steps=44 format=3 uid="uid://d33k3abfexh3k"]
 
+[ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="2_8cm00"]
 [ext_resource type="Script" path="res://scripts/entities/sky_rotate.gd" id="3_5u8qt"]
@@ -23,22 +24,6 @@
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="15_0cvc3"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="16_o0ykn"]
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="17_1c438"]
-
-[sub_resource type="GDScript" id="GDScript_0cvc3"]
-script/source = "# Tutorial
-extends Node3D
-
-@onready var tutorial_sequence: TutorialSequence = %TutorialSequence
-@onready var first_enemy: Archa = %FirstEnemy
-
-
-func _ready() -> void:
-    # This is mostly to ensure we wait until the movement component warps the body up 100 units so we can snap it back after
-    await get_tree().process_frame
-    first_enemy.global_position = Vector3(0, -1000, 0)
-    first_enemy.process_mode = Node.PROCESS_MODE_DISABLED
-    tutorial_sequence.start()
-"
 
 [sub_resource type="QuadMesh" id="QuadMesh_mc5jl"]
 material = ExtResource("1_e5qsc")
@@ -168,7 +153,7 @@ material = SubResource("StandardMaterial3D_g7sat")
 size = Vector3(1.465, 0.779, 0.995)
 
 [node name="Tutorial" type="Node3D"]
-script = SubResource("GDScript_0cvc3")
+script = ExtResource("1_2e0i0")
 
 [node name="Environment" type="Node" parent="."]
 
@@ -441,7 +426,11 @@ transform = Transform3D(0.99999845, 0.00044343778, -0.0017273357, 0, 0.96859217,
 
 [node name="FirstEnemyInitial" type="Marker3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 2.9610605, -42.199593)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 1.4846497, -42.199593)
+
+[node name="FirstEnemyRevealPosition" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 1.4846497, -30.670498)
 
 [node name="FirstEnemy" parent="." instance=ExtResource("12_g7sat")]
 unique_name_in_owner = true

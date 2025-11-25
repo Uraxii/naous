@@ -31,7 +31,8 @@ func _setup_screen_notifier_for_target() -> void:
     var new_screen_notifier := TargetableScreenNotifier.new()
     screen_notifier = new_screen_notifier
     screen_notifier.targetable = self
-    entity.add_child(screen_notifier)
+    entity.body.add_child(screen_notifier)
+    screen_notifier.set_entity(entity)
 
 
 func _setup_target_indicator() -> void:

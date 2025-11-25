@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="4_skbj3"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="6_us3mv"]
 [ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="6_wfou7"]
-[ext_resource type="Script" path="res://scripts/entities/components/component_ai_movement.gd" id="7_2oj0l"]
+[ext_resource type="Script" uid="uid://bqxqfnfga8psi" path="res://scripts/entities/components/component_ai_movement.gd" id="7_2oj0l"]
 [ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="7_lrbby"]
 [ext_resource type="Script" path="res://scripts/entities/components/component_player_detector.gd" id="8_lrbby"]
 [ext_resource type="PackedScene" uid="uid://dqljrgdwdfqk2" path="res://assets/models/enemies/archa_enemy.tscn" id="10_2oj0l"]
@@ -17,7 +17,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wfou7"]
 radius = 0.47558594
-height = 1.902832
+height = 2.2579346
 
 [node name="Archa" type="Node3D" node_paths=PackedStringArray("components", "health", "speed", "gravity", "body")]
 script = ExtResource("1_b8ywv")
@@ -77,10 +77,9 @@ metadata/_custom_type_script = "uid://bqxqfnfga8psi"
 unique_name_in_owner = true
 script = ExtResource("8_lrbby")
 parent_entity = NodePath("../..")
-metadata/_custom_type_script = "uid://c04lvsx52dofg"
 
 [node name="Body" type="CharacterBody3D" parent="ComponentManager" node_paths=PackedStringArray("entity")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.61796415, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011195898, 0)
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("6_wfou7")
@@ -91,5 +90,5 @@ metadata/_custom_type_script = "uid://c3j4028duia8g"
 transform = Transform3D(-0.65, 0, -5.6824803e-08, 0, 0.65, 0, 5.6824803e-08, 0, -0.65, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ComponentManager/Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27103066, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0447289, 0)
 shape = SubResource("CapsuleShape3D_wfou7")

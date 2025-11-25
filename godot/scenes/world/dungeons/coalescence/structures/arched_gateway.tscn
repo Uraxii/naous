@@ -53,7 +53,7 @@ height = 18.431
 albedo_color = Color(0.66, 0.53416, 0.36960003, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0uv4u"]
-size = Vector3(25.99405, 16.65393, 12.500427)
+size = Vector3(25.99405, 16.65393, 15.098724)
 
 [node name="ArchedGateway" type="Node3D"]
 script = ExtResource("1_0uv4u")
@@ -101,6 +101,7 @@ shape = SubResource("ConvexPolygonShape3D_ke8f3")
 
 [node name="RubbleEntity" type="Node3D" parent="." node_paths=PackedStringArray("components", "health", "body")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8735266, 5.286301, 0)
 script = ExtResource("1_avcb8")
 components = NodePath("ComponentManager")
 health = NodePath("ComponentManager/HealthComponent")
@@ -117,12 +118,10 @@ collision_layer = 6
 collision_mask = 5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RubbleEntity/RubbleBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3855891, 5.7619867, 0)
 mesh = SubResource("SphereMesh_nv4ux")
 surface_material_override/0 = SubResource("StandardMaterial3D_00g66")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RubbleEntity/RubbleBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6512299, 7.8269653, 1.424469)
 shape = SubResource("BoxShape3D_0uv4u")
 
 [node name="ComponentManager" type="Node" parent="RubbleEntity" node_paths=PackedStringArray("entity")]
