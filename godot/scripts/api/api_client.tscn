@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfjsukiu4mn0v"]
-
-[ext_resource type="Script" uid="uid://gct6lvlcqgte" path="res://scripts/api/api_client.gd" id="1_hsqql"]
-
-[node name="ApiClient" type="Node"]
-script = ExtResource("1_hsqql")
-metadata/_custom_type_script = "uid://gct6lvlcqgte"

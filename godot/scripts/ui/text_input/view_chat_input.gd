@@ -29,14 +29,10 @@ func _on_cancel() -> void:
         STATE_EDITING:
             hide()
             curr_state = STATE_HIDDEN
-            
-            
+
+
+# TODO: Make this an rpc call and update messages for to clients.
 func _on_submit(content: String) -> void:
     line.text = ""
-    
+
     signals.chat.emit("You", content)
-    
-    var packet := PacketManager.new_packet()
-    var chat := packet.new_chat()
-    chat.set_content(content)
-    # WS.send(packet)

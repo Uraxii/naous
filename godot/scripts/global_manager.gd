@@ -2,12 +2,9 @@ class_name GlobalManager extends Node
 
 const SERVER_ID := 1
 
-@onready var session := Session.new()
-
 var launch_args:    Dictionary
 var signal_bus:     SignalBus
 var save:           SaveManager
-var packets:        PacketManager
 var logger:         Log
 var input:          InputManager
 var views:          ViewManager
@@ -17,8 +14,6 @@ var entities:       EntityManager
 var targeting:      TargetingManager
 var camera:         CameraManager
 var casting:        CastManager
-var http:           HTTPManager
-var websocket:      WebSocketManager
 
 
 func new_global_script(node_name: String, type: GDScript) -> Node:
@@ -38,9 +33,6 @@ func new_global_scene(node_name: String, scene: PackedScene) -> Node:
 func create_globals() -> void:
     # Load order matters!!!
     signal_bus = new_global_script("Signals", SignalBus)
-    http = new_global_script("HTTP", HTTPManager)
-    websocket = new_global_script("WebSocket", WebSocketManager)
-    packets = PacketManager.new(signal_bus)
     logger = new_global_script("Log", Log)
     input = new_global_script("Input", InputManager)
     views = new_global_script("Views", ViewManager)

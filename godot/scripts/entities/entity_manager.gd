@@ -46,19 +46,19 @@ func _spawn_custom(data: Dictionary) -> Node:
     # TODO: CHANGE THIS!!! PLAYERS SHOULD NOT BE ABLE TO PASS IN AN ABITRARY PATH!!!
     var scene = load(data.scene)
     var entity: Entity = scene.instantiate()
-    
+
     if data.get("type") == "player":
         entity.transform_sync.set_multiplayer_authority(data.authority)
         entity.name = data.id
         entity.display_name = data.character_data.name
-        
+
     if data.has("position"):
         print_debug("Set entity pos to %s" % data.position)
         entity.position = data.position
 
     if "active_character" in data:
         entity.active_character = data["active_character"]
-        
+
     var id = _ids.lease()
     entity.id = id
     pool[id] = entity

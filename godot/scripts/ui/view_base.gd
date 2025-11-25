@@ -3,9 +3,6 @@ class_name View extends Control
 @export var should_log := false
 
 @onready var signals := Globals.signal_bus
-@onready var session := Globals.session
-@onready var http    := Globals.http
-@onready var ws      := Globals.websocket
 @onready var input   := Globals.input
 @onready var views   := Globals.views
 @onready var save    := Globals.save

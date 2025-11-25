@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0kc2r2wbe47x"]
 
-[ext_resource type="Script" uid="uid://cygqbb44xmtda" path="res://scripts/entity_manager.gd" id="1_jcf0l"]
+[ext_resource type="Script" uid="uid://cygqbb44xmtda" path="res://scripts/entities/entity_manager.gd" id="1_jcf0l"]
 
 [node name="EntityManager" type="MultiplayerSpawner"]
 spawn_path = NodePath(".")
