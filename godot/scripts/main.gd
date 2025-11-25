@@ -10,6 +10,7 @@ func _connect_to_instance(args: Dictionary) -> void:
 
 func _initialize_server(args: Dictionary) -> void:
     print("Initializing as headless server...")
+    InstanceAPI.start_server()
 
 
 func _ready() -> void:

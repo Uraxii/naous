@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bkckqpe71ier5" path="res://scripts/instance/instance_config.gd" id="1_cs1ou"]
 [ext_resource type="PackedScene" uid="uid://ch0bqgk8cfdeq" path="res://scenes/world/zones/lake-natalie.tscn" id="1_x05t1"]
-[ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="2_idoa1"]
+
+[sub_resource type="PackedScene" id="PackedScene_up5xg"]
 
 [resource]
 script = ExtResource("1_cs1ou")
