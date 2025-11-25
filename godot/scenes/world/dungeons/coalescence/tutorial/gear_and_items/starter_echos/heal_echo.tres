@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EchoItem" load_steps=5 format=3 uid="uid://dqwvsj4f1p0hd"]
+
+[ext_resource type="Script" uid="uid://b47nyqsmj22vl" path="res://scripts/effects/heal/heal_effect.gd" id="1_3gp28"]
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="1_brk2m"]
+[ext_resource type="Texture2D" uid="uid://bytwyd0odiij8" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_echos/caduceus_color.png" id="2_42hd1"]
+
+[sub_resource type="Resource" id="Resource_2da60"]
+script = ExtResource("1_3gp28")
+metadata/_custom_type_script = "uid://b47nyqsmj22vl"
+
+[resource]
+script = ExtResource("1_brk2m")
+effect = SubResource("Resource_2da60")
+name = &"Flow Heal"
+description = "Restore health by connecting with the energy within."
+icon = ExtResource("2_42hd1")
+metadata/_custom_type_script = "uid://chxnjdgyds7hd"

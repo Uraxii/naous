@@ -31,8 +31,8 @@ size = Vector3(100, 1, 20)
 [sub_resource type="BoxMesh" id="BoxMesh_ke8f3"]
 size = Vector3(100, 1, 37)
 
-[sub_resource type="BoxMesh" id="BoxMesh_6jvcw"]
-size = Vector3(38, 1, 17.035)
+[sub_resource type="BoxMesh" id="BoxMesh_1esqk"]
+size = Vector3(38, 1, 24.12)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ej2el"]
 size = Vector3(100, 1, 36.585)
@@ -69,8 +69,8 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_e2fn7")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Occluder"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 2.2637558, 30.186428, -40.194412)
-mesh = SubResource("BoxMesh_6jvcw")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 2.2637558, 25.560848, -40.194412)
+mesh = SubResource("BoxMesh_1esqk")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_e2fn7")
 

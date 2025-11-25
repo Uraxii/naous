@@ -13,5 +13,6 @@ func handle_player_lost(player: Player) -> void:
 
 
 func _ready() -> void:
+    super._ready()
     player_detector.player_detected.connect(handle_player_detected)
     player_detector.player_lost.connect(handle_player_lost)

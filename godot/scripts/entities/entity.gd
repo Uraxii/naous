@@ -97,7 +97,10 @@ func _get_local_aabb_from_instances(visual_instances: Array[VisualInstance3D]) -
 
     for visual_instance: VisualInstance3D in visual_instances:
         var instance_aabb := visual_instance.get_aabb()
-        final_aabb.merge(instance_aabb)
+        if not final_aabb.has_volume():
+            final_aabb = instance_aabb
+        else:
+            final_aabb.merge(instance_aabb)
 
     return final_aabb
 

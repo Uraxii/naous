@@ -25,11 +25,12 @@ func detect_targets() -> void:
     previous_targets.assign(_current_targets)
     var valid_targets := targeting.get_valid_targets()
     for possible_target: Targetable in valid_targets:
-        var target_is_detected := _target_is_in_shape(possible_target, get_polygon_shape())
-        if target_is_detected:
-            _add_current_target(possible_target)
-        else:
-            _remove_current_target(possible_target)
+        if not possible_target.is_queued_for_deletion():
+            var target_is_detected := _target_is_in_shape(possible_target, get_polygon_shape())
+            if target_is_detected:
+                _add_current_target(possible_target)
+            else:
+                _remove_current_target(possible_target)
     
     if previous_targets != _current_targets:
         #print("updating detected shapes! - ", self.name)
@@ -92,11 +93,13 @@ func _add_current_target(new_target: Targetable) -> void:
     if not _current_targets.has(new_target):
         #print("adding a target to: - ", self.name)
         _current_targets.push_back(new_target)
+        new_target.tree_exiting.connect(_remove_current_target.bind(new_target))
 
 
 func _remove_current_target(lost_target: Targetable) -> void:
     if _current_targets.has(lost_target):
         #print("removing a target from: - ", self.name)
+        lost_target.tree_exiting.disconnect(_remove_current_target)
         _current_targets.erase(lost_target)
 
 #endregion

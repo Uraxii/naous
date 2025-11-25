@@ -16,7 +16,11 @@ var current_target: Targetable:
 #region Target Selection
 func cursor_target() -> void:
     #Globals.logger.debug("Attempting CURSOR target!")
-    var cursor_detection_target := cursor_targeting.get_next_detected_target(current_target)
+    var starting_target: Targetable = null
+    if is_instance_valid(current_target) and not current_target.is_queued_for_deletion():
+        starting_target = current_target
+    
+    var cursor_detection_target := cursor_targeting.get_next_detected_target(starting_target)
     if is_instance_valid(cursor_detection_target) and cursor_detection_target != current_target:
         #Globals.logger.debug("CURSOR TARGET: updating current target!")
         current_target = cursor_detection_target
@@ -24,7 +28,10 @@ func cursor_target() -> void:
 
 func next_target() -> void:
     #print("attempting NEXT auto target!")
-    var next_auto_target := auto_targeting.get_next_detected_target(current_target)
+    var starting_target: Targetable = null
+    if is_instance_valid(current_target) and not current_target.is_queued_for_deletion():
+        starting_target = current_target
+    var next_auto_target := auto_targeting.get_next_detected_target(starting_target)
     if is_instance_valid(next_auto_target) and next_auto_target != current_target:
         #Globals.logger.debug("AUTO NEXT TARGET: updating current target!")
         current_target = next_auto_target
@@ -32,7 +39,10 @@ func next_target() -> void:
 
 func previous_target() -> void:
     #Globals.logger.debug("attempting PREV auto target!")
-    var prev_auto_target := auto_targeting.get_previous_detected_target(current_target)
+    var starting_target: Targetable = null
+    if is_instance_valid(current_target) and not current_target.is_queued_for_deletion():
+        starting_target = current_target
+    var prev_auto_target := auto_targeting.get_previous_detected_target(starting_target)
     if is_instance_valid(prev_auto_target) and prev_auto_target != current_target:
         #Globals.logger.debug("AUTO PREV TARGET: updating current target!")
         current_target = prev_auto_target
@@ -40,7 +50,10 @@ func previous_target() -> void:
 
 func scan_target_right() -> void:
     #Globals.logger.debug("attempting RIGHT scan target!")
-    var next_scan_target := scan_targeting.get_next_detected_target(current_target)
+    var starting_target: Targetable = null
+    if is_instance_valid(current_target) and not current_target.is_queued_for_deletion():
+        starting_target = current_target
+    var next_scan_target := scan_targeting.get_next_detected_target(starting_target)
     if is_instance_valid(next_scan_target) and next_scan_target != current_target:
         #Globals.logger.debug("SCAN NEXT TARGET: updating current target!")
         current_target = next_scan_target
@@ -48,7 +61,10 @@ func scan_target_right() -> void:
 
 func scan_target_left() -> void:
     #Globals.logger.debug("attempting LEFT scan target!")
-    var prev_scan_target := scan_targeting.get_previous_detected_target(current_target)
+    var starting_target: Targetable = null
+    if is_instance_valid(current_target) and not current_target.is_queued_for_deletion():
+        starting_target = current_target
+    var prev_scan_target := scan_targeting.get_previous_detected_target(starting_target)
     if is_instance_valid(prev_scan_target) and prev_scan_target != current_target:
         #Globals.logger.debug("SCAN PREV TARGET: updating current target!")
         current_target = prev_scan_target

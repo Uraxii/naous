@@ -23,6 +23,7 @@ func cast_echo_from_inventory(echo_index: int) -> void:
         var echo := echoes[echo_index]
         if echo != null:
             var echo_effect := echo.effect
+            echo_effect.entity_triggered_effect(caster)
 
 
 func get_all_spells() -> Dictionary[String, Spell]:

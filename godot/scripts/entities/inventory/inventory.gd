@@ -132,6 +132,19 @@ func set_backpack_slot(item: Item, slot_index: int) -> void:
         backpack_updated.emit(backpack)
 
 
+func add_to_backpack(item: Item) -> void:
+    var empty_index := find_empty_backpack_slot()
+    if empty_index >= 0:
+        set_backpack_slot(item, empty_index)
+
+
+func find_empty_backpack_slot() -> int:
+    for i in range(0, backpack.size()):
+        if backpack[i] == null:
+            return i
+    return -1
+
+
 func swap_backpack_item_slots(slot_index_A: int, slot_index_B: int) -> void:
     if !backpack_slot_valid(slot_index_A) or !backpack_slot_valid(slot_index_B):
         Globals.logger.error("Can not swap backpack slots for invalid indices! Index A: %s | Index B: %s | Backpack Size: %s" % [slot_index_A, slot_index_B, backpack.size()])

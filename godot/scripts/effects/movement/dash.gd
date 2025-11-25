@@ -17,6 +17,10 @@ func apply_effect_to_entity(entity: Entity) -> void:
     )
 
 
+func entity_triggered_effect(entity: Entity) -> void:
+    apply_effect_to_entity(entity)
+
+
 func _on_effect_end(affected_entity: Entity, original_speed: float) -> void:
     var speed_c: StatComponent = affected_entity.speed
     speed_c.current = original_speed
