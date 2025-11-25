@@ -94,3 +94,11 @@ signal target_exited_screen(target: Targetable)
 #region Character Select
 signal selected_character(character_data: Dictionary)
 #endregion
+
+#region Network Messages
+#endregion
+
+#region Network Messages
+signal test_msg(msg: MsgSpawnEntity)
+signal spawn_entity_msg(msg: MsgSpawnEntity)
+#endregion

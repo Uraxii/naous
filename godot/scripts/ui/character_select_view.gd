@@ -46,7 +46,7 @@ func _on_create_pressed() -> void:
 
 func _on_delete_pressed() -> void:
     if not current_character.has("name"):
-        log.warning("Selected character, but not name was found.")
+        log.warn("Selected character, but not name was found.")
         return
 
     save.delete_character(current_character.name)
@@ -59,6 +59,10 @@ func _on_load_pressed() -> void:
         return
 
     log.info("Entering world as " + current_character.get("name"))
+    InstanceAPI.local_player.character_name = current_character.name
+    InstanceAPI.start_client(
+        %ServerAddress.text,
+        int(%ServerPort.text))
 
 
 func _on_selected_character(character_data: Dictionary) -> void:
