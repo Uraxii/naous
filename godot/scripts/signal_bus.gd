@@ -1,31 +1,12 @@
 class_name SignalBus extends Node
 
-#region HTTP Signals
-signal logged_in
-signal logged_out
-#endregion
-
-#region Web Socket Signals
-signal connected_to_server
-signal connection_closed
-
-signal claim_token_received(packet)
-signal deny_received(packet)
-signal chat_message_received(packet)
-signal server_message_received(packet)
-#endregion
+signal save_game
 
 #region Instance API
+signal connected_to_server()
 signal player_connected(peer_id: int)
 signal player_disconnected(peer_id: int)
 signal server_disconnected
-signal save_game
-#endregion
-
-#region Network (Legacy - keeping for compatibility)
-signal got_packet(packet)
-signal got_client_id(msg)
-signal login(msg)
 #endregion
 
 #region Spell Casting
