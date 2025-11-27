@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dj7j78ll3lsgv"]
+[gd_scene load_steps=30 format=3 uid="uid://dj7j78ll3lsgv"]
 
 [ext_resource type="PackedScene" uid="uid://cdrx1jc5vlcfw" path="res://scenes/world/dungeons/coalescence/structures/building.tscn" id="1_d6wv2"]
 [ext_resource type="ArrayOccluder3D" uid="uid://cp1bfskqa1lnr" path="res://scenes/world/dungeons/coalescence/bubbles/dwellings.occ" id="1_x1yss"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://b0rkj0dcpnrd5" path="res://assets/prefabs/ground_rocky.tscn" id="6_e2h0b"]
 [ext_resource type="PackedScene" uid="uid://bnivwxa6lr1pp" path="res://assets/prefabs/boulder-purple.tscn" id="7_e2h0b"]
 [ext_resource type="PackedScene" uid="uid://c0tcxk54tuq6c" path="res://assets/prefabs/boulder_dark.tscn" id="8_1j0rv"]
+[ext_resource type="PackedScene" uid="uid://crvijhkrifgtp" path="res://assets/prefabs/grass_cluster_a.tscn" id="9_3voct"]
+[ext_resource type="PackedScene" uid="uid://ci8ii42pte78r" path="res://assets/prefabs/small_rock_cluster.tscn" id="10_cuyxe"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_x1yss"]
 size = Vector3(120, 1, 20)
@@ -866,3 +868,134 @@ transform = Transform3D(13.445368, 0.0379467, -8.672986, -6.911243, 9.713354, -1
 
 [node name="boulder-dark16" parent="boulders" instance=ExtResource("8_1j0rv")]
 transform = Transform3D(9.70343, 3.8091965, -12.138102, -11.5925255, 8.935363, -6.4631767, 5.2399282, 12.71414, 8.178867, -30.455902, -3.472354, -12.44857)
+
+[node name="grass and pebbles" type="Node3D" parent="."]
+
+[node name="grass-cluster-a" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.861374, 0.5156119, 33.6584)
+
+[node name="grass-cluster-a2" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.791866, 0.51561284, 24.077625)
+
+[node name="grass-cluster-a3" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -66.13609, 0.5156138, 22.454445)
+
+[node name="grass-cluster-a4" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.53048, 0.5156138, 10.97937)
+
+[node name="grass-cluster-a5" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.962547, 0.51561475, 6.880121)
+
+[node name="grass-cluster-a6" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65.277084, 0.5156157, 0.43462658)
+
+[node name="grass-cluster-a7" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.93569, 0.5156157, 7.8564663)
+
+[node name="grass-cluster-a8" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.01333, 0.51561666, 7.7956266)
+
+[node name="grass-cluster-a9" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.29899085, 0, 0.954256, 0, 1, 0, -0.954256, 0, 0.29899085, -42.12651, 0.5156176, 11.580414)
+
+[node name="grass-cluster-a12" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.29899085, 0, 0.954256, 0, 1, 0, -0.954256, 0, 0.29899085, -29.961117, 0.5156176, 0.87103176)
+
+[node name="grass-cluster-a13" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.29899085, 0, 0.954256, 0, 1, 0, -0.954256, 0, 0.29899085, -19.480183, 0.5156176, -1.048152)
+
+[node name="grass-cluster-a14" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.29899085, 0, 0.954256, 0, 1, 0, -0.954256, 0, 0.29899085, -22.24725, 0.5156176, 6.3416653)
+
+[node name="grass-cluster-a15" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.29899085, 0, 0.954256, 0, 1, 0, -0.954256, 0, 0.29899085, -3.6059303, 0.5156176, 18.420803)
+
+[node name="grass-cluster-a16" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.29899085, 0, 0.954256, 0, 1, 0, -0.954256, 0, 0.29899085, -3.6059303, 0.5769379, 10.219661)
+
+[node name="grass-cluster-a17" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.93114495, 0, -0.36464924, 0, 1, 0, 0.36464924, 0, 0.93114495, 1.0018396, 0.5769379, 12.674605)
+
+[node name="grass-cluster-a18" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.67387694, 0, -0.73884356, 0, 1, 0, 0.73884356, 0, 0.67387694, -0.9759302, 0.5769379, -2.300232)
+
+[node name="grass-cluster-a19" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.67387694, 0, -0.73884356, 0, 1, 0, 0.73884356, 0, 0.67387694, -62.79009, 0.5769379, 62.842903)
+
+[node name="grass-cluster-a20" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.67387694, 0, -0.73884356, 0, 1, 0, 0.73884356, 0, 0.67387694, -52.905846, 0.5769379, 72.643486)
+
+[node name="grass-cluster-a21" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.67387694, 0, -0.73884356, 0, 1, 0, 0.73884356, 0, 0.67387694, -47.64107, 0.57693744, 84.28426)
+
+[node name="grass-cluster-a10" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(0.09584576, 0, -0.9953962, 0, 1, 0, 0.9953962, 0, 0.09584576, -45.04952, 0.51561666, 14.873438)
+
+[node name="grass-cluster-a11" parent="grass and pebbles" instance=ExtResource("9_3voct")]
+transform = Transform3D(-0.017871188, 0, -0.9998403, 0, 1, 0, 0.9998403, 0, -0.017871188, -40.708134, 0.51561666, 19.806595)
+
+[node name="small-rock-cluster" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.920975, 0.56036484, 23.725922)
+
+[node name="small-rock-cluster2" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.75102, 0.56036484, 37.328827)
+
+[node name="small-rock-cluster3" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.44122392, 0, -0.89739704, 0, 1, 0, 0.89739704, 0, 0.44122392, -63.258724, 0.56036484, 47.78493)
+
+[node name="small-rock-cluster4" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.44122392, 0, -0.89739704, 0, 1, 0, 0.89739704, 0, 0.44122392, -58.207172, 0.56036484, 66.68376)
+
+[node name="small-rock-cluster5" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.8284906, 0, -0.5600029, 0, 1, 0, 0.5600029, 0, 0.8284906, -62.27575, 0.56036484, 64.80409)
+
+[node name="small-rock-cluster6" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.8284906, 0, -0.5600029, 0, 1, 0, 0.5600029, 0, 0.8284906, -54.28813, 0.56036484, 80.413414)
+
+[node name="small-rock-cluster7" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.8284906, 0, -0.5600029, 0, 1, 0, 0.5600029, 0, 0.8284906, -47.487183, 0.56036484, 80.90651)
+
+[node name="small-rock-cluster8" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(-0.18094832, 0, -0.9834926, 0, 1, 0, 0.9834926, 0, -0.18094832, -47.300217, 0.56036484, 85.64948)
+
+[node name="small-rock-cluster9" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.9894299, 0, 0.14501236, 0, 1, 0, -0.14501236, 0, 0.9894299, -32.238594, 0.6159966, 26.539768)
+
+[node name="small-rock-cluster10" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.9894299, 0, 0.14501236, 0, 1, 0, -0.14501236, 0, 0.9894299, -36.41813, 0.6159966, 31.711025)
+
+[node name="small-rock-cluster11" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.48648787, 0, -0.8736873, 0, 1, 0, 0.8736873, 0, 0.48648787, -35.19908, 0.6159966, 30.491062)
+
+[node name="small-rock-cluster12" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.86649626, 0, -0.49918354, 0, 1, 0, 0.49918354, 0, 0.86649626, -36.8179, 0.6159966, 25.16839)
+
+[node name="small-rock-cluster13" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.86649626, 0, -0.49918354, 0, 1, 0, 0.49918354, 0, 0.86649626, -25.430676, 0.6159966, 6.476)
+
+[node name="small-rock-cluster14" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(-0.17309815, 0, -0.9849047, 0, 1, 0, 0.9849047, 0, -0.17309815, -29.687222, 0.6159966, 6.476)
+
+[node name="small-rock-cluster15" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(-0.17309815, 0, -0.9849047, 0, 1, 0, 0.9849047, 0, -0.17309815, -26.74788, 0.6159966, 2.702321)
+
+[node name="small-rock-cluster16" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(-0.17309815, 0, -0.9849047, 0, 1, 0, 0.9849047, 0, -0.17309815, -34.368645, 0.6159966, -6.1122046)
+
+[node name="small-rock-cluster17" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.9841153, 0, -0.17753136, 0, 1, 0, 0.17753136, 0, 0.9841153, -38.46849, 0.6159966, -12.884335)
+
+[node name="small-rock-cluster18" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.9841153, 0, -0.17753136, 0, 1, 0, 0.17753136, 0, 0.9841153, -61.67286, 0.6159966, 4.2697906)
+
+[node name="small-rock-cluster19" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(0.5822366, 0, -0.8130196, 0, 1, 0, 0.8130196, 0, 0.5822366, -64.141266, 0.61599755, 11.215599)
+
+[node name="small-rock-cluster20" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(-0.19178545, 0, -0.98143697, 0, 1, 0, 0.98143697, 0, -0.19178545, -61.918987, 0.61599755, 8.421824)
+
+[node name="small-rock-cluster21" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(-0.8765757, 0, -0.48126423, 0, 1, 0, 0.48126423, 0, -0.8765757, -57.847904, 0.61599755, 8.421824)
+
+[node name="small-rock-cluster22" parent="grass and pebbles" instance=ExtResource("10_cuyxe")]
+transform = Transform3D(-0.8765757, 0, -0.48126423, 0, 1, 0, 0.48126423, 0, -0.8765757, -57.847904, 0.61599755, 8.421824)
