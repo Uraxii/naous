@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxdmxuu3rsr0b"]
+
+[ext_resource type="ArrayMesh" uid="uid://bspga0r8jrq75" path="res://assets/models/cliff-bump-flat-sides-lowpoly.obj" id="1_m77fp"]
+[ext_resource type="Material" uid="uid://drqf8ep76dtmn" path="res://assets/materials/cliff-material.tres" id="2_ppvx3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_75jbj"]
+size = Vector3(100, 100, 30)
+
+[node name="cliff" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 50)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 5, -50)
+shape = SubResource("BoxShape3D_75jbj")
+
+[node name="CliffBumpFlatSidesLowpoly2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -3.019916e-07, 6.600236e-15, 0, -8.742278e-08, -1, 1.509958e-07, -2, 4.371139e-08, 100, 0, 2)
+mesh = ExtResource("1_m77fp")
+skeleton = NodePath("../CliffBumpFlatSidesLowpoly")
+surface_material_override/0 = ExtResource("2_ppvx3")
+
+[node name="CliffBumpFlatSidesLowpoly" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -8.742278e-08, -1, 0, 2, -4.371139e-08, 0, 0, -2)
+mesh = ExtResource("1_m77fp")
+surface_material_override/0 = ExtResource("2_ppvx3")
