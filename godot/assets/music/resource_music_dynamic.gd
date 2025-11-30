@@ -31,16 +31,16 @@ var is_playing:bool = false
 func _init() -> void: prnt("Loaded %s." % [title])
 
 func set_bpm_from_track() -> void:
-	var _bpm:float = file._get_bpm()
-	if _bpm != null:
-		if _bpm > 0.0:
-			bpm = int(_bpm)
-			return
-	push_error("Track doesn't have BPM set. Check import settings.")
+    var _bpm:float = file._get_bpm()
+    if _bpm != null:
+        if _bpm > 0.0:
+            bpm = int(_bpm)
+            return
+    push_error("Track doesn't have BPM set. Check import settings.")
 
 func prnt(x) -> void:
-	## Print log. Swap me out some day.
-	print_debug(x)
+    ## Print log. Swap me out some day.
+    print_debug(x)
 
 static func set_volume_from_curve(curve_point: float, player:AudioStreamPlayer, curve: Curve) -> void:
-	player.volume_linear = curve.sample_baked(curve_point)
+    player.volume_linear = curve.sample_baked(curve_point)
