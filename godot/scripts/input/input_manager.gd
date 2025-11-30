@@ -81,9 +81,11 @@ func _input(event: InputEvent) -> void:
 
     # TODO: Figure out way to only do this when playing.
     if was_camera_rotating and not is_camera_rotating:
-        Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+        #Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+        pass
     elif not was_camera_rotating and is_camera_rotating and capture_mouse_on_click:
-        Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+        #Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+        pass
 
     if rotate_char and not was_character_rotating:
         signals.character_rotate_start.emit()
