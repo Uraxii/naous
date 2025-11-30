@@ -4,8 +4,10 @@ class_name Main extends Node
 @onready var arguments := Globals.launch_args
 
 
-func _connect_to_instance(args: Dictionary) -> void:
+func _initialize_client(args: Dictionary) -> void:
     print("Connecting to instance server...")
+    Globals.views.spawn(CharacterSelectView)
+    
 
 
 func _initialize_server(args: Dictionary) -> void:
@@ -21,7 +23,5 @@ func _ready() -> void:
 
     if arguments.has("server"):
         _initialize_server(arguments)
-    elif arguments.has("client"):
-        _connect_to_instance(arguments)
     else:
-        Globals.views.spawn(CharacterSelectView)
+        _initialize_client(arguments)
