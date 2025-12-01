@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdrx1jc5vlcfw"]
+[gd_scene load_steps=12 format=3 uid="uid://cdrx1jc5vlcfw"]
 
 [ext_resource type="PackedScene" uid="uid://bubw2npxhqmbl" path="res://scenes/entities/door.tscn" id="1_13n46"]
 [ext_resource type="Material" uid="uid://dfwy04xhxplyc" path="res://assets/materials/house-base.tres" id="2_ia1wr"]
+[ext_resource type="PackedScene" uid="uid://dwnbnkrwnx73o" path="res://assets/models/brick-corner-quoin.fbx" id="3_j22f5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_t8rem"]
 size = Vector3(0.3, 4.1, 6.305)
@@ -81,3 +82,15 @@ surface_material_override/0 = SubResource("StandardMaterial3D_13n46")
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.09802008, 2.4299107, -3.2516556)
 shape = SubResource("ConvexPolygonShape3D_srcpc")
+
+[node name="brick-corner-quoin" parent="." instance=ExtResource("3_j22f5")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 3.5, 0.4, -3.5)
+
+[node name="brick-corner-quoin2" parent="." instance=ExtResource("3_j22f5")]
+transform = Transform3D(-1.0927847e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.0927847e-08, -3.2, 0.4, -3.5)
+
+[node name="brick-corner-quoin3" parent="." instance=ExtResource("3_j22f5")]
+transform = Transform3D(-0.25, 0, -2.1855694e-08, 0, 0.25, 0, 2.1855694e-08, 0, -0.25, -3.2, 0.4, 3.3)
+
+[node name="brick-corner-quoin4" parent="." instance=ExtResource("3_j22f5")]
+transform = Transform3D(-1.0927847e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.0927847e-08, 3.5, 0.4, 3.3)
