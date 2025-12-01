@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdrx1jc5vlcfw"]
+[gd_scene load_steps=13 format=3 uid="uid://cdrx1jc5vlcfw"]
 
 [ext_resource type="PackedScene" uid="uid://bubw2npxhqmbl" path="res://scenes/entities/door.tscn" id="1_13n46"]
 [ext_resource type="Material" uid="uid://dfwy04xhxplyc" path="res://assets/materials/house-base.tres" id="2_ia1wr"]
 [ext_resource type="PackedScene" uid="uid://dwnbnkrwnx73o" path="res://assets/models/brick-corner-quoin.fbx" id="3_j22f5"]
+[ext_resource type="PackedScene" uid="uid://bb1y11l8fff7q" path="res://assets/prefabs/rooftop.tscn" id="4_mqbyd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_t8rem"]
 size = Vector3(0.3, 4.1, 6.305)
@@ -94,3 +95,6 @@ transform = Transform3D(-0.25, 0, -2.1855694e-08, 0, 0.25, 0, 2.1855694e-08, 0, 
 
 [node name="brick-corner-quoin4" parent="." instance=ExtResource("3_j22f5")]
 transform = Transform3D(-1.0927847e-08, 0, -0.25, 0, 0.25, 0, 0.25, 0, -1.0927847e-08, 3.5, 0.4, 3.3)
+
+[node name="rooftop2" parent="." instance=ExtResource("4_mqbyd")]
+transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 4, 0, 4.5, 0)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb1y11l8fff7q"]
+
+[ext_resource type="PackedScene" uid="uid://8dpg4p8cbehp" path="res://assets/models/rooftop.fbx" id="1_20o0p"]
+[ext_resource type="Material" uid="uid://bqh1kagd3b7wf" path="res://assets/materials/rooftop.tres" id="2_roxkr"]
+
+[node name="rooftop" instance=ExtResource("1_20o0p")]
+
+[node name="roof" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_roxkr")
