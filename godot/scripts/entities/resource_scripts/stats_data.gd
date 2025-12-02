@@ -6,7 +6,7 @@ class_name StatsData extends Resource
 @export var jump_force  := 10.0
 
 
-func serialize() -> String:
+func serialize() -> Dictionary:
     return {
         "health":       health,
         "speed":        speed,
@@ -20,4 +20,3 @@ func deserialize(data: Dictionary) -> void:
     speed       = data.get("speed", speed)
     gravity     = data.get("gravity", gravity)
     jump_force  = data.get("jump_force", jump_force)
-

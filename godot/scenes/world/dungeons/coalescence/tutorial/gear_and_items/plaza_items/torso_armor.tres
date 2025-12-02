@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TorsoItem" load_steps=3 format=3 uid="uid://cma2nvc1vdj5o"]
+
+[ext_resource type="Texture2D" uid="uid://t8abp0hpe1h0" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/plaza_items/ink-crate-raw-scan.jpg" id="1_2nf5s"]
+[ext_resource type="Script" uid="uid://ctduyoaobc201" path="res://scripts/entities/items/torso/torso_item.gd" id="1_avofy"]
+
+[resource]
+script = ExtResource("1_avofy")
+name = &"Torn Plating"
+icon = ExtResource("1_2nf5s")
+metadata/_custom_type_script = "uid://ctduyoaobc201"

@@ -1,4 +1,4 @@
-class_name EntityData extends Resource
+class_name SerializableEntityData extends Resource
 
 @export var id:         EntityIdData
 @export var stats:      StatsData
@@ -14,4 +14,5 @@ func serialize() -> Dictionary:
 
 
 func deserialize(data: Dictionary) -> void:
-    for data in
+    #for data in
+    pass

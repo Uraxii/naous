@@ -59,19 +59,19 @@ func _physics_process(delta: float) -> void:
     var target_velocity := Vector3.ZERO
     if not next_position.is_zero_approx():
         # Don't rotate up/down facing
-		body.look_at(Vector3(next_position.x, body.global_position.y, next_position.z)) 
-		# TODO: Update this with acceleration or whatever later
-		target_velocity = body.global_position.direction_to(next_position) * speed.current
-	
-	body.velocity = target_velocity
-	body.velocity.y -= gravity.current
-	body.move_and_slide()
+        body.look_at(Vector3(next_position.x, body.global_position.y, next_position.z)) 
+        # TODO: Update this with acceleration or whatever later
+        target_velocity = body.global_position.direction_to(next_position) * speed.current
+    
+    body.velocity = target_velocity
+    body.velocity.y -= gravity.current
+    body.move_and_slide()
 
 
 func _ready() -> void:
-	if entity == null:
-		var component_parent: ComponentManager = get_parent()
-		if is_instance_valid(component_parent) and component_parent.entity != null:
-			entity = component_parent.entity
-		else:
-			Globals.logger.error("AI Movement has no encompassing parent entity!")
+    if entity == null:
+        var component_parent: ComponentManager = get_parent()
+        if is_instance_valid(component_parent) and component_parent.entity != null:
+            entity = component_parent.entity
+        else:
+            Globals.logger.error("AI Movement has no encompassing parent entity!")

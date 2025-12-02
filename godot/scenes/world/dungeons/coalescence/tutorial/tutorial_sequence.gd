@@ -259,18 +259,89 @@ func _on_player_healed(_new: float, _old: float) -> void:
 
 
 #region EXPLORE PLAZA
+@onready var pyramid_archa: Archa = %PyramidArcha
+@onready var pyramid_loot_pickup: LootPickup = %PyramidLootPickup
+@onready var spawn_map := {
+    pyramid_archa: %PyramidArchaSpawn,
+}
+var enemies_to_defeat: Array
+var enemies_defeated: Array
+
+const TORSO_ARMOR = preload("uid://cma2nvc1vdj5o")
+const SHOULDER_ARMOR = preload("uid://bwnrnbwg67vmy")
+const MAGIC_MASK = preload("uid://bw6vcgtg5adyi")
+const LEG_ARMOR = preload("uid://xg4koadm3yy3")
+@onready var loot_map := {
+    %PyramidLootPickup: [TORSO_ARMOR],
+}
+var loot_to_collect: Array
+var loot_collected: Array
+
 func explore_plaza() -> void:
     Globals.logger.debug("STARTING EXPLORE PLAZA SEQUENCE")
     current_sequence = SEQ.EXPLORE_PLAZA
     # 1. Remove collision preventing player from progressing as necessary (maybe it looks like the healing burst applies an impulse to the boulder rubble that finishes moving it out of the way)
     entry_path.arched_gateway.delete_rubble()
+    
+    # 1.1 Setup spawns and signals
+    for enemy: BaseEnemy in spawn_map:
+        var spawn_marker: Marker3D = spawn_map.get(enemy)
+        enemy.body.global_position = spawn_marker.global_position
+        enemy.defeated.connect(_plaza_enemy_defeated.bind(enemy))
+        enemy.process_mode = Node.PROCESS_MODE_INHERIT
+        enemies_to_defeat.push_back(enemy.get_instance_id())
+    
+    for loot_mapping: LootPickup in loot_map:
+        loot_mapping.collected.connect(_plaza_item_pickup.bind(loot_mapping))
+        loot_to_collect.push_back(loot_mapping.get_instance_id())
+    
     # 2. Show the open plaza with roaming enemies and shiny pick-up items
+    
     # 3. Prompt the user to explore the area
-    # 3a. Sub-objectives: Defeat 3 enemies, Collect 3 Masks
+    _update_plaza_objective_text()
+
+
+func _update_plaza_objective_text() -> void:
+    var base_text := "Explore the plaza"
+    # 3a. Sub-objectives: Defeat 3 enemies, Collect 3 Items
+    var enemies_text := "> Enemies: [%s/%s]" % [enemies_defeated.size(), enemies_to_defeat.size()]
+    var loot_text := "> Loot: [%s/%s]" % [loot_collected.size(), loot_to_collect.size()]
+    
+    var final_text := ""
+    final_text += base_text
+    final_text += "\n" + enemies_text
+    final_text += "\n" + loot_text
+    
+    hud_layer.display_objective_hud(final_text)
+
+
+func _plaza_enemy_defeated(enemy: BaseEnemy) -> void:
+    if enemies_to_defeat.has(enemy.get_instance_id()):
+        enemies_defeated.push_back(enemy.get_instance_id())
+        _update_plaza_objective_text()
+        enemy.queue_free()
+    
+    _resolve_plaza_sequence()
+
+
+func _plaza_item_pickup(loot_pickup: LootPickup) -> void:
+    if loot_to_collect.has(loot_pickup.get_instance_id()):
+        var loot_items: Array[Item]
+        loot_items.assign(loot_map.get(loot_pickup))
+        put_items_in_player_backpack(loot_items)
+        loot_collected.push_back(loot_pickup.get_instance_id())
+        _update_plaza_objective_text()
+        loot_pickup.queue_free()
+    
     # 4. When a mask is picked up, prompt to open inventory
     # 5. Once inventory is open, show Mask equip tutorial explaining what they do
+    _resolve_plaza_sequence()
+
+
+func _resolve_plaza_sequence() -> void:
     # 6. When all enemies are defeated and Masks are collected, trigger next sequence
-    pass
+    if loot_collected.size() == loot_to_collect.size() and enemies_defeated.size() == enemies_to_defeat.size():
+        trigger_sequence(SEQ.MINIBOSS_FIGHT)
 #endregion EXPLORE PLAZA
 
 
@@ -335,6 +406,11 @@ func escape() -> void:
     pass
 #endregion ESCAPE
 #endregion Sequence Functions
+
+
+func put_items_in_player_backpack(items: Array[Item]) -> void:
+    for item: Item in items:
+        player.inventory.inventory.add_to_backpack(item)
 
 
 func trigger_sequence(sequence: SEQ) -> void:
