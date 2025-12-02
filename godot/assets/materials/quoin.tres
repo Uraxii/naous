@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://jco7loaad8wq"]
+
+[ext_resource type="Texture2D" uid="uid://dx0w1dcr763wi" path="res://assets/materials/lines-rocky.png" id="1_vrbxu"]
+
+[resource]
+depth_draw_mode = 1
+specular_mode = 2
+albedo_color = Color(0.6300116, 0.48420614, 0.28714696, 1)
+albedo_texture = ExtResource("1_vrbxu")
+uv1_triplanar = true
+uv1_world_triplanar = true

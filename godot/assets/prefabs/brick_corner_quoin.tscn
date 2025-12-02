@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci21uimhkgdgj"]
+
+[ext_resource type="PackedScene" uid="uid://dwnbnkrwnx73o" path="res://assets/models/brick-corner-quoin.fbx" id="1_fl2fo"]
+[ext_resource type="Material" uid="uid://jco7loaad8wq" path="res://assets/materials/quoin.tres" id="2_lnuyc"]
+
+[node name="brick-corner-quoin" instance=ExtResource("1_fl2fo")]
+
+[node name="Cube_Cube_001" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_lnuyc")
+surface_material_override/1 = ExtResource("2_lnuyc")
+surface_material_override/2 = ExtResource("2_lnuyc")
+surface_material_override/3 = ExtResource("2_lnuyc")
