@@ -7,4 +7,5 @@ depth_draw_mode = 1
 specular_mode = 2
 albedo_color = Color(0.29, 0.1972, 0.20957333, 1)
 albedo_texture = ExtResource("1_c3t8s")
-uv1_scale = Vector3(1, 2, 1)
+uv1_scale = Vector3(1, 8, 1)
+uv1_world_triplanar = true
