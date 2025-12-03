@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=46 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="15_0cvc3"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="16_o0ykn"]
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="17_1c438"]
+[ext_resource type="PackedScene" uid="uid://dwvukle78pxbp" path="res://scenes/entities/control_zone.tscn" id="24_acyb3"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_mc5jl"]
 material = ExtResource("1_e5qsc")
@@ -814,6 +815,33 @@ prompt_text = "Pickup Item"
 time_to_complete = 0.1
 priority = 2
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="Horde" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.18224, 0, -88.62871)
+
+[node name="ControlZone" parent="Plaza/Horde" instance=ExtResource("24_acyb3")]
+transform = Transform3D(8, 0, 0, 0, 2.975, 0, 0, 0, 8, -0.24708557, -1.3341248, 4.4476013)
+
+[node name="HordeEnemy1" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="HordeSpawn1" type="Marker3D" parent="Plaza/Horde"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.973932, 0, 4.65744)
+
+[node name="HordeEnemy2" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="HordeSpawn2" type="Marker3D" parent="Plaza/Horde"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38363266, 0, 15.029572)
+
+[node name="HordeEnemy3" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="HordeSpawn3" type="Marker3D" parent="Plaza/Horde"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.931303, 0, -1.4191895)
 
 [node name="Player" parent="." instance=ExtResource("10_23v16")]
 unique_name_in_owner = true

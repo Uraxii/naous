@@ -1,10 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwvukle78pxbp"]
+[gd_scene load_steps=11 format=3 uid="uid://dwvukle78pxbp"]
 
 [ext_resource type="Script" uid="uid://c0o28dohsooma" path="res://scripts/entities/objects/control_zone.gd" id="1_spf4a"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_oh56c"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="2_rupwl"]
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="3_oh56c"]
 [ext_resource type="Script" uid="uid://bcj72dre6qge7" path="res://scripts/entities/interaction/entity_detector.gd" id="4_kcvsx"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rupwl"]
+properties/0/path = NodePath("Components/Body:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Components/Body:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Components/Body:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Components/Body:up_direction")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:target_id")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_kcvsx"]
 properties/0/path = NodePath("Body:position")
@@ -32,6 +49,11 @@ albedo_color = Color(0.41960785, 0.16078432, 0.3882353, 0.48235294)
 [node name="ControlZone" type="Node3D" node_paths=PackedStringArray("components")]
 script = ExtResource("1_spf4a")
 components = NodePath("ComponentManager")
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_rupwl")
+script = ExtResource("2_oh56c")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
 [node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_kcvsx")

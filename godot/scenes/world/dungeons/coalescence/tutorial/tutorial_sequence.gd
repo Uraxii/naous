@@ -413,16 +413,49 @@ func _after_draw_tutorial_closed() -> void:
 
 
 #region HORDE FIGHT
+@onready var horde_enemy_1: Archa = %HordeEnemy1
+@onready var horde_spawn_1: Marker3D = %HordeSpawn1
+@onready var horde_enemy_2: Archa = %HordeEnemy2
+@onready var horde_spawn_2: Marker3D = %HordeSpawn2
+@onready var horde_enemy_3: Archa = %HordeEnemy3
+@onready var horde_spawn_3: Marker3D = %HordeSpawn3
+var horde_enemies_to_defeat: Array
+var horde_enemies_defeated: Array
 func horde_fight() -> void:
     Globals.logger.debug("STARTING HORDE SEQUENCE")
     current_sequence = SEQ.HORDE_FIGHT
     # 1. Show "cutscene" of roars and rumbles
     # 2. Spawn some enemies and have them jump into the scene
+    horde_enemy_1.body.global_position = horde_spawn_1.global_position
+    horde_enemy_1.process_mode = Node.PROCESS_MODE_INHERIT
+    horde_enemy_2.body.global_position = horde_spawn_2.global_position
+    horde_enemy_2.process_mode = Node.PROCESS_MODE_INHERIT
+    horde_enemy_3.body.global_position = horde_spawn_3.global_position
+    horde_enemy_3.process_mode = Node.PROCESS_MODE_INHERIT
+    horde_enemies_to_defeat.push_back(horde_enemy_1)
+    horde_enemies_to_defeat.push_back(horde_enemy_2)
+    horde_enemies_to_defeat.push_back(horde_enemy_3)
     # 3. Highlight a designated area for the player to move to (should mostly be where they were)
     # 4. Prompt player to fend off the horde
     hud_layer.display_objective_hud("Fend off the horde")
     # 5. After 3 enemies are defeated, trigger next sequence
-    pass
+    horde_enemy_1.defeated.connect(_on_horde_enemy_defeated.bind(horde_enemy_1))
+    horde_enemy_2.defeated.connect(_on_horde_enemy_defeated.bind(horde_enemy_2))
+    horde_enemy_3.defeated.connect(_on_horde_enemy_defeated.bind(horde_enemy_3))
+
+
+const OFFSCREEN := Vector3(0, -1000, 0)
+func _on_horde_enemy_defeated(enemy: BaseEnemy) -> void:
+    # We're pooling these enemies, so we'll move it offscreen and re-use it later
+    enemy.body.global_position = OFFSCREEN
+    horde_enemies_defeated.push_back(enemy)
+    _resolve_initial_horde_enemies()
+
+
+func _resolve_initial_horde_enemies() -> void:
+    if horde_enemies_defeated.size() == horde_enemies_to_defeat.size():
+        trigger_sequence(SEQ.BACKUP_ARRIVES)
+    
 #endregion HORDE FIGHT
 
 
