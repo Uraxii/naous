@@ -4,7 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
 [ext_resource type="Material" uid="uid://cpccsiuabq0sr" path="res://assets/materials/waterfall-material.tres" id="1_ppcyp"]
 [ext_resource type="Material" uid="uid://xfswcd1ua7te" path="res://assets/materials/uv_scroller_material.tres" id="2_ppcyp"]
-[ext_resource type="Script" uid="uid://do4x4l8nwjdip" path="res://scripts/entities/sky_rotate.gd" id="3_1l721"]
+[ext_resource type="Script" path="res://scripts/entities/sky_rotate.gd" id="3_1l721"]
 [ext_resource type="Material" uid="uid://crjxaors8r61l" path="res://assets/materials/splash-particle-material.tres" id="4_pyk41"]
 [ext_resource type="Material" uid="uid://inv5fl1j6wgv" path="res://assets/materials/heightmap-terrain-material.tres" id="5_8y67n"]
 [ext_resource type="ArrayMesh" uid="uid://0m02442vtb2s" path="res://assets/models/heightmap-lake-natalie.obj" id="5_fydbq"]
@@ -22,10 +22,10 @@
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="18_bef4i"]
 [ext_resource type="PackedScene" uid="uid://cy6gtgeup1h6e" path="res://assets/prefabs/bunting.tscn" id="19_abejf"]
 [ext_resource type="PackedScene" uid="uid://d1vsrqg2pt0xc" path="res://assets/prefabs/simpletown.tscn" id="19_vboxf"]
-[ext_resource type="PackedScene" uid="uid://k8t2ynb36rvi" path="res://assets/prefabs/stairs.tscn" id="20_q55i7"]
-[ext_resource type="Material" uid="uid://rknsm0d0mgvc" path="res://assets/materials/ink-cloud1.tres" id="22_4xysy"]
-[ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="22_xswqy"]
-[ext_resource type="Material" uid="uid://d38i2dxauqkl0" path="res://assets/materials/ink-cloud3.tres" id="23_1l721"]
+[ext_resource type="PackedScene" path="res://assets/prefabs/stairs.tscn" id="20_q55i7"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud1.tres" id="22_4xysy"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud2.tres" id="22_xswqy"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud3.tres" id="23_1l721"]
 [ext_resource type="ArrayMesh" uid="uid://owe4sfo5l6w2" path="res://assets/models/tree_big.obj" id="25_tbnxh"]
 [ext_resource type="ArrayMesh" uid="uid://cscyy7keqvkkp" path="res://assets/models/sierpinski_triangles.obj" id="26_1ukf6"]
 [ext_resource type="Material" uid="uid://xnfrp5vnr1au" path="res://assets/materials/tree-material.tres" id="26_abejf"]
@@ -1053,13 +1053,11 @@ multimesh = SubResource("MultiMesh_kff60")
 script = ExtResource("32_kff60")
 
 [node name="grassGeneratorSourceMesh" type="MeshInstance3D" parent="grassGenerator"]
-visible = false
 mesh = SubResource("ArrayMesh_kff60")
 skeleton = NodePath("")
 
 [node name="grassGeneratorSpawnZone" type="MeshInstance3D" parent="grassGenerator"]
 transform = Transform3D(6.3504076, -1.5449573, -3.3766113e-08, 0, -8.742278e-08, 1, -7.7247863, -1.2700815, -2.7758514e-08, 13.25, 2.25, 2.5)
-visible = false
 mesh = ExtResource("7_47l1t")
 skeleton = NodePath("../..")
 

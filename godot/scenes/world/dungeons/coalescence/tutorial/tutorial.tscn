@@ -616,5 +616,137 @@ time_to_complete = 0.1
 priority = 2
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
 
+[node name="CrystalCornerArea" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.45561, 2.062158, -47.715546)
+
+[node name="CrystalCornerArcha" parent="Plaza/CrystalCornerArea" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="CrystalCornerSpawn" type="Marker3D" parent="Plaza/CrystalCornerArea"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6925049, 0, 5.1066437)
+
+[node name="CrystalCornerPickup" type="Node3D" parent="Plaza/CrystalCornerArea" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 5.2042694, 0.56630945, 8.079422)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("CrystalLootEntity")
+
+[node name="CrystalLootEntity" type="Node3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_2e0i0")
+
+[node name="ComponentManager" type="Node" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Pickup Item"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="FountainTreeArea" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8726501, -3.0396135, -10.771637)
+
+[node name="FountainArcha" parent="Plaza/FountainTreeArea" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="FountainArchaSpawn" type="Marker3D" parent="Plaza/FountainTreeArea"]
+unique_name_in_owner = true
+transform = Transform3D(0.9000071, -0.43587524, 0, 0.43587524, 0.9000071, 0, 0, 0, 1, -0.20710945, -3.1389558, 2.8294678)
+
+[node name="FountainLootPickup" type="Node3D" parent="Plaza/FountainTreeArea" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 5.530877, -3.7763383, -11.359955)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("FountainLootEntity")
+
+[node name="FountainLootEntity" type="Node3D" parent="Plaza/FountainTreeArea/FountainLootPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_2e0i0")
+
+[node name="ComponentManager" type="Node" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Pickup Item"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
 [node name="Player" parent="." instance=ExtResource("10_23v16")]
 unique_name_in_owner = true

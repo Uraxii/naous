@@ -260,9 +260,15 @@ func _on_player_healed(_new: float, _old: float) -> void:
 
 #region EXPLORE PLAZA
 @onready var pyramid_archa: Archa = %PyramidArcha
-@onready var pyramid_loot_pickup: LootPickup = %PyramidLootPickup
+@onready var pyramid_archa_spawn: Marker3D = %PyramidArchaSpawn
+@onready var crystal_corner_archa: Archa = %CrystalCornerArcha
+@onready var crystal_corner_spawn: Marker3D = %CrystalCornerSpawn
+@onready var fountain_archa: Archa = %FountainArcha
+@onready var fountain_archa_spawn: Marker3D = %FountainArchaSpawn
 @onready var spawn_map := {
-    pyramid_archa: %PyramidArchaSpawn,
+    pyramid_archa: pyramid_archa_spawn,
+    crystal_corner_archa: crystal_corner_spawn,
+    fountain_archa: fountain_archa_spawn,
 }
 var enemies_to_defeat: Array
 var enemies_defeated: Array
@@ -271,8 +277,13 @@ const TORSO_ARMOR = preload("uid://cma2nvc1vdj5o")
 const SHOULDER_ARMOR = preload("uid://bwnrnbwg67vmy")
 const MAGIC_MASK = preload("uid://bw6vcgtg5adyi")
 const LEG_ARMOR = preload("uid://xg4koadm3yy3")
+@onready var pyramid_loot_pickup: LootPickup = %PyramidLootPickup
+@onready var crystal_corner_pickup: LootPickup = %CrystalCornerPickup
+@onready var fountain_loot_pickup: LootPickup = %FountainLootPickup
 @onready var loot_map := {
-    %PyramidLootPickup: [TORSO_ARMOR],
+    pyramid_loot_pickup: [TORSO_ARMOR],
+    crystal_corner_pickup: [SHOULDER_ARMOR, LEG_ARMOR],
+    fountain_loot_pickup: [MAGIC_MASK],
 }
 var loot_to_collect: Array
 var loot_collected: Array
@@ -349,6 +360,7 @@ func _resolve_plaza_sequence() -> void:
 func miniboss_fight() -> void:
     Globals.logger.debug("STARTING MINIBOSS SEQUENCE")
     current_sequence = SEQ.MINIBOSS_FIGHT
+    hud_layer.display_objective_hud("Quell the new threat")
     # 1. Show "cutscene" of miniboss entering the area
     # 2. Prompt player to defeat the miniboss
     # 3. When the enemy is defeated, trigger next sequence
