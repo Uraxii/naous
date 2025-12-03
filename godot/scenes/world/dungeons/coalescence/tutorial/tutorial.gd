@@ -4,6 +4,7 @@ extends Node3D
 @onready var tutorial_sequence: TutorialSequence = %TutorialSequence
 @onready var first_enemy: Archa = %FirstEnemy
 @onready var pyramid_archa: Archa = %PyramidArcha
+@onready var miniboss_enemy: Archa = %MinibossEnemy
 @onready var crystal_corner_archa: Archa = %CrystalCornerArcha
 @onready var fountain_archa: Archa = %FountainArcha
 
@@ -19,6 +20,7 @@ func _move_enemies_offscreen() -> void:
     var enemies := [
         first_enemy,
         pyramid_archa, crystal_corner_archa, fountain_archa,
+        miniboss_enemy,
     ]
     for enemy: Archa in enemies:
         enemy.global_position = OFFSCREEN

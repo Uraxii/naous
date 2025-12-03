@@ -748,5 +748,72 @@ time_to_complete = 0.1
 priority = 2
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
 
+[node name="Miniboss" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.23199, 0.22426891, -87.770706)
+
+[node name="MinibossEnemy" parent="Plaza/Miniboss" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="MinibossSpawn" type="Marker3D" parent="Plaza/Miniboss"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.191491, -1.9073486e-06, 2.0243225)
+
+[node name="MinibossLootPickup" type="Node3D" parent="Plaza/Miniboss" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 0, -127.580315, 0)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("MinibossLootEntity")
+
+[node name="MinibossLootEntity" type="Node3D" parent="Plaza/Miniboss/MinibossLootPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_2e0i0")
+
+[node name="ComponentManager" type="Node" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Pickup Item"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
 [node name="Player" parent="." instance=ExtResource("10_23v16")]
 unique_name_in_owner = true

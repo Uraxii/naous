@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EchoItem" load_steps=3 format=3 uid="uid://c14ouqn3wnjlt"]
+
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="1_awpet"]
+[ext_resource type="Texture2D" uid="uid://bvw6k3hqwoko0" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/miniboss_loots/splash_echo_icon.tres" id="1_l4moy"]
+
+[resource]
+script = ExtResource("1_awpet")
+name = &"Flow Sync"
+icon = ExtResource("1_l4moy")
+metadata/_custom_type_script = "uid://chxnjdgyds7hd"

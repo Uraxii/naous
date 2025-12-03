@@ -273,17 +273,18 @@ func _on_player_healed(_new: float, _old: float) -> void:
 var enemies_to_defeat: Array
 var enemies_defeated: Array
 
-const TORSO_ARMOR = preload("uid://cma2nvc1vdj5o")
-const SHOULDER_ARMOR = preload("uid://bwnrnbwg67vmy")
-const MAGIC_MASK = preload("uid://bw6vcgtg5adyi")
-const LEG_ARMOR = preload("uid://xg4koadm3yy3")
+const TORSO_ARMOR := preload("uid://cma2nvc1vdj5o")
+const SHOULDER_ARMOR := preload("uid://bwnrnbwg67vmy")
+const MAGIC_MASK := preload("uid://bw6vcgtg5adyi")
+const LEG_ARMOR := preload("uid://xg4koadm3yy3")
+const PHYSICAL_MASK := preload("uid://cdk7rbobh16a1")
 @onready var pyramid_loot_pickup: LootPickup = %PyramidLootPickup
 @onready var crystal_corner_pickup: LootPickup = %CrystalCornerPickup
 @onready var fountain_loot_pickup: LootPickup = %FountainLootPickup
 @onready var loot_map := {
-    pyramid_loot_pickup: [TORSO_ARMOR],
-    crystal_corner_pickup: [SHOULDER_ARMOR, LEG_ARMOR],
-    fountain_loot_pickup: [MAGIC_MASK],
+    pyramid_loot_pickup: [PHYSICAL_MASK],
+    crystal_corner_pickup: [MAGIC_MASK],
+    fountain_loot_pickup: [SHOULDER_ARMOR, LEG_ARMOR, TORSO_ARMOR],
 }
 var loot_to_collect: Array
 var loot_collected: Array
@@ -357,14 +358,33 @@ func _resolve_plaza_sequence() -> void:
 
 
 #region MINIBOSS FIGHT
+@onready var miniboss_enemy: Archa = %MinibossEnemy
+@onready var miniboss_spawn: Marker3D = %MinibossSpawn
 func miniboss_fight() -> void:
     Globals.logger.debug("STARTING MINIBOSS SEQUENCE")
     current_sequence = SEQ.MINIBOSS_FIGHT
-    hud_layer.display_objective_hud("Quell the new threat")
     # 1. Show "cutscene" of miniboss entering the area
-    # 2. Prompt player to defeat the miniboss
-    # 3. When the enemy is defeated, trigger next sequence
-    pass
+    miniboss_enemy.body.global_position = miniboss_spawn.global_position
+    miniboss_enemy.process_mode = Node.PROCESS_MODE_INHERIT
+    miniboss_enemy.defeated.connect(_miniboss_defeated)
+    # 2. Prompt player to defeat the minibossi
+    hud_layer.display_objective_hud("Quell the new threat")
+
+
+@onready var miniboss_loot_pickup: LootPickup = %MinibossLootPickup
+func _miniboss_defeated() -> void:
+    # 3. When the enemy is defeated, drop new echo
+    miniboss_loot_pickup.global_position = miniboss_enemy.body.global_position
+    miniboss_loot_pickup.collected.connect(_miniboss_gear_collected)
+    miniboss_enemy.queue_free()
+
+
+const SPLASH_ECHO := preload("uid://c14ouqn3wnjlt")
+func _miniboss_gear_collected() -> void:
+    # 3.1 Show player a Draw tutorial
+    miniboss_loot_pickup.queue_free()
+    put_items_in_player_backpack([SPLASH_ECHO])
+    trigger_sequence(SEQ.DRAW_TUTORIAL)
 #endregion MINIBOSS FIGHT
 
 
@@ -374,10 +394,21 @@ func draw_tutorial() -> void:
     current_sequence = SEQ.DRAW_TUTORIAL
     # 1. The defeated miniboss drops a new Echo (with a higher Draw cost)
     # 2. Prompt player to open the inventory
+    hud_layer.display_objective_hud("Open inventory")
+    menu_layer.inventory_opened.connect(_start_draw_tutorial_with_inventory_open)
+
+
+func _start_draw_tutorial_with_inventory_open() -> void:
+    menu_layer.inventory_opened.disconnect(_start_draw_tutorial_with_inventory_open)
     # 3. Once inventory is open, show tutorial explaining Draw cost and how it limits how many/what Echoes you can have equipped.
     # 4. Prompt user to adjust Echoes as desired and then close inventory
+    menu_layer.inventory_closed.connect(_after_draw_tutorial_closed)
+
+
+func _after_draw_tutorial_closed() -> void:
     # 5. When inventory is closed, trigger next sequence
-    pass
+    menu_layer.inventory_closed.disconnect(_after_draw_tutorial_closed)
+    trigger_sequence(SEQ.HORDE_FIGHT)
 #endregion DRAW TUTORIAL
 
 
@@ -389,6 +420,7 @@ func horde_fight() -> void:
     # 2. Spawn some enemies and have them jump into the scene
     # 3. Highlight a designated area for the player to move to (should mostly be where they were)
     # 4. Prompt player to fend off the horde
+    hud_layer.display_objective_hud("Fend off the horde")
     # 5. After 3 enemies are defeated, trigger next sequence
     pass
 #endregion HORDE FIGHT
