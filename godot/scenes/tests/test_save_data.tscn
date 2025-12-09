@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccx2pl042lp5n"]
+
+[ext_resource type="Script" uid="uid://3i3hrvt88njq" path="res://scripts/tests/test_save_data.gd" id="1_0chro"]
+[ext_resource type="Resource" uid="uid://d0r5e1ispxyld" path="res://resources/entities/test_entity.tres" id="2_hpqmu"]
+
+[node name="TestSaveData" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0chro")
+entity_data = ExtResource("2_hpqmu")
