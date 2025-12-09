@@ -6,4 +6,5 @@
 
 [resource]
 script = ExtResource("1_cs1ou")
+tick_rate = 1
 metadata/_custom_type_script = "uid://bkckqpe71ier5"
