@@ -1,7 +1,15 @@
 class_name Entity extends Node3D
 
+enum EntityType {
+    UNKNOWN,
+    PLAYER,
+    NPC,
+    PROJECTILE,
+}
+
 #region Variables
 signal change_control(is_local: bool)
+@export var type := EntityType.UNKNOWN
 
 @export_category("Components")
 @export var components:   ComponentManager
@@ -128,17 +136,18 @@ func hookup_components() -> void:
     if not components: components = find_child("Components")
 
     if components:
-        if not health:        health       = components.find("Health")
-        if not speed:         speed        = components.find("Speed")
-        if not gravity:       gravity      = components.find("Gravity")
-        if not jump_force:    jump_force   = components.find("JumpForce")
-        if not spellbook:     spellbook    = components.find("Spellbook")
-        if not body:          body         = components.find("Body")
-        if not move:          move         = components.find("Move")
-        if not inventory:     inventory    = components.find("Inventory")
-        if not interaction:   interaction  = components.find("Interaction")
-        if not targeting:     targeting    = components.find("TargetingSystem")
-        
+        if not health:          health       = components.find("Health")
+        if not speed:           speed        = components.find("Speed")
+        if not gravity:         gravity      = components.find("Gravity")
+        if not jump_force:      jump_force   = components.find("JumpForce")
+        if not spellbook:       spellbook    = components.find("Spellbook")
+        if not body:            body         = components.find("Body")
+        if not move:            move         = components.find("Move")
+        if not inventory:       inventory    = components.find("Inventory")
+        if not interaction:     interaction  = components.find("Interaction")
+        if not targetable:      targetable   = components.find("Targetable")
+        if not targeting:       targeting    = components.find("TargetingSystem")
+
         # Component signals
         if is_instance_valid(targeting):
             targeting.new_target_selected.connect(_new_target_selected)
@@ -146,7 +155,7 @@ func hookup_components() -> void:
 
 func _new_target_selected(new_target: Targetable) -> void:
     if is_instance_valid(new_target):
-        set_target_id(new_target.get_instance_id())
+        set_target_id(new_target.entity.id)
     else:
         set_target_id(0) # Some default, adjust if needed
 #endregion
