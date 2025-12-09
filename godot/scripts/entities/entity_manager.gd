@@ -10,7 +10,7 @@ var pool: Dictionary[int, Entity] = {}
 var _ids := IdPool.new()
 
 
-@rpc("call_local")
+@rpc("call_local", "any_peer")
 func despawn(id: int) -> void:
     if not multiplayer.is_server():
         return
@@ -42,22 +42,19 @@ func _ready():
     spawned.connect(_on_client_spawn)
 
 
-func _spawn_custom(data: Dictionary) -> Node:
+func _spawn_custom(serialized_spawn_msg: Dictionary) -> Node:
     # TODO: CHANGE THIS!!! PLAYERS SHOULD NOT BE ABLE TO PASS IN AN ABITRARY PATH!!!
-    var scene = load(data.scene)
+    var msg := MsgSpawnEntity.new()
+    msg.deserialize(serialized_spawn_msg.payload)
+    
+    var scene = load(msg.resource_path)
     var entity: Entity = scene.instantiate()
 
-    if data.get("type") == "player":
-        entity.transform_sync.set_multiplayer_authority(data.authority)
-        entity.name = data.id
-        entity.display_name = data.character_data.name
-
-    if data.has("position"):
-        print_debug("Set entity pos to %s" % data.position)
-        entity.position = data.position
-
-    if "active_character" in data:
-        entity.active_character = data["active_character"]
+    match entity.type:
+        entity.EntityType.PLAYER:
+            entity.transform_sync.set_multiplayer_authority(msg.authority)
+            entity.name = "%d" % msg.id
+            entity.display_name = msg.display_name
 
     var id = _ids.lease()
     entity.id = id
