@@ -1,8 +1,9 @@
-class_name SerializableEntityData extends Resource
+class_name EntityData extends Resource
 
 @export var id:         EntityIdData
 @export var stats:      StatsData
 @export var inventory:  Inventory
+@export var spellbook:  SpellbookData
 
 
 func serialize() -> Dictionary:
@@ -10,9 +11,31 @@ func serialize() -> Dictionary:
         "id":           id.serialize(),
         "stats":        stats.serialize(),
         "inventory":    inventory.serialize(),
+        "spellbook":    spellbook.serialize(),
     }
 
 
 func deserialize(data: Dictionary) -> void:
-    #for data in
-    pass
+    var id_data = data.get("id")
+    if id_data:
+        id.deserialize(id_data)
+    else:
+        id = EntityIdData.new()
+
+    var stats_data = data.get("stats")
+    if stats_data:
+        stats.deserialize(stats_data)
+    else:
+        stats = StatsData.new()
+
+    var inventory_data = data.get("inventory")
+    if inventory_data:
+        inventory.deserialize(inventory_data)
+    else:
+        inventory = Inventory.new()
+
+    var spellbook_data = data.get("spellbook")
+    if spellbook_data:
+        spellbook.deserialize(spellbook_data)
+    else:
+        spellbook = SpellbookData.new()
