@@ -165,3 +165,13 @@ func swap_backpack_item_slots(slot_index_A: int, slot_index_B: int) -> void:
 func backpack_slot_valid(slot_index: int) -> bool:
     return slot_index < 0 or slot_index >= backpack.size()
 #endregion
+
+#region Serialization Logic
+func serialize() -> Dictionary:
+    push_warning("Inventory serialization not implemented.")
+    return {}
+
+
+func deserialize(data: Dictionary) -> void:
+    push_warning("Inventory deserialization not implemented.")
+#endregion
