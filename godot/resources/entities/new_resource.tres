@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="2_qwow1"]
 [ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="3_lgivs"]
 [ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="4_ji4j5"]
-[ext_resource type="Script" uid="uid://bbk30rpwgjsmv" path="res://scripts/entities/resource_scripts/stats_data.gd" id="6_ltd4a"]
+[ext_resource type="Script" uid="uid://c4w8yg88aqeon" path="res://scripts/entities/resource_scripts/stats_data.gd" id="6_ltd4a"]
 
 [sub_resource type="Resource" id="Resource_fbxjs"]
 script = ExtResource("3_lgivs")
