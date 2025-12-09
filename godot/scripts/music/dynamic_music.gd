@@ -92,7 +92,6 @@ func _process(delta: float) -> void:
 			var player = get_player(track)
 			if player:
 				track.do_intensity_process(player.stream)
-				
 #endregion
 
 #region Tweens

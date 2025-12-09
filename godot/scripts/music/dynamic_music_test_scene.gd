@@ -62,6 +62,23 @@ func _populate_synchronized_layers(stream:AudioStreamSynchronized) -> void:
 		
 		slider.value_changed.connect(_on_sync_layer_slider_changed.bind(stream, i))
 		vbox.add_child(slider)
+		
+		check_button.set_meta(&"layer_id", i)
+		slider.set_meta(&"layer_id", i)
+		
+func _update_synchronized_layers() -> void:
+	await get_tree().process_frame
+	var stream = Music.get_player(get_selected_track()).stream
+	if stream is AudioStreamSynchronized:
+		for child in controller_sync_layers.get_child(0).get_children():
+			var layer_id = child.get_meta(&"layer_id", -1)
+			if layer_id >= 0:
+				if child is HSlider:
+					child.value = db_to_linear(stream.get_sync_stream_volume(layer_id))
+				elif child is CheckButton:
+					child.button_pressed = true if stream.get_sync_stream_volume(layer_id) > linear_to_db(0.1) else false
+					
+				print_debug(layer_id, ": ", stream.get_sync_stream_volume(layer_id))
 
 func _repopulate_tracks_playing() -> void:
 	for child in tracks_playing.get_children():
@@ -152,3 +169,6 @@ func _on_intensity_h_slider_drag_ended(value_changed: bool) -> void:
 	if track:
 		track.set_intensity(int(intensity_h_slider.value))
 		update_intensity_label(track)
+		
+	#await get_tree().process_frame
+	call_deferred(&"_update_synchronized_layers")
