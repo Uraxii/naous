@@ -4,7 +4,7 @@ var selected_track_index:int = 0:
 	set(value):
 		if Music.tracks.size() > 0:
 			selected_track_index = wrapi(value, 0, Music.tracks.size())
-			selected_track_label.text = Music.tracks[selected_track_index].title
+			_on_selected_track_changed()
 		else:
 			selected_track_index = -1
 			selected_track_label.text = "No tracks!"
@@ -13,31 +13,37 @@ var selected_track_index:int = 0:
 @onready var controller_sync_layers: PanelContainer = %ControllerSyncLayers # parent of vbox for layers
 @onready var tracks_playing: VBoxContainer = %TracksPlaying
 
-func _ready() -> void: selected_track_index = 0 # So the UI is populated.
+@onready var intensity_h_slider: HSlider = %IntensityHSlider
+@onready var intensity_slider_label: Label = %IntensitySliderLabel
+
+
+func _ready() -> void:
+	selected_track_index = 0 # So the UI is populated.
+	update_intensity_slider()
+	update_intensity_label()
 
 func start_track(track:DynamicMusicTrack) -> void:
-	var _player = Music.start_track(track)
+	var player = Music.start_track(track)
 	
 func stop_track(track:DynamicMusicTrack) -> void:
 	var player = Music.stop_track(track)
-	if track.file is AudioStreamSynchronized:
-		_populate_synchronized_layers(player.stream)
 	
 func _clear_synchronized_layers() -> void:
 	var vbox:VBoxContainer = controller_sync_layers.get_child(0)
 	for child in vbox.get_children():
-		if child is CheckButton:
-			child.free()
+		if child.has_meta(&"template"):
+			if child.get_meta(&"template", false):
+				continue
+		child.free()
 		
 func _populate_synchronized_layers(stream:AudioStreamSynchronized) -> void:
 	## Generate UI for interacting with our AudioStreamSynchronized
 	var vbox:VBoxContainer = controller_sync_layers.get_child(0)
 	for i in stream.stream_count:
-		## Check button on/off
 		var layer:AudioStream = stream.get_sync_stream(i)
-		# Make a toggle
-		var check_button := CheckButton.new()
 		
+		# Make a toggle check button on/off
+		var check_button := CheckButton.new()
 		check_button.text = layer.resource_path.get_file() # This is just for UI purposes.
 		check_button.button_pressed = true if stream.get_sync_stream_volume(i) > linear_to_db(0.1) else false
 		
@@ -46,7 +52,6 @@ func _populate_synchronized_layers(stream:AudioStreamSynchronized) -> void:
 		
 		## Volume slider
 		var slider:HSlider = HSlider.new()
-		
 		slider.step = 0.01 # 1%
 		slider.tick_count = 5
 		slider.ticks_position = Slider.TICK_POSITION_CENTER
@@ -76,10 +81,10 @@ func _repopulate_tracks_playing() -> void:
 			slider.audio_player = item
 			tracks_playing.add_child(slider)
 			
-func _process(delta: float) -> void:
-	for child in tracks_playing.get_children():
-		if child is HSlider:
-			pass
+#func _process(delta: float) -> void:
+	#for child in tracks_playing.get_children():
+		#if child is HSlider:
+			#pass
 	
 func _on_sync_check_button_toggled(is_pressed:bool, stream:AudioStreamSynchronized, id:int) -> void:
 	stream.set_sync_stream_volume(id, linear_to_db(1.0 if is_pressed else 0.0))
@@ -90,12 +95,30 @@ func _on_sync_layer_slider_changed(value:float, stream:AudioStreamSynchronized, 
 func _on_playback_slider_changed(value:float, player:AudioStreamPlayer) -> void:
 	player.seek(value)
 	
+func get_selected_track() -> DynamicMusicTrack:
+	return Music.tracks[selected_track_index]
+	
+func _on_selected_track_changed() -> void:
+	var track = get_selected_track()
+	if track:
+		selected_track_label.text = track.title
+		
+		var player = Music.get_player(track)
+		if player:
+			update_intensity_slider()
+			update_intensity_label()
+			
+			if track.file is AudioStreamSynchronized:
+				_populate_synchronized_layers(player.stream)
+			else:
+				_clear_synchronized_layers()
+	
 func _on_start_playback_pressed() -> void:
-	start_track(Music.tracks[selected_track_index])
+	start_track(get_selected_track())
 	_repopulate_tracks_playing()
 		
 func _on_stop_playback_pressed() -> void:
-	stop_track(Music.tracks[selected_track_index])
+	stop_track(get_selected_track())
 	_repopulate_tracks_playing()
 
 func _on_track_select_prev_pressed() -> void:
@@ -103,3 +126,29 @@ func _on_track_select_prev_pressed() -> void:
 
 func _on_track_select_next_pressed() -> void:
 	selected_track_index += 1
+
+## Intensity adjustment
+
+## Sets the slider to the track's intensity property
+func update_intensity_slider() -> void:
+	var track = get_selected_track()
+	if track:
+		intensity_h_slider.value = track.intensity
+		update_intensity_label(track)
+		
+## Sets the label's text to the slider's current value.
+func update_intensity_label(track: DynamicMusicTrack = null) -> void:
+	if track:
+		intensity_slider_label.text = str(track.intensity) + "%"
+	else:
+		intensity_slider_label.text = str(intensity_h_slider.value) + "%"
+
+
+func _on_intensity_h_slider_value_changed(value: float) -> void:
+	update_intensity_label()
+
+func _on_intensity_h_slider_drag_ended(value_changed: bool) -> void:
+	var track = get_selected_track()
+	if track:
+		track.set_intensity(int(intensity_h_slider.value))
+		update_intensity_label(track)

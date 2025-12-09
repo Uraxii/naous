@@ -1,4 +1,4 @@
-@tool class_name DynamicMusicManager extends Node
+class_name DynamicMusicManager extends Node
 
 const BUS_NAME:StringName = &"Music"
 ## This is their position in the mixer effect stack. Ensure the tracks align.
@@ -85,7 +85,14 @@ func _process(delta: float) -> void:
 		pass
 	else:
 		pass
-	pass
+	
+	for track in tracks:
+		if track.is_playing && track.use_intensity:
+			# Per layer adjustments (intensity)
+			var player = get_player(track)
+			if player:
+				track.do_intensity_process(player.stream)
+				
 #endregion
 
 #region Tweens
@@ -303,7 +310,7 @@ func low_shelf(frequency:float, gain:float, transition:float = 0.0) -> void:
 #region Audio Players
 func get_player(track:DynamicMusicTrack) -> Variant:
 	if track.treat_positional:
-		
+		## DEPRECATED
 		for player:AudioStreamPlayer3D in positional_root.get_children():
 			if player.stream == track.file:
 				return player
@@ -348,6 +355,7 @@ func clear_all_stopped_tracks() -> void:
 			player.queue_free()
 
 func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
+	track.is_playing = true
 	var player = get_player(track)
 	player.play()
 		
@@ -357,6 +365,7 @@ func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	return player
 	
 func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
+	track.is_playing = false
 	var player = get_player(track)
 	player.stop()
 		

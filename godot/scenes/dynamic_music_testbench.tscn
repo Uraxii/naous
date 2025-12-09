@@ -1,0 +1,335 @@
+[gd_scene load_steps=24 format=3 uid="uid://fkfyhnng56ic"]
+
+[ext_resource type="Script" uid="uid://c8vuvxm8pbrf2" path="res://scripts/music/dynamic_music_test_scene.gd" id="1_8abuy"]
+[ext_resource type="PackedScene" uid="uid://dgl2tc7u5oid2" path="res://scenes/dynamic_music.tscn" id="2_nvxtv"]
+[ext_resource type="AudioStream" uid="uid://htobeesip2qa" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 1.ogg" id="3_w638y"]
+[ext_resource type="AudioStream" uid="uid://by4la1ljato1d" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 3.ogg" id="4_wasvt"]
+[ext_resource type="AudioStream" uid="uid://48u8uru081xt" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 5.ogg" id="5_c5fp7"]
+[ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="6_nvxtv"]
+
+[sub_resource type="SystemFont" id="SystemFont_8abuy"]
+font_names = PackedStringArray("Lucida Sans Typewriter")
+generate_mipmaps = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkott"]
+bg_color = Color(0.34968925, 0.34968933, 0.3496893, 0.25882354)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wasvt"]
+draw_center = false
+border_width_left = 1
+border_width_right = 1
+border_width_bottom = 3
+border_color = Color(0.8, 0.8, 0.8, 0.63529414)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w638y"]
+bg_color = Color(0.8324741, 0.8324741, 0.832474, 0.25882354)
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvxtv"]
+bg_color = Color(0.7017301, 0.7017301, 0.7017301, 0.25882354)
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5fp7"]
+bg_color = Color(1, 1, 1, 0.93333334)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_size = 1
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_8abuy"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.051805336)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nvxtv"]
+gradient = SubResource("Gradient_8abuy")
+width = 16
+height = 16
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8abuy"]
+gradient = SubResource("Gradient_8abuy")
+width = 20
+height = 20
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5qv2"]
+bg_color = Color(0.575848, 0.8565228, 0.81014466, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtk23"]
+bg_color = Color(0.44650003, 0.95, 0.86608326, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8abuy"]
+color = Color(0.2046, 0.2882, 0.33, 1)
+thickness = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8abuy"]
+bg_color = Color(0.12460001, 0.119, 0.14, 0.7058824)
+border_width_left = 50
+border_width_right = 50
+border_color = Color(0.32933334, 0.312, 0.52, 0)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+corner_detail = 10
+
+[sub_resource type="Theme" id="Theme_nvxtv"]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(0.47202516, 0.47202522, 0.47202516, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 1
+Button/font_sizes/font_size = 18
+Button/fonts/font = SubResource("SystemFont_8abuy")
+Button/styles/disabled = SubResource("StyleBoxFlat_dkott")
+Button/styles/focus = SubResource("StyleBoxFlat_wasvt")
+Button/styles/hover = SubResource("StyleBoxFlat_w638y")
+Button/styles/normal = SubResource("StyleBoxFlat_nvxtv")
+Button/styles/pressed = SubResource("StyleBoxFlat_c5fp7")
+HSlider/constants/tick_offset = 10
+HSlider/icons/grabber = SubResource("GradientTexture2D_nvxtv")
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = SubResource("GradientTexture2D_8abuy")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_q5qv2")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_vtk23")
+HSlider/styles/slider = SubResource("StyleBoxLine_8abuy")
+Label/fonts/font = SubResource("SystemFont_8abuy")
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 40
+MarginContainer/constants/margin_right = 40
+MarginContainer/constants/margin_top = 20
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_8abuy")
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_vqrw5"]
+stream_count = 3
+stream_0/stream = ExtResource("3_w638y")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("4_wasvt")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("5_c5fp7")
+stream_2/volume = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_8abuy"]
+font_size = 19
+
+[sub_resource type="QuadMesh" id="QuadMesh_hb3m7"]
+size = Vector2(15, 15)
+
+[node name="DynamicMusicTestScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_nvxtv")
+script = ExtResource("1_8abuy")
+
+[node name="DynamicMusic" parent="." instance=ExtResource("2_nvxtv")]
+
+[node name="SynchronizedPrototype" type="AudioStreamPlayer" parent="DynamicMusic"]
+stream = SubResource("AudioStreamSynchronized_vqrw5")
+bus = &"Music"
+
+[node name="BACKGROUND" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_nvxtv")
+expand_mode = 4
+
+[node name="Controls" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Controller" type="PanelContainer" parent="Controls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+
+[node name="PrevNext" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Prev" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Previous"
+
+[node name="Spacer" type="Control" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Next" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Next"
+
+[node name="SelectedTrack" type="Label" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "- selection -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartStop" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="StopPlayback" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stop"
+
+[node name="StartPlayback" type="Button" parent="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start"
+
+[node name="PlayingTracks" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks/VBoxContainer"]
+layout_mode = 2
+text = "Player Instances:"
+horizontal_alignment = 1
+
+[node name="TracksPlaying" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer/PlayingTracks/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IntensityWindow" type="PanelContainer" parent="Controls/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer2/IntensityWindow"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Intensity"
+
+[node name="MarginContainer" type="MarginContainer" parent="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="IntensityHSlider" type="HSlider" parent="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+value = 25.0
+rounded = true
+tick_count = 11
+ticks_on_borders = true
+
+[node name="IntensitySliderLabel" type="Label" parent="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "20%"
+label_settings = SubResource("LabelSettings_8abuy")
+horizontal_alignment = 1
+
+[node name="ControllerSyncLayers" type="PanelContainer" parent="Controls/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Layers" type="VBoxContainer" parent="Controls/HBoxContainer/VBoxContainer2/ControllerSyncLayers"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Controls/HBoxContainer/VBoxContainer2/ControllerSyncLayers/Layers"]
+layout_mode = 2
+text = "Synchronized Stream Layers"
+horizontal_alignment = 1
+metadata/template = true
+
+[node name="Root" type="Node3D" parent="."]
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Root"]
+
+[node name="Camera3D" type="Camera3D" parent="Root"]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 15, 15, 15)
+current = true
+size = 30.0
+
+[node name="World" type="Node3D" parent="Root"]
+
+[node name="Floor" type="MeshInstance3D" parent="Root/World"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_hb3m7")
+skeleton = NodePath("../..")
+
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext/Prev" to="." method="_on_track_select_prev_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/PrevNext/Next" to="." method="_on_track_select_next_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop/StopPlayback" to="." method="_on_stop_playback_pressed"]
+[connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop/StartPlayback" to="." method="_on_start_playback_pressed"]
+[connection signal="drag_ended" from="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer/MarginContainer/HBoxContainer/IntensityHSlider" to="." method="_on_intensity_h_slider_drag_ended"]
+[connection signal="value_changed" from="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer/MarginContainer/HBoxContainer/IntensityHSlider" to="." method="_on_intensity_h_slider_value_changed"]
+
+[editable path="DynamicMusic"]

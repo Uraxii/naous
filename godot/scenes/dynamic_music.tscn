@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_xno0y"]
 [ext_resource type="Resource" uid="uid://e26byi4f045n" path="res://assets/music/01-Not So Still.tres" id="3_wr1r5"]
 [ext_resource type="AudioStream" uid="uid://psvgua4141k" path="res://assets/music/02 Ambivalent Fellow/02 - Ambivalent Fellow - Complete.mp3" id="4_02qho"]
+[ext_resource type="Resource" uid="uid://dbkj5mkwehrw4" path="res://assets/music/combat.tres" id="5_ltqrd"]
 [ext_resource type="Script" uid="uid://chopagi41a16x" path="res://scripts/music/dynamic_music.gd" id="15_3ovdk"]
 [ext_resource type="AudioStream" uid="uid://d1mxe5jdtpok0" path="res://assets/music/03 Combat 1/Combat.ogg" id="16_o8nnl"]
 
@@ -12,19 +13,13 @@ file = ExtResource("4_02qho")
 title = "Ambivalence"
 metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
 
-[sub_resource type="Resource" id="Resource_aprk7"]
-script = ExtResource("2_xno0y")
-file = ExtResource("16_o8nnl")
-title = "Combat"
-metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
-
 [node name="DynamicMusic" type="Node" node_paths=PackedStringArray("non_positional_root", "positional_root", "proto_non_positional_player", "proto_positional_player")]
 script = ExtResource("15_3ovdk")
 non_positional_root = NodePath("NonPositional")
 positional_root = NodePath("Positional")
 proto_non_positional_player = NodePath("NonPositionalPrototype")
 proto_positional_player = NodePath("PositionalPrototype")
-tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), SubResource("Resource_ltqrd"), SubResource("Resource_aprk7")])
+tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), SubResource("Resource_ltqrd"), ExtResource("5_ltqrd")])
 
 [node name="NonPositionalPrototype" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_o8nnl")

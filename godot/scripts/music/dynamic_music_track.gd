@@ -29,6 +29,14 @@ class_name DynamicMusicTrack extends Resource
 @export var trans_seek_crossfade_in: Curve ## X is in seconds, Y is volume.
 @export var trans_seek_crossfade_out: Curve ## X is in seconds, Y is volume.
 
+@export_group("Intensities")
+@export var use_intensity: bool = false
+@export var intensity:int = 100:
+	set(value):
+		intensity = clampi(value, 0, 100)
+		#prnt("Intensity changed to %d" % [intensity])
+# more foo
+
 var is_playing:bool = false
 
 func _init() -> void: prnt("Loaded %s." % [title])
@@ -47,3 +55,23 @@ func prnt(x) -> void:
 
 static func set_volume_from_curve(curve_point: float, player:AudioStreamPlayer, curve: Curve) -> void:
 	player.volume_linear = curve.sample_baked(curve_point)
+
+func set_intensity(value:int) -> void:
+	self.intensity = value
+
+func do_intensity_process(stream: AudioStream) -> void:
+	if not use_intensity: return
+	
+	if stream is AudioStreamSynchronized:
+		# Simple implementation
+		# Based on how many layers we have
+		for i in stream.stream_count:
+			#var layer:AudioStream = stream.get_sync_stream(i)
+			if hundred_to_linear(intensity) > float(i+1) / float(stream.stream_count):
+				# Playing
+				stream.set_sync_stream_volume(i, linear_to_db(1.0))
+			else:
+				stream.set_sync_stream_volume(i, linear_to_db(0.0))
+
+func hundred_to_linear(integer: int) -> float:
+	return integer / 100.0
