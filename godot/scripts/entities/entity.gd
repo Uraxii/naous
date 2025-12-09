@@ -74,8 +74,9 @@ func _check_local_authority() -> void:
 
     change_control.emit(is_local)
 
-    if is_local:
+    if is_local and not multiplayer.is_server():
         signals.control_entity.emit(self)
+        InstanceAPI.local_player.entity = self
         logger.debug("I am %s playing as %s" % [name, display_name])
 
 
