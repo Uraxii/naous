@@ -1,12 +1,6 @@
-class_name DamageCaster extends Node
+class_name DamageCaster extends Trait
 
 @export var damage := 10.0
-
-var spell: Spell
-
-
-func setup() -> void:
-    spell = get_parent()
 
 
 func cast() -> void:

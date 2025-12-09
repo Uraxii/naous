@@ -1,15 +1,10 @@
-class_name TraitSpawnEntity extends Node
+class_name TraitSpawnEntity extends Trait
 
 @export var entity_scene: PackedScene
 @export_category("Runtime Values")
-@export var spell: Spell
 
 @onready var router := Globals.msg_router
 @onready var entities: EntityManager = Globals.entities
-
-
-func setup() -> void:
-    spell = get_parent()
 
 
 func cast() -> void:
