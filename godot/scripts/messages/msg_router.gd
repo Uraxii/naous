@@ -13,15 +13,28 @@ static func generate_msg_routes(
         Msg.Type.TEST: bus.test_msg,
         Msg.Type.CHAT: bus.chat_msg,
         Msg.Type.SPAWN_ENTITY: bus.spawn_entity_msg,
+        Msg.Type.CAST_REQUEST: bus.cast_resquest_msg,
     }
 
 
+func client_send_to_server(msg: Msg) -> void:
+    _server_recieve_msg.rpc_id(1, msg.serialize())
+
+
+@rpc("any_peer", "call_remote")
+func _server_recieve_msg(msg: Dictionary) -> void:
+    if not multiplayer.is_server():
+        return
+
+    _route_msg(msg)
+
+
 func send(msg: Msg) -> void:
-    _receive.rpc(msg.serialize())
+    _route_msg.rpc(msg.serialize())
 
 
 @rpc("any_peer", "call_local")
-func _receive(msg: Dictionary) -> void:
+func _route_msg(msg: Dictionary) -> void:
     if not validate_message(msg):
         return
 

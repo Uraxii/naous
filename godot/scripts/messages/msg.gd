@@ -6,6 +6,7 @@ enum Type {
     TEST,
     CHAT,
     SPAWN_ENTITY,
+    CAST_REQUEST,
 }
 
 static var TypeMap: Dictionary[Type, GDScript] = {
@@ -13,6 +14,7 @@ static var TypeMap: Dictionary[Type, GDScript] = {
     Type.TEST: MsgTest,
     Type.CHAT: MsgChat,
     Type.SPAWN_ENTITY: MsgSpawnEntity,
+    Type.CAST_REQUEST: MsgCastRequest
 }
 
 

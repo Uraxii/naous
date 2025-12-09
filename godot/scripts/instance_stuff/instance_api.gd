@@ -1,6 +1,8 @@
 class_name InstanceApi extends Node
 
 #region Instance Variables
+@onready var tick_timer := Timer.new()
+
 @onready var save   := Globals.save
 @onready var lg     := Globals.logger
 
@@ -43,8 +45,14 @@ func start_client(address:=config.host, port:=config.port) -> void:
 
 func start_server(cfg: InstanceConfig = config) -> void:
     lg.debug("Starting server.")
+    push_warning("I am the server.")
 
     config = cfg
+
+    tick_timer.wait_time = config.tick_interal
+    tick_timer.autostart = true
+    add_child.call_deferred(tick_timer)
+
     var multiplayer_peer = ENetMultiplayerPeer.new()
     var error = multiplayer_peer.create_server(cfg.port, cfg.size)
 
@@ -88,28 +96,31 @@ func load_level(level_name: String) -> void:
 
 
 func _spawn_player(
-    authority: int, user_name: String, character_data: Dictionary
+    authority: int,
+    user_name: String,
+    character_data: Dictionary
 ) -> void:
     if not multiplayer.is_server():
+        push_warning("not the server")
         return
+    else:
+        push_warning("Server spawning thing...")
 
-    #print_debug("Sender %d" % authority)
+    lg.debug("Sender %d" % authority)
 
     if connections.has(authority):
         return
 
     var player_data = PlayerData.new(user_name, authority)
-    var spawn_data = {
-        "type": "player",
-        "scene": "res://scenes/entities/player.tscn",
-        "authority": authority,
-        "id": player_data.id,
-        "character_data": character_data,
-    }
+    var spawn_data = MsgSpawnEntity.new()
+    spawn_data.resource_path = "res://scenes/entities/player.tscn"
+    spawn_data.authority = authority
+    spawn_data.id = player_data.id
+    spawn_data.entity_data = character_data
 
     lg.debug(spawn_data)
 
-    var entity: Entity = entities.spawn(spawn_data)
+    var entity: Entity = entities.spawn(spawn_data.serialize())
     player_data.entity = entity
     connections[authority] = player_data
 
@@ -125,11 +136,22 @@ func _request_spawn(user_name: String, character_data: Dictionary) -> void:
     _spawn_player(_sender_id, user_name, character_data)
 
 
+func _on_spawn_entity_msg(msg: MsgSpawnEntity) -> void:
+    if not multiplayer.is_server():
+        return
+
+    entities.spawn(msg.serialize())
+
+
 func _set_authority(entity: Entity, peer_id: int) -> void:
     entity.authority_id = peer_id
 
 
 #region Signal Handlers
+func _on_tick_timer_timeout() -> void:
+    signals.network_tick.emit()
+
+
 func _on_player_connected(peer_id: int) -> void:
     lg.debug("Peer %d connected." % peer_id)
 
@@ -171,13 +193,18 @@ func _on_server_disconnected() -> void:
     signals.server_disconnected.emit()
 #endregion
 
-#region Godot Callback functions
-func _ready() -> void:
+func connect_signals() -> void:
+    tick_timer.timeout.connect(_on_tick_timer_timeout)
+
     multiplayer.peer_connected.connect(_on_player_connected)
     multiplayer.peer_disconnected.connect(_on_player_disconnected)
     multiplayer.connected_to_server.connect(_on_connected_ok)
     multiplayer.connection_failed.connect(_on_connected_fail)
     multiplayer.server_disconnected.connect(_on_server_disconnected)
+
+#region Godot Callback functions
+func _ready() -> void:
+    connect_signals()
 #endregion
 
 #comment to trigger git

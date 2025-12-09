@@ -9,22 +9,22 @@ var binds := [
     InputBindings.ACTION_2,
     InputBindings.ACTION_3,
     InputBindings.ACTION_4,
-    ]
+]
 
 var buttons: Array[Hotbutton] = []
 
 
 func _on_control_entity(new_enity: Entity) -> void:
     var spell_component = new_enity.spellbook
-    log.debug("sb", new_enity.spellbook)
+    #log.debug("sb", new_enity.spellbook)
     if not spell_component:
         return
-    
+
     var spells: Array[Spell] = spell_component.spells.values().filter(
         func(spell:Spell): return spell.hotbar == id)
-    
-    log.debug("Spells:", spells)
-    
+
+    #log.debug("Spells:", spells)
+
     for button in buttons:
         for spell in spells:
             if spell.hotbutton == button.id:

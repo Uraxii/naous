@@ -12,7 +12,9 @@ signal cast_started
 @export_category("Runtime Values")
 @export var traits: Array[Node] = []
 @export var caster: Entity
+@export var cast_cancel_token: String
 
+@onready var router := Globals.msg_router
 @onready var timer := Timer.new()
 
 
@@ -27,25 +29,45 @@ func setup(entity: Entity) -> void:
     caster = entity
 
 
-@rpc("call_local", "reliable")
+func request_cast() -> void:
+    var msg := MsgCastRequest.new()
+    msg.spell_node_path = get_path()
+    router.client_send_to_server(msg)
+
+@rpc("reliable", "any_peer")
+func start_cast(cast_token: String) -> void:
+    cast_cancel_token = cast_token
+
+
+@rpc("reliable", "any_peer")
 func cast() -> void:
+    cast_cancel_token = ""
     lg.debug("%d casted %s." % [caster.id, id])
+
     timer.wait_time = cooldown_time
     timer.start()
     cast_started.emit()
+
     for t in traits:
         if t:
             t.cast()
 
 
+@rpc("reliable", "any_peer")
+func cancel_cast() -> void:
+    push_warning("Cancelling casts client logic has not been implemented yet.")
+
+
 func get_all_traits() -> Array[Node]:
     var trait_nodes := get_children()
+    
     var spell_traits: Array[Node] = []
     for t in trait_nodes:
         if t.has_method("cast"):
             if t.has_method("setup"):
                 t.setup()
             spell_traits.append(t)
+
     return spell_traits
 
 

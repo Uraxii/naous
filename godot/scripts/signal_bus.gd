@@ -1,5 +1,6 @@
 class_name SignalBus extends Node
 
+signal network_tick
 signal save_game
 
 #region Instance API
@@ -63,6 +64,7 @@ signal move(dir: Vector2)
 signal cursor_target
 signal next_target
 signal previous_target
+signal target_self
 signal scan_target_right
 signal scan_target_left
 signal cancel_target
@@ -93,10 +95,8 @@ signal selected_character(character_data: Dictionary)
 #endregion
 
 #region Network Messages
-#endregion
-
-#region Network Messages
 signal test_msg(msg: MsgSpawnEntity)
 signal chat_msg(msg: MsgChat)
 signal spawn_entity_msg(msg: MsgSpawnEntity)
+signal cast_resquest_msg(msg: MsgCastRequest)
 #endregion

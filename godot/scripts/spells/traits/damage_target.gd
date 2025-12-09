@@ -1,6 +1,6 @@
 class_name DamageTarget extends Node
 
-@export var amount := 1.0
+@export var amount := 10.0
 
 @onready var signals := Globals.signal_bus
 @onready var entities := Globals.entities
@@ -19,4 +19,5 @@ func cast() -> void:
         lg.debug("No target")
         return
 
-    signals.damage_entity.emit(target.id, amount)
+    if target.health:
+        target.health.current -= amount
