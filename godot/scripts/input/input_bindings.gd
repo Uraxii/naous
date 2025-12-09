@@ -15,6 +15,7 @@ const INTERACT := "interact"
 const CURSOR_TARGET := "cursor_target"
 const NEXT_TARGET := "target_next"
 const PREVIOUS_TARGET := "target_previous"
+const TARGET_SELF := "target_self"
 const SCAN_TARGET_RIGHT := "scan_target_right"
 const SCAN_TARGET_LEFT := "scan_target_left"
 const CANCEL_TARGET := "cancel_target"
@@ -55,6 +56,7 @@ const UI_TOGGLE := "ui_toggle"
 @export var cursor_target: Array[InputEvent]
 @export var next_target: Array[InputEvent]
 @export var previous_target: Array[InputEvent]
+@export var target_self: Array[InputEvent]
 @export var scan_target_right: Array[InputEvent]
 @export var scan_target_left: Array[InputEvent]
 @export var cancel_target: Array[InputEvent]
@@ -92,6 +94,7 @@ func get_binds() -> Dictionary:
         CURSOR_TARGET: cursor_target,
         NEXT_TARGET: next_target,
         PREVIOUS_TARGET: previous_target,
+        TARGET_SELF: target_self,
         SCAN_TARGET_RIGHT: scan_target_right,
         SCAN_TARGET_LEFT: scan_target_left,
         CANCEL_TARGET: cancel_target,

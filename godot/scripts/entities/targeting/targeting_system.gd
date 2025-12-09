@@ -48,6 +48,12 @@ func previous_target() -> void:
         current_target = prev_auto_target
 
 
+func target_self() -> void:
+    var targetable := InstanceAPI.local_player.entity.targetable
+    if targetable:
+        current_target = targetable
+
+
 func scan_target_right() -> void:
     #Globals.logger.debug("attempting RIGHT scan target!")
     var starting_target: Targetable = null
@@ -104,6 +110,7 @@ func _ready() -> void:
     signals.cursor_target.connect(cursor_target)
     signals.next_target.connect(next_target)
     signals.previous_target.connect(previous_target)
+    signals.target_self.connect(target_self)
     signals.scan_target_right.connect(scan_target_right)
     signals.scan_target_left.connect(scan_target_left)
     signals.cancel_target.connect(clear_current_target)

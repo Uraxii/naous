@@ -11,6 +11,7 @@ class_name InputManager extends Node
     InputBindings.CURSOR_TARGET: signals.cursor_target,
     InputBindings.NEXT_TARGET: signals.next_target,
     InputBindings.PREVIOUS_TARGET: signals.previous_target,
+    InputBindings.TARGET_SELF: signals.target_self,
     InputBindings.SCAN_TARGET_LEFT: signals.scan_target_left,
     InputBindings.SCAN_TARGET_RIGHT: signals.scan_target_right,
     InputBindings.CANCEL_TARGET: signals.cancel_target,
