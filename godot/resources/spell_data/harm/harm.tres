@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=4 format=3 uid="uid://btf5y0qargo3f"]
+
+[ext_resource type="Texture2D" uid="uid://bx3je8p2m0bxb" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_weapon/starter_weapon_sword.png" id="1_mqafw"]
+[ext_resource type="Script" uid="uid://ctuop4g7pu2g3" path="res://scripts/spells/spell_data.gd" id="2_k3b1e"]
+[ext_resource type="Resource" uid="uid://pqtqhibg6y07" path="res://resources/spell_data/harm/trait_data/damage_target_10.tres" id="3_lb3q7"]
+
+[resource]
+script = ExtResource("2_k3b1e")
+id = "Harm"
+icon = ExtResource("1_mqafw")
+cast_time = 0.5
+traits = Array[Resource]([ExtResource("3_lb3q7")])
+metadata/_custom_type_script = "uid://ctuop4g7pu2g3"

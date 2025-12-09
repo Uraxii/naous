@@ -2,21 +2,24 @@ class_name Spell extends Node
 
 signal cast_started
 
+@export var data: SpellData
 @export var echo: EchoItem
-@export var icon: Texture2D
-@export var id := ""
-@export var cooldown_time := 1.0
 
 @export var hotbar := 0
 @export var hotbutton := 0
 @export_category("Runtime Values")
-@export var traits: Array[Node] = []
+@export var traits: Array[Trait] = []
 @export var caster: Entity
 @export var cast_cancel_token: String
 
 @onready var router := Globals.msg_router
 @onready var timer := Timer.new()
 
+var icon: Texture2D:
+    get: return data.icon
+
+var id := "":
+    get: return data.id
 
 var is_castable: bool:
     get: return timer.time_left <= 0
@@ -44,7 +47,7 @@ func cast() -> void:
     cast_cancel_token = ""
     lg.debug("%d casted %s." % [caster.id, id])
 
-    timer.wait_time = cooldown_time
+    timer.wait_time = data.cooldown_time
     timer.start()
     cast_started.emit()
 
@@ -71,7 +74,20 @@ func get_all_traits() -> Array[Node]:
     return spell_traits
 
 
+func generate_traits() -> Array[Trait]:
+    var trait_nodes: Array[Trait] = []
+
+    for trait_data in data.traits:
+        var new_trait: Trait = trait_data.new()
+        new_trait.name = trait_data.resource_name
+        new_trait.setup(trait_data, self)
+        add_child.call_deferred(new_trait)
+        trait_nodes.append(new_trait)
+
+    return trait_nodes
+
+
 func _ready() -> void:
-    traits = get_all_traits()
+    traits = generate_traits()
     timer.one_shot = true
     add_child(timer)
