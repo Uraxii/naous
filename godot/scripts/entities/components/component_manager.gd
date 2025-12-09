@@ -10,7 +10,7 @@ func get_all() -> Dictionary[String, Node]:
     for child in children:
         component_map.set(child.name, child)
     return component_map
-    
+
 
 func find(node_name: String) -> Node:
     return map.get(node_name)
@@ -19,7 +19,7 @@ func find(node_name: String) -> Node:
 #region Signal Handler Functions
 func _on_component_added(node: Node) -> void:
     map.set(node.name, node)
-    
+
 func _on_component_removed(node: Node) -> void:
     map.erase(node.name)
 #endregion 
