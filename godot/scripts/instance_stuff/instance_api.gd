@@ -66,23 +66,6 @@ func start_server(cfg: InstanceConfig = config) -> void:
 #endregion
 
 
-#region Entity Control Functions
-@rpc("any_peer", "reliable")
-func request_cast(entity_id: int, spell_id: String) -> void:
-    # TODO: Check if sender has authority over the entity!
-    var entity: Entity = entities.find(entity_id)
-    if not entity:
-        lg.debug("Did not find entity %d" % entity_id)
-        return
-
-    lg.debug("Entity %d found." % entity.id)
-
-    var spellbook: ComponentSpellbook = entity.spellbook
-    if spellbook:
-        spellbook.cast(spell_id)
-#endregion
-
-
 @rpc("authority", "call_remote", "reliable")
 func load_level(level_name: String) -> void:
     var level_path: String = "res://scenes/world/zones/%s.tscn" % level_name
