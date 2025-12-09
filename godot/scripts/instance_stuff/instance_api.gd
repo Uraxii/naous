@@ -99,6 +99,7 @@ func _spawn_player(
     spawn_data.resource_path = "res://scenes/entities/player.tscn"
     spawn_data.authority = authority
     spawn_data.id = player_data.id
+    spawn_data.display_name = character_data.get("name")
     spawn_data.entity_data = character_data
 
     lg.debug(spawn_data)
