@@ -1,8 +1,9 @@
-[gd_scene load_steps=77 format=3 uid="uid://dna33ypax8s0g"]
+[gd_scene load_steps=78 format=3 uid="uid://dna33ypax8s0g"]
 
 [ext_resource type="PackedScene" uid="uid://deb4oma4divte" path="res://scenes/world/dungeons/coalescence/structures/graybox_hint.tscn" id="1_8t8kn"]
 [ext_resource type="ArrayOccluder3D" uid="uid://cngur83tl1hf4" path="res://scenes/world/dungeons/coalescence/bubbles/markets.occ" id="1_jahlm"]
 [ext_resource type="PackedScene" uid="uid://ddpxf6iym3jsj" path="res://assets/prefabs/column.tscn" id="3_aca0l"]
+[ext_resource type="PackedScene" uid="uid://bqxs2o47c8xle" path="res://assets/prefabs/market-stall.tscn" id="4_02r2h"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_f0yot"]
 size = Vector3(103, 40, 1)
@@ -725,3 +726,21 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30.340715, 1.8869143, -78.988
 
 [node name="column10" parent="." instance=ExtResource("3_aca0l")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 33.014328, 1.8869143, -85.64318)
+
+[node name="market-stall" parent="." instance=ExtResource("4_02r2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.395351, 0, 0.15598822)
+
+[node name="market-stall2" parent="." instance=ExtResource("4_02r2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.452455, 0, -81.35063)
+
+[node name="market-stall3" parent="." instance=ExtResource("4_02r2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.961918, 0, -83.20981)
+
+[node name="market-stall4" parent="." instance=ExtResource("4_02r2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.41745, 0, -86.463135)
+
+[node name="market-stall5" parent="." instance=ExtResource("4_02r2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.68, 0, -62.728)
+
+[node name="market-stall6" parent="." instance=ExtResource("4_02r2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.072504, 0, -21.586178)
