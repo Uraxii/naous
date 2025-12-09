@@ -33,7 +33,10 @@ properties/2/replication_mode = 2
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_so8uy"]
 properties/0/path = NodePath(".:id")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:target_id")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984

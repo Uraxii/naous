@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=37 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
@@ -7,9 +7,11 @@
 [ext_resource type="Script" uid="uid://cq7g2ygkwm0yr" path="res://scripts/entities/components/component_attack.gd" id="4_yv3je"]
 [ext_resource type="PackedScene" uid="uid://dqgvbdfsa0nll" path="res://scenes/spells/hurt_caster.tscn" id="5_5ki56"]
 [ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
-[ext_resource type="PackedScene" uid="uid://wv8s83v0gmat" path="res://scenes/spells/hurt_target.tscn" id="7_yr3on"]
+[ext_resource type="Texture2D" uid="uid://b062rfptwd6eg" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_echos/Fireball.png" id="7_6gvyl"]
+[ext_resource type="PackedScene" uid="uid://e7ke1jio535t" path="res://scenes/spells/hurt_target.tscn" id="7_yr3on"]
 [ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
 [ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="9_jv5ih"]
+[ext_resource type="Texture2D" uid="uid://f3o6flfus2dn" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_echos/wind_color.png" id="9_u2s01"]
 [ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="10_b4o2o"]
 [ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="10_n36er"]
 [ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="10_qc1tv"]
@@ -17,6 +19,7 @@
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="11_b4o2o"]
 [ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="11_cwche"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
+[ext_resource type="Texture2D" uid="uid://bx3je8p2m0bxb" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_weapon/starter_weapon_sword.png" id="11_tb0mf"]
 [ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="12_spk56"]
 [ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="12_yr3on"]
 [ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="12_yv3je"]
@@ -49,6 +52,9 @@ properties/4/replication_mode = 2
 properties/0/path = NodePath(".:id")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+properties/1/path = NodePath(".:target_id")
+properties/1/spawn = true
+properties/1/replication_mode = 2
 
 [sub_resource type="Resource" id="Resource_3hm5d"]
 resource_local_to_scene = true
@@ -69,6 +75,7 @@ size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("components", "inventory", "interaction", "targeting")]
 script = ExtResource("1_yr3on")
+type = 1
 components = NodePath("Components")
 inventory = NodePath("Components/Inventory")
 interaction = NodePath("Components/Interaction")
@@ -96,13 +103,16 @@ entity = NodePath("../..")
 script = ExtResource("4_qa3vu")
 
 [node name="ThrowBall" parent="Components/Spellbook" instance=ExtResource("5_saib0")]
+icon = ExtResource("7_6gvyl")
 hotbutton = 1
 
 [node name="HurtCaster" parent="Components/Spellbook" instance=ExtResource("5_5ki56")]
+icon = ExtResource("9_u2s01")
 id = "Hurt Caster"
 hotbutton = 3
 
 [node name="HurtTarget" parent="Components/Spellbook" instance=ExtResource("7_yr3on")]
+icon = ExtResource("11_tb0mf")
 hotbar = 1
 hotbutton = 2
 

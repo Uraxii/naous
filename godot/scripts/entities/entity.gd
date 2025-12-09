@@ -22,6 +22,7 @@ signal change_control(is_local: bool)
 @export var spellbook:    ComponentSpellbook
 @export var inventory:    InventoryComponent
 @export var interaction:  InteractionComponent
+@export var targetable:   Targetable
 @export var targeting:    TargetingSystem
 @export_category("Runtime Values")
 @export var id := 0
@@ -33,6 +34,9 @@ signal change_control(is_local: bool)
 @onready var signals    := Globals.signal_bus
 
 var display_name := "{ NAME }"
+
+var target: Entity:
+    get: return entities.find(target_id)
 
 var is_local_owner: bool:
     get: return transform_sync.is_multiplayer_authority()
