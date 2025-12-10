@@ -46,6 +46,9 @@ func remove_spell() -> void:
 
 #region Signal Handlers
 func _on_action_pressed() -> void:
+    if not spell:
+        return
+
     #log.debug('Cast %s' % spell.name )
     spell.request_cast()
 

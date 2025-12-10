@@ -1,6 +1,7 @@
 class_name EntityData extends Resource
 
 @export var id:         EntityIdData
+@export var prefs:      UserPrefs
 @export var stats:      StatsData
 @export var inventory:  Inventory
 @export var spellbook:  SpellbookData
