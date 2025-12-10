@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="TraitData" load_steps=3 format=3 uid="uid://pqtqhibg6y07"]
+[gd_resource type="Resource" script_class="TraitData" load_steps=2 format=3 uid="uid://pqtqhibg6y07"]
 
 [ext_resource type="Script" uid="uid://b0kc5ew6keevx" path="res://scripts/spells/traits/trait_data.gd" id="1_iiywm"]
-[ext_resource type="Script" uid="uid://ccxpwloe1f4c0" path="res://scripts/spells/traits/damage_target.gd" id="2_ulyjc"]
 
 [resource]
 script = ExtResource("1_iiywm")
-type = ExtResource("2_ulyjc")
 damage = 10.0
 metadata/_custom_type_script = "uid://b0kc5ew6keevx"

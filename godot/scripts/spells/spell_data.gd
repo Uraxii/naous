@@ -1,7 +1,10 @@
 class_name SpellData extends Resource
 
 @export var id := ""
+@export var hotbar := 1
+@export var hotbutton := 1
 @export var icon: Texture2D
+@export var cooldown_time := 1.0
 @export var cast_time := 0.0
 @export var traits: Array[TraitData]
 

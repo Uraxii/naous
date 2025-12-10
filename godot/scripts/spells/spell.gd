@@ -3,17 +3,17 @@ class_name Spell extends Node
 signal cast_started
 
 @export var data: SpellData
-@export var echo: EchoItem
 
-@export var hotbar := 0
-@export var hotbutton := 0
+@export var hotbar := 1
+@export var hotbutton := 1
 @export_category("Runtime Values")
 @export var traits: Array[Trait] = []
 @export var caster: Entity
 @export var cast_cancel_token: String
 
 @onready var router := Globals.msg_router
-@onready var timer := Timer.new()
+
+var timer := Timer.new()
 
 var icon: Texture2D:
     get: return data.icon
@@ -28,7 +28,8 @@ var signals: SignalBus:
     get: return Globals.signal_bus
 
 
-func setup(entity: Entity) -> void:
+func setup(spell_data: SpellData, entity: Entity) -> void:
+    data = spell_data
     caster = entity
 
 
@@ -36,6 +37,7 @@ func request_cast() -> void:
     var msg := MsgCastRequest.new()
     msg.spell_node_path = get_path()
     router.client_send_to_server(msg)
+
 
 @rpc("reliable", "any_peer")
 func start_cast(cast_token: String) -> void:
@@ -61,33 +63,24 @@ func cancel_cast() -> void:
     push_warning("Cancelling casts client logic has not been implemented yet.")
 
 
-func get_all_traits() -> Array[Node]:
-    var trait_nodes := get_children()
-    
-    var spell_traits: Array[Node] = []
-    for t in trait_nodes:
-        if t.has_method("cast"):
-            if t.has_method("setup"):
-                t.setup()
-            spell_traits.append(t)
-
-    return spell_traits
-
-
 func generate_traits() -> Array[Trait]:
     var trait_nodes: Array[Trait] = []
 
     for trait_data in data.traits:
-        var new_trait: Trait = trait_data.new()
-        new_trait.name = trait_data.resource_name
+        print_debug("Loading trait: ", trait_data.resource_path)
+        var new_trait: Trait = trait_data.trait_script.new()
+        new_trait.name = trait_data.resource_path
         new_trait.setup(trait_data, self)
-        add_child.call_deferred(new_trait)
         trait_nodes.append(new_trait)
+        add_child.call_deferred(new_trait)
 
     return trait_nodes
 
 
 func _ready() -> void:
+    hotbar = data.hotbar
+    hotbutton = data.hotbutton
+
     traits = generate_traits()
     timer.one_shot = true
     add_child(timer)
