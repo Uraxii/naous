@@ -1,6 +1,20 @@
 class_name TraitData extends Resource
 
-@export var type: GDScript
+enum Type {
+    UNKOWN,
+    DAMAGE_TARGET,
+    DAMAGE_CASTER,
+    SPAWN_ENTITY,
+}
+
+static var trait_type_map: Dictionary[Type, GDScript] = {
+    Type.UNKOWN: Trait,
+    Type.DAMAGE_TARGET: DamageTarget,
+    Type.DAMAGE_CASTER: DamageCaster,
+    Type.SPAWN_ENTITY:  TraitSpawnEntity,
+}
+
+@export var trait_type := Type.DAMAGE_TARGET
 @export var draw := 1.0
 @export_category("Modify Stats")
 @export var damage  := 0.0
@@ -11,11 +25,14 @@ class_name TraitData extends Resource
 @export_category("Apply Effects")
 @export var apply_status: SpellData
 
+var trait_script: GDScript = Trait:
+    get: return trait_type_map.get(trait_type, Trait)
+
 
 func serialize() -> Dictionary:
     var data := {}
 
-    data["type"] = type.resource_path if type else ""
+    data["type"] = trait_type
     data["draw"] = draw
     data["damage"] = damage
     data["healing"] = healing
@@ -25,7 +42,7 @@ func serialize() -> Dictionary:
         data["entity_data"] = entity_data.serialize()
     else:
         data["entity_data"] = null
-        
+
     if apply_status:
         data["apply_status"] = apply_status.serialize()
     else:
@@ -39,11 +56,9 @@ func deserialize(data: Dictionary) -> void:
     damage  = data.get("damage", damage)
     healing = data.get("healing", healing)
 
-    var type_path: String = data.get("type", "")
-    if not type_path.is_empty():
-        type = load(type_path) as GDScript
-    else:
-        type = null
+    var type_of_trait: Type = data.get("type", Type.UNKOWN)
+    trait_script = trait_type_map.get(type_of_trait, Type.UNKOWN)
+    print_debug("trait script is ", trait_script)
 
     var scene_path: String = data.get("summon_entity", "")
     if not scene_path.is_empty():
