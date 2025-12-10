@@ -16,7 +16,7 @@ func serialize() -> Dictionary:
 
 
 func deserialize(data: Dictionary) -> void:
-    health      = data.get("health", health)
-    speed       = data.get("speed", speed)
-    gravity     = data.get("gravity", gravity)
-    jump_force  = data.get("jump_force", jump_force)
+    health      = data.health
+    speed       = data.speed
+    gravity     = data.gravity
+    jump_force  = data.jump_force

@@ -7,9 +7,9 @@ enum EntityType {
     PROJECTILE,
 }
 
-#region Variables
 signal change_control(is_local: bool)
 @export var type := EntityType.UNKNOWN
+@export var data := EntityData.new()
 
 @export_category("Components")
 @export var components:   ComponentManager
@@ -51,7 +51,6 @@ var transform_sync: MultiplayerSynchronizer:
         return _transform_sync
 
 var stored_authority := Globals.SERVER_ID
-#endregion
 
 
 @rpc("call_local")
@@ -137,25 +136,37 @@ func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualIn
 
 
 #region Components
-func hookup_components() -> void:
-    if not components: components = find_child("Components")
+func setup_components() -> void:
+    if not components:
+        components = find_child("Components")
+        if not components:
+            return
 
-    if components:
-        if not health:          health       = components.find("Health")
-        if not speed:           speed        = components.find("Speed")
-        if not gravity:         gravity      = components.find("Gravity")
-        if not jump_force:      jump_force   = components.find("JumpForce")
-        if not spellbook:       spellbook    = components.find("Spellbook")
-        if not body:            body         = components.find("Body")
-        if not move:            move         = components.find("Move")
-        if not inventory:       inventory    = components.find("Inventory")
-        if not interaction:     interaction  = components.find("Interaction")
-        if not targetable:      targetable   = components.find("Targetable")
-        if not targeting:       targeting    = components.find("TargetingSystem")
+    if not health:
+        health = components.find("Health")
+    if not speed: 
+        speed = components.find("Speed")
+    if not gravity:
+        gravity = components.find("Gravity")
+    if not jump_force: 
+        jump_force   = components.find("JumpForce")
+    if not spellbook: 
+        spellbook    = components.find("Spellbook")
+    if not body:
+        body = components.find("Body")
+    if not move:
+        move = components.find("Move")
+    if not inventory: 
+        inventory = components.find("Inventory")
+    if not interaction: 
+        interaction = components.find("Interaction")
+    if not targetable: 
+        targetable = components.find("Targetable")
+    if not targeting: 
+        targeting = components.find("TargetingSystem")
 
-        # Component signals
-        if is_instance_valid(targeting):
-            targeting.new_target_selected.connect(_new_target_selected)
+    if is_instance_valid(targeting):
+        targeting.new_target_selected.connect(_new_target_selected)
 
 
 func _new_target_selected(new_target: Targetable) -> void:
@@ -173,7 +184,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-    hookup_components()
+    setup_components()
 
     for comp: Node in components.map.values():
         if comp.has_method("set_entity"):

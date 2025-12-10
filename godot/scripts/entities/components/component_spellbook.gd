@@ -8,6 +8,13 @@ class_name ComponentSpellbook extends Node
 var caster: Entity
 
 
+func setup() -> void:
+    var component_manager: ComponentManager = get_parent()
+    caster = component_manager.entity
+    if caster and caster.data.spellbook:
+        generate_spells(caster.data.spellbook)
+
+
 func cast(spell_id: String):
     var spell: Spell = spells.get(spell_id)
     if not spell or not spell.is_castable:
@@ -19,28 +26,25 @@ func cast(spell_id: String):
 
 func cast_echo_from_inventory(echo_index: int) -> void:
     if is_instance_valid(caster.inventory):
-        var echoes := caster.inventory.inventory.get_equipped_echoes()
-        var echo := echoes[echo_index]
+        var echoes = caster.inventory.inventory.get_equipped_echoes()
+        var echo = echoes[echo_index]
         if echo != null:
-            var echo_effect := echo.effect
+            var echo_effect = echo.effect
             echo_effect.entity_triggered_effect(caster)
 
 
-func get_all_spells() -> Dictionary[String, Spell]:
-    var stat_nodes := find_children("*", "Spell")
-    
-    var map: Dictionary[String, Spell] = {}
-    for s: Spell in stat_nodes:
-        map[s.id] = s
-        s.setup(caster)
-
-    return map
+func add_spell(spell_data: SpellData) -> Spell:
+    var spell := Spell.new()
+    spell.setup(spell_data, caster)
+    spell.name = spell.id
+    spells[spell.id] = spell
+    add_child.call_deferred(spell)
+    return spell
 
 
-func _setup() -> void:
-    var component_manager: ComponentManager = get_parent()
-    caster = component_manager.entity
-    spells = get_all_spells()
+func generate_spells(data: SpellbookData) -> void:
+    for spell_data in data.spells:
+        add_spell(spell_data)
 
 
 func _connect_echo_inputs() -> void:
@@ -51,6 +55,5 @@ func _connect_echo_inputs() -> void:
 
 
 func _ready() -> void:
-    _setup()
-    
     _connect_echo_inputs()
+    setup()

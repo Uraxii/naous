@@ -14,4 +14,3 @@ func serialize() -> Dictionary:
 func deserialize(data: Dictionary) -> void:
     display_name    = data.get("display_name", display_name)
     title           = data.get("title", title)
-

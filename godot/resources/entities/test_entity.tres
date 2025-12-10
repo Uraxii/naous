@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="EntityData" load_steps=15 format=3 uid="uid://d0r5e1ispxyld"]
+
+[ext_resource type="Script" uid="uid://bc0jnc1fj6sth" path="res://scripts/entities/resource_scripts/entity_id_data.gd" id="1_q5pyu"]
+[ext_resource type="Script" uid="uid://10aext5su5hg" path="res://scripts/entities/entity_data.gd" id="1_tnkym"]
+[ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="2_25hmn"]
+[ext_resource type="Resource" uid="uid://clfcaibvn6w48" path="res://scripts/entities/items/test_item/test_item.tres" id="3_of4kj"]
+[ext_resource type="Resource" uid="uid://bkio72g04wx2o" path="res://scripts/entities/inventory/test_equipment.tres" id="4_kmw28"]
+[ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="5_tocab"]
+[ext_resource type="Script" uid="uid://d0hjh3hlvo8m4" path="res://scripts/entities/spellbook_data.gd" id="7_0ofku"]
+[ext_resource type="Script" uid="uid://ctuop4g7pu2g3" path="res://scripts/spells/spell_data.gd" id="8_vf0fo"]
+[ext_resource type="Resource" uid="uid://btf5y0qargo3f" path="res://resources/spell_data/harm/harm.tres" id="9_s7rvt"]
+[ext_resource type="Script" uid="uid://c4w8yg88aqeon" path="res://scripts/entities/resource_scripts/stats_data.gd" id="10_oq6ar"]
+
+[sub_resource type="Resource" id="Resource_axyf4"]
+script = ExtResource("1_q5pyu")
+display_name = "Unnamed Hero"
+title = "The Crash Test Dummy"
+metadata/_custom_type_script = "uid://bc0jnc1fj6sth"
+
+[sub_resource type="Resource" id="Resource_jlpw0"]
+script = ExtResource("5_tocab")
+equipment = ExtResource("4_kmw28")
+backpack = Array[ExtResource("2_25hmn")]([ExtResource("3_of4kj")])
+metadata/_custom_type_script = "uid://sjk1ggbjspjx"
+
+[sub_resource type="Resource" id="Resource_ku2lg"]
+script = ExtResource("7_0ofku")
+spells = Array[ExtResource("8_vf0fo")]([ExtResource("9_s7rvt")])
+metadata/_custom_type_script = "uid://d0hjh3hlvo8m4"
+
+[sub_resource type="Resource" id="Resource_cjxc5"]
+script = ExtResource("10_oq6ar")
+metadata/_custom_type_script = "uid://c4w8yg88aqeon"
+
+[resource]
+script = ExtResource("1_tnkym")
+id = SubResource("Resource_axyf4")
+stats = SubResource("Resource_cjxc5")
+inventory = SubResource("Resource_jlpw0")
+spellbook = SubResource("Resource_ku2lg")
+metadata/_custom_type_script = "uid://10aext5su5hg"
