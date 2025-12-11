@@ -77,7 +77,9 @@ func _check_local_authority() -> void:
 
     change_control.emit(is_local)
 
-    if is_local and not multiplayer.is_server():
+    # TODO: Add "and not multiplayer.is_server()" check here in the future
+    # Currently this appears to always be 'true' by default
+    if is_local:
         signals.control_entity.emit(self)
         InstanceAPI.local_player.entity = self
         logger.debug("I am %s playing as %s" % [name, display_name])
