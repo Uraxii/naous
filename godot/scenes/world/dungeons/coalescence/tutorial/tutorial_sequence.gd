@@ -72,7 +72,7 @@ func beginning() -> void:
     player_body_c.global_position = player_spawn_position.global_position
     # 3. Fade in screen to show character (with letterbox?)
     screen_overlay.fade_in_complete.connect(_on_beginning_hud_fade_in)
-    screen_overlay.fade_in(0.1) # FIXME: 0.1 is for testing. Remove the duration override here (just remove the argument), let it use the default.
+    screen_overlay.fade_in()
 
 
 func _on_beginning_hud_fade_in() -> void:
