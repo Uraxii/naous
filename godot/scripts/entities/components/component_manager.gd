@@ -5,17 +5,16 @@ class_name ComponentManager extends Node
 
 
 func get_all() -> Dictionary[String, Node]:
-    var component_map: Dictionary[String, Node]= {}
     var children = get_children()
     for child in children:
         _on_component_added(child)
-    return component_map
+    return map
 
 
 func find(node_name: String) -> Node:
     var component = map.get(node_name)
 
-    if not component:
+    if is_instance_valid(component):
         component = find_child(node_name)
         map.set(component.name, component)
 

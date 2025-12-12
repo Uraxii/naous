@@ -12,6 +12,8 @@ extends Node3D
 @onready var horde_enemy_3: Archa = %HordeEnemy3
 @onready var backup_enemy_4: Archa = %BackupEnemy4
 @onready var backup_enemy_5: Archa = %BackupEnemy5
+@onready var backup_ally_1: Entity = %BackupAlly1
+@onready var backup_ally_2: Entity = %BackupAlly2
 
 const OFFSCREEN := Vector3(0, -1000, 0)
 func _ready() -> void:
@@ -22,14 +24,15 @@ func _ready() -> void:
 
 
 func _move_enemies_offscreen() -> void:
-    var enemies := [
+    var entities_to_hide := [
         first_enemy,
         pyramid_archa, crystal_corner_archa, fountain_archa,
         miniboss_enemy,
         horde_enemy_1, horde_enemy_2, horde_enemy_3,
         backup_enemy_4, backup_enemy_5,
+        backup_ally_1, backup_ally_2,
     ]
-    for enemy: Archa in enemies:
-        enemy.global_position = OFFSCREEN
-        enemy.process_mode = Node.PROCESS_MODE_DISABLED
+    for to_hide: Entity in entities_to_hide:
+        to_hide.body.global_position = OFFSCREEN
+        to_hide.process_mode = Node.PROCESS_MODE_DISABLED
     

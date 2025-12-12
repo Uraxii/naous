@@ -456,7 +456,6 @@ func _on_horde_enemy_defeated(enemy: BaseEnemy) -> void:
 func _resolve_initial_horde_enemies() -> void:
     if horde_enemies_defeated.size() == horde_enemies_to_defeat.size():
         trigger_sequence(SEQ.BACKUP_ARRIVES)
-    
 #endregion HORDE FIGHT
 
 
@@ -470,11 +469,16 @@ func backup_arrives() -> void:
     # 2. Startup "allies" as static characters that attack enemies and support the player
     _setup_backup_allies()
     # 3. Prompt player to continue fending off the horde
+    hud_layer.display_objective_hud("Work together to defeat the horde!")
     _setup_backup_enemies()
 
-
+@onready var backup_ally_1: Entity = %BackupAlly1
+@onready var backup_ally_2: Entity = %BackupAlly2
+@onready var backup_ally_spawn_1: Marker3D = %BackupAllySpawn1
+@onready var backup_ally_spawn_2: Marker3D = %BackupAllySpawn2
 func _setup_backup_allies() -> void:
-    pass
+    backup_ally_1.body.global_position = backup_ally_spawn_1.global_position
+    backup_ally_2.body.global_position = backup_ally_spawn_2.global_position
 
 
 # Reusing the horde enemies for 1-3, adding 4 & 5
@@ -534,6 +538,7 @@ func escape() -> void:
     current_sequence = SEQ.ESCAPE
     # 1. Show "cutscene" of large boss enemy smashing into the scene and defeating some allies
     # 2. Prompt player to retreat and find help
+    hud_layer.display_objective_hud("Return to the entrance and escape!")
     # 3. Highlight the entrance/exit for the player to move towards, point player camera in that direction
     # 4. Activate level transition collision at the exit of the area
     # 5. When player reaches level transition, let level transition occur and resolve sequence
