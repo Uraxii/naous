@@ -23,7 +23,6 @@ func find(node_name: String) -> Node:
 
 #region Component Setup
 func setup_move(move_comp: ComponentMove) -> void:
-    print_debug("Setting up move component.")
     var anim_comp: ComponentAnimator = find("Animator")
     if anim_comp:
         move_comp.moving.connect(anim_comp.moving)
