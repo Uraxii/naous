@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=39 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
 [ext_resource type="Script" uid="uid://cq7g2ygkwm0yr" path="res://scripts/entities/components/component_attack.gd" id="4_yv3je"]
-[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
+[ext_resource type="Script" uid="uid://dfwdj4h67di34" path="res://scripts/entities/components/component_animator.gd" id="5_cwche"]
+[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/components/component_move.gd" id="9_dqg57"]
 [ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="9_jv5ih"]
 [ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="10_b4o2o"]
 [ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="10_n36er"]
@@ -20,11 +21,16 @@
 [ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="12_yv3je"]
 [ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="13_2ngu4"]
 [ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="14_jv5ih"]
-[ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
 [ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="19_2ngu4"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://bhhsm2jeuha2y" path="res://scenes/entities/player_anim_tree.tres" id="21_u2s01"]
+[ext_resource type="PackedScene" uid="uid://cph7hkr227xjo" path="res://assets/models/player/player_base.tscn" id="22_xe83n"]
 [ext_resource type="Script" uid="uid://cyi3glr80w6yu" path="res://scenes/entities/ground_material_detector.gd" id="23_d745t"]
+[ext_resource type="Script" uid="uid://c6gn18lnds0sy" path="res://scripts/entities/components/component_visual.gd" id="23_yw3xw"]
+[ext_resource type="Animation" uid="uid://t5qqplpiy121" path="res://animations/Idle.res" id="24_6gvyl"]
+[ext_resource type="Animation" uid="uid://rmyyolbj4p4f" path="res://animations/Run.res" id="25_u2s01"]
+[ext_resource type="Animation" uid="uid://d1tgwi0o7efcu" path="res://animations/Walk.res" id="26_tb0mf"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
 properties/0/path = NodePath("Components/Body:position")
@@ -61,6 +67,13 @@ resource_local_to_scene = true
 script = ExtResource("10_n36er")
 equipment = SubResource("Resource_3hm5d")
 metadata/_custom_type_script = "uid://sjk1ggbjspjx"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2dek"]
+_data = {
+&"Idle": ExtResource("24_6gvyl"),
+&"Run": ExtResource("25_u2s01"),
+&"Walk": ExtResource("26_tb0mf")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -162,6 +175,21 @@ metadata/_custom_type_script = "uid://bfu0l0d4jw4rd"
 [node name="Targetable" parent="Components" node_paths=PackedStringArray("entity") instance=ExtResource("19_2ngu4")]
 entity = NodePath("../..")
 
+[node name="Animator" type="AnimationTree" parent="Components"]
+root_node = NodePath("../Visual/player_base")
+tree_root = ExtResource("21_u2s01")
+anim_player = NodePath("AnimationPlayer")
+parameters/BlendSpace2D/blend_position = Vector2(0, 0)
+script = ExtResource("5_cwche")
+movement_blend_parameter_path = "parameters/BlendSpace2D/blend_position"
+metadata/_custom_type_script = "uid://dfwdj4h67di34"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Components/Animator"]
+root_node = NodePath("../../Visual/player_base")
+libraries = {
+&"animlib_player": SubResource("AnimationLibrary_y2dek")
+}
+
 [node name="Body" type="CharacterBody3D" parent="Components"]
 collision_layer = 5
 collision_mask = 3
@@ -181,11 +209,15 @@ metadata/_custom_type_script = "uid://bkq1fycsacayy"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009765625, 1.4589534, -0.9480772)
 shape = SubResource("BoxShape3D_mxvno")
 
-[node name="Visual" parent="Components/Body" instance=ExtResource("16_v11i1")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
 [node name="ProjectileSpawner" type="Node3D" parent="Components/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5009488, -0.53692293)
+
+[node name="Visual" type="Node3D" parent="Components" node_paths=PackedStringArray("body")]
+script = ExtResource("23_yw3xw")
+body = NodePath("../Body")
+
+[node name="player_base" parent="Components/Visual" instance=ExtResource("22_xe83n")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
 unique_name_in_owner = true
