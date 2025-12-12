@@ -5,6 +5,10 @@ class_name Projectile extends Entity
 var velocity = Vector3.ZERO
 
 
+func get_type() -> EntityType:
+    return EntityType.PROJECTILE
+
+
 func calculate_direction():
     velocity = -transform.basis.z * speed.current
 

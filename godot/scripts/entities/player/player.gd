@@ -6,6 +6,10 @@ var character_data: Dictionary
 var active_character: String = ""
 
 
+func get_type() -> EntityType:
+    return EntityType.PLAYER
+
+
 func _ready() -> void:
     super._ready()
     if is_client:

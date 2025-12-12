@@ -1,7 +1,7 @@
 class_name Entity extends Node3D
 
 enum EntityType {
-    UNKNOWN,
+    BASE,
     PLAYER,
     NPC,
     PROJECTILE,
@@ -9,7 +9,15 @@ enum EntityType {
 
 signal change_control(is_local: bool)
 
-@export var type := EntityType.UNKNOWN
+
+var type: EntityType:
+    get = get_type
+
+func get_type() -> EntityType:
+    push_warning("get_type is unimplemented.")
+    return EntityType.BASE
+
+
 @export var data := EntityData.new()
 
 @export_category("Components")

@@ -21,7 +21,6 @@ properties/2/replication_mode = 1
 
 [node name="Projectile" type="Node3D" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("1_6ndfs")
-type = 3
 components = NodePath("Components")
 body = NodePath("Components/Body")
 

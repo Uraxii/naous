@@ -83,7 +83,6 @@ size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
 [node name="Player" type="Node3D" node_paths=PackedStringArray("components")]
 script = ExtResource("1_yr3on")
-type = 1
 data = ExtResource("2_u2s01")
 components = NodePath("Components")
 
