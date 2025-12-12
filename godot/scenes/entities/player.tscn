@@ -1,8 +1,7 @@
-[gd_scene load_steps=39 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=38 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
-[ext_resource type="Resource" uid="uid://d0r5e1ispxyld" path="res://resources/entities/test_entity.tres" id="2_yv3je"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
 [ext_resource type="Script" uid="uid://cq7g2ygkwm0yr" path="res://scripts/entities/components/component_attack.gd" id="4_yv3je"]
@@ -81,22 +80,8 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("components", "health", "speed", "gravity", "jump_force", "move", "body", "spellbook", "inventory", "interaction", "targetable", "targeting")]
+[node name="Player" type="Node3D"]
 script = ExtResource("1_yr3on")
-type = 1
-data = ExtResource("2_yv3je")
-components = NodePath("Components")
-health = NodePath("Components/Health")
-speed = NodePath("Components/Speed")
-gravity = NodePath("Components/Gravity")
-jump_force = NodePath("Components/JumpForce")
-move = NodePath("Components/Move")
-body = NodePath("Components/Body")
-spellbook = NodePath("Components/Spellbook")
-inventory = NodePath("Components/Inventory")
-interaction = NodePath("Components/Interaction")
-targetable = NodePath("Components/Targetable")
-targeting = NodePath("Components/TargetingSystem")
 
 [node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
@@ -180,8 +165,11 @@ root_node = NodePath("../Visual/player_base")
 tree_root = ExtResource("21_u2s01")
 anim_player = NodePath("AnimationPlayer")
 parameters/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/BlendSpace1D/blend_position = 0.0
+parameters/Add2/add_amount = 0.0
 script = ExtResource("5_cwche")
 movement_blend_parameter_path = "parameters/BlendSpace2D/blend_position"
+jump_fall_blend_parameter_path = "parameters/BlendSpace1D/blend_position"
 metadata/_custom_type_script = "uid://dfwdj4h67di34"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Components/Animator"]
