@@ -10,9 +10,6 @@ extends Node3D
 @onready var horde_enemy_1: Archa = %HordeEnemy1
 @onready var horde_enemy_2: Archa = %HordeEnemy2
 @onready var horde_enemy_3: Archa = %HordeEnemy3
-@onready var backup_enemy_1: Archa = %BackupEnemy1
-@onready var backup_enemy_2: Archa = %BackupEnemy2
-@onready var backup_enemy_3: Archa = %BackupEnemy3
 @onready var backup_enemy_4: Archa = %BackupEnemy4
 @onready var backup_enemy_5: Archa = %BackupEnemy5
 
@@ -30,7 +27,7 @@ func _move_enemies_offscreen() -> void:
         pyramid_archa, crystal_corner_archa, fountain_archa,
         miniboss_enemy,
         horde_enemy_1, horde_enemy_2, horde_enemy_3,
-        backup_enemy_1, backup_enemy_2, backup_enemy_3, backup_enemy_4, backup_enemy_5,
+        backup_enemy_4, backup_enemy_5,
     ]
     for enemy: Archa in enemies:
         enemy.global_position = OFFSCREEN

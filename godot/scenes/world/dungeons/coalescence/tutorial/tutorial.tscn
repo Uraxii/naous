@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=50 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -26,10 +26,6 @@
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="17_1c438"]
 [ext_resource type="PackedScene" uid="uid://dwvukle78pxbp" path="res://scenes/entities/control_zone.tscn" id="24_acyb3"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="25_vi3y7"]
-[ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="26_3qj3r"]
-[ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="27_f15f4"]
-[ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="28_n3n4y"]
-[ext_resource type="Script" uid="uid://bc6253msclsnu" path="res://scripts/spells/traits/spawn_entity.gd" id="29_hxtm8"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_mc5jl"]
 material = ExtResource("1_e5qsc")
@@ -899,12 +895,14 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7235813, 0, 5.205002)
 
-[node name="BackupAlly1" type="Node3D" parent="Plaza/Backup"]
+[node name="BackupAlly1" type="Node3D" parent="Plaza/Backup" node_paths=PackedStringArray("components", "body")]
 unique_name_in_owner = true
 script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("ComponentManager/Body")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Backup/BackupAlly1"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Backup/BackupAlly1"]
 replication_config = SubResource("SceneReplicationConfig_4nrkc")
 script = ExtResource("16_o0ykn")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -926,28 +924,14 @@ shape = SubResource("CapsuleShape3D_7fhsc")
 [node name="Visual" parent="Plaza/Backup/BackupAlly1/ComponentManager/Body" instance=ExtResource("25_vi3y7")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Spells" type="Node" parent="Plaza/Backup/BackupAlly1/ComponentManager"]
-script = ExtResource("26_3qj3r")
-
-[node name="TestSpell" type="Node" parent="Plaza/Backup/BackupAlly1/ComponentManager/Spells"]
-script = ExtResource("27_f15f4")
-
-[node name="DamageSelf" type="Node" parent="Plaza/Backup/BackupAlly1/ComponentManager/Spells/TestSpell"]
-script = ExtResource("28_n3n4y")
-
-[node name="ThrowBall" type="Node" parent="Plaza/Backup/BackupAlly1/ComponentManager/Spells"]
-script = ExtResource("27_f15f4")
-metadata/_custom_type_script = "uid://dm0o2a64iis1u"
-
-[node name="SpawnProjectile" type="Node" parent="Plaza/Backup/BackupAlly1/ComponentManager/Spells/ThrowBall"]
-script = ExtResource("29_hxtm8")
-
-[node name="BackupAlly2" type="Node3D" parent="Plaza/Backup"]
+[node name="BackupAlly2" type="Node3D" parent="Plaza/Backup" node_paths=PackedStringArray("components", "body")]
 unique_name_in_owner = true
 script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("ComponentManager/Body")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Backup/BackupAlly2"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Backup/BackupAlly2"]
 replication_config = SubResource("SceneReplicationConfig_4nrkc")
 script = ExtResource("16_o0ykn")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -968,22 +952,6 @@ shape = SubResource("CapsuleShape3D_7fhsc")
 
 [node name="Visual" parent="Plaza/Backup/BackupAlly2/ComponentManager/Body" instance=ExtResource("25_vi3y7")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="Spells" type="Node" parent="Plaza/Backup/BackupAlly2/ComponentManager"]
-script = ExtResource("26_3qj3r")
-
-[node name="TestSpell" type="Node" parent="Plaza/Backup/BackupAlly2/ComponentManager/Spells"]
-script = ExtResource("27_f15f4")
-
-[node name="DamageSelf" type="Node" parent="Plaza/Backup/BackupAlly2/ComponentManager/Spells/TestSpell"]
-script = ExtResource("28_n3n4y")
-
-[node name="ThrowBall" type="Node" parent="Plaza/Backup/BackupAlly2/ComponentManager/Spells"]
-script = ExtResource("27_f15f4")
-metadata/_custom_type_script = "uid://dm0o2a64iis1u"
-
-[node name="SpawnProjectile" type="Node" parent="Plaza/Backup/BackupAlly2/ComponentManager/Spells/ThrowBall"]
-script = ExtResource("29_hxtm8")
 
 [node name="Player" parent="." instance=ExtResource("10_23v16")]
 unique_name_in_owner = true
