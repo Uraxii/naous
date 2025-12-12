@@ -14,16 +14,23 @@ extends Node3D
 @onready var backup_enemy_5: Archa = %BackupEnemy5
 @onready var backup_ally_1: Entity = %BackupAlly1
 @onready var backup_ally_2: Entity = %BackupAlly2
+@onready var escape_boss: BaseEnemy = %EscapeBoss
+@onready var exit_loading_zone: Area3D = %ExitLoadingZone
+@onready var player: Player = %Player
+
 
 const OFFSCREEN := Vector3(0, -1000, 0)
 func _ready() -> void:
     # This is mostly to ensure we wait until the movement component warps the body up 100 units so we can snap it back after
+    tutorial_sequence.spawn_entity_at.connect(_on_entity_spawn_at)
+    tutorial_sequence.despawn_entity.connect(_on_entity_despawn)
     await get_tree().process_frame
-    _move_enemies_offscreen()
+    _move_entities_offscreen()
+    exit_loading_zone.process_mode = Node.PROCESS_MODE_DISABLED
     tutorial_sequence.start()
 
 
-func _move_enemies_offscreen() -> void:
+func _move_entities_offscreen() -> void:
     var entities_to_hide := [
         first_enemy,
         pyramid_archa, crystal_corner_archa, fountain_archa,
@@ -31,8 +38,36 @@ func _move_enemies_offscreen() -> void:
         horde_enemy_1, horde_enemy_2, horde_enemy_3,
         backup_enemy_4, backup_enemy_5,
         backup_ally_1, backup_ally_2,
+        escape_boss
     ]
-    for to_hide: Entity in entities_to_hide:
-        to_hide.body.global_position = OFFSCREEN
-        to_hide.process_mode = Node.PROCESS_MODE_DISABLED
+    for entity_to_hide: Entity in entities_to_hide:
+        despawn_entity(entity_to_hide)
+
+
+func despawn_entity(entity: Entity) -> void:
+    Globals.logger.debug("Despawning entity %s" % [entity.name])
+    if is_instance_valid(entity.body):
+        entity.body.global_position = OFFSCREEN
+        entity.body.hide()
+    entity.process_mode = Node.PROCESS_MODE_DISABLED
     
+    if is_instance_valid(player.targeting.current_target) and  player.targeting.current_target.entity == entity:
+        player.targeting.clear_current_target()
+
+
+func spawn_entity_at(entity: Entity, location: Vector3) -> void:
+    Globals.logger.debug("Spawning entity %s at %s" % [entity.name, location])
+    entity.global_position = location
+    if is_instance_valid(entity.body):
+        entity.body.global_position = location
+        entity.body.show()
+    entity.process_mode = Node.PROCESS_MODE_INHERIT
+    entity.show()
+
+
+func _on_entity_spawn_at(entity: Entity, location: Vector3) -> void:
+    spawn_entity_at(entity, location)
+
+
+func _on_entity_despawn(entity: Entity) -> void:
+    despawn_entity(entity)
