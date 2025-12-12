@@ -4,4 +4,4 @@ class_name ComponentCharacterBody extends CharacterBody3D
 
 
 func set_entity(new_entity: Entity) -> void:
-	entity = new_entity
+    entity = new_entity

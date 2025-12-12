@@ -13,9 +13,11 @@ func _ready() -> void:
         load_character_from_disk(active_character)
     Globals.signal_bus.save_game.connect(save_active_character_to_disk)
 
+
 func data_path_for_character(character_name: String):
     #!Note: custom folders won't work
     return "user://" + str(id) + "_" + character_name + "_character_data.json"
+
 
 func save_active_character_to_disk() -> void:
     if is_client: # Save data locally for the player
@@ -26,6 +28,7 @@ func save_active_character_to_disk() -> void:
         else:
             push_warning("Couldn't write to player save file!")
             print("file error: ", FileAccess.get_open_error())
+
 
 func load_character_from_disk(character_name: String) -> void:
     var character_path = data_path_for_character(character_name)
