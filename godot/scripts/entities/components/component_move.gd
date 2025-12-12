@@ -3,22 +3,26 @@ class_name ComponentMove extends Node
 #region Variables
 signal moving(velocity: Vector3)
 
+const ID := "Move"
 const BACKPEDDLE_PENALTY := 0.7
 
 var body: CharacterBody3D:
     get: return entity.body
 
-var speed: float:
-    get: return entity.speed.current
+var speed := 10.0
+func on_speed_change(new: float, old: float) -> void:
+    speed = new
 
-var gravity: float:
-    get: return entity.gravity.current
+var gravity := 1.0
+func on_gravity_change(new: float, old: float) -> void:
+    gravity = new
 
 var jumping_gravity: float:
     get: return entity.gravity.current / 2
 
-var jump_force: float:
-    get: return entity.jump_force.current
+var jump_force := 10.0
+func on_jump_force_change(new: float, old: float) -> void:
+    jump_force = new
 
 var signals: SignalBus:
     get: return Globals.signal_bus

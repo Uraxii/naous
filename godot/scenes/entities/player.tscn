@@ -81,10 +81,9 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("components")]
+[node name="Player" type="Node3D"]
 script = ExtResource("1_yr3on")
 data = ExtResource("2_u2s01")
-components = NodePath("Components")
 
 [node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
@@ -163,7 +162,7 @@ metadata/_custom_type_script = "uid://bfu0l0d4jw4rd"
 [node name="Targetable" parent="Components" node_paths=PackedStringArray("entity") instance=ExtResource("19_2ngu4")]
 entity = NodePath("../..")
 
-[node name="Animator" type="AnimationTree" parent="Components"]
+[node name="Anim" type="AnimationTree" parent="Components"]
 root_node = NodePath("../Visual/player_base")
 tree_root = ExtResource("21_u2s01")
 anim_player = NodePath("AnimationPlayer")
@@ -175,7 +174,7 @@ movement_blend_parameter_path = "parameters/BlendSpace2D/blend_position"
 jump_fall_blend_parameter_path = "parameters/BlendSpace1D/blend_position"
 metadata/_custom_type_script = "uid://dfwdj4h67di34"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Components/Animator"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Components/Anim"]
 root_node = NodePath("../../Visual/player_base")
 libraries = {
 &"animlib_player": SubResource("AnimationLibrary_y2dek")

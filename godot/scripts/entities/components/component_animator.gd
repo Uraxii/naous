@@ -1,5 +1,7 @@
 class_name ComponentAnimator extends AnimationTree
 
+const ID := "Anim"
+
 @export var movement_blend_parameter_path := ""
 @export var jump_fall_blend_parameter_path := ""
 

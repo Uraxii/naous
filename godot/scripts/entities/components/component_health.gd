@@ -1,4 +1,4 @@
-class_name HealthComponent extends StatComponent
+class_name ComponentHealth extends ComponentStat
 
 var entity: Entity
 
