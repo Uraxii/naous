@@ -71,7 +71,6 @@ script = ExtResource("6_ywv5m")
 
 [node name="ThrowBall" type="Node" parent="Components/Spells"]
 script = ExtResource("5_snvcc")
-id = "Throw Ball"
 metadata/_custom_type_script = "uid://dm0o2a64iis1u"
 
 [node name="SpawnProjectile" type="Node" parent="Components/Spells/ThrowBall"]

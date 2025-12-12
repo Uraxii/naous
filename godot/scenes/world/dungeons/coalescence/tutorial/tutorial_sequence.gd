@@ -449,6 +449,7 @@ func _on_horde_enemy_defeated(enemy: BaseEnemy) -> void:
     # We're pooling these enemies, so we'll move it offscreen and re-use it later
     enemy.body.global_position = OFFSCREEN
     horde_enemies_defeated.push_back(enemy)
+    enemy.defeated.disconnect(_on_horde_enemy_defeated)
     _resolve_initial_horde_enemies()
 
 
@@ -460,14 +461,70 @@ func _resolve_initial_horde_enemies() -> void:
 
 
 #region BACKUP ARRIVES
+var backup_enemies_to_defeat: Array[BaseEnemy]
+var backup_enemies_defeated: Array[BaseEnemy]
 func backup_arrives() -> void:
     Globals.logger.debug("STARTING BACKUP SEQUENCE")
     current_sequence = SEQ.BACKUP_ARRIVES
     # 1. Show "cutscene" of allies jumping in to help
     # 2. Startup "allies" as static characters that attack enemies and support the player
+    _setup_backup_allies()
     # 3. Prompt player to continue fending off the horde
-    # When several more enemies are defeated or after X time has passed, trigger next sequence
+    _setup_backup_enemies()
+
+
+func _setup_backup_allies() -> void:
     pass
+
+
+# Reusing the horde enemies for 1-3, adding 4 & 5
+@onready var backup_enemy_spawn_1: Marker3D = %BackupEnemySpawn1
+@onready var backup_enemy_spawn_2: Marker3D = %BackupEnemySpawn2
+@onready var backup_enemy_spawn_3: Marker3D = %BackupEnemySpawn3
+@onready var backup_enemy_4: Archa = %BackupEnemy4
+@onready var backup_enemy_spawn_4: Marker3D = %BackupEnemySpawn4
+@onready var backup_enemy_5: Archa = %BackupEnemy5
+@onready var backup_enemy_spawn_5: Marker3D = %BackupEnemySpawn5
+func _setup_backup_enemies() -> void:
+    # Set positions and enable processing
+    horde_enemy_1.body.global_position = backup_enemy_spawn_1.global_position
+    horde_enemy_1.process_mode = Node.PROCESS_MODE_INHERIT
+    horde_enemy_2.body.global_position = backup_enemy_spawn_2.global_position
+    horde_enemy_2.process_mode = Node.PROCESS_MODE_INHERIT
+    horde_enemy_3.body.global_position = backup_enemy_spawn_3.global_position
+    horde_enemy_3.process_mode = Node.PROCESS_MODE_INHERIT
+    backup_enemy_4.body.global_position = backup_enemy_spawn_4.global_position
+    backup_enemy_4.process_mode = Node.PROCESS_MODE_INHERIT
+    backup_enemy_5.body.global_position = backup_enemy_spawn_5.global_position
+    backup_enemy_5.process_mode = Node.PROCESS_MODE_INHERIT
+    
+    # Connect signals for when they are defeated
+    horde_enemy_1.defeated.connect(
+        _on_backup_enemies_defeated.bind(horde_enemy_1))
+    horde_enemy_2.defeated.connect(
+        _on_backup_enemies_defeated.bind(horde_enemy_2))
+    horde_enemy_3.defeated.connect(
+        _on_backup_enemies_defeated.bind(horde_enemy_3))
+    backup_enemy_4.defeated.connect(
+        _on_backup_enemies_defeated.bind(backup_enemy_4))
+    backup_enemy_5.defeated.connect(
+        _on_backup_enemies_defeated.bind(backup_enemy_5))
+    
+    # Track them in our "to defeat" list
+    backup_enemies_to_defeat.push_back(horde_enemy_1)
+    backup_enemies_to_defeat.push_back(horde_enemy_2)
+    backup_enemies_to_defeat.push_back(horde_enemy_3)
+    backup_enemies_to_defeat.push_back(backup_enemy_4)
+    backup_enemies_to_defeat.push_back(backup_enemy_4)
+
+
+func _on_backup_enemies_defeated(enemy: BaseEnemy) -> void:
+    backup_enemies_defeated.push_back(enemy)
+    enemy.defeated.disconnect(_on_backup_enemies_defeated)
+    enemy.body.global_position = OFFSCREEN
+    if backup_enemies_defeated.size() == backup_enemies_to_defeat.size():
+        # When enemies are defeated, trigger next sequence
+        trigger_sequence(SEQ.ESCAPE)
 #endregion BACKUP ARRIVES
 
 
