@@ -42,6 +42,9 @@ func _inventory_is_open() -> bool:
 func _ready() -> void:
     Globals.signal_bus.open_inventory.connect(_on_inventory_menu_input)
     
-    inventory_ui.set_inventory.call_deferred(player.inventory.inventory)
+    _connect_inventory.call_deferred()
     inventory_ui.hide()
-    
+
+
+func _connect_inventory() -> void:
+    inventory_ui.set_inventory(player.inventory.inventory)

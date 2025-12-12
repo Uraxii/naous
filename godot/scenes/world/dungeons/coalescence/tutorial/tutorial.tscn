@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=58 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://wp3c7iemuwmf" path="res://scenes/world/dungeons/coalescence/tutorial/screen_overlay_layer.gd" id="9_d6baa"]
 [ext_resource type="PackedScene" uid="uid://bh4yxqkgk4di4" path="res://scenes/world/dungeons/coalescence/bubbles/plaza.tscn" id="9_otwgf"]
 [ext_resource type="Script" uid="uid://b4k3rvmuqbaa5" path="res://scenes/world/dungeons/coalescence/tutorial/menu_layer.gd" id="9_w4dxx"]
+[ext_resource type="Script" uid="uid://f68pd3ys4akk" path="res://scenes/world/dungeons/coalescence/tutorial/target_panel.gd" id="10_00c68"]
 [ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="10_23v16"]
 [ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="11_f5oke"]
 [ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="12_g7sat"]
@@ -53,7 +54,7 @@ content_margin_left = 8.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-bg_color = Color(0.11372549, 0.5686275, 0.47843137, 0.8)
+bg_color = Color(0.11399999, 0.57, 0.47879997, 0.92156863)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -76,13 +77,14 @@ outline_size = 12
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_d6baa"]
-variation_embolden = 0.5
+variation_embolden = 1.1
+spacing_glyph = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_acyb3"]
 font = SubResource("FontVariation_d6baa")
-font_size = 18
+font_size = 20
 font_color = Color(0.055675693, 0.0556757, 0.0556757, 1)
-outline_size = 6
+outline_size = 7
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5oke"]
 bg_color = Color(0.25, 0.25, 0.25, 0.5254902)
@@ -99,6 +101,39 @@ variation_embolden = 0.3
 [sub_resource type="LabelSettings" id="LabelSettings_f2uap"]
 font = SubResource("FontVariation_2e0i0")
 font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2uap"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0352008, 0.035200816, 0.03520076, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_00c68"]
+variation_transform = Transform2D(1, 0.15, 0, 1, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ydln7"]
+font = SubResource("FontVariation_00c68")
+font_size = 22
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7kbnc"]
+grow_begin = -4.0
+grow_end = -4.0
+thickness = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00c68"]
+bg_color = Color(0.31589073, 0.06325139, 0.12706104, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydln7"]
+bg_color = Color(0.11434039, 0.43240878, 0.6904513, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w4dxx"]
 properties/0/path = NodePath("Components/Body:position")
@@ -156,6 +191,9 @@ size = Vector3(1.465, 0.779, 0.995)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2e0i0"]
 size = Vector3(1.465, 0.779, 0.995)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f2uap"]
+size = Vector3(87.64469, 30.91211, 22.257263)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4nrkc"]
 properties/0/path = NodePath("Body:position")
@@ -398,6 +436,43 @@ layout_mode = 2
 text = "INTERACT"
 label_settings = SubResource("LabelSettings_f2uap")
 
+[node name="TargetPanel" type="PanelContainer" parent="HUDLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 70)
+anchors_preset = -1
+anchor_left = 0.40500003
+anchor_right = 0.595
+offset_left = -0.5600281
+offset_top = 27.0
+offset_right = 0.5599365
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f2uap")
+script = ExtResource("10_00c68")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDLayer/TargetPanel"]
+layout_mode = 2
+
+[node name="TargetNameLabel" type="Label" parent="HUDLayer/TargetPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Target Name"
+label_settings = SubResource("LabelSettings_ydln7")
+
+[node name="HSeparator" type="HSeparator" parent="HUDLayer/TargetPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_7kbnc")
+
+[node name="TargetResourceBar" type="ProgressBar" parent="HUDLayer/TargetPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/background = SubResource("StyleBoxFlat_00c68")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ydln7")
+step = 0.1
+value = 75.0
+
 [node name="ScreenOverlayLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 layer = 3
@@ -570,6 +645,16 @@ prompt_text = "Pickup Item"
 time_to_complete = 0.1
 priority = 2
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="ExitLoadingZone" type="Area3D" parent="EntryPath"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1023598, 3.2898846, 58.301994)
+collision_layer = 2
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryPath/ExitLoadingZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6404076, 6.5039063, 10.628632)
+shape = SubResource("BoxShape3D_f2uap")
 
 [node name="Plaza" parent="." instance=ExtResource("9_otwgf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -172.40681)
@@ -924,6 +1009,10 @@ shape = SubResource("CapsuleShape3D_7fhsc")
 [node name="Visual" parent="Plaza/Backup/BackupAlly1/ComponentManager/Body" instance=ExtResource("25_vi3y7")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
+[node name="BackupAllySpawn1" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.211958, 0, -1.2337646)
+
 [node name="BackupAlly2" type="Node3D" parent="Plaza/Backup" node_paths=PackedStringArray("components", "body")]
 unique_name_in_owner = true
 script = ExtResource("13_xujpj")
@@ -952,6 +1041,20 @@ shape = SubResource("CapsuleShape3D_7fhsc")
 
 [node name="Visual" parent="Plaza/Backup/BackupAlly2/ComponentManager/Body" instance=ExtResource("25_vi3y7")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="BackupAllySpawn2" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8050928, 0, -1.1304321)
+
+[node name="Escape" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.605366, 1.841228, -99.33275)
+
+[node name="EscapeBoss" parent="Plaza/Escape" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="EscapeBossSpawn" type="Marker3D" parent="Plaza/Escape"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021392822, -5.5680513, -0.5468445)
 
 [node name="Player" parent="." instance=ExtResource("10_23v16")]
 unique_name_in_owner = true

@@ -1,6 +1,7 @@
 class_name TargetingSystem extends Node
 
 signal new_target_selected(target: Targetable)
+signal cleared_target(target: Targetable)
 
 @export var cursor_targeting: CursorTargeting
 @export var auto_targeting: AutoTargeting
@@ -95,13 +96,22 @@ func set_current_target(new_target: Targetable) -> void:
     if is_instance_valid(current_target):
         #Globals.logger.debug("setting new current target to: ", new_target.get_parent().get_parent().name)
         current_target.show_indicator()
+        if not current_target.tree_exiting.is_connected(_on_current_target_freed):
+            current_target.tree_exiting.connect(_on_current_target_freed)
     
     # Always emit this for new targets AND for unselecting target (null)
     new_target_selected.emit(current_target)
 
 
 func clear_current_target() -> void:
-    current_target = null
+    if is_instance_valid(current_target):
+        current_target.tree_exiting.disconnect(_on_current_target_freed)
+        cleared_target.emit(current_target)
+        current_target = null
+
+
+func _on_current_target_freed() -> void:
+    clear_current_target()
 #endregion
 
 
