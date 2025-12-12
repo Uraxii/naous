@@ -23,10 +23,10 @@ func get_type() -> EntityType:
 @export_category("Components")
 @export var components:   ComponentManager
 @export var animator:     ComponentAnimator
-@export var health:       HealthComponent
-@export var speed:        StatComponent
-@export var gravity:      StatComponent
-@export var jump_force:   StatComponent
+@export var health:       ComponentHealth
+@export var speed:        ComponentStat
+@export var gravity:      ComponentStat
+@export var jump_force:   ComponentStat
 @export var move:         ComponentMove
 @export var body:         Node3D
 @export var spellbook:    ComponentSpellbook
@@ -150,8 +150,12 @@ func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualIn
 #region Components
 func setup_components() -> void:
     if not components:
-        components = find_child("Components")
+        components = find_child(ComponentManager.ID)
+
         if not components:
+            push_warning(
+                "Unable find component manger on %s. Ensure this node exists and its name is %s" % [
+                    get_path(), ComponentManager.ID])
             return
 
     if not health:
