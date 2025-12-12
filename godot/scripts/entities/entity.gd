@@ -8,11 +8,13 @@ enum EntityType {
 }
 
 signal change_control(is_local: bool)
+
 @export var type := EntityType.UNKNOWN
 @export var data := EntityData.new()
 
 @export_category("Components")
 @export var components:   ComponentManager
+@export var animator:     ComponentAnimator
 @export var health:       HealthComponent
 @export var speed:        StatComponent
 @export var gravity:      StatComponent
@@ -149,9 +151,9 @@ func setup_components() -> void:
     if not gravity:
         gravity = components.find("Gravity")
     if not jump_force: 
-        jump_force   = components.find("JumpForce")
+        jump_force = components.find("JumpForce")
     if not spellbook: 
-        spellbook    = components.find("Spellbook")
+        spellbook = components.find("Spellbook")
     if not body:
         body = components.find("Body")
     if not move:
@@ -164,6 +166,8 @@ func setup_components() -> void:
         targetable = components.find("Targetable")
     if not targeting: 
         targeting = components.find("TargetingSystem")
+    if not animator:
+        animator = components.find("Animator")
 
     if is_instance_valid(targeting):
         targeting.new_target_selected.connect(_new_target_selected)

@@ -1,29 +1,31 @@
 class_name ComponentMove extends Node
 
 #region Variables
+signal moving(velocity: Vector3)
+
 const BACKPEDDLE_PENALTY := 0.7
 
 var body: CharacterBody3D:
     get: return entity.body
-    
+
 var speed: float:
     get: return entity.speed.current
-    
+
 var gravity: float:
     get: return entity.gravity.current
 
 var jumping_gravity: float:
     get: return entity.gravity.current / 2
-    
+
 var jump_force: float:
     get: return entity.jump_force.current
 
 var signals: SignalBus:
     get: return Globals.signal_bus
-    
+
 var input: InputManager:
     get: return Globals.input
-    
+
 var entity: Entity
 
 var current_gravity: float = 0.0
@@ -55,7 +57,7 @@ func jump() -> void:
             jump_influence = horizontal_velocity.normalized() * speed
         else:
             jump_influence = Vector3.ZERO
-        
+
         jump_influence.y = jump_force
 
 
@@ -102,21 +104,21 @@ func _setup() -> void:
     var component_manager: ComponentManager = get_parent()
     if component_manager is not ComponentManager:
         push_error("Movement component MUST be child of a ComponentManager!")
-        
+
     if not entity:
         entity = component_manager.entity
         if not entity:
             push_error("Movement found no entity!")
             return
-        
+
     push_warning("Reminder: Move is pushing the player up in _startup.")
     body.position.y += 100
-    
+
     entity.change_control.connect(_on_change_control)
-    
+
     if entity.transform_sync.is_multiplayer_authority() and not signals.jump.is_connected(jump):
         signals.jump.connect(jump)
-    
+
     signals.allow_character_control.connect(_on_allow_character_control)
 
 
@@ -151,5 +153,6 @@ func _process(_delta: float) -> void:
         body.velocity.z = body.velocity.z * BACKPEDDLE_PENALTY
 
     body.move_and_slide()
+    moving.emit(body.velocity)
     body.velocity = Vector3.ZERO
 #endregion

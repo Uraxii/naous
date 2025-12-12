@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dm0o2a64iis1u" path="res://scripts/spells/spell.gd" id="5_snvcc"]
 [ext_resource type="Script" uid="uid://bfblplj4wwkvc" path="res://scripts/spells/traits/damage_caster.gd" id="6_ywv5m"]
 [ext_resource type="Script" uid="uid://bc6253msclsnu" path="res://scripts/spells/traits/spawn_entity.gd" id="7_rks5t"]
-[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_de2c2"]
+[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/components/component_move.gd" id="9_de2c2"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="9_owpaf"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w2piu"]
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="12_nml3o"]
@@ -60,6 +60,15 @@ script = ExtResource("3_egv4y")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
+[node name="Animation" type="Node" parent="Components"]
+
+[node name="AnimationTree" type="AnimationTree" parent="Components/Animation"]
+root_node = NodePath("../../..")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Components/Animation"]
+root_node = NodePath("../../..")
+
 [node name="Spells" type="Node" parent="Components"]
 script = ExtResource("4_owpaf")
 
@@ -71,7 +80,6 @@ script = ExtResource("6_ywv5m")
 
 [node name="ThrowBall" type="Node" parent="Components/Spells"]
 script = ExtResource("5_snvcc")
-id = "Throw Ball"
 metadata/_custom_type_script = "uid://dm0o2a64iis1u"
 
 [node name="SpawnProjectile" type="Node" parent="Components/Spells/ThrowBall"]
