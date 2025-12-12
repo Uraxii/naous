@@ -1,12 +1,13 @@
 class_name ComponentAnimator extends AnimationTree
 
 @export var movement_blend_parameter_path := ""
+@export var jump_fall_blend_parameter_path := ""
 
 
 func moving(velocity: Vector3) -> void:
     var v2_velocity = Vector2(velocity.x, velocity.z)
     set(movement_blend_parameter_path, v2_velocity)
-
+    set(jump_fall_blend_parameter_path, velocity.y)
 
 func jump() -> void:
     pass
