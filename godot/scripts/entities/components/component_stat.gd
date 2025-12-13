@@ -18,6 +18,10 @@ const JUMP_FORCE_ID := "JumpForce"
     set = _set_current
 
 @onready var signals := Globals.signal_bus
+
+var percetage: float:
+    get: return current/max_value
+
 #endregion
 
 func _ready() -> void:
