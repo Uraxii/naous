@@ -21,7 +21,7 @@ func get_type() -> EntityType:
 
 @export_category("Components")
 @export var components:     ComponentManager
-@export var animator:       ComponentAnimator
+@export var anim:           ComponentAnimator
 @export var stats:          ComponentStatManager
 @export var health:         ComponentHealth
 @export var speed:          ComponentStat
@@ -158,14 +158,16 @@ func setup_components() -> void:
                     get_path(), ComponentManager.ID])
             return
 
+    if not stats:
+        stats = components.find(ComponentStatManager.ID)
     if not health:
-        health = components.find("Health")
+        health = components.find(ComponentStat.HEALTH_ID)
     if not speed: 
-        speed = components.find("Speed")
+        speed = components.find(ComponentStat.SPEED_ID)
     if not gravity:
-        gravity = components.find("Gravity")
+        gravity = components.find(ComponentStat.GRAVITY_ID)
     if not jump_force: 
-        jump_force = components.find("JumpForce")
+        jump_force = components.find(ComponentStat.JUMP_FORCE_ID)
     if not spellbook: 
         spellbook = components.find("Spellbook")
     if not body:
@@ -180,8 +182,8 @@ func setup_components() -> void:
         targetable = components.find("Targetable")
     if not targeting: 
         targeting = components.find("TargetingSystem")
-    if not animator:
-        animator = components.find("Animator")
+    if not anim:
+        anim = components.find("Animator")
 
     if is_instance_valid(targeting):
         targeting.new_target_selected.connect(_new_target_selected)

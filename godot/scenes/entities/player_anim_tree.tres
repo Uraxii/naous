@@ -62,12 +62,12 @@ blend_point_8/node = SubResource("AnimationNodeAnimation_a1t1q")
 blend_point_8/pos = Vector2(0.2, 0.4)
 
 [resource]
-graph_offset = Vector2(-279.18417, -49.211555)
+graph_offset = Vector2(-295.53394, 55.055603)
 nodes/output/position = Vector2(680, 160)
 nodes/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_5vyls")
 nodes/BlendSpace2D/position = Vector2(40, 40)
 nodes/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_7mc0s")
-nodes/BlendSpace1D/position = Vector2(40, 280)
+nodes/BlendSpace1D/position = Vector2(40, 300)
 nodes/Add2/node = SubResource("AnimationNodeAdd2_5kyyl")
-nodes/Add2/position = Vector2(380, 60)
+nodes/Add2/position = Vector2(400, 80)
 node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"BlendSpace2D", &"Add2", 1, &"BlendSpace1D"]

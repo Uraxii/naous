@@ -16,7 +16,7 @@ func get_all() -> Dictionary[String, Node]:
 func find(node_name: String) -> Node:
     var component = map.get(node_name)
 
-    if is_instance_valid(component):
+    if not component:
         component = find_child(node_name)
         if not component:
             return
@@ -26,6 +26,7 @@ func find(node_name: String) -> Node:
 
 #region Component Setup
 func setup_move(move_comp: ComponentMove) -> void:
+    print_debug("ayye")
     var anim_comp: ComponentAnimator = find(ComponentAnimator.ID)
     if anim_comp:
         move_comp.moving.connect(anim_comp.moving)
@@ -60,9 +61,8 @@ func connect_signals() -> void:
 
 func _on_component_added(node: Node) -> void:
     map.set(node.name, node)
-    print_debug("hello")
     match node.name:
-        "Move":
+        ComponentMove.ID:
             setup_move(node)
 
 

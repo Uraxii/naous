@@ -1,8 +1,8 @@
 class_name ComponentMove extends Node
 
-#region Variables
 signal moving(velocity: Vector3)
 
+#region Variables
 const ID := "Move"
 const BACKPEDDLE_PENALTY := 0.7
 
@@ -18,7 +18,7 @@ func on_gravity_change(new: float, old: float) -> void:
     gravity = new
 
 var jumping_gravity: float:
-    get: return entity.gravity.current / 2
+    get: return gravity * 0.80
 
 var jump_force := 10.0
 func on_jump_force_change(new: float, old: float) -> void:
@@ -32,9 +32,10 @@ var input: InputManager:
 
 var entity: Entity
 
-var current_gravity: float = 0.0
+var last_velocity := Vector3.ZERO
+var current_gravity := 0.0
 var move_velocity := Vector3.ZERO
-var is_jumping: bool = false
+var is_jumping := false
 var jump_influence := Vector3.ZERO
 var allow_character_control := true
 #endregion
@@ -157,6 +158,10 @@ func _process(_delta: float) -> void:
         body.velocity.z = body.velocity.z * BACKPEDDLE_PENALTY
 
     body.move_and_slide()
-    moving.emit(body.velocity)
+
+    if body.velocity != last_velocity:
+        moving.emit(body.velocity)
+        last_velocity = body.velocity
+
     body.velocity = Vector3.ZERO
 #endregion
