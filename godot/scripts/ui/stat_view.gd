@@ -2,6 +2,7 @@ class_name StatView extends View
 
 @export var stat_type := "Health"
 @export var label: Label
+
 var stat: ComponentStat
 
 

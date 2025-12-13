@@ -31,18 +31,26 @@ func setup_move(move_comp: ComponentMove) -> void:
     if anim_comp:
         move_comp.moving.connect(anim_comp.moving)
 
-    var stat_comp_signals: Dictionary[String, Callable] = {
-        ComponentStat.SPEED_ID: move_comp.on_speed_change,
-        ComponentStat.JUMP_FORCE_ID: move_comp.on_jump_force_change,
-        ComponentStat.GRAVITY_ID: move_comp.on_gravity_change,
-    }
+    var stats_man_comp: ComponentStatManager = find(
+        ComponentStatManager.ID)
 
-    for stat_id in stat_comp_signals.keys():
-        var comp: ComponentStat = find(stat_id)
-        var signal_handler := stat_comp_signals[stat_id]
-        # This initializes the value
-        signal_handler.call(comp.current, comp.current)
-        comp.change.connect(signal_handler)
+    if stats_man_comp:
+        var stat_comp_signals: Dictionary[String, Callable] = {
+            ComponentStat.SPEED_ID: move_comp.on_speed_change,
+            ComponentStat.JUMP_FORCE_ID: move_comp.on_jump_force_change,
+            ComponentStat.GRAVITY_ID: move_comp.on_gravity_change,
+        }
+
+        for stat_id in stat_comp_signals.keys():
+            var comp: ComponentStat = stats_man_comp.find(stat_id)
+
+            if not comp:
+                continue
+
+            var signal_handler := stat_comp_signals[stat_id]
+            # This initializes the value
+            signal_handler.call(comp.current, comp.current)
+            comp.change.connect(signal_handler)
 #endregion
 
 #region Signal Handler 

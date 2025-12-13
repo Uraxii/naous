@@ -9,7 +9,6 @@ enum EntityType {
 
 signal change_control(is_local: bool)
 
-
 var type: EntityType:
     get = get_type
 
@@ -21,19 +20,20 @@ func get_type() -> EntityType:
 @export var data := EntityData.new()
 
 @export_category("Components")
-@export var components:   ComponentManager
-@export var animator:     ComponentAnimator
-@export var health:       ComponentHealth
-@export var speed:        ComponentStat
-@export var gravity:      ComponentStat
-@export var jump_force:   ComponentStat
-@export var move:         ComponentMove
-@export var body:         Node3D
-@export var spellbook:    ComponentSpellbook
-@export var inventory:    InventoryComponent
-@export var interaction:  InteractionComponent
-@export var targetable:   Targetable
-@export var targeting:    TargetingSystem
+@export var components:     ComponentManager
+@export var animator:       ComponentAnimator
+@export var stats:          ComponentStatManager
+@export var health:         ComponentHealth
+@export var speed:          ComponentStat
+@export var gravity:        ComponentStat
+@export var jump_force:     ComponentStat
+@export var move:           ComponentMove
+@export var body:           Node3D
+@export var spellbook:      ComponentSpellbook
+@export var inventory:      InventoryComponent
+@export var interaction:    InteractionComponent
+@export var targetable:     Targetable
+@export var targeting:      TargetingSystem
 @export_category("Runtime Values")
 @export var id := 0
 @export var target_id := 0:

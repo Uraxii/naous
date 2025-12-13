@@ -30,6 +30,7 @@ metadata/_custom_type_script = "uid://d0hjh3hlvo8m4"
 
 [sub_resource type="Resource" id="Resource_cjxc5"]
 script = ExtResource("10_oq6ar")
+jump_force = 1.0
 metadata/_custom_type_script = "uid://c4w8yg88aqeon"
 
 [resource]
