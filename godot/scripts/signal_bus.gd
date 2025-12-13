@@ -98,5 +98,5 @@ signal selected_character(character_data: Dictionary)
 signal test_msg(msg: MsgSpawnEntity)
 signal chat_msg(msg: MsgChat)
 signal spawn_entity_msg(msg: MsgSpawnEntity)
-signal cast_resquest_msg(msg: MsgCastRequest)
+signal cast_resquest_msg(msg: MsgCastReq)
 #endregion

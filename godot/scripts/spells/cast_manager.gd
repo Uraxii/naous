@@ -6,7 +6,7 @@ class_name CastManager extends Node
 @export var queue: Dictionary[String, Spell] = {}
 
 
-func _on_cast_request(msg: MsgCastRequest) -> void:
+func _on_cast_request(msg: MsgCastReq) -> void:
     var spell: Spell = get_node(msg.spell_node_path)
     if not spell:
         return

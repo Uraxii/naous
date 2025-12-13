@@ -104,7 +104,9 @@ func _spawn_player(
 
     lg.debug(spawn_data)
 
-    var entity: Entity = entities.spawn(spawn_data.serialize())
+    var entity: Entity = entities.spawn(
+        Serializer.to_dict(spawn_data))
+
     player_data.entity = entity
     connections[authority] = player_data
 

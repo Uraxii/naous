@@ -3,22 +3,21 @@ class_name MsgRouter extends Node
 @onready var signals    := Globals.signal_bus
 @onready var logger     := Globals.logger
 
-var routes: Dictionary[Msg.Type, Signal] = {  }
+var routes: Dictionary[BFT.ID, Signal] = {  }
 
 
-static func generate_msg_routes(
-    bus: SignalBus
-) -> Dictionary[Msg.Type, Signal]:
+static func generate_msg_routes(bus: SignalBus) -> Dictionary[BFT.ID, Signal]:
     return {
-        Msg.Type.TEST: bus.test_msg,
-        Msg.Type.CHAT: bus.chat_msg,
-        Msg.Type.SPAWN_ENTITY: bus.spawn_entity_msg,
-        Msg.Type.CAST_REQUEST: bus.cast_resquest_msg,
+        BFT.ID.MSG_TEST: bus.test_msg,
+        BFT.ID.MSG_CHAT: bus.chat_msg,
+        BFT.ID.MSG_SPAWN_ENTITY: bus.spawn_entity_msg,
+        BFT.ID.MSG_CAST_REQ: bus.cast_resquest_msg,
     }
 
 
 func client_send_to_server(msg: Msg) -> void:
-    _server_recieve_msg.rpc_id(1, msg.serialize())
+    _server_recieve_msg.rpc_id(1,
+    Serializer.to_dict(msg))
 
 
 @rpc("any_peer", "call_remote")
@@ -30,7 +29,8 @@ func _server_recieve_msg(msg: Dictionary) -> void:
 
 
 func send(msg: Msg) -> void:
-    _route_msg.rpc(msg.serialize())
+    var serialized_msg := Serializer.to_dict(msg)
+    _route_msg.rpc(serialized_msg)
 
 
 @rpc("any_peer", "call_local")
@@ -39,10 +39,9 @@ func _route_msg(msg: Dictionary) -> void:
         return
 
     logger.debug("Received message:", msg)
-    var new_msg = Msg.TypeMap.get(msg.type).new()
-    new_msg.deserialize(msg.payload)
+    var new_msg: Msg = Serializer.from_dict(msg)
 
-    if not routes.has(msg.type):
+    if not routes.has(new_msg.get_id()):
         logger.warn("No route for message!\tMSG:", msg)
         return
 
@@ -54,7 +53,7 @@ func validate_message(msg: Dictionary) -> bool:
         logger.warn("Invaid msg payload!\tMSG:", msg)
         return false
 
-    if not msg.has("type") or not Msg.TypeMap.has(msg["type"]):
+    if not msg.has("type") or not BFT.get_type(msg["type"]):
         logger.warn("Invalid msg type!\tMSG:", msg)
         return false
 

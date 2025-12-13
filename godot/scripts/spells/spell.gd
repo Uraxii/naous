@@ -34,7 +34,7 @@ func setup(spell_data: SpellData, entity: Entity) -> void:
 
 
 func request_cast() -> void:
-    var msg := MsgCastRequest.new()
+    var msg := MsgCastReq.new()
     msg.spell_node_path = get_path()
     router.client_send_to_server(msg)
 

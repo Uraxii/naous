@@ -1,16 +1,10 @@
 class_name MsgTest extends MsgChat
 
 
-func serialize() -> Dictionary:
-    return {
-        "type": Type.TEST,
-        "payload": {
-            "sender": "TestMessage",
-            "message": "This is a test message."
-            }
-        }
+func _init() -> void:
+    sender = "Test"
+    message = "This is a test message."
 
 
-func deserialize(payload: Dictionary):
-    sender = payload.sender
-    message = payload.message
+func get_id() -> BFT.ID:
+    return BFT.ID.MSG_TEST
