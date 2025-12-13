@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="12_yr3on"]
 [ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="12_yv3je"]
 [ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="13_2ngu4"]
-[ext_resource type="Script" uid="uid://cycxwu1ofls7d" path="res://scripts/entities/components/component_stat_manager.gd" id="13_y2dek"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_stat_manager.gd" id="13_y2dek"]
 [ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="14_jv5ih"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
 [ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="19_2ngu4"]
@@ -120,7 +120,6 @@ metadata/_custom_type_script = "uid://u8paan0wgvi6"
 
 [node name="Stats" type="Node" parent="Components"]
 script = ExtResource("13_y2dek")
-metadata/_custom_type_script = "uid://cycxwu1ofls7d"
 
 [node name="Health" type="Node" parent="Components/Stats"]
 script = ExtResource("10_w0xwc")

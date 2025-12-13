@@ -4,12 +4,7 @@ signal die
 
 
 func _set_current(value: float) -> void:
-    if is_infinite:
-        return
+    super._set_current(value)
 
-    var old = current
-    current = clamp(value, min_value, max_value)
-    change.emit(current, old)
-
-    if value <= 0:
+    if current <= 0:
         die.emit()
