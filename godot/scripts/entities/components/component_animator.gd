@@ -11,37 +11,42 @@ func moving(velocity: Vector3) -> void:
     set(movement_blend_parameter_path, v2_velocity)
     set(jump_fall_blend_parameter_path, velocity.y)
 
+
 func jump() -> void:
-    pass
+    push_warning("jump anim not implemented.")
 
 
 func falling() -> void:
-    pass
+    push_warning("falling anim not implemented.")
 
 
 func land() -> void:
-    pass
+    push_warning("land anim not implemented.")
 
 
 func weapon_swing() -> void:
-    pass
+    push_warning("weapon_swing not implemented.")
 
 
 func start_cast() -> void:
-    pass
+    push_warning("start_cast anim not implemented.")
 
 
 func cast() -> void:
-    pass
+    push_warning("cast anim not implemented.")
 
 
 func take_damage() -> void:
-    pass
+    push_warning("take_damage anim not implemented.")
 
 
 func low_health() -> void:
-    pass
+    push_warning("low_health anim not implemented")
+
+
+func die() -> void:
+    push_warning("die anim not implemented.")
 
 
 func stunned() -> void:
-    pass
+    push_warning("stunned anim not implemented.")
