@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dgpjya5w3dpcy" path="res://scripts/ui/hotbar_manager.gd" id="1_80i08"]
 [ext_resource type="PackedScene" uid="uid://dsts11lyb1wm7" path="res://scenes/ui/hotbar_view.tscn" id="2_meqgt"]
-[ext_resource type="Resource" uid="uid://0p7mb11yap3h" path="res://resources/defaut_hotbar_prefs.tres" id="2_pug7i"]
+[ext_resource type="Resource" uid="uid://0p7mb11yap3h" path="res://resources/prefs/defaut_hotbar_prefs.tres" id="2_pug7i"]
 
 [node name="HotbarManager" type="Control"]
 layout_mode = 3
