@@ -14,15 +14,14 @@ func get_all() -> Dictionary[String, Node]:
 
 
 func find(node_name: String) -> Node:
-    var component = map.get(node_name)
+    var comp = map.get(node_name)
 
-    if not component:
-        component = find_child(node_name)
-        if not component:
-            return
-        map.set(component.name, component)
+    if not comp:
+        comp = find_child(node_name)
+        if comp:
+            map[comp.name] = comp
 
-    return component
+    return comp
 
 #region Component Setup
 func setup_move(move_comp: ComponentMove) -> void:
