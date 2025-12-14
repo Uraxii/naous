@@ -1,20 +1,6 @@
 class_name TraitData extends Resource
 
-enum Type {
-    UNKOWN,
-    DAMAGE_TARGET,
-    DAMAGE_CASTER,
-    SPAWN_ENTITY,
-}
-
-static var trait_type_map: Dictionary[Type, GDScript] = {
-    Type.UNKOWN: Trait,
-    Type.DAMAGE_TARGET: DamageTarget,
-    Type.DAMAGE_CASTER: DamageCaster,
-    Type.SPAWN_ENTITY:  TraitSpawnEntity,
-}
-
-@export var trait_type := Type.DAMAGE_TARGET
+@export var trait_type := BFT.ID.TRAIT_DAMAGE_TARGET
 @export var draw := 1.0
 @export_category("Modify Stats")
 @export var damage  := 0.0
@@ -26,7 +12,7 @@ static var trait_type_map: Dictionary[Type, GDScript] = {
 @export var apply_status: SpellData
 
 var trait_script: GDScript = Trait:
-    get: return trait_type_map.get(trait_type, Trait)
+    get: return BFT.get_type(trait_type)
 
 
 func serialize() -> Dictionary:
@@ -56,8 +42,8 @@ func deserialize(data: Dictionary) -> void:
     damage  = data.get("damage", damage)
     healing = data.get("healing", healing)
 
-    var type_of_trait: Type = data.get("type", Type.UNKOWN)
-    trait_script = trait_type_map.get(type_of_trait, Type.UNKOWN)
+    var type_of_trait: BFT.ID = data.get("type", BFT.ID.UNKNOWN)
+    trait_script = BFT.get_type(type_of_trait)
     print_debug("trait script is ", trait_script)
 
     var scene_path: String = data.get("summon_entity", "")
