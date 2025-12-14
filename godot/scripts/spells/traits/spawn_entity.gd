@@ -1,8 +1,5 @@
 class_name TraitSpawnEntity extends Trait
 
-@export var entity_scene: PackedScene
-@export_category("Runtime Values")
-
 @onready var router := Globals.msg_router
 @onready var entities: EntityManager = Globals.entities
 
@@ -12,7 +9,7 @@ func cast() -> void:
         return
 
     var spawn_msg := MsgSpawnEntity.new()
-    spawn_msg.resource_path = entity_scene.resource_path
+    spawn_msg.resource_path = data.summon_entity.resource_path
     spawn_msg.position = spell.caster.body.global_position
     var entity: Entity = entities.spawn(spawn_msg.serialize())
     
