@@ -14,8 +14,8 @@ func _ready() -> void:
     super._ready()
     if is_client:
         %StatView.visible = true
-        load_character_from_disk(active_character)
-    Globals.signal_bus.save_game.connect(save_active_character_to_disk)
+        #load_character_from_disk(active_character)
+    #Globals.signal_bus.save_game.connect(save_active_character_to_disk)
 
 
 func data_path_for_character(character_name: String):
