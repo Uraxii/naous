@@ -4,7 +4,7 @@ class_name DamageSimple extends EffectBase
 @export_range(0, 1000, 1) var damage: float = 10
 
 func apply_effect_to_entity(entity: Entity) -> void:
-    var health_c: HealthComponent = entity.health
+    var health_c: ComponentHealth = entity.health
     if not is_instance_valid(health_c):
         Globals.logger.warn("Damage Effect unable to find health component on entity!")
     else:

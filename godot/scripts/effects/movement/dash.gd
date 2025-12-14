@@ -5,7 +5,7 @@ class_name DashEffect extends EffectBase
 
 
 func apply_effect_to_entity(entity: Entity) -> void:
-    var speed_c: StatComponent = entity.speed
+    var speed_c: ComponentStat = entity.speed
     if not is_instance_valid(speed_c):
         Globals.logger.error("Dash Effect can't find speed component of entity!")
         return
@@ -22,5 +22,5 @@ func entity_triggered_effect(entity: Entity) -> void:
 
 
 func _on_effect_end(affected_entity: Entity, original_speed: float) -> void:
-    var speed_c: StatComponent = affected_entity.speed
+    var speed_c: ComponentStat = affected_entity.speed
     speed_c.current = original_speed
