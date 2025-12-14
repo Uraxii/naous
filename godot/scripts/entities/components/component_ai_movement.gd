@@ -2,8 +2,8 @@ class_name ComponentAIMovement extends Node
 
 @export var entity: Entity
 @export var body: CharacterBody3D
-@export var speed: StatComponent
-@export var gravity: StatComponent
+@export var speed: ComponentStat
+@export var gravity: ComponentStat
 
 # TODO: Later implement a proper NavigationMesh system with NavigationAgent3D
 var target_destination: Vector3:
