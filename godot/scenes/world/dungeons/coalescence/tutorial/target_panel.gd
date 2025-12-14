@@ -4,7 +4,7 @@ class_name TargetPanel extends PanelContainer
 @onready var target_resource_bar: ProgressBar = %TargetResourceBar
 
 var tracked_entity: Entity
-var tracked_stat: StatComponent
+var tracked_stat: ComponentStat
 
 
 ## Percent should be a float from 0.0 to 1.0
@@ -16,7 +16,7 @@ func set_target_name(target_name: String) -> void:
     target_name_label.text = target_name
 
 
-func track_entity(entity: Entity, stat_c: StatComponent) -> void:
+func track_entity(entity: Entity, stat_c: ComponentStat) -> void:
     Globals.logger.debug("Tracking entity: %s" % [entity.name])
     tracked_entity = entity
     set_target_name(tracked_entity.name)
