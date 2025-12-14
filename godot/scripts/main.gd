@@ -5,20 +5,20 @@ class_name Main extends Node
 
 
 func _initialize_client(args: Dictionary) -> void:
-    print("Connecting to instance server...")
+    print_debug("Initializing as client...")
     Globals.views.spawn(CharacterSelectView)
     
 
 
 func _initialize_server(args: Dictionary) -> void:
-    print("Initializing as headless server...")
+    print("Initializing as server...")
     InstanceAPI.start_server()
 
 
 func _ready() -> void:
     Globals.views.spawn(ConsoleView)
 
-    print_debug("Initializing as client...")
+    print_debug("user://: ", OS.get_user_data_dir())
     print_debug("Args=", arguments)
 
     if arguments.has("server"):
