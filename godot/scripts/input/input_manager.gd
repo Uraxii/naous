@@ -27,8 +27,8 @@ class_name InputManager extends Node
     InputBindings.ACTION_4: signals.action_4,
 }
 
-var default_binds: InputBindings = load(
-    "res://resources/default_input_bindings.tres")
+var default_binds: InputBindings = preload(
+    "res://resources/prefs/default_input_bindings.tres")
 
 var move: Vector2:
     get: return Input.get_vector(
