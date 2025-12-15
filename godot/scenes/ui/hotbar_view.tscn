@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsts11lyb1wm7"]
 
-[ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hot_bar.gd" id="1_yjdhc"]
+[ext_resource type="Script" uid="uid://bjf3yfqupacrg" path="res://scripts/ui/hotbar.gd" id="1_yjdhc"]
 
 [node name="HotBar" type="Control"]
 layout_mode = 3
