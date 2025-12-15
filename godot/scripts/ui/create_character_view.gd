@@ -22,10 +22,16 @@ func _on_back_pressed() -> void:
 
 func _on_create_pressed() -> void:
     var character_name: LineEdit = %CharacterName
-    var character_data = {
-        "name" = character_name.text,
-    }
-    save.save_character(character_data)
+    var data = EntityData.new()
+    data.id.display_name = character_name.text
+
+
+    data.spellbook.spells.append(
+        load("res://resources/spell_data/fireball/fireball.tres"))
+    data.spellbook.spells.append(
+        load("res://resources/spell_data/harm/harm.tres"))
+        
+    save.save_character(data)
     _return_to_character_select()
 
 

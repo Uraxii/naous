@@ -27,7 +27,7 @@ func get_all_characters() -> Array[String]:
         if file_name.ends_with(CHARACTER_FILE_EXTENSION):
             var character_name = file_name.trim_suffix(CHARACTER_FILE_EXTENSION)
             character_list.append(character_name)
-            
+
         file_name = dir.get_next()
 
     dir.list_dir_end()
@@ -63,20 +63,13 @@ func load_character(character_name: String) -> Dictionary:
     return character_data
 
 
-func save_character(character_data: Dictionary) -> bool:
+func save_character(data: EntityData) -> bool:
     """
     Returns true on success, false on failure.
     """
 
     var err_msg = "Unable to save character!"
-
-    var character_name = character_data.get("name", "")
-    print_debug("Char Name: %s", character_name)
-    if not character_name:
-        var err_reason = "Characer data missing name!"
-        logger.error("ERROR: %s, REASON: %s" % [err_msg, err_reason])
-        return false
-
+    var character_name = data.id.display_name
     var character_path = get_character_file_path(character_name)
 
     var file = FileAccess.open(character_path, FileAccess.WRITE)
@@ -88,7 +81,7 @@ func save_character(character_data: Dictionary) -> bool:
         logger.error("ERROR: %s, REASON: %s" % [err_msg, err_reason])
         return false
 
-    if not file.store_string(JSON.stringify(character_data, "\t")):
+    if not file.store_string(JSON.stringify(data.serialize(), "\t")):
         var err_reason = FileAccess.get_open_error()
         logger.error("ERROR: %s, REASON: %s" % [err_msg, err_reason])
 

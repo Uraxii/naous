@@ -1,10 +1,10 @@
 class_name EntityData extends Resource
 
-@export var id:         EntityIdData
-@export var prefs:      UserPrefs
-@export var stats:      StatsData
-@export var inventory:  Inventory
-@export var spellbook:  SpellbookData
+@export var id := EntityIdData.new()
+@export var prefs := UserPrefs.new()
+@export var stats := StatsData.new()
+@export var inventory := Inventory.new()
+@export var spellbook := SpellbookData.new()
 
 
 func serialize() -> Dictionary:
