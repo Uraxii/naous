@@ -26,7 +26,7 @@ func _on_control_entity(new_enity: Entity) -> void:
 
     for button in buttons:
         for spell in spells:
-            print_debug("Spell: ", spell.name, ", ", spell.hotbutton)
+            #print_debug("Spell: ", spell.name, ", ", spell.hotbutton)
             if spell.hotbutton == button.id:
                 log.debug("(%s, %d, %d)" % [spell.id, spell.hotbutton, button.id])
                 button.set_spell(spell)
