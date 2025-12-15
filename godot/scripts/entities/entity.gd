@@ -162,25 +162,25 @@ func setup_components() -> void:
         stats = components.find(ComponentStatManager.ID)
     if not health:
         health = components.find(ComponentStat.HEALTH_ID)
-    if not speed: 
+    if not speed:
         speed = components.find(ComponentStat.SPEED_ID)
     if not gravity:
         gravity = components.find(ComponentStat.GRAVITY_ID)
-    if not jump_force: 
+    if not jump_force:
         jump_force = components.find(ComponentStat.JUMP_FORCE_ID)
-    if not spellbook: 
+    if not spellbook:
         spellbook = components.find("Spellbook")
     if not body:
         body = components.find("Body")
     if not move:
         move = components.find("Move")
-    if not inventory: 
+    if not inventory:
         inventory = components.find("Inventory")
-    if not interaction: 
+    if not interaction:
         interaction = components.find("Interaction")
-    if not targetable: 
+    if not targetable:
         targetable = components.find("Targetable")
-    if not targeting: 
+    if not targeting:
         targeting = components.find("TargetingSystem")
     if not anim:
         anim = components.find("Animator")

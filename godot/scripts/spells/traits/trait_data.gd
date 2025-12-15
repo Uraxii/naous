@@ -57,7 +57,7 @@ func deserialize(data: Dictionary) -> void:
     var entity_dict = data.get("entity_data")
     if entity_dict and entity_dict is Dictionary:
         if not entity_data:
-            entity_data = EntityData.new() 
+            entity_data = EntityData.new()
         entity_data.deserialize(entity_dict)
     elif entity_dict == null:
         entity_data = null

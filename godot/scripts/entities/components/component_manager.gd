@@ -51,7 +51,7 @@ func setup_move(move_comp: ComponentMove) -> void:
             comp.change.connect(signal_handler)
 #endregion
 
-#region Signal Handler 
+#region Signal Handler
 func connect_signals() -> void:
     child_entered_tree.connect(_on_component_added)
     child_exiting_tree.connect(_on_component_removed)

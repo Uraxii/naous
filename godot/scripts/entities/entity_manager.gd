@@ -46,7 +46,7 @@ func _spawn_custom(serialized_spawn_msg: Dictionary) -> Node:
     # TODO: CHANGE THIS!!! PLAYERS SHOULD NOT BE ABLE TO PASS IN AN ABITRARY PATH!!!
     var msg := MsgSpawnEntity.new()
     msg.deserialize(serialized_spawn_msg.payload)
-    
+
     var scene = load(msg.resource_path)
     var entity: Entity = scene.instantiate()
 

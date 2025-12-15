@@ -2,6 +2,7 @@ class_name ComponentStatManager extends Node
 
 const ID := "Stats"
 
+var data := StatsData
 var stats: Dictionary[String, ComponentStat]
 
 #region Get Stat Values
@@ -47,7 +48,7 @@ func find(stat_id: String) -> ComponentStat:
     return comp
 
 
-#region Signal Handlers 
+#region Signal Handlers
 func _on_component_added(node: Node) -> void:
     if node is ComponentStat:
         stats.set(node.name, node)

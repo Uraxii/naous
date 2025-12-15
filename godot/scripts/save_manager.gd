@@ -44,7 +44,7 @@ func load_character(character_name: String) -> Dictionary:
         return {}
 
     var json_object = JSON.new()
-    
+
     if json_object.parse(file.get_as_text()) != OK:
         var err_msg = "Failed to parse character file!"
         var err_reason = json_object.get_error_message()

@@ -11,7 +11,7 @@ const JUMP_FORCE_ID := "JumpForce"
 @export var is_invincible := false
 @export var current: float = 10:
     set = _set_current
-@export var min_value := 0.0 
+@export var min_value := 0.0
 @export var max_value := 100.0
 
 @onready var signals := Globals.signal_bus

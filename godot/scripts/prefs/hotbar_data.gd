@@ -11,7 +11,7 @@ func serialize() -> Dictionary:
 
     data["buttons"] = []
     for hotbutton in buttons:
-        data["buttons"].append(hotbutton.serialize()) 
+        data["buttons"].append(hotbutton.serialize())
 
     data["scale"] = scale
     return data
@@ -20,7 +20,7 @@ func serialize() -> Dictionary:
 func deserialize(data: Dictionary) -> void:
     scale = data.get("scale", scale)
     var saved_buttons_data: Array[Dictionary] = data.get("buttons", [])
-    buttons.clear() 
+    buttons.clear()
     for button_data in saved_buttons_data:
         var new_hotbutton: HotbuttonData = HotbuttonData.new()
         new_hotbutton.deserialize(button_data)

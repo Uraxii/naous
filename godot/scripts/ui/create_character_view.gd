@@ -11,7 +11,7 @@ func _ready() -> void:
 func _connect_signals() -> void:
     var create_button: Button = %CreateButton
     create_button.pressed.connect(_on_create_pressed)
-    
+
     var back_button: Button = %BackButton
     back_button.pressed.connect(_on_back_pressed)
 
@@ -30,7 +30,7 @@ func _on_create_pressed() -> void:
         load("res://resources/spell_data/fireball/fireball.tres"))
     data.spellbook.spells.append(
         load("res://resources/spell_data/harm/harm.tres"))
-        
+
     save.save_character(data)
     _return_to_character_select()
 
