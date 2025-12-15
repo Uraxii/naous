@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="SpellData" load_steps=5 format=3 uid="uid://o0et1lpj7iaq"]
+
+[ext_resource type="Texture2D" uid="uid://b062rfptwd6eg" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_echos/Fireball.png" id="1_7nrjg"]
+[ext_resource type="Script" uid="uid://ctuop4g7pu2g3" path="res://scripts/spells/spell_data.gd" id="1_y50ly"]
+[ext_resource type="Script" uid="uid://b0kc5ew6keevx" path="res://scripts/spells/traits/trait_data.gd" id="2_txkmi"]
+[ext_resource type="Resource" uid="uid://q0371c4jkq8k" path="res://resources/spell_data/fireball/traits/shoot_fireball.tres" id="4_7nrjg"]
+
+[resource]
+script = ExtResource("1_y50ly")
+id = "fireball"
+hotbutton = 2
+icon = ExtResource("1_7nrjg")
+cooldown_time = 3.0
+cast_time = 1.0
+traits = Array[ExtResource("2_txkmi")]([ExtResource("4_7nrjg")])
+metadata/_custom_type_script = "uid://ctuop4g7pu2g3"

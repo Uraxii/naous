@@ -5,6 +5,8 @@ class_name TraitData extends Resource
 @export_category("Modify Stats")
 @export var damage  := 0.0
 @export var healing := 0.0
+@export_category("Projectile")
+@export var projectile_scene: PackedScene
 @export_category("Spawning")
 @export var summon_entity:  PackedScene
 @export var entity_data:    EntityData
