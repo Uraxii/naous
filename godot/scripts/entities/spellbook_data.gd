@@ -18,7 +18,6 @@ func serialize() -> Dictionary:
 
 func deserialize(data: Dictionary) -> void:
     var spells_data_array: Array = data.get("spells", [])
-
     spells.clear()
 
     for spell_dict in spells_data_array:

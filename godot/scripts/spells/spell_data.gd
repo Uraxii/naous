@@ -13,9 +13,11 @@ func serialize() -> Dictionary:
     var data := {}
 
     data["id"] = id
+    data["hotbar"] = hotbar
+    data["hotbutton"] = hotbutton
     data["cast_time"] = cast_time
     data["icon_path"] = icon.resource_path if icon else ""
-    
+
     var serialized_traits = []
     for spell_trait in traits:
         serialized_traits.append(spell_trait.serialize())
@@ -27,6 +29,8 @@ func serialize() -> Dictionary:
 
 func deserialize(data: Dictionary) -> void:
     id = data.get("id", id)
+    hotbar = data.get("hotbar", hotbar)
+    hotbutton = data.get("hotbutton", hotbutton)
     cast_time = data.get("cast_time", cast_time)
 
     var icon_path: String = data.get("icon_path", "")

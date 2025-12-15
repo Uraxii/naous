@@ -4,8 +4,8 @@ signal cast_started
 
 @export var data: SpellData
 
-@export var hotbar := 1
-@export var hotbutton := 1
+@export var hotbar := 0
+@export var hotbutton := 0
 @export_category("Runtime Values")
 @export var traits: Array[Trait] = []
 @export var caster: Entity
@@ -30,6 +30,9 @@ var signals: SignalBus:
 
 func setup(spell_data: SpellData, entity: Entity) -> void:
     data = spell_data
+    hotbar = data.hotbar
+    hotbutton = data.hotbutton
+
     caster = entity
 
 
@@ -78,9 +81,6 @@ func generate_traits() -> Array[Trait]:
 
 
 func _ready() -> void:
-    hotbar = data.hotbar
-    hotbutton = data.hotbutton
-
     traits = generate_traits()
     timer.one_shot = true
     add_child(timer)

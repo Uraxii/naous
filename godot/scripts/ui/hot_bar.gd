@@ -20,14 +20,15 @@ func _on_control_entity(new_enity: Entity) -> void:
     if not spell_component:
         return
 
-    var spells: Array[Spell] = spell_component.spells.values().filter(
-        func(spell:Spell): return spell.hotbar == id)
-
+    var spells: Array[Spell] = spell_component.spells.values()
     #log.debug("Spells:", spells)
+    #log.debug("Hotbuttons: ", buttons)
 
     for button in buttons:
         for spell in spells:
+            print_debug("Spell: ", spell.name, ", ", spell.hotbutton)
             if spell.hotbutton == button.id:
+                log.debug("(%s, %d, %d)" % [spell.id, spell.hotbutton, button.id])
                 button.set_spell(spell)
 
 
