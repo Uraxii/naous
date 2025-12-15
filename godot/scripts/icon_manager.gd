@@ -8,9 +8,7 @@ static var cache: Dictionary[String, Texture2D] = {  }
 
 
 static func find(id: String) -> Texture2D:
-    var icon: Texture2D
-
-    icon = cache.get(id)
+    var icon = cache.get(id)
     if icon:
         return icon
 
