@@ -1,7 +1,5 @@
 class_name Projectile extends Entity
 
-@export var damage := 10.0
-
 var velocity = Vector3.ZERO
 
 
@@ -22,7 +20,7 @@ func _physics_process(delta) -> void:
         _hit_target(collision)
 
 
-func _hit_target(collision: KinematicCollision3D) -> void:    
+func _hit_target(collision: KinematicCollision3D) -> void:
     var hit_object = collision.get_collider()
 
     var hit_entity: Entity = hit_object.get("entity")
@@ -30,6 +28,6 @@ func _hit_target(collision: KinematicCollision3D) -> void:
         return
 
     if hit_entity.health:
-        hit_entity.health.current -= damage
+        hit_entity.health.current -= data.damage
 
     queue_free()
