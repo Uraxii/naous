@@ -1,8 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1omqy0vt0q46"]
+[gd_scene load_steps=2 format=3 uid="uid://c1omqy0vt0q46"]
 
 [ext_resource type="Script" uid="uid://bc6253msclsnu" path="res://scripts/spells/traits/spawn_entity.gd" id="1_cge1k"]
-[ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/entities/projectiles/projectile.tscn" id="2_jivum"]
 
 [node name="SpawnEntity" type="Node"]
 script = ExtResource("1_cge1k")
-entity_scene = ExtResource("2_jivum")
