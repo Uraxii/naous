@@ -5,6 +5,7 @@ class_name CameraManager extends SpringArm3D
 @export var min_distance := -1.0
 @export var max_distance := 20.0
 @export var zoom_increment := 0.5
+@export var zoom_tween_length := 0.65
 @export var x_offset := 0.5
 @export var y_offset := 2.0
 @export var z_offset := 0.0
@@ -12,7 +13,7 @@ class_name CameraManager extends SpringArm3D
 @export var target: Node3D
 @export var camera_distance := 1.0 : set = _set_camera_distance
 
-@onready var signals = Globals.signal_bus
+@onready var signals := Globals.signal_bus
 @onready var input := Globals.input
 
 @onready var camera: Camera3D = %Camera3D:
@@ -64,7 +65,8 @@ func get_current_camera() -> Camera3D:
 func _set_camera_distance(value: float) -> void:
     if allow_input_control:
         camera_distance = clampf(value, min_distance, max_distance)
-        spring_length = camera_distance
+        var tween := get_tree().create_tween()
+        tween.tween_property(self, "spring_length", camera_distance, zoom_tween_length)
 
 
 func _on_allow_character_control(allow: bool) -> void:
