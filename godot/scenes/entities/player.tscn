@@ -123,7 +123,6 @@ script = ExtResource("13_y2dek")
 
 [node name="Health" type="Node" parent="Components/Stats"]
 script = ExtResource("10_w0xwc")
-max_value = 100.0
 current = 100.0
 
 [node name="Energy" type="Node" parent="Components/Stats"]
@@ -131,18 +130,14 @@ script = ExtResource("11_spk56")
 
 [node name="Speed" type="Node" parent="Components/Stats"]
 script = ExtResource("11_spk56")
-max_value = 30.0
 current = 1.0
+max_value = 30.0
 
 [node name="Gravity" type="Node" parent="Components/Stats"]
 script = ExtResource("11_spk56")
-max_value = 100.0
-start_percent = 0.01400000000000001
 
 [node name="JumpForce" type="Node" parent="Components/Stats"]
 script = ExtResource("11_spk56")
-max_value = 100.0
-start_percent = 0.07000000000000006
 
 [node name="Interaction" type="Node" parent="Components" node_paths=PackedStringArray("entity", "detection_zone")]
 script = ExtResource("10_b4o2o")
