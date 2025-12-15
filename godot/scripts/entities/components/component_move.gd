@@ -117,7 +117,7 @@ func _setup() -> void:
             return
 
     push_warning("Reminder: Move is pushing the player up in _startup.")
-    body.position.y += 100
+    body.position.y += 50
 
     entity.change_control.connect(_on_change_control)
 
