@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsnahgut5wqd6"]
+[gd_scene load_steps=8 format=3 uid="uid://bsnahgut5wqd6"]
 
 [ext_resource type="Script" uid="uid://0c4vp0yvei3e" path="res://scripts/entities/projectile.gd" id="1_6ndfs"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="2_kbb6n"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="3_ewt5w"]
+[ext_resource type="Script" uid="uid://cycxwu1ofls7d" path="res://scripts/entities/components/component_stat_manager.gd" id="3_onq88"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ewt5w"]
 properties/0/path = NodePath("ComponentManager/Body:position")
@@ -32,7 +33,10 @@ script = ExtResource("2_kbb6n")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Speed" type="Node" parent="Components"]
+[node name="StatManager" type="Node" parent="Components"]
+script = ExtResource("3_onq88")
+
+[node name="Speed" type="Node" parent="Components/StatManager"]
 script = ExtResource("3_ewt5w")
 metadata/_custom_type_script = "uid://bjeqm0rajdi7x"
 
