@@ -16,7 +16,7 @@ func serialize() -> Dictionary:
     data["hotbar"] = hotbar
     data["hotbutton"] = hotbutton
     data["cast_time"] = cast_time
-    data["icon_path"] = icon.resource_path if icon else ""
+    data["icon"] = IconManager.path_to_id(icon.resource_path) if icon else ""
 
     var serialized_traits = []
     for spell_trait in traits:
@@ -32,11 +32,8 @@ func deserialize(data: Dictionary) -> void:
     hotbar = data.get("hotbar", hotbar)
     hotbutton = data.get("hotbutton", hotbutton)
     cast_time = data.get("cast_time", cast_time)
-
-    var icon_path: String = data.get("icon_path", "")
-    if not icon_path.is_empty():
-        icon = load(icon_path) as Texture2D
-
+    var icon_name = data.get("icon", "")
+    icon = IconManager.find(icon_name)
 
     var traits_data_array: Array = data.get("traits", [])
     traits.clear()
