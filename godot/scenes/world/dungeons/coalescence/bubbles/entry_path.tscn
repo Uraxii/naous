@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cx54j3yuqwncx"]
+[gd_scene load_steps=25 format=3 uid="uid://cx54j3yuqwncx"]
 
 [ext_resource type="Script" uid="uid://nwrhhefs20xd" path="res://scenes/world/dungeons/coalescence/bubbles/entry_path.gd" id="1_1esqk"]
 [ext_resource type="Material" uid="uid://bdqiuk1jp6gfi" path="res://assets/materials/ground - rocky - huge.tres" id="1_ej2el"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c0tcxk54tuq6c" path="res://assets/prefabs/boulder_dark.tscn" id="5_kjq6w"]
 [ext_resource type="PackedScene" uid="uid://d1vsrqg2pt0xc" path="res://assets/prefabs/simpletown.tscn" id="6_kjq6w"]
 [ext_resource type="PackedScene" uid="uid://c3vvmgu3op006" path="res://assets/prefabs/crystal-cluster.tscn" id="6_uof7h"]
+[ext_resource type="PackedScene" uid="uid://c1anu3e4f7788" path="res://assets/prefabs/chimney_smoke.tscn" id="8_81an0"]
 [ext_resource type="PackedScene" uid="uid://ci8ii42pte78r" path="res://assets/prefabs/small_rock_cluster.tscn" id="8_h3w75"]
 [ext_resource type="PackedScene" uid="uid://crvijhkrifgtp" path="res://assets/prefabs/grass_cluster_a.tscn" id="11_vkb28"]
 [ext_resource type="PackedScene" uid="uid://b10ssru87qgh0" path="res://assets/prefabs/tree_red.tscn" id="12_nbdce"]
@@ -176,6 +177,15 @@ transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 4.412034, -0.33317995, -43.22
 
 [node name="crystal-cluster2" parent="Ground" instance=ExtResource("6_uof7h")]
 transform = Transform3D(3.4375343, 0, -7.223805, 0, 8, 0, 7.223805, 0, 3.4375343, -11.145466, -1.059463, -52.785423)
+
+[node name="chimney_smoke" parent="Ground" instance=ExtResource("8_81an0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.157787, 11.966992, 35.27837)
+
+[node name="chimney_smoke2" parent="Ground" instance=ExtResource("8_81an0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.966696, 11.966992, 12.274587)
+
+[node name="chimney_smoke3" parent="Ground" instance=ExtResource("8_81an0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.294369, 11.966992, -21.41268)
 
 [node name="foliage" type="Node3D" parent="."]
 
