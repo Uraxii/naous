@@ -9,4 +9,6 @@ func remove_rubble() -> void:
 
 
 func delete_rubble() -> void:
-    rubble_entity.queue_free()
+    # make sure this only happence once
+    if rubble_entity and is_instance_valid(rubble_entity):
+        rubble_entity.queue_free()
