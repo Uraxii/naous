@@ -45,9 +45,14 @@ background_energy_multiplier = 2.0
 sky = SubResource("Sky_6y1nk")
 ambient_light_source = 2
 ambient_light_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
+ambient_light_energy = 0.25
 reflected_light_source = 1
 ssao_enabled = true
-ssao_intensity = 2.5
+ssao_radius = 2.0
+ssao_intensity = 4.0
+ssao_light_affect = 0.5
+ssil_radius = 6.0
+ssil_intensity = 6.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6baa"]
 content_margin_left = 8.0
@@ -230,9 +235,9 @@ mesh = SubResource("QuadMesh_mc5jl")
 
 [node name="sun" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.58778524, -0.3290569, 0.7390739, 0, 0.9135455, 0.40673667, -0.80901706, 0.2390738, -0.5369685, 0, 100, 0)
+light_color = Color(0.9984834, 0.9999997, 0.9040936, 1)
 shadow_enabled = true
-shadow_opacity = 0.5
-shadow_blur = 8.0
+shadow_opacity = 0.25
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment/sun"]
 environment = SubResource("Environment_3vwdg")
