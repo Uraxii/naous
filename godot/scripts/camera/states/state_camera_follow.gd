@@ -1,5 +1,7 @@
 class_name StateCameraFollow extends State
 
+@export var camera_tilt_extents := 1
+
 @onready var camera: CameraManager = get_owner()
 
 var target: Node3D:
@@ -47,11 +49,11 @@ func exit() -> void:
 
 
 func get_next_position(position: Vector3) -> Vector3:
-    var new_position = Vector3(
+    var new_position := Vector3(
         position.x + camera.x_offset,
         position.y + camera.y_offset,
         position.z + camera.z_offset
-        )
+    )
 
     return new_position
 
@@ -60,8 +62,8 @@ func _handle_rotation(rotation_vector: Vector2) -> void:
     camera.rotation.y -= rotation_vector.x
     camera.rotation.x -= rotation_vector.y
 
-    if camera.rotation.x < -1:
-        camera.rotation.x = -1
+    if camera.rotation.x < (camera_tilt_extents * -1) or camera.rotation.x > camera_tilt_extents:
+        camera.rotation.x = camera_tilt_extents * -1 if camera.rotation.x < 0 else camera_tilt_extents
     
     if camera.rotate_entity:
         target.rotation.y = camera.rotation.y

@@ -1,4 +1,5 @@
 class_name CameraManager extends SpringArm3D
+
 @export var mouse_sensitivity := 0.005
 @export var joystick_sensitivity := 0.06
 @export var invert_look_y_axis := false
@@ -9,6 +10,7 @@ class_name CameraManager extends SpringArm3D
 @export var x_offset := 0.5
 @export var y_offset := 2.0
 @export var z_offset := 0.0
+
 @export_category("Runtime Values")
 @export var target: Node3D
 @export var camera_distance := 1.0 : set = _set_camera_distance
