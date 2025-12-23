@@ -64,4 +64,3 @@ func _ready() -> void:
     else:
         start_client()
         run_test()
-
