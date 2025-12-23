@@ -1,5 +1,7 @@
 class_name ComponentSpellbook extends Node
 
+const ID := "Spellbook"
+
 @export_category("Runtime Values")
 @export var spells: Dictionary[String, Spell] = {}
 # Spell ID : Input Action String
@@ -8,11 +10,10 @@ class_name ComponentSpellbook extends Node
 var caster: Entity
 
 
-func setup() -> void:
-    var component_manager: ComponentManager = get_parent()
-    caster = component_manager.entity
-    if caster and caster.data.spellbook:
-        generate_spells(caster.data.spellbook)
+func setup(entity: Entity, data: SpellbookData) -> void:
+    caster = entity
+    for spell_data in data.spells:
+        add_spell(spell_data)
 
 
 func cast(spell_id: String):
@@ -42,11 +43,6 @@ func add_spell(spell_data: SpellData) -> Spell:
     return spell
 
 
-func generate_spells(data: SpellbookData) -> void:
-    for spell_data in data.spells:
-        add_spell(spell_data)
-
-
 func _connect_echo_inputs() -> void:
     Globals.signal_bus.action_1.connect(cast_echo_from_inventory.bind(0))
     Globals.signal_bus.action_2.connect(cast_echo_from_inventory.bind(1))
@@ -56,4 +52,3 @@ func _connect_echo_inputs() -> void:
 
 func _ready() -> void:
     _connect_echo_inputs()
-    setup()

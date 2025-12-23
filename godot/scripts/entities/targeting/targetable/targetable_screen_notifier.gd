@@ -19,6 +19,7 @@ func target_exited_screen() -> void:
 
 func match_aabb_to_entity(aabb_entity: Entity) -> void:
     if aabb_entity.name == "RubbleEntity":
+        @warning_ignore("unused_variable")
         var xyz := true
     var new_aabb := aabb_entity.get_local_aabb()
     aabb = new_aabb

@@ -16,7 +16,7 @@ func serialize() -> Dictionary:
     }
 
 
-func deserialize(data: Dictionary) -> void:
+func deserialize(data: Dictionary) -> EntityData:
     var id_data = data.get("id")
     if id_data:
         id.deserialize(id_data)
@@ -40,3 +40,5 @@ func deserialize(data: Dictionary) -> void:
         spellbook.deserialize(spellbook_data)
     else:
         spellbook = SpellbookData.new()
+
+    return self

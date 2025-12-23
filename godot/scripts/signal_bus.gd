@@ -99,4 +99,5 @@ signal test_msg(msg: MsgSpawnEntity)
 signal chat_msg(msg: MsgChat)
 signal spawn_entity_msg(msg: MsgSpawnEntity)
 signal cast_resquest_msg(msg: MsgCastReq)
+signal get_entity_data(msg: MsgGetEntityData)
 #endregion

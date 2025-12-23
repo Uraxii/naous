@@ -7,6 +7,7 @@ enum ID {
     MSG_CHAT,
     MSG_SPAWN_ENTITY,
     MSG_CAST_REQ,
+    MSG_GET_ENTITY_DATA,
     TRAIT_DAMAGE_TARGET,
     TRAIT_SPAWN_ENTITY,
     TRAIT_SHOOT_PROJECTILE,
@@ -23,6 +24,8 @@ const id_to_type: Dictionary[ID, Resource] = {
         "res://scripts/messages/msg_spawn_entity.gd"),
     ID.MSG_CAST_REQ: preload(
         "res://scripts/messages/msg_cast_req.gd"),
+    ID.MSG_GET_ENTITY_DATA: preload(
+        "res://scripts/messages/msg_get_entity_data.gd"),
     ID.TRAIT_DAMAGE_TARGET: preload(
         "res://scripts/spells/traits/damage_target.gd"),
     ID.TRAIT_SPAWN_ENTITY: preload(

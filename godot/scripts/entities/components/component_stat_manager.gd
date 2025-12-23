@@ -2,8 +2,18 @@ class_name ComponentStatManager extends Node
 
 const ID := "Stats"
 
-var data := StatsData
+var data: StatsData
 var stats: Dictionary[String, ComponentStat]
+
+
+func setup(stats_data: StatsData) -> void:
+    data = stats_data
+
+    var data_dict := data.serialize()
+    for stat_id in data_dict.keys():
+        print_debug("stat: %s, val %d" % [stat_id, data_dict[stat_id]])
+        set_value(stat_id, data_dict[stat_id])
+
 
 #region Get Stat Values
 func get_value(id: String) -> float:
@@ -24,16 +34,20 @@ func get_percent(id: String) -> float:
 #region Modify Stat Values
 func modify(id: String, amount: float) -> void:
     var comp = stats.get(id)
-
     if comp:
         comp.current += amount
 
 
 func modify_percent(id: String, percentage: float):
     var comp = stats.get(id)
-
     if comp:
         comp.current = comp.current - (comp.max * percentage)
+
+
+func set_value(id: String, new_value: float) -> void:
+    var comp = stats.get(id)
+    if comp:
+        comp.current = new_value
 #endregion
 
 
@@ -42,7 +56,7 @@ func find(stat_id: String) -> ComponentStat:
 
     if not comp:
         comp = find_child(stat_id)
-        if comp and comp is ComponentStat:
+        if comp:
             stats[comp.name] = comp
 
     return comp
@@ -50,8 +64,7 @@ func find(stat_id: String) -> ComponentStat:
 
 #region Signal Handlers
 func _on_component_added(node: Node) -> void:
-    if node is ComponentStat:
-        stats.set(node.name, node)
+    stats.set(node.name, node)
 
 
 func _on_component_removed(node: Node) -> void:

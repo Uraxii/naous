@@ -7,7 +7,6 @@ class_name Main extends Node
 func _initialize_client(args: Dictionary) -> void:
     print_debug("Initializing as client...")
     Globals.views.spawn(CharacterSelectView)
-    
 
 
 func _initialize_server(args: Dictionary) -> void:

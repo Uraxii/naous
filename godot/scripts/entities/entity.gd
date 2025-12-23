@@ -8,17 +8,9 @@ enum EntityType {
 }
 
 signal change_control(is_local: bool)
+signal change_data(data: EntityData)
 
-var type: EntityType:
-    get = get_type
-
-func get_type() -> EntityType:
-    push_warning("get_type is unimplemented.")
-    return EntityType.BASE
-
-
-@export var data := EntityData.new()
-
+@export var data: EntityData
 @export_category("Components")
 @export var components:     ComponentManager
 @export var anim:           ComponentAnimator
@@ -45,6 +37,9 @@ func get_type() -> EntityType:
 
 var display_name := "{ NAME }"
 
+var type: EntityType:
+    get = get_type
+
 var target: Entity:
     get: return entities.find(target_id)
 
@@ -61,6 +56,25 @@ var transform_sync: MultiplayerSynchronizer:
         return _transform_sync
 
 var stored_authority := Globals.SERVER_ID
+
+
+func get_type() -> EntityType:
+    push_warning("get_type is unimplemented.")
+    return EntityType.BASE
+
+
+@rpc("reliable", "any_peer")
+func update_data(data_dict: Dictionary) -> void:
+    print_debug("heheheh ", multiplayer.get_remote_sender_id())
+    if multiplayer.get_remote_sender_id() != transform_sync.get_multiplayer_authority():
+        return
+
+    print_debug("yoooo")
+
+    var new_data = EntityData.new()
+    new_data.deserialize(data_dict)
+    data = new_data
+    change_data.emit(data)
 
 
 @rpc("call_local")
@@ -204,12 +218,14 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+    # Delay for wait for network syncs.
+    for i in range(0, 3):
+        await get_tree().process_frame
+
+    if transform_sync.is_multiplayer_authority():
+        update_data.rpc(data.serialize())
+
     setup_components()
-
-    for comp: Node in components.map.values():
-        if comp.has_method("set_entity"):
-            comp.set_entity(self)
-
     # This MUST be last!
     _check_local_authority()
 #endregion

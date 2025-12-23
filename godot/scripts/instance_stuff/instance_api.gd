@@ -86,10 +86,6 @@ func _spawn_player(
     if not multiplayer.is_server():
         push_warning("not the server")
         return
-    else:
-        push_warning("Server spawning thing...")
-
-    lg.debug("Sender %d" % authority)
 
     if connections.has(authority):
         return
@@ -102,7 +98,7 @@ func _spawn_player(
     spawn_data.display_name = character_data.get("name")
     spawn_data.entity_data = character_data
 
-    lg.debug(spawn_data)
+    lg.debug("spawning entity: ", character_data)
 
     var entity: Entity = entities.spawn(
         Serializer.to_dict(spawn_data))
@@ -158,7 +154,6 @@ func _on_player_disconnected(peer_id: int) -> void:
 func _on_connected_ok() -> void:
     # Request server to spawn a character of this player
     var character_data = save.load_character(local_player.character_name)
-
     _request_spawn.rpc_id(
         1,
         local_player.user,
@@ -190,6 +185,7 @@ func connect_signals() -> void:
 
 #region Godot Callback functions
 func _ready() -> void:
+    return
     connect_signals()
 #endregion
 

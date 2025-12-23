@@ -12,7 +12,7 @@ func cast() -> void:
     spawn_msg.resource_path = data.summon_entity.resource_path
     spawn_msg.position = spell.caster.body.global_position
     var entity: Entity = entities.spawn(spawn_msg.serialize())
-    
+
     var glob_pos: Vector3 = spell.caster.body.global_position
     var glob_rot: Vector3 = spell.caster.body.global_rotation
 

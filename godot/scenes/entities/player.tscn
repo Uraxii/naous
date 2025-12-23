@@ -1,8 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=40 format=3 uid="uid://c5ospakgw0cwt"]
 
 [ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
-[ext_resource type="Resource" uid="uid://d0r5e1ispxyld" path="res://resources/entities/test_entity.tres" id="2_u2s01"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
 [ext_resource type="Script" uid="uid://cq7g2ygkwm0yr" path="res://scripts/entities/components/component_attack.gd" id="4_yv3je"]
@@ -37,16 +36,16 @@
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
 properties/0/path = NodePath("Components/Body:position")
 properties/0/spawn = true
-properties/0/replication_mode = 1
+properties/0/replication_mode = 2
 properties/1/path = NodePath("Components/Body:rotation")
 properties/1/spawn = true
-properties/1/replication_mode = 1
+properties/1/replication_mode = 2
 properties/2/path = NodePath("Components/Body:scale")
 properties/2/spawn = true
-properties/2/replication_mode = 1
+properties/2/replication_mode = 2
 properties/3/path = NodePath("Components/Body:up_direction")
 properties/3/spawn = true
-properties/3/replication_mode = 1
+properties/3/replication_mode = 2
 properties/4/path = NodePath(".:target_id")
 properties/4/spawn = true
 properties/4/replication_mode = 2
@@ -83,9 +82,11 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Player" type="Node3D"]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("components", "stats", "body")]
 script = ExtResource("1_yr3on")
-data = ExtResource("2_u2s01")
+components = NodePath("Components")
+stats = NodePath("Components/Stats")
+body = NodePath("Components/Body")
 
 [node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")

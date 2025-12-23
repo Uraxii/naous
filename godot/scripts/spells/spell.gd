@@ -81,6 +81,7 @@ func generate_traits() -> Array[Trait]:
 
 
 func _ready() -> void:
+    await get_tree().process_frame
     traits = generate_traits()
     timer.one_shot = true
     add_child(timer)

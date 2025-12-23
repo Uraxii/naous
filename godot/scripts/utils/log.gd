@@ -31,3 +31,4 @@ func success(...args: Array) -> void:
     var message = " ".join(args.map(str))
     signals.log_new_success.emit(message)
     print(message)
+

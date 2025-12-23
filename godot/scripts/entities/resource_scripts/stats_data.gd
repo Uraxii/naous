@@ -8,15 +8,15 @@ class_name StatsData extends Resource
 
 func serialize() -> Dictionary:
     return {
-        "health":       health,
-        "speed":        speed,
-        "gravity":      gravity,
-        "jump_force":   jump_force,
+        ComponentStat.HEALTH_ID:        health,
+        ComponentStat.SPEED_ID:         speed,
+        ComponentStat.GRAVITY_ID:       gravity,
+        ComponentStat.JUMP_FORCE_ID:    jump_force,
     }
 
 
 func deserialize(data: Dictionary) -> void:
-    health      = data.health
-    speed       = data.speed
-    gravity     = data.gravity
-    jump_force  = data.jump_force
+    health      = data.get(ComponentStat.HEALTH_ID, health)
+    speed       = data.get(ComponentStat.SPEED_ID, speed)
+    gravity     = data.get(ComponentStat.GRAVITY_ID, gravity)
+    jump_force  = data.get(ComponentStat.JUMP_FORCE_ID, jump_force)

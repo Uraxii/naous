@@ -7,7 +7,7 @@ var caster: Entity
 
 
 func cast() -> void:
-    var target := entities.find(spell.caster.target_id)
+    var target: Entity = entities.find(spell.caster.target_id)
     if not target:
         lg.debug("No target")
         return

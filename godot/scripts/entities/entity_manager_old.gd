@@ -1,4 +1,4 @@
-class_name EntityManager extends MultiplayerSpawner
+class_name EntityManager_Old extends MultiplayerSpawner
 
 @export var player_scene: PackedScene = preload(
     "uid://c5ospakgw0cwt")
@@ -8,6 +8,8 @@ class_name EntityManager extends MultiplayerSpawner
 
 var pool: Dictionary[int, Entity] = {}
 var _ids := IdPool.new()
+
+var entity_data: Dictionary[int, EntityData] = { }
 
 
 @rpc("call_local", "any_peer")
@@ -37,7 +39,6 @@ func _on_client_spawn(node: Node) -> void:
 
 
 func _spawn_custom(serialized_spawn_msg: Dictionary) -> Node:
-    # TODO: CHANGE THIS!!! PLAYERS SHOULD NOT BE ABLE TO PASS IN AN ABITRARY PATH!!!
     var msg := MsgSpawnEntity.new()
     msg.deserialize(serialized_spawn_msg.payload)
 
