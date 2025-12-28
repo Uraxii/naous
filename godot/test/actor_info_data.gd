@@ -11,6 +11,8 @@ func serialize() -> Dictionary:
     }
 
 
-func deserialize(data: Dictionary) -> void:
+func deserialize(data: Dictionary) -> ActorInfoData:
     display_name    = data.get("display_name", display_name)
     title           = data.get("title", title)
+    return self
+

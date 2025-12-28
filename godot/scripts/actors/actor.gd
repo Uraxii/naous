@@ -1,5 +1,7 @@
 class_name Actor extends Node
 
+const INVALID_ID := 0
+
 enum Kind {
     BASE,
     NPC,
@@ -8,12 +10,14 @@ enum Kind {
 
 @export var comp_man: ComponentManager
 
+var id: int = INVALID_ID
+
 var kind: Kind:
     get = get_kind
 
 
 func get_kind() -> Kind:
-    push_error("get_kind not implemented on %s" % get_path)
+    push_error("get_kind not implemented on %s" % get_path())
     return Kind.BASE
 
 

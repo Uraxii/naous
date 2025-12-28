@@ -68,9 +68,9 @@ func load_character(character_name: String) -> Dictionary:
 
 
 ## Returns true on success, false on failure.
-func save_character(data: EntityData) -> bool:
+func save_character(data: ComponentData) -> bool:
     var err_msg = "Unable to save character!"
-    var character_name = data.id.display_name
+    var character_name = data.info.display_name
     var character_path = get_character_file_path(character_name)
 
     var file = FileAccess.open(character_path, FileAccess.WRITE)

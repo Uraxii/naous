@@ -16,7 +16,7 @@ func serialize() -> Dictionary:
     return data
 
 
-func deserialize(data: Dictionary) -> void:
+func deserialize(data: Dictionary) -> SpellbookData:
     var spells_data_array: Array = data.get("spells", [])
     spells.clear()
 
@@ -27,3 +27,6 @@ func deserialize(data: Dictionary) -> void:
         var new_spell = SpellData.new()
         new_spell.deserialize(spell_dict)
         spells.append(new_spell)
+
+    return self
+

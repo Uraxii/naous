@@ -12,6 +12,7 @@ var input:          InputManager
 var views:          ViewManager
 var game:           GameManager
 var interaction:    InteractionManager
+var actors:         ActorManager
 var entities:       EntityManager
 var targeting:      TargetingManager
 var camera:         CameraManager
@@ -24,7 +25,7 @@ var client: NaousNet
 #endregion
 
 #region Server globals
-var server: NaousNet
+var server:         NaousNet
 var instance_db:    InstanceDB
 var actor_db:       ActorDB
 #endregion
@@ -55,6 +56,7 @@ func create_globals() -> void:
     views = new_global_script("Views", ViewManager)
     game = new_global_script("Game", GameManager)
     interaction = new_global_script("Interaction", InteractionManager)
+    actors = new_global_script("Actors", preload("res://scripts/actors/actor_manager.gd"))
     entities = new_global_scene("Entities", preload("uid://c0kc2r2wbe47x"))
     targeting = new_global_script("Targeting", TargetingManager)
     camera = new_global_scene("Camera", preload("uid://dajlyyo0adshc"))

@@ -15,8 +15,10 @@ func serialize() -> Dictionary:
     }
 
 
-func deserialize(data: Dictionary) -> void:
+func deserialize(data: Dictionary) -> StatsData:
     health      = data.get(ComponentStat.HEALTH_ID, health)
     speed       = data.get(ComponentStat.SPEED_ID, speed)
     gravity     = data.get(ComponentStat.GRAVITY_ID, gravity)
     jump_force  = data.get(ComponentStat.JUMP_FORCE_ID, jump_force)
+    return self
+

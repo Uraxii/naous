@@ -40,3 +40,4 @@ func fetch_player_data(promise_id: int, user_id: int):
 @rpc("any_peer", "call_remote", "reliable")
 func set_player_data(data: Dictionary) -> void:
     pass
+

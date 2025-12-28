@@ -6,7 +6,6 @@ var local_player := ComponentData.new()
 
 
 ## Fufills promise with [param promise_id] id.
-## Called by ServerNet, implemented on ClientNet.
 @rpc("authority", "call_remote", "reliable")
 func respond(promise_id: int, data: Dictionary) -> void:
     promises.fulfill(promise_id, data)
@@ -14,7 +13,6 @@ func respond(promise_id: int, data: Dictionary) -> void:
 
 ## Calls a fetch function on the server.
 ## Returns signal that is emited upon response from the server.
-## Called by ClientNet, implemented on ClientNet
 func fetch(fetch_func: Callable, ...args) -> Signal:
     var promise = promises.create()
     var arguments: Array = [SERVER_PEER_ID, promise.id]
@@ -40,14 +38,22 @@ func connect_to_server(address:="localhost", port:=9000) -> void:
 #region Signal Handlers
 ## Called when client successfully connects to a server.
 func _on_connected_ok() -> void:
+    set_player_data.rpc_id(SERVER_PEER_ID, local_player.serialize())
+
+    var resp: Dictionary = await fetch(fetch_my_actor)
+    lg.debug("resp:", resp)
+    var msg := MsgActorData.new().deserialize(resp)
+    if msg.err:
+        lg.error("Unable to fetch my actor. Disconnecting from server. Err: %d" % msg.err)
+        _on_server_disconnected()
+        return
+
+    lg.debug("my actor: ", msg.actor_data.serialize())
+
     signals.connected_to_server.emit()
-    set_player_data.rpc_id(SERVER_PEER_ID, 1, local_player.serialize())
-    var actor = await fetch(fetch_my_actor)
-    lg.debug("my actor: ", actor)
 
 
-
-## Called when client fails to connect to a server.
+## Called when client fails to connect to server.
 func _on_connected_fail() -> void:
     signals.log_new_error.emit("Failed to connect.")
     multiplayer.multiplayer_peer = null
@@ -71,4 +77,3 @@ func connect_signals() -> void:
 func _ready() -> void:
     connect_signals()
 #endregion
-

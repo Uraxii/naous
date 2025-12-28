@@ -20,7 +20,7 @@ var sender_peer_id: int:
 
 ## Callde by ClientNet, implemented on ClientNet
 func fetch(fetch_func: Callable, ...args) -> Signal:
-    push_error("Fetch not implemented on %s" % name)
+    push_error("Fetch not implemented on %s" % get_path())
     var promise_that_never_gets_fufilled := Promise.new()
     return promise_that_never_gets_fufilled.trigger
 
@@ -28,33 +28,39 @@ func fetch(fetch_func: Callable, ...args) -> Signal:
 ## Called by ServerNet, implemented on ClientNet.
 @rpc("authority", "call_remote", "reliable")
 func respond(promise_id: int, data: Dictionary) -> void:
-    push_error("Return not implemented on %s" % name)
+    push_error("Return not implemented on %s" % get_path())
+
+
+## Called by ClientNet, implemented on ServerNet
+@rpc("any_peer", "call_remote", "reliable")
+func create_new_player(promise_id: int) -> void:
+    push_error("create_new_player not implemented on %s" % get_path())
 
 
 ## Called by ClientNet, implemented on ServerNet.
 @rpc("any_peer", "call_remote", "reliable")
 func fetch_my_actor(promise_id: int) -> void:
-    push_error("fetch_my_actor not implemented on %s" % name)
+    push_error("fetch_my_actor not implemented on %s" % get_path())
 
 
 ## Called by ClientNet, implemented on ServerNet.
 @rpc("any_peer", "call_remote", "reliable")
-func fetch_all_player_data(promise_id: int) -> void:
-    push_error("fetch_all_player_data not implemented on %s" % name)
+func fetch_all_actor_data(promise_id: int) -> void:
+    push_error("fetch_all_player_data not implemented on %s" % get_path())
 
 
 ## Called by ClientNet, implemented on ServerNet.
 @rpc("any_peer", "call_remote", "reliable")
-func fetch_player_data(promise_id: int, user_id: int) -> void:
-    push_error("fetch_player_data not implemented on %s" % name)
+func fetch_actor_data(promise_id: int, user_id: int) -> void:
+    push_error("fetch_player_data not implemented on %s" % get_path())
 
 
 @rpc("any_peer", "call_remote", "reliable")
-func set_player_data(user_id: int, data: Dictionary) -> void:
-    push_error("set_player_data not implemented on %s" % name)
-
+func set_player_data(data: Dictionary) -> void:
+    push_error("set_player_data not implemented on %s" % get_path())
 
 
 @rpc("authority", "call_remote", "reliable")
 func load_level(level_name: String) -> void:
-    push_error("laod_level not implemented on %s" % name)
+    push_error("laod_level not implemented on %s" % get_path())
+

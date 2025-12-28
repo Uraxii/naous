@@ -1,11 +1,37 @@
 class_name CreateCharacterView extends View
 
 
-func _ready() -> void:
-    print("hello")
-    _connect_signals()
-    # start the animation just in case it isn't set to do so by default
-    #$AnimationPlayer.play("idle") # assumes this animation exists
+func return_to_character_select() -> void:
+    Globals.views.spawn(CharacterSelectView)
+    despawn()
+
+
+#region Signal Handler Functions
+func _on_back_pressed() -> void:
+    return_to_character_select()
+
+
+func _on_create_pressed() -> void:
+    var character_name: LineEdit = %CharacterName
+    var data = ComponentData.new()
+    data.info.display_name = character_name.text
+    data.info.title = "Newbie"
+
+    data.stats = StatsData.new()
+
+    data.spellbook = SpellbookData.new()
+    data.spellbook.spells.append(
+        load("res://resources/spell_data/fireball/fireball.tres"))
+    data.spellbook.spells.append(
+        load("res://resources/spell_data/harm/harm.tres"))
+
+    save.save_character(data)
+    return_to_character_select()
+
+
+func _on_character_created(data: Dictionary) -> void:
+    log.debug("Character created: ", data)
+    return_to_character_select()
 
 
 func _connect_signals() -> void:
@@ -14,32 +40,11 @@ func _connect_signals() -> void:
 
     var back_button: Button = %BackButton
     back_button.pressed.connect(_on_back_pressed)
+#endregion
 
-
-func _on_back_pressed() -> void:
-    _return_to_character_select()
-
-
-func _on_create_pressed() -> void:
-    var character_name: LineEdit = %CharacterName
-    var data = EntityData.new()
-    data.id.display_name = character_name.text
-
-
-    data.spellbook.spells.append(
-        load("res://resources/spell_data/fireball/fireball.tres"))
-    data.spellbook.spells.append(
-        load("res://resources/spell_data/harm/harm.tres"))
-
-    save.save_character(data)
-    _return_to_character_select()
-
-
-func _on_character_created(data: Dictionary) -> void:
-    print("Character created: ", data)
-    _return_to_character_select()
-
-
-func _return_to_character_select() -> void:
-    Globals.views.spawn(CharacterSelectView)
-    despawn()
+#region Godot Callback Functions
+func _ready() -> void:
+    _connect_signals()
+    # start the animation just in case it isn't set to do so by default
+    #$AnimationPlayer.play("idle") # assumes this animation exists
+#endregion

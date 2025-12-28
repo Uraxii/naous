@@ -18,23 +18,31 @@ func populate_character_list() -> void:
 
     for char_name in characters:
         var character_data = save.load_character(char_name)
+
         if not character_data.has("name"):
             log.warn("Character data missing name", character_data)
             continue
+
         var new_button: CharacterInfoTemplate
         new_button = character_info_template.instantiate()
         character_buttons.append(new_button)
         new_button.set_character_data(character_data)
         %CharacterContainer.add_child.call_deferred(new_button)
 
+    if character_buttons.size() > 0:
+        character_buttons[0].pressed.emit()
+
 
 func _connect_signals() -> void:
     var create_button: Button = %CreateCharacter
     create_button.pressed.connect(_on_create_pressed)
+
     var delete_button: Button = %DeleteCharacter
     delete_button.pressed.connect(_on_delete_pressed)
+
     var load_button: Button = %LoadWorld
     load_button.pressed.connect(_on_load_pressed)
+
     signals.selected_character.connect(_on_selected_character)
     signals.connected_to_server.connect(_on_connected_to_server)
 

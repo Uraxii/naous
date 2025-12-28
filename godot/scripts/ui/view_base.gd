@@ -2,6 +2,7 @@ class_name View extends Control
 
 @export var should_log := false
 
+@onready var client  := Globals.client
 @onready var signals := Globals.signal_bus
 @onready var router  := Globals.msg_router
 @onready var input   := Globals.input
