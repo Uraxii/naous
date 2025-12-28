@@ -1,6 +1,8 @@
 class_name SaveManager extends Node
 
+## Directory that houses character data
 const CHARACTER_DIR = "user://"
+## Tail for chracter files names (i.e. <Character Name>_data.json)
 const CHARACTER_FILE_EXTENSION = "_data.json"
 
 @onready var logger := Globals.logger
@@ -8,6 +10,8 @@ const CHARACTER_FILE_EXTENSION = "_data.json"
 var current_character
 
 
+## Returns filepath for a character by name as a String.
+## ex. "Jane" => "user://Jane_data.json"
 func get_character_file_path(character_name: String) -> String:
     return  CHARACTER_DIR + character_name + CHARACTER_FILE_EXTENSION
 
@@ -63,11 +67,8 @@ func load_character(character_name: String) -> Dictionary:
     return character_data
 
 
+## Returns true on success, false on failure.
 func save_character(data: EntityData) -> bool:
-    """
-    Returns true on success, false on failure.
-    """
-
     var err_msg = "Unable to save character!"
     var character_name = data.id.display_name
     var character_path = get_character_file_path(character_name)
