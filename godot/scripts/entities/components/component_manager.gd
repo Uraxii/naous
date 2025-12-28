@@ -14,6 +14,11 @@ var setup_funcs: Dictionary[String, Callable] = {
 @onready var comp_cache: Dictionary[String, Node] = get_all()
 
 
+func get_stat(stat_id: String) -> float:
+    var stats: ComponentStatManager = find(ComponentStatManager.ID)
+    return stats.get_value(stat_id)
+
+
 func set_data(component_type: String, data_dict: Dictionary) -> void:
     var comp = find(component_type)
     if comp and comp.has_method("set_data"):
