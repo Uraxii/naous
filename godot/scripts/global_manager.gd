@@ -2,6 +2,7 @@ class_name GlobalManager extends Node
 
 const SERVER_ID := 1
 
+#region shared globals
 var launch_args:    Dictionary
 var signal_bus:     SignalBus
 var msg_router:     MsgRouter
@@ -15,6 +16,18 @@ var entities:       EntityManager
 var targeting:      TargetingManager
 var camera:         CameraManager
 var casting:        CastManager
+var promises:       PromiseManager
+#endregion
+
+#region Client globals
+var client: NaousNet
+#endregion
+
+#region Server globals
+var server: NaousNet
+var instance_db:    InstanceDB
+var actor_db:       ActorDB
+#endregion
 
 
 func new_global_script(node_name: String, type: GDScript) -> Node:
@@ -36,6 +49,7 @@ func create_globals() -> void:
     signal_bus = new_global_script("Signals", SignalBus)
     logger = new_global_script("Log", Log)
     msg_router = new_global_script("MsgRouter", MsgRouter)
+    promises = new_global_script("Promises", PromiseManager)
     save = new_global_script("Save", SaveManager)
     input = new_global_script("Input", InputManager)
     views = new_global_script("Views", ViewManager)
@@ -47,7 +61,37 @@ func create_globals() -> void:
     casting = new_global_script("Casting", CastManager)
 
 
+func create_server_globals() -> void:
+    # Load order matters!!!
+    push_warning("Initializing as server...")
+    actor_db = new_global_script("ActorDB", ActorDB)
+    instance_db = new_global_script("InstanceDB", InstanceDB)
+    server = new_global_script("Network", preload("res://scripts/network/server_net.gd"))
+    server.start_server()
+
+
+func create_client_globals() -> void:
+    # Load order matters!!!
+    push_warning("Initializing as client...")
+    client = new_global_script("Network", preload("res://scripts/network/client_net.gd"))
+    views.spawn(CharacterSelectView)
+
+
 func _ready():
     launch_args = ArgParser.parse()
-    if not launch_args.has("no-globals"):
-        create_globals()
+    if launch_args.has("no-globals"):
+        return
+
+    create_globals()
+
+    match launch_args.get("role", "client"):
+        "server":
+            create_server_globals()
+        "client":
+            create_client_globals()
+        _:
+            push_error(
+                "%s is an invalid role! Check your launch arguments. Should be '--role=server' OR '--role=client'")
+
+
+    views.spawn(ConsoleView)
