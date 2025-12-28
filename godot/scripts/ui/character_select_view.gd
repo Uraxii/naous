@@ -59,10 +59,15 @@ func _on_load_pressed() -> void:
         return
 
     log.info("Entering world as " + current_character.get("name"))
-    InstanceAPI.local_player.character_name = current_character.name
-    InstanceAPI.start_client(
-        %ServerAddress.text,
-        int(%ServerPort.text))
+    #InstanceAPI.local_player.character_name = current_character.name
+    client.local_player.deserialize(current_character)
+    var address = %ServerAddress.text
+    var port = int(%ServerPort.text) if %ServerPort else 0
+    if not address or not port:
+        log.warn("Address and port for server are required!")
+        return
+
+    client.connect_to_server(address, port)
 
 
 func _on_selected_character(character_data: Dictionary) -> void:
