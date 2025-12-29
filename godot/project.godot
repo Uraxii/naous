@@ -28,6 +28,10 @@ Music="*res://scenes/dynamic_music.tscn"
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 
+[editor]
+
+run/main_run_args="--no-globals"
+
 [godots]
 
 version_hint=""

@@ -49,3 +49,5 @@ func _ready():
     launch_args = ArgParser.parse()
     if not launch_args.has("no-globals"):
         create_globals()
+    else:
+        print_debug("Globals skipped.")
