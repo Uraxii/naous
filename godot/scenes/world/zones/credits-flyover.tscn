@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://bovh2hjexu5yl"]
+
+[ext_resource type="PackedScene" uid="uid://ch0bqgk8cfdeq" path="res://scenes/world/zones/lake-natalie.tscn" id="1_biuu0"]
+[ext_resource type="Script" uid="uid://b87r01re7n4ak" path="res://scripts/ui/credits.gd" id="2_biuu0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xu86d"]
+font_size = 22
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.7607843)
+shadow_offset = Vector2(1, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_biuu0"]
+line_spacing = 0.0
+font_size = 18
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.44705883)
+shadow_offset = Vector2(0, 1)
+
+[node name="CreditsFlyover" type="Node3D"]
+
+[node name="lake-natalie" parent="." instance=ExtResource("1_biuu0")]
+
+[node name="Credits" type="CanvasLayer" parent="."]
+script = ExtResource("2_biuu0")
+credits_path = "res://credits.txt"
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 320
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 320
+theme_override_constants/margin_bottom = 80
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Credits/MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="CreditsItems" type="VBoxContainer" parent="Credits/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TemplateHeader" type="Label" parent="Credits/MarginContainer/ScrollContainer/CreditsItems"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Johnothon Doe"
+label_settings = SubResource("LabelSettings_xu86d")
+
+[node name="TemplateBody" type="Label" parent="Credits/MarginContainer/ScrollContainer/CreditsItems"]
+unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+text = "Contributed to feature, feature, this feature, that feature, a whole range of features, as well as two features."
+label_settings = SubResource("LabelSettings_biuu0")
+autowrap_mode = 3
