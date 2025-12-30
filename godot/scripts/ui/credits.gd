@@ -27,7 +27,7 @@ func _ready() -> void:
 		credits_data = credits_text
 	populate_with(credits_data)
 	start_scroll(scroll_duration)
-		
+	
 func populate_with(text: String) -> void:
 	## Clear all existing entries
 	#for child in credits_items.get_children():

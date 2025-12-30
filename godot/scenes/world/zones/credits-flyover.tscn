@@ -1,7 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=9 format=3 uid="uid://bovh2hjexu5yl"]
 
 [ext_resource type="PackedScene" uid="uid://ch0bqgk8cfdeq" path="res://scenes/world/zones/lake-natalie.tscn" id="1_biuu0"]
+[ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
 [ext_resource type="Script" uid="uid://b87r01re7n4ak" path="res://scripts/ui/credits.gd" id="2_biuu0"]
+
+[sub_resource type="Animation" id="Animation_fu1cq"]
+resource_name = "new_animation"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-78, 9, -2), Vector3(-60, 9, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_5b34y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-78, 9, -2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a2upa"]
+_data = {
+&"RESET": SubResource("Animation_5b34y"),
+&"new_animation": SubResource("Animation_fu1cq")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_xu86d"]
 font_size = 22
@@ -17,8 +55,25 @@ shadow_color = Color(0, 0, 0, 0.44705883)
 shadow_offset = Vector2(0, 1)
 
 [node name="CreditsFlyover" type="Node3D"]
+script = ExtResource("1_fu1cq")
 
 [node name="lake-natalie" parent="." instance=ExtResource("1_biuu0")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_a2upa")
+}
+autoplay = "new_animation"
+
+[node name="CameraMarker3D" type="Marker3D" parent="AnimationPlayer"]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -78, 9, -2)
+
+[node name="Camera3D" type="Camera3D" parent="AnimationPlayer/CameraMarker3D"]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="AnimationPlayer/CameraMarker3D"]
+unique_name_in_owner = true
 
 [node name="Credits" type="CanvasLayer" parent="."]
 script = ExtResource("2_biuu0")
