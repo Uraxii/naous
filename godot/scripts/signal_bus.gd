@@ -3,6 +3,10 @@ class_name SignalBus extends Node
 signal network_tick
 signal save_game
 
+signal spawn_actor(msg)
+signal delete_actor(msg)
+signal update_actor(msg)
+
 #region Instance API
 signal connected_to_server()
 signal player_connected(peer_id: int)
@@ -17,7 +21,7 @@ signal damage_entity(id: int, amount: float)
 #region Entity
 signal spawn_entity(entity: Entity)
 signal despawn_entity(entity: Entity)
-signal control_entity(entity: Entity)
+signal control_entity(entity)
 #endregion
 
 #region UI

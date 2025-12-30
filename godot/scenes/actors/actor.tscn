@@ -1,80 +1,11 @@
-[gd_scene load_steps=40 format=3 uid="uid://3q0xqxvnr6o8"]
+[gd_scene load_steps=9 format=3 uid="uid://3q0xqxvnr6o8"]
 
 [ext_resource type="Script" uid="uid://cwvqc3p37uo4l" path="res://scripts/actors/actor.gd" id="1_vx335"]
-[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_yf7m1"]
-[ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_35tcc"]
-[ext_resource type="Script" uid="uid://cq7g2ygkwm0yr" path="res://scripts/entities/components/component_attack.gd" id="4_y6ior"]
-[ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="5_5l0bo"]
-[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/components/component_move.gd" id="6_rqddy"]
-[ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="7_qct8v"]
-[ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="8_lkowq"]
-[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="9_wwwfw"]
-[ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="10_pko7u"]
-[ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="11_d6ihy"]
-[ext_resource type="Script" uid="uid://cycxwu1ofls7d" path="res://scripts/entities/components/component_stat_manager.gd" id="12_ddj24"]
-[ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="13_486nw"]
-[ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="14_tqwi0"]
-[ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="15_ee1hf"]
-[ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="16_gsoyo"]
-[ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="17_15ctm"]
-[ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="18_2lsvt"]
-[ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="19_l6dp0"]
-[ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="20_g63wv"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://bhhsm2jeuha2y" path="res://scenes/entities/player_anim_tree.tres" id="21_3lgv3"]
-[ext_resource type="Script" uid="uid://dfwdj4h67di34" path="res://scripts/entities/components/component_animator.gd" id="22_hvqs6"]
-[ext_resource type="Animation" uid="uid://t5qqplpiy121" path="res://animations/Idle.res" id="23_x3aex"]
-[ext_resource type="Animation" uid="uid://rmyyolbj4p4f" path="res://animations/Run.res" id="24_sn0yf"]
-[ext_resource type="Animation" uid="uid://d1tgwi0o7efcu" path="res://animations/Walk.res" id="25_2jbi3"]
+[ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="6_cdbwx"]
 [ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="26_3kioc"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="27_b2l21"]
 [ext_resource type="Script" uid="uid://c6gn18lnds0sy" path="res://scripts/entities/components/component_visual.gd" id="28_i15fx"]
 [ext_resource type="PackedScene" uid="uid://cph7hkr227xjo" path="res://assets/models/player/player_base.tscn" id="29_gvab4"]
-[ext_resource type="Script" uid="uid://c175lugs0knyw" path="res://scripts/state_machine/state_base.gd" id="30_fbrfe"]
-[ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="31_qhoac"]
-[ext_resource type="Script" uid="uid://cyi3glr80w6yu" path="res://scenes/entities/ground_material_detector.gd" id="32_0snri"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
-properties/0/path = NodePath("Components/Body:position")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-properties/1/path = NodePath("Components/Body:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 2
-properties/2/path = NodePath("Components/Body:scale")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath("Components/Body:up_direction")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath(".:target_id")
-properties/4/spawn = true
-properties/4/replication_mode = 2
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2ngu4"]
-properties/0/path = NodePath(".:id")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-properties/1/path = NodePath(".:target_id")
-properties/1/spawn = true
-properties/1/replication_mode = 2
-
-[sub_resource type="Resource" id="Resource_3hm5d"]
-resource_local_to_scene = true
-script = ExtResource("10_pko7u")
-metadata/_custom_type_script = "uid://hqemwssvkqh4"
-
-[sub_resource type="Resource" id="Resource_d745t"]
-resource_local_to_scene = true
-script = ExtResource("11_d6ihy")
-equipment = SubResource("Resource_3hm5d")
-metadata/_custom_type_script = "uid://sjk1ggbjspjx"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2dek"]
-_data = {
-&"Idle": ExtResource("23_x3aex"),
-&"Run": ExtResource("24_sn0yf"),
-&"Walk": ExtResource("25_2jbi3")
-}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -85,98 +16,7 @@ size = Vector3(1.3007813, 3.4932861, 1.2172852)
 [node name="Actor" type="Node3D"]
 script = ExtResource("1_vx335")
 
-[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_8nksq")
-script = ExtResource("2_yf7m1")
-metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
-
-[node name="StatSyncronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_2ngu4")
-script = ExtResource("2_yf7m1")
-metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
-
-[node name="Components" type="Node" parent="." node_paths=PackedStringArray("entity")]
-script = ExtResource("3_35tcc")
-entity = NodePath("..")
-
-[node name="Attack" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
-script = ExtResource("4_y6ior")
-entity = NodePath("../..")
-
-[node name="Spellbook" type="Node" parent="Components"]
-script = ExtResource("5_5l0bo")
-
-[node name="Move" type="Node" parent="Components"]
-script = ExtResource("6_rqddy")
-
-[node name="StatusesEffects" type="Node" parent="Components"]
-
-[node name="Inventory" type="Node" parent="Components"]
-script = ExtResource("7_qct8v")
-inventory = SubResource("Resource_d745t")
-metadata/_custom_type_script = "uid://u8paan0wgvi6"
-
-[node name="Stats" type="Node" parent="Components"]
-script = ExtResource("12_ddj24")
-
-[node name="Health" type="Node" parent="Components/Stats"]
-script = ExtResource("13_486nw")
-current = 100.0
-
-[node name="Energy" type="Node" parent="Components/Stats"]
-script = ExtResource("14_tqwi0")
-
-[node name="Speed" type="Node" parent="Components/Stats"]
-script = ExtResource("14_tqwi0")
-max_value = 30.0
-
-[node name="Gravity" type="Node" parent="Components/Stats"]
-script = ExtResource("14_tqwi0")
-current = 1.0
-
-[node name="JumpForce" type="Node" parent="Components/Stats"]
-script = ExtResource("14_tqwi0")
-
-[node name="Interaction" type="Node" parent="Components" node_paths=PackedStringArray("entity", "detection_zone")]
-script = ExtResource("15_ee1hf")
-entity = NodePath("../..")
-detection_zone = NodePath("../Body/InteractableDetector")
-metadata/_custom_type_script = "uid://ctil5vnixrdc0"
-
-[node name="TargetingSystem" type="Node" parent="Components" node_paths=PackedStringArray("cursor_targeting", "auto_targeting", "scan_targeting")]
-unique_name_in_owner = true
-script = ExtResource("16_gsoyo")
-cursor_targeting = NodePath("CursorTargeting")
-auto_targeting = NodePath("AutoTargeting")
-scan_targeting = NodePath("ScanTargeting")
-metadata/_custom_type_script = "uid://bfu0l0d4jw4rd"
-
-[node name="AutoTargeting" parent="Components/TargetingSystem" instance=ExtResource("17_15ctm")]
-
-[node name="ScanTargeting" parent="Components/TargetingSystem" instance=ExtResource("18_2lsvt")]
-
-[node name="CursorTargeting" parent="Components/TargetingSystem" instance=ExtResource("19_l6dp0")]
-
-[node name="Targetable" parent="Components" node_paths=PackedStringArray("entity") instance=ExtResource("20_g63wv")]
-entity = NodePath("../..")
-
-[node name="Anim" type="AnimationTree" parent="Components"]
-root_node = NodePath("../Visual/player_base")
-tree_root = ExtResource("21_3lgv3")
-anim_player = NodePath("AnimationPlayer")
-parameters/BlendSpace2D/blend_position = Vector2(0, 0)
-parameters/BlendSpace1D/blend_position = 0.0
-parameters/Add2/add_amount = 0.0
-script = ExtResource("22_hvqs6")
-movement_blend_parameter_path = "parameters/BlendSpace2D/blend_position"
-jump_fall_blend_parameter_path = "parameters/BlendSpace1D/blend_position"
-metadata/_custom_type_script = "uid://dfwdj4h67di34"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Components/Anim"]
-root_node = NodePath("../../Visual/player_base")
-libraries = {
-&"animlib_player": SubResource("AnimationLibrary_y2dek")
-}
+[node name="Components" type="Node" parent="."]
 
 [node name="Body" type="CharacterBody3D" parent="Components"]
 collision_layer = 5
@@ -207,30 +47,6 @@ body = NodePath("../Body")
 [node name="player_base" parent="Components/Visual" instance=ExtResource("29_gvab4")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="State" type="Node" parent="Components"]
-script = ExtResource("30_fbrfe")
-metadata/_custom_type_script = "uid://c175lugs0knyw"
-
-[node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("31_qhoac")
-label = NodePath("Health")
-
-[node name="Health" type="Label" parent="StatView"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "STAT"
-
-[node name="GroundMaterialDetector" type="Node3D" parent="." node_paths=PackedStringArray("player", "player_shape")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("32_0snri")
-player = NodePath("../Components/Body")
-player_shape = NodePath("../Components/Body/InteractableDetector/CollisionShape3D")
-
-[connection signal="material_changed" from="GroundMaterialDetector" to="Components/Body" method="_on_ground_material_detector_material_changed"]
+[node name="Targetable" type="Node" parent="Components"]
+script = ExtResource("6_cdbwx")
+metadata/_custom_type_script = "uid://kb2rkvmsll57"

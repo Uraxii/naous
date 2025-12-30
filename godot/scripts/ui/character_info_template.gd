@@ -7,7 +7,7 @@ var character_data: Dictionary = {}
 
 func set_character_data(character_dict: Dictionary) -> void:
     character_data = character_dict
-    %Name.text = character_data.get("name", "{ NO NAME }")
+    %Name.text = character_data.get("display_name", "{ NO NAME }")
 
 
 func _on_pressed() -> void:

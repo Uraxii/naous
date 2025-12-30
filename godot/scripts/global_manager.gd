@@ -12,7 +12,7 @@ var input:          InputManager
 var views:          ViewManager
 var game:           GameManager
 var interaction:    InteractionManager
-var actors:         ActorManager
+var actor_db:       ActorDB
 var entities:       EntityManager
 var targeting:      TargetingManager
 var camera:         CameraManager
@@ -27,7 +27,6 @@ var client: NaousNet
 #region Server globals
 var server:         NaousNet
 var instance_db:    InstanceDB
-var actor_db:       ActorDB
 #endregion
 
 
@@ -51,12 +50,12 @@ func create_globals() -> void:
     logger = new_global_script("Log", Log)
     msg_router = new_global_script("MsgRouter", MsgRouter)
     promises = new_global_script("Promises", PromiseManager)
+    actor_db = new_global_script("ActorDB", ActorDB)
     save = new_global_script("Save", SaveManager)
     input = new_global_script("Input", InputManager)
     views = new_global_script("Views", ViewManager)
     game = new_global_script("Game", GameManager)
     interaction = new_global_script("Interaction", InteractionManager)
-    actors = new_global_script("Actors", preload("res://scripts/actors/actor_manager.gd"))
     entities = new_global_scene("Entities", preload("uid://c0kc2r2wbe47x"))
     targeting = new_global_script("Targeting", TargetingManager)
     camera = new_global_scene("Camera", preload("uid://dajlyyo0adshc"))
@@ -66,7 +65,6 @@ func create_globals() -> void:
 func create_server_globals() -> void:
     # Load order matters!!!
     push_warning("Initializing as server...")
-    actor_db = new_global_script("ActorDB", ActorDB)
     instance_db = new_global_script("InstanceDB", InstanceDB)
     server = new_global_script("Network", preload("res://scripts/network/server_net.gd"))
     server.start_server()

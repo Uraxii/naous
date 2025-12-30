@@ -1,53 +1,80 @@
 class_name ActorDB extends Node
 
-const klass := preload("res://test/player_data_new.gd")
+const ACTOR_SCENE := preload("res://scenes/entities/player.tscn")
 
-var pool: Dictionary[int, klass] = {  }
+@onready var signals := Globals.signal_bus
+
+## Peer ID : Entity Instance ID
+var players: Dictionary[int, int] = {  }
+## Entity id : Actor
+var actors: Dictionary[int, Entity] = {  }
+## Pooler for managing instance IDs
 var id_pool := IdPool.new()
 
 
-func get_stat(actor_id: int, stat_id: String) -> MsgStat:
-    var resp := MsgStat.new()
-    var data: ActorData = pool.get(actor_id)
-
-    if not data:
-        resp.error = "Entity %d not found." % actor_id
-        return resp
-
-    resp.actor_id = data.id
-    resp.stat = stat_id
-    resp.curr = data.stats.get(stat_id, 0.0)
-
-    return resp
+## Creates an actor on the clients.
+## Called by the sever on a client.
+@rpc("authority", "call_local", "reliable")
+func create_actor(data: Dictionary) -> void:
+    var actor := ACTOR_SCENE.instantiate()
+    actor.components.deserialize(data)
+    actor.name = str(actor.id)
+    add_child.call_deferred(actor)
 
 
-func get_all() -> Array[klass]:
-    return pool.values()
+## Destroys an actor on the clients.
+## Called by the sever on a client.
+@rpc("authority", "call_remote", "reliable")
+func destroy_actor(id: int) -> void:
+    pass
 
 
-func find(item_id: int) -> klass:
-    return pool.get(item_id)
+## Updates actor data on the clients.
+## Called by the sever on a client.
+@rpc("authority", "call_remote", "reliable")
+func update_stat(id: int, data: Dictionary) -> void:
+    pass
 
 
-func create() -> klass:
-    var item := klass.new()
+## Assigns actor instance of [param actor_id] to peer [param peer_id].
+## Returns BFT.Err.OK on success.
+func assign_peer(actor_id: int, peer_id: int) -> BFT.Err:
+    var actor: Entity = actors.get(actor_id)
+    if not actor:
+        return BFT.Err.ERR_ACTOR_NOT_FOUND
+
+    actor.peer_auth = peer_id
+    players.get_or_add(peer_id, actor_id)
+    return BFT.Err.OK
+
+
+func get_all() -> Array[Entity]:
+    return actors.values()
+
+
+func find(item_id: int) -> Entity:
+    return actors.get(item_id)
+
+
+func create() -> Entity:
+    var item: Entity = ACTOR_SCENE.instantiate()
     item.id = id_pool.lease()
 
     if not item.id:
         push_error("Failed to assign id to item!")
         return
 
-    if pool.has(item.id):
+    if actors.has(item.id):
         push_error("Tried to assign an id to an item that is in use!")
         return
 
-    pool[item.id] = item
+    actors[item.id] = item
     return item
 
 
-func release(item_id: int) -> klass:
-    var item: klass = pool.get(item_id)
+func release(item_id: int) -> Entity:
+    var item: Entity = actors.get(item_id)
     if item:
-        pool.erase(item_id)
+        actors.erase(item_id)
     id_pool.release(item_id)
     return item

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bmpfv2bwc6v1r"]
+[gd_scene load_steps=24 format=3 uid="uid://bmpfv2bwc6v1r"]
 
 [ext_resource type="Script" uid="uid://cfyjnr8bvcyt8" path="res://scripts/entities/entity.gd" id="1_so8uy"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_218qm"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="9_owpaf"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w2piu"]
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="12_nml3o"]
+[ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="12_so8uy"]
 [ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="13_so8uy"]
 [ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="14_218qm"]
 [ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="15_a7jbu"]
@@ -44,8 +45,9 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Entity" type="Node3D"]
+[node name="Entity" type="Node3D" node_paths=PackedStringArray("components")]
 script = ExtResource("1_so8uy")
+components = NodePath("Components")
 
 [node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
@@ -115,6 +117,11 @@ script = ExtResource("15_hqyav")
 entity = NodePath("../..")
 detection_zone = NodePath("../Body/InteractableDetector")
 metadata/_custom_type_script = "uid://ctil5vnixrdc0"
+
+[node name="Targetable" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
+script = ExtResource("12_so8uy")
+entity = NodePath("../..")
+metadata/_custom_type_script = "uid://kb2rkvmsll57"
 
 [node name="TargetingSystem" type="Node" parent="Components" node_paths=PackedStringArray("cursor_targeting", "auto_targeting", "scan_targeting")]
 unique_name_in_owner = true

@@ -6,6 +6,8 @@ const SERVER_PEER_ID := 1
 @onready var lg := Globals.logger
 @onready var signals := Globals.signal_bus
 
+var current_level: Node
+
 ## Peer ID of the local client.
 ## Alias for multiplayer.get_unique_id()
 var my_peer_id: int:
@@ -29,6 +31,12 @@ func fetch(fetch_func: Callable, ...args) -> Signal:
 @rpc("authority", "call_remote", "reliable")
 func respond(promise_id: int, data: Dictionary) -> void:
     push_error("Return not implemented on %s" % get_path())
+
+
+@rpc("any_peer", "call_remote", "reliable")
+func set_current_actor(actor_iid: int) -> void:
+    push_error("set_current_actor not implemented on %s" % get_path())
+
 
 
 ## Called by ClientNet, implemented on ServerNet
@@ -60,7 +68,14 @@ func set_player_data(data: Dictionary) -> void:
     push_error("set_player_data not implemented on %s" % get_path())
 
 
+## Loads a level scene.
 @rpc("authority", "call_remote", "reliable")
 func load_level(level_name: String) -> void:
-    push_error("laod_level not implemented on %s" % get_path())
+    var level_path: String = "res://scenes/world/zones/%s.tscn" % level_name
+    lg.debug("Loading %s" % level_path)
+    print_debug(level_path)
+    var level_scene: PackedScene = load(level_path)
 
+    if level_scene:
+        var level_node: Node = level_scene.instantiate()
+        get_tree().root.add_child.call_deferred(level_node)

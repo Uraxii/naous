@@ -19,7 +19,7 @@ func populate_character_list() -> void:
     for char_name in characters:
         var character_data = save.load_character(char_name)
 
-        if not character_data.has("name"):
+        if not character_data.has("display_name"):
             log.warn("Character data missing name", character_data)
             continue
 
@@ -53,11 +53,11 @@ func _on_create_pressed() -> void:
 
 
 func _on_delete_pressed() -> void:
-    if not current_character.has("name"):
-        log.warn("Selected character, but not name was found.")
+    if not current_character.has("display_name"):
+        log.warn("Selected character, but not display_name was found.")
         return
 
-    save.delete_character(current_character.name)
+    save.delete_character(current_character.display_name)
     populate_character_list()
 
 
@@ -66,9 +66,9 @@ func _on_load_pressed() -> void:
         log.warn("Cannot enter world without selecting a character!")
         return
 
-    log.info("Entering world as " + current_character.get("name"))
+    log.info("Entering world as " + current_character.get("display_name"))
     #InstanceAPI.local_player.character_name = current_character.name
-    client.local_player.deserialize(current_character)
+    client.local_player.components.deserialize(current_character)
     var address = %ServerAddress.text
     var port = int(%ServerPort.text) if %ServerPort else 0
     if not address or not port:

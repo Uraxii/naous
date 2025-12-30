@@ -77,8 +77,6 @@ func setup_move(move_comp: ComponentMove) -> void:
 
 
 func setup_spellbook(spellbook_comp: ComponentSpellbook) -> void:
-    print_debug("heellooo")
-
     if entity.data.spellbook:
         spellbook_comp.setup(entity, entity.data.spellbook)
 
@@ -103,7 +101,6 @@ func _on_component_removed(node: Node) -> void:
 
 
 func _on_entity_data_change(data: EntityData) -> void:
-    print_debug("hiii")
     for comp in comp_cache.values():
             if setup_funcs.has(comp.name):
                 var setup_callable: Callable = setup_funcs.get(comp.name)
@@ -117,3 +114,59 @@ func _ready() -> void:
     if not entity:
         entity = get_parent()
 #endregion
+
+
+## Gathers data from all child components that support serialization.
+func serialize() -> Dictionary:
+    var full_state := {}
+
+    # 1. Serialize Entity-Level Data (formerly in ComponentData)
+    # Assuming the Entity holds the authoritative ID and Peer ID now.
+    if entity:
+        full_state["id"] = entity.get("id") 
+        full_state["peer_auth_id"] = entity.get("peer_auth_id")
+
+    # 2. Serialize Components
+    # We iterate over all cached components.
+    for comp_name in comp_cache:
+        var comp = comp_cache[comp_name]
+
+        # Duck Typing: If the component knows how to save itself, let it.
+        if comp.has_method("serialize"):
+            var comp_data = comp.serialize()
+
+            # Only save if data was actually returned (optional optimization)
+            if comp_data != null and not comp_data.is_empty():
+                full_state[comp_name] = comp_data
+
+    return full_state
+
+
+## Distributes data to matching components.
+func deserialize(data: Dictionary) -> void:
+    # 1. Deserialize Entity-Level Data
+    if entity:
+        if "id" in data: 
+            entity.set("id", data["id"])
+        if "peer_auth_id" in data: 
+            entity.set("peer_auth_id", data["peer_auth_id"])
+
+    # 2. Deserialize Components
+    # We iterate through the keys in the data dictionary.
+    for key in data.keys():
+        # Skip root-level keys that aren't components
+        if key in ["id", "peer_auth_id"]:
+            continue
+
+        # Attempt to find a component matching this key
+        var comp = find(key)
+
+        # If the component exists and accepts data, pass it in.
+        if comp:
+            if comp.has_method("deserialize"):
+                comp.deserialize(data[key])
+            elif comp.has_method("set_data"):
+                # Fallback to your existing set_data method if preferred
+                comp.set_data(data[key])
+        else:
+            push_warning("ComponentManager: Data found for '%s', but no component exists." % key)

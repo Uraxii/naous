@@ -33,7 +33,14 @@ static func from_dict(serialized_dict: Dictionary) -> Object:
     var obj = script.new()
     var payload: Dictionary = serialized_dict.get("payload")
 
-    for prop in payload.keys():
-        obj.set(prop, payload[prop])
+    for prop_name in payload.keys():
+        var prop = obj.get(prop_name)
+        var value = payload[prop_name]
+
+        if prop is Object and prop.has_method("deserialize"):
+            value = prop.deserialize(value)
+            continue
+
+        prop = value
 
     return obj

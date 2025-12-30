@@ -82,11 +82,22 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("components", "stats", "body")]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("components", "anim", "stats", "health", "speed", "gravity", "jump_force", "move", "body", "spellbook", "inventory", "interaction", "targetable", "targeting")]
 script = ExtResource("1_yr3on")
 components = NodePath("Components")
+anim = NodePath("Components/Anim")
 stats = NodePath("Components/Stats")
+health = NodePath("Components/Stats/Health")
+speed = NodePath("Components/Stats/Speed")
+gravity = NodePath("Components/Stats/Gravity")
+jump_force = NodePath("Components/Stats/JumpForce")
+move = NodePath("Components/Move")
 body = NodePath("Components/Body")
+spellbook = NodePath("Components/Spellbook")
+inventory = NodePath("Components/Inventory")
+interaction = NodePath("Components/Interaction")
+targetable = NodePath("Components/Targetable")
+targeting = NodePath("Components/TargetingSystem")
 
 [node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")

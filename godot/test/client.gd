@@ -3,6 +3,7 @@ class_name Client extends Node
 @onready var lg := Globals.logger
 
 var promises := PromiseManager.new()
+var local_player := Actor
 
 var peer_id: int:
     get: return multiplayer.get_unique_id()

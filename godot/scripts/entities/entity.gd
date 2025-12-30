@@ -8,11 +8,10 @@ enum EntityType {
 }
 
 signal change_control(is_local: bool)
-signal change_data(data: EntityData)
 
 @export var data: EntityData
 @export_category("Components")
-@export var components:     ComponentManager
+@export var components:     ComponentManager = ComponentManager.new()
 @export var anim:           ComponentAnimator
 @export var stats:          ComponentStatManager
 @export var health:         ComponentHealth
@@ -36,6 +35,7 @@ signal change_data(data: EntityData)
 @onready var signals    := Globals.signal_bus
 
 var display_name := "{ NAME }"
+var peer_auth := NaousNet.SERVER_PEER_ID
 
 var type: EntityType:
     get = get_type
@@ -63,21 +63,6 @@ func get_type() -> EntityType:
     return EntityType.BASE
 
 
-@rpc("reliable", "any_peer")
-func update_data(data_dict: Dictionary) -> void:
-    print_debug("heheheh ", multiplayer.get_remote_sender_id())
-    if multiplayer.get_remote_sender_id() != transform_sync.get_multiplayer_authority():
-        return
-
-    print_debug("yoooo")
-
-    var new_data = EntityData.new()
-    new_data.deserialize(data_dict)
-    data = new_data
-    change_data.emit(data)
-
-
-@rpc("call_local")
 func die() -> void:
     if not multiplayer.is_server():
         return
@@ -221,9 +206,6 @@ func _ready() -> void:
     # Delay for wait for network syncs.
     for i in range(0, 3):
         await get_tree().process_frame
-
-    if transform_sync.is_multiplayer_authority():
-        update_data.rpc(data.serialize())
 
     setup_components()
     # This MUST be last!

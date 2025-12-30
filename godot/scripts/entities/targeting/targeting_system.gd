@@ -20,7 +20,7 @@ func cursor_target() -> void:
     var starting_target: Targetable = null
     if is_instance_valid(current_target) and not current_target.is_queued_for_deletion():
         starting_target = current_target
-    
+
     var cursor_detection_target := cursor_targeting.get_next_detected_target(starting_target)
     if is_instance_valid(cursor_detection_target) and cursor_detection_target != current_target:
         #Globals.logger.debug("CURSOR TARGET: updating current target!")
@@ -50,7 +50,7 @@ func previous_target() -> void:
 
 
 func target_self() -> void:
-    var targetable := InstanceAPI.local_player.entity.targetable
+    var targetable: Targetable = Globals.client.local_player.find_child("Components/Targetable")
     if targetable:
         current_target = targetable
 

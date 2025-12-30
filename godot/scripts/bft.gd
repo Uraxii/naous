@@ -2,8 +2,17 @@ class_name BFT
 
 enum ID {
     UNKNOWN,
+    COMP_ANIM,
+    COMP_INFO,
+    COMP_MOVE,
+    COMP_SPELLBOOK,
+    COMP_STATS,
+    COMP_TARGETABLE,
     MSG_BASE,
     MSG_ACTOR_DATA,
+    MSG_SPAWN_ACTOR,
+    MSG_DELETE_ACTOR,
+    MSG_UPDATE_ACTOR,
     MSG_TEST,
     MSG_CHAT,
     MSG_SPAWN_ENTITY,
@@ -19,8 +28,39 @@ enum Err {
     ERR_ACTOR_NOT_FOUND,
 }
 
+enum Stat {
+    DEX,
+    CON,
+    INT,
+    STR,
+}
+
+enum EquipSlots {
+    HEAD,
+    NECK,
+    BACK,
+    SHOLDIER,
+    CHEST,
+    BELT,
+    LEGS,
+    RING_1,
+    RING_2,
+}
+
 
 const id_to_type: Dictionary[ID, Resource] = {
+    ID.COMP_ANIM: preload(
+        "res://scripts/entities/components/component_animator.gd"),
+    ID.COMP_INFO: preload(
+        "res://test/actor_info_data.gd"),
+    ID.COMP_MOVE: preload(
+        "res://scripts/entities/components/component_move.gd"),
+    ID.COMP_SPELLBOOK: preload(
+        "res://scripts/entities/components/component_spellbook.gd"),
+    ID.COMP_STATS: preload(
+        "res://scripts/entities/components/component_stat_manager.gd"),
+    ID.COMP_TARGETABLE: preload(
+        "res://scripts/entities/targeting/targetable/targetable_screen_notifier.gd"),
     ID.MSG_BASE: preload(
         "res://scripts/messages/msg.gd"),
     ID.MSG_ACTOR_DATA: preload(

@@ -1,4 +1,4 @@
-# Checks the ground below the attached entity through a raycast and reads the assigned material 
+# Checks the ground below the attached entity through a raycast and reads the assigned material
 extends Node3D
 
 # This signal is emitted when a detected material changes
@@ -10,7 +10,7 @@ signal material_changed(new_material: NaousMaterial.Materials)
 # the elapsed seconds counted from the physics process
 @onready var elapsed_seconds: float = 0.
 
-# the timestamp(elasted_seconds) when the last material detection was triggered at 
+# the timestamp(elasted_seconds) when the last material detection was triggered at
 @onready var last_triggered: float = 0.
 
 # The player body to provide positional and floor information
@@ -22,7 +22,7 @@ signal material_changed(new_material: NaousMaterial.Materials)
 # The currently detected material
 var detected_material: NaousMaterial.Materials = NaousMaterial.Materials.UNKNOWN
 
-# Half of the players height, so 
+# Half of the players height, so
 @onready var character_height_half: float
 
 func _ready() -> void:
@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
             ):
                 new_detected_material = raycast.collider.material
             elif ( "material" in raycast.collider and raycast.collider.material is NaousMaterial):
-                # or collided body has member a variable "material" 
+                # or collided body has member a variable "material"
                 new_detected_material = raycast.collider.material
 
         if detected_material != new_detected_material:

@@ -58,11 +58,11 @@ func load_character(character_name: String) -> Dictionary:
         return {}
 
     var character_data = json_object.data
-    if not "name" in character_data:
-        character_data["name"] = character_name
+    if not "display_name" in character_data:
+        character_data["display_name"] = character_name
         push_warning("Player save didn't contain its name! Initiating a new Character")
     else:
-        character_name = character_data["name"]
+        character_name = character_data["display_name"]
 
     return character_data
 

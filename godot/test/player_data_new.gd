@@ -1,13 +1,28 @@
 class_name ComponentData extends Resource
 
-## Actor's UUID while playing. Set by the server when spawned.
+## Actor's Instance ID while playing.
+## Set by the server when spawned.
 var id: int
-## Peer that has authority over this actor. Set by the server.
+## Peer that has authority over this actor.
+## Set by the server.
 var peer_auth_id: int
 
 var info:       ActorInfoData = ActorInfoData.new()
 var stats:      StatsData
 var spellbook:  SpellbookData
+
+
+func get_component_data() -> Array[Dictionary]:
+    var comp_data: Array[Dictionary] = []
+
+    if info:
+        comp_data.append({"kind": BFT.ID.COMP_INFO, "data": info})
+    if stats:
+        comp_data.append({"kind": BFT.ID.COMP_STATS, "data": stats})
+    if spellbook:
+        comp_data.append({"kind": BFT.ID.COMP_SPELLBOOK, "data": spellbook})
+
+    return comp_data
 
 
 func serialize() -> Dictionary:

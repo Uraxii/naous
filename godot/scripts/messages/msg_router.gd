@@ -10,14 +10,14 @@ static func generate_msg_routes(bus: SignalBus) -> Dictionary[BFT.ID, Signal]:
     return {
         BFT.ID.MSG_TEST: bus.test_msg,
         BFT.ID.MSG_CHAT: bus.chat_msg,
-        BFT.ID.MSG_SPAWN_ENTITY: bus.spawn_entity_msg,
-        BFT.ID.MSG_CAST_REQ: bus.cast_resquest_msg,
+        BFT.ID.MSG_SPAWN_ACTOR: bus.spawn_actor,
+        BFT.ID.MSG_DELETE_ACTOR: bus.delete_actor,
+        BFT.ID.MSG_UPDATE_ACTOR: bus.update_actor,
     }
 
 
 func client_send_to_server(msg: Msg) -> void:
-    _server_recieve_msg.rpc_id(1,
-    Serializer.to_dict(msg))
+    _server_recieve_msg.rpc_id(1, Serializer.to_dict(msg))
 
 
 @rpc("any_peer", "call_remote")

@@ -1,8 +1,15 @@
 class_name ClientNet extends NaousNet
 
+@onready var actors := Globals.actor_db
 ## Used to manage promises when performing fetch requests.
 var promises := PromiseManager.new()
-var local_player := ComponentData.new()
+var local_player := Entity.new()
+
+
+@rpc("authority", "call_remote", "reliable")
+func set_current_actor(actor_iid: int) -> void:
+    local_player = actors.find(actor_iid)
+    signals.control_entity.emit(local_player)
 
 
 ## Fufills promise with [param promise_id] id.
@@ -38,18 +45,7 @@ func connect_to_server(address:="localhost", port:=9000) -> void:
 #region Signal Handlers
 ## Called when client successfully connects to a server.
 func _on_connected_ok() -> void:
-    set_player_data.rpc_id(SERVER_PEER_ID, local_player.serialize())
-
-    var resp: Dictionary = await fetch(fetch_my_actor)
-    lg.debug("resp:", resp)
-    var msg := MsgActorData.new().deserialize(resp)
-    if msg.err:
-        lg.error("Unable to fetch my actor. Disconnecting from server. Err: %d" % msg.err)
-        _on_server_disconnected()
-        return
-
-    lg.debug("my actor: ", msg.actor_data.serialize())
-
+    set_player_data.rpc_id(SERVER_PEER_ID, local_player.components.serialize())
     signals.connected_to_server.emit()
 
 
