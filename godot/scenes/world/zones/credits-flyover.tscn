@@ -1,8 +1,77 @@
-[gd_scene load_steps=9 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=23 format=3 uid="uid://bovh2hjexu5yl"]
 
 [ext_resource type="PackedScene" uid="uid://ch0bqgk8cfdeq" path="res://scenes/world/zones/lake-natalie.tscn" id="1_biuu0"]
 [ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
+[ext_resource type="AudioStream" uid="uid://psvgua4141k" path="res://assets/music/02 Ambivalent Fellow/02 - Ambivalent Fellow - Complete.mp3" id="2_a2upa"]
 [ext_resource type="Script" uid="uid://b87r01re7n4ak" path="res://scripts/ui/credits.gd" id="2_biuu0"]
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="3_ntrn5"]
+
+[sub_resource type="Resource" id="Resource_ffwap"]
+script = ExtResource("3_ntrn5")
+file = ExtResource("2_a2upa")
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2upa"]
+animation = &"anim_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ntrn5"]
+animation = &"anim_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ffwap"]
+animation = &"anim_3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1tqvt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v7off"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o48bc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2humq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_omi1n"]
+states/Start/position = Vector2(-48, 84)
+states/anim_1/node = SubResource("AnimationNodeAnimation_a2upa")
+states/anim_1/position = Vector2(86, 84)
+states/anim_2/node = SubResource("AnimationNodeAnimation_ntrn5")
+states/anim_2/position = Vector2(193, 84)
+states/anim_3/node = SubResource("AnimationNodeAnimation_ffwap")
+states/anim_3/position = Vector2(266, 162)
+transitions = ["Start", "anim_1", SubResource("AnimationNodeStateMachineTransition_1tqvt"), "anim_1", "anim_2", SubResource("AnimationNodeStateMachineTransition_v7off"), "anim_2", "anim_3", SubResource("AnimationNodeStateMachineTransition_o48bc"), "anim_3", "anim_1", SubResource("AnimationNodeStateMachineTransition_2humq")]
+graph_offset = Vector2(-621, -27)
+
+[sub_resource type="Animation" id="Animation_5b34y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-78, 9, -2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.5707964, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_fu1cq"]
 resource_name = "new_animation"
@@ -20,8 +89,9 @@ tracks/0/keys = {
 "values": [Vector3(-78, 9, -2), Vector3(-60, 9, -2)]
 }
 
-[sub_resource type="Animation" id="Animation_5b34y"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_a2upa"]
+resource_name = "anim_2"
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,16 +99,58 @@ tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-58.115, 20.625, 4.32), Vector3(-31.68, 19.9, 10.14)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-78, 9, -2)]
+"values": [Vector3(-0.43633232, -1.0210177, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ntrn5"]
+resource_name = "anim_3"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-41.375, 9.86, 39.585), Vector3(-41.375, 12.63, 58.655)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.3228859, -2.0682151, 0), Vector3(-0.3228859, -2.6267204, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a2upa"]
 _data = {
 &"RESET": SubResource("Animation_5b34y"),
-&"new_animation": SubResource("Animation_fu1cq")
+&"anim_1": SubResource("Animation_fu1cq"),
+&"anim_2": SubResource("Animation_a2upa"),
+&"anim_3": SubResource("Animation_ntrn5")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_xu86d"]
@@ -54,17 +166,29 @@ shadow_size = 8
 shadow_color = Color(0, 0, 0, 0.44705883)
 shadow_offset = Vector2(0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_a2upa"]
+font_size = 36
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.5529412)
+shadow_offset = Vector2(0, 1)
+
 [node name="CreditsFlyover" type="Node3D"]
 script = ExtResource("1_fu1cq")
+music = SubResource("Resource_ffwap")
 
 [node name="lake-natalie" parent="." instance=ExtResource("1_biuu0")]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_omi1n")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_a2upa")
 }
-autoplay = "new_animation"
+autoplay = "anim_1"
+next/anim_1 = &"anim_2"
 
 [node name="CameraMarker3D" type="Marker3D" parent="AnimationPlayer"]
 unique_name_in_owner = true
@@ -77,6 +201,7 @@ unique_name_in_owner = true
 
 [node name="Credits" type="CanvasLayer" parent="."]
 script = ExtResource("2_biuu0")
+scroll_duration = 150
 credits_path = "res://credits.txt"
 
 [node name="MarginContainer" type="MarginContainer" parent="Credits"]
@@ -95,7 +220,7 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
+vertical_scroll_mode = 3
 
 [node name="CreditsItems" type="VBoxContainer" parent="Credits/MarginContainer/ScrollContainer"]
 unique_name_in_owner = true
@@ -116,3 +241,13 @@ layout_mode = 2
 text = "Contributed to feature, feature, this feature, that feature, a whole range of features, as well as two features."
 label_settings = SubResource("LabelSettings_biuu0")
 autowrap_mode = 3
+
+[node name="TITLE" type="Label" parent="Credits/MarginContainer/ScrollContainer/CreditsItems"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+text = "Naous"
+label_settings = SubResource("LabelSettings_a2upa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="scroll_finished" from="Credits" to="." method="_on_credits_scroll_finished"]

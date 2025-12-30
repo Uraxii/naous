@@ -1,10 +1,13 @@
 extends Node
 
+signal scroll_finished
+
 ## Populates the visible credits.
 ## A simple syntax is employed to format the result. "-" indicate titles. You can optionally
 ## include a description in the line following an indented line.
 
 @export var scroll_duration: int = 30
+@export var start_delay:float = 4.0
 @export_file("*.txt") var credits_path: String ## Text file. No special features or parsing yet.
 @export_multiline var credits_text: String ## Will be used if [member credits_path] is empty.
 
@@ -61,5 +64,8 @@ func start_scroll(duration: float) -> void:
 	scroll.value = 0
 	#scroll_container.scroll_vertical = 0
 	var tween: Tween = create_tween()
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_interval(start_delay)
 	tween.tween_property(scroll, ^"value", scroll.max_value, scroll_duration)
 	tween.tween_property(scroll_container, ^"modulate", Color.TRANSPARENT, 4.0)
+	tween.tween_callback(scroll_finished.emit)
