@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://b631noidj7co0"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://b631noidj7co0"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_6ouvt"]
 color = Color(0.054399993, 0.10192003, 0.16, 1)
@@ -16,6 +16,14 @@ border_width_left = 4
 border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gx6s2"]
+bg_color = Color(0, 0, 0, 0.8117647)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aks48"]
@@ -38,4 +46,6 @@ corner_radius_bottom_left = 12
 HSeparator/styles/separator = SubResource("StyleBoxLine_6ouvt")
 InventoryPanel/base_type = &"PanelContainer"
 InventoryPanel/styles/panel = SubResource("StyleBoxFlat_6ouvt")
+ItemTooltip/base_type = &"PanelContainer"
+ItemTooltip/styles/panel = SubResource("StyleBoxFlat_gx6s2")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_aks48")

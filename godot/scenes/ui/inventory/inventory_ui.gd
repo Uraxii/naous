@@ -2,6 +2,8 @@ class_name InventoryUI extends PanelContainer
 
 const ITEM_SLOT: PackedScene = preload("uid://nbaglwtf3v0k")
 
+@onready var item_tooltip_popup: ItemTooltipPopup = %ItemTooltipPopup
+
 @onready var mask_slot: ItemSlot = %MaskSlot
 @onready var weapon_left_slot: ItemSlot = %WeaponLeftSlot
 @onready var weapon_right_slot: ItemSlot = %WeaponRightSlot
@@ -107,6 +109,9 @@ func wire_slot_signals(item_slot: ItemSlot, setter_callable: Callable) -> void:
     if setter_callable.is_valid():
         item_slot.set_inventory_item_callback = setter_callable
     item_slot.interacted.connect(handle_item_slot_interacted.bind(item_slot))
+    item_slot.mouse_entered.connect(_on_mouse_entered_slot.bind(item_slot))
+    item_slot.mouse_exited.connect(_on_mouse_exited_slot.bind(item_slot))
+    
 
 
 func _create_item_slot() -> ItemSlot:
@@ -178,14 +183,52 @@ func _inventory_backpack_updated(backpack: Array[Item]) -> void:
     sync_backpack_to_view(backpack)
 
 
+#region Item Tooltips
+func tooltip_follow_mouse_process(delta: float) -> void:
+    if item_tooltip_popup.visible:
+        var new_popup_position := get_screen_position() + get_local_mouse_position()
+        item_tooltip_popup.show_at_position(new_popup_position)
+
+
+func show_tooltip_for_item(item: Item) -> void:
+    item_tooltip_popup.set_item(item)
+    
+    if not item_tooltip_popup.visible:
+        print("Showing item tooltip!")
+        item_tooltip_popup.show()
+
+
+func hide_tooltip() -> void:
+    if item_tooltip_popup.visible:
+        print("Hiding item tooltip!")
+        item_tooltip_popup.hide()
+
+
+func _on_mouse_entered_slot(item_slot: ItemSlot) -> void:
+    if is_instance_valid(item_slot.item):
+        show_tooltip_for_item(item_slot.item)
+
+
+func _on_mouse_exited_slot(item_slot: ItemSlot) -> void:
+    hide_tooltip()
+#endregion
+
+
 func _ready() -> void:
     _initialize_equipment_slots()
     _clear_preview_slots_on_load()
+    
+    Globals.logger.debug("Inventory UI is setting subwindows to be embedded")
+    get_viewport().gui_embed_subwindows = true
     
     for i in range(0, backpack_slots):
         var new_backpack_slot := _create_item_slot()
         backpack_grid.add_child(new_backpack_slot)
 
+
+func _process(delta: float) -> void:
+    tooltip_follow_mouse_process(delta)
+    
 
 func _clear_preview_slots_on_load() -> void:
     var preview_backpack_slots := backpack_grid.get_children()
