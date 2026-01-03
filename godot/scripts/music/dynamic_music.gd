@@ -1,5 +1,15 @@
 class_name DynamicMusicManager extends Node
 
+## This class manages playing back music and triggering various scripted effects.
+## NOTICE It is implemented as a Scene Autoload, so be sure to check
+## "res://scenes/dynamic_music.tscn"
+## You can see examples of implementation in
+## "res://scenes/dynamic_music_testbench.tscn"
+
+
+## Most methods  [DynamicMusicTrack], a unique [AudioStreamPlayer] node is created 
+## Audio players are created and destroyed(? TODO) automatically when needed,
+
 const BUS_NAME:StringName = &"Music"
 ## This is their position in the mixer effect stack. Ensure the tracks align.
 enum FX {
@@ -86,6 +96,10 @@ func _process(delta: float) -> void:
 	else:
 		pass
 	
+	## Intensity reactivity implementation.
+	## Since tracks are just resources, we're firing our own process.
+	## TODO Maybe instead we could make a custom AudioStreamPlayer that
+	## fires this process.
 	for track in tracks:
 		if track.is_playing && track.use_intensity:
 			# Per layer adjustments (intensity)
@@ -353,12 +367,14 @@ func clear_all_stopped_tracks() -> void:
 		if not player.has_stream_playback():
 			player.queue_free()
 
+## You can call this 
 func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	track.is_playing = true
 	var player = get_player(track)
 	player.play()
 		
 	if track.trans_start_fade_in:
+		## TODO
 		pass
 		
 	return player
@@ -366,19 +382,21 @@ func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	track.is_playing = false
 	var player = get_player(track)
-	player.stop()
+	
+	if track.trans_end_fade_out: ## TODO TEST
+		player.volume_linear = track.trans_start_fade_in.sample_baked(track.trans_end_fade_out.min_domain)
+		var trans_tween:Tween = player.create_tween()
+		trans_tween.tween_method(
+			DynamicMusicTrack.set_volume_from_curve.bind(
+				player,
+				track.trans_end_fade_out
+				),
+			player.volume_linear,
+			track.trans_end_fade_out.max_domain,
+			track.trans_end_fade_out.max_domain
+			)
+		trans_tween.tween_callback(player.stop)
+	else:
+		player.stop()
 		
-	if track.trans_end_fade_out:
-			player.volume_linear = track.trans_start_fade_in.sample_baked(track.trans_end_fade_out.min_domain)
-			var trans_tween:Tween = player.create_tween()
-			trans_tween.tween_method(
-				DynamicMusicTrack.set_volume_from_curve.bind(
-					player,
-					track.trans_end_fade_out
-					),
-				player.volume_linear,
-				track.trans_end_fade_out.max_domain,
-				track.trans_end_fade_out.max_domain
-				)
-				
 	return player

@@ -1,5 +1,10 @@
 extends Control
 
+## TESTING
+## This script provides most of the functionality in the test bench scene for
+## [DynamicMusic].
+## See "res://scenes/dynamic_music_testbench.tscn"
+
 var selected_track_index:int = 0:
 	set(value):
 		if Music.tracks.size() > 0:

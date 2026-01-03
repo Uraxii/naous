@@ -1,5 +1,10 @@
 class_name DynamicMusicEvent extends Resource
 
+## TESTING -- this class is Experimental.
+## The idea was to make a resource that can be "fired" as an event in the
+## dynamic music system. This would be used in scripts to react to gameplay
+## and apply some desired effect to the music.
+
 signal activated
 signal deactivated
 

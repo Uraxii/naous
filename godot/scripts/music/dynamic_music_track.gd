@@ -1,5 +1,8 @@
 class_name DynamicMusicTrack extends Resource
 
+## An audio file plus configurable properties used by the
+## [DynamicMusic] system.
+
 ## Audio resource.
 @export var file:AudioStream
 
@@ -12,24 +15,26 @@ class_name DynamicMusicTrack extends Resource
 			return title
 
 ## Tempo; Beats per minute.
-@export var bpm:int
+@export var bpm:int ## EXPERIMENTAL
 
 ## Time signature.
-@export var time_signature:Vector2i = Vector2i(4,4)
+@export var time_signature:Vector2i = Vector2i(4,4) ## EXPERIMENTAL
 
 ## Name, Beat Count.
-@export var markers:Dictionary[StringName, int] = {"start": 0}
+@export var markers:Dictionary[StringName, int] = {"start": 0} ## EXPERIMENTAL
 
-@export_group("Treatment", "treat_")
+@export_group("Treatment", "treat_") ## EXPERIMENTAL
 @export var treat_positional:bool = false
 
-@export_group("Transitions", "trans_")
+@export_group("Transitions", "trans_") ## EXPERIMENTAL
 @export var trans_start_fade_in: Curve ## X is in seconds, Y is volume.
 @export var trans_end_fade_out: Curve ## X is in seconds, Y is volume.
 @export var trans_seek_crossfade_in: Curve ## X is in seconds, Y is volume.
 @export var trans_seek_crossfade_out: Curve ## X is in seconds, Y is volume.
 
 @export_group("Intensities")
+## React to changes in intensity.
+## See [method do_intensity_process] and [DynamicMusic] _process().
 @export var use_intensity: bool = false
 @export var intensity:int = 100:
 	set(value):
