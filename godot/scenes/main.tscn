@@ -115,8 +115,6 @@ offset_bottom = 16.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = SubResource("AnimatedTexture_o6xl0")
-texture_pressed = SubResource("AnimatedTexture_o6xl0")
-texture_hover = SubResource("AnimatedTexture_o6xl0")
 ignore_texture_size = true
 stretch_mode = 0
 
