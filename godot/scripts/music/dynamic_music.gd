@@ -388,7 +388,10 @@ func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	track.is_playing = true
 	var player = get_player(track)
 	player.play()
-		
+	
+	if not player.finished.is_connected(_on_track_finished):
+		player.finished.connect(_on_track_finished.bind(track))
+	
 	if track.trans_start_fade_in:
 		## TODO
 		pass
@@ -416,3 +419,36 @@ func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 		player.stop()
 		
 	return player
+
+func _on_track_finished(track: DynamicMusicTrack) -> void:
+	track.is_playing = false
+	
+	if continuous_playback:
+		## get the next track
+		var next_track: DynamicMusicTrack = null
+		var t_index: int = tracks.find(track)
+		var iterations: int = 0
+		while next_track == null:
+			
+			## Prevent infinite loop
+			iterations += 1
+			if iterations > tracks.size() * 2:
+				return
+			
+			if t_index < 0:
+				t_index = 0
+			else:
+				t_index += 1
+				
+			var _track = tracks.get(t_index)
+			if _track != null:
+				if _track.include_in_continuous_playlist:
+					next_track = _track
+				else:
+					continue
+			else:
+				## Out of bounds
+				t_index = -1
+				continue
+		
+		Globals.music.start_track(next_track)
