@@ -28,4 +28,5 @@ func _on_cancel() -> void:
      
 
 func _on_logout_pressed() -> void:
-    API.logout()
+    ##API.logout()
+    pass

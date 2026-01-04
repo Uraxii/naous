@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShoulderItem" load_steps=3 format=3 uid="uid://bwnrnbwg67vmy"]
+
+[ext_resource type="Script" uid="uid://vpy3jvt10vfw" path="res://scripts/entities/items/shoulders/shoulder_item.gd" id="1_c82h3"]
+[ext_resource type="Texture2D" uid="uid://cewvn3vweiebl" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/plaza_items/splash-HD.png" id="1_fify2"]
+
+[resource]
+script = ExtResource("1_c82h3")
+name = &"False Padding"
+icon = ExtResource("1_fify2")
+metadata/_custom_type_script = "uid://vpy3jvt10vfw"

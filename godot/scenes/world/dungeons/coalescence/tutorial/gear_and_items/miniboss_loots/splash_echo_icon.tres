@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://bvw6k3hqwoko0"]
+
+[ext_resource type="Texture2D" uid="uid://6uiysfnglfrj" path="res://assets/textures/ink-pebble.png" id="1_tyn0l"]
+
+[resource]
+atlas = ExtResource("1_tyn0l")
+region = Rect2(77.99988, 80.727356, 91.81818, 92.727264)

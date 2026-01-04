@@ -1,0 +1,1065 @@
+[gd_scene load_steps=58 format=3 uid="uid://d33k3abfexh3k"]
+
+[ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
+[ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
+[ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="2_8cm00"]
+[ext_resource type="Script" uid="uid://do4x4l8nwjdip" path="res://scripts/entities/sky_rotate.gd" id="3_5u8qt"]
+[ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="4_julif"]
+[ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="5_ygplp"]
+[ext_resource type="Material" uid="uid://d38i2dxauqkl0" path="res://assets/materials/ink-cloud3.tres" id="6_64ggy"]
+[ext_resource type="Material" uid="uid://rknsm0d0mgvc" path="res://assets/materials/ink-cloud1.tres" id="7_4r05b"]
+[ext_resource type="Script" uid="uid://cq4jqk5k1libd" path="res://scenes/world/dungeons/coalescence/tutorial/hud_layer.gd" id="8_0cvc3"]
+[ext_resource type="Script" uid="uid://bn60ptck7jhbi" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_sequence.gd" id="8_8cm00"]
+[ext_resource type="PackedScene" uid="uid://cx54j3yuqwncx" path="res://scenes/world/dungeons/coalescence/bubbles/entry_path.tscn" id="8_fx6br"]
+[ext_resource type="Script" uid="uid://wp3c7iemuwmf" path="res://scenes/world/dungeons/coalescence/tutorial/screen_overlay_layer.gd" id="9_d6baa"]
+[ext_resource type="PackedScene" uid="uid://bh4yxqkgk4di4" path="res://scenes/world/dungeons/coalescence/bubbles/plaza.tscn" id="9_otwgf"]
+[ext_resource type="Script" uid="uid://b4k3rvmuqbaa5" path="res://scenes/world/dungeons/coalescence/tutorial/menu_layer.gd" id="9_w4dxx"]
+[ext_resource type="Script" uid="uid://f68pd3ys4akk" path="res://scenes/world/dungeons/coalescence/tutorial/target_panel.gd" id="10_00c68"]
+[ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="10_23v16"]
+[ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="11_f5oke"]
+[ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="12_g7sat"]
+[ext_resource type="Script" uid="uid://cfyjnr8bvcyt8" path="res://scripts/entities/entity.gd" id="13_xujpj"]
+[ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="14_0tafa"]
+[ext_resource type="Script" uid="uid://dk070b54ufb44" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/loot_pickup.gd" id="14_1c438"]
+[ext_resource type="Script" uid="uid://biugcdkh4yjur" path="res://scripts/entities/interaction/interactable_trigger.gd" id="14_omq0d"]
+[ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="15_0cvc3"]
+[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="16_o0ykn"]
+[ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="17_1c438"]
+[ext_resource type="PackedScene" uid="uid://dwvukle78pxbp" path="res://scenes/entities/control_zone.tscn" id="24_acyb3"]
+[ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="25_vi3y7"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_mc5jl"]
+material = ExtResource("1_e5qsc")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fvsdy"]
+panorama = ExtResource("2_8cm00")
+
+[sub_resource type="Sky" id="Sky_6y1nk"]
+sky_material = SubResource("PanoramaSkyMaterial_fvsdy")
+
+[sub_resource type="Environment" id="Environment_3vwdg"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_6y1nk")
+ambient_light_source = 2
+ambient_light_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
+ambient_light_energy = 0.25
+reflected_light_source = 1
+ssao_enabled = true
+ssao_radius = 2.0
+ssao_intensity = 4.0
+ssao_light_affect = 0.5
+ssil_radius = 6.0
+ssil_intensity = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6baa"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.11399999, 0.57, 0.47879997, 0.92156863)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.013729546, 0.013729553, 0.013729527, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_f5oke"]
+variation_transform = Transform2D(1, 0.165, 0, 1, 0, 0)
+spacing_glyph = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_2e0i0"]
+font = SubResource("FontVariation_f5oke")
+font_size = 14
+font_color = Color(0.9193109, 0.81228954, 0.093572326, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_d6baa"]
+variation_embolden = 1.1
+spacing_glyph = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_acyb3"]
+font = SubResource("FontVariation_d6baa")
+font_size = 20
+font_color = Color(0.055675693, 0.0556757, 0.0556757, 1)
+outline_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5oke"]
+bg_color = Color(0.25, 0.25, 0.25, 0.5254902)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="FontVariation" id="FontVariation_2e0i0"]
+variation_embolden = 0.3
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2uap"]
+font = SubResource("FontVariation_2e0i0")
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2uap"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0352008, 0.035200816, 0.03520076, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_00c68"]
+variation_transform = Transform2D(1, 0.15, 0, 1, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ydln7"]
+font = SubResource("FontVariation_00c68")
+font_size = 22
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7kbnc"]
+grow_begin = -4.0
+grow_end = -4.0
+thickness = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_00c68"]
+bg_color = Color(0.31589073, 0.06325139, 0.12706104, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydln7"]
+bg_color = Color(0.11434039, 0.43240878, 0.6904513, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w4dxx"]
+properties/0/path = NodePath("Components/Body:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Components/Body:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Components/Body:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Components/Body:up_direction")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:target_id")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g7sat"]
+spread = 180.0
+initial_velocity_min = 0.14
+initial_velocity_max = 0.14
+gravity = Vector3(0, 0, 0)
+damping_max = 0.07
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wek5"]
+transparency = 4
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_xujpj"]
+lightmap_size_hint = Vector2i(2, 2)
+material = SubResource("StandardMaterial3D_2wek5")
+radius = 0.024
+height = 0.048
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g7sat"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.45490196)
+emission_enabled = true
+emission = Color(0.96, 0.96, 0.96, 1)
+emission_energy_multiplier = 1.73
+
+[sub_resource type="SphereMesh" id="SphereMesh_2wek5"]
+material = SubResource("StandardMaterial3D_g7sat")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o0ykn"]
+size = Vector3(1.465, 0.779, 0.995)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2e0i0"]
+size = Vector3(1.465, 0.779, 0.995)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f2uap"]
+size = Vector3(87.64469, 30.91211, 22.257263)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4nrkc"]
+properties/0/path = NodePath("Body:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath("Body:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath("Body:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jy2u2"]
+properties/0/path = NodePath(".:id")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:target_id")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7fhsc"]
+radius = 0.42333984
+
+[node name="Tutorial" type="Node3D"]
+script = ExtResource("1_2e0i0")
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="[outline shader]" type="Node3D" parent="Environment"]
+
+[node name="Shader" type="MeshInstance3D" parent="Environment/[outline shader]"]
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_mc5jl")
+
+[node name="sun" type="DirectionalLight3D" parent="Environment"]
+transform = Transform3D(-0.58778524, -0.3290569, 0.7390739, 0, 0.9135455, 0.40673667, -0.80901706, 0.2390738, -0.5369685, 0, 100, 0)
+light_color = Color(0.9984834, 0.9999997, 0.9040936, 1)
+shadow_enabled = true
+shadow_opacity = 0.25
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment/sun"]
+environment = SubResource("Environment_3vwdg")
+
+[node name="clouds" type="Node3D" parent="Environment"]
+script = ExtResource("3_5u8qt")
+
+[node name="cloud8" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-1.0927847e-06, 50, 0, -25, -2.1855694e-06, 0, 0, 0, 25, 92.531395, 78.821304, -150)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="cloud9" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-1.0885797e-06, 49.8076, 2.191064, -25, -2.1855694e-06, 8.881784e-15, 9.577445e-08, -4.382128, 24.9038, -24.821426, 26.253792, -197.31456)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="cloud10" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-4.93478e-07, 22.57892, 22.305786, -25, -2.1855694e-06, -7.105428e-14, 9.750169e-07, -44.611572, 11.28946, -302.73236, 79.49286, -197.01639)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="cloud11" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(1.847053e-07, -8.451134, 24.640305, -25, -2.1855694e-06, -8.881786e-14, 1.0770619e-06, -49.28061, -4.225567, -302.73236, 79.49286, 212.22696)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="cloud12" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(1.0862709e-06, -49.70196, 2.7255766, -25, -2.1855694e-06, 7.1744924e-14, 1.1913867e-07, -5.4511533, -24.85098, -32.413223, 37.54126, 212.22696)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="cloud13" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(7.7684456e-07, -35.544273, -17.582695, -25, -2.1855694e-06, 2.995901e-13, -7.6856423e-07, 35.16539, -17.772137, 253.87575, 134.74402, 232.9253)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="cloud14" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-6.065833e-08, 2.7753901, -24.961456, -25, -2.1855694e-06, 2.5279063e-13, -1.0910999e-06, 49.922913, 1.3876951, 305.70892, 8.981812, -34.376007)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="cloud15" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-1.0287154e-06, 47.068523, -8.434365, -25, -2.1855694e-06, 2.3353774e-13, -3.6867763e-07, 16.86873, 23.534262, 75.0462, 22.907047, -145.14691)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_64ggy")
+
+[node name="cloud16" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-4.8918497e-07, 22.38249, -22.355225, -25, -2.1855694e-06, 1.1684169e-13, -9.771778e-07, 44.71045, 11.191245, 101.99615, 22.059101, -27.658295)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_64ggy")
+
+[node name="cloud17" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(3.9585322e-07, -18.112139, -23.302095, -25, -2.1855694e-06, 2.1181304e-13, -1.018567e-06, 46.60419, -9.056069, 101.99615, 84.612015, 49.28662)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_64ggy")
+
+[node name="cloud18" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(1.0841534e-06, -49.605076, 3.135932, -25, -2.1855694e-06, 2.5335216e-13, 1.3707569e-07, -6.271864, -24.802538, -96.950066, 73.11977, 202.67581)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_64ggy")
+
+[node name="cloud19" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(1.2825392e-07, -5.8682027, 24.827225, -25, -2.1855694e-06, 2.8109573e-13, 1.0852324e-06, -49.65445, -2.9341013, -237.23889, 38.511467, 95.92949)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_64ggy")
+
+[node name="cloud20" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-3.738616e-07, 17.105925, 23.49142, -25, -2.1855694e-06, 3.015374e-13, 1.0268427e-06, -46.98284, 8.552962, -225.41595, 38.511467, -45.21675)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_64ggy")
+
+[node name="cloud21" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-8.28925e-07, 37.927197, 16.290548, -25, -2.1855694e-06, 2.4054034e-13, 7.120827e-07, -32.581097, 18.963598, -58.015015, 29.167892, -108.678604)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_64ggy")
+
+[node name="cloud22" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-1.0570878e-06, 48.366707, 6.33762, -25, -2.1855694e-06, 2.407577e-13, 2.7702637e-07, -12.67524, 24.183353, -14.192902, 85.41214, -137.38586)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_64ggy")
+
+[node name="cloud1" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-1.0927847e-06, 50, 0, -25, -2.1855694e-06, 0, 0, 0, 25, -50, 42.483147, -150)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_4r05b")
+
+[node name="cloud2" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-6.9549384e-07, 31.822088, 19.28312, -25, -2.1855694e-06, 0, 8.428919e-07, -38.56624, 15.911044, -144.97202, 81.91808, -84.504364)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_4r05b")
+
+[node name="cloud3" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-1.7320937e-07, 7.925137, -24.683962, -25, -2.1855694e-06, 0, -1.0789703e-06, 49.367924, 3.9625685, -144.97202, 28.254112, 3.9278355)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_4r05b")
+
+[node name="cloud4" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-1.0927847e-06, 50, 4.440892e-15, -24.960335, -2.1821018e-06, 1.4077356, 1.4077356, 1.2306815e-07, 24.960335, -49.131096, 42.483147, 156.08049)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_4r05b")
+
+[node name="cloud5" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-3.37562e-07, 15.445037, 23.777357, -25, -2.1855694e-06, 0, 1.0393412e-06, -47.554714, 7.7225184, 145.74533, 91.87791, 156.08049)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_4r05b")
+
+[node name="cloud6" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(2.1180726e-07, -9.691168, -24.525911, -25, -2.1855694e-06, -6.26453e-14, -1.0720617e-06, 49.051823, -4.845584, 145.74533, 35.6289, -7.2791595)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_4r05b")
+
+[node name="cloud7" type="MeshInstance3D" parent="Environment/clouds"]
+transform = Transform3D(-7.043406e-07, 32.226868, -19.11432, -25, -2.1855694e-06, 3.5527137e-14, -8.3551345e-07, 38.22864, 16.113434, 145.74533, 97.17628, -165.42375)
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("7_4r05b")
+
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 2
+script = ExtResource("8_0cvc3")
+
+[node name="QuestInfoContainer" type="PanelContainer" parent="HUDLayer"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -241.0
+offset_top = 11.0
+offset_right = -10.0
+offset_bottom = 97.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d6baa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDLayer/QuestInfoContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="QuestHeading" type="Label" parent="HUDLayer/QuestInfoContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Objective"
+label_settings = SubResource("LabelSettings_2e0i0")
+
+[node name="HSeparator" type="HSeparator" parent="HUDLayer/QuestInfoContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="QuestDetails" type="Label" parent="HUDLayer/QuestInfoContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+text = "DO A THING HOLY COW LOOK AT ALL THESE WORDS EXPANDING THE WINDOW THING"
+label_settings = SubResource("LabelSettings_acyb3")
+autowrap_mode = 2
+
+[node name="InteractPrompt" type="PanelContainer" parent="HUDLayer"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -183.0
+offset_right = 20.0
+offset_bottom = -143.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f5oke")
+
+[node name="InteractText" type="Label" parent="HUDLayer/InteractPrompt"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "INTERACT"
+label_settings = SubResource("LabelSettings_f2uap")
+
+[node name="TargetPanel" type="PanelContainer" parent="HUDLayer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 70)
+anchors_preset = -1
+anchor_left = 0.40500003
+anchor_right = 0.595
+offset_left = -0.5600281
+offset_top = 27.0
+offset_right = 0.5599365
+offset_bottom = 95.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f2uap")
+script = ExtResource("10_00c68")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDLayer/TargetPanel"]
+layout_mode = 2
+
+[node name="TargetNameLabel" type="Label" parent="HUDLayer/TargetPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Target Name"
+label_settings = SubResource("LabelSettings_ydln7")
+
+[node name="HSeparator" type="HSeparator" parent="HUDLayer/TargetPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_7kbnc")
+
+[node name="TargetResourceBar" type="ProgressBar" parent="HUDLayer/TargetPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_styles/background = SubResource("StyleBoxFlat_00c68")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ydln7")
+step = 0.1
+value = 75.0
+
+[node name="ScreenOverlayLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 3
+script = ExtResource("9_d6baa")
+
+[node name="FadeBox" type="ColorRect" parent="ScreenOverlayLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 4
+visible = false
+script = ExtResource("9_w4dxx")
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 85
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 85
+theme_override_constants/margin_bottom = 45
+
+[node name="InventoryUI" parent="MenuLayer/MarginContainer" instance=ExtResource("11_f5oke")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="TutorialSequence" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("8_8cm00")
+
+[node name="EntryPath" parent="." instance=ExtResource("8_fx6br")]
+unique_name_in_owner = true
+
+[node name="PlayerSpawnPosition" type="Marker3D" parent="EntryPath"]
+unique_name_in_owner = true
+transform = Transform3D(0.99999845, 0.00044343778, -0.0017273357, 0, 0.96859217, 0.24865481, 0.0017833469, -0.24865443, 0.9685906, 0.34585485, 1.3265276, 63.15676)
+
+[node name="FirstEnemyInitial" type="Marker3D" parent="EntryPath"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 1.4846497, -42.199593)
+
+[node name="FirstEnemyRevealPosition" type="Marker3D" parent="EntryPath"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 1.4846497, -30.670498)
+
+[node name="FirstEnemy" parent="EntryPath" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="StarterGearPickup" type="Node3D" parent="EntryPath" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(0.32749826, 0, -0.94485176, 0, 1, 0, 0.94485176, 0, 0.32749826, 25.594046, 0.62818503, -23.348516)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("StarterGearEntity")
+
+[node name="StarterGearEntity" type="Node3D" parent="EntryPath/StarterGearPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="EntryPath/StarterGearPickup/StarterGearEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="EntryPath/StarterGearPickup/StarterGearEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntryPath/StarterGearPickup/StarterGearEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="EntryPath/StarterGearPickup/StarterGearEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryPath/StarterGearPickup/StarterGearEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_o0ykn")
+
+[node name="ComponentManager" type="Node" parent="EntryPath/StarterGearPickup/StarterGearEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="EntryPath/StarterGearPickup/StarterGearEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="EntryPath/StarterGearPickup/StarterGearEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Collect Gear"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="HealEchoPickup" type="Node3D" parent="EntryPath" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(0.32749826, 0, -0.94485176, 0, 1, 0, 0.94485176, 0, 0.32749826, -23.800093, -21.339058, -33.524895)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("HealEchoEntity")
+
+[node name="HealEchoEntity" type="Node3D" parent="EntryPath/HealEchoPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="EntryPath/HealEchoPickup/HealEchoEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="EntryPath/HealEchoPickup/HealEchoEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntryPath/HealEchoPickup/HealEchoEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="EntryPath/HealEchoPickup/HealEchoEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryPath/HealEchoPickup/HealEchoEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_2e0i0")
+
+[node name="ComponentManager" type="Node" parent="EntryPath/HealEchoPickup/HealEchoEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="EntryPath/HealEchoPickup/HealEchoEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="EntryPath/HealEchoPickup/HealEchoEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Pickup Item"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="ExitLoadingZone" type="Area3D" parent="EntryPath"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1023598, 3.2898846, 58.301994)
+collision_layer = 2
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryPath/ExitLoadingZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6404076, 6.5039063, 10.628632)
+shape = SubResource("BoxShape3D_f2uap")
+
+[node name="Plaza" parent="." instance=ExtResource("9_otwgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -172.40681)
+
+[node name="PyramidArea" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.81397, 0, 82.430405)
+
+[node name="PyramidArcha" parent="Plaza/PyramidArea" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="PyramidArchaSpawn" type="Marker3D" parent="Plaza/PyramidArea"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0856552, 0, 1.326271)
+
+[node name="PyramidLootPickup" type="Node3D" parent="Plaza/PyramidArea" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, -3.1584702, 0.5663096, -2.7788467)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("PyramidLootEntity")
+
+[node name="PyramidLootEntity" type="Node3D" parent="Plaza/PyramidArea/PyramidLootPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_2e0i0")
+
+[node name="ComponentManager" type="Node" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Pickup Item"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="CrystalCornerArea" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.45561, 2.062158, -47.715546)
+
+[node name="CrystalCornerArcha" parent="Plaza/CrystalCornerArea" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="CrystalCornerSpawn" type="Marker3D" parent="Plaza/CrystalCornerArea"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6925049, 0, 5.1066437)
+
+[node name="CrystalCornerPickup" type="Node3D" parent="Plaza/CrystalCornerArea" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 5.2042694, 0.56630945, 8.079422)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("CrystalLootEntity")
+
+[node name="CrystalLootEntity" type="Node3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_2e0i0")
+
+[node name="ComponentManager" type="Node" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Pickup Item"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="FountainTreeArea" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8726501, -3.0396135, -10.771637)
+
+[node name="FountainArcha" parent="Plaza/FountainTreeArea" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="FountainArchaSpawn" type="Marker3D" parent="Plaza/FountainTreeArea"]
+unique_name_in_owner = true
+transform = Transform3D(0.9000071, -0.43587524, 0, 0.43587524, 0.9000071, 0, 0, 0, 1, -0.20710945, -3.1389558, 2.8294678)
+
+[node name="FountainLootPickup" type="Node3D" parent="Plaza/FountainTreeArea" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 5.530877, -3.7763383, -11.359955)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("FountainLootEntity")
+
+[node name="FountainLootEntity" type="Node3D" parent="Plaza/FountainTreeArea/FountainLootPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_2e0i0")
+
+[node name="ComponentManager" type="Node" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Pickup Item"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="Miniboss" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.23199, 0.22426891, -87.770706)
+
+[node name="MinibossEnemy" parent="Plaza/Miniboss" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="MinibossSpawn" type="Marker3D" parent="Plaza/Miniboss"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.191491, -1.9073486e-06, 2.0243225)
+
+[node name="MinibossLootPickup" type="Node3D" parent="Plaza/Miniboss" node_paths=PackedStringArray("loot_entity")]
+unique_name_in_owner = true
+transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 0, -127.580315, 0)
+script = ExtResource("14_1c438")
+loot_entity = NodePath("MinibossLootEntity")
+
+[node name="MinibossLootEntity" type="Node3D" parent="Plaza/Miniboss/MinibossLootPickup" node_paths=PackedStringArray("components", "body")]
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("MeshInstance3D")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+replication_config = SubResource("SceneReplicationConfig_w4dxx")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+lifetime = 1.8
+interp_to_end = 1.0
+explosiveness = 0.43
+process_material = SubResource("ParticleProcessMaterial_g7sat")
+draw_pass_1 = SubResource("SphereMesh_xujpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+mesh = SubResource("SphereMesh_2wek5")
+skeleton = NodePath("")
+
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity" node_paths=PackedStringArray("interactable")]
+collision_layer = 8
+priority = 1
+script = ExtResource("14_omq0d")
+interactable = NodePath("../ComponentManager/Interactable")
+metadata/_custom_type_script = "uid://biugcdkh4yjur"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/InteractableTrigger"]
+transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
+shape = SubResource("BoxShape3D_2e0i0")
+
+[node name="ComponentManager" type="Node" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity" node_paths=PackedStringArray("entity")]
+script = ExtResource("15_0cvc3")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Targetable" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+entity = NodePath("../..")
+
+[node name="Interactable" type="Node" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("17_1c438")
+entity = NodePath("../..")
+prompt_text = "Pickup Item"
+time_to_complete = 0.1
+priority = 2
+metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="Horde" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.18224, 0, -88.62871)
+
+[node name="ControlZone" parent="Plaza/Horde" instance=ExtResource("24_acyb3")]
+transform = Transform3D(8, 0, 0, 0, 2.975, 0, 0, 0, 8, -0.24708557, -1.3341248, 4.4476013)
+
+[node name="HordeEnemy1" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="HordeSpawn1" type="Marker3D" parent="Plaza/Horde"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.973932, 0, 4.65744)
+
+[node name="HordeEnemy2" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="HordeSpawn2" type="Marker3D" parent="Plaza/Horde"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38363266, 0, 15.029572)
+
+[node name="HordeEnemy3" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="HordeSpawn3" type="Marker3D" parent="Plaza/Horde"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.931303, 0, -1.4191895)
+
+[node name="Backup" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.779051, 9.536743e-07, -83.997665)
+
+[node name="BackupEnemySpawn1" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6459494, 0, 5.026184)
+
+[node name="BackupEnemySpawn2" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2729154, 0, -6.206421)
+
+[node name="BackupEnemySpawn3" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.386942, 0, -8.313171)
+
+[node name="BackupEnemy4" parent="Plaza/Backup" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="BackupEnemySpawn4" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.392233, 0, -0.2511902)
+
+[node name="BackupEnemy5" parent="Plaza/Backup" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="BackupEnemySpawn5" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7235813, 0, 5.205002)
+
+[node name="BackupAlly1" type="Node3D" parent="Plaza/Backup" node_paths=PackedStringArray("components", "body")]
+unique_name_in_owner = true
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("ComponentManager/Body")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Backup/BackupAlly1"]
+replication_config = SubResource("SceneReplicationConfig_4nrkc")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Backup/BackupAlly1"]
+replication_config = SubResource("SceneReplicationConfig_jy2u2")
+
+[node name="ComponentManager" type="Node" parent="Plaza/Backup/BackupAlly1"]
+script = ExtResource("15_0cvc3")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Body" type="CharacterBody3D" parent="Plaza/Backup/BackupAlly1/ComponentManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.779051, 9.536743e-07, -256.40448)
+
+[node name="Shape" type="CollisionShape3D" parent="Plaza/Backup/BackupAlly1/ComponentManager/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_7fhsc")
+
+[node name="Visual" parent="Plaza/Backup/BackupAlly1/ComponentManager/Body" instance=ExtResource("25_vi3y7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="BackupAllySpawn1" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.211958, 0, -1.2337646)
+
+[node name="BackupAlly2" type="Node3D" parent="Plaza/Backup" node_paths=PackedStringArray("components", "body")]
+unique_name_in_owner = true
+script = ExtResource("13_xujpj")
+components = NodePath("ComponentManager")
+body = NodePath("ComponentManager/Body")
+metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Backup/BackupAlly2"]
+replication_config = SubResource("SceneReplicationConfig_4nrkc")
+script = ExtResource("16_o0ykn")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Backup/BackupAlly2"]
+replication_config = SubResource("SceneReplicationConfig_jy2u2")
+
+[node name="ComponentManager" type="Node" parent="Plaza/Backup/BackupAlly2"]
+script = ExtResource("15_0cvc3")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="Body" type="CharacterBody3D" parent="Plaza/Backup/BackupAlly2/ComponentManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.779051, 9.536743e-07, -256.40448)
+
+[node name="Shape" type="CollisionShape3D" parent="Plaza/Backup/BackupAlly2/ComponentManager/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_7fhsc")
+
+[node name="Visual" parent="Plaza/Backup/BackupAlly2/ComponentManager/Body" instance=ExtResource("25_vi3y7")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="BackupAllySpawn2" type="Marker3D" parent="Plaza/Backup"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8050928, 0, -1.1304321)
+
+[node name="Escape" type="Node3D" parent="Plaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.605366, 1.841228, -99.33275)
+
+[node name="EscapeBoss" parent="Plaza/Escape" instance=ExtResource("12_g7sat")]
+unique_name_in_owner = true
+
+[node name="EscapeBossSpawn" type="Marker3D" parent="Plaza/Escape"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021392822, -5.5680513, -0.5468445)
+
+[node name="Player" parent="." instance=ExtResource("10_23v16")]
+unique_name_in_owner = true

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LegsItem" load_steps=3 format=3 uid="uid://xg4koadm3yy3"]
+
+[ext_resource type="Texture2D" uid="uid://t4074lchcveg" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/plaza_items/block_color.png" id="1_dde0w"]
+[ext_resource type="Script" uid="uid://i20jib6cha24" path="res://scripts/entities/items/legs/legs_item.gd" id="1_ir28o"]
+
+[resource]
+script = ExtResource("1_ir28o")
+name = &"Faded Greaves"
+icon = ExtResource("1_dde0w")
+metadata/_custom_type_script = "uid://i20jib6cha24"

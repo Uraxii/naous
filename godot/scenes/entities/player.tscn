@@ -1,25 +1,38 @@
-[gd_scene load_steps=25 format=3 uid="uid://c5ospakgw0cwt"]
+[gd_scene load_steps=41 format=3 uid="uid://c5ospakgw0cwt"]
 
-[ext_resource type="Script" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
+[ext_resource type="Script" uid="uid://vmntysxgdre" path="res://scripts/entities/player/player.gd" id="1_yr3on"]
 [ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_mjgby"]
+[ext_resource type="Resource" uid="uid://d0r5e1ispxyld" path="res://resources/entities/test_entity.tres" id="2_u2s01"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_r5ib0"]
 [ext_resource type="Script" uid="uid://d38go7bcor71r" path="res://scripts/entities/components/component_spellbook.gd" id="4_qa3vu"]
-[ext_resource type="PackedScene" uid="uid://dqgvbdfsa0nll" path="res://scenes/spells/hurt_caster.tscn" id="5_5ki56"]
-[ext_resource type="PackedScene" uid="uid://yraotv0gbwqi" path="res://scenes/spells/throw_ball.tscn" id="5_saib0"]
-[ext_resource type="PackedScene" uid="uid://wv8s83v0gmat" path="res://scenes/spells/hurt_target.tscn" id="7_yr3on"]
-[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/component_movement.gd" id="9_dqg57"]
+[ext_resource type="Script" uid="uid://cq7g2ygkwm0yr" path="res://scripts/entities/components/component_attack.gd" id="4_yv3je"]
+[ext_resource type="Script" uid="uid://dfwdj4h67di34" path="res://scripts/entities/components/component_animator.gd" id="5_cwche"]
+[ext_resource type="Script" uid="uid://cga4m42gn54u" path="res://scripts/entities/components/component_move.gd" id="9_dqg57"]
+[ext_resource type="Script" uid="uid://u8paan0wgvi6" path="res://scripts/entities/components/component_inventory.gd" id="9_jv5ih"]
 [ext_resource type="Script" uid="uid://ctil5vnixrdc0" path="res://scripts/entities/interaction/interaction_component.gd" id="10_b4o2o"]
+[ext_resource type="Script" uid="uid://sjk1ggbjspjx" path="res://scripts/entities/inventory/inventory.gd" id="10_n36er"]
+[ext_resource type="Script" uid="uid://dbkni0d5ocl7o" path="res://scripts/entities/items/item.gd" id="10_qc1tv"]
 [ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="10_w0xwc"]
 [ext_resource type="Script" uid="uid://bfu0l0d4jw4rd" path="res://scripts/entities/targeting/targeting_system.gd" id="11_b4o2o"]
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="11_cwche"]
 [ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="11_spk56"]
 [ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="12_spk56"]
 [ext_resource type="PackedScene" uid="uid://gltlimjauiog" path="res://scripts/entities/targeting/detection_types/auto_targeting.tscn" id="12_yr3on"]
+[ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="12_yv3je"]
 [ext_resource type="PackedScene" uid="uid://bf51jnfb20p2r" path="res://scripts/entities/targeting/detection_types/scan_targeting.tscn" id="13_2ngu4"]
+[ext_resource type="Script" uid="uid://cycxwu1ofls7d" path="res://scripts/entities/components/component_stat_manager.gd" id="13_y2dek"]
 [ext_resource type="PackedScene" uid="uid://8gqdpvmtu8g4" path="res://scripts/entities/targeting/detection_types/cursor_targeting.tscn" id="14_jv5ih"]
-[ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="16_v11i1"]
 [ext_resource type="Script" uid="uid://bkq1fycsacayy" path="res://scripts/entities/interaction/interactable_detector.gd" id="17_oouqh"]
 [ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="19_2ngu4"]
 [ext_resource type="Script" uid="uid://dqnphqsm65vr" path="res://scripts/ui/stat_view.gd" id="19_ow2nv"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://bhhsm2jeuha2y" path="res://scenes/entities/player_anim_tree.tres" id="21_u2s01"]
+[ext_resource type="PackedScene" uid="uid://cph7hkr227xjo" path="res://assets/models/player/player_base.tscn" id="22_xe83n"]
+[ext_resource type="Script" uid="uid://cyi3glr80w6yu" path="res://scenes/entities/ground_material_detector.gd" id="23_d745t"]
+[ext_resource type="Script" uid="uid://c6gn18lnds0sy" path="res://scripts/entities/components/component_visual.gd" id="23_yw3xw"]
+[ext_resource type="Animation" uid="uid://t5qqplpiy121" path="res://animations/Idle.res" id="24_6gvyl"]
+[ext_resource type="Animation" uid="uid://rmyyolbj4p4f" path="res://animations/Run.res" id="25_u2s01"]
+[ext_resource type="Animation" uid="uid://d1tgwi0o7efcu" path="res://animations/Walk.res" id="26_tb0mf"]
+[ext_resource type="Script" uid="uid://c175lugs0knyw" path="res://scripts/state_machine/state_base.gd" id="30_tb0mf"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_8nksq"]
 properties/0/path = NodePath("Components/Body:position")
@@ -42,6 +55,27 @@ properties/4/replication_mode = 2
 properties/0/path = NodePath(".:id")
 properties/0/spawn = true
 properties/0/replication_mode = 2
+properties/1/path = NodePath(".:target_id")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[sub_resource type="Resource" id="Resource_3hm5d"]
+resource_local_to_scene = true
+script = ExtResource("12_yv3je")
+metadata/_custom_type_script = "uid://hqemwssvkqh4"
+
+[sub_resource type="Resource" id="Resource_d745t"]
+resource_local_to_scene = true
+script = ExtResource("10_n36er")
+equipment = SubResource("Resource_3hm5d")
+metadata/_custom_type_script = "uid://sjk1ggbjspjx"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y2dek"]
+_data = {
+&"Idle": ExtResource("24_6gvyl"),
+&"Run": ExtResource("25_u2s01"),
+&"Walk": ExtResource("26_tb0mf")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vh5go"]
 radius = 0.42333984
@@ -49,11 +83,9 @@ radius = 0.42333984
 [sub_resource type="BoxShape3D" id="BoxShape3D_mxvno"]
 size = Vector3(1.3007813, 3.4932861, 1.2172852)
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("components", "interaction", "targeting")]
+[node name="Player" type="Node3D"]
 script = ExtResource("1_yr3on")
-components = NodePath("Components")
-interaction = NodePath("Components/Interaction")
-targeting = NodePath("Components/TargetingSystem")
+data = ExtResource("2_u2s01")
 
 [node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_8nksq")
@@ -69,19 +101,12 @@ metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 script = ExtResource("3_r5ib0")
 entity = NodePath("..")
 
+[node name="Attack" type="Node" parent="Components" node_paths=PackedStringArray("entity")]
+script = ExtResource("4_yv3je")
+entity = NodePath("../..")
+
 [node name="Spellbook" type="Node" parent="Components"]
 script = ExtResource("4_qa3vu")
-
-[node name="ThrowBall" parent="Components/Spellbook" instance=ExtResource("5_saib0")]
-hotbutton = 1
-
-[node name="HurtCaster" parent="Components/Spellbook" instance=ExtResource("5_5ki56")]
-id = "Hurt Caster"
-hotbutton = 3
-
-[node name="HurtTarget" parent="Components/Spellbook" instance=ExtResource("7_yr3on")]
-hotbar = 1
-hotbutton = 2
 
 [node name="Move" type="Node" parent="Components"]
 script = ExtResource("9_dqg57")
@@ -89,27 +114,30 @@ script = ExtResource("9_dqg57")
 [node name="StatusesEffects" type="Node" parent="Components"]
 
 [node name="Inventory" type="Node" parent="Components"]
+script = ExtResource("9_jv5ih")
+inventory = SubResource("Resource_d745t")
+metadata/_custom_type_script = "uid://u8paan0wgvi6"
 
-[node name="Health" type="Node" parent="Components"]
+[node name="Stats" type="Node" parent="Components"]
+script = ExtResource("13_y2dek")
+
+[node name="Health" type="Node" parent="Components/Stats"]
 script = ExtResource("10_w0xwc")
+current = 100.0
 
-[node name="Energy" type="Node" parent="Components"]
+[node name="Energy" type="Node" parent="Components/Stats"]
 script = ExtResource("11_spk56")
 
-[node name="Speed" type="Node" parent="Components"]
+[node name="Speed" type="Node" parent="Components/Stats"]
 script = ExtResource("11_spk56")
 max_value = 30.0
+
+[node name="Gravity" type="Node" parent="Components/Stats"]
+script = ExtResource("11_spk56")
 current = 1.0
 
-[node name="Gravity" type="Node" parent="Components"]
+[node name="JumpForce" type="Node" parent="Components/Stats"]
 script = ExtResource("11_spk56")
-max_value = 100.0
-start_percent = 0.01400000000000001
-
-[node name="JumpForce" type="Node" parent="Components"]
-script = ExtResource("11_spk56")
-max_value = 200.0
-start_percent = 0.17500000000000004
 
 [node name="Interaction" type="Node" parent="Components" node_paths=PackedStringArray("entity", "detection_zone")]
 script = ExtResource("10_b4o2o")
@@ -134,7 +162,27 @@ metadata/_custom_type_script = "uid://bfu0l0d4jw4rd"
 [node name="Targetable" parent="Components" node_paths=PackedStringArray("entity") instance=ExtResource("19_2ngu4")]
 entity = NodePath("../..")
 
+[node name="Anim" type="AnimationTree" parent="Components"]
+root_node = NodePath("../Visual/player_base")
+tree_root = ExtResource("21_u2s01")
+anim_player = NodePath("AnimationPlayer")
+parameters/BlendSpace2D/blend_position = Vector2(0, 0)
+parameters/BlendSpace1D/blend_position = 0.0
+parameters/Add2/add_amount = 0.0
+script = ExtResource("5_cwche")
+movement_blend_parameter_path = "parameters/BlendSpace2D/blend_position"
+jump_fall_blend_parameter_path = "parameters/BlendSpace1D/blend_position"
+metadata/_custom_type_script = "uid://dfwdj4h67di34"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Components/Anim"]
+root_node = NodePath("../../Visual/player_base")
+libraries = {
+&"animlib_player": SubResource("AnimationLibrary_y2dek")
+}
+
 [node name="Body" type="CharacterBody3D" parent="Components"]
+collision_layer = 5
+collision_mask = 3
 script = ExtResource("12_spk56")
 
 [node name="Shape" type="CollisionShape3D" parent="Components/Body"]
@@ -151,11 +199,19 @@ metadata/_custom_type_script = "uid://bkq1fycsacayy"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009765625, 1.4589534, -0.9480772)
 shape = SubResource("BoxShape3D_mxvno")
 
-[node name="Visual" parent="Components/Body" instance=ExtResource("16_v11i1")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
 [node name="ProjectileSpawner" type="Node3D" parent="Components/Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5009488, -0.53692293)
+
+[node name="Visual" type="Node3D" parent="Components" node_paths=PackedStringArray("body")]
+script = ExtResource("23_yw3xw")
+body = NodePath("../Body")
+
+[node name="player_base" parent="Components/Visual" instance=ExtResource("22_xe83n")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="State" type="Node" parent="Components"]
+script = ExtResource("30_tb0mf")
+metadata/_custom_type_script = "uid://c175lugs0knyw"
 
 [node name="StatView" type="Control" parent="." node_paths=PackedStringArray("label")]
 unique_name_in_owner = true
@@ -172,3 +228,11 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "STAT"
+
+[node name="GroundMaterialDetector" type="Node3D" parent="." node_paths=PackedStringArray("player", "player_shape")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("23_d745t")
+player = NodePath("../Components/Body")
+player_shape = NodePath("../Components/Body/InteractableDetector/CollisionShape3D")
+
+[connection signal="material_changed" from="GroundMaterialDetector" to="Components/Body" method="_on_ground_material_detector_material_changed"]

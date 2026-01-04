@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b6ko46gatk0wt"]
+
+[ext_resource type="Texture2D" uid="uid://di0mip4isayru" path="res://assets/textures/ink-stone-panel.png" id="1_k2i8y"]
+
+[resource]
+cull_mode = 2
+depth_draw_mode = 1
+specular_mode = 2
+albedo_color = Color(0.7140871, 0.53838485, 0.48446333, 1)
+albedo_texture = ExtResource("1_k2i8y")
+normal_enabled = true

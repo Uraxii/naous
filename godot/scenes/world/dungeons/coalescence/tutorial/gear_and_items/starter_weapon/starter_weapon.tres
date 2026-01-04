@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://b7eyqhnr5cqgo"]
+
+[ext_resource type="Script" uid="uid://dtv422ixg66s7" path="res://scripts/effects/damage/damage_simple.gd" id="1_jpr2s"]
+[ext_resource type="Texture2D" uid="uid://bx3je8p2m0bxb" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_weapon/starter_weapon_sword.png" id="1_ngtew"]
+[ext_resource type="Script" uid="uid://rl8xkcdn8v2m" path="res://scripts/entities/items/weapon/weapon_item.gd" id="1_rsxi7"]
+
+[sub_resource type="Resource" id="Resource_wnbjy"]
+script = ExtResource("1_jpr2s")
+metadata/_custom_type_script = "uid://dtv422ixg66s7"
+
+[resource]
+script = ExtResource("1_rsxi7")
+effect = SubResource("Resource_wnbjy")
+name = &"Blade Edge"
+description = "Strait-edged and straitforward. You know implictly how to turn the sharpness into fear."
+icon = ExtResource("1_ngtew")
+metadata/_custom_type_script = "uid://rl8xkcdn8v2m"

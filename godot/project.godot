@@ -18,9 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://scripts/global_manager.gd"
-API="*res://scripts/api/api_client.tscn"
-InstanceAPI="*res://scripts/instance_api.gd"
 lg="*res://scripts/utils/log.gd"
+InstanceAPI="*res://scripts/instance_stuff/instance_api.gd"
 
 [debug]
 
@@ -189,6 +188,14 @@ interact={
 "deadzone": 0.2,
 "events": []
 }
+open_inventory={
+"deadzone": 0.2,
+"events": []
+}
+toggle_chat_input={
+"deadzone": 0.2,
+"events": []
+}
 
 [layer_names]
 
@@ -196,3 +203,7 @@ interact={
 3d_physics/layer_2="World"
 3d_physics/layer_3="Entity"
 3d_physics/layer_4="InteractableTrigger"
+
+[rendering]
+
+occlusion_culling/use_occlusion_culling=true

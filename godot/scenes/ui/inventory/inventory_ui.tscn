@@ -1,0 +1,226 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7bsvixb5jjsf"]
+
+[ext_resource type="Theme" uid="uid://b631noidj7co0" path="res://scenes/ui/inventory/inventory_theme.tres" id="1_8pb6k"]
+[ext_resource type="Script" uid="uid://epop25me7jqf" path="res://scenes/ui/inventory/inventory_ui.gd" id="1_a0on1"]
+[ext_resource type="PackedScene" uid="uid://nbaglwtf3v0k" path="res://scenes/ui/inventory/item_slot.tscn" id="2_a0on1"]
+
+[node name="InventoryUI" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -151.11108
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8pb6k")
+script = ExtResource("1_a0on1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="EquippedGear" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InventoryPanel" type="PanelContainer" parent="HBoxContainer/EquippedGear"]
+layout_mode = 2
+theme_type_variation = &"InventoryPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TopGear" type="HBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EquippedWeaponL" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="WeaponLeftSlot" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/EquippedWeaponL" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="WeaponL_Label" type="Label" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/EquippedWeaponL"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon (L)"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EquippedMask" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MaskSlot" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer/EquippedMask" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MaskLabel" type="Label" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer/EquippedMask"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Mask"
+horizontal_alignment = 1
+
+[node name="EquippedShoulders" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShouldersSlot" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer/EquippedShoulders" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ShouldersLabel" type="Label" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer/EquippedShoulders"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Shoulders"
+horizontal_alignment = 1
+
+[node name="EquippedTorso" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TorsoSlot" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer/EquippedTorso" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TorsoLabel" type="Label" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer/EquippedTorso"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Torso"
+horizontal_alignment = 1
+
+[node name="EquippedLegs" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LegsSlot" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer/EquippedLegs" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LegsLabel" type="Label" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/VBoxContainer/EquippedLegs"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Legs"
+horizontal_alignment = 1
+
+[node name="EquippedWeaponR" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="WeaponRightSlot" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/EquippedWeaponR" instance=ExtResource("2_a0on1")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="WeaponR_Label" type="Label" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/TopGear/EquippedWeaponR"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Weapon (R)"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="BottomGear" type="VBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="EchoesLabel" type="Label" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/BottomGear"]
+layout_mode = 2
+text = "Echoes"
+
+[node name="EchoesContainer" type="HBoxContainer" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/BottomGear"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ItemSlot" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/BottomGear/EchoesContainer" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ItemSlot2" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/BottomGear/EchoesContainer" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ItemSlot3" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/BottomGear/EchoesContainer" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ItemSlot4" parent="HBoxContainer/EquippedGear/InventoryPanel/VBoxContainer/BottomGear/EchoesContainer" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BackpackPanel" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackpackGrid" type="GridContainer" parent="HBoxContainer/BackpackPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+columns = 8
+
+[node name="ItemSlot" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot2" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot3" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot4" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot5" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot6" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot7" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot8" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot9" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot10" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot11" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot12" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot13" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot14" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot15" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2
+
+[node name="ItemSlot16" parent="HBoxContainer/BackpackPanel/BackpackGrid" instance=ExtResource("2_a0on1")]
+layout_mode = 2

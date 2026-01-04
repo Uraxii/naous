@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://4u8pqa1uet2t"]
+
+[ext_resource type="Texture2D" uid="uid://dur6virqoevlv" path="res://assets/textures/red-crystals.png" id="1_iudgb"]
+[ext_resource type="Texture2D" uid="uid://52vit8s6pqay" path="res://assets/textures/red-crystals-normal.png" id="2_4ja1y"]
+
+[resource]
+albedo_texture = ExtResource("1_iudgb")
+normal_enabled = true
+normal_texture = ExtResource("2_4ja1y")

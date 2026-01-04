@@ -10,6 +10,7 @@ detectors = [NodePath("CursorDetector")]
 metadata/_custom_type_script = "uid://cbidjfhlnvb46"
 
 [node name="CursorDetector" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.15686275, 0.4117647, 0.98039216, 0.53333336)
 polygon = PackedVector2Array(-1, -29, -20, -21, -24, -1, -15, 19, 0, 27, 16, 16, 25, -1, 16, -22)
 script = ExtResource("2_g527n")

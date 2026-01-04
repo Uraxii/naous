@@ -1,5 +1,7 @@
 # Naous - The Still World
 
+[Quickstart guide](doc/QUICKSTART.md)
+
 # Mood Board
 
 Watercolor manga style; pastel colors, thin outlines and detail crosshatching.

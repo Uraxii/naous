@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=4 format=3 uid="uid://0mnksuuupcuy"]
+
+[ext_resource type="Texture2D" uid="uid://xririwoyvwv2" path="res://assets/textures/ink-flower.png" id="1_7vj10"]
+[ext_resource type="Script" uid="uid://rl8xkcdn8v2m" path="res://scripts/entities/items/weapon/weapon_item.gd" id="1_ib4tc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmc0j"]
+atlas = ExtResource("1_7vj10")
+region = Rect2(120.72717, 1078.4956, 150.05127, 150.05115)
+
+[resource]
+script = ExtResource("1_ib4tc")
+name = &"Test Weapon"
+icon = SubResource("AtlasTexture_xmc0j")
+metadata/_custom_type_script = "uid://rl8xkcdn8v2m"

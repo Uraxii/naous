@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EchoItem" load_steps=5 format=3 uid="uid://c1nk8bluat4xw"]
+
+[ext_resource type="Texture2D" uid="uid://f3o6flfus2dn" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_echos/wind_color.png" id="1_byht0"]
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="1_m65fn"]
+[ext_resource type="Script" uid="uid://cokt2xaq1yx0o" path="res://scripts/effects/movement/dash.gd" id="1_ygqgf"]
+
+[sub_resource type="Resource" id="Resource_ksxau"]
+script = ExtResource("1_ygqgf")
+metadata/_custom_type_script = "uid://cokt2xaq1yx0o"
+
+[resource]
+script = ExtResource("1_m65fn")
+effect = SubResource("Resource_ksxau")
+name = &"Dash"
+description = "Short-distance dash to avoid attacks and close gaps."
+icon = ExtResource("1_byht0")
+metadata/_custom_type_script = "uid://chxnjdgyds7hd"

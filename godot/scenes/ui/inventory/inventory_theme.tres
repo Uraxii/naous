@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://b631noidj7co0"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_6ouvt"]
+color = Color(0.054399993, 0.10192003, 0.16, 1)
+grow_begin = -40.0
+grow_end = -40.0
+thickness = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ouvt"]
+content_margin_left = 8.0
+content_margin_top = 12.0
+content_margin_right = 8.0
+content_margin_bottom = 10.0
+bg_color = Color(0.1332686, 0.18479982, 0.1499838, 0.93333334)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aks48"]
+content_margin_left = 24.0
+content_margin_top = 24.0
+content_margin_right = 24.0
+content_margin_bottom = 24.0
+bg_color = Color(0.42660004, 0.48708004, 0.54, 0.94509804)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.44400004, 0.74, 0.65119994, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[resource]
+HSeparator/styles/separator = SubResource("StyleBoxLine_6ouvt")
+InventoryPanel/base_type = &"PanelContainer"
+InventoryPanel/styles/panel = SubResource("StyleBoxFlat_6ouvt")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_aks48")

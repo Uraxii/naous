@@ -8,6 +8,7 @@ script = ExtResource("1_xbhis")
 metadata/_custom_type_script = "uid://cbidjfhlnvb46"
 
 [node name="Zone1" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.970578, 0.28835246, 0.30506596, 0.5294118)
 offset = Vector2(0, 117)
 polygon = PackedVector2Array(569, 496, 141, 278, 250, 193, 567, 121, 841, 177, 998, 269)
@@ -15,6 +16,7 @@ script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
 [node name="Zone2" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.78977114, 0.4484908, 0.55916715, 0.5294118)
 offset = Vector2(0, 359)
 polygon = PackedVector2Array(570, 67, 191, 100, 193, 271, 567, 285, 955, 277, 946, 95)
@@ -22,6 +24,7 @@ script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
 [node name="Zone3" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.787522, 0.4858221, 0.27731854, 0.5294118)
 offset = Vector2(0, 117)
 polygon = PackedVector2Array(571, 495, 77, 209, 190, 100, 566, 48, 859, 93, 1074, 206)
@@ -29,6 +32,7 @@ script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
 [node name="Zone4" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.6217734, 0.5811835, 0.19050422, 0.5294118)
 offset = Vector2(0, 117)
 polygon = PackedVector2Array(569, 496, 24, 106, 164, -4, 566, -45, 998, 7, 1126, 105)
@@ -36,6 +40,7 @@ script = ExtResource("2_omt2j")
 metadata/_custom_type_script = "uid://ig85vsh183qg"
 
 [node name="Zone5" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.3847674, 0.60381866, 0.70750016, 0.5294118)
 offset = Vector2(0, 117)
 polygon = PackedVector2Array(569, 492, 0, -11, 0, -116, 1153, -116, 1153, -11)

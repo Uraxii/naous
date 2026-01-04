@@ -1,22 +1,19 @@
 class_name View extends Control
 
-var signals: SignalBus:
-    get: return Globals.signal_bus
+@export var should_log := false
 
-var input: InputManager:
-    get: return Globals.input
- 
-var views: ViewManager:
-    get: return Globals.views
-
+@onready var signals := Globals.signal_bus
+@onready var router  := Globals.msg_router
+@onready var input   := Globals.input
+@onready var views   := Globals.views
+@onready var save    := Globals.save
 @warning_ignore("shadowed_global_identifier")
-var log: Log:
-    get: return Globals.logger
+@onready var log     := Globals.logger
 
 
 func initalize() -> void:
-    visibility_changed.connect(_on_visibility_change)    
-    
+    visibility_changed.connect(_on_visibility_change)
+
 
 func despawn():
     signals.despawn_view.emit(self)
@@ -24,5 +21,5 @@ func despawn():
 
 
 func _on_visibility_change() -> void:
-    #print_debug(self, " visible:", is_visible_in_tree())
-    pass
+    if should_log:
+        print_debug(self, " visible:", is_visible_in_tree())

@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bxwllm61ew1x"]
+
+[ext_resource type="Texture2D" uid="uid://cnenijnfd32lh" path="res://assets/textures/greebly-diffuse.png" id="1_re6ax"]
+[ext_resource type="Texture2D" uid="uid://du2snp128bqw6" path="res://assets/textures/greebly-normal.png" id="2_324pt"]
+
+[resource]
+cull_mode = 2
+depth_draw_mode = 1
+specular_mode = 2
+albedo_color = Color(0.35686275, 0.40784314, 0.3882353, 1)
+albedo_texture = ExtResource("1_re6ax")
+normal_enabled = true
+normal_texture = ExtResource("2_324pt")
+uv1_scale = Vector3(0.063, 0.063, 0.063)
+uv1_triplanar = true
+uv1_world_triplanar = true

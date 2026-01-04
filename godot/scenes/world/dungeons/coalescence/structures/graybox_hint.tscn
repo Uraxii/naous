@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://deb4oma4divte"]
+
+[node name="GrayboxHint" type="Label3D"]
+text = "Graybox Hint"
+font_size = 140
+outline_size = 92
+uppercase = true
+autowrap_mode = 2
+width = 1500.0

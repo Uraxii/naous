@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c1nnai20618l0"]
+
+[ext_resource type="Texture2D" uid="uid://b13u34fuif31r" path="res://assets/textures/grass.png" id="1_vu4vr"]
+[ext_resource type="Texture2D" uid="uid://bsavi1a41nkcw" path="res://assets/textures/grass_normal.png" id="2_uj6yt"]
+
+[resource]
+cull_mode = 2
+depth_draw_mode = 1
+specular_mode = 2
+albedo_color = Color(0, 0.7001668, 0.54617774, 1)
+albedo_texture = ExtResource("1_vu4vr")
+normal_enabled = true
+normal_texture = ExtResource("2_uj6yt")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true

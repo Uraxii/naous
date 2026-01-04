@@ -4,7 +4,8 @@ const SERVER_ID := 1
 
 var launch_args:    Dictionary
 var signal_bus:     SignalBus
-var packets:        PacketManager
+var msg_router:     MsgRouter
+var save:           SaveManager
 var logger:         Log
 var input:          InputManager
 var views:          ViewManager
@@ -34,8 +35,9 @@ func new_global_scene(node_name: String, scene: PackedScene) -> Node:
 func create_globals() -> void:
     # Load order matters!!!
     signal_bus = new_global_script("Signals", SignalBus)
-    packets = PacketManager.new(signal_bus)
     logger = new_global_script("Log", Log)
+    msg_router = new_global_script("MsgRouter", MsgRouter)
+    save = new_global_script("Save", SaveManager)
     input = new_global_script("Input", InputManager)
     views = new_global_script("Views", ViewManager)
     game = new_global_script("Game", GameManager)

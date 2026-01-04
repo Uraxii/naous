@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqljrgdwdfqk2"]
+
+[ext_resource type="PackedScene" uid="uid://hvjax25ll5p0" path="res://assets/models/enemies/archa-enemy.glb" id="1_seodg"]
+[ext_resource type="Shader" uid="uid://25yfuknk3fyj" path="res://assets/models/enemies/crack_overlay.gdshader" id="2_4bawe"]
+[ext_resource type="Texture2D" uid="uid://buev5cr4nohif" path="res://assets/textures/archa-enemy-damage-blend-mask.png" id="3_pai0u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3k37"]
+render_priority = 0
+shader = ExtResource("2_4bawe")
+shader_parameter/CrackColor = Color(1, 1, 1, 1)
+shader_parameter/CrackMask = ExtResource("3_pai0u")
+shader_parameter/crack_strength = 0.0
+shader_parameter/emission_strength = 0.1
+shader_parameter/crack_stages = 5
+shader_parameter/mask_noise_threshold = 0.78999998234192
+shader_parameter/invert_mask = false
+
+[node name="archa-enemy" instance=ExtResource("1_seodg")]
+
+[node name="Skeleton3D" parent="Archa-Enemy" index="0"]
+bones/0/position = Vector3(-0.003174398, 1.2007811, -0.10727116)
+bones/1/rotation = Quaternion(1.8982751e-11, 0.99999994, 2.169748e-07, -0.00037200854)
+bones/2/rotation = Quaternion(-0.0041001136, -0.7089255, -0.004121615, 0.7052595)
+bones/3/rotation = Quaternion(0.6369809, 0.19368792, 0.5968413, -0.44779563)
+bones/4/rotation = Quaternion(-0.26962712, -0.10519292, -0.5472683, 0.7853237)
+bones/5/position = Vector3(0.27981195, 1.2386736, -0.15043828)
+bones/5/rotation = Quaternion(0.9189283, -0.00094703946, 0.39376238, 0.022828173)
+bones/6/rotation = Quaternion(-0.0027329691, 0.9480802, 0.001048235, -0.3180181)
+bones/7/rotation = Quaternion(0.5409486, -0.13031258, 0.82258916, 0.11721892)
+bones/8/rotation = Quaternion(0.0027022439, 0.9998733, 0.0031297687, -0.015372588)
+bones/9/rotation = Quaternion(0.7351333, 0.012564385, 0.6735586, 0.07576297)
+bones/10/rotation = Quaternion(-0.13119407, 0.98943686, 0.061667938, 0.00016485479)
+bones/11/position = Vector3(0.9432619, 1.6743239, 0.17252585)
+bones/13/position = Vector3(0.6520272, 1.9165078, 0.91373014)
+bones/15/position = Vector3(-0.9671373, 0.86638856, -0.23386492)
+bones/17/position = Vector3(-1.0943968, 1.9165076, 0.91373014)
+
+[node name="Archa" parent="Archa-Enemy/Skeleton3D" index="0"]
+material_overlay = SubResource("ShaderMaterial_i3k37")
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "ArmatureAction"

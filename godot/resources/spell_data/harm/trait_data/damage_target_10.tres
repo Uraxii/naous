@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TraitData" load_steps=2 format=3 uid="uid://pqtqhibg6y07"]
+
+[ext_resource type="Script" uid="uid://b0kc5ew6keevx" path="res://scripts/spells/traits/trait_data.gd" id="1_iiywm"]
+
+[resource]
+script = ExtResource("1_iiywm")
+damage = 10.0
+metadata/_custom_type_script = "uid://b0kc5ew6keevx"

@@ -1,0 +1,275 @@
+[gd_scene load_steps=11 format=3 uid="uid://42b1rmqi4r8i"]
+
+[ext_resource type="PackedScene" uid="uid://dqljrgdwdfqk2" path="res://assets/models/enemies/archa_enemy.tscn" id="1_a5tf6"]
+
+[sub_resource type="GDScript" id="GDScript_a5tf6"]
+resource_name = "test_shader"
+script/source = "extends Node3D
+
+@onready var camera_3d: Camera3D = %Camera3D
+
+@onready var crack_color: ColorPickerButton = %CrackColor
+@onready var crack_strength: HSlider = %CrackStrength
+@onready var emission_strength: HSlider = %EmissionStrength
+@onready var crack_stages: HSlider = %CrackStages
+@onready var noise_threshold: HSlider = %NoiseThreshold
+@onready var invert_mask: CheckButton = %InvertMask
+
+@onready var color_display: Label = %ColorDisplay
+@onready var strength_display: Label = %StrengthDisplay
+@onready var emission_display: Label = %EmissionDisplay
+@onready var stages_display: Label = %StagesDisplay
+@onready var noise_display: Label = %NoiseDisplay
+@onready var invert_display: Label = %InvertDisplay
+
+@onready var left_archa: Node3D = %LeftArcha
+@onready var mid_archa: Node3D = %MidArcha
+@onready var right_archa: Node3D = %RightArcha
+
+var enemy_overlays: Array[ShaderMaterial]
+
+var invert_state: bool = false
+
+func set_shader_params(color: Vector4, strength: float, emission: float, stages: int, threshold: float, invert: bool) -> void:
+    
+    for shader in enemy_overlays:
+        shader.set_shader_parameter(\"CrackColor\", color)
+        shader.set_shader_parameter(\"crack_strength\", strength)
+        shader.set_shader_parameter(\"emission_strength\", emission)
+        shader.set_shader_parameter(\"crack_stages\", stages)
+        shader.set_shader_parameter(\"mask_noise_threshold\", threshold)
+        shader.set_shader_parameter(\"invert_mask\", invert)
+
+
+func set_displays(color: Vector4, strength: float, emission: float, stages: int, threshold: float, invert: bool) -> void:
+    color_display.text = \"(%s, %s, %s, %s)\" % [
+        snappedf(color.x, 0.01),
+        snappedf(color.y, 0.01),
+        snappedf(color.z, 0.01),
+        snappedf(color.w, 0.01)
+    ]
+    strength_display.text = \"(%s)\" % [crack_strength.value]
+    emission_display.text = \"(%s)\" % [emission_strength.value]
+    stages_display.text = \"(%s)\" % crack_stages.value
+    noise_display.text = \"(%s)\" % noise_threshold.value
+    invert_display.text = \"Enabled\" if invert else \"Disabled\"
+
+func set_overlays() -> void:
+    var enemies := [left_archa, mid_archa, right_archa]
+    
+    for enemy: Node3D in enemies:
+        var mesh := enemy.find_child(\"Archa\", true, true) as MeshInstance3D
+        var shader_overlay: ShaderMaterial = mesh.material_overlay
+        enemy_overlays.push_back(shader_overlay)
+    
+
+func _handle_value_change(_new_value: Variant) -> void:
+    # Get the values
+    var color: Vector4 = Vector4(crack_color.color.r, crack_color.color.g, crack_color.color.b, crack_color.color.a)
+    var strength := crack_strength.value
+    var emission := emission_strength.value
+    var stages := int(crack_stages.value)
+    var threshold := noise_threshold.value
+    var invert := invert_state
+    set_shader_params(color, strength, emission, stages, threshold, invert)
+    set_displays(color, strength, emission, stages, threshold, invert)
+
+
+func _handle_invert_change(invert_val: bool) -> void:
+    invert_state = invert_val
+    _handle_value_change(1) # set shaders to current values
+
+
+func _ready() -> void:
+    set_overlays()
+    crack_color.color_changed.connect(_handle_value_change)
+    crack_strength.value_changed.connect(_handle_value_change)
+    emission_strength.value_changed.connect(_handle_value_change)
+    crack_stages.value_changed.connect(_handle_value_change)
+    noise_threshold.value_changed.connect(_handle_value_change)
+    invert_mask.toggled.connect(_handle_invert_change)
+    _handle_value_change(1) # set shaders to current values
+    
+    # Hacks to disable global camera and input stuff
+    camera_3d.make_current()
+    Globals.camera.queue_free()
+    Globals.input.queue_free()
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4lltr"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_7nvo8"]
+sky_material = SubResource("ProceduralSkyMaterial_4lltr")
+
+[sub_resource type="Environment" id="Environment_xmv5e"]
+background_mode = 2
+sky = SubResource("Sky_7nvo8")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5tf6"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.10549063, 0.17229778, 0.15070492, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.039385863, 0.039385874, 0.0393858, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a5tf6"]
+albedo_color = Color(0.5975417, 0.6488033, 0.5728555, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4lltr"]
+material = SubResource("StandardMaterial3D_a5tf6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmv5e"]
+albedo_color = Color(0.034796454, 0.048987843, 0.12250725, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_33q7s"]
+material = SubResource("StandardMaterial3D_xmv5e")
+
+[node name="TestShader" type="Node3D"]
+script = SubResource("GDScript_a5tf6")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xmv5e")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.047907025, -0.4744956, 0.87895334, 0.6466881, 0.65590715, 0.3893335, -0.7612488, 0.5870605, 0.27542818, 7.568749, 5.684841, 5.819646)
+shadow_enabled = true
+directional_shadow_max_distance = 1.0
+
+[node name="TestUI" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="TestUI"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_a5tf6")
+
+[node name="GridContainer" type="GridContainer" parent="TestUI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 18
+theme_override_constants/v_separation = 15
+columns = 3
+
+[node name="ColorPicker" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "Crack Color"
+
+[node name="CrackColor" type="ColorPickerButton" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Crack Color"
+color = Color(0.938319, 0.93831897, 0.9383189, 1)
+
+[node name="ColorDisplay" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CrackStrengthLabel" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "Crack Strength"
+
+[node name="CrackStrength" type="HSlider" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="StrengthDisplay" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EmissionStrengthLabel" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "Emission Strength"
+
+[node name="EmissionStrength" type="HSlider" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 20.0
+step = 0.1
+value = 0.8
+
+[node name="EmissionDisplay" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CrackStagesLabel" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "Crack Stages"
+
+[node name="CrackStages" type="HSlider" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 5.0
+
+[node name="StagesDisplay" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NoiseThresholdLabel" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "Noise Threshold"
+
+[node name="NoiseThreshold" type="HSlider" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.01
+
+[node name="NoiseDisplay" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="InvertLabel" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+layout_mode = 2
+text = "Invert Mask"
+
+[node name="InvertMask" type="CheckButton" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="InvertDisplay" type="Label" parent="TestUI/PanelContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.9184326, -0.0056708185, -0.39553696, 0.014313462, 0.9997189, 0.018902726, 0.39531857, -0.023022382, 0.91825557, -2.8209863, 2.54837, 3.0527163)
+fov = 70.2
+
+[node name="GroundMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(79.024925, 0, 0, 0, 0.13247752, 0, 0, 0, 58.499367, 0, 0, 0)
+mesh = SubResource("BoxMesh_4lltr")
+skeleton = NodePath("../../root/@EditorNode@20442/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@62/@VBoxContainer@63/@EditorMainScreen@103/MainScreen/@CanvasItemEditor@10871/@VSplitContainer@10516/@HSplitContainer@10518/@HSplitContainer@10520/@Control@10521/@SubViewportContainer@10522/@SubViewport@10523/TestTargeting")
+
+[node name="WallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(79.024925, 0, 0, 0, -5.7907763e-09, -58.499367, 0, 0.13247752, -2.5570885e-06, -0.019972563, 1.8805704, -0.9136324)
+mesh = SubResource("BoxMesh_33q7s")
+skeleton = NodePath("../../root/@EditorNode@20442/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@62/@VBoxContainer@63/@EditorMainScreen@103/MainScreen/@CanvasItemEditor@10871/@VSplitContainer@10516/@HSplitContainer@10518/@HSplitContainer@10520/@Control@10521/@SubViewportContainer@10522/@SubViewport@10523/TestTargeting")
+
+[node name="LeftArcha" parent="." instance=ExtResource("1_a5tf6")]
+unique_name_in_owner = true
+transform = Transform3D(0.99446887, 0, -0.10503182, 0, 1, 0, 0.10503182, 0, 0.99446887, -3.1254761, 0, 0)
+
+[node name="MidArcha" parent="." instance=ExtResource("1_a5tf6")]
+unique_name_in_owner = true
+transform = Transform3D(0.95301634, 0, -0.30291885, 0, 1, 0, 0.30291885, 0, 0.95301634, -0.18267202, 4.7683716e-07, -0.15965271)
+
+[node name="RightArcha" parent="." instance=ExtResource("1_a5tf6")]
+unique_name_in_owner = true
+transform = Transform3D(0.7729883, 0, -0.6344203, 0, 1, 0, 0.6344203, 0, 0.7729883, 4.168643, 0, -0.07747555)

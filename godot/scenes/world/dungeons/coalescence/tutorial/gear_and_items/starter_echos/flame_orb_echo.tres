@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EchoItem" load_steps=5 format=3 uid="uid://iyvy1qavlxb7"]
+
+[ext_resource type="Script" uid="uid://dtv422ixg66s7" path="res://scripts/effects/damage/damage_simple.gd" id="1_773jq"]
+[ext_resource type="Texture2D" uid="uid://b062rfptwd6eg" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_echos/Fireball.png" id="1_duq61"]
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="1_jmtco"]
+
+[sub_resource type="Resource" id="Resource_n8whj"]
+script = ExtResource("1_773jq")
+metadata/_custom_type_script = "uid://dtv422ixg66s7"
+
+[resource]
+script = ExtResource("1_jmtco")
+effect = SubResource("Resource_n8whj")
+name = &"Flame Orb"
+description = "Project flaming Naous as a projectile at opponents."
+icon = ExtResource("1_duq61")
+metadata/_custom_type_script = "uid://chxnjdgyds7hd"

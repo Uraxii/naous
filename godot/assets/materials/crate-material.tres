@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c0n1a1d3mstfc"]
+
+[ext_resource type="Texture2D" uid="uid://dpxfhtexyve2m" path="res://assets/textures/ink-crate.png" id="1_2ooyk"]
+
+[resource]
+cull_mode = 2
+depth_draw_mode = 1
+specular_mode = 2
+albedo_color = Color(0.5006379, 0.3607634, 0.22555181, 1)
+albedo_texture = ExtResource("1_2ooyk")
+normal_enabled = true

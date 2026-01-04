@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TraitData" load_steps=3 format=3 uid="uid://q0371c4jkq8k"]
+
+[ext_resource type="Script" uid="uid://b0kc5ew6keevx" path="res://scripts/spells/traits/trait_data.gd" id="1_862t7"]
+[ext_resource type="PackedScene" uid="uid://bsnahgut5wqd6" path="res://scenes/entities/projectiles/projectile.tscn" id="1_u64iq"]
+
+[resource]
+script = ExtResource("1_862t7")
+trait_type = 8
+damage = 30.0
+projectile_scene = ExtResource("1_u64iq")
+metadata/_custom_type_script = "uid://b0kc5ew6keevx"

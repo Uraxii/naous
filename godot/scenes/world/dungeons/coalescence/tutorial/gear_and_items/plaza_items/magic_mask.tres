@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MaskItem" load_steps=3 format=3 uid="uid://bw6vcgtg5adyi"]
+
+[ext_resource type="Script" uid="uid://dg45bv0urh4re" path="res://scripts/entities/items/mask/mask_item.gd" id="1_4acf6"]
+[ext_resource type="Texture2D" uid="uid://c1ligprj0nsjq" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/plaza_items/Ice.png" id="1_su0qh"]
+
+[resource]
+script = ExtResource("1_4acf6")
+draw = 3
+name = &"Mask of Inflection"
+icon = ExtResource("1_su0qh")
+metadata/_custom_type_script = "uid://dg45bv0urh4re"

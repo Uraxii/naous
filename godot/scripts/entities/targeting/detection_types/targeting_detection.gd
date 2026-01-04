@@ -40,7 +40,8 @@ func get_previous_detected_target(current_target: Targetable = null) -> Targetab
 func get_highest_priority_target() -> Targetable:
     var highest_priority_target: Targetable = null
     if not prioritized_target_list.is_empty():
-        highest_priority_target = prioritized_target_list.front()
+        if prioritized_target_list.front() != null and not prioritized_target_list.front().is_queued_for_deletion():
+            highest_priority_target = prioritized_target_list.front()
     return highest_priority_target
 
 

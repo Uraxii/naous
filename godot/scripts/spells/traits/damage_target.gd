@@ -1,16 +1,9 @@
-class_name DamageTarget extends Node
-
-@export var amount := 1.0
+class_name DamageTarget extends Trait
 
 @onready var signals := Globals.signal_bus
 @onready var entities := Globals.entities
 
-var spell: Spell
 var caster: Entity
-
-
-func setup() -> void:
-    spell = get_parent()
 
 
 func cast() -> void:
@@ -19,4 +12,5 @@ func cast() -> void:
         lg.debug("No target")
         return
 
-    signals.damage_entity.emit(target.id, amount)
+    if target.health:
+        target.health.current -= data.damage
