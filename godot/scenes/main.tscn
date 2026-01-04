@@ -1,6 +1,75 @@
-[gd_scene load_steps=2 format=3 uid="uid://cblo8m3itchq8"]
+[gd_scene load_steps=5 format=3 uid="uid://cblo8m3itchq8"]
 
 [ext_resource type="Script" uid="uid://7jp87884qqhb" path="res://scripts/main.gd" id="1_wm5da"]
 
+[sub_resource type="Gradient" id="Gradient_o5qli"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.21507353, 0.375, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.19784173, 0.19784173, 0.19784173, 1, 0.506683, 0.506683, 0.506683, 1, 0.26475334, 0.26475334, 0.26475334, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0wfyh"]
+gradient = SubResource("Gradient_o5qli")
+width = 512
+height = 512
+fill_from = Vector2(0.25641027, 1)
+fill_to = Vector2(0.7307692, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o5qli"]
+font_size = 72
+
 [node name="Main" type="Node"]
 script = ExtResource("1_wm5da")
+
+[node name="SplashScreen" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="SplashScreen"]
+modulate = Color(0.4486373, 0.6384279, 0.65891, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_0wfyh")
+
+[node name="MarginContainer" type="MarginContainer" parent="SplashScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 160
+theme_override_constants/margin_bottom = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SplashScreen/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameTitle" type="Label" parent="SplashScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Naous"
+label_settings = SubResource("LabelSettings_o5qli")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="SplashScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "The Stilled World"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="SplashScreen/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="AnimatedProgressBar" type="ProgressBar" parent="SplashScreen/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

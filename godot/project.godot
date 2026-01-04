@@ -26,10 +26,6 @@ InstanceAPI="*res://scripts/instance_stuff/instance_api.gd"
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 
-[editor]
-
-run/main_run_args="--no-globals"
-
 [godots]
 
 version_hint=""
