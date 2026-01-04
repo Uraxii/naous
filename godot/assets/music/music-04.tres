@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=11 format=3 uid="uid://dbkj5mkwehrw4"]
+
+[ext_resource type="AudioStream" uid="uid://cxo01xpccni0i" path="res://assets/music/track_04/Combat - LPercussion.ogg" id="1_5hv6x"]
+[ext_resource type="AudioStream" uid="uid://dj4qrk1st87xr" path="res://assets/music/track_04/Combat - Pad.ogg" id="2_wc0mw"]
+[ext_resource type="AudioStream" uid="uid://detfjcbuu0eib" path="res://assets/music/track_04/Combat - EPiano.ogg" id="3_gnqlj"]
+[ext_resource type="AudioStream" uid="uid://dpo2cxa5c0glb" path="res://assets/music/track_04/Combat - Drums A.ogg" id="4_5e025"]
+[ext_resource type="AudioStream" uid="uid://b16kutfh4ayjc" path="res://assets/music/track_04/Combat - Drums B.ogg" id="5_e8s7y"]
+[ext_resource type="AudioStream" uid="uid://chnlxgnks6d6c" path="res://assets/music/track_04/Combat - Piano A.ogg" id="6_ntkp1"]
+[ext_resource type="AudioStream" uid="uid://bjx0a161yik7f" path="res://assets/music/track_04/Combat - Piano B.ogg" id="7_vqbcy"]
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="8_2u17i"]
+[ext_resource type="AudioStream" uid="uid://cmb6mne7qi2n6" path="res://assets/music/track_04/Combat - EPiano B.ogg" id="8_wc0mw"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_aadet"]
+stream_count = 8
+stream_0/stream = ExtResource("2_wc0mw")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("6_ntkp1")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("4_5e025")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("3_gnqlj")
+stream_3/volume = 0.0
+stream_4/stream = ExtResource("5_e8s7y")
+stream_4/volume = 0.0
+stream_5/stream = ExtResource("1_5hv6x")
+stream_5/volume = 0.0
+stream_6/stream = ExtResource("7_vqbcy")
+stream_6/volume = 0.0
+stream_7/stream = ExtResource("8_wc0mw")
+stream_7/volume = 0.0
+
+[resource]
+script = ExtResource("8_2u17i")
+file = SubResource("AudioStreamSynchronized_aadet")
+title = "Combat"
+use_intensity = true
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

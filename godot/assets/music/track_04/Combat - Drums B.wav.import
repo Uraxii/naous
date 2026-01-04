@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cflp34pu80vkf"
-path="res://.godot/imported/Combat - Drums B.wav-98b01459fed094b2debb0c1ef8850157.sample"
+path="res://.godot/imported/Combat - Drums B.wav-32270e377bb472c8bc117f7dcb04b655.sample"
 
 [deps]
 
-source_file="res://assets/music/03 Combat 1/Combat - Drums B.wav"
-dest_files=["res://.godot/imported/Combat - Drums B.wav-98b01459fed094b2debb0c1ef8850157.sample"]
+source_file="res://assets/music/track_04/Combat - Drums B.wav"
+dest_files=["res://.godot/imported/Combat - Drums B.wav-32270e377bb472c8bc117f7dcb04b655.sample"]
 
 [params]
 

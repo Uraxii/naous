@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c8vuvxm8pbrf2" path="res://scripts/music/dynamic_music_test_scene.gd" id="1_8abuy"]
 [ext_resource type="PackedScene" uid="uid://dgl2tc7u5oid2" path="res://scenes/dynamic_music.tscn" id="2_nvxtv"]
-[ext_resource type="AudioStream" uid="uid://htobeesip2qa" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 1.ogg" id="3_w638y"]
-[ext_resource type="AudioStream" uid="uid://by4la1ljato1d" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 3.ogg" id="4_wasvt"]
-[ext_resource type="AudioStream" uid="uid://48u8uru081xt" path="res://assets/music/02 Ambivalent Fellow/02 Ambivalent Fellow - Track 5.ogg" id="5_c5fp7"]
+[ext_resource type="AudioStream" uid="uid://htobeesip2qa" path="res://assets/music/track_03/Ambivalent Fellow - Track 1.ogg" id="3_w638y"]
+[ext_resource type="AudioStream" uid="uid://by4la1ljato1d" path="res://assets/music/track_03/Ambivalent Fellow - Track 3.ogg" id="4_wasvt"]
+[ext_resource type="AudioStream" uid="uid://48u8uru081xt" path="res://assets/music/track_03/Ambivalent Fellow - Track 5.ogg" id="5_c5fp7"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="6_nvxtv"]
 
 [sub_resource type="SystemFont" id="SystemFont_8abuy"]
