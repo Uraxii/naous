@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=2 format=3 uid="uid://bijg3owlp50gm"]
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=3 format=3 uid="uid://bijg3owlp50gm"]
 
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="1_07y4g"]
+[ext_resource type="AudioStream" uid="uid://6k82uohhehfv" path="res://assets/music/track_06/Naous_Track_Finale_complete.ogg" id="1_52nol"]
 
 [resource]
 script = ExtResource("1_07y4g")
-title = "Finale"
+file = ExtResource("1_52nol")
+title = "Echoes"
 metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

@@ -1,130 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://fkfyhnng56ic"]
+[gd_scene load_steps=6 format=3 uid="uid://fkfyhnng56ic"]
 
 [ext_resource type="Script" uid="uid://c8vuvxm8pbrf2" path="res://scripts/music/dynamic_music_test_scene.gd" id="1_8abuy"]
+[ext_resource type="Theme" uid="uid://bbqndpj4wq337" path="res://scenes/ui/ui_music_theme.tres" id="1_47yts"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="6_nvxtv"]
-
-[sub_resource type="SystemFont" id="SystemFont_8abuy"]
-font_names = PackedStringArray("Lucida Sans Typewriter")
-generate_mipmaps = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dkott"]
-bg_color = Color(0.34968925, 0.34968933, 0.3496893, 0.25882354)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-shadow_size = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wasvt"]
-draw_center = false
-border_width_left = 1
-border_width_right = 1
-border_width_bottom = 3
-border_color = Color(0.8, 0.8, 0.8, 0.63529414)
-border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-expand_margin_left = 4.0
-expand_margin_right = 4.0
-expand_margin_bottom = 4.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w638y"]
-bg_color = Color(0.8324741, 0.8324741, 0.832474, 0.25882354)
-border_width_bottom = 2
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvxtv"]
-bg_color = Color(0.7017301, 0.7017301, 0.7017301, 0.25882354)
-border_width_bottom = 1
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5fp7"]
-bg_color = Color(1, 1, 1, 0.93333334)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-shadow_size = 1
-shadow_offset = Vector2(0, 1)
-
-[sub_resource type="Gradient" id="Gradient_8abuy"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.051805336)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nvxtv"]
-gradient = SubResource("Gradient_8abuy")
-width = 16
-height = 16
-fill_from = Vector2(0, 1)
-fill_to = Vector2(0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8abuy"]
-gradient = SubResource("Gradient_8abuy")
-width = 20
-height = 20
-fill_from = Vector2(0, 1)
-fill_to = Vector2(0, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5qv2"]
-bg_color = Color(0.575848, 0.8565228, 0.81014466, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtk23"]
-bg_color = Color(0.44650003, 0.95, 0.86608326, 1)
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_8abuy"]
-color = Color(0.2046, 0.2882, 0.33, 1)
-thickness = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8abuy"]
-bg_color = Color(0.12460001, 0.119, 0.14, 0.7058824)
-border_width_left = 50
-border_width_right = 50
-border_color = Color(0.32933334, 0.312, 0.52, 0)
-border_blend = true
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
-corner_detail = 10
-
-[sub_resource type="Theme" id="Theme_nvxtv"]
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
-Button/colors/font_hover_color = Color(1, 1, 1, 1)
-Button/colors/font_hover_pressed_color = Color(0.47202516, 0.47202522, 0.47202516, 1)
-Button/colors/font_pressed_color = Color(0, 0, 0, 1)
-Button/constants/outline_size = 1
-Button/font_sizes/font_size = 18
-Button/fonts/font = SubResource("SystemFont_8abuy")
-Button/styles/disabled = SubResource("StyleBoxFlat_dkott")
-Button/styles/focus = SubResource("StyleBoxFlat_wasvt")
-Button/styles/hover = SubResource("StyleBoxFlat_w638y")
-Button/styles/normal = SubResource("StyleBoxFlat_nvxtv")
-Button/styles/pressed = SubResource("StyleBoxFlat_c5fp7")
-HSlider/constants/tick_offset = 10
-HSlider/icons/grabber = SubResource("GradientTexture2D_nvxtv")
-HSlider/icons/grabber_disabled = null
-HSlider/icons/grabber_highlight = SubResource("GradientTexture2D_8abuy")
-HSlider/styles/grabber_area = SubResource("StyleBoxFlat_q5qv2")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_vtk23")
-HSlider/styles/slider = SubResource("StyleBoxLine_8abuy")
-Label/fonts/font = SubResource("SystemFont_8abuy")
-MarginContainer/constants/margin_bottom = 20
-MarginContainer/constants/margin_left = 40
-MarginContainer/constants/margin_right = 40
-MarginContainer/constants/margin_top = 20
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_8abuy")
 
 [sub_resource type="LabelSettings" id="LabelSettings_8abuy"]
 font_size = 19
@@ -139,7 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_nvxtv")
+theme = ExtResource("1_47yts")
 script = ExtResource("1_8abuy")
 
 [node name="BACKGROUND" type="TextureRect" parent="."]

@@ -1,6 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cblo8m3itchq8"]
+[gd_scene load_steps=11 format=3 uid="uid://cblo8m3itchq8"]
 
 [ext_resource type="Script" uid="uid://7jp87884qqhb" path="res://scripts/main.gd" id="1_wm5da"]
+[ext_resource type="Texture2D" uid="uid://dvce71tg12x60" path="res://assets/icons/music_3.png" id="2_jyhfs"]
+[ext_resource type="Script" uid="uid://cmch24nlv3bqo" path="res://scripts/music/ui_music_control.gd" id="2_tbgi4"]
+[ext_resource type="Theme" uid="uid://bbqndpj4wq337" path="res://scenes/ui/ui_music_theme.tres" id="2_tefeu"]
+[ext_resource type="Texture2D" uid="uid://c0xclbkkcp8od" path="res://assets/icons/music_2.png" id="3_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://cvxl0xc0h1p1a" path="res://assets/icons/music_1.png" id="4_tefeu"]
 
 [sub_resource type="Gradient" id="Gradient_o5qli"]
 interpolation_mode = 2
@@ -16,6 +21,15 @@ fill_to = Vector2(0.7307692, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_o5qli"]
 font_size = 72
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_o6xl0"]
+frames = 3
+speed_scale = 4.0
+frame_0/texture = ExtResource("2_jyhfs")
+frame_1/texture = ExtResource("3_tbgi4")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("4_tefeu")
+frame_2/duration = 1.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_wm5da")
@@ -73,3 +87,143 @@ layout_mode = 2
 [node name="AnimatedProgressBar" type="ProgressBar" parent="SplashScreen/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="UIMusicCanvasLayer" type="CanvasLayer" parent="."]
+layer = 99
+
+[node name="UIMusicControl" type="Control" parent="UIMusicCanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_tefeu")
+script = ExtResource("2_tbgi4")
+
+[node name="MusicButton" type="TextureButton" parent="UIMusicCanvasLayer/UIMusicControl"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = SubResource("AnimatedTexture_o6xl0")
+texture_pressed = SubResource("AnimatedTexture_o6xl0")
+texture_hover = SubResource("AnimatedTexture_o6xl0")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="MusicOptionsPanel" type="PanelContainer" parent="UIMusicCanvasLayer/UIMusicControl"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="CloseWindowButton" type="Button" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="WindowTitleLabel" type="Label" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Music Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolumeHBoxContainer" type="HBoxContainer" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/VolumeHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_stretch_ratio = 0.5
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeHSlider" type="HSlider" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/VolumeHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 80.0
+rounded = true
+tick_count = 11
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="VolumePercentageLabel" type="Label" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/VolumeHBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "80%"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TrackSelectMenuButton" type="MenuButton" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Play track..."
+flat = false
+
+[node name="PlaybackHBoxContainer" type="HBoxContainer" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/PlaybackHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Continuous playback:"
+
+[node name="ContinuousPlaybackCheckBox" type="CheckBox" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/PlaybackHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "(off)"
+
+[node name="TracksItemList" type="ItemList" parent="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+select_mode = 2
+allow_search = false
+auto_height = true
+
+[connection signal="pressed" from="UIMusicCanvasLayer/UIMusicControl/MusicButton" to="UIMusicCanvasLayer/UIMusicControl" method="_on_music_button_pressed"]
+[connection signal="pressed" from="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/CloseWindowButton" to="UIMusicCanvasLayer/UIMusicControl" method="_on_close_window_button_pressed"]
+[connection signal="drag_ended" from="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/VolumeHBoxContainer/VolumeHSlider" to="UIMusicCanvasLayer/UIMusicControl" method="_on_volume_h_slider_drag_ended"]
+[connection signal="value_changed" from="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/VolumeHBoxContainer/VolumeHSlider" to="UIMusicCanvasLayer/UIMusicControl" method="_on_volume_h_slider_value_changed"]
+[connection signal="toggled" from="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/PlaybackHBoxContainer/ContinuousPlaybackCheckBox" to="UIMusicCanvasLayer/UIMusicControl" method="_on_continuous_playback_check_box_toggled"]
+[connection signal="multi_selected" from="UIMusicCanvasLayer/UIMusicControl/MusicOptionsPanel/MarginContainer/VBoxContainer/TracksItemList" to="UIMusicCanvasLayer/UIMusicControl" method="_on_tracks_item_list_multi_selected"]

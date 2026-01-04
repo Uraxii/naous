@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=3 format=3 uid="uid://bcpglwarj06jc"]
+
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="1_0lbrw"]
+[ext_resource type="AudioStream" uid="uid://b37jnaw6amy31" path="res://assets/music/track_05/Naous_Track_5_complete.ogg" id="1_we1jd"]
+
+[resource]
+script = ExtResource("1_0lbrw")
+file = ExtResource("1_we1jd")
+title = "Coalescent Discoveries"
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

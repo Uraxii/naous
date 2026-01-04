@@ -11,7 +11,7 @@ class_name DynamicMusicManager extends Node
 ## Audio players are created and destroyed(? TODO) automatically when needed,
 
 const BUS_NAME:StringName = &"Music"
-## This is their position in the mixer effect stack. Ensure the tracks align.
+## CRITICAL This is their position in the mixer effect stack. Ensure the tracks are in this order.
 enum FX {
 	Attenuation = 0,
 	BandPass = 1,
@@ -33,9 +33,10 @@ class FXBaselines:
 @export var tracks:Array[DynamicMusicTrack]
 
 @export_group("Behavior")
+@export var force_single_track_playback: bool = true ## Simplifies handling song changes, disable for more control
+@export var continuous_playback: bool = false
 @export_range(0.1, 10.0, 0.1, "or_greater", "hide_slider") var minimum_transition_time:float = 0.1
 @export_range(0.1, 30.0, 0.1, "or_greater", "hide_slider") var default_transition_time:float = 5.0
-
 
 ## Cached integer for the index of the Music bus in [AudioServer].
 var music_bus_idx:int:
@@ -90,6 +91,9 @@ var band_pass_reset_timer: Tween
 
 
 #region Virtuals
+func _ready() -> void:
+	assert(get_bus_idx() != -1, 'Missing a "%s" bus in the current audio mixer bus!' % [BUS_NAME])
+
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		pass
@@ -362,6 +366,13 @@ func get_audio_players() -> Array[AudioStreamPlayer]:
 	array.append_array(positional_root.get_children())
 	return array
 	
+func stop_all_players(and_free_instances:bool = false) -> void:
+	for player in get_audio_players():
+		player.stop()
+		
+	if and_free_instances:
+		clear_all_stopped_tracks()
+	
 func clear_all_stopped_tracks() -> void:
 	for player:AudioStreamPlayer in get_audio_players():
 		if not player.has_stream_playback():
@@ -369,6 +380,11 @@ func clear_all_stopped_tracks() -> void:
 
 ## You can call this 
 func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
+	if force_single_track_playback:
+		for _track in tracks:
+			if _track.is_playing:
+				stop_track(_track)
+	
 	track.is_playing = true
 	var player = get_player(track)
 	player.play()

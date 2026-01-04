@@ -27,7 +27,7 @@ func _check_physics_body_is_local_player_instance(body: Node3D) -> bool:
 			if body.entity is Player:
 				if body.entity.is_client:
 					# It's the player
-					print_debug("DynamicMusicArea detected local Player")
+					print_debug("DynamicMusicArea detected local Player: %s" % [track.title if track else "null"])
 					return true
 	return false
 

@@ -14,6 +14,10 @@ class_name DynamicMusicTrack extends Resource
 		else:
 			return title
 
+## If true, it will be played as part of "Continuous Play" when enabled in the UI music options.
+## See [member DynamicMusicManager.continous_playback].
+@export var include_in_continuous_playlist: bool = true
+
 ## Tempo; Beats per minute.
 @export var bpm:int ## EXPERIMENTAL
 

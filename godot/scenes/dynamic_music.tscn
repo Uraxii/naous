@@ -1,17 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgl2tc7u5oid2"]
+[gd_scene load_steps=10 format=3 uid="uid://dgl2tc7u5oid2"]
 
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_xno0y"]
 [ext_resource type="Resource" uid="uid://e26byi4f045n" path="res://assets/music/music-01.tres" id="3_wr1r5"]
-[ext_resource type="AudioStream" uid="uid://psvgua4141k" path="res://assets/music/track_03/Ambivalent Fellow - Complete.mp3" id="4_02qho"]
+[ext_resource type="Resource" uid="uid://bay64fi84hggh" path="res://assets/music/music-03.tres" id="4_ltqrd"]
+[ext_resource type="Resource" uid="uid://brq7gfor30m8x" path="res://assets/music/music-02.tres" id="4_pqu1w"]
 [ext_resource type="Resource" uid="uid://dbkj5mkwehrw4" path="res://assets/music/music-04.tres" id="5_ltqrd"]
+[ext_resource type="Resource" uid="uid://bcpglwarj06jc" path="res://assets/music/music-05.tres" id="7_3sdwi"]
+[ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="7_fe71g"]
 [ext_resource type="Script" uid="uid://chopagi41a16x" path="res://scripts/music/dynamic_music.gd" id="15_3ovdk"]
 [ext_resource type="AudioStream" uid="uid://d1mxe5jdtpok0" path="res://assets/music/track_04/Combat.ogg" id="16_o8nnl"]
-
-[sub_resource type="Resource" id="Resource_ltqrd"]
-script = ExtResource("2_xno0y")
-file = ExtResource("4_02qho")
-title = "Ambivalence"
-metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
 
 [node name="DynamicMusic" type="Node" node_paths=PackedStringArray("non_positional_root", "positional_root", "proto_non_positional_player", "proto_positional_player")]
 script = ExtResource("15_3ovdk")
@@ -19,7 +16,7 @@ non_positional_root = NodePath("NonPositional")
 positional_root = NodePath("Positional")
 proto_non_positional_player = NodePath("NonPositionalPrototype")
 proto_positional_player = NodePath("PositionalPrototype")
-tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), SubResource("Resource_ltqrd"), ExtResource("5_ltqrd")])
+tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), ExtResource("4_pqu1w"), ExtResource("4_ltqrd"), ExtResource("5_ltqrd"), ExtResource("7_3sdwi"), ExtResource("7_fe71g")])
 
 [node name="NonPositionalPrototype" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_o8nnl")

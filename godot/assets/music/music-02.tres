@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=3 format=3 uid="uid://brq7gfor30m8x"]
+
+[ext_resource type="AudioStream" uid="uid://c7pak6cxivm34" path="res://assets/music/track_02/Naous_track_2.mp3" id="1_nj8dn"]
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="1_wmeq0"]
+
+[resource]
+script = ExtResource("1_wmeq0")
+file = ExtResource("1_nj8dn")
+title = "Into Oasis"
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

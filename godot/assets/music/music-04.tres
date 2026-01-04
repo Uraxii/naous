@@ -32,6 +32,7 @@ stream_7/volume = 0.0
 [resource]
 script = ExtResource("8_2u17i")
 file = SubResource("AudioStreamSynchronized_aadet")
-title = "Combat"
+title = "Adverse Entity"
+include_in_continuous_playlist = false
 use_intensity = true
 metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
