@@ -1,10 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://fkfyhnng56ic"]
+[gd_scene load_steps=19 format=3 uid="uid://fkfyhnng56ic"]
 
 [ext_resource type="Script" uid="uid://c8vuvxm8pbrf2" path="res://scripts/music/dynamic_music_test_scene.gd" id="1_8abuy"]
-[ext_resource type="PackedScene" uid="uid://dgl2tc7u5oid2" path="res://scenes/dynamic_music.tscn" id="2_nvxtv"]
-[ext_resource type="AudioStream" uid="uid://htobeesip2qa" path="res://assets/music/track_03/Ambivalent Fellow - Track 1.ogg" id="3_w638y"]
-[ext_resource type="AudioStream" uid="uid://by4la1ljato1d" path="res://assets/music/track_03/Ambivalent Fellow - Track 3.ogg" id="4_wasvt"]
-[ext_resource type="AudioStream" uid="uid://48u8uru081xt" path="res://assets/music/track_03/Ambivalent Fellow - Track 5.ogg" id="5_c5fp7"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="6_nvxtv"]
 
 [sub_resource type="SystemFont" id="SystemFont_8abuy"]
@@ -130,15 +126,6 @@ MarginContainer/constants/margin_right = 40
 MarginContainer/constants/margin_top = 20
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_8abuy")
 
-[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_vqrw5"]
-stream_count = 3
-stream_0/stream = ExtResource("3_w638y")
-stream_0/volume = 0.0
-stream_1/stream = ExtResource("4_wasvt")
-stream_1/volume = 0.0
-stream_2/stream = ExtResource("5_c5fp7")
-stream_2/volume = 0.0
-
 [sub_resource type="LabelSettings" id="LabelSettings_8abuy"]
 font_size = 19
 
@@ -154,12 +141,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_nvxtv")
 script = ExtResource("1_8abuy")
-
-[node name="DynamicMusic" parent="." instance=ExtResource("2_nvxtv")]
-
-[node name="SynchronizedPrototype" type="AudioStreamPlayer" parent="DynamicMusic"]
-stream = SubResource("AudioStreamSynchronized_vqrw5")
-bus = &"Music"
 
 [node name="BACKGROUND" type="TextureRect" parent="."]
 layout_mode = 1
@@ -331,5 +312,3 @@ skeleton = NodePath("../..")
 [connection signal="pressed" from="Controls/HBoxContainer/VBoxContainer/Controller/VBoxContainer/StartStop/StartPlayback" to="." method="_on_start_playback_pressed"]
 [connection signal="drag_ended" from="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer/MarginContainer/HBoxContainer/IntensityHSlider" to="." method="_on_intensity_h_slider_drag_ended"]
 [connection signal="value_changed" from="Controls/HBoxContainer/VBoxContainer2/IntensityWindow/VBoxContainer/MarginContainer/HBoxContainer/IntensityHSlider" to="." method="_on_intensity_h_slider_value_changed"]
-
-[editable path="DynamicMusic"]
