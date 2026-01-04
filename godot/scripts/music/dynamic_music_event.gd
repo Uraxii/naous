@@ -41,28 +41,28 @@ enum MODES {
 
 
 func activate() -> void:
-	if duck_enabled: Music.attenuate(duck_volume, duck_transitions.transition_in)
-	if hs_enabled: Music.high_shelf(hs_frequency, hs_gain, hs_transitions.transition_in)
-	if ls_enabled: Music.low_shelf(ls_frequency, ls_gain, ls_transitions.transition_in)
-	if bp_enabled: Music.band_pass(bp_frequency, bp_resonance, bp_transitions.transition_in)
+	if duck_enabled: Globals.music.attenuate(duck_volume, duck_transitions.transition_in)
+	if hs_enabled: Globals.music.high_shelf(hs_frequency, hs_gain, hs_transitions.transition_in)
+	if ls_enabled: Globals.music.low_shelf(ls_frequency, ls_gain, ls_transitions.transition_in)
+	if bp_enabled: Globals.music.band_pass(bp_frequency, bp_resonance, bp_transitions.transition_in)
 	
 	if mode == MODES.DURATION:
-		if duck_enabled: Music.timed_reset(
+		if duck_enabled: Globals.music.timed_reset(
 			DynamicMusicManager.FX.Attenuation,
 			duck_transitions.duration,
 			duck_transitions.transition_out
 			)
-		if hs_enabled: Music.timed_reset(
+		if hs_enabled: Globals.music.timed_reset(
 			DynamicMusicManager.FX.HighShelf,
 			hs_transitions.duration,
 			hs_transitions.transition_out
 			)
-		if ls_enabled: Music.timed_reset(
+		if ls_enabled: Globals.music.timed_reset(
 			DynamicMusicManager.FX.LowShelf,
 			ls_transitions.duration,
 			ls_transitions.transition_out
 			)
-		if bp_enabled: Music.timed_reset(
+		if bp_enabled: Globals.music.timed_reset(
 			DynamicMusicManager.FX.BandPass,
 			bp_transitions.duration,
 			bp_transitions.transition_out
@@ -70,19 +70,19 @@ func activate() -> void:
 	activated.emit()
 
 func deactivate() -> void:
-	if duck_enabled: Music.reset_fx(
+	if duck_enabled: Globals.music.reset_fx(
 		DynamicMusicManager.FX.Attenuation,
 		duck_transitions.transition_out
 		)
-	if hs_enabled: Music.reset_fx(
+	if hs_enabled: Globals.music.reset_fx(
 		DynamicMusicManager.FX.HighShelf,
 		hs_transitions.transition_out
 		)
-	if ls_enabled: Music.reset_fx(
+	if ls_enabled: Globals.music.reset_fx(
 		DynamicMusicManager.FX.LowShelf,
 		ls_transitions.transition_out
 		)
-	if bp_enabled: Music.reset_fx(
+	if bp_enabled: Globals.music.reset_fx(
 		DynamicMusicManager.FX.BandPass,
 		bp_transitions.transition_out
 		)
