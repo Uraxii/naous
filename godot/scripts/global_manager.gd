@@ -14,6 +14,7 @@ var entities:       EntityManager
 var targeting:      TargetingManager
 var camera:         CameraManager
 var casting:        CastManager
+var music:          DynamicMusicManager
 
 
 func new_global_script(node_name: String, type: GDScript) -> Node:
@@ -43,6 +44,7 @@ func create_globals() -> void:
     targeting = new_global_script("Targeting", TargetingManager)
     camera = new_global_scene("Camera", preload("uid://dajlyyo0adshc"))
     casting = new_global_script("Casting", CastManager)
+    music = new_global_scene("Music", preload("uid://dgl2tc7u5oid2"))
 
 
 func _ready():
