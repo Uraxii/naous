@@ -24,8 +24,8 @@ var selected_track_index:int = 0:
 
 func _ready() -> void:
 	if not Globals.music:
-		push_error("Couldn't find instance of DynamicMusic. Were Globals skipped?")
-		push_warning("Forcing GlobalManager to instance DynamicMusic scene...")
+		push_error("Couldn't find instance of DynamicMusicManager. Were Globals skipped?")
+		push_warning("Forcing GlobalManager to instance DynamicMusicManager scene...")
 		## HACK
 		Globals.music = Globals.new_global_scene("Music", preload("uid://dgl2tc7u5oid2"))
 	

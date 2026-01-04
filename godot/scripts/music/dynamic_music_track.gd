@@ -1,7 +1,7 @@
 class_name DynamicMusicTrack extends Resource
 
 ## An audio file plus configurable properties used by the
-## [DynamicMusic] system.
+## [DynamicMusicManager] system.
 
 ## Audio resource.
 @export var file:AudioStream
@@ -34,7 +34,7 @@ class_name DynamicMusicTrack extends Resource
 
 @export_group("Intensities")
 ## React to changes in intensity.
-## See [method do_intensity_process] and [DynamicMusic] _process().
+## See [method do_intensity_process] and [DynamicMusicManager] _process().
 @export var use_intensity: bool = false
 @export var intensity:int = 100:
 	set(value):
@@ -42,7 +42,7 @@ class_name DynamicMusicTrack extends Resource
 		#prnt("Intensity changed to %d" % [intensity])
 # more foo
 
-var is_playing:bool = false
+var is_playing:bool = false ## Set by [DynamicMusicManager] do NOT set manually.
 
 func _init() -> void: prnt("Loaded %s." % [title])
 
@@ -80,3 +80,16 @@ func do_intensity_process(stream: AudioStream) -> void:
 
 func hundred_to_linear(integer: int) -> float:
 	return integer / 100.0
+
+## Helper methods that point to [DynamicMusicManager].
+func play() -> void:
+	if not Globals: return
+	if not Globals.music: return
+	
+	Globals.music.start_track(self)
+	
+func stop() -> void:
+	if not Globals: return
+	if not Globals.music: return
+	
+	Globals.music.stop_track(self)
