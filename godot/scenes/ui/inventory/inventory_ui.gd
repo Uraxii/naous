@@ -194,13 +194,13 @@ func show_tooltip_for_item(item: Item) -> void:
     item_tooltip_popup.set_item(item)
     
     if not item_tooltip_popup.visible:
-        print("Showing item tooltip!")
+        #print("Showing item tooltip!")
         item_tooltip_popup.show()
 
 
 func hide_tooltip() -> void:
     if item_tooltip_popup.visible:
-        print("Hiding item tooltip!")
+        #print("Hiding item tooltip!")
         item_tooltip_popup.hide()
 
 

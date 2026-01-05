@@ -21,9 +21,7 @@ func set_item_content(item: Item) -> void:
 
 
 func get_item_type_display(item: Item) -> String:
-    if item is Item:
-        return "Item"
-    elif item is EchoItem:
+    if item is EchoItem:
         return "Echo"
     elif item is MaskItem:
         return "Mask"
@@ -35,5 +33,7 @@ func get_item_type_display(item: Item) -> String:
         return "Torso"
     elif item is LegsItem:
         return "Legs"
+    elif item is Item: # Check this base class last
+        return "Item"
     
     return "UNKNOWN"
