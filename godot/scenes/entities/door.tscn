@@ -53,7 +53,7 @@ script = ExtResource("2_de05j")
 script = ExtResource("3_y1est")
 entity = NodePath("../..")
 requirements = Array[ExtResource("5_f8c16")]([SubResource("Resource_5d2xg")])
-prompt_text = "Definitely a Door"
+prompt_text = "Open"
 time_to_complete = 0.0
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
 

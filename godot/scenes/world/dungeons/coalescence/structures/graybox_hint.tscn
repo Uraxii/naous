@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://deb4oma4divte"]
+[gd_scene load_steps=2 format=3 uid="uid://deb4oma4divte"]
+
+[ext_resource type="Script" uid="uid://ch73dv3s5rf75" path="res://scripts/ui/graybox_hint.gd" id="1_0ay0l"]
 
 [node name="GrayboxHint" type="Label3D"]
 text = "Graybox Hint"
@@ -7,3 +9,4 @@ outline_size = 92
 uppercase = true
 autowrap_mode = 2
 width = 1500.0
+script = ExtResource("1_0ay0l")

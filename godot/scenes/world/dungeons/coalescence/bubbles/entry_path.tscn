@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cx54j3yuqwncx"]
+[gd_scene load_steps=32 format=3 uid="uid://cx54j3yuqwncx"]
 
 [ext_resource type="Script" uid="uid://nwrhhefs20xd" path="res://scenes/world/dungeons/coalescence/bubbles/entry_path.gd" id="1_1esqk"]
 [ext_resource type="Material" uid="uid://bdqiuk1jp6gfi" path="res://assets/materials/ground - rocky - huge.tres" id="1_ej2el"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ci8ii42pte78r" path="res://assets/prefabs/small_rock_cluster.tscn" id="8_h3w75"]
 [ext_resource type="PackedScene" uid="uid://crvijhkrifgtp" path="res://assets/prefabs/grass_cluster_a.tscn" id="11_vkb28"]
 [ext_resource type="PackedScene" uid="uid://b10ssru87qgh0" path="res://assets/prefabs/tree_red.tscn" id="12_nbdce"]
+[ext_resource type="Script" uid="uid://ch73dv3s5rf75" path="res://scripts/ui/graybox_hint.gd" id="15_ve43y"]
 [ext_resource type="PackedScene" uid="uid://tyue713y5cxv" path="res://assets/prefabs/crate.tscn" id="16_dhkxi"]
 [ext_resource type="PackedScene" uid="uid://cayqs5l0qo416" path="res://assets/prefabs/wavy_flag.tscn" id="17_1i1ah"]
 [ext_resource type="PackedScene" uid="uid://cwkqp1k05xvps" path="res://assets/prefabs/wall_massive.tscn" id="18_npye5"]
@@ -373,6 +374,8 @@ outline_size = 92
 uppercase = true
 autowrap_mode = 2
 width = 1500.0
+script = ExtResource("15_ve43y")
+metadata/_custom_type_script = "uid://ch73dv3s5rf75"
 
 [node name="LoreHint" type="Label3D" parent="."]
 transform = Transform3D(0.15457234, 0, 0.9879814, 0, 1, 0, -0.9879814, 0, 0.15457234, -15.792407, 2.4215503, 9.248089)
@@ -382,6 +385,8 @@ outline_size = 92
 uppercase = true
 autowrap_mode = 2
 width = 1500.0
+script = ExtResource("15_ve43y")
+metadata/_custom_type_script = "uid://ch73dv3s5rf75"
 
 [node name="EmptyHint" type="Label3D" parent="."]
 transform = Transform3D(0.6293476, 0, -0.7771238, 0, 1, 0, 0.7771238, 0, 0.6293476, 17.603836, 2.6570363, 36.110867)
@@ -391,6 +396,8 @@ outline_size = 92
 uppercase = true
 autowrap_mode = 2
 width = 1500.0
+script = ExtResource("15_ve43y")
+metadata/_custom_type_script = "uid://ch73dv3s5rf75"
 
 [node name="EmptyHint2" type="Label3D" parent="."]
 transform = Transform3D(0.39613873, 0, -0.9181906, 0, 1, 0, 0.9181906, 0, 0.39613873, 17.378885, 2.6570373, 16.606773)
@@ -400,6 +407,8 @@ outline_size = 92
 uppercase = true
 autowrap_mode = 2
 width = 1500.0
+script = ExtResource("15_ve43y")
+metadata/_custom_type_script = "uid://ch73dv3s5rf75"
 
 [node name="tree-red" parent="." instance=ExtResource("12_nbdce")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.518711, 0.98181725, 42.112915)
