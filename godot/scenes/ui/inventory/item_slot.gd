@@ -98,6 +98,12 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
         #print("Item slot dropping data")
         received_item.emit(data)
 #endregion
+func _on_mouse_entered() -> void:
+    grab_focus()
+
+
+func _on_mouse_exited() -> void:
+    lost_focus()
 
 
 func _ready() -> void:
@@ -107,8 +113,8 @@ func _ready() -> void:
         item_icon = new_texture_rect
     
     focus_entered.connect(gained_focus)
-    mouse_entered.connect(grab_focus)
-    mouse_exited.connect(lost_focus)
+    mouse_entered.connect(_on_mouse_entered)
+    mouse_exited.connect(_on_mouse_exited)
 
 
 func _gui_input(event: InputEvent) -> void:
