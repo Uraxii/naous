@@ -42,6 +42,7 @@ enum SEQ {
     ESCAPE
 }
 
+@onready var tutorial_music: TutorialMusic = %TutorialMusic
 @onready var player: Player = %Player
 @onready var hud_layer: HUDLayer = %HUDLayer
 @onready var screen_overlay: ScreenOverlayLayer = %ScreenOverlayLayer
@@ -61,6 +62,7 @@ func start() -> void:
 @onready var starter_gear_pickup: LootPickup = %StarterGearPickup
 func beginning() -> void:
     print("STARTING BEGINNING SEQUENCE")
+    tutorial_music.play_background()
     current_sequence = SEQ.BEGINNING
     # 1. Set camera to black, prevent player control
     screen_overlay.hide_screen()
@@ -194,6 +196,7 @@ func _on_barricade_health_changed(new: float, _old: float) -> void:
 @onready var first_enemy_initial: Marker3D = %FirstEnemyInitial
 func first_combat() -> void:
     Globals.logger.debug("STARTING FIRST COMBAT SEQUENCE")
+    tutorial_music.play_combat()
     current_sequence = SEQ.FIRST_COMBAT
     # 1. Start "cutscene" where enemy bursts through boulder (potentially damaging the player slightly - this ensures they have health to recover with the upcoming heal ability)
     _play_first_combat_enemy_reveal()
@@ -244,6 +247,7 @@ func _on_first_enemy_defeated() -> void:
 const HEAL_ECHO = preload("uid://dqwvsj4f1p0hd")
 func heal_tutorial() -> void:
     Globals.logger.debug("STARTING HEAL SEQUENCE")
+    tutorial_music.play_explore()
     current_sequence = SEQ.HEAL_TUTORIAL
     # 1. Enemy dropped a new Echo for self-healing
     # 2. Prompt player to pick up Echo
@@ -336,6 +340,7 @@ func _update_plaza_objective_text() -> void:
 
 
 func _plaza_enemy_defeated(enemy: BaseEnemy) -> void:
+    tutorial_music.play_explore()
     if enemies_to_defeat.has(enemy.get_instance_id()):
         enemies_defeated.push_back(enemy.get_instance_id())
         _update_plaza_objective_text()
@@ -432,6 +437,7 @@ var horde_enemies_to_defeat: Array
 var horde_enemies_defeated: Array
 func horde_fight() -> void:
     Globals.logger.debug("STARTING HORDE SEQUENCE")
+    tutorial_music.play_boss_combat()
     current_sequence = SEQ.HORDE_FIGHT
     # 1. Show "cutscene" of roars and rumbles
     # 2. Spawn some enemies and have them jump into the scene
@@ -566,6 +572,7 @@ func _on_exit_zone_body_entered(body: Node3D) -> void:
 func _on_tutorial_fade_out() -> void:
     # TODO: Do something that isn't just softlocking the player in the void :D
     Globals.logger.debug("Tutorial Complete!")
+	# TODO Switch to the Credits flyover scene!
 #endregion ESCAPE
 #endregion Sequence Functions
 
