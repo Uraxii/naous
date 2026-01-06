@@ -379,7 +379,7 @@ func clear_all_stopped_tracks() -> void:
 			player.queue_free()
 
 ## You can call this 
-func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
+func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioStreamPlayer:
 	if force_single_track_playback:
 		for _track in tracks:
 			if _track.is_playing:
@@ -390,7 +390,7 @@ func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	player.play()
 	
 	if not player.finished.is_connected(_on_track_finished):
-		player.finished.connect(_on_track_finished.bind(track))
+		player.finished.connect(_on_track_finished.bind(track, force_looping))
 	
 	if track.trans_start_fade_in:
 		## TODO
@@ -420,35 +420,40 @@ func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 		
 	return player
 
-func _on_track_finished(track: DynamicMusicTrack) -> void:
-	track.is_playing = false
+func _on_track_finished(track: DynamicMusicTrack, loop:bool = false) -> void:
+	if loop:
+		# Start the track again
+		Globals.music.start_track(track)
+	else:
 	
-	if continuous_playback:
-		## get the next track
-		var next_track: DynamicMusicTrack = null
-		var t_index: int = tracks.find(track)
-		var iterations: int = 0
-		while next_track == null:
-			
-			## Prevent infinite loop
-			iterations += 1
-			if iterations > tracks.size() * 2:
-				return
-			
-			if t_index < 0:
-				t_index = 0
-			else:
-				t_index += 1
-				
-			var _track = tracks.get(t_index)
-			if _track != null:
-				if _track.include_in_continuous_playlist:
-					next_track = _track
-				else:
-					continue
-			else:
-				## Out of bounds
-				t_index = -1
-				continue
+		track.is_playing = false
 		
-		Globals.music.start_track(next_track)
+		if continuous_playback:
+			## get the next track
+			var next_track: DynamicMusicTrack = null
+			var t_index: int = tracks.find(track)
+			var iterations: int = 0
+			while next_track == null:
+				
+				## Prevent infinite loop
+				iterations += 1
+				if iterations > tracks.size() * 2:
+					return
+				
+				if t_index < 0:
+					t_index = 0
+				else:
+					t_index += 1
+					
+				var _track = tracks.get(t_index)
+				if _track != null:
+					if _track.include_in_continuous_playlist:
+						next_track = _track
+					else:
+						continue
+				else:
+					## Out of bounds
+					t_index = -1
+					continue
+			
+			Globals.music.start_track(next_track)

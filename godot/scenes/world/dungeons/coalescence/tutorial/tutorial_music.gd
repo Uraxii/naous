@@ -22,15 +22,15 @@ func play_combat() -> void:
 
 
 func play_background() -> void:
-    Globals.music.start_track(AMBIVALENT_FELLOW)
+    Globals.music.start_track(AMBIVALENT_FELLOW, true)
 
 
 func play_explore() -> void:
-    Globals.music.start_track(INTO_OASIS)
+    Globals.music.start_track(INTO_OASIS) ## Was thinking Coalescent Discoveries might fit better
 
 
 func play_boss_combat() -> void:
-    Globals.music.start_track(COALESCENT_DISCOVERIES)
+    Globals.music.start_track(COALESCENT_DISCOVERIES) ## Not really a combat track IMO
     
 
 func play_finale() -> void:
