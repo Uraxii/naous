@@ -1,27 +1,52 @@
 class_name Entity extends Node3D
 
-#region Variables
+enum EntityType {
+    BASE,
+    PLAYER,
+    NPC,
+    PROJECTILE,
+}
+
 signal change_control(is_local: bool)
 
+var type: EntityType:
+    get = get_type
+
+func get_type() -> EntityType:
+    push_warning("get_type is unimplemented.")
+    return EntityType.BASE
+
+
+@export var data := EntityData.new()
+
 @export_category("Components")
-@export var components:   ComponentManager
-@export var health:       HealthComponent
-@export var speed:        StatComponent
-@export var gravity:      StatComponent
-@export var jump_force:   StatComponent
-@export var move:         ComponentMove
-@export var body:         Node3D
-@export var spellbook:    ComponentSpellbook
-@export var inventory:    Node
-@export var interaction:  InteractionComponent
-@export var targeting:    TargetingSystem
+@export var components:     ComponentManager
+@export var anim:           ComponentAnimator
+@export var stats:          ComponentStatManager
+@export var health:         ComponentHealth
+@export var speed:          ComponentStat
+@export var gravity:        ComponentStat
+@export var jump_force:     ComponentStat
+@export var move:           ComponentMove
+@export var body:           Node3D
+@export var spellbook:      ComponentSpellbook
+@export var inventory:      InventoryComponent
+@export var interaction:    InteractionComponent
+@export var targetable:     Targetable
+@export var targeting:      TargetingSystem
 @export_category("Runtime Values")
 @export var id := 0
 @export var target_id := 0:
     set = set_target_id
 
-@onready var entities:  EntityManager   = Globals.entities
-@onready var signals:   SignalBus       = Globals.signal_bus
+@onready var logger     := Globals.logger
+@onready var entities   := Globals.entities
+@onready var signals    := Globals.signal_bus
+
+var display_name := "{ NAME }"
+
+var target: Entity:
+    get: return entities.find(target_id)
 
 var is_local_owner: bool:
     get: return transform_sync.is_multiplayer_authority()
@@ -36,7 +61,6 @@ var transform_sync: MultiplayerSynchronizer:
         return _transform_sync
 
 var stored_authority := Globals.SERVER_ID
-#endregion
 
 
 @rpc("call_local")
@@ -63,8 +87,12 @@ func _check_local_authority() -> void:
 
     change_control.emit(is_local)
 
+    # TODO: Add "and not multiplayer.is_server()" check here in the future
+    # Currently this appears to always be 'true' by default
     if is_local:
         signals.control_entity.emit(self)
+        InstanceAPI.local_player.entity = self
+        logger.debug("I am %s playing as %s" % [name, display_name])
 
 
 #region AABB Helpers
@@ -93,7 +121,10 @@ func _get_local_aabb_from_instances(visual_instances: Array[VisualInstance3D]) -
 
     for visual_instance: VisualInstance3D in visual_instances:
         var instance_aabb := visual_instance.get_aabb()
-        final_aabb.merge(instance_aabb)
+        if not final_aabb.has_volume():
+            final_aabb = instance_aabb
+        else:
+            final_aabb.merge(instance_aabb)
 
     return final_aabb
 
@@ -117,29 +148,50 @@ func _get_world_transformed_aabb_from_instances(visual_instances: Array[VisualIn
 
 
 #region Components
-func hookup_components() -> void:
-    if not components: components = find_child("Components")
+func setup_components() -> void:
+    if not components:
+        components = find_child(ComponentManager.ID)
 
-    if components:
-        if not health:        health       = components.find("Health")
-        if not speed:         speed        = components.find("Speed")
-        if not gravity:       gravity      = components.find("Gravity")
-        if not jump_force:    jump_force   = components.find("JumpForce")
-        if not spellbook:     spellbook    = components.find("Spellbook")
-        if not body:          body         = components.find("Body")
-        if not move:          move         = components.find("Move")
-        if not inventory:     inventory    = components.find("Inventory")
-        if not interaction:   interaction  = components.find("Interaction")
-        if not targeting:     targeting    = components.find("TargetingSystem")
-        
-        # Component signals
-        if is_instance_valid(targeting):
-            targeting.new_target_selected.connect(_new_target_selected)
+        if not components:
+            push_warning(
+                "Unable find component manger on %s. Ensure this node exists and its name is %s" % [
+                    get_path(), ComponentManager.ID])
+            return
+
+    if not stats:
+        stats = components.find(ComponentStatManager.ID)
+    if not health:
+        health = components.find(ComponentStat.HEALTH_ID)
+    if not speed:
+        speed = components.find(ComponentStat.SPEED_ID)
+    if not gravity:
+        gravity = components.find(ComponentStat.GRAVITY_ID)
+    if not jump_force:
+        jump_force = components.find(ComponentStat.JUMP_FORCE_ID)
+    if not spellbook:
+        spellbook = components.find("Spellbook")
+    if not body:
+        body = components.find("Body")
+    if not move:
+        move = components.find("Move")
+    if not inventory:
+        inventory = components.find("Inventory")
+    if not interaction:
+        interaction = components.find("Interaction")
+    if not targetable:
+        targetable = components.find("Targetable")
+    if not targeting:
+        targeting = components.find("TargetingSystem")
+    if not anim:
+        anim = components.find("Animator")
+
+    if is_instance_valid(targeting):
+        targeting.new_target_selected.connect(_new_target_selected)
 
 
 func _new_target_selected(new_target: Targetable) -> void:
     if is_instance_valid(new_target):
-        set_target_id(new_target.get_instance_id())
+        set_target_id(new_target.entity.id)
     else:
         set_target_id(0) # Some default, adjust if needed
 #endregion
@@ -152,7 +204,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-    hookup_components()
+    setup_components()
 
     for comp: Node in components.map.values():
         if comp.has_method("set_entity"):

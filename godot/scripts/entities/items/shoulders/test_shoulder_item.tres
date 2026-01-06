@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShoulderItem" load_steps=4 format=3 uid="uid://coxn38nc7tw1d"]
+
+[ext_resource type="Script" uid="uid://vpy3jvt10vfw" path="res://scripts/entities/items/shoulders/shoulder_item.gd" id="1_boa0y"]
+[ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="1_bsdjl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jivyk"]
+atlas = ExtResource("1_bsdjl")
+region = Rect2(90.60179, 32.77121, 25.445862, 23.903687)
+
+[resource]
+script = ExtResource("1_boa0y")
+name = &"Shoulder Item"
+icon = SubResource("AtlasTexture_jivyk")
+metadata/_custom_type_script = "uid://vpy3jvt10vfw"

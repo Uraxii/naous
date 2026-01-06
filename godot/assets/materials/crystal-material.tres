@@ -1,4 +1,10 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://cuit4f8xjcn1"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cuit4f8xjcn1"]
+
+[ext_resource type="Texture2D" uid="uid://w1j2gm5b6xct" path="res://assets/textures/big-blue-crystals.png" id="1_502s6"]
+[ext_resource type="Texture2D" uid="uid://dmr6qqi24ovih" path="res://assets/textures/big-blue-crystals-normal.png" id="2_bj6ut"]
 
 [resource]
 albedo_color = Color(0.698943, 0.939972, 0.952339, 1)
+albedo_texture = ExtResource("1_502s6")
+normal_enabled = true
+normal_texture = ExtResource("2_bj6ut")

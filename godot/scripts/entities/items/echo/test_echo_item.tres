@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EchoItem" load_steps=4 format=3 uid="uid://dphpvrkpe0olg"]
+
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="1_78qt7"]
+[ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="1_qxaml"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6l6k"]
+atlas = ExtResource("1_qxaml")
+region = Rect2(57.29747, 58.25424, 13.884735, 20.587711)
+
+[resource]
+script = ExtResource("1_78qt7")
+name = &"Test Echo"
+icon = SubResource("AtlasTexture_u6l6k")
+metadata/_custom_type_script = "uid://chxnjdgyds7hd"

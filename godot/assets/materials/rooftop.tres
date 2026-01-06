@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bqh1kagd3b7wf"]
+
+[ext_resource type="Texture2D" uid="uid://b5qshmpwgr6fx" path="res://assets/materials/trim-simple.png" id="1_c3t8s"]
+
+[resource]
+depth_draw_mode = 1
+specular_mode = 2
+albedo_color = Color(0.29, 0.1972, 0.20957333, 1)
+albedo_texture = ExtResource("1_c3t8s")
+uv1_scale = Vector3(1, 8, 1)
+uv1_world_triplanar = true

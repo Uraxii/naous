@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=3 format=3 uid="uid://bay64fi84hggh"]
+
+[ext_resource type="AudioStream" uid="uid://psvgua4141k" path="res://assets/music/track_03/Ambivalent Fellow - Complete.mp3" id="1_tjxoq"]
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_fnrmy"]
+
+[resource]
+script = ExtResource("2_fnrmy")
+file = ExtResource("1_tjxoq")
+title = "Ambivalent Fellow"
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

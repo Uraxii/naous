@@ -1,5 +1,8 @@
 class_name DynamicMusicTrack extends Resource
 
+## An audio file plus configurable properties used by the
+## [DynamicMusicManager] system.
+
 ## Audio resource.
 @export var file:AudioStream
 
@@ -11,25 +14,31 @@ class_name DynamicMusicTrack extends Resource
 		else:
 			return title
 
+## If true, it will be played as part of "Continuous Play" when enabled in the UI music options.
+## See [member DynamicMusicManager.continous_playback].
+@export var include_in_continuous_playlist: bool = true
+
 ## Tempo; Beats per minute.
-@export var bpm:int
+@export var bpm:int ## EXPERIMENTAL
 
 ## Time signature.
-@export var time_signature:Vector2i = Vector2i(4,4)
+@export var time_signature:Vector2i = Vector2i(4,4) ## EXPERIMENTAL
 
 ## Name, Beat Count.
-@export var markers:Dictionary[StringName, int] = {"start": 0}
+@export var markers:Dictionary[StringName, int] = {"start": 0} ## EXPERIMENTAL
 
-@export_group("Treatment", "treat_")
+@export_group("Treatment", "treat_") ## EXPERIMENTAL
 @export var treat_positional:bool = false
 
-@export_group("Transitions", "trans_")
+@export_group("Transitions", "trans_") ## EXPERIMENTAL
 @export var trans_start_fade_in: Curve ## X is in seconds, Y is volume.
 @export var trans_end_fade_out: Curve ## X is in seconds, Y is volume.
 @export var trans_seek_crossfade_in: Curve ## X is in seconds, Y is volume.
 @export var trans_seek_crossfade_out: Curve ## X is in seconds, Y is volume.
 
 @export_group("Intensities")
+## React to changes in intensity.
+## See [method do_intensity_process] and [DynamicMusicManager] _process().
 @export var use_intensity: bool = false
 @export var intensity:int = 100:
 	set(value):
@@ -37,7 +46,7 @@ class_name DynamicMusicTrack extends Resource
 		#prnt("Intensity changed to %d" % [intensity])
 # more foo
 
-var is_playing:bool = false
+var is_playing:bool = false ## Set by [DynamicMusicManager] do NOT set manually.
 
 func _init() -> void: prnt("Loaded %s." % [title])
 
@@ -75,3 +84,16 @@ func do_intensity_process(stream: AudioStream) -> void:
 
 func hundred_to_linear(integer: int) -> float:
 	return integer / 100.0
+
+## Helper methods that point to [DynamicMusicManager].
+func play() -> void:
+	if not Globals: return
+	if not Globals.music: return
+	
+	Globals.music.start_track(self)
+	
+func stop() -> void:
+	if not Globals: return
+	if not Globals.music: return
+	
+	Globals.music.stop_track(self)

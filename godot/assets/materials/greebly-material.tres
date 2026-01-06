@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://deq4f561rx4wp"]
+
+[ext_resource type="Texture2D" uid="uid://cnenijnfd32lh" path="res://assets/textures/greebly-diffuse.png" id="1_ybjee"]
+[ext_resource type="Texture2D" uid="uid://du2snp128bqw6" path="res://assets/textures/greebly-normal.png" id="2_wy0ky"]
+
+[resource]
+cull_mode = 2
+depth_draw_mode = 1
+specular_mode = 2
+albedo_texture = ExtResource("1_ybjee")
+normal_enabled = true
+normal_texture = ExtResource("2_wy0ky")
+uv1_scale = Vector3(10, 10, 10)

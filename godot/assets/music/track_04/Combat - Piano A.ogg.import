@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://chnlxgnks6d6c"
+path="res://.godot/imported/Combat - Piano A.ogg-0416b00f6bae08b00c0c3a292ef3d634.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_04/Combat - Piano A.ogg"
+dest_files=["res://.godot/imported/Combat - Piano A.ogg-0416b00f6bae08b00c0c3a292ef3d634.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=99.0
+beat_count=144
+bar_beats=4

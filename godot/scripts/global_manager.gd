@@ -4,7 +4,8 @@ const SERVER_ID := 1
 
 var launch_args:    Dictionary
 var signal_bus:     SignalBus
-var packets:        PacketManager
+var msg_router:     MsgRouter
+var save:           SaveManager
 var logger:         Log
 var input:          InputManager
 var views:          ViewManager
@@ -14,6 +15,7 @@ var entities:       EntityManager
 var targeting:      TargetingManager
 var camera:         CameraManager
 var casting:        CastManager
+var music:          DynamicMusicManager
 
 
 func new_global_script(node_name: String, type: GDScript) -> Node:
@@ -33,8 +35,9 @@ func new_global_scene(node_name: String, scene: PackedScene) -> Node:
 func create_globals() -> void:
     # Load order matters!!!
     signal_bus = new_global_script("Signals", SignalBus)
-    packets = PacketManager.new(signal_bus)
     logger = new_global_script("Log", Log)
+    msg_router = new_global_script("MsgRouter", MsgRouter)
+    save = new_global_script("Save", SaveManager)
     input = new_global_script("Input", InputManager)
     views = new_global_script("Views", ViewManager)
     game = new_global_script("Game", GameManager)
@@ -43,9 +46,12 @@ func create_globals() -> void:
     targeting = new_global_script("Targeting", TargetingManager)
     camera = new_global_scene("Camera", preload("uid://dajlyyo0adshc"))
     casting = new_global_script("Casting", CastManager)
+    music = new_global_scene("Music", preload("uid://dgl2tc7u5oid2"))
 
 
 func _ready():
     launch_args = ArgParser.parse()
     if not launch_args.has("no-globals"):
         create_globals()
+    else:
+        print_debug("Globals skipped.")

@@ -11,9 +11,12 @@ class_name InputManager extends Node
     InputBindings.CURSOR_TARGET: signals.cursor_target,
     InputBindings.NEXT_TARGET: signals.next_target,
     InputBindings.PREVIOUS_TARGET: signals.previous_target,
+    InputBindings.TARGET_SELF: signals.target_self,
     InputBindings.SCAN_TARGET_LEFT: signals.scan_target_left,
     InputBindings.SCAN_TARGET_RIGHT: signals.scan_target_right,
     InputBindings.CANCEL_TARGET: signals.cancel_target,
+    InputBindings.OPEN_INVENTORY: signals.open_inventory,
+    InputBindings.TOGGLE_CHAT_INPUT: signals.toggle_chat_input,
     InputBindings.UI_ACCEPT: signals.ui_accept,
     InputBindings.UI_CANCEL: signals.ui_cancel,
     InputBindings.UI_TOGGLE: signals.ui_toggle,
@@ -24,8 +27,8 @@ class_name InputManager extends Node
     InputBindings.ACTION_4: signals.action_4,
 }
 
-var default_binds: InputBindings = load(
-    "res://resources/default_input_bindings.tres")
+var default_binds: InputBindings = preload(
+    "res://resources/prefs/default_input_bindings.tres")
 
 var move: Vector2:
     get: return Input.get_vector(
@@ -47,6 +50,8 @@ var was_camera_move_enabled := false
 var jump := false
 var select_location := false
 var mouse_pos_delta := Vector2.ZERO
+var capture_mouse_on_click := true:
+    set = set_mouse_capture
 #endregion
 
 
@@ -67,6 +72,7 @@ func update_binds(new_binds: InputBindings) -> void:
 func _ready() -> void:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
     update_binds(default_binds)
+    Globals.signal_bus.allow_character_control.connect(_on_allow_character_control)
 
 
 func _input(event: InputEvent) -> void:
@@ -74,10 +80,13 @@ func _input(event: InputEvent) -> void:
     var rotate_char =  Input.is_action_pressed(InputBindings.CHARACTER_ROTATE)
     var is_camera_rotating = rotate_cam or rotate_char
 
+    # TODO: Figure out way to only do this when playing.
     if was_camera_rotating and not is_camera_rotating:
-        Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-    elif not was_camera_rotating and is_camera_rotating:
-        Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+        #Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+        pass
+    elif not was_camera_rotating and is_camera_rotating and capture_mouse_on_click:
+        #Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+        pass
 
     if rotate_char and not was_character_rotating:
         signals.character_rotate_start.emit()
@@ -99,6 +108,17 @@ func _input(event: InputEvent) -> void:
     #       - eg. LT + Face buttons for a set of actions, RT + face buttons for another set
     for action in action_map.keys():
         if Input.is_action_just_pressed(action) and event.is_action(action, true):
-            lg.debug("Pressed:", action)
+            #lg.debug("Pressed:", action)
             action_map[action].emit()
+
+
+func set_mouse_capture(capture: bool) -> void:
+    capture_mouse_on_click = capture
+    # Ensure the mouse is visible and not actively captured
+    if not capture_mouse_on_click:
+        Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _on_allow_character_control(allow: bool) -> void:
+    set_mouse_capture(allow)
 #endregion

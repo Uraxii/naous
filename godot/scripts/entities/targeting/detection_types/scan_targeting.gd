@@ -13,6 +13,10 @@ func get_highest_priority_target() -> Targetable:
     var copied_targets: Array[Targetable]
     copied_targets.assign(prioritized_target_list)
     copied_targets.sort_custom(_sort_targets_by_distance_to_screen_center)
+
+    if copied_targets.size() == 0:
+        return null
+
     return copied_targets.front()
 
 

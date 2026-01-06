@@ -1,52 +1,44 @@
 class_name Main extends Node
 
-enum ServerMode {
-    CLIENT,
-    HEADLESS_SERVER
-}
+@onready var signals := Globals.signal_bus
+@onready var arguments := Globals.launch_args
 
-var server_mode: ServerMode = ServerMode.CLIENT
-var shard_config: Dictionary = {}
+@onready var splash_screen: Control = %SplashScreen
+@onready var animated_progress_bar: ProgressBar = %AnimatedProgressBar
+const SPLASH_SCREEN_TIME:float = 3.0
 
-
-func _ready() -> void:
-    Globals.views.spawn(ConsoleView)
-    var args := ArgParser.parse()
+func _initialize_client(args: Dictionary) -> void:
+    print_debug("Initializing as client...")
+    Globals.views.spawn(CharacterSelectView)
     
-    print("Args=", args)
-    
-    # Check if running as headless server
-    if _is_server_mode(args):
-        server_mode = ServerMode.HEADLESS_SERVER
-        _initialize_server(args)
-    else:
-        server_mode = ServerMode.CLIENT
-        _initialize_client(args)
-
-
-func _is_server_mode(args: Dictionary) -> bool:
-    """Check if we should run as a headless server."""
-    return args.has("headless") or args.has("server") or args.has("shard_id")
 
 
 func _initialize_server(args: Dictionary) -> void:
-    """Initialize as a headless server shard."""
-    print("Initializing as headless server...")
-
-    var instance_cfg := InstanceConfig.new()
-    if args.has("level"):
-        var level_name = args.get("level")
-        instance_cfg.level = load(
-            "res://scenes/world/zones/%s.tscn" % level_name)
-    InstanceAPI.start_server(instance_cfg)
+    print("Initializing as server...")
+    InstanceAPI.start_server()
 
 
-func _initialize_client(args: Dictionary) -> void:
-    """Initialize as a normal client."""
-    print("Initializing as client...")
-    
-    if args.has("auto_connect"):
-        InstanceAPI.start_client()
-        return
-    
-    Globals.views.spawn(MainView)
+func _ready() -> void:
+	## Splash screen
+    var splash_tween = splash_screen.create_tween()
+    splash_tween.set_trans(Tween.TRANS_SINE)
+    splash_tween.tween_property(splash_screen, ^"modulate", Color.WHITE, 1.0).from(Color.BLACK)
+    splash_screen.show()
+	
+	## Loading bar false graphic.
+    var loading_bar_tween = animated_progress_bar.create_tween()
+    loading_bar_tween.set_ease(Tween.EASE_IN_OUT)
+    loading_bar_tween.set_trans(Tween.TRANS_EXPO)
+    loading_bar_tween.tween_property(animated_progress_bar, ^"value", animated_progress_bar.max_value, SPLASH_SCREEN_TIME * 0.9)
+    await loading_bar_tween.finished
+    splash_screen.queue_free()
+	
+    Globals.views.spawn(ConsoleView)
+
+    print_debug("user://: ", OS.get_user_data_dir())
+    print_debug("Args=", arguments)
+
+    if arguments.has("server"):
+        _initialize_server(arguments)
+    else:
+        _initialize_client(arguments)

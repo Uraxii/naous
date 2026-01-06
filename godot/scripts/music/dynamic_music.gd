@@ -1,7 +1,17 @@
 class_name DynamicMusicManager extends Node
 
+## This class manages playing back music and triggering various scripted effects.
+## NOTICE It is implemented as a Scene Autoload, so be sure to check
+## "res://scenes/dynamic_music.tscn"
+## You can see examples of implementation in
+## "res://scenes/dynamic_music_testbench.tscn"
+
+
+## Most methods  [DynamicMusicTrack], a unique [AudioStreamPlayer] node is created 
+## Audio players are created and destroyed(? TODO) automatically when needed,
+
 const BUS_NAME:StringName = &"Music"
-## This is their position in the mixer effect stack. Ensure the tracks align.
+## CRITICAL This is their position in the mixer effect stack. Ensure the tracks are in this order.
 enum FX {
 	Attenuation = 0,
 	BandPass = 1,
@@ -23,9 +33,10 @@ class FXBaselines:
 @export var tracks:Array[DynamicMusicTrack]
 
 @export_group("Behavior")
+@export var force_single_track_playback: bool = true ## Simplifies handling song changes, disable for more control
+@export var continuous_playback: bool = false
 @export_range(0.1, 10.0, 0.1, "or_greater", "hide_slider") var minimum_transition_time:float = 0.1
 @export_range(0.1, 30.0, 0.1, "or_greater", "hide_slider") var default_transition_time:float = 5.0
-
 
 ## Cached integer for the index of the Music bus in [AudioServer].
 var music_bus_idx:int:
@@ -80,12 +91,19 @@ var band_pass_reset_timer: Tween
 
 
 #region Virtuals
+func _ready() -> void:
+	assert(get_bus_idx() != -1, 'Missing a "%s" bus in the current audio mixer bus!' % [BUS_NAME])
+
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		pass
 	else:
 		pass
 	
+	## Intensity reactivity implementation.
+	## Since tracks are just resources, we're firing our own process.
+	## TODO Maybe instead we could make a custom AudioStreamPlayer that
+	## fires this process.
 	for track in tracks:
 		if track.is_playing && track.use_intensity:
 			# Per layer adjustments (intensity)
@@ -348,17 +366,34 @@ func get_audio_players() -> Array[AudioStreamPlayer]:
 	array.append_array(positional_root.get_children())
 	return array
 	
+func stop_all_players(and_free_instances:bool = false) -> void:
+	for player in get_audio_players():
+		player.stop()
+		
+	if and_free_instances:
+		clear_all_stopped_tracks()
+	
 func clear_all_stopped_tracks() -> void:
 	for player:AudioStreamPlayer in get_audio_players():
 		if not player.has_stream_playback():
 			player.queue_free()
 
-func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
+## You can call this 
+func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioStreamPlayer:
+	if force_single_track_playback:
+		for _track in tracks:
+			if _track.is_playing:
+				stop_track(_track)
+	
 	track.is_playing = true
 	var player = get_player(track)
 	player.play()
-		
+	
+	if not player.finished.is_connected(_on_track_finished):
+		player.finished.connect(_on_track_finished.bind(track, force_looping))
+	
 	if track.trans_start_fade_in:
+		## TODO
 		pass
 		
 	return player
@@ -366,19 +401,59 @@ func start_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	track.is_playing = false
 	var player = get_player(track)
-	player.stop()
+	
+	if track.trans_end_fade_out: ## TODO TEST
+		player.volume_linear = track.trans_start_fade_in.sample_baked(track.trans_end_fade_out.min_domain)
+		var trans_tween:Tween = player.create_tween()
+		trans_tween.tween_method(
+			DynamicMusicTrack.set_volume_from_curve.bind(
+				player,
+				track.trans_end_fade_out
+				),
+			player.volume_linear,
+			track.trans_end_fade_out.max_domain,
+			track.trans_end_fade_out.max_domain
+			)
+		trans_tween.tween_callback(player.stop)
+	else:
+		player.stop()
 		
-	if track.trans_end_fade_out:
-			player.volume_linear = track.trans_start_fade_in.sample_baked(track.trans_end_fade_out.min_domain)
-			var trans_tween:Tween = player.create_tween()
-			trans_tween.tween_method(
-				DynamicMusicTrack.set_volume_from_curve.bind(
-					player,
-					track.trans_end_fade_out
-					),
-				player.volume_linear,
-				track.trans_end_fade_out.max_domain,
-				track.trans_end_fade_out.max_domain
-				)
-				
 	return player
+
+func _on_track_finished(track: DynamicMusicTrack, loop:bool = false) -> void:
+	if loop:
+		# Start the track again
+		Globals.music.start_track(track)
+	else:
+	
+		track.is_playing = false
+		
+		if continuous_playback:
+			## get the next track
+			var next_track: DynamicMusicTrack = null
+			var t_index: int = tracks.find(track)
+			var iterations: int = 0
+			while next_track == null:
+				
+				## Prevent infinite loop
+				iterations += 1
+				if iterations > tracks.size() * 2:
+					return
+				
+				if t_index < 0:
+					t_index = 0
+				else:
+					t_index += 1
+					
+				var _track = tracks.get(t_index)
+				if _track != null:
+					if _track.include_in_continuous_playlist:
+						next_track = _track
+					else:
+						continue
+				else:
+					## Out of bounds
+					t_index = -1
+					continue
+			
+			Globals.music.start_track(next_track)

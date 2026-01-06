@@ -1,9 +1,14 @@
 extends Control
 
+## TESTING
+## This script provides most of the functionality in the test bench scene for
+## [DynamicGlobals.music].
+## See "res://scenes/dynamic_Globals.music_testbench.tscn"
+
 var selected_track_index:int = 0:
 	set(value):
-		if Music.tracks.size() > 0:
-			selected_track_index = wrapi(value, 0, Music.tracks.size())
+		if Globals.music.tracks.size() > 0:
+			selected_track_index = wrapi(value, 0, Globals.music.tracks.size())
 			_on_selected_track_changed()
 		else:
 			selected_track_index = -1
@@ -18,15 +23,21 @@ var selected_track_index:int = 0:
 
 
 func _ready() -> void:
+	if not Globals.music:
+		push_error("Couldn't find instance of DynamicMusicManager. Were Globals skipped?")
+		push_warning("Forcing GlobalManager to instance DynamicMusicManager scene...")
+		## HACK
+		Globals.music = Globals.new_global_scene("Music", preload("uid://dgl2tc7u5oid2"))
+	
 	selected_track_index = 0 # So the UI is populated.
 	update_intensity_slider()
 	update_intensity_label()
 
 func start_track(track:DynamicMusicTrack) -> void:
-	var player = Music.start_track(track)
+	var player = Globals.music.start_track(track)
 	
 func stop_track(track:DynamicMusicTrack) -> void:
-	var player = Music.stop_track(track)
+	var player = Globals.music.stop_track(track)
 	
 func _clear_synchronized_layers() -> void:
 	var vbox:VBoxContainer = controller_sync_layers.get_child(0)
@@ -68,7 +79,7 @@ func _populate_synchronized_layers(stream:AudioStreamSynchronized) -> void:
 		
 func _update_synchronized_layers() -> void:
 	await get_tree().process_frame
-	var stream = Music.get_player(get_selected_track()).stream
+	var stream = Globals.music.get_player(get_selected_track()).stream
 	if stream is AudioStreamSynchronized:
 		for child in controller_sync_layers.get_child(0).get_children():
 			var layer_id = child.get_meta(&"layer_id", -1)
@@ -84,8 +95,8 @@ func _repopulate_tracks_playing() -> void:
 	for child in tracks_playing.get_children():
 		child.free()
 	var list:Array = []
-	list.append_array(Music.positional_root.get_children())
-	list.append_array(Music.non_positional_root.get_children())
+	list.append_array(Globals.music.positional_root.get_children())
+	list.append_array(Globals.music.non_positional_root.get_children())
 	for item in list:
 		if item is AudioStreamPlayer:
 			var label:Label = Label.new()
@@ -113,14 +124,14 @@ func _on_playback_slider_changed(value:float, player:AudioStreamPlayer) -> void:
 	player.seek(value)
 	
 func get_selected_track() -> DynamicMusicTrack:
-	return Music.tracks[selected_track_index]
+	return Globals.music.tracks[selected_track_index]
 	
 func _on_selected_track_changed() -> void:
 	var track = get_selected_track()
 	if track:
 		selected_track_label.text = track.title
 		
-		var player = Music.get_player(track)
+		var player = Globals.music.get_player(track)
 		if player:
 			update_intensity_slider()
 			update_intensity_label()

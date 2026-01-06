@@ -1,0 +1,33 @@
+[gd_resource type="StandardMaterial3D" load_steps=8 format=3 uid="uid://cdrndbvg0xyu6"]
+
+[ext_resource type="Texture2D" uid="uid://klnpeyv0nmre" path="res://assets/textures/archa-enemy-healthy.png" id="1_afluq"]
+[ext_resource type="Texture2D" uid="uid://bhb8wq2tqnns" path="res://assets/textures/archa-enemy-healthy-diffuse.png" id="2_6h4vw"]
+[ext_resource type="Texture2D" uid="uid://18pqu3va6vgr" path="res://assets/textures/archa-enemy-healthy-normal.png" id="2_ijxrg"]
+[ext_resource type="Texture2D" uid="uid://ct0nld4voafyv" path="res://assets/textures/archa-enemy-healthy-bump.png" id="3_6h4vw"]
+[ext_resource type="Texture2D" uid="uid://buev5cr4nohif" path="res://assets/textures/archa-enemy-damage-blend-mask.png" id="3_samnv"]
+[ext_resource type="Shader" uid="uid://25yfuknk3fyj" path="res://assets/models/enemies/crack_overlay.gdshader" id="4_samnv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lt8mn"]
+render_priority = 0
+shader = ExtResource("4_samnv")
+shader_parameter/CrackColor = Color(0.88, 0.88, 0.88, 1)
+shader_parameter/CrackMask = ExtResource("3_samnv")
+shader_parameter/crack_strength = 0.97999997809504
+shader_parameter/emission_strength = 1.20000001788144
+shader_parameter/crack_stages = 4
+shader_parameter/mask_noise_threshold = 0.0999999977648
+shader_parameter/invert_mask = true
+
+[resource]
+next_pass = SubResource("ShaderMaterial_lt8mn")
+albedo_texture = ExtResource("1_afluq")
+metallic = 0.4
+metallic_texture = ExtResource("2_6h4vw")
+roughness = 0.65
+roughness_texture = ExtResource("3_6h4vw")
+emission_texture = ExtResource("3_samnv")
+normal_enabled = true
+normal_texture = ExtResource("2_ijxrg")
+bent_normal_texture = ExtResource("2_6h4vw")
+subsurf_scatter_strength = 0.23
+subsurf_scatter_texture = ExtResource("2_6h4vw")

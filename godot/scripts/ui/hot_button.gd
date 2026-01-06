@@ -46,8 +46,11 @@ func remove_spell() -> void:
 
 #region Signal Handlers
 func _on_action_pressed() -> void:
-    if entity and spell and spell.is_castable:
-        InstanceAPI.request_cast.rpc_id(1, entity.id, spell.id)
+    if not spell:
+        return
+
+    #log.debug('Cast %s' % spell.name )
+    spell.request_cast()
 
 
 func _on_cast_started() -> void:

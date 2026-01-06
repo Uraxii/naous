@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Equipment" load_steps=10 format=3 uid="uid://bkio72g04wx2o"]
+
+[ext_resource type="Script" uid="uid://chxnjdgyds7hd" path="res://scripts/entities/items/echo/echo_item.gd" id="1_7oc0b"]
+[ext_resource type="Resource" uid="uid://dphpvrkpe0olg" path="res://scripts/entities/items/echo/test_echo_item.tres" id="2_bujlx"]
+[ext_resource type="Resource" uid="uid://cdeofyf7gxuno" path="res://scripts/entities/items/echo/test_echo_item2.tres" id="3_v8epu"]
+[ext_resource type="Resource" uid="uid://d1d7s3xcngfng" path="res://scripts/entities/items/legs/test_legs_item.tres" id="4_m28rf"]
+[ext_resource type="Resource" uid="uid://dcj2qv41xjv7b" path="res://scripts/entities/items/mask/test_mask_item.tres" id="5_rfwsl"]
+[ext_resource type="Script" uid="uid://hqemwssvkqh4" path="res://scripts/entities/inventory/equipment.gd" id="6_5djt2"]
+[ext_resource type="Resource" uid="uid://coxn38nc7tw1d" path="res://scripts/entities/items/shoulders/test_shoulder_item.tres" id="7_uh8f7"]
+[ext_resource type="Resource" uid="uid://bgm08g5a70mtq" path="res://scripts/entities/items/torso/test_torso_item.tres" id="8_s11tx"]
+[ext_resource type="Resource" uid="uid://0mnksuuupcuy" path="res://scripts/entities/items/weapon/test_weapon_item.tres" id="9_uoi38"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("6_5djt2")
+mask = ExtResource("5_rfwsl")
+weapon_right = ExtResource("9_uoi38")
+torso = ExtResource("8_s11tx")
+legs = ExtResource("4_m28rf")
+shoulders = ExtResource("7_uh8f7")
+echoes = Array[ExtResource("1_7oc0b")]([ExtResource("2_bujlx"), null, ExtResource("3_v8epu")])
+metadata/_custom_type_script = "uid://hqemwssvkqh4"

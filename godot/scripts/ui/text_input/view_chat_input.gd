@@ -7,14 +7,7 @@ enum {
 
 var curr_state := STATE_HIDDEN
 
-@onready var line: LineEdit = %LineEdit
-
-
-func _ready() -> void:
-    signals.ui_accept.connect(_on_accept)
-    signals.ui_cancel.connect(_on_cancel)
-    line.text_submitted.connect(_on_submit)
-    hide()
+@onready var line: LineEdit = %ChatInput
 
 
 func _on_accept() -> void:
@@ -29,14 +22,22 @@ func _on_cancel() -> void:
         STATE_EDITING:
             hide()
             curr_state = STATE_HIDDEN
-            
-            
+
+
 func _on_submit(content: String) -> void:
+    if line.text:
+        var msg := MsgChat.new()
+        msg.sender = InstanceAPI.local_player.character_name
+        msg.message = content
+        router.send(msg)
+
     line.text = ""
-    
-    signals.chat.emit("You", content)
-    
-    var packet := PacketManager.new_packet()
-    var chat := packet.new_chat()
-    chat.set_content(content)
-    # WS.send(packet)
+    hide()
+    curr_state = STATE_HIDDEN
+
+
+func _ready() -> void:
+    signals.toggle_chat_input.connect(_on_accept)
+    signals.ui_cancel.connect(_on_cancel)
+    line.text_submitted.connect(_on_submit)
+    hide()

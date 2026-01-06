@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MaskItem" load_steps=3 format=3 uid="uid://dk0erx4ii1d1l"]
+
+[ext_resource type="Script" uid="uid://dg45bv0urh4re" path="res://scripts/entities/items/mask/mask_item.gd" id="1_pm1vy"]
+[ext_resource type="Texture2D" uid="uid://ch8063wtcph1j" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/starter_mask/starter_mask.png" id="1_pn87g"]
+
+[resource]
+script = ExtResource("1_pm1vy")
+draw = 2
+name = &"Broken Visage"
+description = "Due to use or abuse, this mask shows significant cracks and has nearly returned to Naous in full. It won't last long, but it'll do for now."
+icon = ExtResource("1_pn87g")
+metadata/_custom_type_script = "uid://dg45bv0urh4re"

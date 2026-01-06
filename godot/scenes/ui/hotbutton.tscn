@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5xxqs125rfhr"]
+[gd_scene load_steps=3 format=3 uid="uid://b5xxqs125rfhr"]
 
 [ext_resource type="Script" uid="uid://c0m8tmsilt5f" path="res://scripts/ui/hot_button.gd" id="1_mktm8"]
+[ext_resource type="Texture2D" uid="uid://penv05a5ag0f" path="res://assets/materials/grid.png" id="2_70go0"]
 
 [node name="Hotbutton" type="Control"]
 custom_minimum_size = Vector2(75, 75)
@@ -18,6 +19,7 @@ metadata/_custom_type_script = "uid://c0m8tmsilt5f"
 
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 1
 anchors_preset = 8
@@ -33,6 +35,9 @@ grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
 button_mask = 5
+icon = ExtResource("2_70go0")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Icon" type="TextureRect" parent="Button"]
 unique_name_in_owner = true

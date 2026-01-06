@@ -6,7 +6,7 @@ var history: Array[String] = []
 
 
 func _ready() -> void:
-    signals.chat.connect(_on_chat)
+    signals.chat_msg.connect(_on_chat_msg)
     signals.log_new_message.connect(_on_log_message)
     signals.log_new_debug.connect(_on_log_debug)
     signals.log_new_warning.connect(_on_log_warning)
@@ -15,9 +15,9 @@ func _ready() -> void:
     signals.log_new_announcment.connect(_on_log_announcement)
 
 
-func _on_chat(sender: String, content: String) -> void:
+func _on_chat_msg(msg: MsgChat) -> void:
     window.append_text("[color=#%s]%s[/color]: [i]%s[/i]\n" % [
-        Color.CORNFLOWER_BLUE.to_html(false), sender, content])
+        Color.CORNFLOWER_BLUE.to_html(false), msg.sender, msg.message])
 
 
 func _on_log_message(message: String) -> void:
@@ -34,7 +34,7 @@ func _on_log_warning(message: String) -> void:
     if len(signals.log_new_warning.get_connections()) == 1:
         _message(message, Color.ORANGE_RED)
 
-    
+
 func _on_log_error(message: String) -> void:
     if len(signals.log_new_error.get_connections()) == 1:
         _message(message, Color.RED)
@@ -42,7 +42,7 @@ func _on_log_error(message: String) -> void:
 
 func _on_log_success(message: String) -> void:
     _message(message, Color.LAWN_GREEN)
-    
+
 
 func _on_log_announcement(message: String) -> void:
     if not len(signals.log_new_announcment.get_connections()) > 1:

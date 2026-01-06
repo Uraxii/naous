@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TorsoItem" load_steps=4 format=3 uid="uid://bgm08g5a70mtq"]
+
+[ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="1_4yrw2"]
+[ext_resource type="Script" uid="uid://ctduyoaobc201" path="res://scripts/entities/items/torso/torso_item.gd" id="1_jiy4w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o77c"]
+atlas = ExtResource("1_4yrw2")
+region = Rect2(51.098785, 14.283089, 26.333115, 20.539833)
+
+[resource]
+script = ExtResource("1_jiy4w")
+name = &"Torso Item"
+icon = SubResource("AtlasTexture_1o77c")
+metadata/_custom_type_script = "uid://ctduyoaobc201"

@@ -48,7 +48,9 @@ func register_active_targeting_system(new_targeting_system: TargetingSystem) -> 
 
 
 func get_current_targeting_owner() -> Entity:
-    return (Globals.camera.target as ComponentCharacterBody).entity
+    if is_instance_valid(Globals.camera.target) and Globals.camera.target is ComponentCharacterBody:
+        return (Globals.camera.target as ComponentCharacterBody).entity
+    return null
 #endregion
 
 
@@ -62,10 +64,12 @@ func add_valid_target(new_target: Targetable) -> void:
     if not valid_targets.has(new_target) and new_target.entity != current_targeting_owner:
         #Globals.logger.debug("Adding valid target: ", new_target.entity.name)
         valid_targets.push_back(new_target)
+        new_target.tree_exiting.connect(remove_valid_target.bind(new_target))
 
 
 func remove_valid_target(lost_target: Targetable) -> void:
     if valid_targets.has(lost_target):
+        lost_target.tree_exiting.disconnect(remove_valid_target)
         valid_targets.erase(lost_target)
 
 
@@ -89,5 +93,5 @@ func _control_entity_changed(new_controlling_entity: Entity) -> void:
     if new_controlling_entity.targeting != null:
         register_active_targeting_system(new_controlling_entity.targeting)
     else:
-        Globals.logger.error("New controlling entity does not have a TargetingSystem!")
+        Globals.logger.warn("New controlling entity does not have a TargetingSystem. This might be OK!")
 #endregion

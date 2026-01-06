@@ -13,63 +13,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6yyh7")
 
-[node name="Host" type="Button" parent="."]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -15.5
-offset_right = 48.0
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Host Game
-"
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 0
 
-[node name="Join" type="Button" parent="."]
+[node name="Username" type="LineEdit" parent="HBoxContainer2"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = 75.0
-offset_right = 48.0
-offset_bottom = 106.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Join Game"
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "User Name"
 
-[node name="HostAddress" type="LineEdit" parent="Join"]
+[node name="Password" type="LineEdit" parent="HBoxContainer2"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -75.0
-offset_top = -35.0
-offset_right = -51.0
-offset_bottom = -35.0
-grow_horizontal = 2
-grow_vertical = 2
-placeholder_text = "Host Address"
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Password"
+secret = true
 
-[node name="Port" type="LineEdit" parent="Join"]
+[node name="Joing" type="Button" parent="HBoxContainer2"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = -35.0
-offset_right = 74.0
-offset_bottom = -35.0
-grow_horizontal = 2
-grow_vertical = 2
-placeholder_text = "Port Number"
+layout_mode = 2
+text = "Enter"

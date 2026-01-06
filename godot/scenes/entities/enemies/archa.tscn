@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://xi6r38pg1hji"]
+
+[ext_resource type="Script" uid="uid://bwjjofor8t7w8" path="res://scripts/entities/enemies/archa.gd" id="1_b8ywv"]
+[ext_resource type="Script" uid="uid://dm5cpxgpdo55a" path="res://scripts/entities/entity_synchronizer.gd" id="2_dkd6n"]
+[ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="3_wfou7"]
+[ext_resource type="Script" uid="uid://dcvgu5whndbp8" path="res://scripts/entities/components/component_health.gd" id="4_skbj3"]
+[ext_resource type="Script" uid="uid://bjeqm0rajdi7x" path="res://scripts/entities/components/component_stat.gd" id="6_us3mv"]
+[ext_resource type="Script" uid="uid://c3j4028duia8g" path="res://scripts/entities/components/component_character_body.gd" id="6_wfou7"]
+[ext_resource type="Script" uid="uid://bqxqfnfga8psi" path="res://scripts/entities/components/component_ai_movement.gd" id="7_2oj0l"]
+[ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="7_lrbby"]
+[ext_resource type="Script" path="res://scripts/entities/components/component_player_detector.gd" id="8_lrbby"]
+[ext_resource type="PackedScene" uid="uid://dqljrgdwdfqk2" path="res://assets/models/enemies/archa_enemy.tscn" id="10_2oj0l"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lrbby"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2oj0l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wfou7"]
+radius = 0.47558594
+height = 2.2579346
+
+[node name="Archa" type="Node3D" node_paths=PackedStringArray("components", "health", "speed", "gravity", "body")]
+script = ExtResource("1_b8ywv")
+components = NodePath("ComponentManager")
+health = NodePath("ComponentManager/HealthComponent")
+speed = NodePath("ComponentManager/Speed")
+gravity = NodePath("ComponentManager/Gravity")
+body = NodePath("ComponentManager/Body")
+metadata/_custom_type_script = "uid://bwjjofor8t7w8"
+
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lrbby")
+script = ExtResource("2_dkd6n")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="StatSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2oj0l")
+script = ExtResource("2_dkd6n")
+metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
+
+[node name="ComponentManager" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("3_wfou7")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://bhu55855qbepn"
+
+[node name="HealthComponent" type="Node" parent="ComponentManager"]
+script = ExtResource("4_skbj3")
+max_value = 20.0
+metadata/_custom_type_script = "uid://dcvgu5whndbp8"
+
+[node name="Speed" type="Node" parent="ComponentManager"]
+script = ExtResource("6_us3mv")
+max_value = 3.0
+current = 1.0
+metadata/_custom_type_script = "uid://bjeqm0rajdi7x"
+
+[node name="Gravity" type="Node" parent="ComponentManager"]
+script = ExtResource("6_us3mv")
+max_value = 80.0
+metadata/_custom_type_script = "uid://bjeqm0rajdi7x"
+
+[node name="Targetable" type="Node" parent="ComponentManager" node_paths=PackedStringArray("entity")]
+script = ExtResource("7_lrbby")
+entity = NodePath("../..")
+metadata/_custom_type_script = "uid://kb2rkvmsll57"
+
+[node name="ComponentAIMovement" type="Node" parent="ComponentManager" node_paths=PackedStringArray("entity", "body", "speed", "gravity")]
+unique_name_in_owner = true
+script = ExtResource("7_2oj0l")
+entity = NodePath("../..")
+body = NodePath("../Body")
+speed = NodePath("../Speed")
+gravity = NodePath("../Gravity")
+metadata/_custom_type_script = "uid://bqxqfnfga8psi"
+
+[node name="PlayerDetector" type="Node" parent="ComponentManager" node_paths=PackedStringArray("parent_entity")]
+unique_name_in_owner = true
+script = ExtResource("8_lrbby")
+parent_entity = NodePath("../..")
+
+[node name="Body" type="CharacterBody3D" parent="ComponentManager" node_paths=PackedStringArray("entity")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.011195898, 0)
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("6_wfou7")
+entity = NodePath("../..")
+metadata/_custom_type_script = "uid://c3j4028duia8g"
+
+[node name="archa-enemy" parent="ComponentManager/Body" instance=ExtResource("10_2oj0l")]
+transform = Transform3D(-0.65, 0, -5.6824803e-08, 0, 0.65, 0, 5.6824803e-08, 0, -0.65, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ComponentManager/Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0447289, 0)
+shape = SubResource("CapsuleShape3D_wfou7")

@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dh6b84ik25lxk"]
+
+[ext_resource type="Texture2D" uid="uid://4505nq8b6248" path="res://assets/textures/masking-site-pipe-tech-diffuse.png" id="1_ltuep"]
+[ext_resource type="Texture2D" uid="uid://cimc74ehg8x74" path="res://assets/textures/masking-site-pipe-tech-normal.png" id="2_hcucp"]
+
+[resource]
+cull_mode = 2
+depth_draw_mode = 1
+specular_mode = 2
+albedo_texture = ExtResource("1_ltuep")
+normal_enabled = true
+normal_texture = ExtResource("2_hcucp")
+uv1_scale = Vector3(10, 10, 10)

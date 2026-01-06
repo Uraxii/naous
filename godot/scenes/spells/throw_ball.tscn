@@ -5,8 +5,6 @@
 
 [node name="ThrowBall" type="Node"]
 script = ExtResource("1_3qo5t")
-id = "Throw Ball"
-hotbar = 1
 hotbutton = 3
 metadata/_custom_type_script = "uid://dm0o2a64iis1u"
 

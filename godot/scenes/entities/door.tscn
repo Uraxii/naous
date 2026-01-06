@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bubw2npxhqmbl"]
+[gd_scene load_steps=15 format=3 uid="uid://bubw2npxhqmbl"]
 
 [ext_resource type="Script" uid="uid://cfn7j3g4lutwr" path="res://scripts/entities/objects/door.gd" id="1_htbgl"]
 [ext_resource type="Script" uid="uid://bhu55855qbepn" path="res://scripts/entities/components/component_manager.gd" id="2_de05j"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cidlribiuexkb" path="res://scripts/entities/interaction/requirements/interactable_requirement.gd" id="5_f8c16"]
 [ext_resource type="Script" uid="uid://kb2rkvmsll57" path="res://scripts/entities/targeting/targetable/targetable.gd" id="5_qu8ah"]
 [ext_resource type="Script" uid="uid://jqx82cd4qphm" path="res://scripts/entities/interaction/requirements/min_distance_requirement.gd" id="6_ritpd"]
+[ext_resource type="Material" uid="uid://bnyusgd0ncsnl" path="res://assets/materials/house-door.tres" id="8_ritpd"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qu8ah"]
 properties/0/path = NodePath("Body:position")
@@ -26,21 +27,20 @@ min_distance = 5.0
 metadata/_custom_type_script = "uid://jqx82cd4qphm"
 
 [sub_resource type="BoxMesh" id="BoxMesh_htbgl"]
+size = Vector3(1.8, 4, 0.3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_de05j"]
-size = Vector3(1, 1.8066711, 0.15777588)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f8c16"]
+points = PackedVector3Array(0.9569571, 2.6412697, 0.22142857, -0.941084, -2.6412697, -0.19126981, -0.941084, -2.6412697, 0.22142857, -0.941084, 2.6412697, -0.19126981, 0.9569571, -2.6412697, -0.19126981, 0.9569571, -2.6412697, 0.22142857, -0.941084, 2.6412697, 0.22142857, 0.9569571, 2.6412697, -0.19126981)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_htbgl"]
-size = Vector3(1.4953613, 1.9421387, 1)
+size = Vector3(2.7026367, 5.6488, 1)
 
 [node name="Door" type="Node3D" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("1_htbgl")
-open_rotation = Vector3(0, 90, 0)
 components = NodePath("ComponentManager")
 body = NodePath("StaticBody3D")
-metadata/_custom_type_script = "uid://gs35pl2e40ha"
 
-[node name="TransformSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qu8ah")
 script = ExtResource("2_y1est")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
@@ -53,7 +53,7 @@ script = ExtResource("2_de05j")
 script = ExtResource("3_y1est")
 entity = NodePath("../..")
 requirements = Array[ExtResource("5_f8c16")]([SubResource("Resource_5d2xg")])
-prompt_text = "Definitely a Door"
+prompt_text = "Open"
 time_to_complete = 0.0
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
 
@@ -63,18 +63,17 @@ entity = NodePath("../..")
 metadata/_custom_type_script = "uid://kb2rkvmsll57"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5074188, 0, 0)
-collision_layer = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.897, 2, 0)
+collision_layer = 6
 collision_mask = 7
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1.8060284, 0, 0, 0, 0.14275372, 0, 0.9254364, 0)
+material_override = ExtResource("8_ritpd")
 mesh = SubResource("BoxMesh_htbgl")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.92359006, 0.0022888184)
-shape = SubResource("BoxShape3D_de05j")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_f8c16")
 
 [node name="InteractableTrigger" type="Area3D" parent="StaticBody3D" node_paths=PackedStringArray("interactable")]
 collision_layer = 8
@@ -83,5 +82,5 @@ interactable = NodePath("../../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://biugcdkh4yjur"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/InteractableTrigger"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03112793, 0.9690343, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036987305, 0.06343651, 0)
 shape = SubResource("BoxShape3D_htbgl")

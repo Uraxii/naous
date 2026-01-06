@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b10ssru87qgh0"]
+
+[ext_resource type="Material" uid="uid://xnfrp5vnr1au" path="res://assets/materials/tree-material.tres" id="1_fkavw"]
+[ext_resource type="PackedScene" uid="uid://4papmpew6pxg" path="res://assets/prefabs/tree-leaves-fx.tscn" id="1_p1mjp"]
+[ext_resource type="ArrayMesh" uid="uid://owe4sfo5l6w2" path="res://assets/models/tree_big.obj" id="2_p1mjp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fkavw"]
+radius = 100.0
+height = 800.0
+
+[node name="tree-red" type="Node3D"]
+
+[node name="tree-leaves-fx" parent="." instance=ExtResource("1_p1mjp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202734, 3.2514062, 3.6138046)
+
+[node name="tree-leaves-fx2" parent="." instance=ExtResource("1_p1mjp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7101015, 8.0563345, -1.0231278)
+
+[node name="TreeBig" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+material_override = ExtResource("1_fkavw")
+mesh = ExtResource("2_p1mjp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="TreeBig"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TreeBig/StaticBody3D"]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 2400, 0)
+shape = SubResource("CapsuleShape3D_fkavw")

@@ -1,18 +1,21 @@
 class_name CameraManager extends SpringArm3D
+
 @export var mouse_sensitivity := 0.005
 @export var joystick_sensitivity := 0.06
 @export var invert_look_y_axis := false
 @export var min_distance := -1.0
 @export var max_distance := 20.0
 @export var zoom_increment := 0.5
+@export var zoom_tween_length := 0.65
 @export var x_offset := 0.5
 @export var y_offset := 2.0
 @export var z_offset := 0.0
+
 @export_category("Runtime Values")
 @export var target: Node3D
 @export var camera_distance := 1.0 : set = _set_camera_distance
 
-@onready var signals = Globals.signal_bus
+@onready var signals := Globals.signal_bus
 @onready var input := Globals.input
 
 @onready var camera: Camera3D = %Camera3D:
@@ -21,6 +24,7 @@ class_name CameraManager extends SpringArm3D
 var direction := Vector2.ZERO
 var rotate_entity := false
 var menu_is_open := false
+var allow_input_control := true
 
 
 func _ready() -> void:
@@ -30,6 +34,7 @@ func _ready() -> void:
     signals.camera_rotate.connect(_on_camera_rotate)
     signals.character_rotate_start.connect(_on_character_rotate_start)
     signals.character_rotate_stop.connect(_on_character_rotate_stop)
+    signals.allow_character_control.connect(_on_allow_character_control)
 
     # Adjust position to make the server view better.
     # This can get deleted once free cam movement works.
@@ -60,8 +65,14 @@ func get_current_camera() -> Camera3D:
 
 #region Singal Handlers
 func _set_camera_distance(value: float) -> void:
-    camera_distance = clampf(value, min_distance, max_distance)
-    spring_length = camera_distance
+    if allow_input_control:
+        camera_distance = clampf(value, min_distance, max_distance)
+        var tween := get_tree().create_tween()
+        tween.tween_property(self, "spring_length", camera_distance, zoom_tween_length)
+
+
+func _on_allow_character_control(allow: bool) -> void:
+    allow_input_control = allow
 
 
 func _on_control_entity(entity: Entity) -> void:

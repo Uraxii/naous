@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LegsItem" load_steps=4 format=3 uid="uid://d1d7s3xcngfng"]
+
+[ext_resource type="Script" uid="uid://i20jib6cha24" path="res://scripts/entities/items/legs/legs_item.gd" id="1_g22ux"]
+[ext_resource type="Texture2D" uid="uid://dtpsdrkk8bm2i" path="res://icon.svg" id="1_sa1nc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh44q"]
+atlas = ExtResource("1_sa1nc")
+region = Rect2(12.784637, 30.916908, 27.75911, 27.759117)
+
+[resource]
+script = ExtResource("1_g22ux")
+name = &"Legs Item"
+icon = SubResource("AtlasTexture_sh44q")
+metadata/_custom_type_script = "uid://i20jib6cha24"

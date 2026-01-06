@@ -1,17 +1,13 @@
 class_name SignalBus extends Node
 
+signal network_tick
+signal save_game
+
 #region Instance API
-signal connected_to_server
-signal player_connected(peer_id: int, data: PlayerData)
+signal connected_to_server()
+signal player_connected(peer_id: int)
 signal player_disconnected(peer_id: int)
 signal server_disconnected
-#endregion
-
-#region Network (Legacy - keeping for compatibility)
-signal connection_closed
-signal got_packet(packet)
-signal got_client_id(msg)
-signal login(msg)
 #endregion
 
 #region Spell Casting
@@ -43,14 +39,13 @@ signal reload
 signal load_world
 #endregion
 
-#region Chat
-signal chat(sender_name: String, message: String)
-#endregion
-
 #region Input
 signal ui_accept 
 signal ui_cancel
 signal ui_toggle(state:bool)
+signal open_inventory
+signal toggle_chat_input
+signal allow_character_control(allow: bool)
 
 signal camera_zoom_in
 signal camera_zoom_out
@@ -63,11 +58,13 @@ signal character_rotate_stop
 signal jump
 signal interact
 signal move(dir: Vector2)
+#endregion Input
 
-## Targeting
+#region Targeting
 signal cursor_target
 signal next_target
 signal previous_target
+signal target_self
 signal scan_target_right
 signal scan_target_left
 signal cancel_target
@@ -88,7 +85,18 @@ signal entity_interaction_interrupted(entity: Entity, interactable: Interactable
 signal entity_lost_interactable(entity: Entity, interactable: InteractableComponent)
 #endregion
 
-#region Targeting
+#region Aiming
 signal target_entered_screen(target: Targetable)
 signal target_exited_screen(target: Targetable)
+#endregion
+
+#region Character Select
+signal selected_character(character_data: Dictionary)
+#endregion
+
+#region Network Messages
+signal test_msg(msg: MsgSpawnEntity)
+signal chat_msg(msg: MsgChat)
+signal spawn_entity_msg(msg: MsgSpawnEntity)
+signal cast_resquest_msg(msg: MsgCastReq)
 #endregion
