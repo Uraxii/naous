@@ -16,6 +16,7 @@ extends Node3D
 @onready var backup_ally_2: Entity = %BackupAlly2
 @onready var escape_boss: BaseEnemy = %EscapeBoss
 @onready var exit_loading_zone: Area3D = %ExitLoadingZone
+@onready var tutorial_hotbar: TutorialHotbar = %TutorialHotbar
 @onready var player: Player = %Player
 
 
@@ -24,10 +25,13 @@ func _ready() -> void:
     # This is mostly to ensure we wait until the movement component warps the body up 100 units so we can snap it back after
     tutorial_sequence.spawn_entity_at.connect(_on_entity_spawn_at)
     tutorial_sequence.despawn_entity.connect(_on_entity_despawn)
+    
+    # Everything here happens after the first frame is done
     await get_tree().process_frame
     _move_entities_offscreen()
     exit_loading_zone.process_mode = Node.PROCESS_MODE_DISABLED
     tutorial_sequence.start()
+    tutorial_hotbar.assign_entity(player)
 
 
 func _move_entities_offscreen() -> void:

@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://b631noidj7co0" path="res://scenes/ui/inventory/inventory_theme.tres" id="1_8pb6k"]
 [ext_resource type="Script" uid="uid://epop25me7jqf" path="res://scenes/ui/inventory/inventory_ui.gd" id="1_a0on1"]
 [ext_resource type="PackedScene" uid="uid://nbaglwtf3v0k" path="res://scenes/ui/inventory/item_slot.tscn" id="2_a0on1"]
-[ext_resource type="Script" uid="uid://bnesvpxx227bl" path="res://scenes/ui/inventory/item_tooltip_popup.gd" id="4_7cyi0"]
-[ext_resource type="Script" uid="uid://dcw2csvgojows" path="res://scenes/ui/inventory/item_tooltip.gd" id="4_8wncw"]
+[ext_resource type="Script" path="res://scenes/ui/inventory/item_tooltip_popup.gd" id="4_7cyi0"]
+[ext_resource type="Script" path="res://scenes/ui/inventory/item_tooltip.gd" id="4_8wncw"]
 
 [node name="InventoryUI" type="PanelContainer"]
 anchors_preset = 15

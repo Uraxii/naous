@@ -578,7 +578,7 @@ func _on_exit_zone_body_entered(body: Node3D) -> void:
 func _on_tutorial_fade_out() -> void:
     # TODO: Do something that isn't just softlocking the player in the void :D
     Globals.logger.debug("Tutorial Complete!")
-	# TODO Switch to the Credits flyover scene!
+    # TODO Switch to the Credits flyover scene!
     get_tree().change_scene_to_packed(CREDITS_SCENE)
 #endregion ESCAPE
 #endregion Sequence Functions
