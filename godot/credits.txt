@@ -1,194 +1,55 @@
--Uraxii
-Lead developer
+-
+Thank you for playing our prototype.
 
--Maecenas Rhoncus
-Integer eget lacus sit amet sapien iaculis volutpat.
-Etiam iaculis arcu non congue tincidunt.
-Sed euismod augue ac eros iaculis, id luctus odio ultrices.
-Proin varius eros vel dolor ullamcorper convallis.
+-Credits
+(each new line is like a paragraph.)
+(-at the start of a new line denotes a heading, and splits pages)
 
--Sem Hendrerit
-Suspendisse commodo urna in sem elementum, sit amet feugiat nunc imperdiet.
-Proin non enim varius, consequat tellus nec, interdum diam.
-Curabitur vestibulum lorem sit amet cursus volutpat.
-Donec pulvinar lacus nec dapibus vehicula.
+(empty newlines are not parsed)
 
--Tempor Mollis
-Nulla non diam elementum, elementum mi non, dapibus dolor.
-Aenean ac ante feugiat, mollis sem eu, fermentum diam.
-Nullam laoreet dolor sed rutrum porta.
+-
+(you can use empty headings to paginate)
 
--In Consectetur
-Nunc sed orci et est lacinia vulputate sit amet nec ligula.
-Duis vestibulum massa eget diam ultricies, id iaculis dolor aliquet.
-Curabitur sit amet sapien ac elit sodales congue id varius lorem.
-Praesent ornare felis et ante venenatis, eu consequat odio molestie.
-Proin in nulla ac mauris congue dignissim.
-Donec at lectus venenatis, mattis ligula efficitur, pretium justo.
+-Nicole-Brandon Paul (Uraxii)
+Lead Programmer
+(contribution details)
 
--Tellus In
-Praesent porta diam quis laoreet eleifend.
-Proin ultricies justo a arcu dignissim, eu gravida mauris feugiat.
-Praesent non lorem tincidunt, lobortis massa vitae, blandit ex.
-Morbi commodo turpis fringilla neque ultricies, ac suscipit velit pharetra.
-Curabitur mattis enim id vehicula luctus.
+-Christer Kaitila (McFunkypants)
+Lead Environment Artist
+Art Director
+(contribution details)
 
--Maecenas Rhoncus
-Integer eget lacus sit amet sapien iaculis volutpat.
-Etiam iaculis arcu non congue tincidunt.
-Sed euismod augue ac eros iaculis, id luctus odio ultrices.
-Proin varius eros vel dolor ullamcorper convallis.
+-Jesse Rupe (LinkofOrigin)
+(contribution details)
 
--Sem Hendrerit
-Suspendisse commodo urna in sem elementum, sit amet feugiat nunc imperdiet.
-Proin non enim varius, consequat tellus nec, interdum diam.
-Curabitur vestibulum lorem sit amet cursus volutpat.
-Donec pulvinar lacus nec dapibus vehicula.
+-Tyler Funk (tcfunk)
+Lead Character Artist
+(contribution details)
 
--Tempor Mollis
-Nulla non diam elementum, elementum mi non, dapibus dolor.
-Aenean ac ante feugiat, mollis sem eu, fermentum diam.
-Nullam laoreet dolor sed rutrum porta.
+-Michael Avrie (tarnishedmoth)
+Music Composer
+(contribution details)
 
--In Consectetur
-Nunc sed orci et est lacinia vulputate sit amet nec ligula.
-Duis vestibulum massa eget diam ultricies, id iaculis dolor aliquet.
-Curabitur sit amet sapien ac elit sodales congue id varius lorem.
-Praesent ornare felis et ante venenatis, eu consequat odio molestie.
-Proin in nulla ac mauris congue dignissim.
-Donec at lectus venenatis, mattis ligula efficitur, pretium justo.
+-tryfinsigabrt
+(contribution details)
 
--Tellus In
-Praesent porta diam quis laoreet eleifend.
-Proin ultricies justo a arcu dignissim, eu gravida mauris feugiat.
-Praesent non lorem tincidunt, lobortis massa vitae, blandit ex.
-Morbi commodo turpis fringilla neque ultricies, ac suscipit velit pharetra.
-Curabitur mattis enim id vehicula luctus.
+-davids91
+(contribution details)
 
--Maecenas Rhoncus
-Integer eget lacus sit amet sapien iaculis volutpat.
-Etiam iaculis arcu non congue tincidunt.
-Sed euismod augue ac eros iaculis, id luctus odio ultrices.
-Proin varius eros vel dolor ullamcorper convallis.
+-liyiz
+(contribution details)
 
--Sem Hendrerit
-Suspendisse commodo urna in sem elementum, sit amet feugiat nunc imperdiet.
-Proin non enim varius, consequat tellus nec, interdum diam.
-Curabitur vestibulum lorem sit amet cursus volutpat.
-Donec pulvinar lacus nec dapibus vehicula.
+-Chadius
+(contribution details)
 
--Tempor Mollis
-Nulla non diam elementum, elementum mi non, dapibus dolor.
-Aenean ac ante feugiat, mollis sem eu, fermentum diam.
-Nullam laoreet dolor sed rutrum porta.
+-dabates
+(contribution details)
 
--In Consectetur
-Nunc sed orci et est lacinia vulputate sit amet nec ligula.
-Duis vestibulum massa eget diam ultricies, id iaculis dolor aliquet.
-Curabitur sit amet sapien ac elit sodales congue id varius lorem.
-Praesent ornare felis et ante venenatis, eu consequat odio molestie.
-Proin in nulla ac mauris congue dignissim.
-Donec at lectus venenatis, mattis ligula efficitur, pretium justo.
+-Chris DeLeon
+Compiling credits, hosting Dev Pods
 
--Tellus In
-Praesent porta diam quis laoreet eleifend.
-Proin ultricies justo a arcu dignissim, eu gravida mauris feugiat.
-Praesent non lorem tincidunt, lobortis massa vitae, blandit ex.
-Morbi commodo turpis fringilla neque ultricies, ac suscipit velit pharetra.
-Curabitur mattis enim id vehicula luctus.
-
--Maecenas Rhoncus
-Integer eget lacus sit amet sapien iaculis volutpat.
-Etiam iaculis arcu non congue tincidunt.
-Sed euismod augue ac eros iaculis, id luctus odio ultrices.
-Proin varius eros vel dolor ullamcorper convallis.
-
--Sem Hendrerit
-Suspendisse commodo urna in sem elementum, sit amet feugiat nunc imperdiet.
-Proin non enim varius, consequat tellus nec, interdum diam.
-Curabitur vestibulum lorem sit amet cursus volutpat.
-Donec pulvinar lacus nec dapibus vehicula.
-
--Tempor Mollis
-Nulla non diam elementum, elementum mi non, dapibus dolor.
-Aenean ac ante feugiat, mollis sem eu, fermentum diam.
-Nullam laoreet dolor sed rutrum porta.
-
--In Consectetur
-Nunc sed orci et est lacinia vulputate sit amet nec ligula.
-Duis vestibulum massa eget diam ultricies, id iaculis dolor aliquet.
-Curabitur sit amet sapien ac elit sodales congue id varius lorem.
-Praesent ornare felis et ante venenatis, eu consequat odio molestie.
-Proin in nulla ac mauris congue dignissim.
-Donec at lectus venenatis, mattis ligula efficitur, pretium justo.
-
--Tellus In
-Praesent porta diam quis laoreet eleifend.
-Proin ultricies justo a arcu dignissim, eu gravida mauris feugiat.
-Praesent non lorem tincidunt, lobortis massa vitae, blandit ex.
-Morbi commodo turpis fringilla neque ultricies, ac suscipit velit pharetra.
-Curabitur mattis enim id vehicula luctus.
-
--Maecenas Rhoncus
-Integer eget lacus sit amet sapien iaculis volutpat.
-Etiam iaculis arcu non congue tincidunt.
-Sed euismod augue ac eros iaculis, id luctus odio ultrices.
-Proin varius eros vel dolor ullamcorper convallis.
-
--Sem Hendrerit
-Suspendisse commodo urna in sem elementum, sit amet feugiat nunc imperdiet.
-Proin non enim varius, consequat tellus nec, interdum diam.
-Curabitur vestibulum lorem sit amet cursus volutpat.
-Donec pulvinar lacus nec dapibus vehicula.
-
--Tempor Mollis
-Nulla non diam elementum, elementum mi non, dapibus dolor.
-Aenean ac ante feugiat, mollis sem eu, fermentum diam.
-Nullam laoreet dolor sed rutrum porta.
-
--In Consectetur
-Nunc sed orci et est lacinia vulputate sit amet nec ligula.
-Duis vestibulum massa eget diam ultricies, id iaculis dolor aliquet.
-Curabitur sit amet sapien ac elit sodales congue id varius lorem.
-Praesent ornare felis et ante venenatis, eu consequat odio molestie.
-Proin in nulla ac mauris congue dignissim.
-Donec at lectus venenatis, mattis ligula efficitur, pretium justo.
-
--Tellus In
-Praesent porta diam quis laoreet eleifend.
-Proin ultricies justo a arcu dignissim, eu gravida mauris feugiat.
-Praesent non lorem tincidunt, lobortis massa vitae, blandit ex.
-Morbi commodo turpis fringilla neque ultricies, ac suscipit velit pharetra.
-Curabitur mattis enim id vehicula luctus.
-
--Maecenas Rhoncus
-Integer eget lacus sit amet sapien iaculis volutpat.
-Etiam iaculis arcu non congue tincidunt.
-Sed euismod augue ac eros iaculis, id luctus odio ultrices.
-Proin varius eros vel dolor ullamcorper convallis.
-
--Sem Hendrerit
-Suspendisse commodo urna in sem elementum, sit amet feugiat nunc imperdiet.
-Proin non enim varius, consequat tellus nec, interdum diam.
-Curabitur vestibulum lorem sit amet cursus volutpat.
-Donec pulvinar lacus nec dapibus vehicula.
-
--Tempor Mollis
-Nulla non diam elementum, elementum mi non, dapibus dolor.
-Aenean ac ante feugiat, mollis sem eu, fermentum diam.
-Nullam laoreet dolor sed rutrum porta.
-
--In Consectetur
-Nunc sed orci et est lacinia vulputate sit amet nec ligula.
-Duis vestibulum massa eget diam ultricies, id iaculis dolor aliquet.
-Curabitur sit amet sapien ac elit sodales congue id varius lorem.
-Praesent ornare felis et ante venenatis, eu consequat odio molestie.
-Proin in nulla ac mauris congue dignissim.
-Donec at lectus venenatis, mattis ligula efficitur, pretium justo.
-
--Tellus In
-Praesent porta diam quis laoreet eleifend.
-Proin ultricies justo a arcu dignissim, eu gravida mauris feugiat.
-Praesent non lorem tincidunt, lobortis massa vitae, blandit ex.
-Morbi commodo turpis fringilla neque ultricies, ac suscipit velit pharetra.
-Curabitur mattis enim id vehicula luctus.
+-License Attributions
+This game uses Godot Engine, available under following license:
+Copyright (c) 2014-present Godot Engine contributors.
+Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
+See full license terms in LICENSE.txt, and GODOT_COPYRIGHT.txt
