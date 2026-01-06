@@ -6,7 +6,7 @@
 cull_mode = 2
 depth_draw_mode = 1
 specular_mode = 2
-albedo_color = Color(0, 0.7001668, 0.54617774, 1)
+albedo_color = Color(0.77913934, 0.5374282, 0.35200015, 1)
 albedo_texture = ExtResource("1_jqsif")
 normal_enabled = true
 uv1_triplanar = true

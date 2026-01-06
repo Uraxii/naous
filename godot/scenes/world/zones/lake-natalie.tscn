@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://ch0bqgk8cfdeq"]
+[gd_scene load_steps=48 format=4 uid="uid://ch0bqgk8cfdeq"]
 
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="1_6y1nk"]
 [ext_resource type="ArrayMesh" uid="uid://cmfiyexrbhoby" path="res://assets/models/plane-16x16.obj" id="1_8jx1q"]
