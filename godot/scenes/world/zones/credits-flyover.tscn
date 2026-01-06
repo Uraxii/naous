@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=82 format=3 uid="uid://bovh2hjexu5yl"]
 
 [ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
 [ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="2_5b34y"]
@@ -18,7 +18,7 @@ background_energy_multiplier = 2.0
 sky = SubResource("Sky_6y1nk")
 ambient_light_source = 2
 ambient_light_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
-ambient_light_energy = 0.2
+ambient_light_energy = 0.26
 reflected_light_source = 1
 tonemap_mode = 3
 tonemap_white = 2.0
@@ -31,27 +31,144 @@ fog_density = 0.0123
 fog_sky_affect = 0.4
 fog_height = 9.55
 fog_height_density = 0.113
+adjustment_enabled = true
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a2upa"]
 auto_exposure_enabled = true
 auto_exposure_scale = 0.5
-auto_exposure_speed = 0.3
-auto_exposure_min_sensitivity = 160.0
-auto_exposure_max_sensitivity = 1200.0
+auto_exposure_speed = 0.45
+auto_exposure_min_sensitivity = 120.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2upa"]
 animation = &"anim_1"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6o682"]
+animation = &"anim_10"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0fsgn"]
+animation = &"anim_11"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i5emg"]
+animation = &"anim_12"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u8bvc"]
+animation = &"anim_13"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2i0jv"]
+animation = &"anim_14"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qbt1b"]
+animation = &"anim_15"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7hpuh"]
+animation = &"anim_16"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_16t0m"]
+animation = &"anim_17"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lp1p3"]
+animation = &"anim_18"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1465c"]
+animation = &"anim_19"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ntrn5"]
 animation = &"anim_2"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_edilq"]
+animation = &"anim_20"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n8a3i"]
+animation = &"anim_21"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ws1f5"]
+animation = &"anim_22"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ffwap"]
 animation = &"anim_3"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1tqvt"]
+animation = &"anim_4"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v7off"]
+animation = &"anim_5"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o48bc"]
+animation = &"anim_6"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2humq"]
+animation = &"anim_7"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_omi1n"]
+animation = &"anim_8"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t7o6w"]
+animation = &"anim_9"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1tqvt"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v7off"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0fsgn"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i5emg"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u8bvc"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2i0jv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16t0m"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lp1p3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1465c"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_edilq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n8a3i"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aotaq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uvpaw"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16wwa"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a2upa"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ntrn5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ffwap"]
 switch_mode = 2
 advance_mode = 2
 
@@ -63,16 +180,66 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_omi1n"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t7o6w"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6o682"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_omi1n"]
 states/Start/position = Vector2(-48, 84)
 states/anim_1/node = SubResource("AnimationNodeAnimation_a2upa")
 states/anim_1/position = Vector2(86, 84)
+states/anim_10/node = SubResource("AnimationNodeAnimation_6o682")
+states/anim_10/position = Vector2(62, 787)
+states/anim_11/node = SubResource("AnimationNodeAnimation_0fsgn")
+states/anim_11/position = Vector2(37, 864)
+states/anim_12/node = SubResource("AnimationNodeAnimation_i5emg")
+states/anim_12/position = Vector2(79, 956)
+states/anim_13/node = SubResource("AnimationNodeAnimation_u8bvc")
+states/anim_13/position = Vector2(47, 1038)
+states/anim_14/node = SubResource("AnimationNodeAnimation_2i0jv")
+states/anim_14/position = Vector2(29, 1143)
+states/anim_15/node = SubResource("AnimationNodeAnimation_qbt1b")
+states/anim_15/position = Vector2(121, 1257)
+states/anim_16/node = SubResource("AnimationNodeAnimation_7hpuh")
+states/anim_16/position = Vector2(-48, 1233)
+states/anim_17/node = SubResource("AnimationNodeAnimation_16t0m")
+states/anim_17/position = Vector2(-109, 1411)
+states/anim_18/node = SubResource("AnimationNodeAnimation_lp1p3")
+states/anim_18/position = Vector2(62, 1446)
+states/anim_19/node = SubResource("AnimationNodeAnimation_1465c")
+states/anim_19/position = Vector2(1, 1536)
 states/anim_2/node = SubResource("AnimationNodeAnimation_ntrn5")
-states/anim_2/position = Vector2(193, 84)
+states/anim_2/position = Vector2(86, 184)
+states/anim_20/node = SubResource("AnimationNodeAnimation_edilq")
+states/anim_20/position = Vector2(-32, 1606)
+states/anim_21/node = SubResource("AnimationNodeAnimation_n8a3i")
+states/anim_21/position = Vector2(-26, 1690)
+states/anim_22/node = SubResource("AnimationNodeAnimation_ws1f5")
+states/anim_22/position = Vector2(-336, 1656)
 states/anim_3/node = SubResource("AnimationNodeAnimation_ffwap")
-states/anim_3/position = Vector2(266, 162)
-transitions = ["Start", "anim_1", SubResource("AnimationNodeStateMachineTransition_1tqvt"), "anim_1", "anim_2", SubResource("AnimationNodeStateMachineTransition_v7off"), "anim_2", "anim_3", SubResource("AnimationNodeStateMachineTransition_o48bc"), "anim_3", "anim_1", SubResource("AnimationNodeStateMachineTransition_2humq")]
-graph_offset = Vector2(-621, -27)
+states/anim_3/position = Vector2(203, 320)
+states/anim_4/node = SubResource("AnimationNodeAnimation_1tqvt")
+states/anim_4/position = Vector2(37, 288)
+states/anim_5/node = SubResource("AnimationNodeAnimation_v7off")
+states/anim_5/position = Vector2(59, 426)
+states/anim_6/node = SubResource("AnimationNodeAnimation_o48bc")
+states/anim_6/position = Vector2(75, 514)
+states/anim_7/node = SubResource("AnimationNodeAnimation_2humq")
+states/anim_7/position = Vector2(83, 584)
+states/anim_8/node = SubResource("AnimationNodeAnimation_omi1n")
+states/anim_8/position = Vector2(71, 656)
+states/anim_9/node = SubResource("AnimationNodeAnimation_t7o6w")
+states/anim_9/position = Vector2(62, 729)
+transitions = ["Start", "anim_1", SubResource("AnimationNodeStateMachineTransition_1tqvt"), "anim_1", "anim_2", SubResource("AnimationNodeStateMachineTransition_v7off"), "anim_5", "anim_6", SubResource("AnimationNodeStateMachineTransition_0fsgn"), "anim_6", "anim_7", SubResource("AnimationNodeStateMachineTransition_i5emg"), "anim_7", "anim_8", SubResource("AnimationNodeStateMachineTransition_u8bvc"), "anim_8", "anim_9", SubResource("AnimationNodeStateMachineTransition_2i0jv"), "anim_9", "anim_10", SubResource("AnimationNodeStateMachineTransition_16t0m"), "anim_10", "anim_11", SubResource("AnimationNodeStateMachineTransition_lp1p3"), "anim_11", "anim_12", SubResource("AnimationNodeStateMachineTransition_1465c"), "anim_12", "anim_13", SubResource("AnimationNodeStateMachineTransition_edilq"), "anim_13", "anim_14", SubResource("AnimationNodeStateMachineTransition_n8a3i"), "anim_19", "anim_20", SubResource("AnimationNodeStateMachineTransition_aotaq"), "anim_20", "anim_21", SubResource("AnimationNodeStateMachineTransition_uvpaw"), "anim_21", "anim_22", SubResource("AnimationNodeStateMachineTransition_16wwa"), "anim_2", "anim_4", SubResource("AnimationNodeStateMachineTransition_a2upa"), "anim_4", "anim_3", SubResource("AnimationNodeStateMachineTransition_ntrn5"), "anim_3", "anim_5", SubResource("AnimationNodeStateMachineTransition_ffwap"), "anim_18", "anim_17", SubResource("AnimationNodeStateMachineTransition_o48bc"), "anim_17", "anim_19", SubResource("AnimationNodeStateMachineTransition_2humq"), "anim_14", "anim_16", SubResource("AnimationNodeStateMachineTransition_omi1n"), "anim_16", "anim_15", SubResource("AnimationNodeStateMachineTransition_t7o6w"), "anim_15", "anim_18", SubResource("AnimationNodeStateMachineTransition_6o682")]
+graph_offset = Vector2(-986, 392)
 
 [sub_resource type="Animation" id="Animation_5b34y"]
 length = 0.001
@@ -103,7 +270,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_fu1cq"]
 resource_name = "new_animation"
-length = 10.0
+length = 9.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -111,15 +278,27 @@ tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 10),
+"times": PackedFloat32Array(0, 9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-78, 9, -2), Vector3(-60, 9, -2)]
+"values": [Vector3(-70.995, 58.245, -191.765), Vector3(-78.805, 32.295, -191.765)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.61086524, -3.0613074, 0), Vector3(0.3926991, -3.0613074, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_a2upa"]
 resource_name = "anim_2"
-length = 10.0
+length = 4.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -127,10 +306,10 @@ tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 10),
+"times": PackedFloat32Array(0, 4.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-58.115, 20.625, 4.32), Vector3(-31.68, 19.9, 10.14)]
+"values": [Vector3(-36.315, 11.25, 15.55), Vector3(-27.982, 9.499, 17.445)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -142,23 +321,23 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(-0.43633232, -1.0210177, 0)]
+"values": [Vector3(0, -3.0019662, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ntrn5"]
 resource_name = "anim_3"
-length = 15.0
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 15),
+"times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-41.375, 9.86, 39.585), Vector3(-41.375, 12.63, 58.655)]
+"values": [Vector3(-34.035, 49.095, -10.385), Vector3(-36.555, 35.14, -62.03)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -167,18 +346,569 @@ tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 15),
+"times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-0.3228859, -2.0682151, 0), Vector3(-0.3228859, -2.6267204, 0)]
+"values": [Vector3(-0.3228859, -2.0682151, 0), Vector3(-0.3403392, -2.0682151, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ffwap"]
+resource_name = "anim_4"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.87, 13.38, -6.93), Vector3(0.245, 10.635, -20.305)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.38397244, -2.0682151, 0), Vector3(-0.3403392, -2.0682151, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1tqvt"]
+resource_name = "anim_5"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 6, 6.745), Vector3(0, 4.54, -17.93)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.17453292, 0.008726646, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v7off"]
+resource_name = "anim_6"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-8, 5, -46.5), Vector3(1.15, 5.05, -46.555)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.17453292, -0.53232545, 0), Vector3(0.2443461, -0.1134464, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o48bc"]
+resource_name = "anim_7"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-29.9, 1.6, -81.8), Vector3(-23, 1.6, -81.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.05235988, -0.8552113, 0), Vector3(0.017453292, -0.6719518, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2humq"]
+resource_name = "anim_8"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-29.9, 49.185, -81.8), Vector3(-15.705, 48.245, -86.48)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.7853982, -0.6894051, 0), Vector3(-0.83775806, -0.5742133, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_omi1n"]
+resource_name = "anim_9"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-26.615, 7.2, -141.98), Vector3(-27.96, 6.365, -165.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.53232545, -0.6894051, 0), Vector3(-0.46251225, -1.2653637, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t7o6w"]
+resource_name = "anim_10"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-64.59, 0.22, -150.195), Vector3(-74.595, 0.6, -170.385)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.1308997, 1.6214108, 0), Vector3(0.1308997, 1.1763519, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6o682"]
+resource_name = "anim_11"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-47.44, 2.005, -223.29), Vector3(-47.44, 2.005, -239.105)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.1308997, 0.9843657, 0), Vector3(0.1308997, 0.9843657, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0fsgn"]
+resource_name = "anim_12"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-18.88, 1.035, -220.42), Vector3(-7.16, 1.035, -197.09)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.18325958, -1.9530234, 0), Vector3(0.04363323, -1.7784905, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i5emg"]
+resource_name = "anim_13"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-124.9, 4.915, -98.9), Vector3(-140.355, 3.67, -95.005)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.02617994, -4.5273843, 0), Vector3(0.13962634, -4.597197, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u8bvc"]
+resource_name = "anim_14"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-243.75, 6.225, -119.485), Vector3(-241.945, 2.4, -111.62)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.2443461, -8.332202, 0), Vector3(0.15707964, -7.668977, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2i0jv"]
+resource_name = "anim_15"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-345.3, 34.2, -356.6), Vector3(-343.625, 34.2, -368.66)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.0716321, -7.860963, 0), Vector3(-1.2566371, -8.000589, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qbt1b"]
+resource_name = "anim_16"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-334.46, 2.535, -317.72), Vector3(-329.68, 2.535, -323.435)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.2443461, -6.2831855, 0), Vector3(0.3926991, -6.143559, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7hpuh"]
+resource_name = "anim_17"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-344.7, 4.3, -425.2), Vector3(-346.03, 3.81, -459.65)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.04363323, -6.5973444, 0), Vector3(0.008726646, -7.2169366, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_16t0m"]
+resource_name = "anim_18"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-325.77, 11.5, -435.12), Vector3(-327.09, 11.5, -418.255)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.38397244, -2.2602015, 0), Vector3(-0.38397244, -1.6406095, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lp1p3"]
+resource_name = "anim_19"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(77.9, 14, -427.38), Vector3(128.475, 17.045, -430.205)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.8587756, 0), Vector3(-0.17453292, -2.1380284, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1465c"]
+resource_name = "anim_20"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(209.695, 2.175, -415.47), Vector3(225.605, 2.175, -409.375)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.17453292, -0.94596845, 0), Vector3(0.33161256, 0.11868239, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_edilq"]
+resource_name = "anim_21"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-84.8, 4.6, -100.7), Vector3(-74.04, 7.73, -96.805)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.2443461, -1.0245082, 0), Vector3(0.2443461, -0.89360857, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n8a3i"]
+resource_name = "anim_22"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(70.28, 15.165, -108.055), Vector3(88.285, 28.07, -130.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.54105204, 0.81681406, 0), Vector3(0.30543262, 1.1397, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a2upa"]
 _data = {
 &"RESET": SubResource("Animation_5b34y"),
 &"anim_1": SubResource("Animation_fu1cq"),
+&"anim_10": SubResource("Animation_t7o6w"),
+&"anim_11": SubResource("Animation_6o682"),
+&"anim_12": SubResource("Animation_0fsgn"),
+&"anim_13": SubResource("Animation_i5emg"),
+&"anim_14": SubResource("Animation_u8bvc"),
+&"anim_15": SubResource("Animation_2i0jv"),
+&"anim_16": SubResource("Animation_qbt1b"),
+&"anim_17": SubResource("Animation_7hpuh"),
+&"anim_18": SubResource("Animation_16t0m"),
+&"anim_19": SubResource("Animation_lp1p3"),
 &"anim_2": SubResource("Animation_a2upa"),
-&"anim_3": SubResource("Animation_ntrn5")
+&"anim_20": SubResource("Animation_1465c"),
+&"anim_21": SubResource("Animation_edilq"),
+&"anim_22": SubResource("Animation_n8a3i"),
+&"anim_3": SubResource("Animation_ntrn5"),
+&"anim_4": SubResource("Animation_ffwap"),
+&"anim_5": SubResource("Animation_1tqvt"),
+&"anim_6": SubResource("Animation_v7off"),
+&"anim_7": SubResource("Animation_o48bc"),
+&"anim_8": SubResource("Animation_2humq"),
+&"anim_9": SubResource("Animation_omi1n")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_xu86d"]
@@ -209,7 +939,9 @@ transform = Transform3D(-0.58778524, -0.3290569, 0.7390739, 0, 0.9135455, 0.4067
 light_energy = 2.5
 shadow_enabled = true
 shadow_blur = 8.0
-directional_shadow_max_distance = 200.0
+directional_shadow_split_2 = 0.3
+directional_shadow_split_3 = 0.6
+directional_shadow_max_distance = 180.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SUN"]
 environment = SubResource("Environment_ffwap")
@@ -332,6 +1064,9 @@ visible = false
 visible = false
 
 [node name="Hints" parent="Coalescence/BubbleZones/ViewingPlatform" index="6"]
+visible = false
+
+[node name="Player" parent="Coalescence" index="2"]
 visible = false
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
