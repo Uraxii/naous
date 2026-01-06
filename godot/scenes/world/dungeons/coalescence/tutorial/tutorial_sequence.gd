@@ -5,6 +5,9 @@ signal sequence_changed(sequence: SEQ)
 signal spawn_entity_at(entity: Entity, location: Vector3)
 signal despawn_entity(entity: Entity)
 
+const CREDITS_SCENE: PackedScene = preload("uid://bovh2hjexu5yl")
+const TEST_SKIP_TO_CREDITS: bool = false
+
 ## States of the sequence
 enum SEQ {
     # Player is just spawned at the entry to the ruins
@@ -85,6 +88,9 @@ func _on_beginning_hud_fade_in() -> void:
     hud_layer.display_objective_hud("Explore the ruins")
     
     starter_gear_pickup.collected.connect(_on_beginning_gear_pickup)
+    
+    if TEST_SKIP_TO_CREDITS: ## TESTING
+        _on_tutorial_fade_out()
 
 
 func _on_beginning_gear_pickup() -> void:
@@ -573,6 +579,7 @@ func _on_tutorial_fade_out() -> void:
     # TODO: Do something that isn't just softlocking the player in the void :D
     Globals.logger.debug("Tutorial Complete!")
 	# TODO Switch to the Credits flyover scene!
+    get_tree().change_scene_to_packed(CREDITS_SCENE)
 #endregion ESCAPE
 #endregion Sequence Functions
 

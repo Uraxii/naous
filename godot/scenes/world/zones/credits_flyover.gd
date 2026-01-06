@@ -15,7 +15,8 @@ func _ready() -> void:
 
 	## Start music
 	if music:
-		Music.start_track(music)
+		if Globals.music:
+			Globals.music.start_track(music)
 
 
 func _on_credits_scroll_finished() -> void:

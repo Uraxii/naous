@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=68 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -30,8 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://dwvukle78pxbp" path="res://scenes/entities/control_zone.tscn" id="24_acyb3"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="25_vi3y7"]
 [ext_resource type="Resource" uid="uid://dbkj5mkwehrw4" path="res://assets/music/music-04.tres" id="27_vi3y7"]
-[ext_resource type="Script" uid="uid://bnblk2t6ab7ao" path="res://scripts/music/dynamic_music_area.gd" id="29_7kbnc"]
 [ext_resource type="PackedScene" uid="uid://dxdmxuu3rsr0b" path="res://assets/prefabs/cliff.tscn" id="28_7kbnc"]
+[ext_resource type="Script" uid="uid://bnblk2t6ab7ao" path="res://scripts/music/dynamic_music_area.gd" id="29_7kbnc"]
 [ext_resource type="PackedScene" uid="uid://d1m5spyq03wiu" path="res://assets/prefabs/boulder_cliff.tscn" id="29_vi3y7"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_mc5jl"]
