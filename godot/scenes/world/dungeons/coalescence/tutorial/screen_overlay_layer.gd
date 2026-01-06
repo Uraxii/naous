@@ -6,6 +6,8 @@ signal fade_out_complete
 
 @onready var fade_box: ColorRect = %FadeBox
 
+const FADE_DELAY: float = 1.7
+
 const FADE_DURATION: float = 4.0
 var current_tween: Tween
 
@@ -30,6 +32,7 @@ func fade_in(duration_override: float = -1) -> void:
     if duration_override >= 0:
         fade_duration = duration_override
     var fade_time := fade_duration * (fade_box.color.a) # Ratio for how much to fade
+    current_tween.tween_interval(FADE_DELAY) ## Pause while fully black
     current_tween.tween_property(fade_box, "color", Color(0,0,0,0), fade_time)
     current_tween.tween_callback(_on_fade_in_complete)
 
@@ -53,6 +56,7 @@ func fade_out(duration_override: float = -1) -> void:
         fade_duration = duration_override
     var fade_time := fade_duration * (1 - fade_box.color.a) # Ratio for how much to fade
     current_tween.tween_property(fade_box, "color", Color(0,0,0,1), fade_time)
+    current_tween.tween_interval(FADE_DELAY) ## Pause while fully black
     current_tween.tween_callback(_on_fade_out_complete)
 
 
