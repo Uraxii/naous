@@ -1,18 +1,23 @@
 extends Node
 
-signal scroll_finished
+signal finished
+
+const USE_ITERATIVE_REVEAL:bool = true
 
 ## Populates the visible credits.
 ## A simple syntax is employed to format the result. "-" indicate titles. You can optionally
 ## include a description in the line following an indented line.
-
+@export var iterative_duration: float = 158.0 ## in seconds
 @export var scroll_duration: int = 30
 @export var start_delay:float = 4.0
 @export_file("*.txt") var credits_path: String ## Text file. No special features or parsing yet.
 @export_multiline var credits_text: String ## Will be used if [member credits_path] is empty.
 
+var groups: Array[Array] = []
+
 @onready var template_header: Label = %TemplateHeader
 @onready var template_body: Label = %TemplateBody
+@onready var title: Label = %TITLE
 @onready var credits_items: VBoxContainer = %CreditsItems
 @onready var scroll_container: ScrollContainer = %ScrollContainer
 
@@ -29,7 +34,13 @@ func _ready() -> void:
 	else:
 		credits_data = credits_text
 	populate_with(credits_data)
-	start_scroll(scroll_duration)
+	if not USE_ITERATIVE_REVEAL:
+		start_scroll(scroll_duration)
+	else:
+		start_reveal_iter()
+		
+	var fade_in_title:Tween = title.create_tween()
+	fade_in_title.tween_property(title, ^"modulate", Color.WHITE, 3.0).from(Color.TRANSPARENT)
 	
 func populate_with(text: String) -> void:
 	## Clear all existing entries
@@ -41,12 +52,15 @@ func populate_with(text: String) -> void:
 	
 	## Parse it
 	var splits: PackedStringArray = text.split("\n", false)
-	
+	var group: int = -1 ## Used for grouping everything between headings
 	for split: String in splits:
 		var new_item: Label
 		var new_text: String
 		if split.begins_with("-"):
 			## Title/heading
+			group += 1
+			groups.resize(group + 1)
+			groups[group] = Array()
 			new_item = template_header.duplicate()
 			new_text = split.trim_prefix("-")
 		else:
@@ -54,10 +68,18 @@ func populate_with(text: String) -> void:
 			new_text = split
 			
 		new_item.text = new_text
-		new_item.visible = true
+		
+		if USE_ITERATIVE_REVEAL:
+			new_item.visible = false
+			new_item.modulate = Color.TRANSPARENT
+		else:
+			new_item.visible = true
+			#new_item.modulate = Color.WHITE
 		
 		credits_items.add_child(new_item)
+		groups[group].push_back(new_item)
 
+## DEPRECATED
 func start_scroll(duration: float) -> void:
 	var scroll = scroll_container.get_v_scroll_bar()
 	await scroll.changed
@@ -68,4 +90,61 @@ func start_scroll(duration: float) -> void:
 	tween.tween_interval(start_delay)
 	tween.tween_property(scroll, ^"value", scroll.max_value, scroll_duration)
 	tween.tween_property(scroll_container, ^"modulate", Color.TRANSPARENT, 4.0)
-	tween.tween_callback(scroll_finished.emit)
+	tween.tween_callback(finished.emit)
+
+
+var iter_current_group:int
+var pages:int
+var tick_interval:float
+var ticker:Tween
+func start_reveal_iter() -> void:
+	#for group:Array in groups:
+		#for ci:CanvasItem in group:
+			#ci.hide()
+	iter_current_group = -1
+	
+	pages = groups.size()
+	tick_interval = iterative_duration / (pages + 1)
+	ticker = create_tween()
+	ticker.set_loops(pages)
+	ticker.tween_interval(tick_interval)
+	ticker.tween_callback(_on_iterative_tick)
+	ticker.finished.connect(_on_ticker_finished)
+	
+	
+func _on_iterative_tick() -> void:
+	#var first_canvas_item:CanvasItem = groups[iter_current_group].front()
+	#if first_canvas_item.visible:
+	for ci:CanvasItem in groups[iter_current_group]:
+		ci.hide()
+		
+	iter_current_group += 1
+	
+	var fade_time:float = tick_interval / 8.0
+	var clear_time:float = fade_time
+	var remainder:float = tick_interval - clear_time - (fade_time * 2)
+	
+	if iter_current_group == 1:
+		## Hide the title
+		var title_tween:Tween = title.create_tween()
+		title_tween.tween_property(title, ^"modulate", Color.TRANSPARENT, remainder + clear_time)
+		title_tween.tween_interval(fade_time * 2)
+		#title_tween.tween_callback(title.hide) ## Leave it to act as a spacer
+	
+	for ci:CanvasItem in groups[iter_current_group]:
+		var tween:Tween = create_tween()
+		## Fade In
+		tween.tween_property(ci, ^"modulate", Color.WHITE, fade_time)#.from(Color.TRANSPARENT)
+		## Show time
+		tween.tween_interval(remainder)
+		## Fade Out
+		tween.tween_property(ci, ^"modulate", Color.TRANSPARENT, fade_time)
+		## Clear time
+		## (do nothing, tween is finished)
+		ci.show()
+		#ci.show.call_deferred()
+
+func _on_ticker_finished() -> void:
+	## Exit the credits scene
+	finished.emit()
+	pass

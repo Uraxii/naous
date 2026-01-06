@@ -1,10 +1,11 @@
-[gd_scene load_steps=83 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=85 format=3 uid="uid://bovh2hjexu5yl"]
 
 [ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
 [ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="2_5b34y"]
 [ext_resource type="Script" uid="uid://b87r01re7n4ak" path="res://scripts/ui/credits.gd" id="2_biuu0"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="3_a2upa"]
 [ext_resource type="PackedScene" uid="uid://tpls5ou1qmjp" path="res://scenes/world/dungeons/coalescence/coalescence.tscn" id="4_ntrn5"]
+[ext_resource type="Texture2D" uid="uid://e4h148oimaqf" path="res://assets/textures/ink-flag.png" id="6_ntrn5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_65e3w"]
 panorama = ExtResource("3_a2upa")
@@ -941,10 +942,14 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_xu86d"]
-font_size = 22
+font_size = 24
 shadow_size = 6
 shadow_color = Color(0, 0, 0, 0.7607843)
 shadow_offset = Vector2(1, 2)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ffwap"]
+texture = ExtResource("6_ntrn5")
+modulate_color = Color(0.1638613, 0.16386127, 0.16386127, 0.49411765)
 
 [sub_resource type="LabelSettings" id="LabelSettings_biuu0"]
 line_spacing = 0.0
@@ -1154,23 +1159,29 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Johnothon Doe"
 label_settings = SubResource("LabelSettings_xu86d")
+horizontal_alignment = 1
 
 [node name="TemplateBody" type="Label" parent="Credits/MarginContainer/ScrollContainer/CreditsItems"]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ffwap")
 text = "Contributed to feature, feature, this feature, that feature, a whole range of features, as well as two features."
 label_settings = SubResource("LabelSettings_biuu0")
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="TITLE" type="Label" parent="Credits/MarginContainer/ScrollContainer/CreditsItems"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 text = "Naous"
 label_settings = SubResource("LabelSettings_a2upa")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="finished" from="Credits" to="." method="_on_credits_finished"]
 
 [editable path="Coalescence"]
 [editable path="Coalescence/BubbleZones/EntryPath"]
