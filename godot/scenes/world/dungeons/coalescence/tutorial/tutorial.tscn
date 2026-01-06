@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=66 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://b4k3rvmuqbaa5" path="res://scenes/world/dungeons/coalescence/tutorial/menu_layer.gd" id="9_w4dxx"]
 [ext_resource type="Script" uid="uid://f68pd3ys4akk" path="res://scenes/world/dungeons/coalescence/tutorial/target_panel.gd" id="10_00c68"]
 [ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="10_23v16"]
+[ext_resource type="PackedScene" uid="uid://djcmn00dr5t2d" path="res://scenes/ui/music_control_popup.tscn" id="11_3qj3r"]
 [ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="11_f5oke"]
 [ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="12_g7sat"]
 [ext_resource type="Script" uid="uid://cfyjnr8bvcyt8" path="res://scripts/entities/entity.gd" id="13_xujpj"]
@@ -406,6 +407,8 @@ surface_material_override/0 = ExtResource("7_4r05b")
 unique_name_in_owner = true
 layer = 2
 script = ExtResource("8_0cvc3")
+
+[node name="MusicControlPanel" parent="HUDLayer" instance=ExtResource("11_3qj3r")]
 
 [node name="QuestInfoContainer" type="PanelContainer" parent="HUDLayer"]
 unique_name_in_owner = true
