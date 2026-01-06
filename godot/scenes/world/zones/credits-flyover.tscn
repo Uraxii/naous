@@ -1,15 +1,43 @@
-[gd_scene load_steps=23 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=26 format=3 uid="uid://bovh2hjexu5yl"]
 
-[ext_resource type="PackedScene" uid="uid://ch0bqgk8cfdeq" path="res://scenes/world/zones/lake-natalie.tscn" id="1_biuu0"]
 [ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
-[ext_resource type="AudioStream" uid="uid://psvgua4141k" path="res://assets/music/02 Ambivalent Fellow/02 - Ambivalent Fellow - Complete.mp3" id="2_a2upa"]
+[ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="2_5b34y"]
 [ext_resource type="Script" uid="uid://b87r01re7n4ak" path="res://scripts/ui/credits.gd" id="2_biuu0"]
-[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="3_ntrn5"]
+[ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="3_a2upa"]
+[ext_resource type="PackedScene" uid="uid://tpls5ou1qmjp" path="res://scenes/world/dungeons/coalescence/coalescence.tscn" id="4_ntrn5"]
 
-[sub_resource type="Resource" id="Resource_ffwap"]
-script = ExtResource("3_ntrn5")
-file = ExtResource("2_a2upa")
-metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_65e3w"]
+panorama = ExtResource("3_a2upa")
+
+[sub_resource type="Sky" id="Sky_6y1nk"]
+sky_material = SubResource("PanoramaSkyMaterial_65e3w")
+
+[sub_resource type="Environment" id="Environment_ffwap"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_6y1nk")
+ambient_light_source = 2
+ambient_light_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
+ambient_light_energy = 0.2
+reflected_light_source = 1
+tonemap_mode = 3
+tonemap_white = 2.0
+ssao_enabled = true
+ssao_intensity = 2.5
+fog_enabled = true
+fog_light_color = Color(0.5482879, 0.5304627, 0.60917205, 1)
+fog_light_energy = 0.0
+fog_density = 0.0123
+fog_sky_affect = 0.4
+fog_height = 9.55
+fog_height_density = 0.113
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a2upa"]
+auto_exposure_enabled = true
+auto_exposure_scale = 0.5
+auto_exposure_speed = 0.3
+auto_exposure_min_sensitivity = 160.0
+auto_exposure_max_sensitivity = 1200.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2upa"]
 animation = &"anim_1"
@@ -174,9 +202,137 @@ shadow_offset = Vector2(0, 1)
 
 [node name="CreditsFlyover" type="Node3D"]
 script = ExtResource("1_fu1cq")
-music = SubResource("Resource_ffwap")
+music = ExtResource("2_5b34y")
 
-[node name="lake-natalie" parent="." instance=ExtResource("1_biuu0")]
+[node name="SUN" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.58778524, -0.3290569, 0.7390739, 0, 0.9135455, 0.40673667, -0.80901706, 0.2390738, -0.5369685, 0, 100, 0)
+light_energy = 2.5
+shadow_enabled = true
+shadow_blur = 8.0
+directional_shadow_max_distance = 200.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SUN"]
+environment = SubResource("Environment_ffwap")
+camera_attributes = SubResource("CameraAttributesPractical_a2upa")
+
+[node name="Coalescence" parent="." instance=ExtResource("4_ntrn5")]
+
+[node name="sun" parent="Coalescence/Environment" index="1"]
+visible = false
+
+[node name="EchoHint" parent="Coalescence/BubbleZones/EntryPath" index="5"]
+visible = false
+
+[node name="PlazaH" parent="Coalescence/BubbleZones/EntryPath" index="6"]
+visible = false
+
+[node name="BoulderHint" parent="Coalescence/BubbleZones/EntryPath" index="7"]
+visible = false
+
+[node name="LoreHint" parent="Coalescence/BubbleZones/EntryPath" index="8"]
+visible = false
+
+[node name="EmptyHint" parent="Coalescence/BubbleZones/EntryPath" index="9"]
+visible = false
+
+[node name="EmptyHint2" parent="Coalescence/BubbleZones/EntryPath" index="10"]
+visible = false
+
+[node name="MeshInstance3D2" parent="Coalescence/BubbleZones/Plaza/Occluder" index="0"]
+visible = false
+
+[node name="MeshInstance3D3" parent="Coalescence/BubbleZones/Plaza/Occluder" index="1"]
+visible = false
+
+[node name="MeshInstance3D4" parent="Coalescence/BubbleZones/Plaza/Occluder" index="2"]
+visible = false
+
+[node name="MeshInstance3D5" parent="Coalescence/BubbleZones/Plaza/Occluder" index="3"]
+visible = false
+
+[node name="MeshInstance3D6" parent="Coalescence/BubbleZones/Plaza/Occluder" index="4"]
+visible = false
+
+[node name="MeshInstance3D9" parent="Coalescence/BubbleZones/Plaza/Occluder" index="6"]
+visible = false
+
+[node name="MeshInstance3D13" parent="Coalescence/BubbleZones/Plaza/Occluder" index="10"]
+visible = false
+
+[node name="MeshInstance3D14" parent="Coalescence/BubbleZones/Plaza/Occluder" index="11"]
+visible = false
+
+[node name="MeshInstance3D15" parent="Coalescence/BubbleZones/Plaza/Occluder" index="12"]
+visible = false
+
+[node name="MeshInstance3D16" parent="Coalescence/BubbleZones/Plaza/Occluder" index="13"]
+visible = false
+
+[node name="MeshInstance3D8" parent="Coalescence/BubbleZones/Plaza/Occluder" index="16"]
+visible = false
+
+[node name="FountainHint" parent="Coalescence/BubbleZones/Plaza/Fountain" index="10"]
+visible = false
+
+[node name="EntryWayHint" parent="Coalescence/BubbleZones/Plaza/Triggers" index="0"]
+visible = false
+
+[node name="MaskingSiteHint" parent="Coalescence/BubbleZones/Plaza/Triggers" index="1"]
+visible = false
+
+[node name="ViewingPlatformH" parent="Coalescence/BubbleZones/Plaza/Triggers" index="2"]
+visible = false
+
+[node name="LibraryH" parent="Coalescence/BubbleZones/Plaza/Triggers" index="3"]
+visible = false
+
+[node name="PatrolEnemyH" parent="Coalescence/BubbleZones/Plaza/Triggers" index="4"]
+visible = false
+
+[node name="Pickup1H" parent="Coalescence/BubbleZones/Plaza/Triggers" index="5"]
+visible = false
+
+[node name="Pickup2H" parent="Coalescence/BubbleZones/Plaza/Triggers" index="6"]
+visible = false
+
+[node name="Pickup3H" parent="Coalescence/BubbleZones/Plaza/Triggers" index="7"]
+visible = false
+
+[node name="SmallPackH" parent="Coalescence/BubbleZones/Plaza/Triggers" index="8"]
+visible = false
+
+[node name="SmallPack2H" parent="Coalescence/BubbleZones/Plaza/Triggers" index="9"]
+visible = false
+
+[node name="sun" parent="Coalescence/BubbleZones/Plaza/Plaza Environment" index="1"]
+visible = false
+
+[node name="Hints" parent="Coalescence/BubbleZones/Library/LibraryBuilding/FirstFloor" index="5"]
+visible = false
+
+[node name="Hints" parent="Coalescence/BubbleZones/Library/LibraryBuilding/SecondFloor" index="2"]
+visible = false
+
+[node name="Hints" parent="Coalescence/BubbleZones/Library" index="4"]
+visible = false
+
+[node name="Hints" parent="Coalescence/BubbleZones/Dwellings" index="5"]
+visible = false
+
+[node name="MaskingSite" parent="Coalescence/BubbleZones" index="4"]
+visible = false
+
+[node name="Hints" parent="Coalescence/BubbleZones/MaskingSite" index="3"]
+visible = false
+
+[node name="Hints" parent="Coalescence/BubbleZones/Markets" index="3"]
+visible = false
+
+[node name="ViewingPlatform" parent="Coalescence/BubbleZones" index="6"]
+visible = false
+
+[node name="Hints" parent="Coalescence/BubbleZones/ViewingPlatform" index="6"]
+visible = false
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_omi1n")
@@ -251,3 +407,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="scroll_finished" from="Credits" to="." method="_on_credits_scroll_finished"]
+
+[editable path="Coalescence"]
+[editable path="Coalescence/BubbleZones/EntryPath"]
+[editable path="Coalescence/BubbleZones/Plaza"]
+[editable path="Coalescence/BubbleZones/Plaza/Plaza Environment"]
+[editable path="Coalescence/BubbleZones/Library"]
+[editable path="Coalescence/BubbleZones/Dwellings"]
+[editable path="Coalescence/BubbleZones/MaskingSite"]
+[editable path="Coalescence/BubbleZones/Markets"]
+[editable path="Coalescence/BubbleZones/ViewingPlatform"]
