@@ -32,7 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://1ylgy66wcqit" path="res://assets/prefabs/sand_dunes.tscn" id="27_s72rl"]
 [ext_resource type="Texture2D" uid="uid://b5p3ex0xtdv5j" path="res://assets/models/grass_x_0.png" id="31_2j48s"]
 [ext_resource type="Script" uid="uid://csbrdjitu0hdl" path="res://scripts/utils/random_rotate_multimesh_instances.gd" id="32_kff60"]
-[ext_resource type="PackedScene" uid="uid://dqljrgdwdfqk2" path="res://assets/models/enemies/archa_enemy.tscn" id="33_y46pn"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_vboxf"]
 material = ExtResource("18_bef4i")
@@ -1053,15 +1052,14 @@ multimesh = SubResource("MultiMesh_kff60")
 script = ExtResource("32_kff60")
 
 [node name="grassGeneratorSourceMesh" type="MeshInstance3D" parent="grassGenerator"]
+visible = false
 mesh = SubResource("ArrayMesh_kff60")
 skeleton = NodePath("")
 
 [node name="grassGeneratorSpawnZone" type="MeshInstance3D" parent="grassGenerator"]
 transform = Transform3D(6.3504076, -1.5449573, -3.3766113e-08, 0, -8.742278e-08, 1, -7.7247863, -1.2700815, -2.7758514e-08, 13.25, 2.25, 2.5)
+visible = false
 mesh = ExtResource("7_47l1t")
 skeleton = NodePath("../..")
 
 [node name="enemies" type="Node3D" parent="."]
-
-[node name="archa-enemy" parent="." instance=ExtResource("33_y46pn")]
-transform = Transform3D(0.18926677, 0, 0.9819257, 0, 1, 0, -0.9819257, 0, 0.18926677, -13.0791025, 1.8139734, -4.2792187)

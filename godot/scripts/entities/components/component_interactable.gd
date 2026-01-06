@@ -8,7 +8,9 @@ signal interaction_complete
 @export var requirements: Array[InteractableRequirement]
 
 @export_category("Interaction Details")
-@export var prompt_text: String = "INTERACT WITH ME" ## Text indicating what action occurs when interacting with this object (intended for UI)
+## Text indicating what action occurs when interacting with this object (intended for UI)
+@export var prompt_text: String = "INTERACT WITH ME":
+    get = get_prompt_text
 @export_range(0, 60, 0.1, "or_greater") var time_to_complete: float = 1.0 ## Time in seconds to complete interaction. 0 will result in the interaction completing immediately
 @export_range(1, 5, 0.1, "or_greater") var timer_speed_modifier_per_entity: float = 1.0 ## Multiplier that increases the speed of the timer for each interacting Entity
 @export_range(1, 100, 1, "or_greater") var priority: int = 1 ## Higher values have priority over lower values (primarily for UI purposes)
@@ -57,6 +59,9 @@ func get_current_interaction_progress() -> float:
 func is_higher_priority_than(interactable: InteractableComponent) -> bool:
     return priority > interactable.priority
 
+
+func get_prompt_text() -> String:
+    return "(F) " + prompt_text
 
 func _initialize_requirements() -> void:
     if not requirements.is_empty():
