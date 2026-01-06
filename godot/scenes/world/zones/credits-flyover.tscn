@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=83 format=3 uid="uid://bovh2hjexu5yl"]
 
 [ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
 [ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="2_5b34y"]
@@ -82,7 +82,7 @@ animation = &"anim_20"
 animation = &"anim_21"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ws1f5"]
-animation = &"anim_22"
+animation = &"anim_23"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ffwap"]
 animation = &"anim_3"
@@ -156,10 +156,6 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16wwa"]
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a2upa"]
 switch_mode = 2
 advance_mode = 2
@@ -189,6 +185,10 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6o682"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oovxu"]
 switch_mode = 2
 advance_mode = 2
 
@@ -222,8 +222,8 @@ states/anim_20/node = SubResource("AnimationNodeAnimation_edilq")
 states/anim_20/position = Vector2(-32, 1606)
 states/anim_21/node = SubResource("AnimationNodeAnimation_n8a3i")
 states/anim_21/position = Vector2(-26, 1690)
-states/anim_22/node = SubResource("AnimationNodeAnimation_ws1f5")
-states/anim_22/position = Vector2(-336, 1656)
+states/anim_23/node = SubResource("AnimationNodeAnimation_ws1f5")
+states/anim_23/position = Vector2(-65, 1776)
 states/anim_3/node = SubResource("AnimationNodeAnimation_ffwap")
 states/anim_3/position = Vector2(203, 320)
 states/anim_4/node = SubResource("AnimationNodeAnimation_1tqvt")
@@ -238,8 +238,8 @@ states/anim_8/node = SubResource("AnimationNodeAnimation_omi1n")
 states/anim_8/position = Vector2(71, 656)
 states/anim_9/node = SubResource("AnimationNodeAnimation_t7o6w")
 states/anim_9/position = Vector2(62, 729)
-transitions = ["Start", "anim_1", SubResource("AnimationNodeStateMachineTransition_1tqvt"), "anim_1", "anim_2", SubResource("AnimationNodeStateMachineTransition_v7off"), "anim_5", "anim_6", SubResource("AnimationNodeStateMachineTransition_0fsgn"), "anim_6", "anim_7", SubResource("AnimationNodeStateMachineTransition_i5emg"), "anim_7", "anim_8", SubResource("AnimationNodeStateMachineTransition_u8bvc"), "anim_8", "anim_9", SubResource("AnimationNodeStateMachineTransition_2i0jv"), "anim_9", "anim_10", SubResource("AnimationNodeStateMachineTransition_16t0m"), "anim_10", "anim_11", SubResource("AnimationNodeStateMachineTransition_lp1p3"), "anim_11", "anim_12", SubResource("AnimationNodeStateMachineTransition_1465c"), "anim_12", "anim_13", SubResource("AnimationNodeStateMachineTransition_edilq"), "anim_13", "anim_14", SubResource("AnimationNodeStateMachineTransition_n8a3i"), "anim_19", "anim_20", SubResource("AnimationNodeStateMachineTransition_aotaq"), "anim_20", "anim_21", SubResource("AnimationNodeStateMachineTransition_uvpaw"), "anim_21", "anim_22", SubResource("AnimationNodeStateMachineTransition_16wwa"), "anim_2", "anim_4", SubResource("AnimationNodeStateMachineTransition_a2upa"), "anim_4", "anim_3", SubResource("AnimationNodeStateMachineTransition_ntrn5"), "anim_3", "anim_5", SubResource("AnimationNodeStateMachineTransition_ffwap"), "anim_18", "anim_17", SubResource("AnimationNodeStateMachineTransition_o48bc"), "anim_17", "anim_19", SubResource("AnimationNodeStateMachineTransition_2humq"), "anim_14", "anim_16", SubResource("AnimationNodeStateMachineTransition_omi1n"), "anim_16", "anim_15", SubResource("AnimationNodeStateMachineTransition_t7o6w"), "anim_15", "anim_18", SubResource("AnimationNodeStateMachineTransition_6o682")]
-graph_offset = Vector2(-986, 392)
+transitions = ["Start", "anim_1", SubResource("AnimationNodeStateMachineTransition_1tqvt"), "anim_1", "anim_2", SubResource("AnimationNodeStateMachineTransition_v7off"), "anim_5", "anim_6", SubResource("AnimationNodeStateMachineTransition_0fsgn"), "anim_6", "anim_7", SubResource("AnimationNodeStateMachineTransition_i5emg"), "anim_7", "anim_8", SubResource("AnimationNodeStateMachineTransition_u8bvc"), "anim_8", "anim_9", SubResource("AnimationNodeStateMachineTransition_2i0jv"), "anim_9", "anim_10", SubResource("AnimationNodeStateMachineTransition_16t0m"), "anim_10", "anim_11", SubResource("AnimationNodeStateMachineTransition_lp1p3"), "anim_11", "anim_12", SubResource("AnimationNodeStateMachineTransition_1465c"), "anim_12", "anim_13", SubResource("AnimationNodeStateMachineTransition_edilq"), "anim_13", "anim_14", SubResource("AnimationNodeStateMachineTransition_n8a3i"), "anim_19", "anim_20", SubResource("AnimationNodeStateMachineTransition_aotaq"), "anim_20", "anim_21", SubResource("AnimationNodeStateMachineTransition_uvpaw"), "anim_2", "anim_4", SubResource("AnimationNodeStateMachineTransition_a2upa"), "anim_4", "anim_3", SubResource("AnimationNodeStateMachineTransition_ntrn5"), "anim_3", "anim_5", SubResource("AnimationNodeStateMachineTransition_ffwap"), "anim_18", "anim_17", SubResource("AnimationNodeStateMachineTransition_o48bc"), "anim_17", "anim_19", SubResource("AnimationNodeStateMachineTransition_2humq"), "anim_14", "anim_16", SubResource("AnimationNodeStateMachineTransition_omi1n"), "anim_16", "anim_15", SubResource("AnimationNodeStateMachineTransition_t7o6w"), "anim_15", "anim_18", SubResource("AnimationNodeStateMachineTransition_6o682"), "anim_21", "anim_23", SubResource("AnimationNodeStateMachineTransition_oovxu")]
+graph_offset = Vector2(-1062, 1544)
 
 [sub_resource type="Animation" id="Animation_5b34y"]
 length = 0.001
@@ -864,7 +864,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 2
-tracks/0/loop_wrap = false
+tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 9),
 "transitions": PackedFloat32Array(1, 1),
@@ -876,12 +876,40 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
 tracks/1/interp = 2
-tracks/1/loop_wrap = false
+tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.54105204, 0.81681406, 0), Vector3(0.30543262, 1.1397, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ws1f5"]
+resource_name = "anim_23"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.9333334, 6, 9, 11.966666),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(22.995, 0.935, -200.105), Vector3(20.03, 0.954, -184.855), Vector3(16.625, 17.859, -131.025), Vector3(16.625, 25.069, -126.03), Vector3(16.625, 25.069, -126.03)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.366667, 9, 11.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.134464, -3.3161256, 0), Vector3(0.36651915, -3.2288592, 0), Vector3(0.65449846, -3.2288592, 0), Vector3(0.65449846, -3.2288592, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a2upa"]
@@ -902,6 +930,7 @@ _data = {
 &"anim_20": SubResource("Animation_1465c"),
 &"anim_21": SubResource("Animation_edilq"),
 &"anim_22": SubResource("Animation_n8a3i"),
+&"anim_23": SubResource("Animation_ws1f5"),
 &"anim_3": SubResource("Animation_ntrn5"),
 &"anim_4": SubResource("Animation_ffwap"),
 &"anim_5": SubResource("Animation_1tqvt"),
@@ -1085,7 +1114,9 @@ next/anim_1 = &"anim_2"
 unique_name_in_owner = true
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -78, 9, -2)
 
-[node name="Camera3D" type="Camera3D" parent="AnimationPlayer/CameraMarker3D"]
+[node name="EditorCamera3D" type="Camera3D" parent="AnimationPlayer/CameraMarker3D"]
+editor_description = "Only used by the Editor for previewing. In-game, the global camera is used."
+current = true
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="AnimationPlayer/CameraMarker3D"]
 unique_name_in_owner = true
@@ -1140,8 +1171,6 @@ text = "Naous"
 label_settings = SubResource("LabelSettings_a2upa")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[connection signal="scroll_finished" from="Credits" to="." method="_on_credits_scroll_finished"]
 
 [editable path="Coalescence"]
 [editable path="Coalescence/BubbleZones/EntryPath"]

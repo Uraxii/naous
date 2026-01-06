@@ -21,4 +21,5 @@ func _ready() -> void:
 
 func _on_credits_scroll_finished() -> void:
 	## TODO go back to main menu??
-	queue_free()
+	#queue_free()
+	get_tree().quit()
