@@ -7,6 +7,7 @@ const USE_ITERATIVE_REVEAL:bool = true
 ## Populates the visible credits.
 ## A simple syntax is employed to format the result. "-" indicate titles. You can optionally
 ## include a description in the line following an indented line.
+@export var cancel_button_presses_to_quit:int = 5
 @export var iterative_duration: float = 158.0 ## in seconds
 @export var scroll_duration: int = 30
 @export var start_delay:float = 4.0
@@ -20,11 +21,13 @@ var groups: Array[Array] = []
 @onready var title: Label = %TITLE
 @onready var credits_items: VBoxContainer = %CreditsItems
 @onready var scroll_container: ScrollContainer = %ScrollContainer
+@onready var skip_credits_warning_label: Label = %SkipCreditsWarningLabel
 
 
 func _ready() -> void:
 	template_header.hide()
 	template_body.hide()
+	skip_credits_warning_label.modulate = Color.TRANSPARENT
 	
 	var credits_data: String
 	if credits_path:
@@ -41,6 +44,45 @@ func _ready() -> void:
 		
 	var fade_in_title:Tween = title.create_tween()
 	fade_in_title.tween_property(title, ^"modulate", Color.WHITE, 3.0).from(Color.TRANSPARENT)
+	
+var cancel_button_pressed_count:int = 0
+var debouncing:bool = false
+func _undebounce() -> void: debouncing = false
+const DEBOUNCE_TIME:float = 0.5
+
+func _input(event: InputEvent) -> void:
+	if event.is_pressed():
+		if not debouncing:
+			debouncing = true
+			var debounce:Tween = create_tween()
+			debounce.tween_interval(DEBOUNCE_TIME)
+			debounce.tween_callback(_undebounce)
+			
+			cancel_button_pressed_count += 1
+			print("Cancel count %d" % [cancel_button_pressed_count])
+			throb_cancel_label(cancel_button_presses_to_quit + 1 - cancel_button_pressed_count)
+			if cancel_button_pressed_count > cancel_button_presses_to_quit:
+				cancel_credits()
+				
+func cancel_credits() -> void:
+	const FADE_TIME:float = 3.0
+	var fade:Tween = create_tween()
+	fade.set_parallel()
+	fade.tween_property(scroll_container, ^"modulate", Color.TRANSPARENT, FADE_TIME)
+	fade.tween_method(
+		DynamicMusicManager.set_music_bus_volume, 
+		DynamicMusicManager.get_music_bus_volume_linear(),
+		0.0,
+		FADE_TIME
+		)
+	fade.chain().tween_callback(finished.emit)
+	
+func throb_cancel_label(remaining) -> void:
+	skip_credits_warning_label.text = "Press any key to skip credits... (%d)" % [remaining]
+	var throb:Tween = skip_credits_warning_label.create_tween()
+	skip_credits_warning_label.modulate = Color.WHITE
+	throb.tween_interval(0.5)
+	throb.tween_property(skip_credits_warning_label, ^"modulate", Color.TRANSPARENT, 1.0)
 	
 func populate_with(text: String) -> void:
 	## Clear all existing entries

@@ -1181,6 +1181,13 @@ label_settings = SubResource("LabelSettings_a2upa")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SkipCreditsWarningLabel" type="Label" parent="Credits/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "Press any key to skip credits... (5)"
+horizontal_alignment = 1
+
 [connection signal="finished" from="Credits" to="." method="_on_credits_finished"]
 
 [editable path="Coalescence"]
