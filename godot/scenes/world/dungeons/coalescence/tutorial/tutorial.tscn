@@ -1,8 +1,9 @@
-[gd_scene load_steps=60 format=3 uid="uid://cyw405e2huvfg"]
+[gd_scene load_steps=66 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="2_8cm00"]
+[ext_resource type="Script" uid="uid://bmrhuug42isst" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_music.gd" id="2_ydln7"]
 [ext_resource type="Script" uid="uid://do4x4l8nwjdip" path="res://scripts/entities/sky_rotate.gd" id="3_5u8qt"]
 [ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="4_julif"]
 [ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="5_ygplp"]
@@ -16,6 +17,7 @@
 [ext_resource type="Script" uid="uid://b4k3rvmuqbaa5" path="res://scenes/world/dungeons/coalescence/tutorial/menu_layer.gd" id="9_w4dxx"]
 [ext_resource type="Script" uid="uid://f68pd3ys4akk" path="res://scenes/world/dungeons/coalescence/tutorial/target_panel.gd" id="10_00c68"]
 [ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="10_23v16"]
+[ext_resource type="PackedScene" uid="uid://djcmn00dr5t2d" path="res://scenes/ui/music_control_popup.tscn" id="11_3qj3r"]
 [ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="11_f5oke"]
 [ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="12_g7sat"]
 [ext_resource type="Script" uid="uid://cfyjnr8bvcyt8" path="res://scripts/entities/entity.gd" id="13_xujpj"]
@@ -27,6 +29,8 @@
 [ext_resource type="Script" uid="uid://cmg4tj2i8g72l" path="res://scripts/entities/components/component_interactable.gd" id="17_1c438"]
 [ext_resource type="PackedScene" uid="uid://dwvukle78pxbp" path="res://scenes/entities/control_zone.tscn" id="24_acyb3"]
 [ext_resource type="PackedScene" uid="uid://nlvwh3efxtbh" path="res://assets/models/player/player_base.fbx" id="25_vi3y7"]
+[ext_resource type="Resource" uid="uid://dbkj5mkwehrw4" path="res://assets/music/music-04.tres" id="27_vi3y7"]
+[ext_resource type="Script" uid="uid://bnblk2t6ab7ao" path="res://scripts/music/dynamic_music_area.gd" id="29_7kbnc"]
 [ext_resource type="PackedScene" uid="uid://dxdmxuu3rsr0b" path="res://assets/prefabs/cliff.tscn" id="28_7kbnc"]
 [ext_resource type="PackedScene" uid="uid://d1m5spyq03wiu" path="res://assets/prefabs/boulder_cliff.tscn" id="29_vi3y7"]
 
@@ -202,6 +206,22 @@ size = Vector3(1.465, 0.779, 0.995)
 [sub_resource type="BoxShape3D" id="BoxShape3D_f2uap"]
 size = Vector3(87.64469, 30.91211, 22.257263)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3qj3r"]
+height = 3.7294922
+radius = 9.546875
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vi3y7"]
+height = 3.7294922
+radius = 9.546875
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_f15f4"]
+height = 9.689209
+radius = 8.106934
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n3n4y"]
+height = 6.0286865
+radius = 29.861328
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4nrkc"]
 properties/0/path = NodePath("Body:position")
 properties/0/spawn = true
@@ -226,6 +246,10 @@ radius = 0.42333984
 
 [node name="Tutorial" type="Node3D"]
 script = ExtResource("1_2e0i0")
+
+[node name="TutorialMusic" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ydln7")
 
 [node name="Environment" type="Node" parent="."]
 
@@ -383,6 +407,8 @@ surface_material_override/0 = ExtResource("7_4r05b")
 unique_name_in_owner = true
 layer = 2
 script = ExtResource("8_0cvc3")
+
+[node name="MusicControlPanel" parent="HUDLayer" instance=ExtResource("11_3qj3r")]
 
 [node name="QuestInfoContainer" type="PanelContainer" parent="HUDLayer"]
 unique_name_in_owner = true
@@ -732,6 +758,17 @@ time_to_complete = 0.1
 priority = 2
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
 
+[node name="DynamicMusicArea" type="Area3D" parent="Plaza/PyramidArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07387924, 0.90482235, 0)
+script = ExtResource("29_7kbnc")
+track = ExtResource("27_vi3y7")
+disable_when_stopped = true
+metadata/_custom_type_script = "uid://bnblk2t6ab7ao"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/PyramidArea/DynamicMusicArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8647461, 0)
+shape = SubResource("CylinderShape3D_3qj3r")
+
 [node name="CrystalCornerArea" type="Node3D" parent="Plaza"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 95.45561, 2.062158, -47.715546)
 
@@ -797,6 +834,17 @@ prompt_text = "Pickup Item"
 time_to_complete = 0.1
 priority = 2
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="DynamicMusicArea2" type="Area3D" parent="Plaza/CrystalCornerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25823212, 0, 3.7138977)
+script = ExtResource("29_7kbnc")
+track = ExtResource("27_vi3y7")
+disable_when_stopped = true
+metadata/_custom_type_script = "uid://bnblk2t6ab7ao"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/CrystalCornerArea/DynamicMusicArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8647461, 0)
+shape = SubResource("CylinderShape3D_vi3y7")
 
 [node name="FountainTreeArea" type="Node3D" parent="Plaza"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8726501, -3.0396135, -10.771637)
@@ -864,6 +912,17 @@ time_to_complete = 0.1
 priority = 2
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
 
+[node name="DynamicMusicArea3" type="Area3D" parent="Plaza/FountainTreeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9217525, 0, 3.794754)
+script = ExtResource("29_7kbnc")
+track = ExtResource("27_vi3y7")
+disable_when_stopped = true
+metadata/_custom_type_script = "uid://bnblk2t6ab7ao"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/FountainTreeArea/DynamicMusicArea3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77771, 0)
+shape = SubResource("CylinderShape3D_f15f4")
+
 [node name="Miniboss" type="Node3D" parent="Plaza"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.23199, 0.22426891, -87.770706)
 
@@ -930,6 +989,17 @@ prompt_text = "Pickup Item"
 time_to_complete = 0.1
 priority = 2
 metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
+
+[node name="DynamicMusicArea4" type="Area3D" parent="Plaza/Miniboss"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6907654, 0, 4.1132507)
+script = ExtResource("29_7kbnc")
+track = ExtResource("27_vi3y7")
+disable_when_stopped = true
+metadata/_custom_type_script = "uid://bnblk2t6ab7ao"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/Miniboss/DynamicMusicArea4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05255127, 0)
+shape = SubResource("CylinderShape3D_n3n4y")
 
 [node name="Horde" type="Node3D" parent="Plaza"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.18224, 0, -88.62871)

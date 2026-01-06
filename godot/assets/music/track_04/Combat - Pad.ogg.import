@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dj4qrk1st87xr"
+path="res://.godot/imported/Combat - Pad.ogg-ce465ab8933a2c8edcfa3108912059cf.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_04/Combat - Pad.ogg"
+dest_files=["res://.godot/imported/Combat - Pad.ogg-ce465ab8933a2c8edcfa3108912059cf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=99.0
+beat_count=144
+bar_beats=4

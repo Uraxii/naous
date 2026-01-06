@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://014tiklr87rp"
+path="res://.godot/imported/01 - Not So Still.mp3-6ec8d715fc78869b4e640da4e263cbcc.mp3str"
+
+[deps]
+
+source_file="res://assets/music/track_01/01 - Not So Still.mp3"
+dest_files=["res://.godot/imported/01 - Not So Still.mp3-6ec8d715fc78869b4e640da4e263cbcc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=60.0
+beat_count=0
+bar_beats=4
