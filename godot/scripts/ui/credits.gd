@@ -2,14 +2,14 @@ extends Node
 
 signal finished
 
-const USE_ITERATIVE_REVEAL:bool = true
+#const USE_ITERATIVE_REVEAL:bool = true ## DEPRECATED
 
 ## Populates the visible credits.
 ## A simple syntax is employed to format the result. "-" indicate titles. You can optionally
 ## include a description in the line following an indented line.
 @export var cancel_button_presses_to_quit:int = 5
 @export var iterative_duration: float = 158.0 ## in seconds
-@export var scroll_duration: int = 30
+
 @export var start_delay:float = 4.0
 @export_file("*.txt") var credits_path: String ## Text file. No special features or parsing yet.
 @export_multiline var credits_text: String ## Will be used if [member credits_path] is empty.
@@ -22,11 +22,13 @@ var groups: Array[Array] = []
 @onready var credits_items: VBoxContainer = %CreditsItems
 @onready var scroll_container: ScrollContainer = %ScrollContainer
 @onready var skip_credits_warning_label: Label = %SkipCreditsWarningLabel
+@onready var exit_button: Button = %ExitButton
 
 
 func _ready() -> void:
 	template_header.hide()
 	template_body.hide()
+	exit_button.hide()
 	skip_credits_warning_label.modulate = Color.TRANSPARENT
 	
 	var credits_data: String
@@ -37,10 +39,10 @@ func _ready() -> void:
 	else:
 		credits_data = credits_text
 	populate_with(credits_data)
-	if not USE_ITERATIVE_REVEAL:
-		start_scroll(scroll_duration)
-	else:
-		start_reveal_iter()
+	#if not USE_ITERATIVE_REVEAL: ##DEPRECATED
+		#start_scroll(scroll_duration)
+	#else:
+	start_reveal_iter()
 		
 	var fade_in_title:Tween = title.create_tween()
 	fade_in_title.tween_property(title, ^"modulate", Color.WHITE, 3.0).from(Color.TRANSPARENT)
@@ -62,10 +64,26 @@ func _input(event: InputEvent) -> void:
 			print("Cancel count %d" % [cancel_button_pressed_count])
 			throb_cancel_label(cancel_button_presses_to_quit + 1 - cancel_button_pressed_count)
 			if cancel_button_pressed_count > cancel_button_presses_to_quit:
-				cancel_credits()
-				
-func cancel_credits() -> void:
+				cancel_revealing()
+
+func cancel_revealing() -> void:
+	if ticker:
+		if ticker.is_running():
+			ticker.kill()
+	for group:Array in groups:
+		for ci:CanvasItem in group:
+			ci.show()
+			ci.modulate = Color.WHITE
+			
+			scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_ALWAYS
+			scroll_container.mouse_filter = Control.MOUSE_FILTER_PASS
+	
+	exit_button.show()
+
+func fade_out_and_exit() -> void:
 	const FADE_TIME:float = 3.0
+	
+	## Fade out
 	var fade:Tween = create_tween()
 	fade.set_parallel()
 	fade.tween_property(scroll_container, ^"modulate", Color.TRANSPARENT, FADE_TIME)
@@ -77,12 +95,18 @@ func cancel_credits() -> void:
 		)
 	fade.chain().tween_callback(finished.emit)
 	
+var throb_cancel_label_tween:Tween
 func throb_cancel_label(remaining) -> void:
-	skip_credits_warning_label.text = "Press any key to skip credits... (%d)" % [remaining]
-	var throb:Tween = skip_credits_warning_label.create_tween()
-	skip_credits_warning_label.modulate = Color.WHITE
-	throb.tween_interval(0.5)
-	throb.tween_property(skip_credits_warning_label, ^"modulate", Color.TRANSPARENT, 1.0)
+	if remaining > 0:
+		if throb_cancel_label_tween:
+			if throb_cancel_label_tween.is_running():
+				throb_cancel_label_tween.kill()
+			
+		skip_credits_warning_label.text = "Press any key to skip credits... (%d)" % [remaining]
+		skip_credits_warning_label.modulate = Color.WHITE
+		throb_cancel_label_tween = skip_credits_warning_label.create_tween()
+		throb_cancel_label_tween.tween_interval(0.5)
+		throb_cancel_label_tween.tween_property(skip_credits_warning_label, ^"modulate", Color.TRANSPARENT, 1.0)
 	
 func populate_with(text: String) -> void:
 	## Clear all existing entries
@@ -111,28 +135,28 @@ func populate_with(text: String) -> void:
 			
 		new_item.text = new_text
 		
-		if USE_ITERATIVE_REVEAL:
-			new_item.visible = false
-			new_item.modulate = Color.TRANSPARENT
-		else:
-			new_item.visible = true
+		#if USE_ITERATIVE_REVEAL:
+		new_item.visible = false
+		new_item.modulate = Color.TRANSPARENT
+		#else:
+			#new_item.visible = true
 			#new_item.modulate = Color.WHITE
 		
 		credits_items.add_child(new_item)
 		groups[group].push_back(new_item)
 
 ## DEPRECATED
-func start_scroll(duration: float) -> void:
-	var scroll = scroll_container.get_v_scroll_bar()
-	await scroll.changed
-	scroll.value = 0
-	#scroll_container.scroll_vertical = 0
-	var tween: Tween = create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_interval(start_delay)
-	tween.tween_property(scroll, ^"value", scroll.max_value, scroll_duration)
-	tween.tween_property(scroll_container, ^"modulate", Color.TRANSPARENT, 4.0)
-	tween.tween_callback(finished.emit)
+#func start_scroll(duration: float) -> void:
+	#var scroll = scroll_container.get_v_scroll_bar()
+	#await scroll.changed
+	#scroll.value = 0
+	##scroll_container.scroll_vertical = 0
+	#var tween: Tween = create_tween()
+	#tween.set_ease(Tween.EASE_IN)
+	#tween.tween_interval(start_delay)
+	#tween.tween_property(scroll, ^"value", scroll.max_value, scroll_duration)
+	#tween.tween_property(scroll_container, ^"modulate", Color.TRANSPARENT, 4.0)
+	#tween.tween_callback(finished.emit)
 
 
 var iter_current_group:int
@@ -151,7 +175,7 @@ func start_reveal_iter() -> void:
 	ticker.set_loops(pages)
 	ticker.tween_interval(tick_interval)
 	ticker.tween_callback(_on_iterative_tick)
-	ticker.finished.connect(_on_ticker_finished)
+	#ticker.finished.connect(_on_ticker_finished) ## Need to let the ticker execute and quit
 	
 	
 func _on_iterative_tick() -> void:
@@ -185,8 +209,15 @@ func _on_iterative_tick() -> void:
 		## (do nothing, tween is finished)
 		ci.show()
 		#ci.show.call_deferred()
+		
+	if iter_current_group + 1 >= groups.size():
+		await create_tween().tween_interval(tick_interval * 1.5).finished
+		_on_ticker_finished()
 
 func _on_ticker_finished() -> void:
 	## Exit the credits scene
 	finished.emit()
-	pass
+
+
+func _on_exit_button_pressed() -> void:
+	fade_out_and_exit()

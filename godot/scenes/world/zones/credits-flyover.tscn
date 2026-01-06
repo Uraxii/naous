@@ -19,7 +19,7 @@ background_energy_multiplier = 2.0
 sky = SubResource("Sky_6y1nk")
 ambient_light_source = 2
 ambient_light_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
-ambient_light_energy = 0.26
+ambient_light_energy = 0.35
 reflected_light_source = 1
 tonemap_mode = 3
 tonemap_white = 2.0
@@ -240,7 +240,7 @@ states/anim_8/position = Vector2(71, 656)
 states/anim_9/node = SubResource("AnimationNodeAnimation_t7o6w")
 states/anim_9/position = Vector2(62, 729)
 transitions = ["Start", "anim_1", SubResource("AnimationNodeStateMachineTransition_1tqvt"), "anim_1", "anim_2", SubResource("AnimationNodeStateMachineTransition_v7off"), "anim_5", "anim_6", SubResource("AnimationNodeStateMachineTransition_0fsgn"), "anim_6", "anim_7", SubResource("AnimationNodeStateMachineTransition_i5emg"), "anim_7", "anim_8", SubResource("AnimationNodeStateMachineTransition_u8bvc"), "anim_8", "anim_9", SubResource("AnimationNodeStateMachineTransition_2i0jv"), "anim_9", "anim_10", SubResource("AnimationNodeStateMachineTransition_16t0m"), "anim_10", "anim_11", SubResource("AnimationNodeStateMachineTransition_lp1p3"), "anim_11", "anim_12", SubResource("AnimationNodeStateMachineTransition_1465c"), "anim_12", "anim_13", SubResource("AnimationNodeStateMachineTransition_edilq"), "anim_13", "anim_14", SubResource("AnimationNodeStateMachineTransition_n8a3i"), "anim_19", "anim_20", SubResource("AnimationNodeStateMachineTransition_aotaq"), "anim_20", "anim_21", SubResource("AnimationNodeStateMachineTransition_uvpaw"), "anim_2", "anim_4", SubResource("AnimationNodeStateMachineTransition_a2upa"), "anim_4", "anim_3", SubResource("AnimationNodeStateMachineTransition_ntrn5"), "anim_3", "anim_5", SubResource("AnimationNodeStateMachineTransition_ffwap"), "anim_18", "anim_17", SubResource("AnimationNodeStateMachineTransition_o48bc"), "anim_17", "anim_19", SubResource("AnimationNodeStateMachineTransition_2humq"), "anim_14", "anim_16", SubResource("AnimationNodeStateMachineTransition_omi1n"), "anim_16", "anim_15", SubResource("AnimationNodeStateMachineTransition_t7o6w"), "anim_15", "anim_18", SubResource("AnimationNodeStateMachineTransition_6o682"), "anim_21", "anim_23", SubResource("AnimationNodeStateMachineTransition_oovxu")]
-graph_offset = Vector2(-1062, 1544)
+graph_offset = Vector2(-913, 607)
 
 [sub_resource type="Animation" id="Animation_5b34y"]
 length = 0.001
@@ -970,8 +970,9 @@ music = ExtResource("2_5b34y")
 
 [node name="SUN" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.58778524, -0.3290569, 0.7390739, 0, 0.9135455, 0.40673667, -0.80901706, 0.2390738, -0.5369685, 0, 100, 0)
-light_energy = 2.5
+light_energy = 2.3
 shadow_enabled = true
+shadow_opacity = 0.7
 shadow_blur = 8.0
 directional_shadow_split_2 = 0.3
 directional_shadow_split_3 = 0.6
@@ -1128,8 +1129,18 @@ unique_name_in_owner = true
 
 [node name="Credits" type="CanvasLayer" parent="."]
 script = ExtResource("2_biuu0")
-scroll_duration = 150
 credits_path = "res://credits.txt"
+
+[node name="ExitButton" type="Button" parent="Credits"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 40)
+offset_left = 436.0
+offset_top = 586.0
+offset_right = 716.0
+offset_bottom = 626.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Continue"
 
 [node name="MarginContainer" type="MarginContainer" parent="Credits"]
 anchors_preset = 15
@@ -1189,6 +1200,7 @@ text = "Press any key to skip credits... (5)"
 horizontal_alignment = 1
 
 [connection signal="finished" from="Credits" to="." method="_on_credits_finished"]
+[connection signal="pressed" from="Credits/ExitButton" to="Credits" method="_on_exit_button_pressed"]
 
 [editable path="Coalescence"]
 [editable path="Coalescence/BubbleZones/EntryPath"]

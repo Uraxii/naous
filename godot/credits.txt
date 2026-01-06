@@ -53,3 +53,6 @@ This game uses Godot Engine, available under following license:
 Copyright (c) 2014-present Godot Engine contributors.
 Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.
 See full license terms in LICENSE.txt, and GODOT_COPYRIGHT.txt
+
+-Naous
+The Still World
