@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=77 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -257,6 +257,13 @@ Button/styles/hover = SubResource("StyleBoxFlat_jy2u2")
 Button/styles/normal = SubResource("StyleBoxFlat_4nrkc")
 Button/styles/pressed = SubResource("StyleBoxFlat_y0qjs")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_hxtm8")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jy2u2"]
+font_size = 12
+font_color = Color(1, 1, 1, 0.9647059)
+shadow_size = 11
+shadow_color = Color(0.05882353, 0.05882353, 0.05882353, 0.91764706)
+shadow_offset = Vector2(0, 0)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w4dxx"]
 properties/0/path = NodePath("Components/Body:position")
@@ -624,10 +631,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -145.5
-offset_top = -75.0
-offset_right = 145.5
-offset_bottom = -15.0
+offset_left = -103.5
+offset_top = -78.0
+offset_right = 103.5
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 theme = SubResource("Theme_4nrkc")
@@ -649,32 +656,68 @@ mouse_default_cursor_shape = 2
 icon_alignment = 1
 expand_icon = true
 
+[node name="Label" type="Label" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar/HotbuttonOne"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 12.0
+offset_bottom = 18.0
+text = "1"
+label_settings = SubResource("LabelSettings_jy2u2")
+
 [node name="HotbuttonTwo" type="Button" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 mouse_default_cursor_shape = 2
 expand_icon = true
+
+[node name="Label" type="Label" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar/HotbuttonTwo"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 12.0
+offset_bottom = 18.0
+text = "2"
+label_settings = SubResource("LabelSettings_jy2u2")
 
 [node name="HotbuttonThree" type="Button" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 mouse_default_cursor_shape = 2
 expand_icon = true
 
+[node name="Label" type="Label" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar/HotbuttonThree"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 12.0
+offset_bottom = 18.0
+text = "3"
+label_settings = SubResource("LabelSettings_jy2u2")
+
 [node name="HotbuttonFour" type="Button" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
 mouse_default_cursor_shape = 2
 expand_icon = true
+
+[node name="Label" type="Label" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar/HotbuttonFour"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 12.0
+offset_bottom = 18.0
+text = "4"
+label_settings = SubResource("LabelSettings_jy2u2")
 
 [node name="ScreenOverlayLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
