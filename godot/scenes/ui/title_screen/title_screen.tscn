@@ -1,0 +1,132 @@
+[gd_scene load_steps=7 format=3 uid="uid://cshn7uv20j780"]
+
+[ext_resource type="Script" uid="uid://d0m1x4qc15v33" path="res://scenes/ui/title_screen/title_screen.gd" id="1_62kf1"]
+[ext_resource type="Theme" uid="uid://bgliqjwr5w6kp" path="res://scenes/ui/title_screen/title_screen_theme.tres" id="1_oijkb"]
+
+[sub_resource type="Gradient" id="Gradient_o5qli"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.21507353, 0.375, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.19784173, 0.19784173, 0.19784173, 1, 0.506683, 0.506683, 0.506683, 1, 0.26475334, 0.26475334, 0.26475334, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oijkb"]
+gradient = SubResource("Gradient_o5qli")
+width = 512
+height = 512
+fill_from = Vector2(0.25641027, 1)
+fill_to = Vector2(0.7307692, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oijkb"]
+draw_center = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_x4ugo"]
+font_size = 72
+
+[node name="TitleScreen" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_oijkb")
+script = ExtResource("1_62kf1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.4486373, 0.6384279, 0.65891, 1)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_oijkb")
+
+[node name="TabContainer" type="TabContainer" parent="TextureRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oijkb")
+current_tab = 0
+tabs_visible = false
+
+[node name="MenuContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_top = 62
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/TabContainer/MenuContainer"]
+layout_mode = 2
+theme_override_constants/separation = 26
+
+[node name="TextLabelContainer" type="VBoxContainer" parent="TextureRect/TabContainer/MenuContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleTextLabel" type="RichTextLabel" parent="TextureRect/TabContainer/MenuContainer/VBoxContainer/TextLabelContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 56
+text = "Naous"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+
+[node name="SubtitleTextLabel" type="RichTextLabel" parent="TextureRect/TabContainer/MenuContainer/VBoxContainer/TextLabelContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 21
+text = "The Still World"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="TextureRect/TabContainer/MenuContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="StartGameButton" type="Button" parent="TextureRect/TabContainer/MenuContainer/VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enter World"
+
+[node name="CreditsButton" type="Button" parent="TextureRect/TabContainer/MenuContainer/VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Credits"
+
+[node name="QuitGameButton" type="Button" parent="TextureRect/TabContainer/MenuContainer/VBoxContainer/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit Game"
+
+[node name="LoadingContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 160
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 160
+theme_override_constants/margin_bottom = 120
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/TabContainer/LoadingContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameTitle" type="Label" parent="TextureRect/TabContainer/LoadingContainer/VBoxContainer"]
+layout_mode = 2
+text = "Naous"
+label_settings = SubResource("LabelSettings_x4ugo")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="TextureRect/TabContainer/LoadingContainer/VBoxContainer"]
+layout_mode = 2
+text = "The Stilled World"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="TextureRect/TabContainer/LoadingContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="AnimatedProgressBar" type="ProgressBar" parent="TextureRect/TabContainer/LoadingContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2

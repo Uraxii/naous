@@ -19,20 +19,20 @@ func _initialize_server(args: Dictionary) -> void:
 
 
 func _ready() -> void:
-	## Splash screen
+    ## Splash screen
     var splash_tween = splash_screen.create_tween()
     splash_tween.set_trans(Tween.TRANS_SINE)
     splash_tween.tween_property(splash_screen, ^"modulate", Color.WHITE, 1.0).from(Color.BLACK)
     splash_screen.show()
-	
-	## Loading bar false graphic.
+    
+    ## Loading bar false graphic.
     var loading_bar_tween = animated_progress_bar.create_tween()
     loading_bar_tween.set_ease(Tween.EASE_IN_OUT)
     loading_bar_tween.set_trans(Tween.TRANS_EXPO)
     loading_bar_tween.tween_property(animated_progress_bar, ^"value", animated_progress_bar.max_value, SPLASH_SCREEN_TIME * 0.9)
     await loading_bar_tween.finished
     splash_screen.queue_free()
-	
+    
     Globals.views.spawn(ConsoleView)
 
     print_debug("user://: ", OS.get_user_data_dir())

@@ -84,9 +84,11 @@ func _get_drag_data(at_position: Vector2) -> Item:
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
     #print("Item slot is being dragged -> " + name)
     if not data is Item:
+        #print("Item invalid for drop")
         return false
     
     if _acceptable_item_callback.is_valid():
+        #print("Checking acceptable callback for drop")
         return _acceptable_item_callback.call(data)
     
     return true
@@ -98,11 +100,15 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
         #print("Item slot dropping data")
         received_item.emit(data)
 #endregion
+
+
 func _on_mouse_entered() -> void:
+    #print("Slot detected mouse")
     grab_focus()
 
 
 func _on_mouse_exited() -> void:
+    #print("Slot lost mouse")
     lost_focus()
 
 

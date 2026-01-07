@@ -1,14 +1,14 @@
-[gd_scene load_steps=68 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=75 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="2_8cm00"]
 [ext_resource type="Script" uid="uid://bmrhuug42isst" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_music.gd" id="2_ydln7"]
-[ext_resource type="Script" uid="uid://do4x4l8nwjdip" path="res://scripts/entities/sky_rotate.gd" id="3_5u8qt"]
+[ext_resource type="Script" path="res://scripts/entities/sky_rotate.gd" id="3_5u8qt"]
 [ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="4_julif"]
-[ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="5_ygplp"]
-[ext_resource type="Material" uid="uid://d38i2dxauqkl0" path="res://assets/materials/ink-cloud3.tres" id="6_64ggy"]
-[ext_resource type="Material" uid="uid://rknsm0d0mgvc" path="res://assets/materials/ink-cloud1.tres" id="7_4r05b"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud2.tres" id="5_ygplp"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud3.tres" id="6_64ggy"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud1.tres" id="7_4r05b"]
 [ext_resource type="Script" uid="uid://cq4jqk5k1libd" path="res://scenes/world/dungeons/coalescence/tutorial/hud_layer.gd" id="8_0cvc3"]
 [ext_resource type="Script" uid="uid://bn60ptck7jhbi" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_sequence.gd" id="8_8cm00"]
 [ext_resource type="PackedScene" uid="uid://cx54j3yuqwncx" path="res://scenes/world/dungeons/coalescence/bubbles/entry_path.tscn" id="8_fx6br"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://djcmn00dr5t2d" path="res://scenes/ui/music_control_popup.tscn" id="11_3qj3r"]
 [ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="11_f5oke"]
 [ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="12_g7sat"]
+[ext_resource type="Script" uid="uid://uhxppdetrhb2" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_hotbar.gd" id="13_4nrkc"]
 [ext_resource type="Script" uid="uid://cfyjnr8bvcyt8" path="res://scripts/entities/entity.gd" id="13_xujpj"]
 [ext_resource type="PackedScene" uid="uid://gl6sbyrgax7d" path="res://scripts/entities/targeting/targetable/targetable.tscn" id="14_0tafa"]
 [ext_resource type="Script" uid="uid://dk070b54ufb44" path="res://scenes/world/dungeons/coalescence/tutorial/gear_and_items/loot_pickup.gd" id="14_1c438"]
@@ -145,6 +146,116 @@ bg_color = Color(0.31589073, 0.06325139, 0.12706104, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydln7"]
 bg_color = Color(0.11434039, 0.43240878, 0.6904513, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fhsc"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.28, 0.28, 0.28, 0.9607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.68996537, 0.68996495, 0.68996507, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.5058824)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jy2u2"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.28, 0.28, 0.28, 0.9607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.68996537, 0.68996495, 0.68996507, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.5058824)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nrkc"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.20163646, 0.20163646, 0.20163646, 0.93333334)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68996537, 0.68996495, 0.68996507, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.5058824)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0qjs"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.15259093, 0.15259093, 0.15259093, 0.9607843)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68996537, 0.68996495, 0.68996507, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.5058824)
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hxtm8"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.011764706, 0.011764706, 0.011764706, 0.07058824)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_4nrkc"]
+Button/styles/focus = SubResource("StyleBoxFlat_7fhsc")
+Button/styles/hover = SubResource("StyleBoxFlat_jy2u2")
+Button/styles/normal = SubResource("StyleBoxFlat_4nrkc")
+Button/styles/pressed = SubResource("StyleBoxFlat_y0qjs")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_hxtm8")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w4dxx"]
 properties/0/path = NodePath("Components/Body:position")
@@ -505,6 +616,60 @@ theme_override_styles/background = SubResource("StyleBoxFlat_00c68")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ydln7")
 step = 0.1
 value = 75.0
+
+[node name="TutorialHotbarPanel" type="PanelContainer" parent="HUDLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -145.5
+offset_top = -75.0
+offset_right = 145.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_4nrkc")
+
+[node name="TutorialHotbar" type="HBoxContainer" parent="HUDLayer/TutorialHotbarPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 13
+alignment = 1
+script = ExtResource("13_4nrkc")
+
+[node name="HotbuttonOne" type="Button" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="HotbuttonTwo" type="Button" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+expand_icon = true
+
+[node name="HotbuttonThree" type="Button" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+expand_icon = true
+
+[node name="HotbuttonFour" type="Button" parent="HUDLayer/TutorialHotbarPanel/TutorialHotbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+expand_icon = true
 
 [node name="ScreenOverlayLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
