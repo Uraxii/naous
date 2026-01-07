@@ -1133,17 +1133,6 @@ unique_name_in_owner = true
 script = ExtResource("2_biuu0")
 credits_path = "res://credits.txt"
 
-[node name="ExitButton" type="Button" parent="Credits"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(280, 40)
-offset_left = 436.0
-offset_top = 586.0
-offset_right = 716.0
-offset_bottom = 626.0
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "Continue"
-
 [node name="MarginContainer" type="MarginContainer" parent="Credits"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -1200,6 +1189,17 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Press any key to skip credits... (5)"
 horizontal_alignment = 1
+
+[node name="ExitButton" type="Button" parent="Credits"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 40)
+offset_left = 436.0
+offset_top = 586.0
+offset_right = 716.0
+offset_bottom = 626.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Continue"
 
 [connection signal="finished" from="Credits" to="." method="_on_credits_finished"]
 [connection signal="pressed" from="Credits/ExitButton" to="Credits" method="_on_exit_button_pressed"]
