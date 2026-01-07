@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var return_scene: PackedScene
+
 @export var music: DynamicMusicTrack
 
 @onready var camera_marker: Marker3D = %CameraMarker3D
@@ -19,6 +21,9 @@ func _ready() -> void:
 			Globals.music.start_track(music)
 
 func _on_credits_finished() -> void:
-	## TODO go back to main menu??
-	#queue_free()
+	if return_scene:
+		if return_scene.can_instantiate():
+			get_tree().change_scene_to_packed(return_scene)
+			return
+			
 	get_tree().quit()

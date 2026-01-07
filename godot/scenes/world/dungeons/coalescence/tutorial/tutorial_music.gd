@@ -1,7 +1,7 @@
 class_name TutorialMusic
 extends Node
 
-const INITIAL_VOLUME: float = 0.2
+#const INITIAL_VOLUME: float = 0.2
 
 const NOT_SO_STILL: DynamicMusicTrack = preload("uid://e26byi4f045n")
 const INTO_OASIS: DynamicMusicTrack = preload("uid://brq7gfor30m8x")
@@ -10,8 +10,9 @@ const ADVERSE_ENTITY: DynamicMusicTrack = preload("uid://dbkj5mkwehrw4")
 const COALESCENT_DISCOVERIES: DynamicMusicTrack = preload("uid://bcpglwarj06jc")
 const ECHOES_FINALE: DynamicMusicTrack = preload("uid://bijg3owlp50gm")
 
-func _ready() -> void:
-    DynamicMusicManager.set_music_bus_volume(INITIAL_VOLUME)
+#func _ready() -> void:
+	## NOTE Just set the Audio Bus volume in the Audio tab in the Editor so this is always expected
+    #DynamicMusicManager.set_music_bus_volume(INITIAL_VOLUME)
 
 func play_idle() -> void:
     Globals.music.start_track(NOT_SO_STILL)
