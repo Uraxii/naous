@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=76 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://dxdmxuu3rsr0b" path="res://assets/prefabs/cliff.tscn" id="28_7kbnc"]
 [ext_resource type="Script" uid="uid://bnblk2t6ab7ao" path="res://scripts/music/dynamic_music_area.gd" id="29_7kbnc"]
 [ext_resource type="PackedScene" uid="uid://d1m5spyq03wiu" path="res://assets/prefabs/boulder_cliff.tscn" id="29_vi3y7"]
+[ext_resource type="PackedScene" uid="uid://bcb61jrhtijml" path="res://scenes/world/dungeons/coalescence/tutorial/secret-basement.tscn" id="34_4nrkc"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_mc5jl"]
 material = ExtResource("1_e5qsc")
@@ -1363,6 +1364,8 @@ transform = Transform3D(-1.4255517, 1.2694677, 0.59686995, -0.76333785, 0.011951
 
 [node name="boulder-cliff5" parent="Plaza_Mountain_Border" instance=ExtResource("29_vi3y7")]
 transform = Transform3D(0.34550893, 1.9447987, -0.31365722, 0.48433816, 0.22480482, 1.9274025, 1.9094608, -0.4089257, -0.43213397, -89.244286, 13.882484, -276.64734)
+
+[node name="WorldBasement" parent="." instance=ExtResource("34_4nrkc")]
 
 [node name="Player" parent="." instance=ExtResource("10_23v16")]
 unique_name_in_owner = true
