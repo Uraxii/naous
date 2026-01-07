@@ -75,7 +75,7 @@ func _ready() -> void:
     Globals.signal_bus.allow_character_control.connect(_on_allow_character_control)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
     var rotate_cam = Input.is_action_pressed(InputBindings.CAMERA_ROTATE)
     var rotate_char =  Input.is_action_pressed(InputBindings.CHARACTER_ROTATE)
     var is_camera_rotating = rotate_cam or rotate_char
