@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Naous"
-run/main_scene="uid://cblo8m3itchq8"
+run/main_scene="uid://cshn7uv20j780"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
