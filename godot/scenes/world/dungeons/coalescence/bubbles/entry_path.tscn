@@ -55,7 +55,8 @@ size = Vector3(100, 1, 36.585)
 [sub_resource type="BoxMesh" id="BoxMesh_2u03h"]
 size = Vector3(100, 1, 100)
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_t8rem"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_dn5n4"]
+size = Vector3(172, 1, 136)
 
 [node name="EntryPath" type="Node3D"]
 script = ExtResource("1_1esqk")
@@ -105,8 +106,8 @@ material_override = ExtResource("1_ej2el")
 mesh = SubResource("BoxMesh_2u03h")
 
 [node name="WorldGround" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98181725, 0.3630867)
-shape = SubResource("WorldBoundaryShape3D_t8rem")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.363)
+shape = SubResource("BoxShape3D_dn5n4")
 
 [node name="sand-dunes" parent="Ground" instance=ExtResource("2_6jvcw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.506475, -0.3123703, 24.212912)
