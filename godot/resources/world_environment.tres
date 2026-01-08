@@ -1,0 +1,19 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://c88lfewlaln02"]
+
+[ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="1_ov61q"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_65e3w"]
+panorama = ExtResource("1_ov61q")
+
+[sub_resource type="Sky" id="Sky_6y1nk"]
+sky_material = SubResource("PanoramaSkyMaterial_65e3w")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_6y1nk")
+ambient_light_source = 2
+ambient_light_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
+reflected_light_source = 1
+ssao_enabled = true
+ssao_intensity = 2.5

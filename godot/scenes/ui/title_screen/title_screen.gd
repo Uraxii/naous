@@ -20,6 +20,8 @@ const SPLASH_SCREEN_TIME:float = 3.0
 @onready var credits_button: Button = %CreditsButton
 @onready var quit_game_button: Button = %QuitGameButton
 
+@onready var local_camera: Camera3D = %Camera
+
 
 func start_game() -> void:
     await run_splash_screen()
@@ -59,3 +61,6 @@ func _ready() -> void:
     quit_game_button.pressed.connect(quit_game)
     
     tab_container.current_tab = MENU_TAB
+    
+    #Globals.camera.camera.global_transform = local_camera.global_transform
+    local_camera.make_current()

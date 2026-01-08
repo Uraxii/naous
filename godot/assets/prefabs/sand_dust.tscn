@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dalxp2nexw0mo"]
+
+[ext_resource type="Texture2D" uid="uid://cu8cgayv4033k" path="res://assets/textures/ink-bush.png" id="1_3ope5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2n6bt"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_3ope5")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_3nwb7"]
+size = Vector2(1.8, 1)
+
+[sub_resource type="Curve" id="Curve_exy2y"]
+_data = [Vector2(0, 0.23031878), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_brubw"]
+offsets = PackedFloat32Array(0, 0.4814815, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.16078432, 1, 1, 1, 0)
+metadata/_snap_count = 2
+
+[node name="sand_dust" type="Node3D"]
+transform = Transform3D(1.6690047, 0, 0.5262351, 0, 1.75, 0, -0.5262351, 0, 1.6690047, 37.97, 3.075, 17.67)
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_2n6bt")
+cast_shadow = 0
+amount = 16
+lifetime = 9.0
+explosiveness = 0.6
+randomness = 0.25
+lifetime_randomness = 0.5
+fixed_fps = 24
+mesh = SubResource("QuadMesh_3nwb7")
+emission_shape = 3
+emission_box_extents = Vector3(4, 0.5, 4)
+direction = Vector3(-1, 0.1, 0.2)
+spread = 7.5
+flatness = 0.5
+gravity = Vector3(-0.2, -0.04, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.25
+tangential_accel_max = 0.1
+damping_min = 0.01
+damping_max = 0.01
+scale_amount_min = 1.8
+scale_amount_max = 2.2
+scale_amount_curve = SubResource("Curve_exy2y")
+color = Color(0.8944707, 0.7467916, 0.22584116, 1)
+color_ramp = SubResource("Gradient_brubw")
+hue_variation_max = 0.1

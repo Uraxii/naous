@@ -54,7 +54,7 @@ content_margin_left = 23.0
 content_margin_top = 8.0
 content_margin_right = 20.0
 content_margin_bottom = 8.0
-bg_color = Color(0.1770587, 0.28343973, 0.5990349, 1)
+bg_color = Color(0.2856, 0.3842, 0.68, 1)
 border_width_left = 10
 border_width_top = 3
 border_width_right = 2
@@ -64,6 +64,9 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+shadow_color = Color(0.32, 0.32, 0.32, 0.20784314)
+shadow_size = 10
+shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxmwp"]
 bg_color = Color(0.20971075, 0.36620155, 0.36963147, 1)
@@ -76,3 +79,7 @@ Button/styles/hover_pressed = SubResource("StyleBoxFlat_7vhec")
 Button/styles/normal = SubResource("StyleBoxFlat_3pll7")
 Button/styles/pressed = SubResource("StyleBoxFlat_7vhec")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_gxmwp")
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.6156863)
+RichTextLabel/constants/shadow_offset_x = 0
+RichTextLabel/constants/shadow_offset_y = 2
+RichTextLabel/constants/shadow_outline_size = 6
