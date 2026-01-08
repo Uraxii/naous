@@ -21,6 +21,7 @@ const SPLASH_SCREEN_TIME:float = 3.0
 @onready var quit_game_button: Button = %QuitGameButton
 
 @onready var local_camera: Camera3D = %Camera
+@onready var texture_rect: TextureRect = %TextureRect
 
 
 func start_game() -> void:
@@ -63,4 +64,16 @@ func _ready() -> void:
     tab_container.current_tab = MENU_TAB
     
     #Globals.camera.camera.global_transform = local_camera.global_transform
-    local_camera.make_current()
+    local_camera.make_current() ## Camera
+    
+    ## This section just makes the TextureRect pulse in opacity to add some juice.
+    var target:Color = texture_rect.self_modulate ## Cache the target from the editor config
+    texture_rect.self_modulate = Color.WHITE ## Make opaque to start
+    var background_tween = texture_rect.create_tween()
+    #background_tween.set_ease(Tween.EASE_OUT)
+    background_tween.set_trans(Tween.TRANS_CUBIC)
+    background_tween.tween_property(texture_rect, ^"self_modulate", target, 3.0) #.from(Color.WHITE)
+    background_tween.tween_interval(1.0 + randf())
+    background_tween.tween_property(texture_rect, ^"self_modulate", Color(Color.WHITE, randf()*0.6), 3.0 + randf())
+    background_tween.tween_interval(randf())
+    background_tween.set_loops()

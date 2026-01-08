@@ -57,6 +57,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_0uvlf")
 script = ExtResource("1_62kf1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
 self_modulate = Color(0.44880003, 0.6388801, 0.66, 0.5372549)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_oijkb")
