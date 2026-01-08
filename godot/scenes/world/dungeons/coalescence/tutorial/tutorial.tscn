@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=79 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -6,12 +6,14 @@
 [ext_resource type="Script" uid="uid://bmrhuug42isst" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_music.gd" id="2_ydln7"]
 [ext_resource type="Script" uid="uid://do4x4l8nwjdip" path="res://scripts/entities/sky_rotate.gd" id="3_5u8qt"]
 [ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="4_julif"]
+[ext_resource type="Material" uid="uid://oy8uknygfg47" path="res://assets/materials/ink-sun-sprite-mat.tres" id="5_7fhsc"]
 [ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="5_ygplp"]
 [ext_resource type="Material" uid="uid://d38i2dxauqkl0" path="res://assets/materials/ink-cloud3.tres" id="6_64ggy"]
 [ext_resource type="Material" uid="uid://rknsm0d0mgvc" path="res://assets/materials/ink-cloud1.tres" id="7_4r05b"]
 [ext_resource type="Script" uid="uid://cq4jqk5k1libd" path="res://scenes/world/dungeons/coalescence/tutorial/hud_layer.gd" id="8_0cvc3"]
 [ext_resource type="Script" uid="uid://bn60ptck7jhbi" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_sequence.gd" id="8_8cm00"]
 [ext_resource type="PackedScene" uid="uid://cx54j3yuqwncx" path="res://scenes/world/dungeons/coalescence/bubbles/entry_path.tscn" id="8_fx6br"]
+[ext_resource type="Material" uid="uid://cw7jl413ehdss" path="res://assets/materials/ink-sun-sprite2-mat.tres" id="8_y0qjs"]
 [ext_resource type="Script" uid="uid://wp3c7iemuwmf" path="res://scenes/world/dungeons/coalescence/tutorial/screen_overlay_layer.gd" id="9_d6baa"]
 [ext_resource type="PackedScene" uid="uid://bh4yxqkgk4di4" path="res://scenes/world/dungeons/coalescence/bubbles/plaza.tscn" id="9_otwgf"]
 [ext_resource type="Script" uid="uid://b4k3rvmuqbaa5" path="res://scenes/world/dungeons/coalescence/tutorial/menu_layer.gd" id="9_w4dxx"]
@@ -387,17 +389,31 @@ shadow_opacity = 0.25
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment/sun"]
 environment = SubResource("Environment_3vwdg")
 
+[node name="sun-sprite" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(-6.181724e-06, 141.42136, -141.42136, -200, -8.742278e-06, 0, -6.181724e-06, 141.42136, 141.42136, 194.22601, 81.44243, -227.06158)
+material_override = ExtResource("5_7fhsc")
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="sun-sprite2" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(2.1105725e-05, -200, -1.2363448e-05, -141.42136, -6.181724e-06, -141.42136, 141.42136, 2.366628e-05, -141.42136, -97.65845, 528.22473, 437.3517)
+material_override = ExtResource("8_y0qjs")
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
 [node name="clouds" type="Node3D" parent="Environment"]
 script = ExtResource("3_5u8qt")
 
 [node name="cloud8" type="MeshInstance3D" parent="Environment/clouds"]
-transform = Transform3D(-1.0927847e-06, 50, 0, -25, -2.1855694e-06, 0, 0, 0, 25, 92.531395, 78.821304, -150)
+transform = Transform3D(-1.0927847e-06, 50, 0, -25, -2.1855694e-06, 0, 0, 0, 25, 92.531395, 120.00459, -150)
 mesh = ExtResource("4_julif")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("5_ygplp")
 
 [node name="cloud9" type="MeshInstance3D" parent="Environment/clouds"]
-transform = Transform3D(-1.0885797e-06, 49.8076, 2.191064, -25, -2.1855694e-06, 8.881784e-15, 9.577445e-08, -4.382128, 24.9038, -24.821426, 26.253792, -197.31456)
+transform = Transform3D(-1.0885797e-06, 49.8076, 2.191064, -25, -2.1855694e-06, 8.881784e-15, 9.577445e-08, -4.382128, 24.9038, 54.42424, 133.1667, -219.27849)
 mesh = ExtResource("4_julif")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("5_ygplp")
@@ -433,7 +449,7 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("5_ygplp")
 
 [node name="cloud15" type="MeshInstance3D" parent="Environment/clouds"]
-transform = Transform3D(-1.0287154e-06, 47.068523, -8.434365, -25, -2.1855694e-06, 2.3353774e-13, -3.6867763e-07, 16.86873, 23.534262, 75.0462, 22.907047, -145.14691)
+transform = Transform3D(-1.0287154e-06, 47.068523, -8.434365, -25, -2.1855694e-06, 2.3353774e-13, -3.6867763e-07, 16.86873, 23.534262, 107.96669, 33.56625, -169.97668)
 mesh = ExtResource("4_julif")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("6_64ggy")
