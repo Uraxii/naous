@@ -8,6 +8,8 @@ extends CanvasLayer
 @onready var interact_text: Label = %InteractText
 @onready var target_panel: TargetPanel = %TargetPanel
 @onready var tutorial_hotbar_panel: PanelContainer = %TutorialHotbarPanel
+@onready var player_health_bar: ProgressBar = %PlayerHealthBar
+@onready var player_health_panel: PanelContainer = %PlayerHealthPanel
 @onready var player: Player = %Player
 
 
@@ -47,18 +49,30 @@ func hide_target_panel() -> void:
     target_panel.hide()
 
 
+func show_player_health_bar() -> void:
+    player_health_panel.show()
+
+func set_player_health_bar(new_value: float) -> void:
+    player_health_bar.value = new_value
+
+
 func _ready() -> void:
     Globals.signal_bus.entity_detected_interactable.connect(detected_interactable)
     Globals.signal_bus.entity_lost_interactable.connect(lost_interactable)
+    
     
     interact_prompt.hide()
     quest_info_container.hide()
     target_panel.hide()
     tutorial_hotbar_panel.hide()
+    player_health_panel.hide()
     
     await get_tree().process_frame
     player.targeting.new_target_selected.connect(_on_new_player_target)
     player.targeting.cleared_target.connect(_on_player_cleared_target)
+    player.health.change.connect(_on_player_health_change)
+    set_player_health_bar(player.health.current)
+    player_health_bar.max_value = player.health.max_value
 
 
 func _on_new_player_target(targetable: Targetable) -> void:
@@ -69,3 +83,7 @@ func _on_new_player_target(targetable: Targetable) -> void:
 
 func _on_player_cleared_target(_targetable: Targetable) -> void:
     hide_target_panel()
+
+
+func _on_player_health_change(new_val: float, _old_val: float) -> void:
+    set_player_health_bar(new_val)

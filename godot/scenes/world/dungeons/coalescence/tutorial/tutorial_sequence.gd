@@ -90,6 +90,7 @@ func _on_beginning_hud_fade_in() -> void:
     Globals.signal_bus.allow_character_control.emit(true)
     hud_layer.display_objective_hud("Explore the ruins")
     hud_layer.display_hotbar()
+    hud_layer.show_player_health_bar()
     
     starter_gear_pickup.collected.connect(_on_beginning_gear_pickup)
     

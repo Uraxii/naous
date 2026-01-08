@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=82 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -230,6 +230,12 @@ font_color = Color(1, 1, 1, 0.9647059)
 shadow_size = 11
 shadow_color = Color(0.05882353, 0.05882353, 0.05882353, 0.91764706)
 shadow_offset = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5v5l"]
+bg_color = Color(0.3882353, 0.10980392, 0.16078432, 0.9372549)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvvth"]
+bg_color = Color(0.0035157588, 0.47396898, 0.3828481, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6baa"]
 content_margin_left = 8.0
@@ -708,6 +714,33 @@ offset_right = 12.0
 offset_bottom = 18.0
 text = "4"
 label_settings = SubResource("LabelSettings_jy2u2")
+
+[node name="PlayerHealthPanel" type="PanelContainer" parent="HUDLayer"]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = -95.0
+offset_right = 137.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="HUDLayer/PlayerHealthPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+tooltip_text = "Health"
+mouse_filter = 1
+theme_override_font_sizes/font_size = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_w5v5l")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vvvth")
+step = 1.0
+value = 50.0
+show_percentage = false
 
 [node name="ScreenOverlayLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
