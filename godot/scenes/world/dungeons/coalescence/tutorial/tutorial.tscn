@@ -615,6 +615,7 @@ step = 0.1
 value = 75.0
 
 [node name="TutorialHotbarPanel" type="PanelContainer" parent="HUDLayer"]
+unique_name_in_owner = true
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -811,51 +812,51 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 transform = Transform3D(0.32749826, 0, -0.94485176, 0, 1, 0, 0.94485176, 0, 0.32749826, 25.594046, 0.62818503, -23.348516)
 script = ExtResource("14_1c438")
-loot_entity = NodePath("StarterGearEntity")
+loot_entity = NodePath("Starter Gear")
 
-[node name="StarterGearEntity" type="Node3D" parent="EntryPath/StarterGearPickup" node_paths=PackedStringArray("components", "body")]
+[node name="Starter Gear" type="Node3D" parent="EntryPath/StarterGearPickup" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("13_xujpj")
 components = NodePath("ComponentManager")
 body = NodePath("MeshInstance3D")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="EntryPath/StarterGearPickup/StarterGearEntity"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="EntryPath/StarterGearPickup/Starter Gear"]
 replication_config = SubResource("SceneReplicationConfig_w4dxx")
 script = ExtResource("16_o0ykn")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="EntryPath/StarterGearPickup/StarterGearEntity"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="EntryPath/StarterGearPickup/Starter Gear"]
 lifetime = 1.8
 interp_to_end = 1.0
 explosiveness = 0.43
 process_material = SubResource("ParticleProcessMaterial_g7sat")
 draw_pass_1 = SubResource("SphereMesh_xujpj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EntryPath/StarterGearPickup/StarterGearEntity"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntryPath/StarterGearPickup/Starter Gear"]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 mesh = SubResource("SphereMesh_2wek5")
 skeleton = NodePath("")
 
-[node name="InteractableTrigger" type="Area3D" parent="EntryPath/StarterGearPickup/StarterGearEntity" node_paths=PackedStringArray("interactable")]
+[node name="InteractableTrigger" type="Area3D" parent="EntryPath/StarterGearPickup/Starter Gear" node_paths=PackedStringArray("interactable")]
 collision_layer = 8
 priority = 1
 script = ExtResource("14_omq0d")
 interactable = NodePath("../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://biugcdkh4yjur"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryPath/StarterGearPickup/StarterGearEntity/InteractableTrigger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryPath/StarterGearPickup/Starter Gear/InteractableTrigger"]
 transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
 shape = SubResource("BoxShape3D_o0ykn")
 
-[node name="ComponentManager" type="Node" parent="EntryPath/StarterGearPickup/StarterGearEntity" node_paths=PackedStringArray("entity")]
+[node name="ComponentManager" type="Node" parent="EntryPath/StarterGearPickup/Starter Gear" node_paths=PackedStringArray("entity")]
 script = ExtResource("15_0cvc3")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Targetable" parent="EntryPath/StarterGearPickup/StarterGearEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+[node name="Targetable" parent="EntryPath/StarterGearPickup/Starter Gear/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
 entity = NodePath("../..")
 
-[node name="Interactable" type="Node" parent="EntryPath/StarterGearPickup/StarterGearEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+[node name="Interactable" type="Node" parent="EntryPath/StarterGearPickup/Starter Gear/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("17_1c438")
 entity = NodePath("../..")
 prompt_text = "Collect Gear"
@@ -867,51 +868,51 @@ metadata/_custom_type_script = "uid://cmg4tj2i8g72l"
 unique_name_in_owner = true
 transform = Transform3D(0.32749826, 0, -0.94485176, 0, 1, 0, 0.94485176, 0, 0.32749826, -23.800093, -21.339058, -33.524895)
 script = ExtResource("14_1c438")
-loot_entity = NodePath("HealEchoEntity")
+loot_entity = NodePath("Healing Echo")
 
-[node name="HealEchoEntity" type="Node3D" parent="EntryPath/HealEchoPickup" node_paths=PackedStringArray("components", "body")]
+[node name="Healing Echo" type="Node3D" parent="EntryPath/HealEchoPickup" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("13_xujpj")
 components = NodePath("ComponentManager")
 body = NodePath("MeshInstance3D")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="EntryPath/HealEchoPickup/HealEchoEntity"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="EntryPath/HealEchoPickup/Healing Echo"]
 replication_config = SubResource("SceneReplicationConfig_w4dxx")
 script = ExtResource("16_o0ykn")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="EntryPath/HealEchoPickup/HealEchoEntity"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="EntryPath/HealEchoPickup/Healing Echo"]
 lifetime = 1.8
 interp_to_end = 1.0
 explosiveness = 0.43
 process_material = SubResource("ParticleProcessMaterial_g7sat")
 draw_pass_1 = SubResource("SphereMesh_xujpj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="EntryPath/HealEchoPickup/HealEchoEntity"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EntryPath/HealEchoPickup/Healing Echo"]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 mesh = SubResource("SphereMesh_2wek5")
 skeleton = NodePath("")
 
-[node name="InteractableTrigger" type="Area3D" parent="EntryPath/HealEchoPickup/HealEchoEntity" node_paths=PackedStringArray("interactable")]
+[node name="InteractableTrigger" type="Area3D" parent="EntryPath/HealEchoPickup/Healing Echo" node_paths=PackedStringArray("interactable")]
 collision_layer = 8
 priority = 1
 script = ExtResource("14_omq0d")
 interactable = NodePath("../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://biugcdkh4yjur"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryPath/HealEchoPickup/HealEchoEntity/InteractableTrigger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EntryPath/HealEchoPickup/Healing Echo/InteractableTrigger"]
 transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
 shape = SubResource("BoxShape3D_2e0i0")
 
-[node name="ComponentManager" type="Node" parent="EntryPath/HealEchoPickup/HealEchoEntity" node_paths=PackedStringArray("entity")]
+[node name="ComponentManager" type="Node" parent="EntryPath/HealEchoPickup/Healing Echo" node_paths=PackedStringArray("entity")]
 script = ExtResource("15_0cvc3")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Targetable" parent="EntryPath/HealEchoPickup/HealEchoEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+[node name="Targetable" parent="EntryPath/HealEchoPickup/Healing Echo/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
 entity = NodePath("../..")
 
-[node name="Interactable" type="Node" parent="EntryPath/HealEchoPickup/HealEchoEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+[node name="Interactable" type="Node" parent="EntryPath/HealEchoPickup/Healing Echo/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("17_1c438")
 entity = NodePath("../..")
 prompt_text = "Pickup Item"
@@ -946,51 +947,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0856552, 0, 1.326271)
 unique_name_in_owner = true
 transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, -3.1584702, 0.5663096, -2.7788467)
 script = ExtResource("14_1c438")
-loot_entity = NodePath("PyramidLootEntity")
+loot_entity = NodePath("Pyramid Loot")
 
-[node name="PyramidLootEntity" type="Node3D" parent="Plaza/PyramidArea/PyramidLootPickup" node_paths=PackedStringArray("components", "body")]
+[node name="Pyramid Loot" type="Node3D" parent="Plaza/PyramidArea/PyramidLootPickup" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("13_xujpj")
 components = NodePath("ComponentManager")
 body = NodePath("MeshInstance3D")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/PyramidArea/PyramidLootPickup/Pyramid Loot"]
 replication_config = SubResource("SceneReplicationConfig_w4dxx")
 script = ExtResource("16_o0ykn")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/PyramidArea/PyramidLootPickup/Pyramid Loot"]
 lifetime = 1.8
 interp_to_end = 1.0
 explosiveness = 0.43
 process_material = SubResource("ParticleProcessMaterial_g7sat")
 draw_pass_1 = SubResource("SphereMesh_xujpj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/PyramidArea/PyramidLootPickup/Pyramid Loot"]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 mesh = SubResource("SphereMesh_2wek5")
 skeleton = NodePath("")
 
-[node name="InteractableTrigger" type="Area3D" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity" node_paths=PackedStringArray("interactable")]
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/PyramidArea/PyramidLootPickup/Pyramid Loot" node_paths=PackedStringArray("interactable")]
 collision_layer = 8
 priority = 1
 script = ExtResource("14_omq0d")
 interactable = NodePath("../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://biugcdkh4yjur"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity/InteractableTrigger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/PyramidArea/PyramidLootPickup/Pyramid Loot/InteractableTrigger"]
 transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
 shape = SubResource("BoxShape3D_2e0i0")
 
-[node name="ComponentManager" type="Node" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity" node_paths=PackedStringArray("entity")]
+[node name="ComponentManager" type="Node" parent="Plaza/PyramidArea/PyramidLootPickup/Pyramid Loot" node_paths=PackedStringArray("entity")]
 script = ExtResource("15_0cvc3")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Targetable" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+[node name="Targetable" parent="Plaza/PyramidArea/PyramidLootPickup/Pyramid Loot/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
 entity = NodePath("../..")
 
-[node name="Interactable" type="Node" parent="Plaza/PyramidArea/PyramidLootPickup/PyramidLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+[node name="Interactable" type="Node" parent="Plaza/PyramidArea/PyramidLootPickup/Pyramid Loot/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("17_1c438")
 entity = NodePath("../..")
 prompt_text = "Pickup Item"
@@ -1023,51 +1024,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6925049, 0, 5.1066437)
 unique_name_in_owner = true
 transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 5.2042694, 0.56630945, 8.079422)
 script = ExtResource("14_1c438")
-loot_entity = NodePath("CrystalLootEntity")
+loot_entity = NodePath("Crystal Loot")
 
-[node name="CrystalLootEntity" type="Node3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup" node_paths=PackedStringArray("components", "body")]
+[node name="Crystal Loot" type="Node3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("13_xujpj")
 components = NodePath("ComponentManager")
 body = NodePath("MeshInstance3D")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/Crystal Loot"]
 replication_config = SubResource("SceneReplicationConfig_w4dxx")
 script = ExtResource("16_o0ykn")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/Crystal Loot"]
 lifetime = 1.8
 interp_to_end = 1.0
 explosiveness = 0.43
 process_material = SubResource("ParticleProcessMaterial_g7sat")
 draw_pass_1 = SubResource("SphereMesh_xujpj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/Crystal Loot"]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 mesh = SubResource("SphereMesh_2wek5")
 skeleton = NodePath("")
 
-[node name="InteractableTrigger" type="Area3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity" node_paths=PackedStringArray("interactable")]
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/Crystal Loot" node_paths=PackedStringArray("interactable")]
 collision_layer = 8
 priority = 1
 script = ExtResource("14_omq0d")
 interactable = NodePath("../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://biugcdkh4yjur"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/InteractableTrigger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/Crystal Loot/InteractableTrigger"]
 transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
 shape = SubResource("BoxShape3D_2e0i0")
 
-[node name="ComponentManager" type="Node" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity" node_paths=PackedStringArray("entity")]
+[node name="ComponentManager" type="Node" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/Crystal Loot" node_paths=PackedStringArray("entity")]
 script = ExtResource("15_0cvc3")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Targetable" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+[node name="Targetable" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/Crystal Loot/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
 entity = NodePath("../..")
 
-[node name="Interactable" type="Node" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/CrystalLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+[node name="Interactable" type="Node" parent="Plaza/CrystalCornerArea/CrystalCornerPickup/Crystal Loot/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("17_1c438")
 entity = NodePath("../..")
 prompt_text = "Pickup Item"
@@ -1100,51 +1101,51 @@ transform = Transform3D(0.9000071, -0.43587524, 0, 0.43587524, 0.9000071, 0, 0, 
 unique_name_in_owner = true
 transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 5.530877, -3.7763383, -11.359955)
 script = ExtResource("14_1c438")
-loot_entity = NodePath("FountainLootEntity")
+loot_entity = NodePath("Fountain Loot")
 
-[node name="FountainLootEntity" type="Node3D" parent="Plaza/FountainTreeArea/FountainLootPickup" node_paths=PackedStringArray("components", "body")]
+[node name="Fountain Loot" type="Node3D" parent="Plaza/FountainTreeArea/FountainLootPickup" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("13_xujpj")
 components = NodePath("ComponentManager")
 body = NodePath("MeshInstance3D")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/FountainTreeArea/FountainLootPickup/Fountain Loot"]
 replication_config = SubResource("SceneReplicationConfig_w4dxx")
 script = ExtResource("16_o0ykn")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/FountainTreeArea/FountainLootPickup/Fountain Loot"]
 lifetime = 1.8
 interp_to_end = 1.0
 explosiveness = 0.43
 process_material = SubResource("ParticleProcessMaterial_g7sat")
 draw_pass_1 = SubResource("SphereMesh_xujpj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/FountainTreeArea/FountainLootPickup/Fountain Loot"]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 mesh = SubResource("SphereMesh_2wek5")
 skeleton = NodePath("")
 
-[node name="InteractableTrigger" type="Area3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity" node_paths=PackedStringArray("interactable")]
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/FountainTreeArea/FountainLootPickup/Fountain Loot" node_paths=PackedStringArray("interactable")]
 collision_layer = 8
 priority = 1
 script = ExtResource("14_omq0d")
 interactable = NodePath("../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://biugcdkh4yjur"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/InteractableTrigger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/FountainTreeArea/FountainLootPickup/Fountain Loot/InteractableTrigger"]
 transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
 shape = SubResource("BoxShape3D_2e0i0")
 
-[node name="ComponentManager" type="Node" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity" node_paths=PackedStringArray("entity")]
+[node name="ComponentManager" type="Node" parent="Plaza/FountainTreeArea/FountainLootPickup/Fountain Loot" node_paths=PackedStringArray("entity")]
 script = ExtResource("15_0cvc3")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Targetable" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+[node name="Targetable" parent="Plaza/FountainTreeArea/FountainLootPickup/Fountain Loot/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
 entity = NodePath("../..")
 
-[node name="Interactable" type="Node" parent="Plaza/FountainTreeArea/FountainLootPickup/FountainLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+[node name="Interactable" type="Node" parent="Plaza/FountainTreeArea/FountainLootPickup/Fountain Loot/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("17_1c438")
 entity = NodePath("../..")
 prompt_text = "Pickup Item"
@@ -1178,51 +1179,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48588, -0.3110497, 2.024322
 unique_name_in_owner = true
 transform = Transform3D(-0.78548974, 0, -0.6188746, 0, 1, 0, 0.6188746, 0, -0.78548974, 0, -127.580315, 0)
 script = ExtResource("14_1c438")
-loot_entity = NodePath("MinibossLootEntity")
+loot_entity = NodePath("Miniboss Loot")
 
-[node name="MinibossLootEntity" type="Node3D" parent="Plaza/Miniboss/MinibossLootPickup" node_paths=PackedStringArray("components", "body")]
+[node name="Miniboss Loot" type="Node3D" parent="Plaza/Miniboss/MinibossLootPickup" node_paths=PackedStringArray("components", "body")]
 script = ExtResource("13_xujpj")
 components = NodePath("ComponentManager")
 body = NodePath("MeshInstance3D")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Plaza/Miniboss/MinibossLootPickup/Miniboss Loot"]
 replication_config = SubResource("SceneReplicationConfig_w4dxx")
 script = ExtResource("16_o0ykn")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Plaza/Miniboss/MinibossLootPickup/Miniboss Loot"]
 lifetime = 1.8
 interp_to_end = 1.0
 explosiveness = 0.43
 process_material = SubResource("ParticleProcessMaterial_g7sat")
 draw_pass_1 = SubResource("SphereMesh_xujpj")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Plaza/Miniboss/MinibossLootPickup/Miniboss Loot"]
 transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
 mesh = SubResource("SphereMesh_2wek5")
 skeleton = NodePath("")
 
-[node name="InteractableTrigger" type="Area3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity" node_paths=PackedStringArray("interactable")]
+[node name="InteractableTrigger" type="Area3D" parent="Plaza/Miniboss/MinibossLootPickup/Miniboss Loot" node_paths=PackedStringArray("interactable")]
 collision_layer = 8
 priority = 1
 script = ExtResource("14_omq0d")
 interactable = NodePath("../ComponentManager/Interactable")
 metadata/_custom_type_script = "uid://biugcdkh4yjur"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/InteractableTrigger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Plaza/Miniboss/MinibossLootPickup/Miniboss Loot/InteractableTrigger"]
 transform = Transform3D(1.0000004, 0, 0, 0, 1, 0, 0, 0, 1.0000004, 0, 0.24529088, 0)
 shape = SubResource("BoxShape3D_2e0i0")
 
-[node name="ComponentManager" type="Node" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity" node_paths=PackedStringArray("entity")]
+[node name="ComponentManager" type="Node" parent="Plaza/Miniboss/MinibossLootPickup/Miniboss Loot" node_paths=PackedStringArray("entity")]
 script = ExtResource("15_0cvc3")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Targetable" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
+[node name="Targetable" parent="Plaza/Miniboss/MinibossLootPickup/Miniboss Loot/ComponentManager" node_paths=PackedStringArray("entity") instance=ExtResource("14_0tafa")]
 entity = NodePath("../..")
 
-[node name="Interactable" type="Node" parent="Plaza/Miniboss/MinibossLootPickup/MinibossLootEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+[node name="Interactable" type="Node" parent="Plaza/Miniboss/MinibossLootPickup/Miniboss Loot/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("17_1c438")
 entity = NodePath("../..")
 prompt_text = "Pickup Item"

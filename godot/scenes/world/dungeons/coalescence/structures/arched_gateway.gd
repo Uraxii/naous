@@ -1,6 +1,6 @@
 class_name ArchedGateway extends Node3D
 
-@onready var rubble_entity: Entity = %RubbleEntity
+@onready var rubble_entity: Entity = %Boulder
 
 
 func remove_rubble() -> void:

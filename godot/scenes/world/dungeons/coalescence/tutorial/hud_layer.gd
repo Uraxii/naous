@@ -7,6 +7,7 @@ extends CanvasLayer
 @onready var interact_prompt: PanelContainer = %InteractPrompt
 @onready var interact_text: Label = %InteractText
 @onready var target_panel: TargetPanel = %TargetPanel
+@onready var tutorial_hotbar_panel: PanelContainer = %TutorialHotbarPanel
 @onready var player: Player = %Player
 
 
@@ -26,6 +27,10 @@ func lost_interactable(entity: Entity, interactable: InteractableComponent) -> v
 func display_objective_hud(objective_text: String) -> void:
     quest_details.text = objective_text
     quest_info_container.show()
+
+
+func display_hotbar() -> void:
+    tutorial_hotbar_panel.show()
 
 
 func show_target_panel_for(entity: Entity) -> void:
@@ -49,6 +54,7 @@ func _ready() -> void:
     interact_prompt.hide()
     quest_info_container.hide()
     target_panel.hide()
+    tutorial_hotbar_panel.hide()
     
     await get_tree().process_frame
     player.targeting.new_target_selected.connect(_on_new_player_target)
