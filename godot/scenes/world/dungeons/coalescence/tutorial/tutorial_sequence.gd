@@ -274,6 +274,9 @@ func _on_heal_pickup() -> void:
 func _on_player_healed(_new: float, _old: float) -> void:
     # 5. Once health is restored, trigger next sequence
     trigger_sequence(SEQ.EXPLORE_PLAZA)
+	## Disconnect the signal to prevent this from being triggered again.
+    if player.health.change.is_connected(_on_player_healed):
+        player.health.change.disconnect(_on_player_healed)
 #endregion HEAL TUTORIAL
 
 
