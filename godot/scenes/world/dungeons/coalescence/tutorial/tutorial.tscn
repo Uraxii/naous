@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://d33k3abfexh3k"]
+[gd_scene load_steps=80 format=3 uid="uid://d33k3abfexh3k"]
 
 [ext_resource type="Script" uid="uid://dh7l4ppqyoiid" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial.gd" id="1_2e0i0"]
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://b4k3rvmuqbaa5" path="res://scenes/world/dungeons/coalescence/tutorial/menu_layer.gd" id="9_w4dxx"]
 [ext_resource type="Script" uid="uid://f68pd3ys4akk" path="res://scenes/world/dungeons/coalescence/tutorial/target_panel.gd" id="10_00c68"]
 [ext_resource type="PackedScene" uid="uid://c5ospakgw0cwt" path="res://scenes/entities/player.tscn" id="10_23v16"]
+[ext_resource type="Script" uid="uid://bdjhple8e3q40" path="res://scripts/RemoteRemoteTransform3D.gd" id="10_y0qjs"]
 [ext_resource type="PackedScene" uid="uid://djcmn00dr5t2d" path="res://scenes/ui/music_control_popup.tscn" id="11_3qj3r"]
 [ext_resource type="PackedScene" uid="uid://c7bsvixb5jjsf" path="res://scenes/ui/inventory/inventory_ui.tscn" id="11_f5oke"]
 [ext_resource type="PackedScene" uid="uid://xi6r38pg1hji" path="res://scenes/entities/enemies/archa.tscn" id="12_g7sat"]
@@ -380,6 +381,29 @@ script = ExtResource("2_ydln7")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_mc5jl")
 
+[node name="SunSprites" type="Node3D" parent="Environment"]
+script = ExtResource("10_y0qjs")
+force_remote_to_current_camera = true
+update_rotation = false
+update_scale = false
+metadata/_custom_type_script = "uid://bdjhple8e3q40"
+
+[node name="sun-sprite" type="MeshInstance3D" parent="Environment/SunSprites"]
+transform = Transform3D(-6.181724e-06, 141.42136, -141.42136, -200, -8.742278e-06, 0, -6.181724e-06, 141.42136, 141.42136, 194.22601, 81.44243, -227.06158)
+material_override = ExtResource("5_7fhsc")
+cast_shadow = 0
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
+[node name="sun-sprite2" type="MeshInstance3D" parent="Environment/SunSprites"]
+transform = Transform3D(2.1105725e-05, -200, -1.2363448e-05, -141.42136, -6.181724e-06, -141.42136, 141.42136, 2.366628e-05, -141.42136, -97.65845, 528.22473, 437.3517)
+material_override = ExtResource("8_y0qjs")
+cast_shadow = 0
+mesh = ExtResource("4_julif")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_ygplp")
+
 [node name="sun" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.58778524, -0.3290569, 0.7390739, 0, 0.9135455, 0.40673667, -0.80901706, 0.2390738, -0.5369685, 0, 100, 0)
 light_color = Color(0.9984834, 0.9999997, 0.9040936, 1)
@@ -388,20 +412,6 @@ shadow_opacity = 0.25
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment/sun"]
 environment = SubResource("Environment_3vwdg")
-
-[node name="sun-sprite" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(-6.181724e-06, 141.42136, -141.42136, -200, -8.742278e-06, 0, -6.181724e-06, 141.42136, 141.42136, 194.22601, 81.44243, -227.06158)
-material_override = ExtResource("5_7fhsc")
-mesh = ExtResource("4_julif")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("5_ygplp")
-
-[node name="sun-sprite2" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(2.1105725e-05, -200, -1.2363448e-05, -141.42136, -6.181724e-06, -141.42136, 141.42136, 2.366628e-05, -141.42136, -97.65845, 528.22473, 437.3517)
-material_override = ExtResource("8_y0qjs")
-mesh = ExtResource("4_julif")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("5_ygplp")
 
 [node name="clouds" type="Node3D" parent="Environment"]
 script = ExtResource("3_5u8qt")
