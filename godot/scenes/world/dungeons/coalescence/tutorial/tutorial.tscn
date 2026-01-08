@@ -775,7 +775,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 1.4846497, -42.199
 
 [node name="FirstEnemyRevealPosition" type="Marker3D" parent="EntryPath"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 1.4846497, -30.670498)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1116385, 1.398766, -28.836735)
 
 [node name="FirstEnemy" parent="EntryPath" instance=ExtResource("12_g7sat")]
 unique_name_in_owner = true
@@ -1145,7 +1145,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="MinibossSpawn" type="Marker3D" parent="Plaza/Miniboss"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.191491, -1.9073486e-06, 2.0243225)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48588, -0.3110497, 2.0243225)
 
 [node name="MinibossLootPickup" type="Node3D" parent="Plaza/Miniboss" node_paths=PackedStringArray("loot_entity")]
 unique_name_in_owner = true
@@ -1218,28 +1218,28 @@ shape = SubResource("CylinderShape3D_n3n4y")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.18224, 0, -88.62871)
 
 [node name="ControlZone" parent="Plaza/Horde" instance=ExtResource("24_acyb3")]
-transform = Transform3D(8, 0, 0, 0, 2.975, 0, 0, 0, 8, -0.24708557, -1.3341248, 4.4476013)
+transform = Transform3D(8, 0, 0, 0, 2.975, 0, 0, 0, 8, -0.24708557, -1.9756597, 4.4476013)
 
 [node name="HordeEnemy1" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
 unique_name_in_owner = true
 
 [node name="HordeSpawn1" type="Marker3D" parent="Plaza/Horde"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.973932, 0, 4.65744)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.973932, -0.69048977, 4.65744)
 
 [node name="HordeEnemy2" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
 unique_name_in_owner = true
 
 [node name="HordeSpawn2" type="Marker3D" parent="Plaza/Horde"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38363266, 0, 15.029572)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38363266, -0.69048977, 15.029572)
 
 [node name="HordeEnemy3" parent="Plaza/Horde" instance=ExtResource("12_g7sat")]
 unique_name_in_owner = true
 
 [node name="HordeSpawn3" type="Marker3D" parent="Plaza/Horde"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.931303, 0, -1.4191895)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.931303, -0.69048977, -1.4191895)
 
 [node name="Backup" type="Node3D" parent="Plaza"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.779051, 9.536743e-07, -83.997665)
@@ -1301,7 +1301,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="BackupAllySpawn1" type="Marker3D" parent="Plaza/Backup"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.211958, 0, -1.2337646)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.211958, -1.4516593, -1.2337646)
 
 [node name="BackupAlly2" type="Node3D" parent="Plaza/Backup" node_paths=PackedStringArray("components", "body")]
 unique_name_in_owner = true
@@ -1334,7 +1334,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="BackupAllySpawn2" type="Marker3D" parent="Plaza/Backup"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8050928, 0, -1.1304321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8050928, -1.4516593, -1.1304321)
 
 [node name="Escape" type="Node3D" parent="Plaza"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.605366, 1.841228, -99.33275)
@@ -1344,7 +1344,7 @@ unique_name_in_owner = true
 
 [node name="EscapeBossSpawn" type="Marker3D" parent="Plaza/Escape"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.021392822, -5.5680513, -0.5468445)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7341499, -5.5680513, 14.262695)
 
 [node name="Plaza_Mountain_Border" type="Node3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)

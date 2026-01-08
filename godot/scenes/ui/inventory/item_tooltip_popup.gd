@@ -25,3 +25,4 @@ func get_item() -> Item:
 
 func _ready() -> void:
     gui_disable_input = true
+    hide()

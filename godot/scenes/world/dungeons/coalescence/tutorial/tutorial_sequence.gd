@@ -392,7 +392,7 @@ func miniboss_fight() -> void:
 @onready var miniboss_loot_pickup: LootPickup = %MinibossLootPickup
 func _miniboss_defeated() -> void:
     # 3. When the enemy is defeated, drop new echo
-    spawn_entity_at.emit(miniboss_loot_pickup.loot_entity, miniboss_enemy.body.global_position)
+    spawn_entity_at.emit(miniboss_loot_pickup.loot_entity, miniboss_enemy.body.global_position + Vector3(0, 0.6, 0))
     miniboss_loot_pickup.collected.connect(_miniboss_gear_collected)
     despawn_entity.emit(miniboss_enemy)
     hud_layer.display_objective_hud("Pickup Gear Set")
