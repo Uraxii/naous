@@ -14,14 +14,12 @@ func open_inventory() -> void:
     Globals.signal_bus.allow_character_control.emit(false)
     # Show inventory panel
     inventory_ui.show()
-    show()
     inventory_opened.emit()
 
 
 func close_inventory() -> void:
     print("Closing player inventory!")
     # Hide inventory panel
-    hide()
     inventory_ui.hide()
     # Return player control
     Globals.signal_bus.allow_character_control.emit(true)

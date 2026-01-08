@@ -100,7 +100,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nv4ux")
 transform = Transform3D(-0.5007102, -0.86561495, 8.742277e-08, -0.86561495, 0.5007102, 0, -4.3773476e-08, -7.567447e-08, -1, 7.4262505, 4.079604, 0)
 shape = SubResource("ConvexPolygonShape3D_ke8f3")
 
-[node name="RubbleEntity" type="Node3D" parent="." node_paths=PackedStringArray("components", "health", "body")]
+[node name="Boulder" type="Node3D" parent="." node_paths=PackedStringArray("components", "health", "body")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8735266, 5.286301, 0)
 script = ExtResource("1_avcb8")
@@ -109,36 +109,36 @@ health = NodePath("ComponentManager/HealthComponent")
 body = NodePath("RubbleBody")
 metadata/_custom_type_script = "uid://cfyjnr8bvcyt8"
 
-[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="RubbleEntity"]
+[node name="LocalControlSynchronizer" type="MultiplayerSynchronizer" parent="Boulder"]
 replication_config = SubResource("SceneReplicationConfig_rlmsk")
 script = ExtResource("2_0uv4u")
 metadata/_custom_type_script = "uid://dm5cpxgpdo55a"
 
-[node name="RubbleBody" type="StaticBody3D" parent="RubbleEntity"]
+[node name="RubbleBody" type="StaticBody3D" parent="Boulder"]
 collision_layer = 6
 collision_mask = 5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RubbleEntity/RubbleBody"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Boulder/RubbleBody"]
 mesh = SubResource("SphereMesh_nv4ux")
 surface_material_override/0 = SubResource("StandardMaterial3D_00g66")
 
-[node name="boulder-purple" parent="RubbleEntity/RubbleBody/MeshInstance3D" instance=ExtResource("4_8xl5r")]
+[node name="boulder-purple" parent="Boulder/RubbleBody/MeshInstance3D" instance=ExtResource("4_8xl5r")]
 transform = Transform3D(-12.097678, 0, -10.471208, 0, 16, 0, 10.471208, 0, -12.097678, -2.1119394, 1.0823355, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RubbleEntity/RubbleBody"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boulder/RubbleBody"]
 shape = SubResource("BoxShape3D_0uv4u")
 
-[node name="ComponentManager" type="Node" parent="RubbleEntity" node_paths=PackedStringArray("entity")]
+[node name="ComponentManager" type="Node" parent="Boulder" node_paths=PackedStringArray("entity")]
 script = ExtResource("3_8xl5r")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://bhu55855qbepn"
 
-[node name="Targetable" type="Node" parent="RubbleEntity/ComponentManager" node_paths=PackedStringArray("entity")]
+[node name="Targetable" type="Node" parent="Boulder/ComponentManager" node_paths=PackedStringArray("entity")]
 script = ExtResource("4_loggg")
 entity = NodePath("../..")
 metadata/_custom_type_script = "uid://kb2rkvmsll57"
 
-[node name="HealthComponent" type="Node" parent="RubbleEntity/ComponentManager"]
+[node name="HealthComponent" type="Node" parent="Boulder/ComponentManager"]
 script = ExtResource("5_n3roy")
 current = 50.0
 max_value = 50.0

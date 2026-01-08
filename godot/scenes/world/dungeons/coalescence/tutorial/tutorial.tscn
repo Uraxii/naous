@@ -4,12 +4,12 @@
 [ext_resource type="Material" uid="uid://dudlwhegf6r0e" path="res://assets/materials/postproc-toon-material.tres" id="1_e5qsc"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="2_8cm00"]
 [ext_resource type="Script" uid="uid://bmrhuug42isst" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_music.gd" id="2_ydln7"]
-[ext_resource type="Script" uid="uid://do4x4l8nwjdip" path="res://scripts/entities/sky_rotate.gd" id="3_5u8qt"]
+[ext_resource type="Script" path="res://scripts/entities/sky_rotate.gd" id="3_5u8qt"]
 [ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="4_julif"]
 [ext_resource type="Material" uid="uid://oy8uknygfg47" path="res://assets/materials/ink-sun-sprite-mat.tres" id="5_7fhsc"]
-[ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="5_ygplp"]
-[ext_resource type="Material" uid="uid://d38i2dxauqkl0" path="res://assets/materials/ink-cloud3.tres" id="6_64ggy"]
-[ext_resource type="Material" uid="uid://rknsm0d0mgvc" path="res://assets/materials/ink-cloud1.tres" id="7_4r05b"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud2.tres" id="5_ygplp"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud3.tres" id="6_64ggy"]
+[ext_resource type="Material" path="res://assets/materials/ink-cloud1.tres" id="7_4r05b"]
 [ext_resource type="Script" uid="uid://cq4jqk5k1libd" path="res://scenes/world/dungeons/coalescence/tutorial/hud_layer.gd" id="8_0cvc3"]
 [ext_resource type="Script" uid="uid://bn60ptck7jhbi" path="res://scenes/world/dungeons/coalescence/tutorial/tutorial_sequence.gd" id="8_8cm00"]
 [ext_resource type="PackedScene" uid="uid://cx54j3yuqwncx" path="res://scenes/world/dungeons/coalescence/bubbles/entry_path.tscn" id="8_fx6br"]
@@ -64,43 +64,6 @@ ssao_intensity = 4.0
 ssao_light_affect = 0.5
 ssil_radius = 6.0
 ssil_intensity = 6.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6baa"]
-content_margin_left = 8.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.11399999, 0.57, 0.47879997, 0.92156863)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.013729546, 0.013729553, 0.013729527, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="FontVariation" id="FontVariation_f5oke"]
-variation_transform = Transform2D(1, 0.165, 0, 1, 0, 0)
-spacing_glyph = 1
-
-[sub_resource type="LabelSettings" id="LabelSettings_2e0i0"]
-font = SubResource("FontVariation_f5oke")
-font_size = 14
-font_color = Color(0.9193109, 0.81228954, 0.093572326, 1)
-outline_size = 12
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="FontVariation" id="FontVariation_d6baa"]
-variation_embolden = 1.1
-spacing_glyph = 1
-
-[sub_resource type="LabelSettings" id="LabelSettings_acyb3"]
-font = SubResource("FontVariation_d6baa")
-font_size = 20
-font_color = Color(0.055675693, 0.0556757, 0.0556757, 1)
-outline_size = 7
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5oke"]
 bg_color = Color(0.25, 0.25, 0.25, 0.5254902)
@@ -267,6 +230,43 @@ font_color = Color(1, 1, 1, 0.9647059)
 shadow_size = 11
 shadow_color = Color(0.05882353, 0.05882353, 0.05882353, 0.91764706)
 shadow_offset = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6baa"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 16.0
+bg_color = Color(0.11399999, 0.57, 0.47879997, 0.92156863)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.013729546, 0.013729553, 0.013729527, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_f5oke"]
+variation_transform = Transform2D(1, 0.165, 0, 1, 0, 0)
+spacing_glyph = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_2e0i0"]
+font = SubResource("FontVariation_f5oke")
+font_size = 14
+font_color = Color(0.9193109, 0.81228954, 0.093572326, 1)
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_d6baa"]
+variation_embolden = 1.1
+spacing_glyph = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_acyb3"]
+font = SubResource("FontVariation_d6baa")
+font_size = 20
+font_color = Color(0.055675693, 0.0556757, 0.0556757, 1)
+outline_size = 7
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w4dxx"]
 properties/0/path = NodePath("Components/Body:position")
@@ -555,43 +555,6 @@ script = ExtResource("8_0cvc3")
 
 [node name="MusicControlPanel" parent="HUDLayer" instance=ExtResource("11_3qj3r")]
 
-[node name="QuestInfoContainer" type="PanelContainer" parent="HUDLayer"]
-unique_name_in_owner = true
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -241.0
-offset_top = 11.0
-offset_right = -10.0
-offset_bottom = 97.0
-grow_horizontal = 0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_d6baa")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDLayer/QuestInfoContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 2
-
-[node name="QuestHeading" type="Label" parent="HUDLayer/QuestInfoContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Objective"
-label_settings = SubResource("LabelSettings_2e0i0")
-
-[node name="HSeparator" type="HSeparator" parent="HUDLayer/QuestInfoContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 6
-
-[node name="QuestDetails" type="Label" parent="HUDLayer/QuestInfoContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 25)
-layout_mode = 2
-text = "DO A THING HOLY COW LOOK AT ALL THESE WORDS EXPANDING THE WINDOW THING"
-label_settings = SubResource("LabelSettings_acyb3")
-autowrap_mode = 2
-
 [node name="InteractPrompt" type="PanelContainer" parent="HUDLayer"]
 unique_name_in_owner = true
 anchors_preset = 7
@@ -764,7 +727,6 @@ color = Color(0, 0, 0, 1)
 [node name="MenuLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 layer = 4
-visible = false
 script = ExtResource("9_w4dxx")
 
 [node name="MarginContainer" type="MarginContainer" parent="MenuLayer"]
@@ -783,6 +745,45 @@ theme_override_constants/margin_bottom = 45
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+
+[node name="QuestInfoContainer" type="PanelContainer" parent="MenuLayer"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -241.0
+offset_top = 11.0
+offset_right = -10.0
+offset_bottom = 77.0
+grow_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d6baa")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuLayer/QuestInfoContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="QuestHeading" type="Label" parent="MenuLayer/QuestInfoContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Objective"
+label_settings = SubResource("LabelSettings_2e0i0")
+
+[node name="HSeparator" type="HSeparator" parent="MenuLayer/QuestInfoContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="QuestDetails" type="Label" parent="MenuLayer/QuestInfoContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 25)
+layout_mode = 2
+size_flags_vertical = 0
+label_settings = SubResource("LabelSettings_acyb3")
+autowrap_mode = 2
 
 [node name="TutorialSequence" type="Node" parent="."]
 unique_name_in_owner = true
