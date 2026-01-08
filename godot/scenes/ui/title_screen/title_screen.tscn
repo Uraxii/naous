@@ -1,12 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://cshn7uv20j780"]
+[gd_scene load_steps=32 format=3 uid="uid://cshn7uv20j780"]
 
 [ext_resource type="Script" uid="uid://d0m1x4qc15v33" path="res://scenes/ui/title_screen/title_screen.gd" id="1_62kf1"]
 [ext_resource type="Theme" uid="uid://bgliqjwr5w6kp" path="res://scenes/ui/title_screen/title_screen_theme.tres" id="1_oijkb"]
 [ext_resource type="Environment" uid="uid://c88lfewlaln02" path="res://resources/world_environment.tres" id="3_cmpua"]
 [ext_resource type="Material" uid="uid://dd17pmtjchh3c" path="res://assets/materials/sand-dunes.tres" id="4_71e5k"]
+[ext_resource type="Material" uid="uid://cw7jl413ehdss" path="res://assets/materials/ink-sun-sprite2-mat.tres" id="4_oisst"]
 [ext_resource type="PackedScene" uid="uid://1ylgy66wcqit" path="res://assets/prefabs/sand_dunes.tscn" id="5_6heuc"]
+[ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="5_8nxda"]
 [ext_resource type="ArrayMesh" uid="uid://bspga0r8jrq75" path="res://assets/models/cliff-bump-flat-sides-lowpoly.obj" id="5_aqc7l"]
 [ext_resource type="PackedScene" uid="uid://d1vsrqg2pt0xc" path="res://assets/prefabs/simpletown.tscn" id="6_hrt1g"]
+[ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="6_l23k7"]
 [ext_resource type="PackedScene" uid="uid://cayqs5l0qo416" path="res://assets/prefabs/wavy_flag.tscn" id="7_0uvlf"]
 [ext_resource type="PackedScene" uid="uid://bqxs2o47c8xle" path="res://assets/prefabs/market-stall.tscn" id="7_6heuc"]
 [ext_resource type="PackedScene" uid="uid://nfcywnbwg25h" path="res://assets/prefabs/stone_fence.tscn" id="8_m5k72"]
@@ -159,6 +162,16 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="World" type="Node3D" parent="."]
+
+[node name="SunSprites" type="Node3D" parent="World"]
+
+[node name="sun-sprite2" type="MeshInstance3D" parent="World/SunSprites"]
+transform = Transform3D(-8.566059, -62.957905, -13.708565, -55.123127, -2.4095084e-06, 34.44475, -33.362606, 16.164843, -53.39133, -99.835, 187.935, -200)
+material_override = ExtResource("4_oisst")
+cast_shadow = 0
+mesh = ExtResource("5_8nxda")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("6_l23k7")
 
 [node name="Sun" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(-0.25881904, -0.84481776, 0.4682901, 0, 0.48480958, 0.8746197, -0.9659258, 0.22636823, -0.12547795, 0, 0, 0)
