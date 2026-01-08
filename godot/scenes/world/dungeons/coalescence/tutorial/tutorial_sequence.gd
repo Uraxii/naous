@@ -377,7 +377,7 @@ func _plaza_item_pickup(loot_pickup: LootPickup) -> void:
 
 func _resolve_plaza_sequence() -> void:
     # 6. When all enemies are defeated and Masks are collected, trigger next sequence
-    if loot_collected.size() == loot_to_collect.size() and enemies_defeated.size() == enemies_to_defeat.size():
+    if loot_collected.size() >= loot_to_collect.size() and enemies_defeated.size() >= enemies_to_defeat.size():
         trigger_sequence(SEQ.MINIBOSS_FIGHT)
 #endregion EXPLORE PLAZA
 
