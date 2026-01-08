@@ -3,10 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://dnegp6olpq37" path="res://assets/textures/ink-sun.png" id="1_s1wqt"]
 
 [resource]
+render_priority = -1
 transparency = 1
 cull_mode = 2
 depth_draw_mode = 2
 shading_mode = 0
 specular_mode = 2
+disable_ambient_light = true
+disable_fog = true
 albedo_color = Color(0.99583167, 0, 0.3298935, 1)
 albedo_texture = ExtResource("1_s1wqt")
+disable_receive_shadows = true
