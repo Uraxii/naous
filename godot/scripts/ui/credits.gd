@@ -211,7 +211,7 @@ func _on_iterative_tick() -> void:
 		#ci.show.call_deferred()
 		
 	if iter_current_group + 1 >= groups.size():
-		await create_tween().tween_interval(tick_interval * 1.5).finished
+		await create_tween().tween_interval(tick_interval * 1.15).finished
 		_on_ticker_finished()
 
 func _on_ticker_finished() -> void:

@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://dagm641ksqm7c"]
+
+[ext_resource type="PackedScene" uid="uid://dxdmxuu3rsr0b" path="res://assets/prefabs/cliff.tscn" id="1_bqi2u"]
+[ext_resource type="PackedScene" uid="uid://d1m5spyq03wiu" path="res://assets/prefabs/boulder_cliff.tscn" id="2_8iyye"]
+
+[node name="Plaza_Mountain_Border" type="Node3D"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="cliff" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(0.55570084, 0, -0.8313823, 0, 1, 0, 0.8313823, 0, 0.55570084, -122.98223, -73.74094, -113.60498)
+
+[node name="cliff2" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, -123.13791, -82.31029, -192.97249)
+
+[node name="cliff3" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, -123.13791, -79.95871, -283.11224)
+
+[node name="cliff4" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(-0.7413669, 0, -0.6710996, 0, 1, 0, 0.6710996, 0, -0.7413669, -58.278694, -80.17119, -313.78632)
+
+[node name="cliff5" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(-0.9153885, 0, -0.40257087, 0, 1, 0, 0.40257087, 0, -0.9153885, 66.81792, -81.06181, -307.84305)
+
+[node name="cliff6" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(-0.91900444, 0, 0.39424658, 0, 1, 0, -0.39424658, 0, -0.91900444, -22.003716, -81.23463, -267.68307)
+
+[node name="cliff7" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(-0.97969764, 0, 0.20047948, 0, 1, 0, -0.20047948, 0, -0.97969764, 111.313286, -81.53052, -271.91272)
+
+[node name="cliff8" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(-0.3320623, 0, 0.9432572, 0, 1, 0, -0.9432572, 0, -0.3320623, 126.75839, -80.13663, -185.55151)
+
+[node name="cliff9" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(-0.19490205, 0, 0.9808225, 0, 1, 0, -0.9808225, 0, -0.19490205, 148.43187, -74.401764, -110.26828)
+
+[node name="cliff10" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(0.9631295, 0, 0.2690375, 0, 1, 0, -0.2690375, 0, 0.9631295, 56.3235, -76.9925, -49.003643)
+
+[node name="cliff11" parent="." instance=ExtResource("1_bqi2u")]
+transform = Transform3D(0.031619973, 0, 0.9994999, 0, 1, 0, -0.9994999, 0, 0.031619973, 127.312164, -73.31471, -44.15143)
+
+[node name="boulder-cliff" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(0.46471828, 1.9452602, -8.5030024e-08, 0, -8.742278e-08, -2, -1.9452602, 0.46471828, -2.031348e-08, -140.18896, 9.204074, -116.76575)
+
+[node name="boulder-cliff6" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(-1.7924931, 0.8871125, -3.877691e-08, 0, -8.742278e-08, -2, -0.8871125, -1.7924931, 7.835238e-08, 109.994934, 27.139648, -56.11728)
+
+[node name="boulder-cliff7" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 132.9731, 9.568747, -129.77814)
+
+[node name="boulder-cliff8" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(2, 0, 0, 0, 0.7965827, -1.2090592, 0, 0.6045296, 1.5931654, 125.99007, 9.568747, -204.69865)
+
+[node name="boulder-cliff2" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(-1.8655549, -0.72090524, 3.1511775e-08, -8.172931e-16, -8.742277e-08, -2, 0.72090524, -1.8655549, 8.1546e-08, -102.19522, 21.461582, -72.56588)
+
+[node name="boulder-cliff9" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(-1.966191, -0.3661869, 1.6006544e-08, 2.9400372e-15, -8.742277e-08, -2, 0.3661869, -1.966191, 8.594494e-08, 115.88097, 12.146704, -136.17003)
+
+[node name="boulder-cliff10" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(-1.0566694, -1.6980724, 7.4225106e-08, 2.9400372e-15, -8.742277e-08, -2, 1.6980724, -1.0566694, 4.6188482e-08, 101.135925, 21.924372, -258.14743)
+
+[node name="boulder-cliff3" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(-1.8483329, 0.028939253, 0.7634315, -0.7633379, 0.011951447, -1.8485595, -0.031310022, -1.9997548, 8.741207e-08, -128.6974, 13.882484, -155.20941)
+
+[node name="boulder-cliff4" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(-1.4255517, 1.2694677, 0.59686995, -0.76333785, 0.011951447, -1.8485595, -1.17691, -1.5454153, 0.47599775, -131.3632, 13.882484, -238.52203)
+
+[node name="boulder-cliff5" parent="." instance=ExtResource("2_8iyye")]
+transform = Transform3D(0.34550893, 1.9447987, -0.31365722, 0.48433816, 0.22480482, 1.9274025, 1.9094608, -0.4089257, -0.43213397, -89.244286, 13.882484, -276.64734)

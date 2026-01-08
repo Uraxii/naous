@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=88 format=3 uid="uid://bovh2hjexu5yl"]
 
 [ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
 [ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="2_5b34y"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="3_a2upa"]
 [ext_resource type="PackedScene" uid="uid://tpls5ou1qmjp" path="res://scenes/world/dungeons/coalescence/coalescence.tscn" id="4_ntrn5"]
 [ext_resource type="Texture2D" uid="uid://e4h148oimaqf" path="res://assets/textures/ink-flag.png" id="6_ntrn5"]
+[ext_resource type="PackedScene" uid="uid://dxdmxuu3rsr0b" path="res://assets/prefabs/cliff.tscn" id="6_v7off"]
+[ext_resource type="PackedScene" uid="uid://d1m5spyq03wiu" path="res://assets/prefabs/boulder_cliff.tscn" id="7_o48bc"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_65e3w"]
 panorama = ExtResource("3_a2upa")
@@ -14,28 +16,25 @@ panorama = ExtResource("3_a2upa")
 [sub_resource type="Sky" id="Sky_6y1nk"]
 sky_material = SubResource("PanoramaSkyMaterial_65e3w")
 
-[sub_resource type="Environment" id="Environment_ffwap"]
+[sub_resource type="Environment" id="Environment_v7off"]
 background_mode = 2
 background_energy_multiplier = 2.0
 sky = SubResource("Sky_6y1nk")
 ambient_light_source = 2
 ambient_light_color = Color(0.78352344, 0.7835234, 0.7835234, 1)
-ambient_light_energy = 0.35
+ambient_light_energy = 0.5
 reflected_light_source = 1
-tonemap_mode = 3
-tonemap_white = 2.0
 ssao_enabled = true
 ssao_intensity = 2.5
 fog_enabled = true
-fog_light_color = Color(0.5482879, 0.5304627, 0.60917205, 1)
 fog_light_energy = 0.0
 fog_density = 0.0123
 fog_sky_affect = 0.4
-fog_height = 9.55
-fog_height_density = 0.113
-adjustment_enabled = true
+fog_height = 10.0
+fog_height_density = 0.11
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a2upa"]
+exposure_multiplier = 0.9
 auto_exposure_enabled = true
 auto_exposure_scale = 0.5
 auto_exposure_speed = 0.45
@@ -972,21 +971,27 @@ music = ExtResource("2_5b34y")
 
 [node name="SUN" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.58778524, -0.3290569, 0.7390739, 0, 0.9135455, 0.40673667, -0.80901706, 0.2390738, -0.5369685, 0, 100, 0)
-light_energy = 2.3
+light_energy = 1.8
 shadow_enabled = true
-shadow_opacity = 0.7
+shadow_opacity = 0.8
 shadow_blur = 8.0
 directional_shadow_split_2 = 0.3
 directional_shadow_split_3 = 0.6
 directional_shadow_max_distance = 180.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SUN"]
-environment = SubResource("Environment_ffwap")
+environment = SubResource("Environment_v7off")
 camera_attributes = SubResource("CameraAttributesPractical_a2upa")
 
 [node name="Coalescence" parent="." instance=ExtResource("4_ntrn5")]
 
 [node name="sun" parent="Coalescence/Environment" index="1"]
+visible = false
+
+[node name="MeshInstance3D3" parent="Coalescence/BubbleZones/EntryPath/Occluder" index="2"]
+visible = false
+
+[node name="MeshInstance3D4" parent="Coalescence/BubbleZones/EntryPath/Occluder" index="4"]
 visible = false
 
 [node name="EchoHint" parent="Coalescence/BubbleZones/EntryPath" index="5"]
@@ -1023,6 +1028,9 @@ visible = false
 visible = false
 
 [node name="MeshInstance3D9" parent="Coalescence/BubbleZones/Plaza/Occluder" index="6"]
+visible = false
+
+[node name="MeshInstance3D10" parent="Coalescence/BubbleZones/Plaza/Occluder" index="7"]
 visible = false
 
 [node name="MeshInstance3D13" parent="Coalescence/BubbleZones/Plaza/Occluder" index="10"]
@@ -1097,6 +1105,15 @@ visible = false
 [node name="Hints" parent="Coalescence/BubbleZones/Markets" index="3"]
 visible = false
 
+[node name="cliff4" parent="Coalescence/BubbleZones/Markets" index="61"]
+visible = false
+
+[node name="cliff5" parent="Coalescence/BubbleZones/Markets" index="62"]
+transform = Transform3D(-0.19769166, 0, 0.98026437, 0, 1, 0, -0.98026437, 0, -0.19769166, -85.667244, -48.31726, 37.23877)
+
+[node name="cliff7" parent="Coalescence/BubbleZones/Markets" index="63"]
+transform = Transform3D(0.99941504, 0, 0.03420189, 0, 1, 0, -0.03420189, 0, 0.99941504, -108.134895, -51.13638, -97.86255)
+
 [node name="ViewingPlatform" parent="Coalescence/BubbleZones" index="6"]
 visible = false
 
@@ -1105,6 +1122,70 @@ visible = false
 
 [node name="Player" parent="Coalescence" index="2"]
 visible = false
+
+[node name="Plaza_Mountain_Border" type="Node3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="cliff" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(0.93796664, 0, 0.34672248, 0, 1, 0, -0.34672248, 0, 0.93796664, -150.25722, -72.78146, -47.86029)
+
+[node name="cliff3" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(-4.3711378e-08, 0, -0.9999998, 0, 1, 0, 0.9999998, 0, -4.3711378e-08, -131.8509, -92.585594, -283.11218)
+
+[node name="cliff4" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(-0.7413666, 0, -0.6710993, 0, 1, 0, 0.6710993, 0, -0.7413666, -58.278675, -90.13006, -326.89423)
+visible = false
+
+[node name="cliff5" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(-0.915388, 0, -0.4025706, 0, 1, 0, 0.4025706, 0, -0.915388, -4.4504166, -92.01187, -369.94397)
+visible = false
+
+[node name="cliff6" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(-0.9190043, 0, 0.39424652, 0, 1, 0, -0.39424652, 0, -0.9190043, -22.003712, -98.72394, -300.25046)
+visible = false
+
+[node name="cliff7" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(-0.97969735, 0, 0.2004794, 0, 1, 0, -0.2004794, 0, -0.97969735, 84.4415, -85.50533, -341.28198)
+visible = false
+
+[node name="cliff8" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(-0.33206224, 0, 0.9432571, 0, 1, 0, -0.9432571, 0, -0.33206224, 140.49397, -91.129105, -185.55148)
+
+[node name="cliff9" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(-0.19490203, 0, 0.98082244, 0, 1, 0, -0.98082244, 0, -0.19490203, 148.43185, -89.28301, -110.26827)
+
+[node name="cliff10" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(0.9631295, 0, 0.2690375, 0, 1, 0, -0.2690375, 0, 0.9631295, 56.3235, -76.9925, -49.003643)
+
+[node name="cliff11" parent="Plaza_Mountain_Border" instance=ExtResource("6_v7off")]
+transform = Transform3D(0.03161997, 0, 0.99949986, 0, 1, 0, -0.99949986, 0, 0.03161997, 127.31216, -84.193275, -44.151424)
+
+[node name="boulder-cliff6" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(-1.5738693, 1.2340715, -5.3942973e-08, 0, -8.742278e-08, -2, -1.2340715, -1.5738693, 6.879603e-08, 90.99457, 18.0374, -56.117264)
+
+[node name="boulder-cliff7" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(1.9999999, 0, 0, 0, 1, 0, 0, 0, 1.9999999, 132.97308, -1.8283901, -129.77812)
+
+[node name="boulder-cliff8" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(1.9999999, 0, 0, 0, 0.7965827, -1.2090592, 0, 0.60452956, 1.5931653, 125.99006, -1.8283901, -204.69864)
+
+[node name="boulder-cliff2" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(0.5664231, -1.9181131, 8.384333e-08, -7.799953e-16, -8.742277e-08, -2, 1.9181131, 0.5664231, -2.4759146e-08, -93.513435, 21.461578, -58.298687)
+
+[node name="boulder-cliff9" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(-1.9661907, -0.3661868, 1.6006538e-08, 2.9400372e-15, -8.742277e-08, -2, 0.3661868, -1.9661907, 8.594492e-08, 119.327995, -6.1519947, -148.79704)
+
+[node name="boulder-cliff10" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(-1.0566683, -1.6980714, 7.422504e-08, 2.9400372e-15, -8.742277e-08, -2, 1.6980714, -1.0566683, 4.618845e-08, 68.93027, 12.764681, -294.95853)
+
+[node name="boulder-cliff3" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(-1.8483326, 0.028939249, 0.7634314, -0.7633379, 0.011951447, -1.8485595, -0.031310014, -1.9997545, 8.7412054e-08, -133.38568, -2.4779968, -155.20938)
+
+[node name="boulder-cliff4" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(-1.425551, 1.2694671, 0.59686965, -0.76333785, 0.011951447, -1.8485595, -1.1769094, -1.5454147, 0.4759976, -139.45238, -3.1677895, -244.05544)
+
+[node name="boulder-cliff5" parent="Plaza_Mountain_Border" instance=ExtResource("7_o48bc")]
+transform = Transform3D(0.34550884, 1.9447984, -0.31365713, 0.48433816, 0.22480482, 1.9274025, 1.9094604, -0.40892562, -0.43213388, -109.13426, -16.644894, -296.07278)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_omi1n")
