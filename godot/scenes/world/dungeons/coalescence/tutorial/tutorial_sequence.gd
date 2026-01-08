@@ -27,7 +27,10 @@ enum SEQ {
     HEAL_TUTORIAL, 
     # Player is directed to explore the new area to defeat enemies and acquire more gear (mostly Masks)
     #  GOAL: Defeat 3 enemies and acquire 3 items (Masks)
-    EXPLORE_PLAZA, 
+    EXPLORE_PLAZA,
+    # Player is directed to equip a new mask?
+    #  GOAL: Equip the new mask?
+    MASK_TUTORIAL,
     # Enemies have been defeated and items collected. A new enemy appears
     #  GOAL: Defeat the miniboss
     MINIBOSS_FIGHT,
@@ -274,7 +277,7 @@ func _on_heal_pickup() -> void:
 func _on_player_healed(_new: float, _old: float) -> void:
     # 5. Once health is restored, trigger next sequence
     trigger_sequence(SEQ.EXPLORE_PLAZA)
-	## Disconnect the signal to prevent this from being triggered again.
+    ## Disconnect the signal to prevent this from being triggered again.
     if player.health.change.is_connected(_on_player_healed):
         player.health.change.disconnect(_on_player_healed)
 #endregion HEAL TUTORIAL
@@ -367,19 +370,38 @@ func _plaza_item_pickup(loot_pickup: LootPickup) -> void:
         loot_collected.push_back(loot_pickup.get_instance_id())
         _update_plaza_objective_text()
         loot_pickup.queue_free()
-    
-    # 4. When a mask is picked up, prompt to open inventory
-	## TODO
-    # 5. Once inventory is open, show Mask equip tutorial explaining what they do
-	## TODO
+        
     _resolve_plaza_sequence()
 
 
 func _resolve_plaza_sequence() -> void:
     # 6. When all enemies are defeated and Masks are collected, trigger next sequence
     if loot_collected.size() >= loot_to_collect.size() and enemies_defeated.size() >= enemies_to_defeat.size():
-        trigger_sequence(SEQ.MINIBOSS_FIGHT)
+        # 7. Prompt to open inventory
+        trigger_sequence(SEQ.MASK_TUTORIAL)
+        
 #endregion EXPLORE PLAZA
+
+#region EQUIP PLAZA GEAR
+func plaza_mask_tutorial() -> void:
+    print("PLAZA MASK TUTORIAL SEQUENCE")
+    current_sequence = SEQ.MASK_TUTORIAL
+    # 1. Open inventory/equipment view
+    hud_layer.display_objective_hud("Open Inventory (I)")
+    menu_layer.inventory_opened.connect(_on_inventory_opened_with_plaza_gear)
+
+
+func _on_inventory_opened_with_plaza_gear() -> void:
+    menu_layer.inventory_opened.disconnect(_on_inventory_opened_with_plaza_gear)
+    hud_layer.display_objective_hud("Take note of new equipment. Continue when ready.") ## FIXME
+    ## TODO # 8. Once inventory is open, show Mask equip tutorial explaining what they do
+    menu_layer.inventory_closed.connect(_on_inventory_closed_with_plaza_gear)
+        
+func _on_inventory_closed_with_plaza_gear() -> void:
+    menu_layer.inventory_closed.disconnect(_on_inventory_closed_with_plaza_gear)
+    # 5. Trigger the next sequence
+    trigger_sequence(SEQ.MINIBOSS_FIGHT)
+#endregion
 
 
 #region MINIBOSS FIGHT
@@ -609,6 +631,8 @@ func trigger_sequence(sequence: SEQ) -> void:
             heal_tutorial()
         SEQ.EXPLORE_PLAZA:
             explore_plaza()
+        SEQ.MASK_TUTORIAL:
+            plaza_mask_tutorial()
         SEQ.MINIBOSS_FIGHT:
             miniboss_fight()
         SEQ.DRAW_TUTORIAL:
