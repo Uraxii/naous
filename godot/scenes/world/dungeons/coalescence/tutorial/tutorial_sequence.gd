@@ -349,6 +349,7 @@ func _update_plaza_objective_text() -> void:
 
 
 func _plaza_enemy_defeated(enemy: BaseEnemy) -> void:
+    enemy.defeated.disconnect(_plaza_enemy_defeated)
     tutorial_music.play_explore()
     if enemies_to_defeat.has(enemy.get_instance_id()):
         enemies_defeated.push_back(enemy.get_instance_id())
@@ -368,7 +369,9 @@ func _plaza_item_pickup(loot_pickup: LootPickup) -> void:
         loot_pickup.queue_free()
     
     # 4. When a mask is picked up, prompt to open inventory
+	## TODO
     # 5. Once inventory is open, show Mask equip tutorial explaining what they do
+	## TODO
     _resolve_plaza_sequence()
 
 
