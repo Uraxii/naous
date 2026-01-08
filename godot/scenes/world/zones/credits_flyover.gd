@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var return_scene: PackedScene
+const RETURN_SCENE: PackedScene = preload("uid://cshn7uv20j780")
 
 @export var music: DynamicMusicTrack
 
@@ -21,9 +21,9 @@ func _ready() -> void:
 			Globals.music.start_track(music)
 
 func _on_credits_finished() -> void:
-	if return_scene:
-		if return_scene.can_instantiate():
-			get_tree().change_scene_to_packed(return_scene)
+	if RETURN_SCENE:
+		if RETURN_SCENE.can_instantiate():
+			get_tree().change_scene_to_packed(RETURN_SCENE)
 			return
 			
 	get_tree().quit()

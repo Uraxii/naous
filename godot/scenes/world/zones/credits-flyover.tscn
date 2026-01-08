@@ -1,9 +1,8 @@
-[gd_scene load_steps=88 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=87 format=3 uid="uid://bovh2hjexu5yl"]
 
 [ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
 [ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="2_5b34y"]
 [ext_resource type="Script" uid="uid://b87r01re7n4ak" path="res://scripts/ui/credits.gd" id="2_biuu0"]
-[ext_resource type="PackedScene" uid="uid://cshn7uv20j780" path="res://scenes/ui/title_screen/title_screen.tscn" id="2_ffwap"]
 [ext_resource type="Texture2D" uid="uid://75s2rj2gpi7h" path="res://assets/textures/sky-watercolour.jpg" id="3_a2upa"]
 [ext_resource type="PackedScene" uid="uid://tpls5ou1qmjp" path="res://scenes/world/dungeons/coalescence/coalescence.tscn" id="4_ntrn5"]
 [ext_resource type="Texture2D" uid="uid://e4h148oimaqf" path="res://assets/textures/ink-flag.png" id="6_ntrn5"]
@@ -966,7 +965,6 @@ shadow_offset = Vector2(0, 1)
 
 [node name="CreditsFlyover" type="Node3D"]
 script = ExtResource("1_fu1cq")
-return_scene = ExtResource("2_ffwap")
 music = ExtResource("2_5b34y")
 
 [node name="SUN" type="DirectionalLight3D" parent="."]
