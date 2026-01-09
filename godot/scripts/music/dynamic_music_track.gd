@@ -32,7 +32,7 @@ class_name DynamicMusicTrack extends Resource
 
 @export_group("Transitions", "trans_") ## EXPERIMENTAL
 @export var trans_start_fade_in: Curve ## X is in seconds, Y is volume.
-@export var trans_end_fade_out: Curve ## X is in seconds, Y is volume.
+@export var trans_stop_fade_out: Curve ## X is in seconds, Y is volume.
 @export var trans_seek_crossfade_in: Curve ## X is in seconds, Y is volume.
 @export var trans_seek_crossfade_out: Curve ## X is in seconds, Y is volume.
 

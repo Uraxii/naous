@@ -398,9 +398,20 @@ func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioSt
 	if not player.finished.is_connected(_on_track_finished):
 		player.finished.connect(_on_track_finished.bind(track, force_looping))
 	
-	if track.trans_start_fade_in:
-		## TODO
-		pass
+	var track_transition: Curve = track.trans_start_fade_in
+	if track_transition:
+		player.volume_linear = track_transition.sample_baked(track_transition.min_domain)
+		var trans_tween:Tween = player.create_tween()
+		trans_tween.tween_method(
+			DynamicMusicTrack.set_volume_from_curve.bind(
+				player,
+				track_transition
+				),
+			#player.volume_linear,
+			track_transition.min_domain,
+			track_transition.max_domain,
+			track_transition.max_domain
+			)
 		
 	return player
 	
@@ -408,17 +419,19 @@ func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	track.is_playing = false
 	var player = get_player(track)
 	
-	if track.trans_end_fade_out: ## TODO TEST
-		player.volume_linear = track.trans_start_fade_in.sample_baked(track.trans_end_fade_out.min_domain)
+	var track_transition: Curve = track.trans_stop_fade_out
+	if track_transition:
+		player.volume_linear = track_transition.sample_baked(track_transition.min_domain)
 		var trans_tween:Tween = player.create_tween()
 		trans_tween.tween_method(
 			DynamicMusicTrack.set_volume_from_curve.bind(
 				player,
-				track.trans_end_fade_out
+				track_transition
 				),
-			player.volume_linear,
-			track.trans_end_fade_out.max_domain,
-			track.trans_end_fade_out.max_domain
+			#player.volume_linear,
+			track_transition.min_domain,
+			track_transition.max_domain,
+			track_transition.max_domain
 			)
 		trans_tween.tween_callback(player.stop)
 	else:
