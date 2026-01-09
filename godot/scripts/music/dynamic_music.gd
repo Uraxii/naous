@@ -33,7 +33,8 @@ class FXBaselines:
 @export var tracks:Array[DynamicMusicTrack]
 
 @export_group("Behavior")
-@export var force_single_track_playback: bool = true ## CRITICAL Do not change. Simplifies handling song changes, disable for more control
+const force_single_track_playback: bool = true ## CRITICAL Do not change. Simplifies handling song changes, disable for more control
+const clear_player_when_stopped: bool = true ## HACK having issues with volume when returning to already played tracks.
 @export var continuous_playback: bool = false:
 	set(value):
 		print("DynamicMusicManager: continuous_playback now %s" % value)
@@ -332,6 +333,7 @@ func low_shelf(frequency:float, gain:float, transition:float = 0.0) -> void:
 
 #region Audio Players
 func get_player(track:DynamicMusicTrack) -> Variant:
+	var new_player
 	if track.treat_positional:
 		## DEPRECATED
 		for player:AudioStreamPlayer3D in positional_root.get_children():
@@ -339,15 +341,14 @@ func get_player(track:DynamicMusicTrack) -> Variant:
 				return player
 				
 		## New 3D Player
-		var new_player:AudioStreamPlayer3D
-		new_player = proto_positional_player.duplicate()
+		#var new_player:AudioStreamPlayer3D
+		new_player = proto_positional_player.duplicate() as AudioStreamPlayer3D
 		
 		new_player.stream = track.file
 		new_player.bus = BUS_NAME
 		
+		new_player.name = track.title
 		positional_root.add_child(new_player)
-		
-		return new_player
 		
 	else:
 		
@@ -356,15 +357,24 @@ func get_player(track:DynamicMusicTrack) -> Variant:
 				return player
 				
 		## New Static Player
-		var new_player:AudioStreamPlayer
-		new_player = proto_non_positional_player.duplicate()
+		#var new_player:AudioStreamPlayer
+		new_player = proto_non_positional_player.duplicate() as AudioStreamPlayer
 		
 		new_player.stream = track.file
 		new_player.bus = BUS_NAME
 		
+		new_player.name = track.title
 		non_positional_root.add_child(new_player)
+	
+	## HACK
+	#if clear_player_when_stopped:
+		#new_player.finished.connect(
+			#func():
+				#new_player.call_deferred(&"queue_free")
+				#print("Freeing player %s" % new_player.name)
+		#)
 			
-		return new_player
+	return new_player
 		
 func get_audio_players() -> Array[AudioStreamPlayer]:
 	var array:Array = []
@@ -406,9 +416,6 @@ func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioSt
 	var player = get_player(track)
 	player.play()
 	
-	if not player.finished.is_connected(_on_track_finished):
-		player.finished.connect(_on_track_finished.bind(track, force_looping))
-	
 	var track_transition: Curve = track.trans_start_fade_in
 	if track_transition:
 		player.volume_linear = track_transition.sample_baked(track_transition.min_domain)
@@ -423,7 +430,12 @@ func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioSt
 			track_transition.max_domain,
 			track_transition.max_domain
 			)
+	else:
+		player.volume_linear = 1.0 ## Reset the volume
 		
+	if not player.finished.is_connected(_on_track_finished):
+		player.finished.connect(_on_track_finished.bind(track, force_looping))
+	
 	return player
 	
 func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
