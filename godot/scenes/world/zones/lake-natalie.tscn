@@ -733,42 +733,6 @@ transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 18.766602, 8.047068,
 [node name="grass_scrub4" parent="plants" instance=ExtResource("10_6y1nk")]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 19.431623, 7.613676, -23.181473)
 
-[node name="flag" parent="plants" instance=ExtResource("11_4xysy")]
-transform = Transform3D(10, 0, 0, 0, 500, 0, 0, 0, 10, 14.525299, 7.5000005, -37.528225)
-
-[node name="wavy-flag" parent="plants/flag" instance=ExtResource("12_ujt7w")]
-transform = Transform3D(0.099999994, 0, 0, 0, 0.0019999999, 0, 0, 0, 0.099999994, 0, 0.0078, 0)
-
-[node name="flag2" parent="plants" instance=ExtResource("11_4xysy")]
-transform = Transform3D(9.888241, 74.54331, 0, -1.4908662, 494.41205, 0, 0, 0, 9.999999, -3.9896235, 7.5000005, -41.00454)
-
-[node name="wavy-flag" parent="plants/flag2" instance=ExtResource("12_ujt7w")]
-transform = Transform3D(0.099999994, 0, 0, 0, 0.0019999999, 0, 0, 0, 0.099999994, 0, 0.0078, 0)
-
-[node name="flag3" parent="plants" instance=ExtResource("11_4xysy")]
-transform = Transform3D(9.4264145, 166.90344, 0, -3.3380687, 471.32074, 0, 0, 0, 10, -65.927086, 7.5000005, -59.516502)
-
-[node name="wavy-flag" parent="plants/flag3" instance=ExtResource("12_ujt7w")]
-transform = Transform3D(0.099999994, 0, 0, 0, 0.0019999999, 0, 0, 0, 0.099999994, 0, 0.0078, 0)
-
-[node name="bunting" parent="plants" instance=ExtResource("19_abejf")]
-transform = Transform3D(1.5366058, 0.11640884, -1.2748697, -3.053531e-07, 1.9917142, 0.18186392, 1.2801732, -0.13972637, 1.5302397, 25.551321, 13.292893, -33.404793)
-
-[node name="observation-platform" parent="plants" instance=ExtResource("13_hq68q")]
-transform = Transform3D(1.8932536, 0, 0.6446635, 0, 2, 0, -0.6446635, 0, 1.8932536, -11.231066, 7.6230564, -38.824314)
-
-[node name="observation-platform3" parent="plants" instance=ExtResource("13_hq68q")]
-transform = Transform3D(-0.96225274, 0, -1.7533026, 0, 2, 0, 1.7533026, 0, -0.96225274, 14.766723, 7.9198, 12.254876)
-
-[node name="observation-platform4" parent="plants" instance=ExtResource("13_hq68q")]
-transform = Transform3D(-1.8568028, 0, -0.74315715, 0, 2, 0, 0.74315715, 0, -1.8568028, 1.8788886, 8.118816, 22.427006)
-
-[node name="observation-platform5" parent="plants" instance=ExtResource("13_hq68q")]
-transform = Transform3D(-1.5979433, 0, 1.2027376, 0, 2, 0, -1.2027376, 0, -1.5979433, -21.699482, 7.3241034, 12.428986)
-
-[node name="observation-platform6" parent="plants" instance=ExtResource("13_hq68q")]
-transform = Transform3D(1.2113099, 0, 1.5914549, 0, 2, 0, -1.5914549, 0, 1.2113099, -24.293472, 7.896246, -11.37801)
-
 [node name="rivers" type="Node3D" parent="."]
 transform = Transform3D(3.9999998, 6.9282036, 0, -6.9282036, 3.9999998, 0, 0, 0, 16, -25, 7, 8)
 
@@ -1018,6 +982,67 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_pyk41")
 color_ramp = SubResource("Gradient_eam4u")
 
+[node name="banners (bunting)" type="Node3D" parent="."]
+
+[node name="bunting" parent="banners (bunting)" instance=ExtResource("19_abejf")]
+transform = Transform3D(1.5366058, 0.11640884, -1.2748697, -3.053531e-07, 1.9917142, 0.18186392, 1.2801732, -0.13972637, 1.5302397, 25.551321, 13.292893, -33.404793)
+
+[node name="bunting2" parent="banners (bunting)" instance=ExtResource("19_abejf")]
+transform = Transform3D(-0.17666666, -0.18115298, 1.9839286, -3.364028e-07, 1.991714, 0.18186387, -1.9921817, 0.016064422, -0.17593476, -22.597416, 8.27654, 9.42954)
+
+[node name="bunting3" parent="banners (bunting)" instance=ExtResource("19_abejf")]
+transform = Transform3D(0.77021, -0.16783714, 1.8380988, -3.2891214e-07, 1.991714, 0.1818639, -1.8457453, -0.07003693, 0.7670197, -47.56209, 13.349101, -27.639782)
+
+[node name="bunting4" parent="banners (bunting)" instance=ExtResource("19_abejf")]
+transform = Transform3D(-0.31382522, -0.17961112, 1.9670421, -3.3465065e-07, 1.991714, 0.18186389, -1.9752251, 0.028536491, -0.31252474, 38.97569, 19.116503, 4.342521)
+
+[node name="flags" type="Node3D" parent="."]
+
+[node name="wavy-flag" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 15.089415, 22.73846, 27.433947)
+
+[node name="wavy-flag2" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 22.884438, 25.421532, 56.23967)
+
+[node name="wavy-flag3" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 50.09243, 29.1177, 43.605007)
+
+[node name="wavy-flag4" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 47.808777, 29.410215, 33.789448)
+
+[node name="wavy-flag5" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 36.439938, 25.04744, -19.188887)
+
+[node name="wavy-flag6" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -6.760987, 32.502007, -50.48761)
+
+[node name="wavy-flag7" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -47.48852, 31.64153, -25.756418)
+
+[node name="wavy-flag8" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -26.194035, 12.8163805, -6.044143)
+
+[node name="wavy-flag9" parent="flags" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -19.036724, 29.077383, 32.377285)
+
+[node name="flag" parent="flags" instance=ExtResource("11_4xysy")]
+transform = Transform3D(10, 0, 0, 0, 500, 0, 0, 0, 10, 14.525299, 7.5000005, -37.528225)
+
+[node name="wavy-flag" parent="flags/flag" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(0.099999994, 0, 0, 0, 0.0019999999, 0, 0, 0, 0.099999994, 0, 0.0078, 0)
+
+[node name="flag2" parent="flags" instance=ExtResource("11_4xysy")]
+transform = Transform3D(9.888241, 74.54331, 0, -1.4908662, 494.41205, 0, 0, 0, 9.999999, -3.9896235, 7.5000005, -41.00454)
+
+[node name="wavy-flag" parent="flags/flag2" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(0.099999994, 0, 0, 0, 0.0019999999, 0, 0, 0, 0.099999994, 0, 0.0078, 0)
+
+[node name="flag3" parent="flags" instance=ExtResource("11_4xysy")]
+transform = Transform3D(9.4264145, 166.90344, 0, -3.3380687, 471.32074, 0, 0, 0, 10, -65.927086, 7.5000005, -59.516502)
+
+[node name="wavy-flag" parent="flags/flag3" instance=ExtResource("12_ujt7w")]
+transform = Transform3D(0.099999994, 0, 0, 0, 0.0019999999, 0, 0, 0, 0.099999994, 0, 0.0078, 0)
+
 [node name="towns" type="Node3D" parent="."]
 
 [node name="simpletown" parent="towns" instance=ExtResource("19_vboxf")]
@@ -1039,6 +1064,21 @@ surface_material_override/0 = ExtResource("26_abejf")
 
 [node name="stairs" parent="." instance=ExtResource("20_q55i7")]
 transform = Transform3D(-0.9202455, 0, 0.39134154, 0, 1, 0, -0.39134154, 0, -0.9202455, 8.300304, -2.427867, -35.034378)
+
+[node name="observation-platform" parent="stairs" instance=ExtResource("13_hq68q")]
+transform = Transform3D(-1.4899745, 0, -1.3341575, 0, 2, 0, 1.3341575, 0, -1.4899745, 19.456814, 10.050923, -4.1557655)
+
+[node name="observation-platform3" parent="stairs" instance=ExtResource("13_hq68q")]
+transform = Transform3D(0.19936866, 0, 1.9900384, 0, 2, 0, -1.9900384, 0, 0.19936866, -24.456944, 10.347667, -40.98715)
+
+[node name="observation-platform4" parent="stairs" instance=ExtResource("13_hq68q")]
+transform = Transform3D(1.4178863, 0, 1.4105312, 0, 2, 0, -1.4105312, 0, 1.4178863, -16.577747, 10.546683, -55.39155)
+
+[node name="observation-platform5" parent="stairs" instance=ExtResource("13_hq68q")]
+transform = Transform3D(1.9411814, 0, -0.4814723, 0, 2, 0, 0.4814723, 0, 1.9411814, 9.0327835, 9.75197, -55.41811)
+
+[node name="observation-platform6" parent="stairs" instance=ExtResource("13_hq68q")]
+transform = Transform3D(-0.4919002, 0, -1.9385651, 0, 2, 0, 1.9385651, 0, -0.4919002, 20.736557, 10.324113, -34.524963)
 
 [node name="SierpinskiTriangles" type="MeshInstance3D" parent="."]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -55.828964, 7.914072, 81.88608)
