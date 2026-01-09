@@ -42,7 +42,7 @@ exposure_multiplier = 0.9
 auto_exposure_enabled = true
 auto_exposure_scale = 0.5
 auto_exposure_speed = 0.45
-auto_exposure_min_sensitivity = 120.0
+auto_exposure_min_sensitivity = 160.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2upa"]
 animation = &"anim_1"
@@ -244,7 +244,7 @@ states/anim_8/position = Vector2(71, 656)
 states/anim_9/node = SubResource("AnimationNodeAnimation_t7o6w")
 states/anim_9/position = Vector2(62, 729)
 transitions = ["Start", "anim_1", SubResource("AnimationNodeStateMachineTransition_1tqvt"), "anim_1", "anim_2", SubResource("AnimationNodeStateMachineTransition_v7off"), "anim_5", "anim_6", SubResource("AnimationNodeStateMachineTransition_0fsgn"), "anim_6", "anim_7", SubResource("AnimationNodeStateMachineTransition_i5emg"), "anim_7", "anim_8", SubResource("AnimationNodeStateMachineTransition_u8bvc"), "anim_8", "anim_9", SubResource("AnimationNodeStateMachineTransition_2i0jv"), "anim_9", "anim_10", SubResource("AnimationNodeStateMachineTransition_16t0m"), "anim_10", "anim_11", SubResource("AnimationNodeStateMachineTransition_lp1p3"), "anim_11", "anim_12", SubResource("AnimationNodeStateMachineTransition_1465c"), "anim_12", "anim_13", SubResource("AnimationNodeStateMachineTransition_edilq"), "anim_13", "anim_14", SubResource("AnimationNodeStateMachineTransition_n8a3i"), "anim_19", "anim_20", SubResource("AnimationNodeStateMachineTransition_aotaq"), "anim_20", "anim_21", SubResource("AnimationNodeStateMachineTransition_uvpaw"), "anim_2", "anim_4", SubResource("AnimationNodeStateMachineTransition_a2upa"), "anim_4", "anim_3", SubResource("AnimationNodeStateMachineTransition_ntrn5"), "anim_3", "anim_5", SubResource("AnimationNodeStateMachineTransition_ffwap"), "anim_18", "anim_17", SubResource("AnimationNodeStateMachineTransition_o48bc"), "anim_17", "anim_19", SubResource("AnimationNodeStateMachineTransition_2humq"), "anim_14", "anim_16", SubResource("AnimationNodeStateMachineTransition_omi1n"), "anim_16", "anim_15", SubResource("AnimationNodeStateMachineTransition_t7o6w"), "anim_15", "anim_18", SubResource("AnimationNodeStateMachineTransition_6o682"), "anim_21", "anim_23", SubResource("AnimationNodeStateMachineTransition_oovxu")]
-graph_offset = Vector2(-913, 607)
+graph_offset = Vector2(-955, 580)
 
 [sub_resource type="Animation" id="Animation_5b34y"]
 length = 0.001
@@ -303,7 +303,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_t7o6w"]
 resource_name = "anim_10"
-length = 9.0
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -311,7 +311,7 @@ tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 9),
+"times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-64.59, 0.22, -150.195), Vector3(-74.595, 0.6, -170.385)]
@@ -323,7 +323,7 @@ tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 9),
+"times": PackedFloat32Array(0, 10),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0.1308997, 1.6214108, 0), Vector3(0.1308997, 1.1763519, 0)]
@@ -499,7 +499,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_7hpuh"]
 resource_name = "anim_17"
-length = 8.0
+length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -507,7 +507,7 @@ tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 8),
+"times": PackedFloat32Array(0, 5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-344.7, 4.3, -425.2), Vector3(-346.03, 3.81, -459.65)]
@@ -519,7 +519,7 @@ tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 8),
+"times": PackedFloat32Array(0, 5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.04363323, -6.5973444, 0), Vector3(0.008726646, -7.2169366, 0)]
@@ -555,7 +555,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_lp1p3"]
 resource_name = "anim_19"
-length = 6.0
+length = 8.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -563,7 +563,7 @@ tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 6),
+"times": PackedFloat32Array(0, 8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(77.9, 14, -427.38), Vector3(128.475, 17.045, -430.205)]
@@ -575,7 +575,7 @@ tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 6),
+"times": PackedFloat32Array(0, 8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, -1.8587756, 0), Vector3(-0.17453292, -2.1380284, 0)]
@@ -589,7 +589,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 4.5),
 "transitions": PackedFloat32Array(1, 1),
@@ -601,7 +601,7 @@ tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
 tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/loop_wrap = false
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
@@ -891,7 +891,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_omi1n"]
 resource_name = "anim_9"
-length = 8.0
+length = 7.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -899,7 +899,7 @@ tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 8),
+"times": PackedFloat32Array(0, 7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-26.615, 7.2, -141.98), Vector3(-27.96, 6.365, -165.1)]
@@ -911,7 +911,7 @@ tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 8),
+"times": PackedFloat32Array(0, 7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(-0.53232545, -0.6894051, 0), Vector3(-0.46251225, -1.2653637, 0)]
@@ -988,7 +988,7 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("5_6o682")
 
 [node name="sun-sprite2" type="MeshInstance3D" parent="SunSprites"]
-transform = Transform3D(2.1105725e-05, -200, -1.2363448e-05, -141.42136, -6.181724e-06, -141.42136, 141.42136, 2.366628e-05, -141.42136, -97.65845, 528.22473, 437.3517)
+transform = Transform3D(3.0096307e-05, -200, -2.1354033e-05, -141.42137, -6.181724e-06, -141.42136, 141.42136, 3.6380887e-05, -141.42137, -53.348, 454.015, 437.352)
 material_override = ExtResource("6_0fsgn")
 cast_shadow = 0
 mesh = ExtResource("4_t7o6w")
@@ -1012,6 +1012,49 @@ camera_attributes = SubResource("CameraAttributesPractical_a2upa")
 [node name="Coalescence" parent="." instance=ExtResource("4_ntrn5")]
 
 [node name="sun" parent="Coalescence/Environment" index="1"]
+visible = false
+
+[node name="clouds" parent="Coalescence/Environment" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+rotation_speed = 0.1
+
+[node name="cloud9" parent="Coalescence/Environment/clouds" index="1"]
+visible = false
+
+[node name="cloud10" parent="Coalescence/Environment/clouds" index="2"]
+visible = false
+
+[node name="cloud12" parent="Coalescence/Environment/clouds" index="4"]
+visible = false
+
+[node name="cloud13" parent="Coalescence/Environment/clouds" index="5"]
+visible = false
+
+[node name="cloud15" parent="Coalescence/Environment/clouds" index="7"]
+visible = false
+
+[node name="cloud16" parent="Coalescence/Environment/clouds" index="8"]
+visible = false
+
+[node name="cloud18" parent="Coalescence/Environment/clouds" index="10"]
+visible = false
+
+[node name="cloud21" parent="Coalescence/Environment/clouds" index="13"]
+visible = false
+
+[node name="cloud22" parent="Coalescence/Environment/clouds" index="14"]
+visible = false
+
+[node name="cloud2" parent="Coalescence/Environment/clouds" index="16"]
+visible = false
+
+[node name="cloud3" parent="Coalescence/Environment/clouds" index="17"]
+visible = false
+
+[node name="cloud5" parent="Coalescence/Environment/clouds" index="19"]
+visible = false
+
+[node name="cloud6" parent="Coalescence/Environment/clouds" index="20"]
 visible = false
 
 [node name="MeshInstance3D3" parent="Coalescence/BubbleZones/EntryPath/Occluder" index="2"]
@@ -1108,6 +1151,31 @@ visible = false
 visible = false
 
 [node name="sun" parent="Coalescence/BubbleZones/Plaza/Plaza Environment" index="1"]
+visible = false
+
+[node name="clouds" parent="Coalescence/BubbleZones/Plaza/Plaza Environment" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 35, 0)
+rotation_speed = 0.25
+
+[node name="cloud8" parent="Coalescence/BubbleZones/Plaza/Plaza Environment/clouds" index="0"]
+visible = false
+
+[node name="cloud11" parent="Coalescence/BubbleZones/Plaza/Plaza Environment/clouds" index="3"]
+visible = false
+
+[node name="cloud14" parent="Coalescence/BubbleZones/Plaza/Plaza Environment/clouds" index="6"]
+visible = false
+
+[node name="cloud17" parent="Coalescence/BubbleZones/Plaza/Plaza Environment/clouds" index="9"]
+visible = false
+
+[node name="cloud21" parent="Coalescence/BubbleZones/Plaza/Plaza Environment/clouds" index="13"]
+visible = false
+
+[node name="cloud4" parent="Coalescence/BubbleZones/Plaza/Plaza Environment/clouds" index="18"]
+visible = false
+
+[node name="cloud6" parent="Coalescence/BubbleZones/Plaza/Plaza Environment/clouds" index="20"]
 visible = false
 
 [node name="Hints" parent="Coalescence/BubbleZones/Library/LibraryBuilding/FirstFloor" index="5"]

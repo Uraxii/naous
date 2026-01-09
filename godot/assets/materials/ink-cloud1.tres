@@ -8,5 +8,6 @@ cull_mode = 2
 depth_draw_mode = 2
 shading_mode = 0
 specular_mode = 2
+disable_fog = true
 albedo_color = Color(1, 1, 1, 0.627451)
 albedo_texture = ExtResource("1_kd8xs")

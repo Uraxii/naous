@@ -3,21 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://75s2rj2gpi7h"
-path.s3tc="res://.godot/imported/sky-watercolour.jpg-de3b2a756108ee3116c96e2a63249581.s3tc.ctex"
+path="res://.godot/imported/sky-watercolour.jpg-de3b2a756108ee3116c96e2a63249581.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://assets/textures/sky-watercolour.jpg"
-dest_files=["res://.godot/imported/sky-watercolour.jpg-de3b2a756108ee3116c96e2a63249581.s3tc.ctex"]
+dest_files=["res://.godot/imported/sky-watercolour.jpg-de3b2a756108ee3116c96e2a63249581.ctex"]
 
 [params]
 
-compress/mode=2
-compress/high_quality=false
+compress/mode=0
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
