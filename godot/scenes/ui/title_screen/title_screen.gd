@@ -3,6 +3,7 @@ extends PanelContainer
 
 @export_range(-12.0, 0.0, 0.5, "suffix:db") var initial_music_volume := -3.0 ## 0.71 == -3db
 @export var button_presses_to_skip_intro:int = 1
+@export var idle_time_to_show_lore_tab:float = 10.0
 
 const NOT_SO_STILL = preload("uid://e26byi4f045n")
 const TUTORIAL = preload("uid://d33k3abfexh3k")
@@ -10,11 +11,11 @@ const CREDITS_FLYOVER = preload("uid://bovh2hjexu5yl")
 
 var intro_finished:bool = false
 
-const MENU_TAB := 0
-const LOADING_TAB := 1
 @onready var tab_container: TabContainer = %TabContainer
 @onready var menu_container: MarginContainer = %MenuContainer
 @onready var options_container: MarginContainer = %OptionsContainer
+@onready var lore_container: MarginContainer = %LoreContainer
+@onready var lore_scroll_container: ScrollContainer = %LoreScrollContainer
 
 const SPLASH_SCREEN_TIME:float = 3.0
 @onready var loading_container: MarginContainer = %LoadingContainer
@@ -40,7 +41,7 @@ func _ready() -> void:
     credits_button.pressed.connect(show_credits)
     quit_game_button.pressed.connect(quit_game)
     
-    tab_container.current_tab = MENU_TAB
+    menu_container.show()
     
     #Globals.camera.camera.global_transform = local_camera.global_transform
     local_camera.make_current() ## Camera
@@ -85,6 +86,7 @@ func _on_intro_animation_finished() -> void:
     var fit:Tween = create_tween()
     fit.set_ease(Tween.EASE_IN)
     fit.tween_property(tab_container, ^"modulate", Color.WHITE, 1.2)
+    fit.tween_callback(reset_wait_switch_to_lore_tab) ## Start the timer
 
 
 @onready var skip_button_pressed_count:int = 0
@@ -106,7 +108,54 @@ func _input(event: InputEvent) -> void:
                 #credits.throb_cancel_label(cancel_button_presses_to_quit + 1 - cancel_button_pressed_count)
                 if skip_button_pressed_count > button_presses_to_skip_intro:
                     _skip_intro()
+    elif menu_container.visible:
+        ## If we're at the main menu, we'll switch to the Lore tab after the user
+        ## idles for a set time.
+        reset_wait_switch_to_lore_tab()
 
+var idle_tween: Tween
+func reset_wait_switch_to_lore_tab() -> void:
+    if idle_tween:
+        if idle_tween.is_running():
+            idle_tween.kill()
+    
+    idle_tween = create_tween()
+    idle_tween.tween_interval(idle_time_to_show_lore_tab)
+    idle_tween.tween_callback(show_lore)
+    
+func show_lore() -> void:
+    lore_scroll_container.scroll_vertical = 0
+    
+    var lore:Tween = create_tween()
+    lore.tween_property(menu_container, ^"modulate", Color.TRANSPARENT, 2.0)
+    lore.tween_property(lore_container, ^"modulate", Color.WHITE, 3.0).from(Color.TRANSPARENT)
+    lore.parallel()
+    lore.tween_callback(lore_container.show)
+    lore.tween_interval(10.0) ## Wait to start scrolling
+    #lore.tween_property(lore_scroll_container, ^"scroll_vertical", 2171, 120.0) ## HACK hard coded length
+    #lore.tween_property(lore_scroll_container, ^"scroll_vertical", lore_scroll_container.scroll_vertical + 1, 0.1) ## Advance by just one
+    lore.tween_callback(autoscroll_lore)
+    
+var autoscroller:Tween
+func autoscroll_lore() -> void:
+    _on_autoscroll_interrupted()
+    
+    autoscroller = create_tween()
+    ## Advance by just one
+    autoscroller.tween_callback(func(): lore_scroll_container.scroll_vertical += 1)
+    autoscroller.tween_interval(0.15) ## Controls scrolling speed
+    ## I dont believe we need to worry about stopping the loop.
+    autoscroller.set_loops()
+    
+    lore_scroll_container.gui_input.connect(_on_autoscroll_interrupted)
+
+func _on_autoscroll_interrupted(event: InputEvent = null) -> void:
+    if lore_scroll_container.gui_input.is_connected(_on_autoscroll_interrupted):
+        lore_scroll_container.gui_input.disconnect(_on_autoscroll_interrupted)
+    
+    if autoscroller:
+        if autoscroller.is_running():
+            autoscroller.kill()
 
 func start_game() -> void:
     if not intro_finished: return
@@ -133,7 +182,7 @@ func quit_game() -> void:
 
 
 func run_splash_screen() -> void:
-    tab_container.current_tab = LOADING_TAB
+    loading_container.show()
     ## Splash screen
     var splash_tween = loading_container.create_tween()
     splash_tween.set_trans(Tween.TRANS_SINE)
@@ -151,3 +200,14 @@ func _on_options_button_pressed() -> void:
     if not intro_finished: return
     
     options_container.show()
+
+
+func _on_lore_back_button_pressed() -> void:
+    menu_container.show() ## Return to the main menu
+    var fit:Tween = create_tween()
+    fit.tween_property(menu_container, ^"modulate", Color.WHITE, 3.0)
+
+func _on_lore_container_visibility_changed() -> void:
+    if lore_container:
+        if not lore_container.visible:
+            _on_autoscroll_interrupted()

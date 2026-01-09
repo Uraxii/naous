@@ -51,6 +51,33 @@ draw_center = false
 [sub_resource type="LabelSettings" id="LabelSettings_x4ugo"]
 font_size = 72
 
+[sub_resource type="Animation" id="Animation_oisst"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("World/Camera:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(33.46, 9.355, 107.405)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("World/Camera:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.15707965, 0.41538838, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_01jae"]
 resource_name = "start"
 length = 8.0
@@ -91,33 +118,6 @@ tracks/2/keys = {
 "args": [],
 "method": &"_on_intro_animation_finished"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_oisst"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("World/Camera:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(33.46, 9.355, 107.405)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("World/Camera:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.15707965, 0.41538838, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8nxda"]
@@ -214,7 +214,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_oijkb")
-current_tab = 1
+current_tab = 3
 tabs_visible = false
 
 [node name="MenuContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
@@ -275,6 +275,7 @@ text = "Quit Game"
 
 [node name="LoadingContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 160
 theme_override_constants/margin_top = 120
@@ -456,6 +457,131 @@ custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 text = "Cancel"
+
+[node name="LoreContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/margin_left = 180
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 180
+theme_override_constants/margin_bottom = 80
+metadata/_tab_index = 3
+
+[node name="LoreScrollContainer" type="ScrollContainer" parent="TextureRect/TabContainer/LoreContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/TabContainer/LoreContainer/LoreScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 60
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect/TabContainer/LoreContainer/LoreScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+bbcode_enabled = true
+text = "[br]
+[color=thistle][i]\" Woven from pure idea.
+
+	Bending to thought.
+
+Warping, like space under gravity.
+
+	Twisting upon itself.
+
+Tangling into the shapes of souls.
+
+The Naous is existence itself... \""
+fit_content = true
+autowrap_mode = 0
+tab_stops = PackedFloat32Array(30)
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="TextureRect/TabContainer/LoreContainer/LoreScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center][color=khaki]The Fundamental Nature of the World[/color][/center]
+
+	The world of Naous is not made of stone, soil, or physics in the traditional sense. It is built from thought—not imagination, but the raw cognitive substrate of the universe. This substance, called Naous, flows and folds like gravity, memory, and breath.
+
+	Where Naous bends tightly inward, it creates loops of recursive thought—and when those loops become stable, consciousness emerges. In this world, a person is not a soul in a body, but a localized knot of ideas, a bundle of tightly folded thought-patterns held together by conviction and feedback.
+
+[center][color=khaki]Idea-Strands & the Formation of Identity[/color][/center]
+
+	Each being is formed from Idea-Strands that loop into a stable shape. These strands are the building blocks of personality, memory, behavior, and even physical presence.
+
+[center][color=thistle][i]“ You are not in Naous. You are Naous, briefly self-aware. ”[/i][/color][/center]
+
+
+[center][color=khaki]Masks – Identity Made Solid[/color][/center]
+
+	A Mask is a construct forged or slowly grown from Idea-Strands—beliefs and convictions that have stabilized into form. Psychologically, it serves as a defense: a structure built to interface with the world, to protect the vulnerable self, or to simplify overwhelming complexity. But in Naous, that psychological structure is literal.
+
+	A Mask hardens thought. It locks ideas into a stable identity, called a shade, that can be worn. When someone dons a Mask, they shape themselves according to its beliefs. The danger is not in wearing one—but in forgetting it is a mask at all.
+
+[center][color=thistle][i]“ A Mask grants strength by narrowing possibility,
+
+but what begins as choice becomes cage,
+
+and the cage forgets the one who built it. ”[/i][/color][/center]
+
+
+[center][color=khaki]The Stilled – Ossified Minds[/color][/center]
+
+	A Stilled being is someone who has worn a Mask too long, or too rigidly. Their identity has hardened so completely that they become severed from the flow of Naous. They are not dead—but they are no longer truly conscious. They exist in loops of behavior and thought, repeating themselves without growth or reflection. Their minds are lost to symbolic obsession. They haunt Stillness Zones like broken memories.
+
+	More powerful Stilled, whose Masks were forged from overwhelming or dominant ideologies, can subtly shape the environment and influence weaker Stilled in the area—amplifying loops, spawning guardians, or manifesting challenges reflective of their Mask’s belief. However, they do not lead or rule in any traditional sense. Their presence is more like a dominant psychic storm.
+
+	Stillness Zones resemble dungeons formed from the psyche—distorted realms built from recurring thought. Each zone is a looping landscape of metaphor, memory, and belief, created by the ossified mind that anchors it.
+
+[center][color=khaki]Echoes – Fragments of Thought[/color][/center]
+
+	When a being perishes, their ideas don’t fully disappear. Some fragments—especially those with strong emotional or cognitive weight—remain in the world as Echoes. They represent the lingering truth of a being’s life, and they come with emotional weight—stronger Echoes create more Draw, bringing the Bearer closer to ossification.
+
+[center][color=khaki]Bearers – You, the Player[/color][/center]
+
+	Bearers are rare beings born—or awakened—when Naous begins to calcify too deeply. They are fluid identities, capable of resisting ossification and can easily switch Masks. They are not simply heroes—they are corrective mechanisms, born from Naous itself to restore flow to a system choking on its own permanence.
+
+[center][color=thistle][i]“ You are not a soul.
+
+You are the pressure release.
+
+The knot that did not tighten. ”[/i][/color][/center]
+
+Defeating a Mask-bound Stilled being isn’t just combat—it is a ritual severance. By removing their Mask, they return their locked thought-patterns back into the Naous. This restores flow to the region, clears calcified zones, and releases new Echoes. It is both an exorcism and a memorial.
+
+To unmask someone is to kill who they were—but to also let them change again.
+
+[center][color=thistle][i]\" While Ossified cultures once thrived,
+
+their centers have often succumbed to Stillness.
+
+What remains are haunted ruins and echoing institutions,
+
+not functioning societies. \"[/i][/color][/center]
+
+
+[center][color=khaki]The Nature of Naous[/color][/center]
+
+	Naous is not a god, but the cognitive substrate of reality.
+
+	Where it flows freely, thought is dynamic. Where it is folded, minds are born. Where it is looped too tightly, minds ossify.
+
+	Consciousness is an inevitable byproduct of Naous folding back on itself. Masks are how beings carve pieces of Naous into personal structure. Too many Masks cause the stream to calcify. Bearers exist to restore the current.
+
+[center][color=thistle][i]“ You are not your Mask.
+
+You are the current it dammed... \"[/i][/color][/center]"
+fit_content = true
+
+[node name="LoreBackButton" type="Button" parent="TextureRect/TabContainer/LoreContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Go Back"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -753,3 +879,5 @@ transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 1.43, 0.075, 0.345)
 
 [connection signal="pressed" from="TextureRect/TabContainer/MenuContainer/VBoxContainer/ButtonContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="TextureRect/TabContainer/OptionsContainer/VBoxContainer/FooterHBoxContainer/BackButton" to="TextureRect/TabContainer/OptionsContainer" method="_on_back_button_pressed"]
+[connection signal="visibility_changed" from="TextureRect/TabContainer/LoreContainer" to="." method="_on_lore_container_visibility_changed"]
+[connection signal="pressed" from="TextureRect/TabContainer/LoreContainer/LoreBackButton" to="." method="_on_lore_back_button_pressed"]
