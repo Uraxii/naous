@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bgliqjwr5w6kp"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bgliqjwr5w6kp"]
+
+[ext_resource type="Texture2D" uid="uid://c7fjo3ob7o3eg" path="res://assets/textures/ink-line-long.png" id="1_gxmwp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lw67h"]
 content_margin_left = 23.0
@@ -71,6 +73,16 @@ shadow_offset = Vector2(0, 2)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxmwp"]
 bg_color = Color(0.20971075, 0.36620155, 0.36963147, 1)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gxmwp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g28hg"]
+texture = ExtResource("1_gxmwp")
+expand_margin_top = 40.0
+expand_margin_bottom = 40.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(1, 1, 1, 0.78039217)
+
 [resource]
 Button/font_sizes/font_size = 26
 Button/styles/focus = SubResource("StyleBoxFlat_lw67h")
@@ -79,6 +91,12 @@ Button/styles/hover_pressed = SubResource("StyleBoxFlat_7vhec")
 Button/styles/normal = SubResource("StyleBoxFlat_3pll7")
 Button/styles/pressed = SubResource("StyleBoxFlat_7vhec")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_gxmwp")
+ProgressBar/colors/font_color = Color(0, 0, 0, 1)
+ProgressBar/colors/font_outline_color = Color(1, 1, 1, 1)
+ProgressBar/constants/outline_size = 10
+ProgressBar/font_sizes/font_size = 22
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_gxmwp")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_g28hg")
 RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.6156863)
 RichTextLabel/constants/shadow_offset_x = 0
 RichTextLabel/constants/shadow_offset_y = 2

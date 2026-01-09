@@ -7,7 +7,7 @@ signal finished
 ## Populates the visible credits.
 ## A simple syntax is employed to format the result. "-" indicate titles. You can optionally
 ## include a description in the line following an indented line.
-@export var cancel_button_presses_to_quit:int = 5
+
 @export var iterative_duration: float = 158.0 ## in seconds
 
 @export var start_delay:float = 4.0
@@ -46,25 +46,6 @@ func _ready() -> void:
 		
 	var fade_in_title:Tween = title.create_tween()
 	fade_in_title.tween_property(title, ^"modulate", Color.WHITE, 3.0).from(Color.TRANSPARENT)
-	
-var cancel_button_pressed_count:int = 0
-var debouncing:bool = false
-func _undebounce() -> void: debouncing = false
-const DEBOUNCE_TIME:float = 0.5
-
-func _input(event: InputEvent) -> void:
-	if event.is_pressed():
-		if not debouncing:
-			debouncing = true
-			var debounce:Tween = create_tween()
-			debounce.tween_interval(DEBOUNCE_TIME)
-			debounce.tween_callback(_undebounce)
-			
-			cancel_button_pressed_count += 1
-			print("Cancel count %d" % [cancel_button_pressed_count])
-			throb_cancel_label(cancel_button_presses_to_quit + 1 - cancel_button_pressed_count)
-			if cancel_button_pressed_count > cancel_button_presses_to_quit:
-				cancel_revealing()
 
 func cancel_revealing() -> void:
 	if ticker:

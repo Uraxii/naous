@@ -130,6 +130,9 @@ static func check_kill(tween) -> void:
 static func set_music_bus_volume(volume_linear:float) -> void:
 	AudioServer.set_bus_volume_linear(get_bus_idx(), volume_linear)
 	
+static func set_music_bus_volume_db(volume_db:float) -> void:
+	AudioServer.set_bus_volume_db(get_bus_idx(), volume_db)
+	
 static func get_music_bus_volume_linear() -> float:
 	return AudioServer.get_bus_volume_linear(get_bus_idx())
 	

@@ -18,8 +18,8 @@ _data = [Vector2(0, 0.23031878), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_brubw"]
-offsets = PackedFloat32Array(0, 0.4814815, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.16078432, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.5890208, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.20784314, 1, 1, 1, 0)
 metadata/_snap_count = 2
 
 [node name="sand_dust" type="Node3D"]
@@ -28,7 +28,7 @@ transform = Transform3D(1.6690047, 0, 0.5262351, 0, 1.75, 0, -0.5262351, 0, 1.66
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_2n6bt")
 cast_shadow = 0
-amount = 16
+amount = 18
 lifetime = 9.0
 explosiveness = 0.6
 randomness = 0.25
