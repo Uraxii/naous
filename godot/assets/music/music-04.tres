@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=11 format=3 uid="uid://dbkj5mkwehrw4"]
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=13 format=3 uid="uid://dbkj5mkwehrw4"]
 
 [ext_resource type="AudioStream" uid="uid://cxo01xpccni0i" path="res://assets/music/track_04/Combat - LPercussion.ogg" id="1_5hv6x"]
 [ext_resource type="AudioStream" uid="uid://dj4qrk1st87xr" path="res://assets/music/track_04/Combat - Pad.ogg" id="2_wc0mw"]
@@ -29,10 +29,21 @@ stream_6/volume = 0.0
 stream_7/stream = ExtResource("8_wc0mw")
 stream_7/volume = 0.0
 
+[sub_resource type="Curve" id="Curve_0q4h2"]
+_limits = [0.0, 1.0, 0.0, 2.0]
+_data = [Vector2(0, 0.45367092), 0.0, 0.0, 0, 0, Vector2(2, 1), 0.106512845, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3qddj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [resource]
 script = ExtResource("8_2u17i")
 file = SubResource("AudioStreamSynchronized_aadet")
 title = "Adverse Entity"
 include_in_continuous_playlist = false
+trans_start_fade_in = SubResource("Curve_0q4h2")
+trans_stop_fade_out = SubResource("Curve_3qddj")
 use_intensity = true
 metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

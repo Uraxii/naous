@@ -33,7 +33,7 @@ class FXBaselines:
 @export var tracks:Array[DynamicMusicTrack]
 
 @export_group("Behavior")
-@export var force_single_track_playback: bool = true ## Simplifies handling song changes, disable for more control
+@export var force_single_track_playback: bool = true ## CRITICAL Do not change. Simplifies handling song changes, disable for more control
 @export var continuous_playback: bool = false:
 	set(value):
 		print("DynamicMusicManager: continuous_playback now %s" % value)
@@ -372,12 +372,20 @@ func get_audio_players() -> Array[AudioStreamPlayer]:
 	array.append_array(positional_root.get_children())
 	return array
 	
+## This method uses a hard stop, skipping any transitions. Use for utility.
 func stop_all_players(and_free_instances:bool = false) -> void:
 	for player in get_audio_players():
 		player.stop()
 		
 	if and_free_instances:
 		clear_all_stopped_tracks()
+		
+func stop_all_tracks() -> void:
+	#var awaiting: Array[DynamicMusicTrack] = [] ## TODO might be useful
+	for track in tracks:
+		#if track.is_playing:
+			#awaiting.append(track)
+		track.stop()
 	
 func clear_all_stopped_tracks() -> void:
 	for player:AudioStreamPlayer in get_audio_players():
@@ -390,6 +398,9 @@ func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioSt
 		for _track in tracks:
 			if _track.is_playing:
 				stop_track(_track)
+				if _track.is_playing:
+					await _track.playback_changed
+					## Note this will need refactor to work outside of `force_single_track_playback`
 	
 	track.is_playing = true
 	var player = get_player(track)
@@ -416,26 +427,32 @@ func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioSt
 	return player
 	
 func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
-	track.is_playing = false
 	var player = get_player(track)
 	
-	var track_transition: Curve = track.trans_stop_fade_out
-	if track_transition:
-		player.volume_linear = track_transition.sample_baked(track_transition.min_domain)
-		var trans_tween:Tween = player.create_tween()
-		trans_tween.tween_method(
-			DynamicMusicTrack.set_volume_from_curve.bind(
-				player,
-				track_transition
-				),
-			#player.volume_linear,
-			track_transition.min_domain,
-			track_transition.max_domain,
-			track_transition.max_domain
-			)
-		trans_tween.tween_callback(player.stop)
-	else:
-		player.stop()
+	if player.playing:
+		
+		var track_transition: Curve = track.trans_stop_fade_out
+		if track_transition:
+			player.volume_linear = track_transition.sample_baked(track_transition.min_domain)
+			var trans_tween:Tween = player.create_tween()
+			trans_tween.tween_method(
+				DynamicMusicTrack.set_volume_from_curve.bind(
+					player,
+					track_transition
+					),
+				#player.volume_linear,
+				track_transition.min_domain,
+				track_transition.max_domain,
+				track_transition.max_domain
+				)
+			trans_tween.tween_callback(player.stop)
+			trans_tween.tween_callback(track.set.bind(&"is_playing", false))
+		else:
+			player.stop()
+			track.is_playing = false
+			
+	elif track.is_playing:
+		track.is_playing = false
 		
 	return player
 

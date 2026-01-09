@@ -111,12 +111,16 @@ func _input(event: InputEvent) -> void:
 func start_game() -> void:
     if not intro_finished: return
     
+    Globals.music.stop_all_tracks()
+    
     await run_splash_screen()
     get_tree().change_scene_to_packed(TUTORIAL)
 
 
 func show_credits() -> void:
     if not intro_finished: return
+    
+    Globals.music.stop_all_tracks()
     
     await run_splash_screen()
     get_tree().change_scene_to_packed(CREDITS_FLYOVER)

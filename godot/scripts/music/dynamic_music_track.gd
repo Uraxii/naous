@@ -3,6 +3,8 @@ class_name DynamicMusicTrack extends Resource
 ## An audio file plus configurable properties used by the
 ## [DynamicMusicManager] system.
 
+signal playback_changed
+
 ## Audio resource.
 @export var file:AudioStream
 
@@ -46,7 +48,10 @@ class_name DynamicMusicTrack extends Resource
 		#prnt("Intensity changed to %d" % [intensity])
 # more foo
 
-var is_playing:bool = false ## Set by [DynamicMusicManager] do NOT set manually.
+var is_playing:bool = false: ## Set by [DynamicMusicManager] do NOT set manually.
+	set(value):
+		is_playing = value
+		playback_changed.emit()
 
 func _init() -> void: prnt("Loaded %s." % [title])
 

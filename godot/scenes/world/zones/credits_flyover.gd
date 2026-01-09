@@ -1,6 +1,6 @@
 extends Node3D
 
-const RETURN_SCENE: PackedScene = preload("uid://cshn7uv20j780")
+const RETURN_SCENE: String = "uid://cshn7uv20j780"
 
 @export var music: DynamicMusicTrack
 @export var cancel_button_presses_to_quit:int = 5
@@ -24,7 +24,7 @@ func _ready() -> void:
 var cancel_button_pressed_count:int = 0
 var debouncing:bool = false
 func _undebounce() -> void: debouncing = false
-const DEBOUNCE_TIME:float = 0.5
+const DEBOUNCE_TIME:float = 0.25
 
 func _input(event: InputEvent) -> void:
 	if event.is_pressed():
@@ -42,8 +42,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_credits_finished() -> void:
 	if RETURN_SCENE:
-		if RETURN_SCENE.can_instantiate():
-			get_tree().change_scene_to_packed(RETURN_SCENE)
-			return
+		get_tree().change_scene_to_file(RETURN_SCENE)
+		return
 			
 	get_tree().quit()

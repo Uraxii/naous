@@ -1,10 +1,16 @@
-[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=3 format=3 uid="uid://bcpglwarj06jc"]
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=4 format=3 uid="uid://bcpglwarj06jc"]
 
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="1_0lbrw"]
 [ext_resource type="AudioStream" uid="uid://b37jnaw6amy31" path="res://assets/music/track_05/Naous_Track_5_complete.ogg" id="1_we1jd"]
+
+[sub_resource type="Curve" id="Curve_we1jd"]
+_limits = [0.0, 1.0, 0.0, 3.0]
+_data = [Vector2(0, 1), 0.0, -0.013018249, 0, 0, Vector2(3, 0), -0.0955629, 0.0, 0, 0]
+point_count = 2
 
 [resource]
 script = ExtResource("1_0lbrw")
 file = ExtResource("1_we1jd")
 title = "Coalescent Discoveries"
+trans_stop_fade_out = SubResource("Curve_we1jd")
 metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

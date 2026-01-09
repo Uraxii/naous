@@ -62,18 +62,19 @@ func cancel_revealing() -> void:
 	exit_button.show()
 
 func fade_out_and_exit() -> void:
+	Globals.music.stop_all_tracks()
 	const FADE_TIME:float = 3.0
 	
 	## Fade out
 	var fade:Tween = create_tween()
 	fade.set_parallel()
 	fade.tween_property(scroll_container, ^"modulate", Color.TRANSPARENT, FADE_TIME)
-	fade.tween_method(
-		DynamicMusicManager.set_music_bus_volume, 
-		DynamicMusicManager.get_music_bus_volume_linear(),
-		0.0,
-		FADE_TIME
-		)
+	#fade.tween_method(
+		#DynamicMusicManager.set_music_bus_volume, 
+		#DynamicMusicManager.get_music_bus_volume_linear(),
+		#0.0,
+		#FADE_TIME
+		#)
 	fade.chain().tween_callback(finished.emit)
 	
 var throb_cancel_label_tween:Tween

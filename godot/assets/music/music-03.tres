@@ -1,10 +1,16 @@
-[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=3 format=3 uid="uid://bay64fi84hggh"]
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=4 format=3 uid="uid://bay64fi84hggh"]
 
 [ext_resource type="AudioStream" uid="uid://psvgua4141k" path="res://assets/music/track_03/Ambivalent Fellow - Complete.mp3" id="1_tjxoq"]
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_fnrmy"]
+
+[sub_resource type="Curve" id="Curve_tjxoq"]
+_limits = [0.0, 1.0, 0.0, 3.0]
+_data = [Vector2(0, 1), 0.0, -0.013018249, 0, 0, Vector2(3, 0), -0.0955629, 0.0, 0, 0]
+point_count = 2
 
 [resource]
 script = ExtResource("2_fnrmy")
 file = ExtResource("1_tjxoq")
 title = "Ambivalent Fellow"
+trans_stop_fade_out = SubResource("Curve_tjxoq")
 metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"
