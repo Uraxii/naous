@@ -26,6 +26,10 @@ InstanceAPI="*res://scripts/instance_stuff/instance_api.gd"
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [godots]
 
 version_hint=""
