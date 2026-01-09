@@ -34,7 +34,10 @@ class FXBaselines:
 
 @export_group("Behavior")
 @export var force_single_track_playback: bool = true ## Simplifies handling song changes, disable for more control
-@export var continuous_playback: bool = false
+@export var continuous_playback: bool = false:
+	set(value):
+		print("DynamicMusicManager: continuous_playback now %s" % value)
+		continuous_playback = value
 @export_range(0.1, 10.0, 0.1, "or_greater", "hide_slider") var minimum_transition_time:float = 0.1
 @export_range(0.1, 30.0, 0.1, "or_greater", "hide_slider") var default_transition_time:float = 5.0
 

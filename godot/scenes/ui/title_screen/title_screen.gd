@@ -29,6 +29,11 @@ const SPLASH_SCREEN_TIME:float = 3.0
 
 func _ready() -> void:
     DynamicMusicManager.set_music_bus_volume_db(initial_music_volume)
+    Globals.music.continuous_playback = true
+    tree_exiting.connect(Globals.music.set.bind(&"continuous_playback", false))
+    ## You can sit at the menu and the soundtrack will play out.
+    ## Important to set this back to false when giving control to another scene.
+    ## Eventually I should make a "playlist" functionality that handles this more gracefully. -tm
     Globals.music.start_track(NOT_SO_STILL)
     
     start_game_button.pressed.connect(start_game)
