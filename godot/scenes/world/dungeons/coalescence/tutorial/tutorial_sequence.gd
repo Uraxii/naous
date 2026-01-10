@@ -249,7 +249,7 @@ func _after_first_enemy_hold() -> void:
 func _on_first_enemy_defeated() -> void:
     first_enemy.defeated.disconnect(_on_first_enemy_defeated)
 	## Lower the music intensity
-    tutorial_music.ADVERSE_ENTITY.set_intensity(30)
+    tutorial_music.ADVERSE_ENTITY.set_intensity(40)
 	
 	
     # Move the heal pickup to where the enemy was (ie. it "dropped" on defeat)

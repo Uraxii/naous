@@ -20,6 +20,7 @@ func play_idle() -> void:
 
 func play_combat() -> void:
     Globals.music.start_track(ADVERSE_ENTITY, true)
+    ADVERSE_ENTITY.set_intensity(100)
 
 
 func play_background() -> void:
