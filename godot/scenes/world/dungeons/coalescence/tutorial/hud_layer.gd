@@ -52,6 +52,7 @@ func hide_target_panel() -> void:
 func show_player_health_bar() -> void:
     player_health_panel.show()
 
+
 func set_player_health_bar(new_value: float) -> void:
     player_health_bar.value = new_value
 

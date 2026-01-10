@@ -18,5 +18,5 @@ weapon_right = ExtResource("9_uoi38")
 torso = ExtResource("8_s11tx")
 legs = ExtResource("4_m28rf")
 shoulders = ExtResource("7_uh8f7")
-echoes = Array[ExtResource("1_7oc0b")]([ExtResource("2_bujlx"), null, ExtResource("3_v8epu")])
+echoes = Array[ExtResource("1_7oc0b")]([ExtResource("2_bujlx"), null, ExtResource("3_v8epu"), null])
 metadata/_custom_type_script = "uid://hqemwssvkqh4"

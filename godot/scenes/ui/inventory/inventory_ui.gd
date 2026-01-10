@@ -2,6 +2,7 @@ class_name InventoryUI extends PanelContainer
 
 const ITEM_SLOT: PackedScene = preload("uid://nbaglwtf3v0k")
 
+@onready var inventory_audio_manager: InventoryAudioManager = %InventoryAudioManager
 @onready var item_tooltip_popup: ItemTooltipPopup = %ItemTooltipPopup
 
 @onready var mask_slot: ItemSlot = %MaskSlot
@@ -27,6 +28,16 @@ var backpack_slots :=  8 * 2 # Items per row x Num rows
 
 func put_item_in_slot(item: Item, item_slot: ItemSlot) -> void:
     item_slot.item = item
+    
+    if item != null:
+        var item_is_gear := item is MaskItem or item is WeaponItem or item is TorsoItem or item is ShoulderItem or item is LegsItem
+        var item_is_echo := item is EchoItem
+        if item_is_gear:
+            inventory_audio_manager.play_gear_equipped()
+        elif item_is_echo:
+            inventory_audio_manager.play_echo_equipped()
+        else:
+            inventory_audio_manager.play_item_stored()
 
 
 func swap_slot_items(initial_slot: ItemSlot, target_slot: ItemSlot) -> void:

@@ -9,6 +9,7 @@ func apply_effect_to_entity(entity: Entity) -> void:
         Globals.logger.warn("Damage Effect unable to find health component on entity!")
     else:
         Globals.logger.debug("Dealing damage to entity: Damage=%s | Entity=%s" % [damage, entity.name])
+        Globals.signal_bus.play_player_attack.emit()
         health_c.current = health_c.current - damage
 
 

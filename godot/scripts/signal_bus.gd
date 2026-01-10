@@ -39,6 +39,11 @@ signal reload
 signal load_world
 #endregion
 
+#region Audio
+signal play_player_attack
+signal play_player_damaged
+#endregion
+
 #region Input
 signal ui_accept 
 signal ui_cancel

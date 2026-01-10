@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7bsvixb5jjsf"]
+[gd_scene load_steps=7 format=3 uid="uid://c7bsvixb5jjsf"]
 
 [ext_resource type="Theme" uid="uid://b631noidj7co0" path="res://scenes/ui/inventory/inventory_theme.tres" id="1_8pb6k"]
 [ext_resource type="Script" uid="uid://epop25me7jqf" path="res://scenes/ui/inventory/inventory_ui.gd" id="1_a0on1"]
 [ext_resource type="PackedScene" uid="uid://nbaglwtf3v0k" path="res://scenes/ui/inventory/item_slot.tscn" id="2_a0on1"]
+[ext_resource type="Script" uid="uid://cg8kb7bherqgm" path="res://scenes/ui/inventory/inventory_audio_manager.gd" id="3_ktvow"]
 [ext_resource type="Script" uid="uid://bnesvpxx227bl" path="res://scenes/ui/inventory/item_tooltip_popup.gd" id="4_7cyi0"]
-[ext_resource type="Script" path="res://scenes/ui/inventory/item_tooltip.gd" id="4_8wncw"]
+[ext_resource type="Script" uid="uid://dcw2csvgojows" path="res://scenes/ui/inventory/item_tooltip.gd" id="4_8wncw"]
 
 [node name="InventoryUI" type="PanelContainer"]
 anchors_preset = 15
@@ -16,6 +17,20 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8pb6k")
 script = ExtResource("1_a0on1")
+
+[node name="InventoryAudioManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_ktvow")
+
+[node name="InventoryOpenCloseStream" type="AudioStreamPlayer" parent="InventoryAudioManager"]
+unique_name_in_owner = true
+volume_db = -11.0
+bus = &"GUI"
+
+[node name="InventoryItemStream" type="AudioStreamPlayer" parent="InventoryAudioManager"]
+unique_name_in_owner = true
+volume_db = -3.0
+bus = &"GUI"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

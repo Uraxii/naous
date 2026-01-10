@@ -9,5 +9,5 @@
 resource_local_to_scene = true
 script = ExtResource("4_vopij")
 equipment = ExtResource("3_xuq83")
-backpack = Array[ExtResource("1_4fgfs")]([ExtResource("2_6ol7x"), null, ExtResource("2_6ol7x"), null])
+backpack = Array[ExtResource("1_4fgfs")]([ExtResource("2_6ol7x"), null, ExtResource("2_6ol7x"), null, null, null, null, null, null, null, null, null, null, null, null, null])
 metadata/_custom_type_script = "uid://sjk1ggbjspjx"
