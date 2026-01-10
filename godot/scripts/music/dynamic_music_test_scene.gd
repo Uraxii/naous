@@ -34,10 +34,10 @@ func _ready() -> void:
 	update_intensity_label()
 
 func start_track(track:DynamicMusicTrack) -> void:
-	var player = Globals.music.start_track(track)
+	var player = await Globals.music.start_track(track)
 	
 func stop_track(track:DynamicMusicTrack) -> void:
-	var player = Globals.music.stop_track(track)
+	var player = await Globals.music.stop_track(track)
 	
 func _clear_synchronized_layers() -> void:
 	var vbox:VBoxContainer = controller_sync_layers.get_child(0)

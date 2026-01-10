@@ -52,6 +52,12 @@ var is_playing:bool = false: ## Set by [DynamicMusicManager] do NOT set manually
 	set(value):
 		is_playing = value
 		playback_changed.emit()
+		
+static var instance:DynamicMusicManager:
+	get:
+		if Globals.music:
+			return Globals.music
+		return null
 
 func _init() -> void: prnt("Loaded %s." % [title])
 
@@ -70,22 +76,47 @@ func prnt(x) -> void:
 static func set_volume_from_curve(curve_point: float, player:AudioStreamPlayer, curve: Curve) -> void:
 	player.volume_linear = curve.sample_baked(curve_point)
 
+var intensity_tween: Tween
 func set_intensity(value:int) -> void:
-	self.intensity = value
+	if instance:
+		if intensity_tween:
+			if intensity_tween.is_running():
+				intensity_tween.kill()
+		intensity_tween = instance.create_tween()
+		intensity_tween.tween_property(self, ^"intensity", value, 2.0)
+	else:
+		self.intensity = value
+
 
 func do_intensity_process(stream: AudioStream) -> void:
 	if not use_intensity: return
 	
 	if stream is AudioStreamSynchronized:
 		# Simple implementation
+		#if hundred_to_linear(intensity) > float(i+1) / float(stream.stream_count):
+			## Playing
+			#target_volume = linear_to_db(1.0) ## TODO
+		#else:
+			#target_volume = linear_to_db(0.0) ## TODO
+		
 		# Based on how many layers we have
+		var slice:float = 100.0 / stream.stream_count
 		for i in stream.stream_count:
 			#var layer:AudioStream = stream.get_sync_stream(i)
-			if hundred_to_linear(intensity) > float(i+1) / float(stream.stream_count):
-				# Playing
-				stream.set_sync_stream_volume(i, linear_to_db(1.0))
-			else:
-				stream.set_sync_stream_volume(i, linear_to_db(0.0))
+			var start_threshold = i * slice
+			#var end_threshold = (i + 1) * slice
+			
+			var target_volume: float = linear_to_db(
+				clampf(
+					((intensity - start_threshold) / slice),
+					0.0,
+					1.0)
+				)
+				
+			stream.set_sync_stream_volume(i, target_volume)
+			
+func _inverted_sync_callable(volume: float, stream: AudioStreamSynchronized, index:int) -> void:
+	stream.set_sync_stream_volume(index, volume)
 
 func hundred_to_linear(integer: int) -> float:
 	return integer / 100.0
