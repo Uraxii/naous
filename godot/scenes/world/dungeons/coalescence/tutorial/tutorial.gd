@@ -32,6 +32,9 @@ func _ready() -> void:
     exit_loading_zone.process_mode = Node.PROCESS_MODE_DISABLED
     tutorial_sequence.start()
     tutorial_hotbar.assign_entity(player)
+    
+    if Globals.music.react_to_player_movement:
+        Globals.music.react_to_player_movement.setup(player, TutorialMusic.COALESCENT_DISCOVERIES)
 
 
 func _move_entities_offscreen() -> void:

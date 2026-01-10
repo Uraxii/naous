@@ -48,6 +48,9 @@ const clear_player_when_stopped: bool = true ## HACK having issues with volume w
 @export_range(0.1, 10.0, 0.1, "or_greater", "hide_slider") var minimum_transition_time:float = 0.1
 @export_range(0.1, 30.0, 0.1, "or_greater", "hide_slider") var default_transition_time:float = 5.0
 
+@export_group("Reactors")
+@export var react_to_player_movement: DynamicMusicReactToPlayerMovement
+
 ## Cached integer for the index of the Music bus in [AudioServer].
 var music_bus_idx:int:
 	get:
@@ -477,6 +480,7 @@ func stop_track(track:DynamicMusicTrack) -> AudioStreamPlayer:
 	return player
 
 func _on_track_finished(track: DynamicMusicTrack, loop:bool = false) -> void:
+	print("ON TRACK FINISHED %s" % track.title)
 	if loop:
 		# Start the track again
 		Globals.music.start_track(track)

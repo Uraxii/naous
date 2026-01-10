@@ -10,10 +10,6 @@ const ADVERSE_ENTITY: DynamicMusicTrack = preload("uid://dbkj5mkwehrw4")
 const COALESCENT_DISCOVERIES: DynamicMusicTrack = preload("uid://bcpglwarj06jc")
 const ECHOES_FINALE: DynamicMusicTrack = preload("uid://bijg3owlp50gm")
 
-#func _ready() -> void:
-    ## NOTE Just set the Audio Bus volume in the Audio tab in the Editor so this is always expected
-    #DynamicMusicManager.set_music_bus_volume(INITIAL_VOLUME)
-
 func play_idle() -> void:
     Globals.music.start_track(NOT_SO_STILL)
 

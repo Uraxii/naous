@@ -86,6 +86,7 @@ func set_intensity(value:int) -> void:
 		intensity_tween.tween_property(self, ^"intensity", value, 2.0)
 	else:
 		self.intensity = value
+	print("DynamicMusicTrack: %s [b]intensity[/b] set to %d" % [title, value])
 
 
 func do_intensity_process(stream: AudioStream) -> void:

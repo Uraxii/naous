@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgl2tc7u5oid2"]
+[gd_scene load_steps=10 format=3 uid="uid://dgl2tc7u5oid2"]
 
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_xno0y"]
 [ext_resource type="Resource" uid="uid://e26byi4f045n" path="res://assets/music/music-01-single.tres" id="3_wr1r5"]
@@ -7,15 +7,17 @@
 [ext_resource type="Resource" uid="uid://dbkj5mkwehrw4" path="res://assets/music/music-04.tres" id="5_ltqrd"]
 [ext_resource type="Resource" uid="uid://bcpglwarj06jc" path="res://assets/music/music-05.tres" id="7_3sdwi"]
 [ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="7_fe71g"]
+[ext_resource type="Script" uid="uid://b27lkwj0n24ab" path="res://scripts/music/react_to_player_movement.gd" id="9_fe71g"]
 [ext_resource type="Script" uid="uid://chopagi41a16x" path="res://scripts/music/dynamic_music.gd" id="15_3ovdk"]
 
-[node name="DynamicMusic" type="Node" node_paths=PackedStringArray("non_positional_root", "positional_root", "proto_non_positional_player", "proto_positional_player")]
+[node name="DynamicMusic" type="Node" node_paths=PackedStringArray("non_positional_root", "positional_root", "proto_non_positional_player", "proto_positional_player", "react_to_player_movement")]
 script = ExtResource("15_3ovdk")
 non_positional_root = NodePath("NonPositional")
 positional_root = NodePath("Positional")
 proto_non_positional_player = NodePath("NonPositionalPrototype")
 proto_positional_player = NodePath("PositionalPrototype")
 tracks = Array[ExtResource("2_xno0y")]([ExtResource("3_wr1r5"), ExtResource("4_pqu1w"), ExtResource("4_ltqrd"), ExtResource("5_ltqrd"), ExtResource("7_3sdwi"), ExtResource("7_fe71g")])
+react_to_player_movement = NodePath("Reactions/PlayerMovement")
 
 [node name="NonPositionalPrototype" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
@@ -28,3 +30,9 @@ bus = &"Music"
 
 [node name="Positional" type="Node3D" parent="."]
 unique_name_in_owner = true
+
+[node name="Reactions" type="Node" parent="."]
+
+[node name="PlayerMovement" type="Node" parent="Reactions"]
+unique_name_in_owner = true
+script = ExtResource("9_fe71g")

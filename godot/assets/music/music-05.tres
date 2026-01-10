@@ -12,15 +12,15 @@
 stream_count = 6
 stream_0/stream = ExtResource("1_rl5u5")
 stream_0/volume = 0.0
-stream_1/stream = ExtResource("2_56oup")
+stream_1/stream = ExtResource("5_r77gv")
 stream_1/volume = 0.0
-stream_2/stream = ExtResource("3_bho75")
+stream_2/stream = ExtResource("4_psk6m")
 stream_2/volume = 0.0
-stream_3/stream = ExtResource("4_psk6m")
+stream_3/stream = ExtResource("6_xnvt4")
 stream_3/volume = 0.0
-stream_4/stream = ExtResource("5_r77gv")
+stream_4/stream = ExtResource("3_bho75")
 stream_4/volume = 0.0
-stream_5/stream = ExtResource("6_xnvt4")
+stream_5/stream = ExtResource("2_56oup")
 stream_5/volume = 0.0
 
 [sub_resource type="Curve" id="Curve_we1jd"]
