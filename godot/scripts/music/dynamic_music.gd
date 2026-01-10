@@ -411,7 +411,9 @@ func clear_all_stopped_tracks() -> void:
 ## You can call this 
 func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioStreamPlayer:
 	if force_single_track_playback:
-		for _track in tracks:
+		var _all_tracks = Array(tracks) ## HACK
+		_all_tracks.append_array(current_playlist) ## HACK
+		for _track in _all_tracks: ## Might need to add all DMTs to a static var for edge cases
 			if _track.is_playing:
 				stop_track(_track) ## TODO This is where crossfades can happen
 				if _track.is_playing:
@@ -487,7 +489,7 @@ func _on_track_finished(track: DynamicMusicTrack, loop:bool = false) -> void:
 
 ## Use this to play a sequential playlist of tracks. [member continuous_playback] should be enabled for automatic transitioining.
 func start_playlist(playlist: Array[DynamicMusicTrack] = [], force_looping: bool = false) -> void:
-	if playlist.size() > 0:
+	if not playlist.is_empty():
 		current_playlist.assign(playlist)
 		
 	start_track(current_playlist.front(), force_looping)
@@ -512,7 +514,7 @@ func play_next_track(last_track: DynamicMusicTrack) -> void:
 		else:
 			t_index += 1
 			
-		var _track = tracks.get(t_index)
+		var _track = current_playlist.get(t_index)
 		if _track != null:
 			next_track = _track
 			#if _track.include_in_continuous_playlist: ## DEPRECATED implemented Playlists in its place.
