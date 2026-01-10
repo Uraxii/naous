@@ -3,15 +3,7 @@ extends Control
 ## Allow the player to customize their listening experience
 ## Volume + select track playback
 
-var manual_selection_tracks: Array[DynamicMusicTrack]:
-	get:
-		if instance_exists:
-			return Globals.music.tracks
-		else:
-			return []
-	set(value):
-		## Nope
-		return
+var manual_selection_tracks: Array[DynamicMusicTrack]
 
 var instance_exists:bool:
 	get:
@@ -38,6 +30,8 @@ func _ready() -> void:
 		## Populate TrackSelectOptionButton items
 		track_select_menu_button.get_popup().index_pressed.connect(_on_track_select_menu_button_item_selected)
 		
+		manual_selection_tracks.assign(Globals.music.current_playlist)
+		
 		var this_track_id:int = 0
 		for track in manual_selection_tracks:
 			this_track_id += 1
@@ -48,8 +42,8 @@ func _ready() -> void:
 			
 			var this_list_idx: int = tracks_item_list.add_item(track.title)
 			tracks_item_list.set_item_metadata(this_list_idx, manual_selection_tracks.find(track))
-			if track.include_in_continuous_playlist:
-				tracks_item_list.select(this_list_idx, false)
+			#if track.include_in_continuous_playlist: ## DEPRECATED
+			tracks_item_list.select(this_list_idx, false)
 			
 		## Populate Continuous Playback
 		continuous_playback_check_box.button_pressed = Globals.music.continuous_playback
@@ -105,4 +99,11 @@ func _on_tracks_item_list_multi_selected(index: int, selected: bool) -> void:
 		)
 	
 	if track:
-		track.include_in_continuous_playlist = selected
+		if selected:
+			manual_selection_tracks.erase(track)
+		else:
+			manual_selection_tracks.append(track)
+		
+		if not manual_selection_tracks.is_empty():
+			Globals.music.start_playlist(manual_selection_tracks)
+		#track.include_in_continuous_playlist = selected ## DEPRECATED
