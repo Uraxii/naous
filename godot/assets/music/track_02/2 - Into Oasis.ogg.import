@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b31g3st427bom"
+path="res://.godot/imported/2 - Into Oasis.ogg-377fbf25409a1882064f2df50fa1a905.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_02/2 - Into Oasis.ogg"
+dest_files=["res://.godot/imported/2 - Into Oasis.ogg-377fbf25409a1882064f2df50fa1a905.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

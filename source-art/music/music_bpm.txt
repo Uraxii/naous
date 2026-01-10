@@ -1,12 +1,17 @@
 Not So Still
 bpm: 60
 
-Test 2
-bpm:
+Into Oasis
+bpm: 60
 
 Ambivalent Fellow
-bpm: 94
+bpm: 93
 
-Combat 1
+Adverse Entity (Combat)
 bpm: 99
-loop: 37 measures
+
+Coalescent Discoveries
+bpm: 103
+
+Echoes
+bpm: 103

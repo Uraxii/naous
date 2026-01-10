@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://du0kevy63yhew"
+path="res://.godot/imported/Coalescent Discoveries - Drums.ogg-387417435ac540707a1639f6970e1aa8.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_05/Coalescent Discoveries - Drums.ogg"
+dest_files=["res://.godot/imported/Coalescent Discoveries - Drums.ogg-387417435ac540707a1639f6970e1aa8.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

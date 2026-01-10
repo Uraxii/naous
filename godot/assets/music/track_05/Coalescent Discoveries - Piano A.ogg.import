@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bowlcwru4h3jp"
+path="res://.godot/imported/Coalescent Discoveries - Piano A.ogg-c8216b942e835e4752b67d274f649de1.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_05/Coalescent Discoveries - Piano A.ogg"
+dest_files=["res://.godot/imported/Coalescent Discoveries - Piano A.ogg-c8216b942e835e4752b67d274f649de1.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

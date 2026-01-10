@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dogs5d0efm3jq"
+path="res://.godot/imported/6 - Echoes.ogg-5405a0912a13aa21bca87fdf83fc0a7c.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_06/6 - Echoes.ogg"
+dest_files=["res://.godot/imported/6 - Echoes.ogg-5405a0912a13aa21bca87fdf83fc0a7c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

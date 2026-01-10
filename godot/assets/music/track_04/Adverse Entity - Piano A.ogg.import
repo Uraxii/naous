@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b772dvn6nmone"
+path="res://.godot/imported/Adverse Entity - Piano A.ogg-7e8cebac4cb5bd1f70875d505cf671ea.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_04/Adverse Entity - Piano A.ogg"
+dest_files=["res://.godot/imported/Adverse Entity - Piano A.ogg-7e8cebac4cb5bd1f70875d505cf671ea.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

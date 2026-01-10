@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b73j3ky6dia6a"
+path="res://.godot/imported/Adverse Entity - Drums A.ogg-02793102f3330779e41309c96c524c26.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_04/Adverse Entity - Drums A.ogg"
+dest_files=["res://.godot/imported/Adverse Entity - Drums A.ogg-02793102f3330779e41309c96c524c26.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,7 +1,27 @@
-[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=4 format=3 uid="uid://bcpglwarj06jc"]
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=10 format=3 uid="uid://bcpglwarj06jc"]
 
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="1_0lbrw"]
-[ext_resource type="AudioStream" uid="uid://b37jnaw6amy31" path="res://assets/music/track_05/Naous_Track_5_complete.ogg" id="1_we1jd"]
+[ext_resource type="AudioStream" uid="uid://d0j810jmnnpig" path="res://assets/music/track_05/Coalescent Discoveries - Loonsong.ogg" id="1_rl5u5"]
+[ext_resource type="AudioStream" uid="uid://b6h2pvhwerfdj" path="res://assets/music/track_05/Coalescent Discoveries - Pad A.ogg" id="2_56oup"]
+[ext_resource type="AudioStream" uid="uid://du0kevy63yhew" path="res://assets/music/track_05/Coalescent Discoveries - Drums.ogg" id="3_bho75"]
+[ext_resource type="AudioStream" uid="uid://bowlcwru4h3jp" path="res://assets/music/track_05/Coalescent Discoveries - Piano A.ogg" id="4_psk6m"]
+[ext_resource type="AudioStream" uid="uid://bnhwys31y6oxu" path="res://assets/music/track_05/Coalescent Discoveries - Pad B.ogg" id="5_r77gv"]
+[ext_resource type="AudioStream" uid="uid://cb3vy0al2wqwy" path="res://assets/music/track_05/Coalescent Discoveries - Drums Hats.ogg" id="6_xnvt4"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_v6q2m"]
+stream_count = 6
+stream_0/stream = ExtResource("1_rl5u5")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_56oup")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("3_bho75")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("4_psk6m")
+stream_3/volume = 0.0
+stream_4/stream = ExtResource("5_r77gv")
+stream_4/volume = 0.0
+stream_5/stream = ExtResource("6_xnvt4")
+stream_5/volume = 0.0
 
 [sub_resource type="Curve" id="Curve_we1jd"]
 _limits = [0.0, 1.0, 0.0, 3.0]
@@ -10,7 +30,9 @@ point_count = 2
 
 [resource]
 script = ExtResource("1_0lbrw")
-file = ExtResource("1_we1jd")
+file = SubResource("AudioStreamSynchronized_v6q2m")
 title = "Coalescent Discoveries"
+bpm = 103
 trans_stop_fade_out = SubResource("Curve_we1jd")
+use_intensity = true
 metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

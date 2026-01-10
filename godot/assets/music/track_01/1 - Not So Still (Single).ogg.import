@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cgei3egndt5s7"
+path="res://.godot/imported/1 - Not So Still (Single).ogg-ebce8df9f66281000b5d53748afaf23e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_01/1 - Not So Still (Single).ogg"
+dest_files=["res://.godot/imported/1 - Not So Still (Single).ogg-ebce8df9f66281000b5d53748afaf23e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

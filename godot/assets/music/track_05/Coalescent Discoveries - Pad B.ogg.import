@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bnhwys31y6oxu"
+path="res://.godot/imported/Coalescent Discoveries - Pad B.ogg-df8ffda440675c32af3ade3795f52ed0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_05/Coalescent Discoveries - Pad B.ogg"
+dest_files=["res://.godot/imported/Coalescent Discoveries - Pad B.ogg-df8ffda440675c32af3ade3795f52ed0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

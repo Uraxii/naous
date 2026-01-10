@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://di364okr5c2c0"
+path="res://.godot/imported/5 - Coalescent Discoveries.ogg-f5d33d0067303c25805a041480c9d93b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_05/5 - Coalescent Discoveries.ogg"
+dest_files=["res://.godot/imported/5 - Coalescent Discoveries.ogg-f5d33d0067303c25805a041480c9d93b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

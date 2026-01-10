@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dclsormdoamv6"
+path="res://.godot/imported/4 - Adverse Entity.ogg-5a455c4ec2a5c75d776a77cc090f6cea.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_04/4 - Adverse Entity.ogg"
+dest_files=["res://.godot/imported/4 - Adverse Entity.ogg-5a455c4ec2a5c75d776a77cc090f6cea.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

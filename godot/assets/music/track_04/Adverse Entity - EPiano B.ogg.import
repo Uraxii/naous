@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ola5otdq7wf3"
+path="res://.godot/imported/Adverse Entity - EPiano B.ogg-09a5254f5082f8d42f96da980dd5b090.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_04/Adverse Entity - EPiano B.ogg"
+dest_files=["res://.godot/imported/Adverse Entity - EPiano B.ogg-09a5254f5082f8d42f96da980dd5b090.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://xy4b1dug4ufo"
+path="res://.godot/imported/3 - Ambivalent Fellow.ogg-4ee1b447590cd02ed2cccca3504bdc83.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/track_03/3 - Ambivalent Fellow.ogg"
+dest_files=["res://.godot/imported/3 - Ambivalent Fellow.ogg-4ee1b447590cd02ed2cccca3504bdc83.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
