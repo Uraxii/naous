@@ -490,6 +490,7 @@ func _on_track_finished(track: DynamicMusicTrack, loop:bool = false) -> void:
 ## Use this to play a sequential playlist of tracks. [member continuous_playback] should be enabled for automatic transitioining.
 func start_playlist(playlist: Array[DynamicMusicTrack] = [], force_looping: bool = false) -> void:
 	if not playlist.is_empty():
+		current_playlist.clear()
 		current_playlist.assign(playlist)
 		
 	start_track(current_playlist.front(), force_looping)

@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_fnrmy"]
 
 [sub_resource type="Curve" id="Curve_tjxoq"]
-_limits = [0.0, 1.0, 0.0, 3.0]
-_data = [Vector2(0, 1), 0.0, -0.013018249, 0, 0, Vector2(3, 0), -0.0955629, 0.0, 0, 0]
+_limits = [0.0, 1.0, 0.0, 1.75]
+_data = [Vector2(0, 1), 0.0, -0.013018249, 0, 0, Vector2(1.75, 0), -0.0955629, 0.0, 0, 0]
 point_count = 2
 
 [resource]

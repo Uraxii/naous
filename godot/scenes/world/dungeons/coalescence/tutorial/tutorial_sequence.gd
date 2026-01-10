@@ -208,6 +208,7 @@ func _on_barricade_health_changed(new: float, _old: float) -> void:
 func first_combat() -> void:
     Globals.logger.debug("STARTING FIRST COMBAT SEQUENCE")
     tutorial_music.play_combat()
+    tutorial_music.ADVERSE_ENTITY.set_intensity(50)
     current_sequence = SEQ.FIRST_COMBAT
     # 1. Start "cutscene" where enemy bursts through boulder (potentially damaging the player slightly - this ensures they have health to recover with the upcoming heal ability)
     _play_first_combat_enemy_reveal()
@@ -238,6 +239,7 @@ func _first_enemy_reached_target_position() -> void:
 func _after_first_enemy_hold() -> void:
     # 2. Prompt player to target and attack the enemy (just like they did with the boulder)
     print("RAWR") # TODO: Trigger enemy vocalization
+    tutorial_music.ADVERSE_ENTITY.set_intensity(100)
     hud_layer.display_objective_hud("Return the enemy to Naous! Target and attack with Fireball.")
     first_enemy.process_mode = Node.PROCESS_MODE_INHERIT
     first_enemy.defeated.connect(_on_first_enemy_defeated)
@@ -246,6 +248,10 @@ func _after_first_enemy_hold() -> void:
 @onready var heal_echo_pickup: LootPickup = %HealEchoPickup
 func _on_first_enemy_defeated() -> void:
     first_enemy.defeated.disconnect(_on_first_enemy_defeated)
+	## Lower the music intensity
+    tutorial_music.ADVERSE_ENTITY.set_intensity(30)
+	
+	
     # Move the heal pickup to where the enemy was (ie. it "dropped" on defeat)
     spawn_entity_at.emit(heal_echo_pickup.loot_entity, first_enemy.body.global_position)
     despawn_entity.emit(first_enemy)
@@ -258,7 +264,7 @@ func _on_first_enemy_defeated() -> void:
 const HEAL_ECHO = preload("uid://dqwvsj4f1p0hd")
 func heal_tutorial() -> void:
     Globals.logger.debug("STARTING HEAL SEQUENCE")
-    tutorial_music.play_explore()
+    
     current_sequence = SEQ.HEAL_TUTORIAL
     # 1. Enemy dropped a new Echo for self-healing
     # 2. Prompt player to pick up Echo
@@ -321,6 +327,7 @@ func explore_plaza() -> void:
     current_sequence = SEQ.EXPLORE_PLAZA
     # 1. Remove collision preventing player from progressing as necessary (maybe it looks like the healing burst applies an impulse to the boulder rubble that finishes moving it out of the way)
     entry_path.arched_gateway.delete_rubble()
+    tutorial_music.play_explore()
     
     # 1.1 Setup spawns and signals
     for enemy: BaseEnemy in spawn_map:
@@ -355,7 +362,7 @@ func _update_plaza_objective_text() -> void:
 
 func _plaza_enemy_defeated(enemy: BaseEnemy) -> void:
     enemy.defeated.disconnect(_plaza_enemy_defeated)
-    tutorial_music.play_explore()
+    tutorial_music.reduce_intensity_and_queue(tutorial_music.ADVERSE_ENTITY, tutorial_music.play_explore)
     if enemies_to_defeat.has(enemy.get_instance_id()):
         enemies_defeated.push_back(enemy.get_instance_id())
         _update_plaza_objective_text()
@@ -581,6 +588,7 @@ func _on_backup_enemies_defeated(enemy: BaseEnemy) -> void:
 @onready var exit_loading_zone: Area3D = %ExitLoadingZone
 func escape() -> void:
     Globals.logger.debug("STARTING ESCAPE SEQUENCE")
+    tutorial_music.play_finale()
     current_sequence = SEQ.ESCAPE
     # 1. Show "cutscene" of large boss enemy smashing into the scene and defeating some allies
     spawn_entity_at.emit(escape_boss, escape_boss_spawn.global_position)

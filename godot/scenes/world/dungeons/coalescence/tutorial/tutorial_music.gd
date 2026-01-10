@@ -19,7 +19,7 @@ func play_idle() -> void:
 
 
 func play_combat() -> void:
-    Globals.music.start_track(ADVERSE_ENTITY)
+    Globals.music.start_track(ADVERSE_ENTITY, true)
 
 
 func play_background() -> void:
@@ -27,12 +27,19 @@ func play_background() -> void:
 
 
 func play_explore() -> void:
-    Globals.music.start_track(INTO_OASIS) ## Was thinking Coalescent Discoveries might fit better
+    Globals.music.start_track(COALESCENT_DISCOVERIES, true)
 
 
 func play_boss_combat() -> void:
-    Globals.music.start_track(COALESCENT_DISCOVERIES) ## Not really a combat track IMO
+    Globals.music.start_track(ADVERSE_ENTITY, true)
+    ADVERSE_ENTITY.set_intensity(100)
     
 
 func play_finale() -> void:
-    Globals.music.start_track(ECHOES_FINALE)
+    Globals.music.start_track(INTO_OASIS)
+
+func reduce_intensity_and_queue(track: DynamicMusicTrack, callback:Callable) -> void:
+    if track.use_intensity:
+        track.set_intensity(30)
+        await get_tree().create_timer(4.0).timeout
+    callback.call()
