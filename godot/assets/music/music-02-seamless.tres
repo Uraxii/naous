@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=4 format=3 uid="uid://xebupfy4ieki"]
+
+[ext_resource type="AudioStream" uid="uid://b31g3st427bom" path="res://assets/music/track_02/2 - Into Oasis.ogg" id="1_rp5lq"]
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_dv0ib"]
+
+[sub_resource type="Curve" id="Curve_nj8dn"]
+_limits = [0.0, 1.0, 0.0, 3.0]
+_data = [Vector2(0, 1), 0.0, -0.013018249, 0, 0, Vector2(3, 0), -0.0955629, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("2_dv0ib")
+file = ExtResource("1_rp5lq")
+title = "Into Oasis"
+bpm = 60
+trans_stop_fade_out = SubResource("Curve_nj8dn")
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

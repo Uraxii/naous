@@ -18,7 +18,7 @@ signal playback_changed
 
 ## If true, it will be played as part of "Continuous Play" when enabled in the UI music options.
 ## See [member DynamicMusicManager.continous_playback].
-@export var include_in_continuous_playlist: bool = true
+#@export var include_in_continuous_playlist: bool = true ## DEPRECATED
 
 ## Tempo; Beats per minute.
 @export var bpm:int ## EXPERIMENTAL

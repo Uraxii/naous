@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DynamicMusicTrack" load_steps=4 format=3 uid="uid://b4p6fni8y56oc"]
+
+[ext_resource type="AudioStream" uid="uid://ccv4m2lroh3ww" path="res://assets/music/track_01/1 - Not So Still.ogg" id="1_ye1ac"]
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="2_dios1"]
+
+[sub_resource type="Curve" id="Curve_cl3s0"]
+_limits = [0.0, 1.0, 0.0, 3.0]
+_data = [Vector2(0, 1), 0.0, -0.013018249, 0, 0, Vector2(3, 0), -0.0955629, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("2_dios1")
+file = ExtResource("1_ye1ac")
+title = "Not So Still"
+bpm = 60
+trans_stop_fade_out = SubResource("Curve_cl3s0")
+metadata/_custom_type_script = "uid://c2ayc7ud2tvnl"

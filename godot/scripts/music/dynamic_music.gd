@@ -31,6 +31,12 @@ class FXBaselines:
 @export var proto_positional_player:AudioStreamPlayer3D
 
 @export var tracks:Array[DynamicMusicTrack]
+var current_playlist:Array[DynamicMusicTrack]:
+	get:
+		if current_playlist.is_empty():
+			current_playlist.assign(tracks) ## Defaulting behavior
+		return current_playlist
+var use_crossfades:bool = true
 
 @export_group("Behavior")
 const force_single_track_playback: bool = true ## CRITICAL Do not change. Simplifies handling song changes, disable for more control
@@ -407,7 +413,7 @@ func start_track(track:DynamicMusicTrack, force_looping:bool = false) -> AudioSt
 	if force_single_track_playback:
 		for _track in tracks:
 			if _track.is_playing:
-				stop_track(_track)
+				stop_track(_track) ## TODO This is where crossfades can happen
 				if _track.is_playing:
 					await _track.playback_changed
 					## Note this will need refactor to work outside of `force_single_track_playback`
@@ -477,31 +483,48 @@ func _on_track_finished(track: DynamicMusicTrack, loop:bool = false) -> void:
 		track.is_playing = false
 		
 		if continuous_playback:
-			## get the next track
-			var next_track: DynamicMusicTrack = null
-			var t_index: int = tracks.find(track)
-			var iterations: int = 0
-			while next_track == null:
-				
-				## Prevent infinite loop
-				iterations += 1
-				if iterations > tracks.size() * 2:
-					return
-				
-				if t_index < 0:
-					t_index = 0
-				else:
-					t_index += 1
-					
-				var _track = tracks.get(t_index)
-				if _track != null:
-					if _track.include_in_continuous_playlist:
-						next_track = _track
-					else:
-						continue
-				else:
-					## Out of bounds
-					t_index = -1
-					continue
+			play_next_track(track)
+
+## Use this to play a sequential playlist of tracks. [member continuous_playback] should be enabled for automatic transitioining.
+func start_playlist(playlist: Array[DynamicMusicTrack] = [], force_looping: bool = false) -> void:
+	if playlist.size() > 0:
+		current_playlist.assign(playlist)
+		
+	start_track(current_playlist.front(), force_looping)
+
+## Empties the [member current_playlist]. Does not stop playback.
+func clear_playlist() -> void: current_playlist.clear()
+	
+func play_next_track(last_track: DynamicMusicTrack) -> void:
+	## get the next track
+	var next_track: DynamicMusicTrack = null
+	var t_index: int = current_playlist.find(last_track)
+	var iterations: int = 0
+	while next_track == null:
+		
+		iterations += 1
+		if iterations > tracks.size() * 2:
+			## Prevent infinite loop
+			return
+		
+		if t_index < 0:
+			t_index = 0
+		else:
+			t_index += 1
 			
-			Globals.music.start_track(next_track)
+		var _track = tracks.get(t_index)
+		if _track != null:
+			next_track = _track
+			#if _track.include_in_continuous_playlist: ## DEPRECATED implemented Playlists in its place.
+				#next_track = _track
+			#else:
+				#continue
+		else:
+			## Out of bounds
+			t_index = -1
+			continue
+	Globals.music.start_track(next_track)
+		
+func crossfade_to(new_track: DynamicMusicTrack) -> void:
+	## TODO
+	pass

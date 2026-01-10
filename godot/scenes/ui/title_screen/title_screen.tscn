@@ -1,22 +1,29 @@
-[gd_scene load_steps=48 format=3 uid="uid://cshn7uv20j780"]
+[gd_scene load_steps=55 format=3 uid="uid://cshn7uv20j780"]
 
 [ext_resource type="Script" uid="uid://d0m1x4qc15v33" path="res://scenes/ui/title_screen/title_screen.gd" id="1_62kf1"]
 [ext_resource type="Theme" uid="uid://bgliqjwr5w6kp" path="res://scenes/ui/title_screen/title_screen_theme.tres" id="1_oijkb"]
 [ext_resource type="Script" uid="uid://wqwta7susb8c" path="res://scenes/ui/title_screen/options_container.gd" id="3_01jae"]
 [ext_resource type="Environment" uid="uid://c88lfewlaln02" path="res://resources/world_environment.tres" id="3_cmpua"]
+[ext_resource type="Script" uid="uid://c2ayc7ud2tvnl" path="res://scripts/music/dynamic_music_track.gd" id="3_ds43v"]
 [ext_resource type="Script" uid="uid://bdjhple8e3q40" path="res://scripts/RemoteRemoteTransform3D.gd" id="4_60itd"]
 [ext_resource type="Material" uid="uid://dd17pmtjchh3c" path="res://assets/materials/sand-dunes.tres" id="4_71e5k"]
+[ext_resource type="Resource" uid="uid://b4p6fni8y56oc" path="res://assets/music/music-01-seamless.tres" id="4_de2di"]
+[ext_resource type="Resource" uid="uid://xebupfy4ieki" path="res://assets/music/music-02-seamless.tres" id="5_5usk4"]
 [ext_resource type="PackedScene" uid="uid://1ylgy66wcqit" path="res://assets/prefabs/sand_dunes.tscn" id="5_6heuc"]
 [ext_resource type="ArrayMesh" uid="uid://b1cy8beq57d34" path="res://assets/models/plane.obj" id="5_8nxda"]
 [ext_resource type="Texture2D" uid="uid://dnegp6olpq37" path="res://assets/textures/ink-sun.png" id="5_60itd"]
 [ext_resource type="ArrayMesh" uid="uid://bspga0r8jrq75" path="res://assets/models/cliff-bump-flat-sides-lowpoly.obj" id="5_aqc7l"]
 [ext_resource type="PackedScene" uid="uid://d1vsrqg2pt0xc" path="res://assets/prefabs/simpletown.tscn" id="6_hrt1g"]
 [ext_resource type="Material" uid="uid://cdiwdd5odllrk" path="res://assets/materials/ink-cloud2.tres" id="6_l23k7"]
+[ext_resource type="Resource" uid="uid://bay64fi84hggh" path="res://assets/music/music-03.tres" id="6_p536w"]
 [ext_resource type="PackedScene" uid="uid://cayqs5l0qo416" path="res://assets/prefabs/wavy_flag.tscn" id="7_0uvlf"]
 [ext_resource type="PackedScene" uid="uid://bqxs2o47c8xle" path="res://assets/prefabs/market-stall.tscn" id="7_6heuc"]
+[ext_resource type="Resource" uid="uid://dbkj5mkwehrw4" path="res://assets/music/music-04.tres" id="7_w25b0"]
+[ext_resource type="Resource" uid="uid://bcpglwarj06jc" path="res://assets/music/music-05.tres" id="8_m0l0l"]
 [ext_resource type="PackedScene" uid="uid://nfcywnbwg25h" path="res://assets/prefabs/stone_fence.tscn" id="8_m5k72"]
 [ext_resource type="Texture2D" uid="uid://cp1rwn23twpv2" path="res://assets/textures/cloud3.png" id="8_oisst"]
 [ext_resource type="Texture2D" uid="uid://i2t4gy5g5juy" path="res://assets/textures/cloud1.png" id="9_8nxda"]
+[ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="9_t6hcf"]
 [ext_resource type="Texture2D" uid="uid://d1wpje21g2sl1" path="res://assets/textures/cloud2.png" id="10_l23k7"]
 [ext_resource type="PackedScene" uid="uid://cy6gtgeup1h6e" path="res://assets/prefabs/bunting.tscn" id="10_u7pjr"]
 [ext_resource type="PackedScene" uid="uid://crvijhkrifgtp" path="res://assets/prefabs/grass_cluster_a.tscn" id="12_gw7tk"]
@@ -198,6 +205,7 @@ grow_vertical = 2
 theme = ExtResource("1_oijkb")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_0uvlf")
 script = ExtResource("1_62kf1")
+music_playlist = Array[ExtResource("3_ds43v")]([ExtResource("4_de2di"), ExtResource("5_5usk4"), ExtResource("6_p536w"), ExtResource("7_w25b0"), ExtResource("8_m0l0l"), ExtResource("9_t6hcf")])
 
 [node name="TextureRect" type="TextureRect" parent="."]
 unique_name_in_owner = true

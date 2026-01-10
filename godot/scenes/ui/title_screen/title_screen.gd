@@ -1,11 +1,12 @@
 class_name TitleScreen
 extends PanelContainer
 
+@export var music_playlist: Array[DynamicMusicTrack]
 @export_range(-12.0, 0.0, 0.5, "suffix:db") var initial_music_volume := -3.0 ## 0.71 == -3db
 @export var button_presses_to_skip_intro:int = 1
 @export var idle_time_to_show_lore_tab:float = 10.0
 
-const NOT_SO_STILL = preload("uid://e26byi4f045n")
+#const NOT_SO_STILL = preload("uid://e26byi4f045n")
 const TUTORIAL = preload("uid://d33k3abfexh3k")
 const CREDITS_FLYOVER = preload("uid://bovh2hjexu5yl")
 
@@ -32,10 +33,8 @@ func _ready() -> void:
     DynamicMusicManager.set_music_bus_volume_db(initial_music_volume)
     Globals.music.continuous_playback = true
     tree_exiting.connect(Globals.music.set.bind(&"continuous_playback", false))
-    ## You can sit at the menu and the soundtrack will play out.
-    ## Important to set this back to false when giving control to another scene.
-    ## Eventually I should make a "playlist" functionality that handles this more gracefully. -tm
-    Globals.music.start_track(NOT_SO_STILL)
+    Globals.music.start_playlist(music_playlist)
+    tree_exiting.connect(Globals.music.clear_playlist)
     
     start_game_button.pressed.connect(start_game)
     credits_button.pressed.connect(show_credits)
