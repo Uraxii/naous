@@ -27,7 +27,7 @@ Base enemy logic, spellcasting fix, various bug fixes
 Title screen UI, server install documentation
 
 -Michael Avrie
-Music (theme, main menu, gameplay, credits)
+Music (complete soundtrack, 6 songs)
 Scripted dynamic layered music with transitions
 Music integration with gameplay
 Skip-friendly animated credits scene
