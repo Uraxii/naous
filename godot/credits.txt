@@ -1,35 +1,73 @@
 -Nicole-Brandon Paul
-Project lead, core gameplay, main network multiplayer with related backend (including a few rewrites and countless bug fixes), UI actions, status effects and stat systems, spells, entity spawning, camera behavior, collisions, hub level design, skill cooldowns, separating gameplay from physics, ring of fire, character creation/selection, global logging, stats manager, assorted integration
+Project Lead
+Core gameplay
+Main network multiplayer with related backend (including a few rewrites and countless bug fixes)
+Character creation/selection, UI actions
+Status effects and stat systems, skill cooldowns, spells
+Global logging, stats manager, assorted integration
+Entity spawning, camera behavior, collisions, separating gameplay from physics
+Hub level design, ring of fire
 
 -Christer Kaitila
-Project co-lead, lake Natalie environment, town details, archa enemy with animations, models (cliff, crystals, town buildings, dungeon meshes, boulders, foliage, crates,  sculptures, rope flags), environment textures (water, rock, mud, sand, wood, wall trim, plants, clouds, wall rock, sun, sky, pipes, hand drawn effects), particles (splash, smoke, falling leaves), sounds (ambient wind, gem socket, spell fail, footsteps, melee combat, UI tones), windy cloth support, waterfall effects
+Project Co-lead
+Lake Natalie environment, town details, archa enemy with animations
+Models (cliff, crystals, town buildings, dungeon meshes, boulders, foliage, crates, sculptures, cloth flags, rope buntings)
+Environment textures (sky, sun, water, foliage, clouds, cliffs, rocks, mud, sand, wood, wall trim, pipes, decals, hand drawn effects)
+Particle effects (splash, smoke, falling leaves, sand dust)
+Windy cloth shader, moving clouds, waterfall effects
+Sounds (ambient wind, gem socket, spell fail, footsteps, melee combat, UI tones)
 
 -Jesse Rupe
-Base enemy logic, tutorial dungeon with related HUD/hotbar, coalescence dungeon layout, interactables, drang and drop inventory, cursor targeting system, controller support, server install documentation, sequence authoring (opening, plaza, miniboss, initial horde, attack boulder, enemy reveal, heal, allies backup), item tooltips, interaction prompts, title screen menu, music integration, healthbar, spellcasting fix, assorted bug fixes
+Tutorial dungeon with related HUD/hotbar, Coalescence dungeon layout
+Tutorial sequence authoring (opening, plaza, miniboss, initial horde, clear boulder, enemy reveal, heal, allies backup)
+Music integration with tutorial sequence
+Interactables, cursor targeting system, controller support
+Drag & drop inventory, item tooltips, interaction prompts, healthbars
+Base enemy logic, spellcasting fix, various bug fixes
+Title screen UI, server install documentation
 
 -Michael Avrie
-Music (main theme, menu, gameplay, combat), weapons models (sword, polearm), dynamic layers for music (intensity, combat, etc), splash screen, music options menu, credits scene, track fading, title screen background and lore display, various bug fixes, fixed the sun
+Music (theme, main menu, gameplay, credits)
+Scripted dynamic layered music with transitions
+Music integration with gameplay
+Skip-friendly animated credits scene
+Title screen background scene and lore display, music options menu, weapons models (swords, polearm)
+Various scripting and bug fixes
 
 -Justin Montgomery
-Local testing support and related UI, clientAPI, early version of server/client world scene replication, player spawn with camera control, initialization correction, packetmanager, docker build fix
+Local testing support and related UI
+Early version of server/client world scene replication
+ClientAPI
+Player spawn with camera control
+Initialization correction
+Packet manager
+Docker build fix
 
 -Tyler Funk
-Player base model and materials with idle/walk/run animations, Moebius style shader
+Player base model and materials with idle/walk/run animations
+Moebius style shader
 
 -Liyi Zhang
-Edge detection shader, windy cloth shader double-sided fix, dungeon post processing setup
+Edge detection shader
+Windy cloth shader double-sided fix
+Dungeon post processing setup
 
 -Dávid Tóth
-Quickstart guide (internal doc), ground material detection, client side data saving
+Quickstart guide (internal doc)
+Ground material detection
+Client side data saving
 
 -Chad Serrant
-Spell icons (fireball, ice, lightning, block, parry, wind, caduceus), deselect target sound
+Spell icons (fireball, ice, lightning, block, parry, wind, caduceus)
+Deselect target sound
 
 -David Bates
-Zoom scroll smoothing, prevented camera flipping
+Zoom scroll smoothing
+Prevented camera flipping
 
 -Chris DeLeon
-Compiling credits, hosting Dev Pods
+Compiling credits
+Hosting Dev Pods
 
 -License Attributions
 This game uses Godot Engine, available under following license:

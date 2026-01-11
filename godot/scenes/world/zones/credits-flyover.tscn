@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://bovh2hjexu5yl"]
+[gd_scene load_steps=93 format=3 uid="uid://bovh2hjexu5yl"]
 
 [ext_resource type="Script" uid="uid://bohpdgtfvqlvv" path="res://scenes/world/zones/credits_flyover.gd" id="1_fu1cq"]
 [ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="2_5b34y"]
@@ -244,7 +244,7 @@ states/anim_8/position = Vector2(71, 656)
 states/anim_9/node = SubResource("AnimationNodeAnimation_t7o6w")
 states/anim_9/position = Vector2(62, 729)
 transitions = ["Start", "anim_1", SubResource("AnimationNodeStateMachineTransition_1tqvt"), "anim_1", "anim_2", SubResource("AnimationNodeStateMachineTransition_v7off"), "anim_5", "anim_6", SubResource("AnimationNodeStateMachineTransition_0fsgn"), "anim_6", "anim_7", SubResource("AnimationNodeStateMachineTransition_i5emg"), "anim_7", "anim_8", SubResource("AnimationNodeStateMachineTransition_u8bvc"), "anim_8", "anim_9", SubResource("AnimationNodeStateMachineTransition_2i0jv"), "anim_9", "anim_10", SubResource("AnimationNodeStateMachineTransition_16t0m"), "anim_10", "anim_11", SubResource("AnimationNodeStateMachineTransition_lp1p3"), "anim_11", "anim_12", SubResource("AnimationNodeStateMachineTransition_1465c"), "anim_12", "anim_13", SubResource("AnimationNodeStateMachineTransition_edilq"), "anim_13", "anim_14", SubResource("AnimationNodeStateMachineTransition_n8a3i"), "anim_19", "anim_20", SubResource("AnimationNodeStateMachineTransition_aotaq"), "anim_20", "anim_21", SubResource("AnimationNodeStateMachineTransition_uvpaw"), "anim_2", "anim_4", SubResource("AnimationNodeStateMachineTransition_a2upa"), "anim_4", "anim_3", SubResource("AnimationNodeStateMachineTransition_ntrn5"), "anim_3", "anim_5", SubResource("AnimationNodeStateMachineTransition_ffwap"), "anim_18", "anim_17", SubResource("AnimationNodeStateMachineTransition_o48bc"), "anim_17", "anim_19", SubResource("AnimationNodeStateMachineTransition_2humq"), "anim_14", "anim_16", SubResource("AnimationNodeStateMachineTransition_omi1n"), "anim_16", "anim_15", SubResource("AnimationNodeStateMachineTransition_t7o6w"), "anim_15", "anim_18", SubResource("AnimationNodeStateMachineTransition_6o682"), "anim_21", "anim_23", SubResource("AnimationNodeStateMachineTransition_oovxu")]
-graph_offset = Vector2(-955, 580)
+graph_offset = Vector2(-960, 79)
 
 [sub_resource type="Animation" id="Animation_5b34y"]
 length = 0.001
@@ -594,7 +594,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 4.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-36.315, 11.25, 15.55), Vector3(-27.982, 9.499, 17.445)]
+"values": [Vector3(-27.67, 2.71, 23.05), Vector3(-15.97, 3.05, 10.38)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -603,10 +603,10 @@ tracks/1/path = NodePath("AnimationPlayer/CameraMarker3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 4.5),
+"transitions": PackedFloat32Array(2.000001, 1),
 "update": 0,
-"values": [Vector3(0, -3.0019662, 0)]
+"values": [Vector3(0.3403392, -2.7454028, 0), Vector3(0.143117, -3.1520646, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_1465c"]
@@ -728,11 +728,11 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("AnimationPlayer/CameraMarker3D:position")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 10),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.9659363, 1),
 "update": 0,
 "values": [Vector3(-34.035, 49.095, -10.385), Vector3(-36.555, 35.14, -62.03)]
 }
@@ -945,6 +945,8 @@ _data = {
 &"anim_9": SubResource("Animation_omi1n")
 }
 
+[sub_resource type="Theme" id="Theme_t7o6w"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_xu86d"]
 font_size = 24
 shadow_size = 6
@@ -952,13 +954,14 @@ shadow_color = Color(0, 0, 0, 0.7607843)
 shadow_offset = Vector2(1, 2)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ffwap"]
+content_margin_left = 4.0
+content_margin_right = 4.0
 texture = ExtResource("6_ntrn5")
 modulate_color = Color(0.1638613, 0.16386127, 0.16386127, 0.49411765)
 
 [sub_resource type="LabelSettings" id="LabelSettings_biuu0"]
-line_spacing = 0.0
-font_size = 18
-shadow_size = 8
+line_spacing = -6.0
+shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.44705883)
 shadow_offset = Vector2(0, 1)
 
@@ -1329,6 +1332,7 @@ vertical_scroll_mode = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+theme = SubResource("Theme_t7o6w")
 
 [node name="TemplateHeader" type="Label" parent="Credits/MarginContainer/ScrollContainer/CreditsItems"]
 unique_name_in_owner = true
