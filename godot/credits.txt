@@ -1,49 +1,32 @@
--
-Thank you for playing our prototype.
+-Nicole-Brandon Paul
+Project lead, core gameplay, main network multiplayer with related backend (including a few rewrites and countless bug fixes), UI actions, status effects and stat systems, spells, entity spawning, camera behavior, collisions, hub level design, skill cooldowns, separating gameplay from physics, ring of fire, character creation/selection, global logging, stats manager, assorted integration
 
--Credits
-(each new line is like a paragraph.)
-(-at the start of a new line denotes a heading, and splits pages)
+-Christer Kaitila
+Project co-lead, lake Natalie environment, town details, archa enemy with animations, models (cliff, crystals, town buildings, dungeon meshes, boulders, foliage, crates,  sculptures, rope flags), environment textures (water, rock, mud, sand, wood, wall trim, plants, clouds, wall rock, sun, sky, pipes, hand drawn effects), particles (splash, smoke, falling leaves), sounds (ambient wind, gem socket, spell fail, footsteps, melee combat, UI tones), windy cloth support, waterfall effects
 
-(empty newlines are not parsed)
+-Jesse Rupe
+Base enemy logic, tutorial dungeon with related HUD/hotbar, coalescence dungeon layout, interactables, drang and drop inventory, cursor targeting system, controller support, server install documentation, sequence authoring (opening, plaza, miniboss, initial horde, attack boulder, enemy reveal, heal, allies backup), item tooltips, interaction prompts, title screen menu, music integration, healthbar, spellcasting fix, assorted bug fixes
 
--
-(you can use empty headings to paginate)
+-Michael Avrie
+Music (main theme, menu, gameplay, combat), weapons models (sword, polearm), dynamic layers for music (intensity, combat, etc), splash screen, music options menu, credits scene, track fading, title screen background and lore display, various bug fixes, fixed the sun
 
--Nicole-Brandon Paul (Uraxii)
-Lead Programmer
-(contribution details)
+-Justin Montgomery
+Local testing support and related UI, clientAPI, early version of server/client world scene replication, player spawn with camera control, initialization correction, packetmanager, docker build fix
 
--Christer Kaitila (McFunkypants)
-Lead Environment Artist
-Art Director
-(contribution details)
+-Tyler Funk
+Player base model and materials with idle/walk/run animations, Moebius style shader
 
--Jesse Rupe (LinkofOrigin)
-(contribution details)
+-Liyi Zhang
+Edge detection shader, windy cloth shader double-sided fix, dungeon post processing setup
 
--Tyler Funk (tcfunk)
-Lead Character Artist
-(contribution details)
+-Dávid Tóth
+Quickstart guide (internal doc), ground material detection, client side data saving
 
--Michael Avrie (tarnishedmoth)
-Music Composer
-(contribution details)
+-Chad Serrant
+Spell icons (fireball, ice, lightning, block, parry, wind, caduceus), deselect target sound
 
--tryfinsigabrt
-(contribution details)
-
--davids91
-(contribution details)
-
--liyiz
-(contribution details)
-
--Chadius
-(contribution details)
-
--dabates
-(contribution details)
+-David Bates
+Zoom scroll smoothing, prevented camera flipping
 
 -Chris DeLeon
 Compiling credits, hosting Dev Pods
