@@ -222,7 +222,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_oijkb")
-current_tab = 3
+current_tab = 2
 tabs_visible = false
 
 [node name="MenuContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
@@ -320,7 +320,6 @@ value = 50.01
 
 [node name="OptionsContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 220
 theme_override_constants/margin_top = 160
@@ -468,6 +467,7 @@ text = "Cancel"
 
 [node name="LoreContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 180
 theme_override_constants/margin_top = 80

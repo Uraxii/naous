@@ -2,8 +2,8 @@ class_name TitleScreen
 extends PanelContainer
 
 @export var music_playlist: Array[DynamicMusicTrack]
-@export_range(-12.0, 0.0, 0.5, "suffix:db") var initial_music_volume := -3.0 ## 0.71 == -3db
-@export var button_presses_to_skip_intro:int = 1
+@export_range(-12.0, 0.0, 0.5, "suffix:db") var initial_music_volume := -5.0 ## 0.71 == -3db
+@export var button_presses_to_skip_intro:int = 2
 @export var idle_time_to_show_lore_tab:float = 10.0
 
 #const NOT_SO_STILL = preload("uid://e26byi4f045n")
