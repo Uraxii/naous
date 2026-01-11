@@ -101,3 +101,6 @@ RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0.6156863)
 RichTextLabel/constants/shadow_offset_x = 0
 RichTextLabel/constants/shadow_offset_y = 2
 RichTextLabel/constants/shadow_outline_size = 6
+SettingsCheckButton/base_type = &"SettingsOptionButton"
+SettingsOptionButton/base_type = &"OptionButton"
+SettingsOptionButton/font_sizes/font_size = 16

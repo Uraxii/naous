@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cshn7uv20j780"]
+[gd_scene load_steps=65 format=3 uid="uid://cshn7uv20j780"]
 
 [ext_resource type="Script" uid="uid://d0m1x4qc15v33" path="res://scenes/ui/title_screen/title_screen.gd" id="1_62kf1"]
 [ext_resource type="Theme" uid="uid://bgliqjwr5w6kp" path="res://scenes/ui/title_screen/title_screen_theme.tres" id="1_oijkb"]
@@ -26,15 +26,25 @@
 [ext_resource type="Resource" uid="uid://bijg3owlp50gm" path="res://assets/music/music-06.tres" id="9_t6hcf"]
 [ext_resource type="Texture2D" uid="uid://d1wpje21g2sl1" path="res://assets/textures/cloud2.png" id="10_l23k7"]
 [ext_resource type="PackedScene" uid="uid://cy6gtgeup1h6e" path="res://assets/prefabs/bunting.tscn" id="10_u7pjr"]
+[ext_resource type="Script" uid="uid://dk1s6517pxbut" path="res://scripts/ui/settings/scaling_3d.gd" id="11_5usk4"]
 [ext_resource type="PackedScene" uid="uid://crvijhkrifgtp" path="res://assets/prefabs/grass_cluster_a.tscn" id="12_gw7tk"]
 [ext_resource type="PackedScene" uid="uid://dnevvascacxh8" path="res://assets/prefabs/boulder_silver.tscn" id="12_ks1we"]
+[ext_resource type="Script" uid="uid://4u4fdocopuk3" path="res://scripts/ui/settings/window.gd" id="12_p536w"]
+[ext_resource type="Script" uid="uid://binjxvvg7t6n3" path="res://scripts/ui/settings/fsr.gd" id="13_eah1n"]
 [ext_resource type="PackedScene" uid="uid://c0tcxk54tuq6c" path="res://assets/prefabs/boulder_dark.tscn" id="13_gw7tk"]
 [ext_resource type="PackedScene" uid="uid://wiqopyut8fq3" path="res://assets/prefabs/ink-bush.tscn" id="13_p1xs8"]
+[ext_resource type="Script" uid="uid://bqu27nfbu40ld" path="res://scripts/ui/settings/ui_scale.gd" id="13_w25b0"]
+[ext_resource type="Script" uid="uid://byth2ex74i0o1" path="res://scripts/ui/settings/aniso.gd" id="14_m0l0l"]
+[ext_resource type="Script" uid="uid://t1u0v18dhxo1" path="res://scripts/ui/settings/antialiasing.gd" id="15_t6hcf"]
+[ext_resource type="Script" uid="uid://bu4qkfettskg1" path="res://scripts/ui/settings/shadows.gd" id="16_2yb65"]
 [ext_resource type="PackedScene" uid="uid://ckblyus5dwu6i" path="res://assets/prefabs/ink-crack.tscn" id="16_fmqie"]
 [ext_resource type="PackedScene" uid="uid://cagcutw3s5wtw" path="res://assets/prefabs/ink-scratches.tscn" id="16_gnmsg"]
+[ext_resource type="Script" uid="uid://mmbsfjvfdm8b" path="res://scripts/ui/settings/vsync.gd" id="17_2yb65"]
+[ext_resource type="Script" uid="uid://bhgmc8o2i7tif" path="res://scripts/ui/settings/fps_cap.gd" id="18_2mma6"]
 [ext_resource type="PackedScene" uid="uid://b10ssru87qgh0" path="res://assets/prefabs/tree_red.tscn" id="18_xypqu"]
 [ext_resource type="PackedScene" uid="uid://boryn5fidfths" path="res://assets/prefabs/wall_halfheight.tscn" id="19_adinj"]
 [ext_resource type="PackedScene" uid="uid://dxdmxuu3rsr0b" path="res://assets/prefabs/cliff.tscn" id="20_5j3fl"]
+[ext_resource type="Script" uid="uid://dotf4qwiffgkb" path="res://scripts/ui/settings/occlusion_culling.gd" id="20_ff48t"]
 [ext_resource type="PackedScene" uid="uid://dalxp2nexw0mo" path="res://assets/prefabs/sand_dust.tscn" id="21_0uvlf"]
 [ext_resource type="PackedScene" uid="uid://c3vvmgu3op006" path="res://assets/prefabs/crystal-cluster.tscn" id="21_w0k6c"]
 
@@ -321,8 +331,9 @@ value = 50.01
 [node name="OptionsContainer" type="MarginContainer" parent="TextureRect/TabContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme = ExtResource("1_oijkb")
 theme_override_constants/margin_left = 220
-theme_override_constants/margin_top = 160
+theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 220
 theme_override_constants/margin_bottom = 60
 script = ExtResource("3_01jae")
@@ -364,18 +375,18 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 20
 
-[node name="MasterVolumeHBoxContainer" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer"]
+[node name="MasterVolumeHBox" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MasterVolumeHBoxContainer"]
+[node name="Label" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MasterVolumeHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
 text = "Master Volume"
 horizontal_alignment = 1
 
-[node name="MasterVolHSlider" type="HSlider" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MasterVolumeHBoxContainer"]
+[node name="MasterVolHSlider" type="HSlider" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MasterVolumeHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -386,32 +397,32 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="MasterVolPercentLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MasterVolumeHBoxContainer"]
+[node name="MasterVolPercentLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MasterVolumeHBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "100%"
 horizontal_alignment = 1
 
-[node name="MasterVolDBLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MasterVolumeHBoxContainer"]
+[node name="MasterVolDBLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MasterVolumeHBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "0.0"
 horizontal_alignment = 1
 
-[node name="MusicVolumeHBoxContainer" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer"]
+[node name="MusicVolumeHBox" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MusicVolumeHBoxContainer"]
+[node name="Label" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MusicVolumeHBox"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_stretch_ratio = 0.5
 text = "Music Volume"
 horizontal_alignment = 1
 
-[node name="MusicVolHSlider" type="HSlider" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MusicVolumeHBoxContainer"]
+[node name="MusicVolHSlider" type="HSlider" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MusicVolumeHBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -422,19 +433,269 @@ tick_count = 11
 ticks_on_borders = true
 ticks_position = 3
 
-[node name="MusicVolPercentLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MusicVolumeHBoxContainer"]
+[node name="MusicVolPercentLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MusicVolumeHBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "80%"
 horizontal_alignment = 1
 
-[node name="MusicVolDBLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MusicVolumeHBoxContainer"]
+[node name="MusicVolDBLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/MusicOptionsPanel/MarginContainer/VBoxContainer/MusicVolumeHBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "-3.0 db"
 horizontal_alignment = 1
+
+[node name="GraphicsPanel" type="PanelContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("12_p536w")
+
+[node name="WindowedOptionButton" type="OptionButton" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SettingsOptionButton"
+flat = true
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Borderless Fullscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 2
+
+[node name="ResolutionOptionButton" type="OptionButton" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SettingsOptionButton"
+flat = true
+alignment = 1
+selected = 0
+item_count = 6
+popup/item_0/text = "1152x648"
+popup/item_0/id = 0
+popup/item_1/text = "1280x720"
+popup/item_1/id = 1
+popup/item_2/text = "1366x768"
+popup/item_2/id = 2
+popup/item_3/text = "1600x900"
+popup/item_3/id = 3
+popup/item_4/text = "1920x1080"
+popup/item_4/id = 4
+popup/item_5/text = "2560x1440"
+popup/item_5/id = 5
+
+[node name="GridContainer" type="GridContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Antialiasing" type="OptionButton" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"SettingsOptionButton"
+flat = true
+alignment = 1
+selected = 0
+item_count = 6
+popup/item_0/text = "No Antialiasing"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+popup/item_2/text = "SMAA"
+popup/item_2/id = 2
+popup/item_3/text = "MSAA 2x"
+popup/item_3/id = 3
+popup/item_4/text = "MSAA 4x"
+popup/item_4/id = 4
+popup/item_5/text = "MSAA 8x"
+popup/item_5/id = 5
+script = ExtResource("15_t6hcf")
+
+[node name="VSync" type="OptionButton" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_type_variation = &"SettingsOptionButton"
+flat = true
+alignment = 1
+selected = 1
+item_count = 2
+popup/item_0/text = "VSync Off"
+popup/item_0/id = 0
+popup/item_1/text = "VSync On"
+popup/item_1/id = 1
+script = ExtResource("17_2yb65")
+
+[node name="Scaling3D" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("11_5usk4")
+
+[node name="NameLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/Scaling3D"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "3D Scaling"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/Scaling3D"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.25
+max_value = 1.25
+step = 0.01
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="ValueLineEdit" type="LineEdit" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/Scaling3D"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "1.0"
+alignment = 1
+max_length = 4
+context_menu_enabled = false
+emoji_menu_enabled = false
+flat = true
+select_all_on_focus = true
+
+[node name="FSROptionButton" type="OptionButton" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"SettingsOptionButton"
+flat = true
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "No Upscaling"
+popup/item_0/id = 0
+popup/item_1/text = "FSR 1.0"
+popup/item_1/id = 1
+popup/item_2/text = "FSR 2.1"
+popup/item_2/id = 2
+script = ExtResource("13_eah1n")
+
+[node name="UIScale" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+script = ExtResource("13_w25b0")
+
+[node name="NameLabel" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/UIScale"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "UI Scale"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/UIScale"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.7
+max_value = 1.15
+step = 0.05
+value = 1.0
+allow_greater = true
+tick_count = 10
+ticks_on_borders = true
+ticks_position = 3
+
+[node name="ValueLineEdit" type="LineEdit" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/UIScale"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "1.0"
+alignment = 1
+max_length = 4
+context_menu_enabled = false
+emoji_menu_enabled = false
+flat = true
+select_all_on_focus = true
+
+[node name="AnisotropicFiltering" type="OptionButton" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_type_variation = &"SettingsOptionButton"
+flat = true
+selected = 2
+item_count = 5
+popup/item_0/text = "0x Anisotropic"
+popup/item_0/id = 0
+popup/item_1/text = "2x Anisotropic"
+popup/item_1/id = 2
+popup/item_2/text = "4x Anisotropic"
+popup/item_2/id = 4
+popup/item_3/text = "8x Anisotropic"
+popup/item_3/id = 8
+popup/item_4/text = "16x Anisotropic"
+popup/item_4/id = 16
+script = ExtResource("14_m0l0l")
+
+[node name="ShadowsHBox" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/ShadowsHBox"]
+layout_mode = 2
+text = "Shadows"
+
+[node name="Shadows" type="OptionButton" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/ShadowsHBox"]
+layout_mode = 2
+theme_type_variation = &"SettingsOptionButton"
+flat = true
+alignment = 1
+selected = 2
+item_count = 6
+popup/item_0/text = "Very Low"
+popup/item_0/id = 0
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "High"
+popup/item_3/id = 3
+popup/item_4/text = "Ultra"
+popup/item_4/id = 4
+popup/item_5/text = "Extreme"
+popup/item_5/id = 5
+script = ExtResource("16_2yb65")
+
+[node name="FPSLimiter" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/FPSLimiter"]
+layout_mode = 2
+text = "Frame limit"
+
+[node name="FpsLimiter" type="LineEdit" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer/FPSLimiter"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+placeholder_text = "unlimited"
+alignment = 1
+context_menu_enabled = false
+emoji_menu_enabled = false
+flat = true
+caret_blink = true
+script = ExtResource("18_2mma6")
+
+[node name="OptionButton" type="OptionButton" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer/ScrollContainer/VolumeVBox/GraphicsPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"SettingsOptionButton"
+flat = true
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Use Occlusion Culling"
+popup/item_0/id = 0
+popup/item_1/text = "No Occlusion Culling"
+popup/item_1/id = 1
+script = ExtResource("20_ff48t")
 
 [node name="FooterHBoxContainer" type="HBoxContainer" parent="TextureRect/TabContainer/OptionsContainer/VBoxContainer"]
 layout_mode = 2
@@ -885,6 +1146,7 @@ transform = Transform3D(1.6690047, 0, 0.5262351, 0, 1.75, 0, -0.5262351, 0, 1.66
 [node name="grass-cluster-a" parent="World/Scene/crystal-cluster" instance=ExtResource("12_gw7tk")]
 transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 1.43, 0.075, 0.345)
 
+[connection signal="tab_changed" from="TextureRect/TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="pressed" from="TextureRect/TabContainer/MenuContainer/VBoxContainer/ButtonContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="TextureRect/TabContainer/OptionsContainer/VBoxContainer/FooterHBoxContainer/BackButton" to="TextureRect/TabContainer/OptionsContainer" method="_on_back_button_pressed"]
 [connection signal="visibility_changed" from="TextureRect/TabContainer/LoreContainer" to="." method="_on_lore_container_visibility_changed"]

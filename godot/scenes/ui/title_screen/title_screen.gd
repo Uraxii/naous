@@ -2,7 +2,7 @@ class_name TitleScreen
 extends PanelContainer
 
 @export var music_playlist: Array[DynamicMusicTrack]
-@export_range(-12.0, 0.0, 0.5, "suffix:db") var initial_music_volume := -5.0 ## 0.71 == -3db
+@export_range(-12.0, 0.0, 0.5, "suffix:db") var initial_music_volume := -5.0 ## decibels
 @export var button_presses_to_skip_intro:int = 2
 @export var idle_time_to_show_lore_tab:float = 10.0
 
@@ -111,18 +111,23 @@ func _input(event: InputEvent) -> void:
         ## If we're at the main menu, we'll switch to the Lore tab after the user
         ## idles for a set time.
         reset_wait_switch_to_lore_tab()
+        
 
 var idle_tween: Tween
-func reset_wait_switch_to_lore_tab() -> void:
+func reset_wait_switch_to_lore_tab(on: bool = true) -> void:
     if idle_tween:
-        if idle_tween.is_running():
+        if idle_tween.is_valid():
             idle_tween.kill()
-    
-    idle_tween = create_tween()
-    idle_tween.tween_interval(idle_time_to_show_lore_tab)
-    idle_tween.tween_callback(show_lore)
+    if on:
+        idle_tween = create_tween()
+        idle_tween.tween_interval(idle_time_to_show_lore_tab)
+        idle_tween.tween_callback(show_lore)
+    #else:
+        #print("Sanity check")
     
 func show_lore() -> void:
+    if not menu_container.visible: return
+    
     lore_scroll_container.scroll_vertical = 0
     
     var lore:Tween = create_tween()
@@ -197,7 +202,6 @@ func run_splash_screen() -> void:
 
 func _on_options_button_pressed() -> void:
     if not intro_finished: return
-    
     options_container.show()
 
 
@@ -210,3 +214,9 @@ func _on_lore_container_visibility_changed() -> void:
     if lore_container:
         if not lore_container.visible:
             _on_autoscroll_interrupted()
+
+
+func _on_tab_container_tab_changed(_tab: int) -> void:
+    if tab_container:
+        if not tab_container.get_current_tab_control() == menu_container:
+            reset_wait_switch_to_lore_tab(false) ## Stop loading the lore
