@@ -6,7 +6,11 @@ var input: InputManager:
     get: return Globals.input
 
 
+var last_mouse_pos: Vector2
+
 func enter() -> void:
+    # Store mouse position before any state changes
+    last_mouse_pos = DisplayServer.mouse_get_position()
     next_state = StateCameraFree
 
 
@@ -34,6 +38,9 @@ func process() -> void:
     elif camera.menu_is_open:
         if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
             Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+        # Restore mouse position to prevent jumping
+        if last_mouse_pos != Vector2.ZERO:
+            DisplayServer.mouse_set_position(last_mouse_pos)
 
 
 func exit() -> void:
