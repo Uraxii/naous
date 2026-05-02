@@ -112,11 +112,20 @@ func _unhandled_input(event: InputEvent) -> void:
             action_map[action].emit()
 
 
+var _last_mouse_pos := Vector2.ZERO
+
 func set_mouse_capture(capture: bool) -> void:
     capture_mouse_on_click = capture
     # Ensure the mouse is visible and not actively captured
     if not capture_mouse_on_click:
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+        # Restore mouse position after unhiding
+        if _last_mouse_pos != Vector2.ZERO:
+            Input.warp_mouse(_last_mouse_pos)
+            _last_mouse_pos = Vector2.ZERO
+    else:
+        # Save mouse position before hiding
+        _last_mouse_pos = Input.get_last_mouse_position()
 
 
 func _on_allow_character_control(allow: bool) -> void:
