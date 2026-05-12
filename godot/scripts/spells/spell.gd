@@ -9,6 +9,7 @@ signal cast_started
 @export_category("Runtime Values")
 @export var traits: Array[Trait] = []
 @export var caster: Entity
+@export var target_override: Entity
 @export var cast_cancel_token: String
 
 @onready var router := Globals.msg_router
@@ -20,6 +21,14 @@ var icon: Texture2D:
 
 var id := "":
     get: return data.id
+
+var target_entity: Entity:
+    get:
+        if is_instance_valid(target_override):
+            return target_override
+        if is_instance_valid(caster):
+            return caster.target
+        return null
 
 var is_castable: bool:
     get: return timer.time_left <= 0

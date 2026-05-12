@@ -11,7 +11,7 @@ class_name TraitData extends Resource
 @export var summon_entity:  PackedScene
 @export var entity_data:    EntityData
 @export_category("Apply Effects")
-@export var apply_status: SpellData
+@export var apply_status: StatusData
 
 var trait_script: GDScript = Trait:
     get: return BFT.get_type(trait_type)
@@ -44,8 +44,7 @@ func deserialize(data: Dictionary) -> void:
     damage  = data.get("damage", damage)
     healing = data.get("healing", healing)
 
-    var type_of_trait: BFT.ID = data.get("type", BFT.ID.UNKNOWN)
-    trait_script = BFT.get_type(type_of_trait)
+    trait_type = data.get("type", BFT.ID.UNKNOWN)
     print_debug("trait script is ", trait_script)
 
     var scene_path: String = data.get("summon_entity", "")
@@ -65,7 +64,14 @@ func deserialize(data: Dictionary) -> void:
     var status_dict = data.get("apply_status")
     if status_dict and status_dict is Dictionary:
         if not apply_status:
-            apply_status = SpellData.new()
-        apply_status.deserialize(status_dict)
+            apply_status = StatusData.new()
+
+        if status_dict.has("spell_data"):
+            apply_status.deserialize(status_dict)
+        else:
+            var legacy_spell := SpellData.new()
+            legacy_spell.deserialize(status_dict)
+            apply_status.id = legacy_spell.id
+            apply_status.spell = legacy_spell
     elif status_dict == null:
         apply_status = null

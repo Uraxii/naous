@@ -10,6 +10,8 @@ enum ID {
     TRAIT_DAMAGE_TARGET,
     TRAIT_SPAWN_ENTITY,
     TRAIT_SHOOT_PROJECTILE,
+    TRAIT_DAMAGE_CASTER,
+    TRAIT_APPLY_STATUS,
 }
 
 const id_to_type: Dictionary[ID, Resource] = {
@@ -25,10 +27,14 @@ const id_to_type: Dictionary[ID, Resource] = {
         "res://scripts/messages/msg_cast_req.gd"),
     ID.TRAIT_DAMAGE_TARGET: preload(
         "res://scripts/spells/traits/damage_target.gd"),
+    ID.TRAIT_DAMAGE_CASTER: preload(
+        "res://scripts/spells/traits/damage_caster.gd"),
     ID.TRAIT_SPAWN_ENTITY: preload(
         "res://scripts/spells/traits/spawn_entity.gd"),
     ID.TRAIT_SHOOT_PROJECTILE: preload(
         "res://scripts/spells/traits/trait_shoot_projectile.gd"),
+    ID.TRAIT_APPLY_STATUS: preload(
+        "res://scripts/spells/traits/apply_status.gd"),
 }
 
 
