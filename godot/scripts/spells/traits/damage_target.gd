@@ -1,13 +1,8 @@
 class_name DamageTarget extends Trait
 
 @onready var signals := Globals.signal_bus
-@onready var entities := Globals.entities
-
-var caster: Entity
-
-
 func cast() -> void:
-    var target := entities.find(spell.caster.target_id)
+    var target := spell.target_entity
     if not target:
         lg.debug("No target")
         return
